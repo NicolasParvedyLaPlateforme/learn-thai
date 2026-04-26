@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { useProgressStore } from '../../lib/store';
 import courseData from '../../data/course.json';
@@ -222,6 +222,42 @@ export default function LessonPage() {
   );
 }
 
+// A simple component to render tooltips with tap support for mobile
+function TooltipHint({ children, tooltipContent, className = '' }: { children: React.ReactNode, tooltipContent: React.ReactNode, className?: string }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const timeoutRef = useRef<NodeJS.Timeout>(null);
+
+  const handleTap = () => {
+    setIsOpen(true);
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => {
+      setIsOpen(false);
+    }, 2000);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []);
+
+  return (
+    <span 
+      className={`relative cursor-help ${className}`} 
+      onClick={handleTap}
+      onMouseEnter={() => setIsOpen(true)}
+      onMouseLeave={() => setIsOpen(false)}
+    >
+      {children}
+      {isOpen && (
+        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-slate-800 text-white px-3 py-1.5 rounded-lg text-sm whitespace-nowrap z-50 shadow-xl after:content-[''] after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 after:border-8 after:border-transparent after:border-t-slate-800">
+          {tooltipContent}
+        </div>
+      )}
+    </span>
+  );
+}
+
 // A simple component to render the french question with tooltips (hints)
 function SentenceWithHints({text, dictionary, phrases, isSentence, exerciseOptions, hideHints}: {text: string, dictionary: Word[], phrases: Phrase[], isSentence: boolean, exerciseOptions: Word[], hideHints?: boolean}) {
   // Try to match the ENTIRE phrase/word first
@@ -237,12 +273,12 @@ function SentenceWithHints({text, dictionary, phrases, isSentence, exerciseOptio
     <div className="flex flex-col gap-4">
       <span className="flex flex-wrap gap-1 leading-relaxed text-xl md:text-2xl font-medium">
         {exactMatch ? (
-           <span className="group relative border-b-2 border-dotted border-slate-300 cursor-help inline-block">
+           <TooltipHint 
+             className="border-b-2 border-dotted border-slate-300 inline-block"
+             tooltipContent={<><span className="font-thai text-lg font-bold">{exactMatch.th}</span> <span className="text-slate-300 text-xs">({exactMatch.phonetic})</span></>}
+           >
              {text}
-             <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block bg-slate-800 text-white px-3 py-1.5 rounded-lg text-sm whitespace-nowrap z-50 shadow-xl after:content-[''] after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 after:border-8 after:border-transparent after:border-t-slate-800">
-               <span className="font-thai text-lg font-bold">{exactMatch.th}</span> <span className="text-slate-300 text-xs">({exactMatch.phonetic})</span>
-             </div>
-           </span>
+           </TooltipHint>
         ) : (
           text.split(' ').map((w, i) => {
             // fallback word-by-word
@@ -256,12 +292,13 @@ function SentenceWithHints({text, dictionary, phrases, isSentence, exerciseOptio
             
             if (match) {
               return (
-                <span key={i} className="group relative border-b-2 border-dotted border-slate-300 cursor-help inline-block">
+                <TooltipHint 
+                  key={i} 
+                  className="border-b-2 border-dotted border-slate-300 inline-block"
+                  tooltipContent={<><span className="font-thai text-lg font-bold">{match.th}</span> <span className="text-slate-300 text-xs">({match.phonetic})</span></>}
+                >
                   {w}
-                  <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block bg-slate-800 text-white px-3 py-1.5 rounded-lg text-sm whitespace-nowrap z-50 shadow-xl after:content-[''] after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 after:border-8 after:border-transparent after:border-t-slate-800">
-                    <span className="font-thai text-lg font-bold">{match.th}</span> <span className="text-slate-300 text-xs">({match.phonetic})</span>
-                  </div>
-                </span>
+                </TooltipHint>
               );
             }
             return <span key={i}>{w}</span>;
@@ -274,16 +311,15 @@ function SentenceWithHints({text, dictionary, phrases, isSentence, exerciseOptio
           <span className="font-bold text-slate-600 block mb-2 uppercase tracking-wide text-xs">💡 Vocabulaire utile :</span>
           <div className="flex flex-wrap gap-x-4 gap-y-2">
             {exerciseOptions.map((w, i) => (
-              <span key={i} className="group relative inline-flex items-center gap-1.5 bg-white px-2 py-1 rounded border border-slate-200 shadow-sm cursor-help">
+              <TooltipHint 
+                key={i}
+                className="inline-flex items-center gap-1.5 bg-white px-2 py-1 rounded border border-slate-200 shadow-sm"
+                tooltipContent={<><span className="text-slate-200 font-medium">Prononciation :</span> <span className="font-bold">{w.phonetic}</span></>}
+              >
                 <span className="font-thai text-emerald-600 font-semibold">{w.th}</span> 
                 <span className="text-slate-400">=</span> 
                 <span className="italic">{w.fr}</span>
-                
-                {/* Tooltip for phonetic on hover */}
-                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block bg-slate-800 text-white px-3 py-1.5 rounded-lg text-sm whitespace-nowrap z-50 shadow-xl after:content-[''] after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 after:border-8 after:border-transparent after:border-t-slate-800">
-                  <span className="text-slate-200 font-medium">Prononciation :</span> <span className="font-bold">{w.phonetic}</span>
-                </div>
-              </span>
+              </TooltipHint>
             ))}
           </div>
         </div>
