@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-thai: var(--font-thai), "Sarabun", "Noto Sans Thai", sans-serif;
+}
+
+@layer utilities {
+  .glow-emerald {
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+  }
+}
