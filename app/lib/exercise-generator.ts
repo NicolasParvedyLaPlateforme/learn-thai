@@ -64,8 +64,9 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
   }
 
   // Normal lesson logic
-  // 1. Generate word match exercises (skip if master level, focus on sentences)
-  if (!isMasterLevel) {
+  // 1. Generate word match exercises (skip if master level AND lesson has phrases, to focus on sentences)
+  const skipWords = isMasterLevel && lesson.phrases && lesson.phrases.length > 0;
+  if (!skipWords) {
     lesson.words.forEach(word => {
       // Pick random distractor words from all words
       const distractors = shuffle(globalWords.filter(w => w.id !== word.id)).slice(0, baseWMDistractors);
