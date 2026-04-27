@@ -226,6 +226,8 @@ export default function LessonPage() {
 function TooltipHint({ children, tooltipContent, className = '' }: { children: React.ReactNode, tooltipContent: React.ReactNode, className?: string }) {
   const [isOpen, setIsOpen] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout>(null);
+  const tooltipRef = useRef<HTMLDivElement>(null);
+  const arrowRef = useRef<HTMLDivElement>(null);
 
   const handleTap = () => {
     setIsOpen(true);
@@ -241,6 +243,29 @@ function TooltipHint({ children, tooltipContent, className = '' }: { children: R
     };
   }, []);
 
+  useEffect(() => {
+    if (isOpen && tooltipRef.current && arrowRef.current) {
+      // Reset position to measure accurately
+      tooltipRef.current.style.transform = `translateX(-50%)`;
+      arrowRef.current.style.transform = `translateX(-50%)`;
+      
+      const rect = tooltipRef.current.getBoundingClientRect();
+      const viewportWidth = window.innerWidth;
+      
+      let shift = 0;
+      if (rect.left < 10) {
+         shift = 10 - rect.left;
+      } else if (rect.right > viewportWidth - 10) {
+         shift = (viewportWidth - 10) - rect.right;
+      }
+      
+      if (shift !== 0) {
+        tooltipRef.current.style.transform = `translateX(calc(-50% + ${shift}px))`;
+        arrowRef.current.style.transform = `translateX(calc(-50% - ${shift}px))`;
+      }
+    }
+  }, [isOpen]);
+
   return (
     <span 
       className={`relative cursor-help ${className}`} 
@@ -250,8 +275,9 @@ function TooltipHint({ children, tooltipContent, className = '' }: { children: R
     >
       {children}
       {isOpen && (
-        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-slate-800 text-white px-3 py-1.5 rounded-lg text-sm whitespace-nowrap z-50 shadow-xl after:content-[''] after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 after:border-8 after:border-transparent after:border-t-slate-800">
+        <div ref={tooltipRef} className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-slate-800 text-white px-3 py-1.5 rounded-lg text-sm whitespace-nowrap z-[100] shadow-xl">
           {tooltipContent}
+          <div ref={arrowRef} className="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-slate-800"></div>
         </div>
       )}
     </span>

@@ -233,6 +233,103 @@
       "phrases": []
     },
     {
+      "id": "lesson-3-quantities",
+      "title": "Quantités et Objets",
+      "description": "Utiliser les chiffres avec des objets",
+      "words": [
+        {
+          "id": "w_mee",
+          "th": "มี",
+          "fr": "il y a / avoir",
+          "phonetic": "mee"
+        },
+        {
+          "id": "w_gao_ee",
+          "th": "เก้าอี้",
+          "fr": "chaise",
+          "phonetic": "gao-ee"
+        },
+        {
+          "id": "w_gee",
+          "th": "กี่",
+          "fr": "combien de",
+          "phonetic": "gee"
+        },
+        {
+          "id": "w_dtua",
+          "th": "ตัว",
+          "fr": "classificateur (objets)",
+          "phonetic": "dtua"
+        },
+        {
+          "id": "w_khon",
+          "th": "คน",
+          "fr": "personne (et classificateur)",
+          "phonetic": "khon"
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_how_many_chairs",
+          "th": "มีเก้าอี้กี่ตัว",
+          "fr": "combien y a-t-il de chaises ?",
+          "phonetic": "mee gao-ee gee dtua",
+          "components": [
+            "w_mee",
+            "w_gao_ee",
+            "w_gee",
+            "w_dtua"
+          ]
+        },
+        {
+          "id": "p_three_chairs",
+          "th": "มีเก้าอี้สามตัว",
+          "fr": "il y a trois chaises",
+          "phonetic": "mee gao-ee saam dtua",
+          "components": [
+            "w_mee",
+            "w_gao_ee",
+            "w_3",
+            "w_dtua"
+          ]
+        },
+        {
+          "id": "p_how_many_people",
+          "th": "มีกี่คน",
+          "fr": "combien y a-t-il de personnes ?",
+          "phonetic": "mee gee khon",
+          "components": [
+            "w_mee",
+            "w_gee",
+            "w_khon"
+          ]
+        },
+        {
+          "id": "p_five_people",
+          "th": "มีห้าคน",
+          "fr": "il y a cinq personnes",
+          "phonetic": "mee haa khon",
+          "components": [
+            "w_mee",
+            "w_5",
+            "w_khon"
+          ]
+        },
+        {
+          "id": "p_one_chair",
+          "th": "มีเก้าอี้หนึ่งตัว",
+          "fr": "il y a une chaise",
+          "phonetic": "mee gao-ee nueng dtua",
+          "components": [
+            "w_mee",
+            "w_gao_ee",
+            "w_1",
+            "w_dtua"
+          ]
+        }
+      ]
+    },
+    {
       "id": "lesson-4",
       "title": "Nourriture : Au restaurant",
       "description": "Manger au restaurant",
@@ -447,6 +544,18 @@
             "w_dee",
             "w_mai"
           ]
+        },
+        {
+          "id": "p_two_older_siblings",
+          "th": "มีพี่สองคน",
+          "fr": "il y a deux grands frères",
+          "phonetic": "mee phi song khon",
+          "components": [
+            "w_mee",
+            "w_phi",
+            "w_2",
+            "w_khon"
+          ]
         }
       ]
     },
@@ -472,12 +581,6 @@
           "th": "ทำ",
           "fr": "faire",
           "phonetic": "tham"
-        },
-        {
-          "id": "w_mee",
-          "th": "มี",
-          "fr": "avoir",
-          "phonetic": "mee"
         },
         {
           "id": "w_yak",
@@ -593,6 +696,26 @@
             "w_lot",
             "w_dai",
             "w_mai"
+          ]
+        },
+        {
+          "id": "p_nine_baht",
+          "th": "เก้าบาท",
+          "fr": "neuf bahts",
+          "phonetic": "gao baht",
+          "components": [
+            "w_9",
+            "w_baht"
+          ]
+        },
+        {
+          "id": "p_buy_three",
+          "th": "ซื้อสาม",
+          "fr": "acheter trois",
+          "phonetic": "sue saam",
+          "components": [
+            "w_sue",
+            "w_3"
           ]
         }
       ]
@@ -794,6 +917,16 @@
             "w_muea",
             "w_wan",
             "w_nee"
+          ]
+        },
+        {
+          "id": "p_five_days",
+          "th": "ห้าวัน",
+          "fr": "cinq jours",
+          "phonetic": "haa wan",
+          "components": [
+            "w_5",
+            "w_wan"
           ]
         }
       ]
@@ -2073,6 +2206,28 @@
           "components": [
             "w_phuean",
             "w_phom"
+          ]
+        },
+        {
+          "id": "p_four_friends",
+          "th": "เพื่อนสี่คน",
+          "fr": "quatre amis",
+          "phonetic": "phuean see khon",
+          "components": [
+            "w_phuean",
+            "w_4",
+            "w_khon"
+          ]
+        },
+        {
+          "id": "p_one_child",
+          "th": "ลูกหนึ่งคน",
+          "fr": "un enfant",
+          "phonetic": "luk nueng khon",
+          "components": [
+            "w_luk",
+            "w_1",
+            "w_khon"
           ]
         }
       ]

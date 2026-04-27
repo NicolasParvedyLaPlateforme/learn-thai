@@ -12,43 +12,43 @@ const data = courseData as CourseData;
 const UNITS = [
   {
     id: 'unit-1', title: "Unité 1 : Les bases", description: "Commencez votre voyage en thaï !", colorClass: "bg-emerald-500", borderClass: "border-emerald-700", textClass: "text-emerald-500", hoverClass: "hover:bg-emerald-400", lightTextClass: "text-emerald-100", bgMutedClass: "bg-emerald-700/50",
-    startIndex: 0, endIndex: 10
+    startIndex: 0, endIndex: 11
   },
   {
     id: 'unit-2', title: "Unité 2 : Vie quotidienne", description: "Se déplacer, se repérer et communiquer davantage.", colorClass: "bg-blue-500", borderClass: "border-blue-700", textClass: "text-blue-500", hoverClass: "hover:bg-blue-400", lightTextClass: "text-blue-100", bgMutedClass: "bg-blue-700/50",
-    startIndex: 10, endIndex: 19
+    startIndex: 11, endIndex: 20
   },
   {
     id: 'unit-3', title: "Unité 3 : Nourriture & Boissons", description: "Saveurs, viandes et commander au restaurant.", colorClass: "bg-orange-500", borderClass: "border-orange-700", textClass: "text-orange-500", hoverClass: "hover:bg-orange-400", lightTextClass: "text-orange-100", bgMutedClass: "bg-orange-700/50",
-    startIndex: 19, endIndex: 24
+    startIndex: 20, endIndex: 25
   },
   {
     id: 'unit-4', title: "Unité 4 : Verbes d'action", description: "Regarder, jouer, travailler et apprendre.", colorClass: "bg-purple-500", borderClass: "border-purple-700", textClass: "text-purple-500", hoverClass: "hover:bg-purple-400", lightTextClass: "text-purple-100", bgMutedClass: "bg-purple-700/50",
-    startIndex: 24, endIndex: 29
+    startIndex: 25, endIndex: 30
   },
   {
     id: 'unit-5', title: "Unité 5 : Le temps & Météo", description: "Jours, heures, pluie et chaleur.", colorClass: "bg-cyan-500", borderClass: "border-cyan-700", textClass: "text-cyan-500", hoverClass: "hover:bg-cyan-400", lightTextClass: "text-cyan-100", bgMutedClass: "bg-cyan-700/50",
-    startIndex: 29, endIndex: 34
+    startIndex: 30, endIndex: 35
   },
   {
     id: 'unit-6', title: "Unité 6 : En Ville & Trajets", description: "Bâtiments, école et moyens de transports.", colorClass: "bg-pink-500", borderClass: "border-pink-700", textClass: "text-pink-500", hoverClass: "hover:bg-pink-400", lightTextClass: "text-pink-100", bgMutedClass: "bg-pink-700/50",
-    startIndex: 34, endIndex: 39
+    startIndex: 35, endIndex: 40
   },
   {
     id: 'unit-7', title: "Unité 7 : Achats & Vêtements", description: "Couleurs, vêtements et argent.", colorClass: "bg-yellow-500", borderClass: "border-yellow-700", textClass: "text-yellow-500", hoverClass: "hover:bg-yellow-400", lightTextClass: "text-yellow-100", bgMutedClass: "bg-yellow-700/50",
-    startIndex: 39, endIndex: 44
+    startIndex: 40, endIndex: 45
   },
   {
     id: 'unit-8', title: "Unité 8 : Description & Famille", description: "Apparence, frères, sœurs et amis.", colorClass: "bg-indigo-500", borderClass: "border-indigo-700", textClass: "text-indigo-500", hoverClass: "hover:bg-indigo-400", lightTextClass: "text-indigo-100", bgMutedClass: "bg-indigo-700/50",
-    startIndex: 44, endIndex: 49
+    startIndex: 45, endIndex: 50
   },
   {
     id: 'unit-9', title: "Unité 9 : Santé & Émotions", description: "Docteur, tristesse, douleur et joie.", colorClass: "bg-rose-500", borderClass: "border-rose-700", textClass: "text-rose-500", hoverClass: "hover:bg-rose-400", lightTextClass: "text-rose-100", bgMutedClass: "bg-rose-700/50",
-    startIndex: 49, endIndex: 54
+    startIndex: 50, endIndex: 55
   },
   {
     id: 'unit-10', title: "Unité 10 : Le Grand Bilan A1", description: "Expressions, habitudes et tests finaux !", colorClass: "bg-teal-500", borderClass: "border-teal-700", textClass: "text-teal-500", hoverClass: "hover:bg-teal-400", lightTextClass: "text-teal-100", bgMutedClass: "bg-teal-700/50",
-    startIndex: 54, endIndex: 59
+    startIndex: 55, endIndex: 60
   }
 ];
 
