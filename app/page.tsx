@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useProgressStore } from './lib/store';
 import courseData from './data/course.json';
-import { BookOpen, CheckCircle, Flame, Star, Play, Crown } from 'lucide-react';
+import { BookOpen, CheckCircle, Flame, Star, Play, Crown, RotateCcw } from 'lucide-react';
 import { CourseData } from './types';
 
 const data = courseData as CourseData;
@@ -53,7 +53,7 @@ const UNITS = [
 ];
 
 export default function Home() {
-  const { completedLessons, lessonLevels, xp } = useProgressStore();
+  const { completedLessons, lessonLevels, xp, resetLessonLevel } = useProgressStore();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -74,6 +74,10 @@ export default function Home() {
           </div>
           
           <div className="flex items-center gap-4 pl-4 font-bold">
+            <Link href="/review" className="mr-2 text-indigo-500 hover:text-indigo-600 bg-indigo-50 hover:bg-indigo-100 px-4 py-2 rounded-xl flex items-center gap-2 transition-colors">
+              <RotateCcw size={18} />
+              <span className="hidden sm:inline">Rappel</span>
+            </Link>
             <div className="flex items-center gap-1.5 text-orange-500 text-lg">
               <Flame size={22} className="fill-orange-500" />
               <span>0</span>
@@ -129,9 +133,19 @@ export default function Home() {
                     
                     return (
                       <div key={lesson.id} className={`relative z-10 w-full flex justify-center ${translateX}`}>
-                        <Link href={isUnlocked ? `/lesson/${lesson.id}` : '#'} className="group flex flex-col items-center">
-                          
-                          {/* Tooltip on hover */}
+                        <div className="relative group/lesson">
+                          {isCompleted && (
+                            <button
+                              onClick={(e) => { e.preventDefault(); e.stopPropagation(); resetLessonLevel(lesson.id); }}
+                              className="absolute top-1/2 -translate-y-1/2 -right-12 p-2.5 bg-slate-100 hover:bg-slate-200 text-slate-400 hover:text-rose-500 rounded-full transition-all md:opacity-0 md:group-hover/lesson:opacity-100 z-20"
+                              title="Remettre à zéro"
+                            >
+                              <RotateCcw size={18} />
+                            </button>
+                          )}
+                          <Link href={isUnlocked ? `/lesson/${lesson.id}` : '#'} className="group flex flex-col items-center">
+                            
+                            {/* Tooltip on hover */}
                           <div className="absolute -top-16 opacity-0 group-hover:opacity-100 transition-opacity bg-white px-4 py-3 rounded-2xl shadow-xl border-2 border-slate-200 whitespace-nowrap z-50 pointer-events-none">
                             <p className="font-extrabold text-slate-800 uppercase tracking-wide text-sm flex items-center gap-2">
                               {lesson.title}
@@ -168,6 +182,7 @@ export default function Home() {
                             )}
                           </div>
                         </Link>
+                        </div>
                       </div>
                     );
                   })}

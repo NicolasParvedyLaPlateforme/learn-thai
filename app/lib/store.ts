@@ -7,6 +7,7 @@ interface ProgressState {
   xp: number;
   completeLesson: (lessonId: string, earnedXp: number) => void;
   resetProgress: () => void;
+  resetLessonLevel: (lessonId: string) => void;
 }
 
 export const useProgressStore = create<ProgressState>()(
@@ -30,6 +31,12 @@ export const useProgressStore = create<ProgressState>()(
         };
       }),
       resetProgress: () => set({ completedLessons: [], lessonLevels: {}, xp: 0 }),
+      resetLessonLevel: (lessonId) => set((state) => ({
+        lessonLevels: {
+          ...state.lessonLevels,
+          [lessonId]: 0
+        }
+      })),
     }),
     {
       name: 'thai-learning-progress',

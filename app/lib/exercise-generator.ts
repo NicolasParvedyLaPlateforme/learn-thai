@@ -1,12 +1,51 @@
 import { Lesson, Exercise, Word, Phrase } from '../types';
 
-function shuffle<T>(array: T[]): T[] {
+export function shuffle<T>(array: T[]): T[] {
   const newArray = [...array];
   for (let i = newArray.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
   }
   return newArray;
+}
+
+export function generateEndlessReviewExercises(allLessons: Lesson[], completedLessonIds: string[]): Exercise[] {
+  const completedLessons = allLessons.filter(l => completedLessonIds.includes(l.id));
+  if (completedLessons.length === 0) return [];
+
+  let exercises: Exercise[] = [];
+  const globalWords = allLessons.flatMap(l => l.words);
+
+  completedLessons.forEach(prevLesson => {
+    // word match
+    prevLesson.words.forEach(word => {
+      const distractors = shuffle(globalWords.filter(w => w.id !== word.id)).slice(0, 5);
+      exercises.push({
+        id: `endless-wm-${word.id}-${Date.now()}-${Math.random()}`,
+        type: 'word-match',
+        question: word.fr,
+        answer: word.th,
+        options: shuffle([word, ...distractors]),
+        hideHints: false // The user requested hints always on
+      });
+    });
+    // sentence builder
+    prevLesson.phrases.forEach(phrase => {
+      const phraseWords = phrase.components.map(id => globalWords.find(w => w.id === id)).filter(Boolean) as Word[];
+      const distractors = shuffle(globalWords.filter(w => !phrase.components.includes(w.id))).slice(0, 5);
+      exercises.push({
+        id: `endless-sb-${phrase.id}-${Date.now()}-${Math.random()}`,
+        type: 'sentence-builder',
+        question: phrase.fr,
+        answer: phrase.th,
+        options: shuffle([...phraseWords, ...distractors]),
+        correctComponents: phrase.components,
+        hideHints: false // The user requested hints always on
+      });
+    });
+  });
+
+  return shuffle(exercises).slice(0, 20); // Return a batch of 20 random exercises
 }
 
 export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: number = 0): Exercise[] {
@@ -60,30 +99,38 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
     });
 
     // Shuffle and pick 30
-    return shuffle(exercises).slice(0, 30);
+    let finalExercises = shuffle(exercises).slice(0, 30);
+    
+    // Warm-up for reviews too
+    if (level >= 1) {
+      finalExercises.forEach((ex, idx) => {
+        if (idx < 5) {
+          ex.hideHints = false;
+        }
+      });
+    }
+    return finalExercises;
   }
 
   // Normal lesson logic
-  // 1. Generate word match exercises (skip if master level AND lesson has phrases, to focus on sentences)
-  const skipWords = isMasterLevel && lesson.phrases && lesson.phrases.length > 0;
-  if (!skipWords) {
-    lesson.words.forEach(word => {
-      // Pick random distractor words from all words
-      const distractors = shuffle(globalWords.filter(w => w.id !== word.id)).slice(0, baseWMDistractors);
-      exercises.push({
-        id: `wm-${word.id}`,
-        type: 'word-match',
-        question: word.fr,
-        answer: word.th,
-        options: shuffle([word, ...distractors]),
-        hideHints
-      });
+  // 1. Generate word match exercises
+  // We keep words for all levels to make exercises longer
+  lesson.words.forEach(word => {
+    // Pick random distractor words from all words
+    const distractors = shuffle(globalWords.filter(w => w.id !== word.id)).slice(0, baseWMDistractors);
+    exercises.push({
+      id: `wm-${word.id}`,
+      type: 'word-match',
+      question: word.fr,
+      answer: word.th,
+      options: shuffle([word, ...distractors]),
+      hideHints
     });
-  }
+  });
 
   // 2. Generate sentence builder for each phrase in the current lesson
-  // If master level, generate them twice (for more repetition of sentences)
-  const multiplier = isMasterLevel ? 2 : 1;
+  // Increase multiplier to make exercises longer
+  const multiplier = isMasterLevel ? 3 : (level >= 1 ? 2 : 1);
   const sentenceExercises: Exercise[] = [];
 
   for (let i = 0; i < multiplier; i++) {
@@ -107,6 +154,26 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
   }
   
   exercises = [...exercises, ...sentenceExercises];
+  let finalExercises = shuffle(exercises);
 
-  return shuffle(exercises);
+  // Warm-up logic: first 5 exercises are easier
+  if (level >= 2) {
+    finalExercises.forEach((ex, idx) => {
+      if (idx < 5) {
+         ex.hideHints = false; // Show hints for first 5
+         // Reduce distractors to make it simpler
+         if (ex.type === 'word-match') {
+            const correctAnswer = ex.options.find(o => o.th === ex.answer)!;
+            const others = shuffle(ex.options.filter(o => o.th !== ex.answer)).slice(0, 3);
+            ex.options = shuffle([correctAnswer, ...others]);
+         } else if (ex.type === 'sentence-builder') {
+            const correctWords = ex.options.filter(o => ex.correctComponents?.includes(o.id));
+            const otherWords = shuffle(ex.options.filter(o => !ex.correctComponents?.includes(o.id))).slice(0, 3);
+            ex.options = shuffle([...correctWords, ...otherWords]);
+         }
+      }
+    });
+  }
+
+  return finalExercises;
 }

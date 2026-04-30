@@ -1,76 +1,81 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
-import { useParams, useRouter } from 'next/navigation';
-import { useProgressStore } from '../../lib/store';
-import courseData from '../../data/course.json';
-import { generateExercises } from '../../lib/exercise-generator';
-import { Exercise, Lesson, CourseData, Word, Phrase } from '../../types';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { useProgressStore } from '../lib/store';
+import courseData from '../data/course.json';
+import { generateEndlessReviewExercises } from '../lib/exercise-generator';
+import { Exercise, CourseData, Word } from '../types';
 import { X, Check } from 'lucide-react';
-import confetti from 'canvas-confetti';
 
 // Exercise Components
-import WordMatch from './components/WordMatch';
-import SentenceBuilder from './components/SentenceBuilder';
-import { TooltipHint, SentenceWithHints } from '../../components/Hints';
+import WordMatch from '../lesson/[id]/components/WordMatch';
+import SentenceBuilder from '../lesson/[id]/components/SentenceBuilder';
+import { SentenceWithHints } from '../components/Hints';
 
 const data = courseData as CourseData;
 
-export default function LessonPage() {
-  const params = useParams();
+export default function ReviewPage() {
   const router = useRouter();
-  const { completeLesson, lessonLevels } = useProgressStore();
+  const { completedLessons, xp, completeLesson } = useProgressStore();
   
-  const lessonId = params.id as string;
-  // Resolve lesson and exercises directly to avoid useEffect setState
-  const lesson = data.lessons.find((l) => l.id === lessonId) || null;
-  const currentLevel = lesson ? (lessonLevels[lesson.id] || 0) : 0;
-  
-  // We need to stabilize exercises generation since it shuffles.
-  const [exercises, setExercises] = useState<Exercise[]>(() => {
-    return lesson ? generateExercises(lesson, data.lessons, currentLevel) : [];
-  });
+  const [exercises, setExercises] = useState<Exercise[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   
   // Interaction State
   const [selectedAnswer, setSelectedAnswer] = useState<string | string[] | null>(null);
   const [isChecking, setIsChecking] = useState(false);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
-  const [isFinished, setIsFinished] = useState(false);
 
+  const [mounted, setMounted] = useState(false);
   useEffect(() => {
-    if (!lesson) {
-      router.push('/');
+    setMounted(true);
+    if (completedLessons.length > 0) {
+       setExercises(generateEndlessReviewExercises(data.lessons, completedLessons));
     }
-  }, [lesson, router]);
+  }, [completedLessons]);
 
+  if (!mounted) return <div className="p-8 text-center text-slate-500 font-medium">Chargement...</div>;
 
-  if (!lesson || exercises.length === 0) return <div className="p-8 text-center">Chargement...</div>;
+  if (completedLessons.length === 0) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-[#FAFAFA] font-sans">
+        <h1 className="text-3xl font-extrabold text-slate-800 mb-4 text-center">Aucune leçon complétée</h1>
+        <p className="text-slate-500 mb-8 text-center text-lg font-medium">Vous devez compléter au moins une leçon pour pouvoir y accéder !</p>
+        <button 
+          onClick={() => router.push('/')}
+          className="px-12 py-3 rounded-xl bg-indigo-500 border-b-4 border-indigo-700 text-white font-bold text-lg shadow-lg hover:bg-indigo-400 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest w-full max-w-sm"
+        >
+          Retour
+        </button>
+      </div>
+    );
+  }
+
+  if (exercises.length === 0) return <div className="p-8 text-center text-slate-500 font-medium">Chargement...</div>;
 
   const currentExercise = exercises[currentIndex];
-  const progress = (currentIndex / exercises.length) * 100;
+  // Since it's endless, the progress is just cosmetic, let's keep it fixed or bouncing
+  const progress = ((currentIndex % 10) / 10) * 100;
 
   const handleCheck = () => {
     if (isChecking) {
       // Move to next exercise
       if (isCorrect) {
-        if (currentIndex < exercises.length - 1) {
+          // Give 1 XP per correct answer
+          completeLesson('review-dummy', 1);
+          
+          if (currentIndex >= exercises.length - 3) {
+            // Refill exercises when running low
+            setExercises(prev => [...prev, ...generateEndlessReviewExercises(data.lessons, completedLessons)]);
+          }
+          
           setCurrentIndex(currentIndex + 1);
           setIsChecking(false);
           setIsCorrect(null);
           setSelectedAnswer(null);
-        } else {
-          // Finished
-          setIsFinished(true);
-          completeLesson(lesson.id, 10 + exercises.length);
-          confetti({
-            particleCount: 150,
-            spread: 70,
-            origin: { y: 0.6 }
-          });
-        }
       } else {
-        // If wrong, we re-add the exercise to the end!
+        // If wrong, we re-add the exercise to the end of the current batch
         setExercises([...exercises, currentExercise]);
         setCurrentIndex(currentIndex + 1);
         setIsChecking(false);
@@ -96,23 +101,13 @@ export default function LessonPage() {
     setIsChecking(true);
   };
 
-  if (isFinished) {
-    return (
-      <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-[#FAFAFA] font-sans">
-        <div className="text-orange-500 mb-6">
-          <Check size={120} className="mx-auto" />
-        </div>
-        <h1 className="text-3xl font-extrabold text-slate-800 mb-2 text-center">Niveau {Math.min(currentLevel + 1, 4)} terminé !</h1>
-        <p className="text-slate-500 mb-8 text-center text-lg font-medium">+ {10 + exercises.length} XP</p>
-        <button 
-          onClick={() => router.push('/')}
-          className="px-12 py-3 rounded-xl bg-emerald-500 border-b-4 border-emerald-700 text-white font-bold text-lg shadow-lg hover:bg-emerald-400 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest w-full max-w-sm"
-        >
-          Continuer
-        </button>
-      </div>
-    );
-  }
+  const getDictionaryForExercise = () => {
+     return data.lessons.flatMap(l => l.words);
+  };
+
+  const getPhrasesForExercise = () => {
+     return data.lessons.flatMap(l => l.phrases);
+  };
 
   return (
     <div className="h-[100dvh] flex flex-col bg-[#FAFAFA] font-sans text-slate-800 overflow-hidden">
@@ -124,11 +119,11 @@ export default function LessonPage() {
           </button>
           <div className="flex-1 h-3 bg-slate-100 rounded-full overflow-hidden">
             <div 
-              className="bg-emerald-500 h-full transition-all duration-500 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.3)]"
+              className="bg-indigo-500 h-full transition-all duration-500 rounded-full shadow-[0_0_8px_rgba(99,102,241,0.3)]"
               style={{ width: `${progress}%` }}
             />
           </div>
-          <div className="font-bold text-slate-400">Niv. {Math.min(currentLevel + 1, 4)}</div>
+          <div className="font-bold text-slate-400">Rappel ∞</div>
         </div>
       </header>
 
@@ -138,9 +133,9 @@ export default function LessonPage() {
         
           {/* The Question / Hint System */}
           <div className="flex items-start gap-4 md:gap-8 mb-4 md:mb-8">
-            <div className="hidden md:flex w-32 h-32 bg-emerald-100 rounded-3xl items-center justify-center text-5xl shadow-sm border border-emerald-200 relative flex-shrink-0">
-               <span className="animate-bounce">🐘</span>
-               <div className="absolute -right-2 -top-2 w-6 h-6 bg-emerald-500 border-2 border-white rounded-full"></div>
+            <div className="hidden md:flex w-32 h-32 bg-indigo-100 rounded-3xl items-center justify-center text-5xl shadow-sm border border-indigo-200 relative flex-shrink-0">
+               <span className="animate-pulse">🧠</span>
+               <div className="absolute -right-2 -top-2 w-6 h-6 bg-indigo-500 border-2 border-white rounded-full"></div>
             </div>
             
             <div className="flex-1 mt-2 md:mt-0">
@@ -150,8 +145,8 @@ export default function LessonPage() {
               <div className="relative inline-block pb-1">
                 <SentenceWithHints 
                   text={currentExercise.question} 
-                  dictionary={lesson.words} 
-                  phrases={lesson.phrases}
+                  dictionary={getDictionaryForExercise()} 
+                  phrases={getPhrasesForExercise()}
                   isSentence={currentExercise.type === 'sentence-builder'}
                   exerciseOptions={currentExercise.options as Word[]}
                   hideHints={currentExercise.hideHints}
@@ -182,13 +177,13 @@ export default function LessonPage() {
       </main>
 
       {/* Footer Actions */}
-      <footer className={`shrink-0 min-h-[100px] md:h-32 py-4 md:py-0 border-t-2 border-slate-200 flex items-center justify-center px-4 md:px-8 transition-colors duration-300 ${isChecking ? (isCorrect ? 'bg-emerald-50' : 'bg-rose-50 border-rose-200') : 'bg-white'}`}>
+      <footer className={`shrink-0 min-h-[100px] md:h-32 py-4 md:py-0 border-t-2 border-slate-200 flex items-center justify-center px-4 md:px-8 transition-colors duration-300 ${isChecking ? (isCorrect ? 'bg-indigo-50' : 'bg-rose-50 border-rose-200') : 'bg-white'}`}>
         <div className="w-full max-w-4xl flex sm:flex-row flex-col items-center justify-between gap-4">
           
           <div className="flex-1 w-full text-center sm:text-left">
             {isChecking && isCorrect && (
-              <div className="flex items-center justify-center sm:justify-start gap-3 text-emerald-600 font-extrabold text-xl">
-                <div className="bg-white text-emerald-500 rounded-full p-1"><Check size={24} strokeWidth={3} /></div>
+              <div className="flex items-center justify-center sm:justify-start gap-3 text-indigo-600 font-extrabold text-xl">
+                <div className="bg-white text-indigo-500 rounded-full p-1"><Check size={24} strokeWidth={3} /></div>
                 Excellent !
               </div>
             )}
@@ -210,9 +205,9 @@ export default function LessonPage() {
             className={`w-full sm:w-auto px-12 py-3 rounded-xl border-b-4 font-bold text-lg shadow-lg hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest disabled:opacity-50 disabled:scale-100 disabled:shadow-none
               ${isChecking 
                 ? (isCorrect 
-                  ? 'bg-emerald-500 border-emerald-700 text-white hover:bg-emerald-400' 
+                  ? 'bg-indigo-500 border-indigo-700 text-white hover:bg-indigo-400' 
                   : 'bg-rose-500 border-rose-700 text-white hover:bg-rose-400') 
-                : 'bg-emerald-500 border-emerald-700 text-white hover:bg-emerald-400'}
+                : 'bg-indigo-500 border-indigo-700 text-white hover:bg-indigo-400'}
             `}
           >
             {isChecking ? 'Continuer' : 'Vérifier'}
