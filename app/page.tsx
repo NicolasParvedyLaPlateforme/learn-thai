@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useProgressStore } from './lib/store';
 import courseData from './data/course.json';
-import { BookOpen, CheckCircle, Flame, Star, Play, Crown, RotateCcw } from 'lucide-react';
+import { BookOpen, CheckCircle, Flame, Star, Play, Crown, RotateCcw, Pencil } from 'lucide-react';
 import { CourseData } from './types';
 
 const data = courseData as CourseData;
@@ -64,27 +64,31 @@ export default function Home() {
     <div className="min-h-screen bg-[#FAFAFA] font-sans text-slate-800 pb-20 overflow-hidden">
       
       {/* Header */}
-      <header className="sticky top-0 bg-white border-b border-slate-200 z-50 px-8 h-16 flex items-center justify-between shadow-sm">
-        <div className="flex items-center gap-6 w-full max-w-4xl mx-auto flex-1">
+      <header className="sticky top-0 bg-white border-b border-slate-200 z-50 px-4 md:px-8 h-16 flex items-center justify-between shadow-sm">
+        <div className="flex items-center justify-between w-full max-w-4xl mx-auto flex-1 gap-2 sm:gap-6">
           <div className="flex items-center gap-2">
             <div className="bg-emerald-500 text-white p-2 rounded-xl">
               <BookOpen size={24} />
             </div>
-            <h1 className="text-xl font-bold text-slate-800 tracking-tight">ThaiLearn</h1>
+            <h1 className="text-xl font-bold text-slate-800 tracking-tight hidden md:block">ThaiLearn</h1>
           </div>
           
-          <div className="flex items-center gap-4 pl-4 font-bold">
-            <Link href="/review" className="mr-2 text-indigo-500 hover:text-indigo-600 bg-indigo-50 hover:bg-indigo-100 px-4 py-2 rounded-xl flex items-center gap-2 transition-colors">
+          <div className="flex items-center gap-2 sm:gap-4 font-bold">
+            <Link href="/review" className="text-indigo-500 hover:text-indigo-600 bg-indigo-50 hover:bg-indigo-100 px-3 sm:px-4 py-2 rounded-xl flex items-center gap-2 transition-colors">
               <RotateCcw size={18} />
               <span className="hidden sm:inline">Rappel</span>
             </Link>
-            <div className="flex items-center gap-1.5 text-orange-500 text-lg">
-              <Flame size={22} className="fill-orange-500" />
+            <Link href="/writing" className="text-emerald-500 hover:text-emerald-600 bg-emerald-50 hover:bg-emerald-100 px-3 sm:px-4 py-2 rounded-xl flex items-center gap-2 transition-colors">
+              <Pencil size={18} />
+              <span className="hidden sm:inline">Écriture</span>
+            </Link>
+            <div className="flex items-center gap-1 text-orange-500 text-base sm:text-lg">
+              <Flame size={20} className="fill-orange-500 sm:w-[22px] sm:h-[22px]" />
               <span>0</span>
             </div>
-            <div className="flex items-center gap-1.5 text-rose-500 text-lg">
-              <Star size={22} className="fill-rose-500" />
-              <span>{mounted ? xp : 0} XP</span>
+            <div className="flex items-center gap-1 text-rose-500 text-base sm:text-lg">
+              <Star size={20} className="fill-rose-500 sm:w-[22px] sm:h-[22px]" />
+              <span>{mounted ? xp : 0}<span className="ml-1 hidden sm:inline">XP</span></span>
             </div>
           </div>
         </div>

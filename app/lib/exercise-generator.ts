@@ -9,6 +9,84 @@ export function shuffle<T>(array: T[]): T[] {
   return newArray;
 }
 
+/**
+ * Splits a Thai string into meaningful character clusters for writing exercises.
+ * A cluster typically consists of a base consonant plus any associated vowels or tone marks.
+ */
+export function clusterThaiCharacters(text: string): string[] {
+  const clusters: string[] = [];
+  let currentCluster = "";
+
+  for (let i = 0; i < text.length; i++) {
+    const char = text[i];
+    const code = char.charCodeAt(0);
+
+    // If it's a base character (consonant or preposed vowel)
+    const isBase = 
+      (code >= 0x0E01 && code <= 0x0E2E) || // Consonants
+      (code >= 0x0E40 && code <= 0x0E44) || // Preposed vowels
+      (code === 0x0E2F) || // Paiyannoi
+      (code >= 0x0E46 && code <= 0x0E46); // Maiyamok
+
+    if (isBase && currentCluster !== "") {
+      // Check if current base character should be part of the cluster
+      // Usually preposed vowels are the start of a cluster, but let's keep it simple
+      // and only start a new cluster on a base char if the previous cluster is "complete"
+      
+      // Special case: if current char is a consonant and previous was a preposed vowel, move it to the current cluster
+      const prevCode = currentCluster.charCodeAt(0);
+      const prevIsPreposed = prevCode >= 0x0E40 && prevCode <= 0x0E44;
+      
+      if (prevIsPreposed && currentCluster.length === 1) {
+         currentCluster += char;
+         continue;
+      }
+
+      clusters.push(currentCluster);
+      currentCluster = char;
+    } else if (currentCluster === "") {
+      currentCluster = char;
+    } else {
+      // Non-base characters (marks, follow-on vowels) always attach to the current cluster
+      currentCluster += char;
+    }
+  }
+
+  if (currentCluster !== "") {
+    clusters.push(currentCluster);
+  }
+
+  return clusters;
+}
+
+export function generateWritingExercises(allLessons: Lesson[], completedLessonIds: string[]): Exercise[] {
+  const completedLessons = allLessons.filter(l => completedLessonIds.includes(l.id));
+  if (completedLessons.length === 0) return [];
+
+  const candidateItems: { fr: string, th: string }[] = [];
+  completedLessons.forEach(l => {
+    l.words.forEach(w => candidateItems.push({ fr: w.fr, th: w.th }));
+    l.phrases.forEach(p => candidateItems.push({ fr: p.fr, th: p.th }));
+  });
+
+  if (candidateItems.length === 0) return [];
+
+  const shuffledCandidates = shuffle(candidateItems).slice(0, 20);
+  
+  return shuffledCandidates.map((item, idx) => {
+    const clusters = clusterThaiCharacters(item.th.replace(/\s+/g, ''));
+    return {
+      id: `writing-${idx}-${Date.now()}`,
+      type: 'writing' as any,
+      question: item.fr,
+      answer: item.th,
+      options: shuffle(clusters).map((c, i) => ({ id: `c-${i}`, th: c, fr: '', phonetic: '' })),
+      correctComponents: clusters, // Representing the order of clusters
+      hideHints: false
+    };
+  });
+}
+
 export function generateEndlessReviewExercises(allLessons: Lesson[], completedLessonIds: string[]): Exercise[] {
   const completedLessons = allLessons.filter(l => completedLessonIds.includes(l.id));
   if (completedLessons.length === 0) return [];

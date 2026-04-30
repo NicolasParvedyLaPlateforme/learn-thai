@@ -26,7 +26,7 @@ export interface CourseData {
   lessons: Lesson[];
 }
 
-export type ExerciseType = 'word-match' | 'sentence-builder';
+export type ExerciseType = 'word-match' | 'sentence-builder' | 'writing';
 
 export interface Exercise {
   id: string;
