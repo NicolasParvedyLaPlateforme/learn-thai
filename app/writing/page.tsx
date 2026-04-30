@@ -143,8 +143,20 @@ export default function WritingPage() {
                 />
               </div>
               <div className="mt-6">
-                <div className="text-3xl md:text-5xl font-thai font-medium text-emerald-600 tracking-wide">
-                  {currentExercise.answer}
+                <div className="text-3xl md:text-5xl font-thai font-medium tracking-wide flex flex-wrap">
+                  {currentExercise.correctComponents?.map((cluster, idx) => {
+                    let color = "text-slate-300"; // remaining
+                    if (idx < selectedAnswer.length) {
+                      color = "text-emerald-500"; // already typed
+                    } else if (idx === selectedAnswer.length) {
+                      color = "text-orange-500 scale-110 translate-y-[-2px] inline-block"; // to be typed
+                    }
+                    return (
+                      <span key={idx} className={`${color} transition-all duration-300`}>
+                        {cluster}
+                      </span>
+                    );
+                  }) || currentExercise.answer}
                 </div>
               </div>
             </div>
