@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useProgressStore } from './lib/store';
 import courseData from './data/course.json';
-import { BookOpen, CheckCircle, Flame, Star, Play, Crown, RotateCcw, Pencil } from 'lucide-react';
+import { BookOpen, CheckCircle, Flame, Star, Play, Crown, RotateCcw, Pencil, Type } from 'lucide-react';
 import { CourseData } from './types';
 
 const data = courseData as CourseData;
@@ -74,6 +74,10 @@ export default function Home() {
           </div>
           
           <div className="flex items-center gap-2 sm:gap-4 font-bold">
+            <Link href="/alphabet" className="text-emerald-500 hover:text-emerald-600 bg-emerald-50 hover:bg-emerald-100 px-3 sm:px-4 py-2 rounded-xl flex items-center gap-2 transition-colors">
+              <span className="font-extrabold text-lg sm:text-xl leading-none">A</span>
+              <span className="hidden sm:block">Alphabet</span>
+            </Link>
             <Link href="/review" className="text-indigo-500 hover:text-indigo-600 bg-indigo-50 hover:bg-indigo-100 px-3 sm:px-4 py-2 rounded-xl flex items-center gap-2 transition-colors">
               <RotateCcw size={18} />
               <span className="hidden sm:inline">Rappel</span>
