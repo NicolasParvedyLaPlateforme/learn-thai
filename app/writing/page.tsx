@@ -29,18 +29,31 @@ export default function WritingPage() {
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
     setMounted(true);
-    if (completedLessons.length > 0) {
-       setExercises(generateWritingExercises(data.lessons, completedLessons));
+    
+    const params = new URLSearchParams(window.location.search);
+    const lessonId = params.get('lessonId');
+    
+    let targetLessons = completedLessons;
+    
+    if (lessonId) {
+       targetLessons = [lessonId];
+    }
+    
+    if (targetLessons.length > 0) {
+       setExercises(generateWritingExercises(data.lessons, targetLessons));
     }
   }, [completedLessons]);
 
   if (!mounted) return <div className="p-8 text-center text-slate-500 font-medium">Chargement...</div>;
 
-  if (completedLessons.length === 0) {
+  const params = typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : null;
+  const hasLessonId = !!params?.get('lessonId');
+
+  if (completedLessons.length === 0 && !hasLessonId) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-[#FAFAFA] font-sans">
         <h1 className="text-3xl font-extrabold text-slate-800 mb-4 text-center">Aucune leçon complétée</h1>
-        <p className="text-slate-500 mb-8 text-center text-lg font-medium">Vous devez compléter au moins une leçon pour pratiquer l'écriture !</p>
+        <p className="text-slate-500 mb-8 text-center text-lg font-medium">Vous devez compléter au moins une leçon pour pratiquer l&apos;écriture !</p>
         <button 
           onClick={() => router.push('/')}
           className="px-12 py-3 rounded-xl bg-emerald-500 border-b-4 border-emerald-700 text-white font-bold text-lg shadow-lg hover:bg-emerald-400 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest w-full max-w-sm"
@@ -63,7 +76,10 @@ export default function WritingPage() {
           completeLesson('writing-dummy', 1);
           
           if (currentIndex >= exercises.length - 1) {
-            setExercises(generateWritingExercises(data.lessons, completedLessons));
+            const params = new URLSearchParams(window.location.search);
+            const lessonId = params.get('lessonId');
+            const targetLessons = lessonId ? [lessonId] : completedLessons;
+            setExercises(generateWritingExercises(data.lessons, targetLessons));
             setCurrentIndex(0);
           } else {
             setCurrentIndex(currentIndex + 1);

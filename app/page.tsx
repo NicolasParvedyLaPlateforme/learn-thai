@@ -139,13 +139,23 @@ export default function Home() {
                       <div key={lesson.id} className={`relative z-10 w-full flex justify-center ${translateX}`}>
                         <div className="relative group/lesson">
                           {isCompleted && (
-                            <button
-                              onClick={(e) => { e.preventDefault(); e.stopPropagation(); resetLessonLevel(lesson.id); }}
-                              className="absolute top-1/2 -translate-y-1/2 -right-12 p-2.5 bg-slate-100 hover:bg-slate-200 text-slate-400 hover:text-rose-500 rounded-full transition-all md:opacity-0 md:group-hover/lesson:opacity-100 z-20"
-                              title="Remettre à zéro"
-                            >
-                              <RotateCcw size={18} />
-                            </button>
+                            <div className="absolute top-1/2 -translate-y-1/2 -right-24 flex items-center gap-2 md:opacity-0 md:group-hover/lesson:opacity-100 z-20 transition-all">
+                              <Link
+                                href={`/writing?lessonId=${lesson.id}`}
+                                onClick={(e) => e.stopPropagation()}
+                                className="p-2.5 bg-slate-100 hover:bg-emerald-100 text-slate-400 hover:text-emerald-500 rounded-full transition-all"
+                                title="S'entraîner à écrire"
+                              >
+                                <Pencil size={18} />
+                              </Link>
+                              <button
+                                onClick={(e) => { e.preventDefault(); e.stopPropagation(); resetLessonLevel(lesson.id); }}
+                                className="p-2.5 bg-slate-100 hover:bg-rose-100 text-slate-400 hover:text-rose-500 rounded-full transition-all"
+                                title="Remettre à zéro"
+                              >
+                                <RotateCcw size={18} />
+                              </button>
+                            </div>
                           )}
                           <Link href={isUnlocked ? `/lesson/${lesson.id}` : '#'} className="group flex flex-col items-center">
                             

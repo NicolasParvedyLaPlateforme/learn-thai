@@ -1,5 +1,5 @@
 import type {Metadata} from 'next';
-import { Inter, Noto_Sans_Thai } from 'next/font/google';
+import { Inter, Sarabun } from 'next/font/google';
 import './globals.css'; // Global styles
 
 const inter = Inter({
@@ -7,7 +7,8 @@ const inter = Inter({
   variable: '--font-sans',
 });
 
-const notoSansThai = Noto_Sans_Thai({
+const sarabun = Sarabun({
+  weight: ['400', '500', '600', '700'],
   subsets: ['thai'],
   variable: '--font-thai',
 });
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
-    <html lang="en" className={`${inter.variable} ${notoSansThai.variable}`}>
+    <html lang="en" className={`${inter.variable} ${sarabun.variable}`}>
        <body className="font-sans antialiased text-slate-900 bg-slate-50 min-h-screen" suppressHydrationWarning>{children}</body>
     </html>
   );
