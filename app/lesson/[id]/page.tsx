@@ -155,6 +155,7 @@ export default function LessonPage() {
                   isSentence={currentExercise.type === 'sentence-builder'}
                   exerciseOptions={currentExercise.options as Word[]}
                   hideHints={currentExercise.hideHints}
+                  alwaysShowPhonetic={currentLevel < 2}
                 />
               </div>
             </div>

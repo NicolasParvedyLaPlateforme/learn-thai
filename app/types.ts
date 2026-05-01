@@ -35,5 +35,6 @@ export interface Exercise {
   answer: string; // The Thai text
   options: Word[]; // Words to select from
   correctComponents?: string[]; // For sentence builder
+  componentGroups?: number[]; // To logically group correctComponents for visual display
   hideHints?: boolean; // If true, tooltips won't be shown
 }

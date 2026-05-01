@@ -150,6 +150,7 @@ export default function ReviewPage() {
                   isSentence={currentExercise.type === 'sentence-builder'}
                   exerciseOptions={currentExercise.options as Word[]}
                   hideHints={currentExercise.hideHints}
+                  alwaysShowPhonetic={currentExercise.type === 'writing'}
                 />
               </div>
             </div>

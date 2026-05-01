@@ -71,7 +71,7 @@ export function TooltipHint({ children, tooltipContent, className = '' }: { chil
 }
 
 // A simple component to render the french question with tooltips (hints)
-export function SentenceWithHints({text, dictionary, phrases, isSentence, exerciseOptions, hideHints}: {text: string, dictionary: Word[], phrases: Phrase[], isSentence: boolean, exerciseOptions: Word[], hideHints?: boolean}) {
+export function SentenceWithHints({text, dictionary, phrases, isSentence, exerciseOptions, hideHints, alwaysShowPhonetic}: {text: string, dictionary: Word[], phrases: Phrase[], isSentence: boolean, exerciseOptions: Word[], hideHints?: boolean, alwaysShowPhonetic?: boolean}) {
   // Try to match the ENTIRE phrase/word first
   const exactPhrase = phrases.find(p => p.fr.toLowerCase() === text.toLowerCase());
   const exactWord = dictionary.find(w => w.fr.toLowerCase() === text.toLowerCase());
@@ -83,19 +83,26 @@ export function SentenceWithHints({text, dictionary, phrases, isSentence, exerci
   
   return (
     <div className="flex flex-col gap-4">
-      <span className="flex flex-wrap gap-1 leading-relaxed text-xl md:text-2xl font-medium">
+      <span className="flex flex-wrap items-end gap-x-2 gap-y-4 leading-relaxed text-xl md:text-2xl font-medium">
         {exactMatch ? (
-           <TooltipHint 
-             className="border-b-2 border-dotted border-slate-300 inline-block"
-             tooltipContent={<><span className="font-thai text-lg font-bold">{exactMatch.th}</span> <span className="text-slate-300 text-xs">({exactMatch.phonetic})</span></>}
-           >
-             {text}
-           </TooltipHint>
+           alwaysShowPhonetic ? (
+             <span className="inline-flex flex-col">
+               <span>{text}</span>
+               <span className="text-sm md:text-base text-emerald-600 font-medium tracking-wide">[{exactMatch.phonetic}]</span>
+             </span>
+           ) : (
+             <TooltipHint 
+               className="border-b-2 border-dotted border-slate-300 inline-block"
+               tooltipContent={<><span className="font-thai text-lg font-bold">{exactMatch.th}</span> <span className="text-slate-300 text-xs">({exactMatch.phonetic})</span></>}
+             >
+               {text}
+             </TooltipHint>
+           )
         ) : (
           text.split(' ').map((w, i) => {
             // fallback word-by-word
             const cleanW = w.toLowerCase().replace(/[,?!.()]/g, '').trim();
-            if (!cleanW) return <span key={i}>{w}</span>;
+            if (!cleanW) return <span key={i} className="self-start">{w}</span>;
 
             const match = dictionary.find(d => {
               const frWords = d.fr.toLowerCase().split(/[\s/'.()]+/);
@@ -103,7 +110,12 @@ export function SentenceWithHints({text, dictionary, phrases, isSentence, exerci
             });
             
             if (match) {
-              return (
+              return alwaysShowPhonetic ? (
+                 <span key={i} className="inline-flex flex-col">
+                    <span>{w}</span>
+                    <span className="text-xs md:text-sm text-emerald-600 font-medium tracking-wide">[{match.phonetic}]</span>
+                 </span>
+              ) : (
                 <TooltipHint 
                   key={i} 
                   className="border-b-2 border-dotted border-slate-300 inline-block"
@@ -113,10 +125,11 @@ export function SentenceWithHints({text, dictionary, phrases, isSentence, exerci
                 </TooltipHint>
               );
             }
-            return <span key={i}>{w}</span>;
+            return <span key={i} className="self-start">{w}</span>;
           })
         )}
       </span>
+
       
       {isSentence && (
         <div className="mt-2 text-sm text-slate-500 bg-slate-100 p-3 rounded-xl border-2 border-slate-200">

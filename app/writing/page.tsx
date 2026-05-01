@@ -156,23 +156,51 @@ export default function WritingPage() {
                   isSentence={false}
                   exerciseOptions={[]} // No vocab needed for hints here as it's writing
                   hideHints={false}
+                  alwaysShowPhonetic={true}
                 />
               </div>
               <div className="mt-6">
-                <div className="text-3xl md:text-5xl font-thai font-medium tracking-wide flex flex-wrap">
-                  {currentExercise.correctComponents?.map((cluster, idx) => {
-                    let color = "text-slate-300"; // remaining
-                    if (idx < selectedAnswer.length) {
-                      color = "text-emerald-500"; // already typed
-                    } else if (idx === selectedAnswer.length) {
-                      color = "text-orange-500 scale-110 translate-y-[-2px] inline-block"; // to be typed
-                    }
-                    return (
-                      <span key={idx} className={`${color} transition-all duration-300`}>
-                        {cluster}
-                      </span>
-                    );
-                  }) || currentExercise.answer}
+                <div className="text-3xl md:text-5xl font-thai font-medium tracking-wide flex flex-wrap gap-y-2">
+                  {(() => {
+                    if (!currentExercise.correctComponents) return <span>{currentExercise.answer}</span>;
+
+                    const groupedComponents: { cluster: string; idx: number; groupIndex: number }[][] = [];
+                    let currentGroup: { cluster: string; idx: number; groupIndex: number }[] = [];
+                    let currentGroupIndex = currentExercise.componentGroups?.[0] ?? -1;
+
+                    currentExercise.correctComponents.forEach((cluster, idx) => {
+                       const groupIndex = currentExercise.componentGroups?.[idx] ?? idx;
+                       if (groupIndex === currentGroupIndex) {
+                           currentGroup.push({ cluster, idx, groupIndex });
+                       } else {
+                           if (currentGroup.length > 0) groupedComponents.push(currentGroup);
+                           currentGroup = [{ cluster, idx, groupIndex }];
+                           currentGroupIndex = groupIndex;
+                       }
+                    });
+                    if (currentGroup.length > 0) groupedComponents.push(currentGroup);
+
+                    return groupedComponents.map((group, gIdx) => (
+                      <div 
+                        key={gIdx} 
+                        className={`flex items-center mx-[1px] px-[2px] rounded-lg transition-colors ${group.length > 1 ? (gIdx % 2 === 0 ? 'bg-slate-100 shadow-sm' : 'bg-slate-200 shadow-sm') : 'bg-transparent'}`}
+                      >
+                        {group.map(({ cluster, idx }) => {
+                          let color = "text-slate-300"; // remaining
+                          if (idx < selectedAnswer.length) {
+                            color = "text-emerald-500"; // already typed
+                          } else if (idx === selectedAnswer.length) {
+                            color = "text-orange-500 scale-110 translate-y-[-2px] inline-block"; // to be typed
+                          }
+                          return (
+                            <span key={idx} className={`${color} transition-all duration-300`}>
+                              {cluster}
+                            </span>
+                          );
+                        })}
+                      </div>
+                    ));
+                  })()}
                 </div>
               </div>
             </div>
