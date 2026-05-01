@@ -1,4 +1,5 @@
 import { Exercise } from '../../../types';
+import { playThaiTTS } from '../../../lib/tts';
 
 interface Props {
   exercise: Exercise;
@@ -17,7 +18,12 @@ export default function WordMatch({ exercise, selected, onChange, disabled }: Pr
         return (
           <button
             key={opt.id}
-            onClick={() => !disabled && onChange(opt.th)}
+            onClick={() => {
+              if (!disabled) {
+                onChange(opt.th);
+                playThaiTTS(opt.th);
+              }
+            }}
             disabled={disabled}
             className={`
               relative rounded-2xl border-2 text-center transition-all flex flex-col items-center justify-center

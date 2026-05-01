@@ -1,4 +1,5 @@
 import { Exercise } from '../../../types';
+import { playThaiTTS } from '../../../lib/tts';
 
 interface Props {
   exercise: Exercise;
@@ -12,6 +13,7 @@ export default function SentenceBuilder({ exercise, selected, onChange, disabled
   const handleSelect = (wordTh: string) => {
     if (disabled) return;
     onChange([...selected, wordTh]);
+    playThaiTTS(wordTh);
   };
 
   const handleRemove = (index: number) => {

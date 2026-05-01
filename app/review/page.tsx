@@ -7,6 +7,7 @@ import courseData from '../data/course.json';
 import { generateEndlessReviewExercises } from '../lib/exercise-generator';
 import { Exercise, CourseData, Word } from '../types';
 import { X, Check } from 'lucide-react';
+import { playThaiTTS, preloadThaiVoices } from '../lib/tts';
 
 // Exercise Components
 import WordMatch from '../lesson/[id]/components/WordMatch';
@@ -33,6 +34,7 @@ export default function ReviewPage() {
     if (completedLessons.length > 0) {
        setExercises(generateEndlessReviewExercises(data.lessons, completedLessons));
     }
+    preloadThaiVoices();
   }, [completedLessons]);
 
   if (!mounted) return <div className="p-8 text-center text-slate-500 font-medium">Chargement...</div>;
@@ -99,6 +101,7 @@ export default function ReviewPage() {
 
     setIsCorrect(correct);
     setIsChecking(true);
+    playThaiTTS(currentExercise.answer);
   };
 
   const getDictionaryForExercise = () => {

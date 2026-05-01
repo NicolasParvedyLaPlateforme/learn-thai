@@ -1,15 +1,23 @@
 import { useState, useRef, useEffect } from 'react';
 import { Word, Phrase } from '../types';
+import { playThaiTTS } from '../lib/tts';
 
 // A simple component to render tooltips with tap support for mobile
-export function TooltipHint({ children, tooltipContent, className = '' }: { children: React.ReactNode, tooltipContent: React.ReactNode, className?: string }) {
+export function TooltipHint({ children, tooltipContent, className = '', audioText }: { children: React.ReactNode, tooltipContent: React.ReactNode, className?: string, audioText?: string }) {
   const [isOpen, setIsOpen] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout>(null);
   const spanRef = useRef<HTMLSpanElement>(null);
   const [position, setPosition] = useState<'center' | 'left' | 'right'>('center');
 
-  const handleTap = () => {
+  const onOpen = () => {
     setIsOpen(true);
+    if (audioText) {
+      playThaiTTS(audioText);
+    }
+  };
+
+  const handleTap = () => {
+    onOpen();
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
     timeoutRef.current = setTimeout(() => {
       setIsOpen(false);
@@ -48,7 +56,7 @@ export function TooltipHint({ children, tooltipContent, className = '' }: { chil
       ref={spanRef}
       className={`relative cursor-help ${className}`} 
       onClick={handleTap}
-      onMouseEnter={() => setIsOpen(true)}
+      onMouseEnter={onOpen}
       onMouseLeave={() => setIsOpen(false)}
     >
       {children}
@@ -94,6 +102,7 @@ export function SentenceWithHints({text, dictionary, phrases, isSentence, exerci
              <TooltipHint 
                className="border-b-2 border-dotted border-slate-300 inline-block"
                tooltipContent={<><span className="font-thai text-lg font-bold">{exactMatch.th}</span> <span className="text-slate-300 text-xs">({exactMatch.phonetic})</span></>}
+               audioText={exactMatch.th}
              >
                {text}
              </TooltipHint>
@@ -120,6 +129,7 @@ export function SentenceWithHints({text, dictionary, phrases, isSentence, exerci
                   key={i} 
                   className="border-b-2 border-dotted border-slate-300 inline-block"
                   tooltipContent={<><span className="font-thai text-lg font-bold">{match.th}</span> <span className="text-slate-300 text-xs">({match.phonetic})</span></>}
+                  audioText={match.th}
                 >
                   {w}
                 </TooltipHint>
@@ -140,6 +150,7 @@ export function SentenceWithHints({text, dictionary, phrases, isSentence, exerci
                 key={i}
                 className="inline-flex items-center gap-1.5 bg-white px-2 py-1 rounded border border-slate-200 shadow-sm"
                 tooltipContent={<><span className="text-slate-200 font-medium">Prononciation :</span> <span className="font-bold">{w.phonetic}</span></>}
+                audioText={w.th}
               >
                 <span className="font-thai text-emerald-600 font-semibold">{w.th}</span> 
                 <span className="text-slate-400">=</span> 

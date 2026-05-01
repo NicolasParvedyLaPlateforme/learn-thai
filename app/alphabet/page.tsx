@@ -7,6 +7,8 @@ import { X, Volume2 } from 'lucide-react';
 import { useProgressStore } from '../lib/store';
 import { THAI_ALPHABET, AlphabetItem } from '../lib/alphabet-data';
 
+import { playThaiTTS, preloadThaiVoices } from '../lib/tts';
+
 export default function AlphabetPage() {
   const router = useRouter();
   const { seenAlphabets, markAlphabetSeen } = useProgressStore();
@@ -25,12 +27,7 @@ export default function AlphabetPage() {
     pickNextItem(seenAlphabets);
     
     // Pre-load voices for Safari/Chrome so they are ready when the user clicks
-    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
-      window.speechSynthesis.getVoices();
-      window.speechSynthesis.onvoiceschanged = () => {
-        window.speechSynthesis.getVoices();
-      };
-    }
+    preloadThaiVoices();
   }, []);
 
   const pickNextItem = (currentSeen: string[]) => {
@@ -88,38 +85,7 @@ export default function AlphabetPage() {
   };
 
   const playTTS = (text: string) => {
-    if (!('speechSynthesis' in window)) return;
-    window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'th-TH';
-    
-    // Get loaded voices
-    const voices = window.speechSynthesis.getVoices();
-    const thaiVoices = voices.filter(voice => voice.lang.includes('th') || voice.lang.includes('TH'));
-    
-    if (thaiVoices.length > 0) {
-      // Exclude known male names like 'niwat' or 'male'
-      const safeVoices = thaiVoices.filter(v => {
-        const name = v.name.toLowerCase();
-        return !name.includes('male') && !name.includes('niwat') && !name.includes('pattara');
-      });
-
-      // Prioritize known female voices
-      const bestVoice = safeVoices.find(v => 
-        v.name.toLowerCase().includes('female') || 
-        v.name.toLowerCase().includes('narisa') || 
-        v.name.toLowerCase().includes('kanya') ||
-        v.name.toLowerCase().includes('premwadee') ||
-        v.name.toLowerCase().includes('siri female') ||
-        v.name.includes('Google')
-      );
-      
-      utterance.voice = bestVoice || safeVoices[0] || thaiVoices[0];
-    }
-    
-    utterance.pitch = 1.1; // Increase pitch slightly to sound more feminine if fallback is used
-    utterance.rate = 0.8; // Slow down slightly for better clarity
-    window.speechSynthesis.speak(utterance);
+    playThaiTTS(text);
   };
 
   if (!mounted || !currentItem) return null;
@@ -216,30 +182,19 @@ export default function AlphabetPage() {
             </div>
 
             <div className="mt-auto pt-8">
-              {isCorrect === null ? (
-                <button
-                  onClick={handleCheck}
-                  disabled={!selectedOption}
-                  className={`w-full font-bold py-4 rounded-2xl transition-all ${
-                    selectedOption
+              <button
+                onClick={handleCheck}
+                disabled={!selectedOption || isCorrect !== null}
+                className={`w-full font-bold py-4 rounded-2xl transition-all ${
+                  isCorrect !== null 
+                    ? 'opacity-0 pointer-events-none' 
+                    : selectedOption
                       ? 'bg-emerald-500 hover:bg-emerald-400 active:bg-emerald-600 text-white shadow-[0_4px_0_#059669] hover:shadow-[0_4px_0_#059669] active:shadow-[0_0px_0_#059669] active:translate-y-[4px]'
                       : 'bg-slate-200 text-slate-400 cursor-not-allowed'
-                  }`}
-                >
-                  Vérifier
-                </button>
-              ) : (
-                <button
-                  onClick={handleContinue}
-                  className={`w-full font-bold py-4 rounded-2xl transition-all ${
-                    isCorrect
-                      ? 'bg-emerald-500 hover:bg-emerald-400 active:bg-emerald-600 text-white shadow-[0_4px_0_#059669] hover:shadow-[0_4px_0_#059669] active:shadow-[0_0px_0_#059669] active:translate-y-[4px]'
-                      : 'bg-rose-500 hover:bg-rose-400 active:bg-rose-600 text-white shadow-[0_4px_0_#e11d48] hover:shadow-[0_4px_0_#e11d48] active:shadow-[0_0px_0_#e11d48] active:translate-y-[4px]'
-                  }`}
-                >
-                  Continuer
-                </button>
-              )}
+                }`}
+              >
+                Vérifier
+              </button>
             </div>
           </div>
         )}
@@ -247,20 +202,20 @@ export default function AlphabetPage() {
       
       {/* Feedback Banner */}
       {isCorrect !== null && (
-        <div className={`fixed bottom-0 left-0 right-0 p-4 md:p-6 shadow-[-4px_-4px_16px_rgba(0,0,0,0.05)] border-t ${isCorrect ? 'bg-emerald-100 border-emerald-200/50' : 'bg-rose-100 border-rose-200/50'}`}>
-          <div className="max-w-2xl mx-auto flex items-center justify-between">
+        <div className={`fixed bottom-0 left-0 right-0 p-4 md:p-6 shadow-[0_-4px_16px_rgba(0,0,0,0.05)] border-t z-50 ${isCorrect ? 'bg-emerald-100 border-emerald-200/50' : 'bg-rose-100 border-rose-200/50'}`}>
+          <div className="max-w-2xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-0">
             <div className="flex items-center gap-4">
-              <div className={`w-12 h-12 rounded-full flex items-center justify-center ${isCorrect ? 'bg-white text-emerald-500' : 'bg-white text-rose-500'}`}>
+              <div className={`shrink-0 w-12 h-12 rounded-full flex items-center justify-center ${isCorrect ? 'bg-white text-emerald-500' : 'bg-white text-rose-500'}`}>
                 {isCorrect ? <span className="text-2xl">✓</span> : <X size={24} />}
               </div>
-              <div className={`font-bold text-xl ${isCorrect ? 'text-emerald-700' : 'text-rose-700'}`}>
+              <div className={`font-bold text-lg md:text-xl ${isCorrect ? 'text-emerald-700' : 'text-rose-700'}`}>
                 {isCorrect ? 'Excellent !' : 'La bonne réponse était : ' + currentItem.letter}
               </div>
             </div>
             <button
                onClick={handleContinue}
-               className={`hidden md:block font-bold py-3 px-8 rounded-xl transition-all shadow-[0_4px_0_rgba(0,0,0,0.1)] active:shadow-[0_0px_0] active:translate-y-[4px] ${
-                 isCorrect ? 'bg-emerald-500 text-white' : 'bg-rose-500 text-white'
+               className={`w-full md:w-auto font-bold py-4 md:py-3 px-8 rounded-xl md:rounded-2xl transition-all shadow-[0_4px_0_rgba(0,0,0,0.1)] active:shadow-[0_0px_0] active:translate-y-[4px] ${
+                 isCorrect ? 'bg-emerald-500 text-white hover:bg-emerald-400' : 'bg-rose-500 text-white hover:bg-rose-400'
                }`}
             >
               Continuer

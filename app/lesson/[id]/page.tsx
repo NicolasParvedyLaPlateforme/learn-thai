@@ -8,6 +8,7 @@ import { generateExercises } from '../../lib/exercise-generator';
 import { Exercise, Lesson, CourseData, Word, Phrase } from '../../types';
 import { X, Check } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { playThaiTTS, preloadThaiVoices } from '../../lib/tts';
 
 // Exercise Components
 import WordMatch from './components/WordMatch';
@@ -42,6 +43,7 @@ export default function LessonPage() {
     if (!lesson) {
       router.push('/');
     }
+    preloadThaiVoices();
   }, [lesson, router]);
 
 
@@ -94,6 +96,7 @@ export default function LessonPage() {
 
     setIsCorrect(correct);
     setIsChecking(true);
+    playThaiTTS(currentExercise.answer);
   };
 
   if (isFinished) {
