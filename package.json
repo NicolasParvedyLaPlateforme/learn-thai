@@ -10,6 +10,7 @@
     "clean": "next clean"
   },
   "dependencies": {
+    "@fontsource/sarabun": "^5.2.8",
     "@google/genai": "^1.17.0",
     "@hookform/resolvers": "^5.2.1",
     "@types/canvas-confetti": "^1.9.0",

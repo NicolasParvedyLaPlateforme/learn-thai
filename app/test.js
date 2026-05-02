@@ -1,10 +1,8 @@
-const text = "สวัสดีครับ";
-const segmenter = new Intl.Segmenter('th', { granularity: 'word' });
-let offset = 0;
-const bounds = [];
-for (const segment of segmenter.segment(text)) {
-  offset += segment.segment.length;
-  bounds.push(offset);
-  console.log(segment.segment, segment.isWordLike);
+const fs = require('fs');
+const tsConfig = require('./tsconfig.json');
+const text = 'เก้าอี้';
+const characters = [];
+for (let i = 0; i < text.length; i++) {
+  characters.push(text[i]);
 }
-console.log(bounds);
+console.log(characters);
