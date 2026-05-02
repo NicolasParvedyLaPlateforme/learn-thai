@@ -38,8 +38,40 @@ export default function VirtualKeyboard({ exercise, selected, onChange, disabled
     return code === 0x0E31 || (code >= 0x0E34 && code <= 0x0E3A) || (code >= 0x0E47 && code <= 0x0E4E);
   };
 
+  const handleRemove = (index: number) => {
+    if (disabled) return;
+    const newSelected = [...selected];
+    newSelected.splice(index, 1);
+    onChange(newSelected);
+  };
+
   return (
     <div className="flex flex-col gap-4 w-full max-w-2xl mx-auto">
+      {/* Selected area */}
+      <div className={`min-h-[80px] border-y-2 border-slate-200 py-4 flex flex-wrap gap-2 items-center justify-center`}>
+        {selected.length === 0 && (
+          <span className="text-slate-400 p-2 font-medium">Écrivez ici...</span>
+        )}
+        {selected.map((char, idx) => {
+          let isCorrect = true;
+          if (exercise.type === 'writing' && exercise.correctComponents) {
+            isCorrect = char === exercise.correctComponents[idx];
+          }
+          
+          const textColorClass = isCorrect ? "text-emerald-600" : "text-rose-500";
+          return (
+            <button
+              key={`sel-${idx}`}
+              onClick={() => handleRemove(idx)}
+              disabled={disabled}
+              className={`bg-white border-2 border-b-4 ${isCorrect ? 'border-slate-200' : 'border-rose-200'} rounded-xl font-medium ${textColorClass} shadow-sm transition-all hover:-translate-y-0.5 active:translate-y-0.5 active:border-b-2 font-thai ${isDense ? 'px-3 py-1.5 text-3xl sm:px-4 sm:py-2 flex items-center justify-center min-w-[3.5rem] h-14 sm:h-16 sm:text-4xl' : 'px-4 py-2 text-4xl sm:px-5 sm:py-3 sm:text-5xl flex items-center justify-center min-w-[4.5rem] h-16 sm:h-20'}`}
+            >
+              <span className="leading-none pt-1">{char}</span>
+            </button>
+          )
+        })}
+      </div>
+
       {/* Keyboard area */}
       <div className="flex flex-wrap justify-center gap-2 mt-2">
         {exercise.options.map((opt, idx) => {
@@ -48,10 +80,10 @@ export default function VirtualKeyboard({ exercise, selected, onChange, disabled
             isUsed = true;
             usedCounts[opt.th]--;
           }
-
+          
           let displayStr = opt.th;
           if (isCombining(opt.th)) {
-            displayStr = '\u25CC' + opt.th;
+            displayStr = '-' + opt.th;
           }
           
           return (

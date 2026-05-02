@@ -207,7 +207,7 @@ export default function WritingPage() {
 
                         let displayCluster = cluster;
                         if (idx >= selectedAnswer.length && isCombining(cluster)) {
-                          displayCluster = '\u25CC' + cluster;
+                          displayCluster = '-' + cluster;
                         }
 
                         return { text: displayCluster, color };
