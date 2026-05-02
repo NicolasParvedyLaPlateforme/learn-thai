@@ -8,8 +8,7 @@ import { generateWritingExercises } from '../lib/exercise-generator';
 import { Exercise, CourseData, Word } from '../types';
 import { X, Check } from 'lucide-react';
 
-// Reusing SentenceBuilder as it fits the "builder" pattern
-import SentenceBuilder from '../lesson/[id]/components/SentenceBuilder';
+import VirtualKeyboard from './components/VirtualKeyboard';
 import { SentenceWithHints } from '../components/Hints';
 
 const data = courseData as CourseData;
@@ -237,7 +236,7 @@ export default function WritingPage() {
           </div>
 
           <div className="mt-8">
-            <SentenceBuilder 
+            <VirtualKeyboard 
               exercise={currentExercise}
               selected={selectedAnswer}
               onChange={setSelectedAnswer}

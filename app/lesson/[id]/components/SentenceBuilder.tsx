@@ -39,7 +39,13 @@ export default function SentenceBuilder({ exercise, selected, onChange, disabled
           <span className="text-slate-400 p-2 font-medium">Formez la phrase ici...</span>
         )}
         {selected.map((word, idx) => {
-          const isCorrect = exercise.correctComponents ? word === exercise.correctComponents[idx] : true;
+          let isCorrect = true;
+          if (exercise.type === 'sentence-builder' && exercise.correctComponents) {
+            const expectedWordId = exercise.correctComponents[idx];
+            const expectedWord = exercise.options.find(o => o.id === expectedWordId)?.th;
+            isCorrect = word === expectedWord;
+          }
+          
           const textColorClass = isCorrect ? "text-emerald-600" : "text-rose-500";
           return (
           <button
