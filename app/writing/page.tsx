@@ -185,50 +185,58 @@ export default function WritingPage() {
                     });
                     if (currentGroup.length > 0) groupedComponents.push(currentGroup);
 
-                    return groupedComponents.map((group, gIdx) => (
-                      <span 
-                        key={gIdx} 
-                        className={`inline-block mx-[2px] px-[6px] py-[4px] rounded-xl transition-colors ${group.length > 1 ? (gIdx % 2 === 0 ? 'bg-slate-100/80 shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)] border border-slate-200' : 'bg-slate-50 border border-slate-200/50') : 'bg-transparent'}`}
-                      >
-                        {group.map(({ cluster, idx }) => {
-                          let color = "text-slate-300"; // remaining
-                          if (idx < selectedAnswer.length) {
-                            if (selectedAnswer[idx] === cluster) {
-                              color = "text-emerald-500"; // correctly typed
-                            } else {
-                              color = "text-rose-500"; // incorrectly typed
-                            }
-                          } else if (idx === selectedAnswer.length) {
-                            color = "text-orange-500"; // to be typed
+                    return groupedComponents.map((group, gIdx) => {
+                      
+                      // First determine the color and text for each item
+                      const items = group.map(({ cluster, idx }) => {
+                        let color = "text-slate-300"; // remaining
+                        if (idx < selectedAnswer.length) {
+                          if (selectedAnswer[idx] === cluster) {
+                            color = "text-emerald-500";
+                          } else {
+                            color = "text-rose-500";
                           }
-                          
-                          const isCombining = (charStr: string) => {
-                            const code = charStr.charCodeAt(0);
-                            // True vertical combining marks that lack horizontal advance:
-                            // 0x0E31: Mai Han-Akat
-                            // 0x0E34 to 0x0E3A: top/bottom vowels (I, Ii, Ue, Uee, U, Uu, Phinthu)
-                            // 0x0E47 to 0x0E4E: tone marks and other diacritics
-                            return code === 0x0E31 || (code >= 0x0E34 && code <= 0x0E3A) || (code >= 0x0E47 && code <= 0x0E4E);
-                          };
+                        } else if (idx === selectedAnswer.length) {
+                          color = "text-orange-500";
+                        }
 
-                          let displayCluster = cluster;
-                          // If it's the active character and it's a combining mark, add a dotted circle to prevent overlapping!
-                          // But only if it's currently active (orange) or remaining (slate), so they separate out nicely.
-                          // Wait, if it's already typed (emerald), we WANT it to combine!
-                          if (idx >= selectedAnswer.length && isCombining(cluster)) {
-                             // Zero-width non-joiner prevents it from combining with the previous span.
-                             // Actually, let's explicitly use a dotted circle so the user can see it's a mark
-                             displayCluster = '\u25CC' + cluster;
-                          }
+                        const isCombining = (charStr: string) => {
+                          const code = charStr.charCodeAt(0);
+                          return code === 0x0E31 || (code >= 0x0E34 && code <= 0x0E3A) || (code >= 0x0E47 && code <= 0x0E4E);
+                        };
 
-                          return (
-                            <span key={idx} className={`${color}`}>
-                              {displayCluster}
+                        let displayCluster = cluster;
+                        if (idx >= selectedAnswer.length && isCombining(cluster)) {
+                          displayCluster = '\u25CC' + cluster;
+                        }
+
+                        return { text: displayCluster, color };
+                      });
+
+                      // Group contiguous items with the same color
+                      const mergedItems: { text: string; color: string }[] = [];
+                      for (const item of items) {
+                        if (mergedItems.length > 0 && mergedItems[mergedItems.length - 1].color === item.color) {
+                          // Merge text if they have the same color, this is crucial for mobile WebKit combining marks
+                          mergedItems[mergedItems.length - 1].text += item.text;
+                        } else {
+                          mergedItems.push({ text: item.text, color: item.color });
+                        }
+                      }
+
+                      return (
+                        <span 
+                          key={gIdx} 
+                          className={`inline-block mx-[2px] px-[6px] py-[4px] rounded-xl transition-colors ${group.length > 1 ? (gIdx % 2 === 0 ? 'bg-slate-100/80 shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)] border border-slate-200' : 'bg-slate-50 border border-slate-200/50') : 'bg-transparent'}`}
+                        >
+                          {mergedItems.map((mi, i) => (
+                            <span key={i} className={`${mi.color}`}>
+                              {mi.text}
                             </span>
-                          );
-                        })}
-                      </span>
-                    ));
+                          ))}
+                        </span>
+                      );
+                    });
                   })()}
                 </div>
               </div>
