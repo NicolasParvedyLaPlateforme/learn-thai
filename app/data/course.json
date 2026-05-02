@@ -122,6 +122,18 @@
           "th": "ล่ะ",
           "fr": "et (pour renvoyer la question)",
           "phonetic": "lâ"
+        },
+        {
+          "id": "w_laew",
+          "th": "แล้ว",
+          "fr": "alors / et (transition)",
+          "phonetic": "láew"
+        },
+        {
+          "id": "w_dots",
+          "th": "...",
+          "fr": "(prénom)",
+          "phonetic": ""
         }
       ],
       "phrases": [
@@ -154,6 +166,34 @@
           "components": [
             "w_chan",
             "w_chue"
+          ]
+        },
+        {
+          "id": "p_my_name_and_you_m",
+          "th": "ผมชื่อ...แล้วคุณล่ะ",
+          "fr": "je m'appelle (prenom) et toi ? (homme)",
+          "phonetic": "phǒm chûue... láew khun lâ",
+          "components": [
+            "w_phom",
+            "w_chue",
+            "w_dots",
+            "w_laew",
+            "w_khun",
+            "w_la"
+          ]
+        },
+        {
+          "id": "p_my_name_and_you_f",
+          "th": "ฉันชื่อ...แล้วคุณล่ะ",
+          "fr": "je m'appelle (prenom) et toi ? (femme)",
+          "phonetic": "chǎn chûue... láew khun lâ",
+          "components": [
+            "w_chan",
+            "w_chue",
+            "w_dots",
+            "w_laew",
+            "w_khun",
+            "w_la"
           ]
         }
       ]
