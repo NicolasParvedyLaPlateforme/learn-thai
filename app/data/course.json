@@ -9,43 +9,43 @@
           "id": "w_sawatdee",
           "th": "สวัสดี",
           "fr": "bonjour",
-          "phonetic": "sa-wat-dee"
+          "phonetic": "sà-wàt-dii"
         },
         {
           "id": "w_khopkhun",
           "th": "ขอบคุณ",
           "fr": "merci",
-          "phonetic": "khop-khun"
+          "phonetic": "khɔ̀p-khun"
         },
         {
           "id": "w_krap",
           "th": "ครับ",
           "fr": "particule homme",
-          "phonetic": "krap"
+          "phonetic": "khráp"
         },
         {
           "id": "w_kha",
           "th": "ค่ะ",
           "fr": "particule femme",
-          "phonetic": "kha"
+          "phonetic": "khâ"
         },
         {
           "id": "w_sabai",
           "th": "สบาย",
           "fr": "bien / à l'aise",
-          "phonetic": "sa-bai"
+          "phonetic": "sà-baai"
         },
         {
           "id": "w_dee",
           "th": "ดี",
           "fr": "bien / bon",
-          "phonetic": "dee"
+          "phonetic": "dii"
         },
         {
           "id": "w_mai",
           "th": "ไหม",
           "fr": "est-ce que (question)",
-          "phonetic": "mai"
+          "phonetic": "mǎi"
         }
       ],
       "phrases": [
@@ -53,7 +53,7 @@
           "id": "p_hello_m",
           "th": "สวัสดีครับ",
           "fr": "bonjour (homme)",
-          "phonetic": "sa-wat-dee krap",
+          "phonetic": "sà-wàt-dii khráp",
           "components": [
             "w_sawatdee",
             "w_krap"
@@ -63,7 +63,7 @@
           "id": "p_hello_f",
           "th": "สวัสดีค่ะ",
           "fr": "bonjour (femme)",
-          "phonetic": "sa-wat-dee kha",
+          "phonetic": "sà-wàt-dii khâ",
           "components": [
             "w_sawatdee",
             "w_kha"
@@ -73,7 +73,7 @@
           "id": "p_how_are_you",
           "th": "สบายดีไหม",
           "fr": "comment ça va ?",
-          "phonetic": "sa-bai dee mai",
+          "phonetic": "sà-baai dii mǎi",
           "components": [
             "w_sabai",
             "w_dee",
@@ -91,13 +91,13 @@
           "id": "w_phom",
           "th": "ผม",
           "fr": "je (homme)",
-          "phonetic": "phom"
+          "phonetic": "phǒm"
         },
         {
           "id": "w_chan",
           "th": "ฉัน",
           "fr": "je (femme)",
-          "phonetic": "chan"
+          "phonetic": "chǎn"
         },
         {
           "id": "w_khun",
@@ -109,19 +109,19 @@
           "id": "w_chue",
           "th": "ชื่อ",
           "fr": "nom / s'appeler",
-          "phonetic": "chue"
+          "phonetic": "chûue"
         },
         {
           "id": "w_arai",
           "th": "อะไร",
           "fr": "quoi / quel",
-          "phonetic": "a-rai"
+          "phonetic": "à-rai"
         },
         {
           "id": "w_la",
           "th": "ล่ะ",
           "fr": "et (pour renvoyer la question)",
-          "phonetic": "la"
+          "phonetic": "lâ"
         }
       ],
       "phrases": [
@@ -129,7 +129,7 @@
           "id": "p_name_ask",
           "th": "คุณชื่ออะไร",
           "fr": "comment vous appelez-vous ?",
-          "phonetic": "khun chue a-rai",
+          "phonetic": "khun chûue à-rai",
           "components": [
             "w_khun",
             "w_chue",
@@ -140,7 +140,7 @@
           "id": "p_name_m",
           "th": "ผมชื่อ",
           "fr": "je m'appelle (homme)",
-          "phonetic": "phom chue",
+          "phonetic": "phǒm chûue",
           "components": [
             "w_phom",
             "w_chue"
@@ -150,7 +150,7 @@
           "id": "p_name_f",
           "th": "ฉันชื่อ",
           "fr": "je m'appelle (femme)",
-          "phonetic": "chan chue",
+          "phonetic": "chǎn chûue",
           "components": [
             "w_chan",
             "w_chue"
@@ -167,67 +167,67 @@
           "id": "w_0",
           "th": "ศูนย์",
           "fr": "zéro",
-          "phonetic": "suun"
+          "phonetic": "sǔun"
         },
         {
           "id": "w_1",
           "th": "หนึ่ง",
           "fr": "un",
-          "phonetic": "nueng"
+          "phonetic": "nùeng"
         },
         {
           "id": "w_2",
           "th": "สอง",
           "fr": "deux",
-          "phonetic": "song"
+          "phonetic": "sɔ̌ng"
         },
         {
           "id": "w_3",
           "th": "สาม",
           "fr": "trois",
-          "phonetic": "saam"
+          "phonetic": "sǎam"
         },
         {
           "id": "w_4",
           "th": "สี่",
           "fr": "quatre",
-          "phonetic": "see"
+          "phonetic": "sìi"
         },
         {
           "id": "w_5",
           "th": "ห้า",
           "fr": "cinq",
-          "phonetic": "haa"
+          "phonetic": "hâa"
         },
         {
           "id": "w_6",
           "th": "หก",
           "fr": "six",
-          "phonetic": "hok"
+          "phonetic": "hòk"
         },
         {
           "id": "w_7",
           "th": "เจ็ด",
           "fr": "sept",
-          "phonetic": "jet"
+          "phonetic": "jèt"
         },
         {
           "id": "w_8",
           "th": "แปด",
           "fr": "huit",
-          "phonetic": "paet"
+          "phonetic": "bpàet"
         },
         {
           "id": "w_9",
           "th": "เก้า",
           "fr": "neuf",
-          "phonetic": "kao"
+          "phonetic": "kâao"
         },
         {
           "id": "w_10",
           "th": "สิบ",
           "fr": "dix",
-          "phonetic": "sip"
+          "phonetic": "sìp"
         }
       ],
       "phrases": []
@@ -241,19 +241,19 @@
           "id": "w_mee",
           "th": "มี",
           "fr": "il y a / avoir",
-          "phonetic": "mee"
+          "phonetic": "mii"
         },
         {
           "id": "w_gao_ee",
           "th": "เก้าอี้",
           "fr": "chaise",
-          "phonetic": "gao-ee"
+          "phonetic": "kâo-îi"
         },
         {
           "id": "w_gee",
           "th": "กี่",
           "fr": "combien de",
-          "phonetic": "gee"
+          "phonetic": "kìi"
         },
         {
           "id": "w_dtua",
@@ -273,7 +273,7 @@
           "id": "p_how_many_chairs",
           "th": "มีเก้าอี้กี่ตัว",
           "fr": "combien y a-t-il de chaises ?",
-          "phonetic": "mee gao-ee gee dtua",
+          "phonetic": "mii kâo-îi kìi dtua",
           "components": [
             "w_mee",
             "w_gao_ee",
@@ -285,7 +285,7 @@
           "id": "p_three_chairs",
           "th": "มีเก้าอี้สามตัว",
           "fr": "il y a trois chaises",
-          "phonetic": "mee gao-ee saam dtua",
+          "phonetic": "mii kâo-îi sǎam dtua",
           "components": [
             "w_mee",
             "w_gao_ee",
@@ -297,7 +297,7 @@
           "id": "p_how_many_people",
           "th": "มีกี่คน",
           "fr": "combien y a-t-il de personnes ?",
-          "phonetic": "mee gee khon",
+          "phonetic": "mii kìi khon",
           "components": [
             "w_mee",
             "w_gee",
@@ -308,7 +308,7 @@
           "id": "p_five_people",
           "th": "มีห้าคน",
           "fr": "il y a cinq personnes",
-          "phonetic": "mee haa khon",
+          "phonetic": "mii hâa khon",
           "components": [
             "w_mee",
             "w_5",
@@ -319,7 +319,7 @@
           "id": "p_one_chair",
           "th": "มีเก้าอี้หนึ่งตัว",
           "fr": "il y a une chaise",
-          "phonetic": "mee gao-ee nueng dtua",
+          "phonetic": "mii kâo-îi nùeng dtua",
           "components": [
             "w_mee",
             "w_gao_ee",
@@ -344,37 +344,37 @@
           "id": "w_khao",
           "th": "ข้าว",
           "fr": "riz",
-          "phonetic": "khao"
+          "phonetic": "khâao"
         },
         {
           "id": "w_nam",
           "th": "น้ำ",
           "fr": "eau",
-          "phonetic": "nam"
+          "phonetic": "náam"
         },
         {
           "id": "w_aroi",
           "th": "อร่อย",
           "fr": "délicieux",
-          "phonetic": "a-roi"
+          "phonetic": "à-rɔ̀i"
         },
         {
           "id": "w_mak",
           "th": "มาก",
           "fr": "très / beaucoup",
-          "phonetic": "mak"
+          "phonetic": "mâak"
         },
         {
           "id": "w_phet",
           "th": "เผ็ด",
           "fr": "épicé",
-          "phonetic": "phet"
+          "phonetic": "phèt"
         },
         {
           "id": "w_mai_neg",
           "th": "ไม่",
           "fr": "ne pas",
-          "phonetic": "mai"
+          "phonetic": "mǎi"
         },
         {
           "id": "w_ao",
@@ -388,7 +388,7 @@
           "id": "p_eat_rice",
           "th": "กินข้าว",
           "fr": "manger (un repas)",
-          "phonetic": "kin khao",
+          "phonetic": "kin khâao",
           "components": [
             "w_kin",
             "w_khao"
@@ -398,7 +398,7 @@
           "id": "p_very_delicious",
           "th": "อร่อยมาก",
           "fr": "très délicieux",
-          "phonetic": "a-roi mak",
+          "phonetic": "à-rɔ̀i mâak",
           "components": [
             "w_aroi",
             "w_mak"
@@ -408,7 +408,7 @@
           "id": "p_not_spicy",
           "th": "ไม่เผ็ด",
           "fr": "pas épicé",
-          "phonetic": "mai phet",
+          "phonetic": "mâi phèt",
           "components": [
             "w_mai_neg",
             "w_phet"
@@ -425,25 +425,25 @@
           "id": "w_kho_thot",
           "th": "ขอโทษ",
           "fr": "pardon / désolé",
-          "phonetic": "kho thot"
+          "phonetic": "khɔ̌ɔ thôot"
         },
         {
           "id": "w_thi_nai",
           "th": "ที่ไหน",
           "fr": "où",
-          "phonetic": "thi nai"
+          "phonetic": "thîi nǎi"
         },
         {
           "id": "w_ka_ru_na",
           "th": "กรุณา",
           "fr": "s'il vous plaît",
-          "phonetic": "ka-ru-na"
+          "phonetic": "kà-rú-naa"
         },
         {
           "id": "w_khao_jai",
           "th": "เข้าใจ",
           "fr": "comprendre",
-          "phonetic": "khao jai"
+          "phonetic": "khâo jai"
         }
       ],
       "phrases": [
@@ -451,7 +451,7 @@
           "id": "p_understand_q",
           "th": "เข้าใจไหม",
           "fr": "comprenez-vous ?",
-          "phonetic": "khao jai mai",
+          "phonetic": "khâao jai mǎi",
           "components": [
             "w_khao_jai",
             "w_mai"
@@ -461,7 +461,7 @@
           "id": "p_not_understand",
           "th": "ไม่เข้าใจ",
           "fr": "je ne comprends pas",
-          "phonetic": "mai khao jai",
+          "phonetic": "mǎi khâao jai",
           "components": [
             "w_mai_neg",
             "w_khao_jai"
@@ -471,7 +471,7 @@
           "id": "p_sorry_m",
           "th": "ขอโทษครับ",
           "fr": "pardon (homme)",
-          "phonetic": "kho thot krap",
+          "phonetic": "kho thot khráp",
           "components": [
             "w_kho_thot",
             "w_krap"
@@ -488,7 +488,7 @@
           "id": "w_khao_pron",
           "th": "เขา",
           "fr": "il / elle",
-          "phonetic": "khao"
+          "phonetic": "khâao"
         },
         {
           "id": "w_rao",
@@ -500,25 +500,25 @@
           "id": "w_mae",
           "th": "แม่",
           "fr": "mère",
-          "phonetic": "mae"
+          "phonetic": "mâe"
         },
         {
           "id": "w_pho",
           "th": "พ่อ",
           "fr": "père",
-          "phonetic": "pho"
+          "phonetic": "phɔ̂ɔ"
         },
         {
           "id": "w_phi",
           "th": "พี่",
           "fr": "grand frère / grande sœur",
-          "phonetic": "phi"
+          "phonetic": "phîi"
         },
         {
           "id": "w_nong",
           "th": "น้อง",
           "fr": "petit frère / petite sœur",
-          "phonetic": "nong"
+          "phonetic": "nɔ́ɔng"
         }
       ],
       "phrases": [
@@ -526,7 +526,7 @@
           "id": "p_he_name",
           "th": "เขาชื่ออะไร",
           "fr": "comment s'appelle-t-il ?",
-          "phonetic": "khao chue a-rai",
+          "phonetic": "khâao chûue à-rai",
           "components": [
             "w_khao_pron",
             "w_chue",
@@ -537,7 +537,7 @@
           "id": "p_dad_fine",
           "th": "พ่อสบายดีไหม",
           "fr": "comment va papa ?",
-          "phonetic": "pho sa-bai dee mai",
+          "phonetic": "phɔ̂ɔ sà-baai dii mǎi",
           "components": [
             "w_pho",
             "w_sabai",
@@ -549,7 +549,7 @@
           "id": "p_two_older_siblings",
           "th": "มีพี่สองคน",
           "fr": "il y a deux grands frères",
-          "phonetic": "mee phi song khon",
+          "phonetic": "mii phîi sɔ̌ng khon",
           "components": [
             "w_mee",
             "w_phi",
@@ -568,13 +568,13 @@
           "id": "w_pai",
           "th": "ไป",
           "fr": "aller",
-          "phonetic": "pai"
+          "phonetic": "bpai"
         },
         {
           "id": "w_ma",
           "th": "มา",
           "fr": "venir",
-          "phonetic": "ma"
+          "phonetic": "maa"
         },
         {
           "id": "w_tham",
@@ -586,7 +586,7 @@
           "id": "w_yak",
           "th": "อยาก",
           "fr": "vouloir",
-          "phonetic": "yak"
+          "phonetic": "yàak"
         }
       ],
       "phrases": [
@@ -594,7 +594,7 @@
           "id": "p_where_go",
           "th": "ไปที่ไหน",
           "fr": "où vas-tu ?",
-          "phonetic": "pai thi nai",
+          "phonetic": "bpai thîi nǎi",
           "components": [
             "w_pai",
             "w_thi_nai"
@@ -604,7 +604,7 @@
           "id": "p_want_eat",
           "th": "อยากกินข้าว",
           "fr": "je veux manger",
-          "phonetic": "yak kin khao",
+          "phonetic": "yàak kin khâao",
           "components": [
             "w_yak",
             "w_kin",
@@ -615,7 +615,7 @@
           "id": "p_have_water",
           "th": "มีน้ำไหม",
           "fr": "avez-vous de l'eau ?",
-          "phonetic": "mee nam mai",
+          "phonetic": "mii náam mǎi",
           "components": [
             "w_mee",
             "w_nam",
@@ -633,7 +633,7 @@
           "id": "w_thao_rai",
           "th": "เท่าไหร่",
           "fr": "combien",
-          "phonetic": "thao rai"
+          "phonetic": "thâo rai"
         },
         {
           "id": "w_phaeng",
@@ -645,25 +645,25 @@
           "id": "w_lot",
           "th": "ลด",
           "fr": "réduire",
-          "phonetic": "lot"
+          "phonetic": "lót"
         },
         {
           "id": "w_dai",
           "th": "ได้",
           "fr": "pouvoir",
-          "phonetic": "dai"
+          "phonetic": "dâai"
         },
         {
           "id": "w_baht",
           "th": "บาท",
           "fr": "baht (monnaie)",
-          "phonetic": "baht"
+          "phonetic": "bàat"
         },
         {
           "id": "w_sue",
           "th": "ซื้อ",
           "fr": "acheter",
-          "phonetic": "sue"
+          "phonetic": "súue"
         }
       ],
       "phrases": [
@@ -671,7 +671,7 @@
           "id": "p_how_much",
           "th": "เท่าไหร่ครับ",
           "fr": "ça coûte combien ? (homme)",
-          "phonetic": "thao rai krap",
+          "phonetic": "thao rai khráp",
           "components": [
             "w_thao_rai",
             "w_krap"
@@ -681,7 +681,7 @@
           "id": "p_very_expensive",
           "th": "แพงมาก",
           "fr": "très cher",
-          "phonetic": "phaeng mak",
+          "phonetic": "phaeng mâak",
           "components": [
             "w_phaeng",
             "w_mak"
@@ -691,7 +691,7 @@
           "id": "p_discount",
           "th": "ลดได้ไหม",
           "fr": "pouvez-vous baisser le prix ?",
-          "phonetic": "lot dai mai",
+          "phonetic": "lót dâai mǎi",
           "components": [
             "w_lot",
             "w_dai",
@@ -702,7 +702,7 @@
           "id": "p_nine_baht",
           "th": "เก้าบาท",
           "fr": "neuf bahts",
-          "phonetic": "gao baht",
+          "phonetic": "gao bàat",
           "components": [
             "w_9",
             "w_baht"
@@ -712,7 +712,7 @@
           "id": "p_buy_three",
           "th": "ซื้อสาม",
           "fr": "acheter trois",
-          "phonetic": "sue saam",
+          "phonetic": "súue sǎam",
           "components": [
             "w_sue",
             "w_3"
@@ -729,25 +729,25 @@
           "id": "w_hiw",
           "th": "หิว",
           "fr": "avoir faim",
-          "phonetic": "hiw"
+          "phonetic": "hǐw"
         },
         {
           "id": "w_nueay",
           "th": "เหนื่อย",
           "fr": "fatigué",
-          "phonetic": "nueay"
+          "phonetic": "nùeay"
         },
         {
           "id": "w_dee_jai",
           "th": "ดีใจ",
           "fr": "heureux",
-          "phonetic": "dee jai"
+          "phonetic": "dii jai"
         },
         {
           "id": "w_chop",
           "th": "ชอบ",
           "fr": "aimer",
-          "phonetic": "chop"
+          "phonetic": "chɔ̂ɔp"
         }
       ],
       "phrases": [
@@ -755,7 +755,7 @@
           "id": "p_hungry",
           "th": "หิวมาก",
           "fr": "j'ai très faim",
-          "phonetic": "hiw mak",
+          "phonetic": "hǐw mâak",
           "components": [
             "w_hiw",
             "w_mak"
@@ -765,7 +765,7 @@
           "id": "p_like_q",
           "th": "ชอบไหม",
           "fr": "tu aimes ?",
-          "phonetic": "chop mai",
+          "phonetic": "chɔ̂ɔp mǎi",
           "components": [
             "w_chop",
             "w_mai"
@@ -775,7 +775,7 @@
           "id": "p_very_tired",
           "th": "เหนื่อยมาก",
           "fr": "je suis très fatigué",
-          "phonetic": "nueay mak",
+          "phonetic": "nùeay mâak",
           "components": [
             "w_nueay",
             "w_mak"
@@ -800,7 +800,7 @@
           "id": "w_rot",
           "th": "รถ",
           "fr": "voiture / véhicule",
-          "phonetic": "rot"
+          "phonetic": "rót"
         },
         {
           "id": "w_fai",
@@ -812,19 +812,19 @@
           "id": "w_sathannee",
           "th": "สถานี",
           "fr": "station",
-          "phonetic": "sa-tha-nee"
+          "phonetic": "sà-thǎa-nii"
         },
         {
           "id": "w_sanambin",
           "th": "สนามบิน",
           "fr": "aéroport",
-          "phonetic": "sa-nam-bin"
+          "phonetic": "sà-nǎam-bin"
         },
         {
           "id": "w_khi",
           "th": "ขี่",
           "fr": "conduire (moto/vélo)",
-          "phonetic": "khi"
+          "phonetic": "khìi"
         }
       ],
       "phrases": [
@@ -832,7 +832,7 @@
           "id": "p_train_station",
           "th": "สถานีรถไฟ",
           "fr": "gare (station de train)",
-          "phonetic": "sa-tha-nee rot fai",
+          "phonetic": "sà-thǎa-nii rót fai",
           "components": [
             "w_sathannee",
             "w_rot",
@@ -843,7 +843,7 @@
           "id": "p_go_airport",
           "th": "ไปสนามบิน",
           "fr": "aller à l'aéroport",
-          "phonetic": "pai sa-nam-bin",
+          "phonetic": "bpai sà-nǎam-bin",
           "components": [
             "w_pai",
             "w_sanambin"
@@ -878,13 +878,13 @@
           "id": "w_muea",
           "th": "เมื่อ",
           "fr": "quand (passé)",
-          "phonetic": "muea"
+          "phonetic": "mûea"
         },
         {
           "id": "w_wela",
           "th": "เวลา",
           "fr": "temps / heure",
-          "phonetic": "we-la"
+          "phonetic": "wee-laa"
         }
       ],
       "phrases": [
@@ -892,7 +892,7 @@
           "id": "p_today",
           "th": "วันนี้",
           "fr": "aujourd'hui",
-          "phonetic": "wan nee",
+          "phonetic": "wan níi",
           "components": [
             "w_wan",
             "w_nee"
@@ -902,7 +902,7 @@
           "id": "p_tomorrow",
           "th": "พรุ่งนี้",
           "fr": "demain",
-          "phonetic": "phrung nee",
+          "phonetic": "phrûng níi",
           "components": [
             "w_phrung",
             "w_nee"
@@ -912,7 +912,7 @@
           "id": "p_yesterday",
           "th": "เมื่อวานนี้",
           "fr": "hier",
-          "phonetic": "muea wan nee",
+          "phonetic": "mûea waan níi",
           "components": [
             "w_muea",
             "w_wan",
@@ -923,7 +923,7 @@
           "id": "p_five_days",
           "th": "ห้าวัน",
           "fr": "cinq jours",
-          "phonetic": "haa wan",
+          "phonetic": "hâa wan",
           "components": [
             "w_5",
             "w_wan"
@@ -940,25 +940,25 @@
           "id": "w_sai",
           "th": "ซ้าย",
           "fr": "gauche",
-          "phonetic": "sai"
+          "phonetic": "sáai"
         },
         {
           "id": "w_khwa",
           "th": "ขวา",
           "fr": "droite",
-          "phonetic": "khwa"
+          "phonetic": "khwǎa"
         },
         {
           "id": "w_trong",
           "th": "ตรง",
           "fr": "droit / direct",
-          "phonetic": "trong"
+          "phonetic": "dtrong"
         },
         {
           "id": "w_liao",
           "th": "เลี้ยว",
           "fr": "tourner",
-          "phonetic": "liao"
+          "phonetic": "líiao"
         }
       ],
       "phrases": [
@@ -966,7 +966,7 @@
           "id": "p_turn_left",
           "th": "เลี้ยวซ้าย",
           "fr": "tournez à gauche",
-          "phonetic": "liao sai",
+          "phonetic": "líiao sáai",
           "components": [
             "w_liao",
             "w_sai"
@@ -976,7 +976,7 @@
           "id": "p_turn_right",
           "th": "เลี้ยวขวา",
           "fr": "tournez à droite",
-          "phonetic": "liao khwa",
+          "phonetic": "líiao khwǎa",
           "components": [
             "w_liao",
             "w_khwa"
@@ -986,7 +986,7 @@
           "id": "p_go_straight",
           "th": "ตรงไป",
           "fr": "allez tout droit",
-          "phonetic": "trong pai",
+          "phonetic": "dtrong bpai",
           "components": [
             "w_trong",
             "w_pai"
@@ -1003,25 +1003,25 @@
           "id": "w_chai",
           "th": "ใช่",
           "fr": "oui / exact",
-          "phonetic": "chai"
+          "phonetic": "châi"
         },
         {
           "id": "w_mai_question",
           "th": "ไม่ใช่",
           "fr": "non / ce n'est pas",
-          "phonetic": "mai chai"
+          "phonetic": "mǎi châi"
         },
         {
           "id": "w_nit_noi",
           "th": "นิดหน่อย",
           "fr": "un peu",
-          "phonetic": "nit noi"
+          "phonetic": "nít nòi"
         },
         {
           "id": "w_pood",
           "th": "พูด",
           "fr": "parler",
-          "phonetic": "pood"
+          "phonetic": "phûut"
         }
       ],
       "phrases": [
@@ -1029,7 +1029,7 @@
           "id": "p_yes",
           "th": "ใช่ครับ",
           "fr": "oui (homme)",
-          "phonetic": "chai krap",
+          "phonetic": "châi khráp",
           "components": [
             "w_chai",
             "w_krap"
@@ -1039,7 +1039,7 @@
           "id": "p_speak_thai_little",
           "th": "พูดได้นิดหน่อย",
           "fr": "je parle un peu (thaï)",
-          "phonetic": "pood dai nit noi",
+          "phonetic": "phûut dâai nit noi",
           "components": [
             "w_pood",
             "w_dai",
@@ -1057,31 +1057,31 @@
           "id": "w_jep",
           "th": "เจ็บ",
           "fr": "avoir mal",
-          "phonetic": "jep"
+          "phonetic": "jèp"
         },
         {
           "id": "w_puat",
           "th": "ปวด",
           "fr": "douleur (plus interne)",
-          "phonetic": "puat"
+          "phonetic": "bpùuat"
         },
         {
           "id": "w_hua",
           "th": "หัว",
           "fr": "tête",
-          "phonetic": "hua"
+          "phonetic": "hǔua"
         },
         {
           "id": "w_thong",
           "th": "ท้อง",
           "fr": "ventre",
-          "phonetic": "thong"
+          "phonetic": "thɔ́ɔng"
         },
         {
           "id": "w_rong_phayaban",
           "th": "โรงพยาบาล",
           "fr": "hôpital",
-          "phonetic": "rong pha-ya-ban"
+          "phonetic": "roong phá-yaa-baan"
         }
       ],
       "phrases": [
@@ -1089,7 +1089,7 @@
           "id": "p_headache",
           "th": "ปวดหัว",
           "fr": "j'ai mal à la tête",
-          "phonetic": "puat hua",
+          "phonetic": "bpùuat hǔua",
           "components": [
             "w_puat",
             "w_hua"
@@ -1099,7 +1099,7 @@
           "id": "p_stomach_ache",
           "th": "ปวดท้อง",
           "fr": "j'ai mal au ventre",
-          "phonetic": "puat thong",
+          "phonetic": "bpùuat thɔ́ɔng",
           "components": [
             "w_puat",
             "w_thong"
@@ -1109,7 +1109,7 @@
           "id": "p_go_hospital",
           "th": "ไปโรงพยาบาล",
           "fr": "aller à l'hôpital",
-          "phonetic": "pai rong pha-ya-ban",
+          "phonetic": "bpai rong pha-ya-ban",
           "components": [
             "w_pai",
             "w_rong_phayaban"
@@ -1126,25 +1126,25 @@
           "id": "w_yai",
           "th": "ใหญ่",
           "fr": "grand",
-          "phonetic": "yai"
+          "phonetic": "yài"
         },
         {
           "id": "w_lek",
           "th": "เล็ก",
           "fr": "petit",
-          "phonetic": "lek"
+          "phonetic": "lék"
         },
         {
           "id": "w_ron",
           "th": "ร้อน",
           "fr": "chaud",
-          "phonetic": "ron"
+          "phonetic": "rɔ́ɔn"
         },
         {
           "id": "w_naow",
           "th": "หนาว",
           "fr": "froid",
-          "phonetic": "naow"
+          "phonetic": "nǎao"
         }
       ],
       "phrases": [
@@ -1152,7 +1152,7 @@
           "id": "p_very_hot",
           "th": "ร้อนมาก",
           "fr": "il fait très chaud",
-          "phonetic": "ron mak",
+          "phonetic": "rɔ́ɔn mâak",
           "components": [
             "w_ron",
             "w_mak"
@@ -1162,7 +1162,7 @@
           "id": "p_not_big",
           "th": "ไม่ใหญ่",
           "fr": "ce n'est pas grand",
-          "phonetic": "mai yai",
+          "phonetic": "mǎi yài",
           "components": [
             "w_mai_neg",
             "w_yai"
@@ -1179,7 +1179,7 @@
           "id": "w_see_color",
           "th": "สี",
           "fr": "couleur",
-          "phonetic": "see"
+          "phonetic": "sìi"
         },
         {
           "id": "w_daeng",
@@ -1191,7 +1191,7 @@
           "id": "w_khao_color",
           "th": "ขาว",
           "fr": "blanc",
-          "phonetic": "khao"
+          "phonetic": "khâao"
         },
         {
           "id": "w_dam",
@@ -1203,7 +1203,7 @@
           "id": "w_nam_ngoen",
           "th": "น้ำเงิน",
           "fr": "bleu (foncé)",
-          "phonetic": "nam ngoen"
+          "phonetic": "náam ngoen"
         }
       ],
       "phrases": [
@@ -1211,7 +1211,7 @@
           "id": "p_color_red",
           "th": "สีแดง",
           "fr": "la couleur rouge",
-          "phonetic": "see daeng",
+          "phonetic": "sìi daeng",
           "components": [
             "w_see_color",
             "w_daeng"
@@ -1221,7 +1221,7 @@
           "id": "p_want_black",
           "th": "อยากได้สีดำ",
           "fr": "je veux le noir",
-          "phonetic": "yak dai see dam",
+          "phonetic": "yàak dâai sìi dam",
           "components": [
             "w_yak",
             "w_dai",
@@ -1240,25 +1240,25 @@
           "id": "w_baan",
           "th": "บ้าน",
           "fr": "maison",
-          "phonetic": "baan"
+          "phonetic": "bâan"
         },
         {
           "id": "w_hong",
           "th": "ห้อง",
           "fr": "pièce / salle",
-          "phonetic": "hong"
+          "phonetic": "hɔ̂ng"
         },
         {
           "id": "w_non",
           "th": "นอน",
           "fr": "dormir",
-          "phonetic": "non"
+          "phonetic": "nɔɔn"
         },
         {
           "id": "w_hong_nam",
           "th": "ห้องน้ำ",
           "fr": "toilettes / salle de bain",
-          "phonetic": "hong nam"
+          "phonetic": "hɔ̂ng náam"
         }
       ],
       "phrases": [
@@ -1266,7 +1266,7 @@
           "id": "p_go_home",
           "th": "ไปบ้าน",
           "fr": "rentrer à la maison",
-          "phonetic": "pai baan",
+          "phonetic": "bpai bâan",
           "components": [
             "w_pai",
             "w_baan"
@@ -1276,7 +1276,7 @@
           "id": "p_where_bathroom",
           "th": "ห้องน้ำอยู่ที่ไหน",
           "fr": "où sont les toilettes ?",
-          "phonetic": "hong nam yu thi nai",
+          "phonetic": "hɔ̂ng náam yu thîi nǎi",
           "components": [
             "w_hong_nam",
             "w_thi_nai"
@@ -1286,7 +1286,7 @@
           "id": "p_want_sleep",
           "th": "อยากนอน",
           "fr": "je veux dormir",
-          "phonetic": "yak non",
+          "phonetic": "yàak nɔɔn",
           "components": [
             "w_yak",
             "w_non"
@@ -1311,25 +1311,25 @@
           "id": "w_kai",
           "th": "ไก่",
           "fr": "poulet",
-          "phonetic": "kai"
+          "phonetic": "kài"
         },
         {
           "id": "w_moo",
           "th": "หมู",
           "fr": "porc",
-          "phonetic": "moo"
+          "phonetic": "mǔu"
         },
         {
           "id": "w_pla",
           "th": "ปลา",
           "fr": "poisson",
-          "phonetic": "pla"
+          "phonetic": "bplaa"
         },
         {
           "id": "w_nuea",
           "th": "เนื้อ",
           "fr": "viande / boeuf",
-          "phonetic": "nuea"
+          "phonetic": "núea"
         }
       ],
       "phrases": [
@@ -1337,7 +1337,7 @@
           "id": "p_eat_chicken",
           "th": "กินไก่",
           "fr": "manger du poulet",
-          "phonetic": "kin kai",
+          "phonetic": "kin kài",
           "components": [
             "w_kin",
             "w_kai"
@@ -1347,7 +1347,7 @@
           "id": "p_want_fish",
           "th": "อยากกินปลา",
           "fr": "je veux manger du poisson",
-          "phonetic": "yak kin pla",
+          "phonetic": "yàak kin bplaa",
           "components": [
             "w_yak",
             "w_kin",
@@ -1365,13 +1365,13 @@
           "id": "w_kafae",
           "th": "กาแฟ",
           "fr": "café",
-          "phonetic": "ka-fae"
+          "phonetic": "kaa-fae"
         },
         {
           "id": "w_cha",
           "th": "ชา",
           "fr": "thé",
-          "phonetic": "cha"
+          "phonetic": "chaa"
         },
         {
           "id": "w_bia",
@@ -1383,7 +1383,7 @@
           "id": "w_duem",
           "th": "ดื่ม",
           "fr": "boire",
-          "phonetic": "duem"
+          "phonetic": "dùuem"
         }
       ],
       "phrases": [
@@ -1391,7 +1391,7 @@
           "id": "p_drink_water",
           "th": "ดื่มน้ำ",
           "fr": "boire de l'eau",
-          "phonetic": "duem nam",
+          "phonetic": "dùuem náam",
           "components": [
             "w_duem",
             "w_nam"
@@ -1401,7 +1401,7 @@
           "id": "p_want_coffee_m",
           "th": "เอากาแฟครับ",
           "fr": "je prends un café (homme)",
-          "phonetic": "ao ka-fae krap",
+          "phonetic": "ao kaa-fae khráp",
           "components": [
             "w_ao",
             "w_kafae",
@@ -1419,7 +1419,7 @@
           "id": "w_waan",
           "th": "หวาน",
           "fr": "sucré",
-          "phonetic": "waan"
+          "phonetic": "wǎan"
         },
         {
           "id": "w_khem",
@@ -1431,7 +1431,7 @@
           "id": "w_priao",
           "th": "เปรี้ยว",
           "fr": "aigre / acide",
-          "phonetic": "priao"
+          "phonetic": "bprîiao"
         }
       ],
       "phrases": [
@@ -1439,7 +1439,7 @@
           "id": "p_very_sweet",
           "th": "หวานมาก",
           "fr": "très sucré",
-          "phonetic": "waan mak",
+          "phonetic": "wǎan mâak",
           "components": [
             "w_waan",
             "w_mak"
@@ -1449,7 +1449,7 @@
           "id": "p_not_spicy",
           "th": "ไม่เผ็ด",
           "fr": "pas épicé",
-          "phonetic": "mai phet",
+          "phonetic": "mâi phèt",
           "components": [
             "w_mai_neg",
             "w_phet"
@@ -1466,19 +1466,19 @@
           "id": "w_gep_ngoen",
           "th": "เก็บเงิน",
           "fr": "l'addition",
-          "phonetic": "gep ngoen"
+          "phonetic": "gèp ngoen"
         },
         {
           "id": "w_hiw",
           "th": "หิว",
           "fr": "avoir faim",
-          "phonetic": "hiw"
+          "phonetic": "hǐw"
         },
         {
           "id": "w_im",
           "th": "อิ่ม",
           "fr": "rassasié / plein",
-          "phonetic": "im"
+          "phonetic": "ìm"
         }
       ],
       "phrases": [
@@ -1486,7 +1486,7 @@
           "id": "p_bill_please",
           "th": "เก็บเงินด้วยครับ",
           "fr": "l'addition s'il vous plaît",
-          "phonetic": "gep ngoen duay krap",
+          "phonetic": "gèp ngoen duay khráp",
           "components": [
             "w_gep_ngoen",
             "w_krap"
@@ -1496,7 +1496,7 @@
           "id": "p_very_hungry",
           "th": "หิวมาก",
           "fr": "j'ai très faim",
-          "phonetic": "hiw mak",
+          "phonetic": "hǐw mâak",
           "components": [
             "w_hiw",
             "w_mak"
@@ -1521,7 +1521,7 @@
           "id": "w_doo",
           "th": "ดู",
           "fr": "regarder",
-          "phonetic": "doo"
+          "phonetic": "duu"
         },
         {
           "id": "w_fang",
@@ -1539,7 +1539,7 @@
           "id": "w_nang",
           "th": "หนัง",
           "fr": "film",
-          "phonetic": "nang"
+          "phonetic": "nâng"
         }
       ],
       "phrases": [
@@ -1547,7 +1547,7 @@
           "id": "p_watch_film",
           "th": "ดูหนัง",
           "fr": "regarder un film",
-          "phonetic": "doo nang",
+          "phonetic": "duu nâng",
           "components": [
             "w_doo",
             "w_nang"
@@ -1564,19 +1564,19 @@
           "id": "w_tham_ngan",
           "th": "ทำงาน",
           "fr": "travailler",
-          "phonetic": "tham-ngan"
+          "phonetic": "tham-ngaan"
         },
         {
           "id": "w_len",
           "th": "เล่น",
           "fr": "jouer",
-          "phonetic": "len"
+          "phonetic": "lên"
         },
         {
           "id": "w_kreng",
           "th": "เก่ง",
           "fr": "doué / bien",
-          "phonetic": "keng"
+          "phonetic": "gèng"
         }
       ],
       "phrases": [
@@ -1584,7 +1584,7 @@
           "id": "p_play_well",
           "th": "เล่นเก่ง",
           "fr": "bien jouer",
-          "phonetic": "len keng",
+          "phonetic": "lên gèng",
           "components": [
             "w_len",
             "w_kreng"
@@ -1594,7 +1594,7 @@
           "id": "p_go_work",
           "th": "ไปทำงาน",
           "fr": "aller travailler",
-          "phonetic": "pai tham-ngan",
+          "phonetic": "bpai tham-ngaan",
           "components": [
             "w_pai",
             "w_tham_ngan"
@@ -1611,25 +1611,25 @@
           "id": "w_rian",
           "th": "เรียน",
           "fr": "apprendre",
-          "phonetic": "rian"
+          "phonetic": "riian"
         },
         {
           "id": "w_aan",
           "th": "อ่าน",
           "fr": "lire",
-          "phonetic": "aan"
+          "phonetic": "àan"
         },
         {
           "id": "w_khian",
           "th": "เขียน",
           "fr": "écrire",
-          "phonetic": "khian"
+          "phonetic": "khǐian"
         },
         {
           "id": "w_nangsue",
           "th": "หนังสือ",
           "fr": "livre",
-          "phonetic": "nang-sue"
+          "phonetic": "nǎng-sǔue"
         }
       ],
       "phrases": [
@@ -1637,7 +1637,7 @@
           "id": "p_read_book",
           "th": "อ่านหนังสือ",
           "fr": "lire un livre",
-          "phonetic": "aan nang-sue",
+          "phonetic": "àan nǎng-sǔue",
           "components": [
             "w_aan",
             "w_nangsue"
@@ -1647,7 +1647,7 @@
           "id": "p_learn_thai",
           "th": "เรียนภาษาไทย",
           "fr": "apprendre le thaï",
-          "phonetic": "rian pha-sa thai",
+          "phonetic": "riian phaa-sǎa thai",
           "components": [
             "w_rian"
           ]
@@ -1663,13 +1663,13 @@
           "id": "w_khai",
           "th": "ขาย",
           "fr": "vendre",
-          "phonetic": "khai"
+          "phonetic": "khǎai"
         },
         {
           "id": "w_hai",
           "th": "ให้",
           "fr": "donner",
-          "phonetic": "hai"
+          "phonetic": "hâi"
         },
         {
           "id": "w_ngoen",
@@ -1683,7 +1683,7 @@
           "id": "p_have_money",
           "th": "มีเงินไหม",
           "fr": "as-tu de l'argent ?",
-          "phonetic": "mee ngoen mai",
+          "phonetic": "mii ngoen mǎi",
           "components": [
             "w_mee",
             "w_ngoen",
@@ -1709,7 +1709,7 @@
           "id": "w_chao",
           "th": "เช้า",
           "fr": "matin",
-          "phonetic": "chao"
+          "phonetic": "cháao"
         },
         {
           "id": "w_yen",
@@ -1721,7 +1721,7 @@
           "id": "w_khuen",
           "th": "คืน",
           "fr": "nuit",
-          "phonetic": "khuen"
+          "phonetic": "kheun"
         }
       ],
       "phrases": [
@@ -1729,7 +1729,7 @@
           "id": "p_this_morning",
           "th": "เช้านี้",
           "fr": "ce matin",
-          "phonetic": "chao nee",
+          "phonetic": "cháao nee",
           "components": [
             "w_chao",
             "w_nee"
@@ -1746,19 +1746,19 @@
           "id": "w_fon",
           "th": "ฝน",
           "fr": "pluie",
-          "phonetic": "fon"
+          "phonetic": "fǒn"
         },
         {
           "id": "w_tok",
           "th": "ตก",
           "fr": "tomber",
-          "phonetic": "tok"
+          "phonetic": "dtòk"
         },
         {
           "id": "w_daet",
           "th": "แดด",
           "fr": "soleil (rayons)",
-          "phonetic": "daet"
+          "phonetic": "dàet"
         }
       ],
       "phrases": [
@@ -1766,7 +1766,7 @@
           "id": "p_rain_falls",
           "th": "ฝนตก",
           "fr": "il pleut",
-          "phonetic": "fon tok",
+          "phonetic": "fǒn dtòk",
           "components": [
             "w_fon",
             "w_tok"
@@ -1789,13 +1789,13 @@
           "id": "w_ron",
           "th": "ร้อน",
           "fr": "chaud",
-          "phonetic": "ron"
+          "phonetic": "rɔ́ɔn"
         },
         {
           "id": "w_naow",
           "th": "หนาว",
           "fr": "froid",
-          "phonetic": "naow"
+          "phonetic": "nǎao"
         }
       ],
       "phrases": [
@@ -1803,7 +1803,7 @@
           "id": "p_very_cold",
           "th": "หนาวมาก",
           "fr": "il fait très froid",
-          "phonetic": "naow mak",
+          "phonetic": "nǎao mâak",
           "components": [
             "w_naow",
             "w_mak"
@@ -1820,7 +1820,7 @@
           "id": "w_muearai",
           "th": "เมื่อไหร่",
           "fr": "quand ?",
-          "phonetic": "muea-rai"
+          "phonetic": "mûea-rài"
         },
         {
           "id": "w_ki",
@@ -1832,7 +1832,7 @@
           "id": "w_mong",
           "th": "โมง",
           "fr": "heure",
-          "phonetic": "mong"
+          "phonetic": "moong"
         }
       ],
       "phrases": [
@@ -1840,7 +1840,7 @@
           "id": "p_what_time",
           "th": "กี่โมง",
           "fr": "quelle heure ?",
-          "phonetic": "ki mong",
+          "phonetic": "ki moong",
           "components": [
             "w_ki",
             "w_mong"
@@ -1850,7 +1850,7 @@
           "id": "p_go_when",
           "th": "ไปเมื่อไหร่",
           "fr": "tu y vas quand ?",
-          "phonetic": "pai muea-rai",
+          "phonetic": "bpai mûea-rài",
           "components": [
             "w_pai",
             "w_muearai"
@@ -1875,13 +1875,13 @@
           "id": "w_rong_raem",
           "th": "โรงแรม",
           "fr": "hôtel",
-          "phonetic": "rong-raem"
+          "phonetic": "roong-raem"
         },
         {
           "id": "w_rong_rian",
           "th": "โรงเรียน",
           "fr": "école",
-          "phonetic": "rong-rian"
+          "phonetic": "roong-riian"
         }
       ],
       "phrases": [
@@ -1889,7 +1889,7 @@
           "id": "p_where_hotel",
           "th": "โรงแรมอยู่ที่ไหน",
           "fr": "où est l'hôtel ?",
-          "phonetic": "rong-raem yu thi nai",
+          "phonetic": "roong-raem yu thîi nǎi",
           "components": [
             "w_rong_raem",
             "w_thi_nai"
@@ -1906,19 +1906,19 @@
           "id": "w_talat",
           "th": "ตลาด",
           "fr": "marché",
-          "phonetic": "ta-lat"
+          "phonetic": "dtà-làat"
         },
         {
           "id": "w_thanon",
           "th": "ถนน",
           "fr": "rue",
-          "phonetic": "tha-non"
+          "phonetic": "thà-nǒn"
         },
         {
           "id": "w_suan",
           "th": "สวน",
           "fr": "parc",
-          "phonetic": "suan"
+          "phonetic": "sǔuan"
         }
       ],
       "phrases": [
@@ -1926,7 +1926,7 @@
           "id": "p_go_market",
           "th": "ไปตลาด",
           "fr": "aller au marché",
-          "phonetic": "pai ta-lat",
+          "phonetic": "bpai dtà-làat",
           "components": [
             "w_pai",
             "w_talat"
@@ -1943,7 +1943,7 @@
           "id": "w_rot_me",
           "th": "รถเมล์",
           "fr": "bus",
-          "phonetic": "rot-me"
+          "phonetic": "rót-mee"
         },
         {
           "id": "w_ruea",
@@ -1955,7 +1955,7 @@
           "id": "w_nang_v",
           "th": "นั่ง",
           "fr": "s'asseoir / prendre (bus)",
-          "phonetic": "nang"
+          "phonetic": "nâng"
         }
       ],
       "phrases": [
@@ -1963,7 +1963,7 @@
           "id": "p_take_bus",
           "th": "นั่งรถเมล์",
           "fr": "prendre le bus",
-          "phonetic": "nang rot-me",
+          "phonetic": "nâng rót-mee",
           "components": [
             "w_nang_v",
             "w_rot_me"
@@ -1980,7 +1980,7 @@
           "id": "w_kruang_bin",
           "th": "เครื่องบิน",
           "fr": "avion",
-          "phonetic": "kruang-bin"
+          "phonetic": "khrûeang-bin"
         },
         {
           "id": "w_bin",
@@ -1992,7 +1992,7 @@
           "id": "w_tua",
           "th": "ตั๋ว",
           "fr": "billet / ticket",
-          "phonetic": "tua"
+          "phonetic": "dtǔua"
         }
       ],
       "phrases": [
@@ -2000,7 +2000,7 @@
           "id": "p_plane_ticket",
           "th": "ตั๋วเครื่องบิน",
           "fr": "billet d'avion",
-          "phonetic": "tua kruang-bin",
+          "phonetic": "dtǔua khrûeang-bin",
           "components": [
             "w_tua",
             "w_kruang_bin"
@@ -2025,19 +2025,19 @@
           "id": "w_suea",
           "th": "เสื้อ",
           "fr": "chemise / haut",
-          "phonetic": "suea"
+          "phonetic": "sûea"
         },
         {
           "id": "w_kangkeng",
           "th": "กางเกง",
           "fr": "pantalon",
-          "phonetic": "kang-keng"
+          "phonetic": "gaang-geeng"
         },
         {
           "id": "w_rong_thao",
           "th": "รองเท้า",
           "fr": "chaussures",
-          "phonetic": "rong-thao"
+          "phonetic": "rɔɔng-tháao"
         }
       ],
       "phrases": [
@@ -2045,7 +2045,7 @@
           "id": "p_buy_shirt",
           "th": "ซื้อเสื้อ",
           "fr": "acheter une chemise",
-          "phonetic": "sue suea",
+          "phonetic": "súue sûea",
           "components": [
             "w_sue",
             "w_suea"
@@ -2062,19 +2062,19 @@
           "id": "w_khiao",
           "th": "เขียว",
           "fr": "vert",
-          "phonetic": "khiao"
+          "phonetic": "khǐiao"
         },
         {
           "id": "w_lueang",
           "th": "เหลือง",
           "fr": "jaune",
-          "phonetic": "lueang"
+          "phonetic": "lǔeang"
         },
         {
           "id": "w_chomphu",
           "th": "ชมพู",
           "fr": "rose",
-          "phonetic": "chom-phu"
+          "phonetic": "chom-phuu"
         }
       ],
       "phrases": [
@@ -2082,7 +2082,7 @@
           "id": "p_green_shirt",
           "th": "เสื้อสีเขียว",
           "fr": "chemise verte",
-          "phonetic": "suea see khiao",
+          "phonetic": "sûea sìi khǐiao",
           "components": [
             "w_suea",
             "w_see_color",
@@ -2100,19 +2100,19 @@
           "id": "w_mai_new",
           "th": "ใหม่",
           "fr": "nouveau",
-          "phonetic": "mai"
+          "phonetic": "mǎi"
         },
         {
           "id": "w_kao",
           "th": "เก่า",
           "fr": "vieux",
-          "phonetic": "kao"
+          "phonetic": "kâao"
         },
         {
           "id": "w_suay",
           "th": "สวย",
           "fr": "beau / joli",
-          "phonetic": "suay"
+          "phonetic": "sǔuay"
         }
       ],
       "phrases": [
@@ -2120,7 +2120,7 @@
           "id": "p_very_beautiful",
           "th": "สวยมาก",
           "fr": "très beau",
-          "phonetic": "suay mak",
+          "phonetic": "sǔuay mâak",
           "components": [
             "w_suay",
             "w_mak"
@@ -2137,7 +2137,7 @@
           "id": "w_thuk",
           "th": "ถูก",
           "fr": "bon marché / correct",
-          "phonetic": "thuk"
+          "phonetic": "thùuk"
         },
         {
           "id": "w_phaeng",
@@ -2149,7 +2149,7 @@
           "id": "w_sai",
           "th": "ใส่",
           "fr": "mettre / porter",
-          "phonetic": "sai"
+          "phonetic": "sáai"
         }
       ],
       "phrases": [
@@ -2157,7 +2157,7 @@
           "id": "p_not_expensive",
           "th": "ไม่แพง",
           "fr": "ce n'est pas cher",
-          "phonetic": "mai phaeng",
+          "phonetic": "mâi phaeng",
           "components": [
             "w_mai_neg",
             "w_phaeng"
@@ -2182,19 +2182,19 @@
           "id": "w_luk",
           "th": "ลูก",
           "fr": "enfant (son enfant)",
-          "phonetic": "luk"
+          "phonetic": "lûuk"
         },
         {
           "id": "w_dek",
           "th": "เด็ก",
           "fr": "enfant (général)",
-          "phonetic": "dek"
+          "phonetic": "dèk"
         },
         {
           "id": "w_phuean",
           "th": "เพื่อน",
           "fr": "ami",
-          "phonetic": "phuean"
+          "phonetic": "phûean"
         }
       ],
       "phrases": [
@@ -2202,7 +2202,7 @@
           "id": "p_my_friend",
           "th": "เพื่อนผม",
           "fr": "mon ami",
-          "phonetic": "phuean phom",
+          "phonetic": "phûean phǒm",
           "components": [
             "w_phuean",
             "w_phom"
@@ -2212,7 +2212,7 @@
           "id": "p_four_friends",
           "th": "เพื่อนสี่คน",
           "fr": "quatre amis",
-          "phonetic": "phuean see khon",
+          "phonetic": "phûean sìi khon",
           "components": [
             "w_phuean",
             "w_4",
@@ -2223,7 +2223,7 @@
           "id": "p_one_child",
           "th": "ลูกหนึ่งคน",
           "fr": "un enfant",
-          "phonetic": "luk nueng khon",
+          "phonetic": "lûuk nùeng khon",
           "components": [
             "w_luk",
             "w_1",
@@ -2241,19 +2241,19 @@
           "id": "w_ta",
           "th": "ตา",
           "fr": "oeil",
-          "phonetic": "ta"
+          "phonetic": "dtaa"
         },
         {
           "id": "w_pak",
           "th": "ปาก",
           "fr": "bouche",
-          "phonetic": "pak"
+          "phonetic": "bpàak"
         },
         {
           "id": "w_mue",
           "th": "มือ",
           "fr": "main",
-          "phonetic": "mue"
+          "phonetic": "muue"
         }
       ],
       "phrases": [
@@ -2261,7 +2261,7 @@
           "id": "p_hurt_hand",
           "th": "เจ็บมือ",
           "fr": "j'ai mal à la main",
-          "phonetic": "jep mue",
+          "phonetic": "jèp muue",
           "components": [
             "w_jep",
             "w_mue"
@@ -2278,19 +2278,19 @@
           "id": "w_sung",
           "th": "สูง",
           "fr": "grand (taille)",
-          "phonetic": "sung"
+          "phonetic": "sǔung"
         },
         {
           "id": "w_tia",
           "th": "เตี้ย",
           "fr": "petit (taille)",
-          "phonetic": "tia"
+          "phonetic": "dtîia"
         },
         {
           "id": "w_uan",
           "th": "อ้วน",
           "fr": "gros",
-          "phonetic": "uan"
+          "phonetic": "ûuan"
         }
       ],
       "phrases": [
@@ -2298,7 +2298,7 @@
           "id": "p_he_is_tall",
           "th": "เขาสูง",
           "fr": "il est grand",
-          "phonetic": "khao sung",
+          "phonetic": "khâao sǔung",
           "components": [
             "w_khao_pron",
             "w_sung"
@@ -2315,19 +2315,19 @@
           "id": "w_jai_dee",
           "th": "ใจดี",
           "fr": "gentil",
-          "phonetic": "jai dee"
+          "phonetic": "jai dii"
         },
         {
           "id": "w_sanuk",
           "th": "สนุก",
           "fr": "amusant",
-          "phonetic": "sa-nuk"
+          "phonetic": "sà-nùk"
         },
         {
           "id": "w_nak_rian",
           "th": "นักเรียน",
           "fr": "étudiant",
-          "phonetic": "nak-rian"
+          "phonetic": "nák-riian"
         }
       ],
       "phrases": [
@@ -2335,7 +2335,7 @@
           "id": "p_good_student",
           "th": "นักเรียนเก่ง",
           "fr": "bon étudiant",
-          "phonetic": "nak-rian keng",
+          "phonetic": "nák-riian gèng",
           "components": [
             "w_nak_rian",
             "w_kreng"
@@ -2360,19 +2360,19 @@
           "id": "w_puay",
           "th": "ป่วย",
           "fr": "malade",
-          "phonetic": "puay"
+          "phonetic": "bpùay"
         },
         {
           "id": "w_mo",
           "th": "หมอ",
           "fr": "médecin",
-          "phonetic": "mo"
+          "phonetic": "mɔ̌ɔ"
         },
         {
           "id": "w_ya",
           "th": "ยา",
           "fr": "médicament",
-          "phonetic": "ya"
+          "phonetic": "yaa"
         }
       ],
       "phrases": [
@@ -2380,7 +2380,7 @@
           "id": "p_eat_medicine",
           "th": "กินยา",
           "fr": "prendre des médicaments",
-          "phonetic": "kin ya",
+          "phonetic": "kin yaa",
           "components": [
             "w_kin",
             "w_ya"
@@ -2397,19 +2397,19 @@
           "id": "w_khai",
           "th": "ไข้",
           "fr": "fièvre",
-          "phonetic": "khai"
+          "phonetic": "khǎai"
         },
         {
           "id": "w_ay",
           "th": "ไอ",
           "fr": "tousser",
-          "phonetic": "ay"
+          "phonetic": "ai"
         },
         {
           "id": "w_nueay",
           "th": "เหนื่อย",
           "fr": "fatigué",
-          "phonetic": "nueay"
+          "phonetic": "nùeay"
         }
       ],
       "phrases": [
@@ -2417,7 +2417,7 @@
           "id": "p_have_fever",
           "th": "มีไข้",
           "fr": "j'ai de la fièvre",
-          "phonetic": "mee khai",
+          "phonetic": "mii khǎai",
           "components": [
             "w_mee",
             "w_khai"
@@ -2434,19 +2434,19 @@
           "id": "w_sia_jai",
           "th": "เสียใจ",
           "fr": "triste / désolé",
-          "phonetic": "sia-jai"
+          "phonetic": "sǐia-jai"
         },
         {
           "id": "w_klua",
           "th": "กลัว",
           "fr": "avoir peur",
-          "phonetic": "klua"
+          "phonetic": "glua"
         },
         {
           "id": "w_krot",
           "th": "โกรธ",
           "fr": "fâché",
-          "phonetic": "krot"
+          "phonetic": "gròot"
         }
       ],
       "phrases": [
@@ -2454,7 +2454,7 @@
           "id": "p_not_afraid",
           "th": "ไม่กลัว",
           "fr": "je n'ai pas peur",
-          "phonetic": "mai klua",
+          "phonetic": "mâi glua",
           "components": [
             "w_mai_neg",
             "w_klua"
@@ -2471,13 +2471,13 @@
           "id": "w_khit",
           "th": "คิด",
           "fr": "penser",
-          "phonetic": "khit"
+          "phonetic": "khít"
         },
         {
           "id": "w_ru",
           "th": "รู้",
           "fr": "savoir / connaitre",
-          "phonetic": "ru"
+          "phonetic": "rúu"
         },
         {
           "id": "w_jing",
@@ -2491,7 +2491,7 @@
           "id": "p_i_dont_know",
           "th": "ไม่รู้",
           "fr": "je ne sais pas",
-          "phonetic": "mai ru",
+          "phonetic": "mâi rúu",
           "components": [
             "w_mai_neg",
             "w_ru"
@@ -2516,13 +2516,13 @@
           "id": "w_samoe",
           "th": "เสมอ",
           "fr": "toujours",
-          "phonetic": "sa-moe"
+          "phonetic": "sà-mǒe"
         },
         {
           "id": "w_boi",
           "th": "บ่อย",
           "fr": "souvent",
-          "phonetic": "boi"
+          "phonetic": "bɔ̀i"
         }
       ],
       "phrases": [
@@ -2530,7 +2530,7 @@
           "id": "p_come_often",
           "th": "มาบ่อย",
           "fr": "venir souvent",
-          "phonetic": "ma boi",
+          "phonetic": "maa bɔ̀i",
           "components": [
             "w_ma",
             "w_boi"
@@ -2547,13 +2547,13 @@
           "id": "w_mai_khoei",
           "th": "ไม่เคย",
           "fr": "jamais",
-          "phonetic": "mai-khoei"
+          "phonetic": "mâi-khoei"
         },
         {
           "id": "w_bang_thi",
           "th": "บางที",
           "fr": "parfois",
-          "phonetic": "bang-thi"
+          "phonetic": "baang-thii"
         }
       ],
       "phrases": [
@@ -2561,7 +2561,7 @@
           "id": "p_never_eat",
           "th": "ไม่เคยกิน",
           "fr": "jamais mangé",
-          "phonetic": "mai-khoei kin",
+          "phonetic": "mâi-khoei kin",
           "components": [
             "w_mai_khoei",
             "w_kin"
@@ -2608,13 +2608,13 @@
           "id": "w_at_ja",
           "th": "อาจจะ",
           "fr": "peut-être",
-          "phonetic": "at-ja"
+          "phonetic": "àat-jà"
         },
         {
           "id": "w_kap",
           "th": "กับ",
           "fr": "avec / et",
-          "phonetic": "kap"
+          "phonetic": "gàp"
         }
       ],
       "phrases": [
@@ -2622,7 +2622,7 @@
           "id": "p_go_with_friend",
           "th": "ไปกับเพื่อน",
           "fr": "aller avec un ami",
-          "phonetic": "pai kap phuean",
+          "phonetic": "bpai gàp phûean",
           "components": [
             "w_pai",
             "w_kap",

@@ -28,20 +28,26 @@ export default function WritingPage() {
 
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
-    setMounted(true);
-    
-    const params = new URLSearchParams(window.location.search);
-    const lessonId = params.get('lessonId');
-    
-    let targetLessons = completedLessons;
-    
-    if (lessonId) {
-       targetLessons = [lessonId];
-    }
-    
-    if (targetLessons.length > 0) {
-       setExercises(generateWritingExercises(data.lessons, targetLessons));
-    }
+    let initialized = false;
+    const timer = setTimeout(() => {
+      setMounted(true);
+      if(!initialized) {
+        const params = new URLSearchParams(window.location.search);
+        const lessonId = params.get('lessonId');
+        
+        let targetLessons = completedLessons;
+        
+        if (lessonId) {
+           targetLessons = [lessonId];
+        }
+        
+        if (targetLessons.length > 0) {
+           setExercises(generateWritingExercises(data.lessons, targetLessons));
+        }
+        initialized = true;
+      }
+    }, 0);
+    return () => clearTimeout(timer);
   }, [completedLessons]);
 
   if (!mounted) return <div className="p-8 text-center text-slate-500 font-medium">Chargement...</div>;

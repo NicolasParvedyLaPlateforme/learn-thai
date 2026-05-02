@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { X, Volume2 } from 'lucide-react';
@@ -8,6 +8,7 @@ import { useProgressStore } from '../lib/store';
 import { THAI_ALPHABET, AlphabetItem } from '../lib/alphabet-data';
 
 import { playThaiTTS, preloadThaiVoices } from '../lib/tts';
+import { ColoredPhonetic } from '../components/ColoredPhonetic';
 
 export default function AlphabetPage() {
   const router = useRouter();
@@ -22,23 +23,27 @@ export default function AlphabetPage() {
   const [selectedOption, setSelectedOption] = useState<AlphabetItem | null>(null);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
 
-  useEffect(() => {
-    setMounted(true);
-    pickNextItem(seenAlphabets);
+  const generateOptions = useCallback((correctItem: AlphabetItem) => {
+    // Pick 1 distractor of the same type
+    const samesTypeDistractors = THAI_ALPHABET.filter(i => i.type === correctItem.type && i.letter !== correctItem.letter);
+    const distractor = samesTypeDistractors[Math.floor(Math.random() * samesTypeDistractors.length)];
     
-    // Pre-load voices for Safari/Chrome so they are ready when the user clicks
-    preloadThaiVoices();
+    // Shuffle the two options
+    const newOptions = [correctItem, distractor].sort(() => Math.random() - 0.5);
+    setOptions(newOptions);
   }, []);
 
-  const pickNextItem = (currentSeen: string[]) => {
+  const pickNextItem = useCallback((currentSeen: string[]) => {
     // Basic progression: maybe prioritize unseen, or just totally random?
     // Let's do 30% chance for a new one, 70% for review, unless no reviews available.
     let itemToPick: AlphabetItem;
     
     const unseen = THAI_ALPHABET.filter(i => !currentSeen.includes(i.letter));
     const seen = THAI_ALPHABET.filter(i => currentSeen.includes(i.letter));
+    
+    const isNew = unseen.length > 0 && (seen.length === 0 || Math.random() < 0.3);
 
-    if (unseen.length > 0 && (seen.length === 0 || Math.random() < 0.3)) {
+    if (isNew) {
       // Pick unseen
       itemToPick = unseen[Math.floor(Math.random() * unseen.length)];
       setIsLessonPhase(true);
@@ -52,17 +57,22 @@ export default function AlphabetPage() {
     generateOptions(itemToPick);
     setSelectedOption(null);
     setIsCorrect(null);
-  };
+  }, [generateOptions]);
 
-  const generateOptions = (correctItem: AlphabetItem) => {
-    // Pick 1 distractor of the same type
-    const samesTypeDistractors = THAI_ALPHABET.filter(i => i.type === correctItem.type && i.letter !== correctItem.letter);
-    const distractor = samesTypeDistractors[Math.floor(Math.random() * samesTypeDistractors.length)];
+  useEffect(() => {
+    let initialized = false;
+    const timer = setTimeout(() => {
+      setMounted(true)
+      if(!initialized) {
+        pickNextItem(seenAlphabets);
+        initialized = true;
+      }
+    }, 0);
     
-    // Shuffle the two options
-    const newOptions = [correctItem, distractor].sort(() => Math.random() - 0.5);
-    setOptions(newOptions);
-  };
+    // Pre-load voices for Safari/Chrome so they are ready when the user clicks
+    preloadThaiVoices();
+    return () => clearTimeout(timer);
+  }, [pickNextItem, seenAlphabets]);
 
   const handleNextInLesson = () => {
     if (currentItem) {
@@ -117,7 +127,7 @@ export default function AlphabetPage() {
               </div>
               
               <div className="mt-12 space-y-4 text-center">
-                <p className="text-2xl font-bold text-slate-800">{currentItem.pronunciation}</p>
+                <p className="text-2xl font-bold text-slate-800"><ColoredPhonetic phonetic={currentItem.pronunciation} /></p>
                 <div className="text-xl text-slate-600">
                   <span className="font-bold">{currentItem.exampleWord}</span> 
                   <span className="opacity-75"> ({currentItem.exampleTranslation})</span>
@@ -135,7 +145,7 @@ export default function AlphabetPage() {
         ) : (
           <div className="flex-1 flex flex-col">
             <h2 className="text-2xl font-bold text-slate-800 mb-8">
-              Complétez le mot ({currentItem.pronunciation})
+              Complétez le mot (<ColoredPhonetic phonetic={currentItem.pronunciation} />)
             </h2>
 
             <div className="flex-1 flex flex-col items-center">

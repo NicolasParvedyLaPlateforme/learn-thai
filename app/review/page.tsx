@@ -30,11 +30,17 @@ export default function ReviewPage() {
 
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
-    setMounted(true);
-    if (completedLessons.length > 0) {
-       setExercises(generateEndlessReviewExercises(data.lessons, completedLessons));
-    }
+    let initialized = false;
+    const timer = setTimeout(() => {
+      setMounted(true);
+      if(!initialized && completedLessons.length > 0) {
+        setExercises(generateEndlessReviewExercises(data.lessons, completedLessons));
+        initialized = true;
+      }
+    }, 0);
+    
     preloadThaiVoices();
+    return () => clearTimeout(timer);
   }, [completedLessons]);
 
   if (!mounted) return <div className="p-8 text-center text-slate-500 font-medium">Chargement...</div>;

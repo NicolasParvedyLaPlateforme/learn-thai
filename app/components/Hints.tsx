@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Word, Phrase } from '../types';
 import { playThaiTTS } from '../lib/tts';
+import { ColoredPhonetic } from './ColoredPhonetic';
 
 // A simple component to render tooltips with tap support for mobile
 export function TooltipHint({ children, tooltipContent, className = '', audioText }: { children: React.ReactNode, tooltipContent: React.ReactNode, className?: string, audioText?: string }) {
@@ -31,10 +32,11 @@ export function TooltipHint({ children, tooltipContent, className = '', audioTex
   }, []);
 
   useEffect(() => {
+    let timer: NodeJS.Timeout;
     if (!isOpen || !spanRef.current) return;
 
     if (window.innerWidth >= 768) {
-      setPosition('center');
+      timer = setTimeout(() => setPosition('center'), 0);
       return;
     }
 
@@ -42,13 +44,16 @@ export function TooltipHint({ children, tooltipContent, className = '', audioTex
     const center = rect.left + rect.width / 2;
     const threshold = window.innerWidth * 0.4;
 
-    if (center < threshold) {
-      setPosition('left');
-    } else if (center > window.innerWidth - threshold) {
-      setPosition('right');
-    } else {
-      setPosition('center');
-    }
+    timer = setTimeout(() => {
+      if (center < threshold) {
+        setPosition('left');
+      } else if (center > window.innerWidth - threshold) {
+        setPosition('right');
+      } else {
+        setPosition('center');
+      }
+    }, 0);
+    return () => clearTimeout(timer);
   }, [isOpen]);
 
   return (
@@ -62,14 +67,16 @@ export function TooltipHint({ children, tooltipContent, className = '', audioTex
       {children}
       {isOpen && (
         <div 
-          className={`absolute bottom-full mb-2 bg-slate-800 text-white px-3 py-1.5 rounded-lg text-sm whitespace-nowrap z-[100] shadow-xl animate-in fade-in duration-200
+          className={`absolute bottom-full mb-2 bg-white text-slate-800 px-3 py-2 rounded-xl text-sm whitespace-nowrap z-[100] shadow-[0_10px_40px_-10px_rgba(0,0,0,0.15)] ring-1 ring-slate-200 animate-in fade-in zoom-in-95 duration-200
             ${position === 'left' ? 'left-0' : position === 'right' ? 'right-0' : 'left-1/2 -translate-x-1/2'}
           `}
         >
-          {tooltipContent}
+          <div className="relative z-10 flex items-center gap-2">
+            {tooltipContent}
+          </div>
           <div 
-            className={`absolute top-full border-8 border-transparent border-t-slate-800
-              ${position === 'left' ? 'left-4' : position === 'right' ? 'right-4' : 'left-1/2 -translate-x-1/2'}
+            className={`absolute top-[100%] w-3 h-3 -mt-1.5 bg-white border-b border-r border-slate-200 rotate-45 rounded-sm z-0
+             ${position === 'left' ? 'left-6' : position === 'right' ? 'right-6' : 'left-1/2 -translate-x-1/2'}
             `}
           ></div>
         </div>
@@ -96,12 +103,12 @@ export function SentenceWithHints({text, dictionary, phrases, isSentence, exerci
            alwaysShowPhonetic ? (
              <span className="inline-flex flex-col">
                <span>{text}</span>
-               <span className="text-sm md:text-base text-emerald-600 font-medium tracking-wide">[{exactMatch.phonetic}]</span>
+               <span className="text-sm md:text-base font-medium tracking-wide">[<ColoredPhonetic phonetic={exactMatch.phonetic} />]</span>
              </span>
            ) : (
              <TooltipHint 
                className="border-b-2 border-dotted border-slate-300 inline-block"
-               tooltipContent={<><span className="font-thai text-lg font-bold">{exactMatch.th}</span> <span className="text-slate-300 text-xs">({exactMatch.phonetic})</span></>}
+               tooltipContent={<><span className="font-thai text-lg font-bold text-slate-800">{exactMatch.th}</span> <span className="text-slate-500 text-xs">(<ColoredPhonetic phonetic={exactMatch.phonetic} />)</span></>}
                audioText={exactMatch.th}
              >
                {text}
@@ -122,13 +129,13 @@ export function SentenceWithHints({text, dictionary, phrases, isSentence, exerci
               return alwaysShowPhonetic ? (
                  <span key={i} className="inline-flex flex-col">
                     <span>{w}</span>
-                    <span className="text-xs md:text-sm text-emerald-600 font-medium tracking-wide">[{match.phonetic}]</span>
+                    <span className="text-xs md:text-sm font-medium tracking-wide">[<ColoredPhonetic phonetic={match.phonetic} />]</span>
                  </span>
               ) : (
                 <TooltipHint 
                   key={i} 
                   className="border-b-2 border-dotted border-slate-300 inline-block"
-                  tooltipContent={<><span className="font-thai text-lg font-bold">{match.th}</span> <span className="text-slate-300 text-xs">({match.phonetic})</span></>}
+                  tooltipContent={<><span className="font-thai text-lg font-bold text-slate-800">{match.th}</span> <span className="text-slate-500 text-xs">(<ColoredPhonetic phonetic={match.phonetic} />)</span></>}
                   audioText={match.th}
                 >
                   {w}
@@ -149,7 +156,7 @@ export function SentenceWithHints({text, dictionary, phrases, isSentence, exerci
               <TooltipHint 
                 key={i}
                 className="inline-flex items-center gap-1.5 bg-white px-2 py-1 rounded border border-slate-200 shadow-sm"
-                tooltipContent={<><span className="text-slate-200 font-medium">Prononciation :</span> <span className="font-bold">{w.phonetic}</span></>}
+                tooltipContent={<><span className="text-slate-500 font-medium">Prononciation :</span> <span className="font-bold text-base"><ColoredPhonetic phonetic={w.phonetic} /></span></>}
                 audioText={w.th}
               >
                 <span className="font-thai text-emerald-600 font-semibold">{w.th}</span> 
