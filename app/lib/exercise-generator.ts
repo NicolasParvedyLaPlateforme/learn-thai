@@ -266,67 +266,97 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
   }
 
   // Normal lesson logic
-  // 1. Generate word match exercises
-  // We keep words for all levels to make exercises longer
+  let wmExercises: Exercise[] = [];
+  let sbExercises: Exercise[] = [];
+
   lesson.words.forEach(word => {
-    // Pick random distractor words from all words
-    const distractors = shuffle(globalWords.filter(w => w.id !== word.id)).slice(0, baseWMDistractors);
-    exercises.push({
-      id: `wm-${word.id}`,
+    // For all levels, 4 options (1 correct, 3 distractors)
+    const distractors = shuffle(globalWords.filter(w => w.id !== word.id)).slice(0, 3);
+    wmExercises.push({
+      id: `wm-${word.id}-${Date.now()}-${Math.random()}`,
       type: 'word-match',
       question: word.fr,
       answer: word.th,
       options: shuffle([word, ...distractors]),
-      hideHints
+      hideHints: false
     });
   });
 
-  // 2. Generate sentence builder for each phrase in the current lesson
-  // Increase multiplier to make exercises longer
-  const multiplier = isMasterLevel ? 3 : (level >= 1 ? 2 : 1);
-  const sentenceExercises: Exercise[] = [];
-
-  for (let i = 0; i < multiplier; i++) {
-    lesson.phrases.forEach(phrase => {
-      // Get the words that make up the phrase from the global pool (since words can be from previous lessons)
-      const phraseWords = phrase.components.map(id => globalWords.find(w => w.id === id)).filter(Boolean) as Word[];
-      
-      // Add some distractors from global words
-      const distractors = shuffle(globalWords.filter(w => !phrase.components.includes(w.id))).slice(0, baseSBDistractors);
-      
-      sentenceExercises.push({
-        id: `sb-${phrase.id}-${i}`,
-        type: 'sentence-builder',
-        question: phrase.fr,
-        answer: phrase.th,
-        options: shuffle([...phraseWords, ...distractors]),
-        correctComponents: phrase.components,
-        hideHints
-      });
+  lesson.phrases.forEach(phrase => {
+    const phraseWords = phrase.components.map(id => globalWords.find(w => w.id === id)).filter(Boolean) as Word[];
+    const numDistractors = level >= 3 ? 1 : 0;
+    const distractors = shuffle(globalWords.filter(w => !phrase.components.includes(w.id))).slice(0, numDistractors);
+    sbExercises.push({
+      id: `sb-${phrase.id}-${Date.now()}-${Math.random()}`,
+      type: 'sentence-builder',
+      question: phrase.fr,
+      answer: phrase.th,
+      options: shuffle([...phraseWords, ...distractors]),
+      correctComponents: phrase.components,
+      hideHints: false
     });
+  });
+
+  let finalExercises: Exercise[] = [];
+  wmExercises = shuffle(wmExercises);
+  sbExercises = shuffle(sbExercises);
+
+  if (level === 0) {
+    // Level 1: Only word-match
+    let pool = [...wmExercises];
+    while (pool.length < 10 && wmExercises.length > 0) pool = [...pool, ...shuffle(wmExercises)];
+    if (pool.length === 0) pool = [...sbExercises];
+    finalExercises = pool;
+  } else if (level === 1) {
+    // Level 2: First half word-match, second half sentence-builder
+    let wmPool = [...wmExercises];
+    while (wmPool.length < 5 && wmExercises.length > 0) wmPool = [...wmPool, ...shuffle(wmExercises)];
+    let sbPool = [...sbExercises];
+    while (sbPool.length < 5 && sbExercises.length > 0) sbPool = [...sbPool, ...shuffle(sbExercises)];
+    if (wmPool.length === 0) wmPool = [...sbPool];
+    if (sbPool.length === 0) sbPool = [...wmPool];
+    finalExercises = [...wmPool, ...sbPool];
+  } else if (level === 2) {
+    // Level 3: 4 word-match, rest sentence-builder
+    let wmPool = wmExercises.slice(0, 4);
+    while (wmPool.length < 4 && wmExercises.length > 0) {
+       wmPool.push(wmExercises[Math.floor(Math.random() * wmExercises.length)]);
+    }
+    let sbPool = [...sbExercises];
+    while (sbPool.length < 8 && sbExercises.length > 0) sbPool = [...sbPool, ...shuffle(sbExercises)];
+    if (wmPool.length === 0) wmPool = [...sbPool].slice(0, 4);
+    if (sbPool.length === 0) sbPool = [...wmPool];
+    finalExercises = [...wmPool, ...sbPool];
+  } else {
+    // Level 4: Only sentence-builder
+    let sbPool = [...sbExercises];
+    while (sbPool.length < 10 && sbExercises.length > 0) sbPool = [...sbPool, ...shuffle(sbExercises)];
+    if (sbPool.length === 0) sbPool = [...wmExercises];
+    finalExercises = sbPool;
+  }
+
+  // Prevent same questions consecutively
+  const result: Exercise[] = [];
+  const waitlist: Exercise[] = [];
+  
+  for (let i = 0; i < finalExercises.length; i++) {
+     const current = finalExercises[i];
+     const lastInResult = result[result.length - 1];
+     
+     if (!lastInResult || lastInResult.answer !== current.answer) {
+         result.push(current);
+         let w = 0;
+         while (w < waitlist.length) {
+            if (result[result.length - 1].answer !== waitlist[w].answer) {
+                result.push(waitlist.splice(w, 1)[0]);
+            } else {
+                w++;
+            }
+         }
+     } else {
+         waitlist.push(current);
+     }
   }
   
-  exercises = [...exercises, ...sentenceExercises];
-  let finalExercises = shuffle(exercises);
-
-  // Warm-up logic: first 5 exercises are easier
-  if (level >= 2) {
-    finalExercises.forEach((ex, idx) => {
-      if (idx < 5) {
-         ex.hideHints = false; // Show hints for first 5
-         // Reduce distractors to make it simpler
-         if (ex.type === 'word-match') {
-            const correctAnswer = ex.options.find(o => o.th === ex.answer)!;
-            const others = shuffle(ex.options.filter(o => o.th !== ex.answer)).slice(0, 3);
-            ex.options = shuffle([correctAnswer, ...others]);
-         } else if (ex.type === 'sentence-builder') {
-            const correctWords = ex.options.filter(o => ex.correctComponents?.includes(o.id));
-            const otherWords = shuffle(ex.options.filter(o => !ex.correctComponents?.includes(o.id))).slice(0, 3);
-            ex.options = shuffle([...correctWords, ...otherWords]);
-         }
-      }
-    });
-  }
-
-  return finalExercises;
+  return [...result, ...waitlist];
 }

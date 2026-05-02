@@ -74,7 +74,7 @@ export default function SentenceBuilder({ exercise, selected, onChange, disabled
               disabled={disabled || isUsed}
               className={`
                 rounded-xl font-medium font-thai select-none transition-all
-                ${isDense ? 'px-3 py-1.5 text-2xl sm:px-4 sm:py-2 flex items-center h-12 sm:h-14 sm:text-3xl' : 'px-4 py-2 text-3xl sm:px-5 sm:py-3 sm:text-4xl flex items-center h-16 sm:h-20'}
+                ${isDense ? 'px-3 py-1.5 text-xl sm:px-4 sm:py-2 flex items-center h-10 sm:h-12 sm:text-2xl' : 'px-4 py-2 text-2xl sm:px-5 sm:py-3 sm:text-3xl flex items-center h-14 sm:h-16'}
                 ${!isUsed 
                   ? 'bg-white border-2 border-b-4 border-slate-200 text-slate-700 hover:bg-slate-50 cursor-pointer active:translate-y-0.5 active:border-b-2' 
                   : 'bg-slate-100 border-2 border-slate-100 text-transparent pointer-events-none'}

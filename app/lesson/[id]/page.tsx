@@ -159,6 +159,8 @@ export default function LessonPage() {
                   exerciseOptions={currentExercise.options as Word[]}
                   hideHints={currentExercise.hideHints}
                   alwaysShowPhonetic={currentLevel < 2}
+                  answerTh={currentExercise.answer}
+                  correctComponents={currentExercise.correctComponents}
                 />
               </div>
             </div>
