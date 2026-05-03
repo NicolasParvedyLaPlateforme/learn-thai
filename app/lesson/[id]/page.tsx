@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import { useProgressStore } from '../../lib/store';
 import courseData from '../../data/course.json';
 import { generateExercises } from '../../lib/exercise-generator';
@@ -20,12 +20,18 @@ const data = courseData as CourseData;
 export default function LessonPage() {
   const params = useParams();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { completeLesson, lessonLevels } = useProgressStore();
   
   const lessonId = params.id as string;
+  const requestedLevelStr = searchParams.get('level');
+  
   // Resolve lesson and exercises directly to avoid useEffect setState
   const lesson = data.lessons.find((l) => l.id === lessonId) || null;
-  const currentLevel = lesson ? (lessonLevels[lesson.id] || 0) : 0;
+  const savedLevel = lesson ? (lessonLevels[lesson.id] || 0) : 0;
+  
+  // Use requested level if provided, otherwise the saved level
+  const currentLevel = requestedLevelStr ? Math.max(0, parseInt(requestedLevelStr, 10) - 1) : savedLevel;
   
   // We need to stabilize exercises generation since it shuffles.
   const [exercises, setExercises] = useState<Exercise[]>(() => {
