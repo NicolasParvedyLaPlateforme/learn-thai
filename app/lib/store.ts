@@ -1,11 +1,15 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
+export type AppLanguage = 'fr' | 'en';
+
 interface ProgressState {
+  language: AppLanguage;
   completedLessons: string[];
   lessonLevels: Record<string, number>;
   xp: number;
   seenAlphabets: string[]; // Keep track of seen alphabet letters
+  setLanguage: (lang: AppLanguage) => void;
   completeLesson: (lessonId: string, earnedXp: number) => void;
   resetProgress: () => void;
   resetLessonLevel: (lessonId: string) => void;
@@ -15,10 +19,12 @@ interface ProgressState {
 export const useProgressStore = create<ProgressState>()(
   persist(
     (set) => ({
+      language: 'fr',
       completedLessons: [],
       lessonLevels: {},
       xp: 0,
       seenAlphabets: [],
+      setLanguage: (lang) => set({ language: lang }),
       completeLesson: (lessonId, earnedXp) => set((state) => {
         const currentLevel = state.lessonLevels[lessonId] || 0;
         const newLevel = Math.min(currentLevel + 1, 4); // Max level 4

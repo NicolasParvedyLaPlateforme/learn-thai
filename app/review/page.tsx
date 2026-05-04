@@ -18,7 +18,7 @@ const data = courseData as CourseData;
 
 export default function ReviewPage() {
   const router = useRouter();
-  const { completedLessons, xp, completeLesson } = useProgressStore();
+  const { completedLessons, xp, completeLesson, language } = useProgressStore();
   
   const [exercises, setExercises] = useState<Exercise[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -34,7 +34,7 @@ export default function ReviewPage() {
     const timer = setTimeout(() => {
       setMounted(true);
       if(!initialized && completedLessons.length > 0) {
-        setExercises(generateEndlessReviewExercises(data.lessons, completedLessons));
+        setExercises(generateEndlessReviewExercises(data.lessons, completedLessons, language));
         initialized = true;
       }
     }, 0);
@@ -43,24 +43,28 @@ export default function ReviewPage() {
     return () => clearTimeout(timer);
   }, [completedLessons]);
 
-  if (!mounted) return <div className="p-8 text-center text-slate-500 font-medium">Chargement...</div>;
+  if (!mounted) return <div className="p-8 text-center text-slate-500 font-medium">{language === 'en' ? 'Loading...' : 'Chargement...'}</div>;
 
   if (completedLessons.length === 0) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-[#FAFAFA] font-sans">
-        <h1 className="text-3xl font-extrabold text-slate-800 mb-4 text-center">Aucune leçon complétée</h1>
-        <p className="text-slate-500 mb-8 text-center text-lg font-medium">Vous devez compléter au moins une leçon pour pouvoir y accéder !</p>
+        <h1 className="text-3xl font-extrabold text-slate-800 mb-4 text-center">
+          {language === 'en' ? 'No completed lessons' : 'Aucune leçon complétée'}
+        </h1>
+        <p className="text-slate-500 mb-8 text-center text-lg font-medium">
+          {language === 'en' ? 'You must complete at least one lesson to access this!' : 'Vous devez compléter au moins une leçon pour pouvoir y accéder !'}
+        </p>
         <button 
           onClick={() => router.push('/')}
           className="px-12 py-3 rounded-xl bg-indigo-500 border-b-4 border-indigo-700 text-white font-bold text-lg shadow-lg hover:bg-indigo-400 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest w-full max-w-sm"
         >
-          Retour
+          {language === 'en' ? 'Back' : 'Retour'}
         </button>
       </div>
     );
   }
 
-  if (exercises.length === 0) return <div className="p-8 text-center text-slate-500 font-medium">Chargement...</div>;
+  if (exercises.length === 0) return <div className="p-8 text-center text-slate-500 font-medium">{language === 'en' ? 'Loading...' : 'Chargement...'}</div>;
 
   const currentExercise = exercises[currentIndex];
   // Since it's endless, the progress is just cosmetic, let's keep it fixed or bouncing
@@ -75,7 +79,7 @@ export default function ReviewPage() {
           
           if (currentIndex >= exercises.length - 3) {
             // Refill exercises when running low
-            setExercises(prev => [...prev, ...generateEndlessReviewExercises(data.lessons, completedLessons)]);
+            setExercises(prev => [...prev, ...generateEndlessReviewExercises(data.lessons, completedLessons, language)]);
           }
           
           setCurrentIndex(currentIndex + 1);
@@ -132,7 +136,7 @@ export default function ReviewPage() {
               style={{ width: `${progress}%` }}
             />
           </div>
-          <div className="font-bold text-slate-400">Rappel ∞</div>
+          <div className="font-bold text-slate-400">{language === 'en' ? 'Review ∞' : 'Rappel ∞'}</div>
         </div>
       </header>
 
@@ -149,7 +153,9 @@ export default function ReviewPage() {
             
             <div className="flex-1 mt-2 md:mt-0">
               <h2 className="text-2xl md:text-3xl font-extrabold text-slate-800 mb-4 md:mb-6">
-                {currentExercise.type === 'word-match' ? "Sélectionnez la bonne traduction" : "Traduisez cette phrase"}
+                {currentExercise.type === 'word-match' 
+                  ? (language === 'en' ? "Select the correct translation:" : "Sélectionnez la bonne traduction")
+                  : (language === 'en' ? "Translate this sentence:" : "Traduisez cette phrase")}
               </h2>
               <div className="relative inline-block pb-1">
                 <SentenceWithHints 
@@ -194,16 +200,18 @@ export default function ReviewPage() {
             {isChecking && isCorrect && (
               <div className="flex items-center justify-center sm:justify-start gap-3 text-indigo-600 font-extrabold text-xl">
                 <div className="bg-white text-indigo-500 rounded-full p-1"><Check size={24} strokeWidth={3} /></div>
-                Excellent !
+                {language === 'en' ? 'Excellent!' : 'Excellent !'}
               </div>
             )}
             {isChecking && !isCorrect && (
               <div className="flex flex-col text-rose-600 font-extrabold text-xl gap-1 items-center sm:items-start">
                 <div className="flex items-center gap-3">
                   <div className="bg-white text-rose-500 rounded-full p-1"><X size={24} strokeWidth={3} /></div>
-                  Incorrect.
+                  {language === 'en' ? 'Incorrect.' : 'Incorrect.'}
                 </div>
-                <div className="text-rose-800 text-sm mt-1 uppercase tracking-widest hidden sm:block">Réponse correcte :</div>
+                <div className="text-rose-800 text-sm mt-1 uppercase tracking-widest hidden sm:block">
+                  {language === 'en' ? 'Correct answer:' : 'Réponse correcte :'}
+                </div>
                 <div className="text-rose-900 font-medium font-thai text-xl md:text-2xl mt-1 sm:mt-0">{currentExercise.answer}</div>
               </div>
             )}
@@ -220,7 +228,7 @@ export default function ReviewPage() {
                 : 'bg-indigo-500 border-indigo-700 text-white hover:bg-indigo-400'}
             `}
           >
-            {isChecking ? 'Continuer' : 'Vérifier'}
+            {isChecking ? (language === 'en' ? 'Continue' : 'Continuer') : (language === 'en' ? 'Check' : 'Vérifier')}
           </button>
         </div>
       </footer>

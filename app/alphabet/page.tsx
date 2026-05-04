@@ -12,7 +12,7 @@ import { ColoredPhonetic } from '../components/ColoredPhonetic';
 
 export default function AlphabetPage() {
   const router = useRouter();
-  const { seenAlphabets, markAlphabetSeen } = useProgressStore();
+  const { seenAlphabets, markAlphabetSeen, language } = useProgressStore();
   
   const [mounted, setMounted] = useState(false);
   const [currentItem, setCurrentItem] = useState<AlphabetItem | null>(null);
@@ -116,7 +116,9 @@ export default function AlphabetPage() {
       <main className="flex-1 w-full max-w-2xl mx-auto flex flex-col p-4 md:p-8">
         {isLessonPhase ? (
           <div className="flex-1 flex flex-col">
-            <h1 className="text-2xl font-bold text-slate-800 text-center mb-8">Nouvelle lettre !</h1>
+            <h1 className="text-2xl font-bold text-slate-800 text-center mb-8">
+              {language === 'en' ? 'New letter!' : 'Nouvelle lettre !'}
+            </h1>
             
             <div className="flex-1 flex flex-col items-center justify-center -mt-8">
               <div className="w-48 h-48 bg-white rounded-3xl shadow-sm border-2 border-slate-100 flex items-center justify-center relative cursor-pointer active:scale-95 transition-transform" onClick={() => playTTS(currentItem.exampleWord)}>
@@ -130,7 +132,7 @@ export default function AlphabetPage() {
                 <p className="text-2xl font-bold text-slate-800"><ColoredPhonetic phonetic={currentItem.pronunciation} /></p>
                 <div className="text-xl text-slate-600">
                   <span className="font-bold">{currentItem.exampleWord}</span> 
-                  <span className="opacity-75"> ({currentItem.exampleTranslation})</span>
+                  <span className="opacity-75"> ({language === 'en' ? currentItem.exampleTranslationEn : currentItem.exampleTranslation})</span>
                 </div>
               </div>
             </div>
@@ -139,13 +141,13 @@ export default function AlphabetPage() {
               onClick={handleNextInLesson}
               className="w-full bg-indigo-500 hover:bg-indigo-400 active:bg-indigo-600 text-white font-bold py-4 rounded-2xl transition-all shadow-[0_4px_0_#4338ca] hover:shadow-[0_4px_0_#4338ca] active:shadow-[0_0px_0_#4338ca] active:translate-y-[4px] mt-auto"
             >
-              Suivant
+              {language === 'en' ? 'Next' : 'Suivant'}
             </button>
           </div>
         ) : (
           <div className="flex-1 flex flex-col">
             <h2 className="text-2xl font-bold text-slate-800 mb-8">
-              Complétez le mot (<ColoredPhonetic phonetic={currentItem.pronunciation} />)
+              {language === 'en' ? 'Find the correct letter for:' : 'Complétez le mot'} (<ColoredPhonetic phonetic={currentItem.pronunciation} />)
             </h2>
 
             <div className="flex-1 flex flex-col items-center">
@@ -203,7 +205,7 @@ export default function AlphabetPage() {
                       : 'bg-slate-200 text-slate-400 cursor-not-allowed'
                 }`}
               >
-                Vérifier
+                {language === 'en' ? 'Check' : 'Vérifier'}
               </button>
             </div>
           </div>
@@ -219,7 +221,7 @@ export default function AlphabetPage() {
                 {isCorrect ? <span className="text-2xl">✓</span> : <X size={24} />}
               </div>
               <div className={`font-bold text-lg md:text-xl ${isCorrect ? 'text-emerald-700' : 'text-rose-700'}`}>
-                {isCorrect ? 'Excellent !' : 'La bonne réponse était : ' + currentItem.letter}
+                {isCorrect ? (language === 'en' ? 'Excellent!' : 'Excellent !') : (language === 'en' ? 'The correct answer was: ' : 'La bonne réponse était : ') + currentItem.letter}
               </div>
             </div>
             <button
@@ -228,7 +230,7 @@ export default function AlphabetPage() {
                  isCorrect ? 'bg-emerald-500 text-white hover:bg-emerald-400' : 'bg-rose-500 text-white hover:bg-rose-400'
                }`}
             >
-              Continuer
+              {language === 'en' ? 'Continue' : 'Continuer'}
             </button>
           </div>
         </div>

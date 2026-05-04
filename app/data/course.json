@@ -9,43 +9,50 @@
           "id": "w_sawatdee",
           "th": "สวัสดี",
           "fr": "bonjour",
-          "phonetic": "sà-wàt-dii"
+          "phonetic": "sà-wàt-dii",
+          "en": "Good morning"
         },
         {
           "id": "w_khopkhun",
           "th": "ขอบคุณ",
           "fr": "merci",
-          "phonetic": "khɔ̀p-khun"
+          "phonetic": "khɔ̀p-khun",
+          "en": "THANKS"
         },
         {
           "id": "w_krap",
           "th": "ครับ",
           "fr": "particule homme",
-          "phonetic": "khráp"
+          "phonetic": "khráp",
+          "en": "man particle"
         },
         {
           "id": "w_kha",
           "th": "ค่ะ",
           "fr": "particule femme",
-          "phonetic": "khâ"
+          "phonetic": "khâ",
+          "en": "woman particle"
         },
         {
           "id": "w_sabai",
           "th": "สบาย",
           "fr": "bien / à l'aise",
-          "phonetic": "sà-baai"
+          "phonetic": "sà-baai",
+          "en": "good / comfortable"
         },
         {
           "id": "w_dee",
           "th": "ดี",
           "fr": "bien / bon",
-          "phonetic": "dii"
+          "phonetic": "dii",
+          "en": "good / good"
         },
         {
           "id": "w_mai",
           "th": "ไหม",
           "fr": "est-ce que (question)",
-          "phonetic": "mǎi"
+          "phonetic": "mǎi",
+          "en": "does (question)"
         }
       ],
       "phrases": [
@@ -57,7 +64,8 @@
           "components": [
             "w_sawatdee",
             "w_krap"
-          ]
+          ],
+          "en": "hello (man)"
         },
         {
           "id": "p_hello_f",
@@ -67,7 +75,8 @@
           "components": [
             "w_sawatdee",
             "w_kha"
-          ]
+          ],
+          "en": "hello (woman)"
         },
         {
           "id": "p_how_are_you",
@@ -78,7 +87,8 @@
             "w_sabai",
             "w_dee",
             "w_mai"
-          ]
+          ],
+          "en": "How are you ?"
         },
         {
           "id": "p_thanks_m",
@@ -88,7 +98,8 @@
           "components": [
             "w_khopkhun",
             "w_krap"
-          ]
+          ],
+          "en": "thank you (man)"
         },
         {
           "id": "p_thanks_f",
@@ -98,7 +109,8 @@
           "components": [
             "w_khopkhun",
             "w_kha"
-          ]
+          ],
+          "en": "thank you (woman)"
         },
         {
           "id": "p_i_am_fine",
@@ -108,9 +120,12 @@
           "components": [
             "w_sabai",
             "w_dee"
-          ]
+          ],
+          "en": "I'm doing well"
         }
-      ]
+      ],
+      "titleEn": "Basics 1: Greetings",
+      "descriptionEn": "Learn to say hello and thank you"
     },
     {
       "id": "lesson-2",
@@ -121,49 +136,57 @@
           "id": "w_phom",
           "th": "ผม",
           "fr": "je (homme)",
-          "phonetic": "phǒm"
+          "phonetic": "phǒm",
+          "en": "I (man)"
         },
         {
           "id": "w_chan",
           "th": "ฉัน",
           "fr": "je (femme)",
-          "phonetic": "chǎn"
+          "phonetic": "chǎn",
+          "en": "I (woman)"
         },
         {
           "id": "w_khun",
           "th": "คุณ",
           "fr": "tu / vous",
-          "phonetic": "khun"
+          "phonetic": "khun",
+          "en": "you/you"
         },
         {
           "id": "w_chue",
           "th": "ชื่อ",
           "fr": "nom / s'appeler",
-          "phonetic": "chûue"
+          "phonetic": "chûue",
+          "en": "name/to be called"
         },
         {
           "id": "w_arai",
           "th": "อะไร",
           "fr": "quoi / quel",
-          "phonetic": "à-rai"
+          "phonetic": "à-rai",
+          "en": "what / which"
         },
         {
           "id": "w_la",
           "th": "ล่ะ",
           "fr": "et (pour renvoyer la question)",
-          "phonetic": "lâ"
+          "phonetic": "lâ",
+          "en": "and (to return the question)"
         },
         {
           "id": "w_laew",
           "th": "แล้ว",
           "fr": "alors / et (transition)",
-          "phonetic": "láew"
+          "phonetic": "láew",
+          "en": "then / and (transition)"
         },
         {
           "id": "w_dots",
           "th": "...",
           "fr": "(prénom)",
-          "phonetic": ""
+          "phonetic": "",
+          "en": "(first name)"
         }
       ],
       "phrases": [
@@ -176,7 +199,8 @@
             "w_khun",
             "w_chue",
             "w_arai"
-          ]
+          ],
+          "en": "what is your name?"
         },
         {
           "id": "p_name_m",
@@ -186,7 +210,8 @@
           "components": [
             "w_phom",
             "w_chue"
-          ]
+          ],
+          "en": "my name is (man)"
         },
         {
           "id": "p_name_f",
@@ -196,7 +221,8 @@
           "components": [
             "w_chan",
             "w_chue"
-          ]
+          ],
+          "en": "my name is (woman)"
         },
         {
           "id": "p_my_name_and_you_m",
@@ -210,7 +236,8 @@
             "w_laew",
             "w_khun",
             "w_la"
-          ]
+          ],
+          "en": "My name is (first name) and you? "
         },
         {
           "id": "p_my_name_and_you_f",
@@ -224,7 +251,8 @@
             "w_laew",
             "w_khun",
             "w_la"
-          ]
+          ],
+          "en": "My name is (first name) and you? "
         },
         {
           "id": "p_what_is_it",
@@ -233,9 +261,12 @@
           "phonetic": "à-rai",
           "components": [
             "w_arai"
-          ]
+          ],
+          "en": "What ?"
         }
-      ]
+      ],
+      "titleEn": "Basics 2: Introduce yourself",
+      "descriptionEn": "Learn basic pronouns and introducing yourself"
     },
     {
       "id": "lesson-3",
@@ -246,67 +277,78 @@
           "id": "w_0",
           "th": "ศูนย์",
           "fr": "zéro",
-          "phonetic": "sǔun"
+          "phonetic": "sǔun",
+          "en": "zero"
         },
         {
           "id": "w_1",
           "th": "หนึ่ง",
           "fr": "un",
-          "phonetic": "nùeng"
+          "phonetic": "nùeng",
+          "en": "A"
         },
         {
           "id": "w_2",
           "th": "สอง",
           "fr": "deux",
-          "phonetic": "sɔ̌ng"
+          "phonetic": "sɔ̌ng",
+          "en": "two"
         },
         {
           "id": "w_3",
           "th": "สาม",
           "fr": "trois",
-          "phonetic": "sǎam"
+          "phonetic": "sǎam",
+          "en": "three"
         },
         {
           "id": "w_4",
           "th": "สี่",
           "fr": "quatre",
-          "phonetic": "sìi"
+          "phonetic": "sìi",
+          "en": "four"
         },
         {
           "id": "w_5",
           "th": "ห้า",
           "fr": "cinq",
-          "phonetic": "hâa"
+          "phonetic": "hâa",
+          "en": "five"
         },
         {
           "id": "w_6",
           "th": "หก",
           "fr": "six",
-          "phonetic": "hòk"
+          "phonetic": "hòk",
+          "en": "six"
         },
         {
           "id": "w_7",
           "th": "เจ็ด",
           "fr": "sept",
-          "phonetic": "jèt"
+          "phonetic": "jèt",
+          "en": "seven"
         },
         {
           "id": "w_8",
           "th": "แปด",
           "fr": "huit",
-          "phonetic": "bpàet"
+          "phonetic": "bpàet",
+          "en": "eight"
         },
         {
           "id": "w_9",
           "th": "เก้า",
           "fr": "neuf",
-          "phonetic": "kâao"
+          "phonetic": "kâao",
+          "en": "nine"
         },
         {
           "id": "w_10",
           "th": "สิบ",
           "fr": "dix",
-          "phonetic": "sìp"
+          "phonetic": "sìp",
+          "en": "ten"
         }
       ],
       "phrases": [
@@ -317,7 +359,8 @@
           "phonetic": "sǔun",
           "components": [
             "w_0"
-          ]
+          ],
+          "en": "zero"
         },
         {
           "id": "p_num_1",
@@ -326,7 +369,8 @@
           "phonetic": "nùeng",
           "components": [
             "w_1"
-          ]
+          ],
+          "en": "A"
         },
         {
           "id": "p_num_2",
@@ -335,7 +379,8 @@
           "phonetic": "sɔ̌ng",
           "components": [
             "w_2"
-          ]
+          ],
+          "en": "two"
         },
         {
           "id": "p_num_3",
@@ -344,7 +389,8 @@
           "phonetic": "sǎam",
           "components": [
             "w_3"
-          ]
+          ],
+          "en": "three"
         },
         {
           "id": "p_num_4",
@@ -353,7 +399,8 @@
           "phonetic": "sìi",
           "components": [
             "w_4"
-          ]
+          ],
+          "en": "four"
         },
         {
           "id": "p_num_5",
@@ -362,9 +409,12 @@
           "phonetic": "hâa",
           "components": [
             "w_5"
-          ]
+          ],
+          "en": "five"
         }
-      ]
+      ],
+      "titleEn": "Numbers 1 to 10",
+      "descriptionEn": "Learn to count from 1 to 10"
     },
     {
       "id": "lesson-3-quantities",
@@ -375,31 +425,36 @@
           "id": "w_mee",
           "th": "มี",
           "fr": "il y a / avoir",
-          "phonetic": "mii"
+          "phonetic": "mii",
+          "en": "there is / have"
         },
         {
           "id": "w_gao_ee",
           "th": "เก้าอี้",
           "fr": "chaise",
-          "phonetic": "kâo-îi"
+          "phonetic": "kâo-îi",
+          "en": "chair"
         },
         {
           "id": "w_gee",
           "th": "กี่",
           "fr": "combien de",
-          "phonetic": "kìi"
+          "phonetic": "kìi",
+          "en": "how many"
         },
         {
           "id": "w_dtua",
           "th": "ตัว",
           "fr": "classificateur (objets)",
-          "phonetic": "dtua"
+          "phonetic": "dtua",
+          "en": "classifier (objects)"
         },
         {
           "id": "w_khon",
           "th": "คน",
           "fr": "personne (et classificateur)",
-          "phonetic": "khon"
+          "phonetic": "khon",
+          "en": "person (and classifier)"
         }
       ],
       "phrases": [
@@ -413,7 +468,8 @@
             "w_gao_ee",
             "w_gee",
             "w_dtua"
-          ]
+          ],
+          "en": "how many chairs are there?"
         },
         {
           "id": "p_three_chairs",
@@ -425,7 +481,8 @@
             "w_gao_ee",
             "w_3",
             "w_dtua"
-          ]
+          ],
+          "en": "there are three chairs"
         },
         {
           "id": "p_how_many_people",
@@ -436,7 +493,8 @@
             "w_mee",
             "w_gee",
             "w_khon"
-          ]
+          ],
+          "en": "how many people are there?"
         },
         {
           "id": "p_five_people",
@@ -447,7 +505,8 @@
             "w_mee",
             "w_5",
             "w_khon"
-          ]
+          ],
+          "en": "there are five people"
         },
         {
           "id": "p_one_chair",
@@ -459,7 +518,8 @@
             "w_gao_ee",
             "w_1",
             "w_dtua"
-          ]
+          ],
+          "en": "there is a chair"
         },
         {
           "id": "p_how_many_chairs_m",
@@ -472,7 +532,8 @@
             "w_gee",
             "w_dtua",
             "w_krap"
-          ]
+          ],
+          "en": "how many chairs are there? "
         },
         {
           "id": "p_how_many_chairs_f",
@@ -485,7 +546,8 @@
             "w_gee",
             "w_dtua",
             "w_kha"
-          ]
+          ],
+          "en": "how many chairs are there? "
         },
         {
           "id": "p_four_people",
@@ -496,9 +558,12 @@
             "w_mee",
             "w_4",
             "w_khon"
-          ]
+          ],
+          "en": "there are four people"
         }
-      ]
+      ],
+      "titleEn": "Quantities and Objects",
+      "descriptionEn": "Using Numbers with Objects"
     },
     {
       "id": "lesson-4",
@@ -509,49 +574,57 @@
           "id": "w_kin",
           "th": "กิน",
           "fr": "manger",
-          "phonetic": "kin"
+          "phonetic": "kin",
+          "en": "eat"
         },
         {
           "id": "w_khao",
           "th": "ข้าว",
           "fr": "riz",
-          "phonetic": "khâao"
+          "phonetic": "khâao",
+          "en": "rice"
         },
         {
           "id": "w_nam",
           "th": "น้ำ",
           "fr": "eau",
-          "phonetic": "náam"
+          "phonetic": "náam",
+          "en": "water"
         },
         {
           "id": "w_aroi",
           "th": "อร่อย",
           "fr": "délicieux",
-          "phonetic": "à-rɔ̀i"
+          "phonetic": "à-rɔ̀i",
+          "en": "delicious"
         },
         {
           "id": "w_mak",
           "th": "มาก",
           "fr": "très / beaucoup",
-          "phonetic": "mâak"
+          "phonetic": "mâak",
+          "en": "very/a lot"
         },
         {
           "id": "w_phet",
           "th": "เผ็ด",
           "fr": "épicé",
-          "phonetic": "phèt"
+          "phonetic": "phèt",
+          "en": "spicy"
         },
         {
           "id": "w_mai_neg",
           "th": "ไม่",
           "fr": "ne pas",
-          "phonetic": "mǎi"
+          "phonetic": "mǎi",
+          "en": "not"
         },
         {
           "id": "w_ao",
           "th": "เอา",
           "fr": "vouloir / prendre",
-          "phonetic": "ao"
+          "phonetic": "ao",
+          "en": "want / take"
         }
       ],
       "phrases": [
@@ -563,7 +636,8 @@
           "components": [
             "w_kin",
             "w_khao"
-          ]
+          ],
+          "en": "eat (a meal)"
         },
         {
           "id": "p_very_delicious",
@@ -573,7 +647,8 @@
           "components": [
             "w_aroi",
             "w_mak"
-          ]
+          ],
+          "en": "very delicious"
         },
         {
           "id": "p_not_spicy",
@@ -583,7 +658,8 @@
           "components": [
             "w_mai_neg",
             "w_phet"
-          ]
+          ],
+          "en": "not spicy"
         },
         {
           "id": "p_want_water",
@@ -593,7 +669,8 @@
           "components": [
             "w_ao",
             "w_nam"
-          ]
+          ],
+          "en": "I want water"
         },
         {
           "id": "p_not_want",
@@ -603,7 +680,8 @@
           "components": [
             "w_mai_neg",
             "w_ao"
-          ]
+          ],
+          "en": "I don't want it"
         },
         {
           "id": "p_spicy_m",
@@ -614,7 +692,8 @@
             "w_phet",
             "w_mak",
             "w_krap"
-          ]
+          ],
+          "en": "it's very spicy (man)"
         },
         {
           "id": "p_delicious_f",
@@ -625,9 +704,12 @@
             "w_aroi",
             "w_mak",
             "w_kha"
-          ]
+          ],
+          "en": "very delicious (woman)"
         }
-      ]
+      ],
+      "titleEn": "Food: At the restaurant",
+      "descriptionEn": "Eating out"
     },
     {
       "id": "lesson-5",
@@ -638,25 +720,29 @@
           "id": "w_kho_thot",
           "th": "ขอโทษ",
           "fr": "pardon / désolé",
-          "phonetic": "khɔ̌ɔ thôot"
+          "phonetic": "khɔ̌ɔ thôot",
+          "en": "sorry / sorry"
         },
         {
           "id": "w_thi_nai",
           "th": "ที่ไหน",
           "fr": "où",
-          "phonetic": "thîi nǎi"
+          "phonetic": "thîi nǎi",
+          "en": "Or"
         },
         {
           "id": "w_ka_ru_na",
           "th": "กรุณา",
           "fr": "s'il vous plaît",
-          "phonetic": "kà-rú-naa"
+          "phonetic": "kà-rú-naa",
+          "en": "Please"
         },
         {
           "id": "w_khao_jai",
           "th": "เข้าใจ",
           "fr": "comprendre",
-          "phonetic": "khâo jai"
+          "phonetic": "khâo jai",
+          "en": "to understand"
         }
       ],
       "phrases": [
@@ -668,7 +754,8 @@
           "components": [
             "w_khao_jai",
             "w_mai"
-          ]
+          ],
+          "en": "do you understand ?"
         },
         {
           "id": "p_not_understand",
@@ -678,7 +765,8 @@
           "components": [
             "w_mai_neg",
             "w_khao_jai"
-          ]
+          ],
+          "en": "I don't understand"
         },
         {
           "id": "p_sorry_m",
@@ -688,7 +776,8 @@
           "components": [
             "w_kho_thot",
             "w_krap"
-          ]
+          ],
+          "en": "sorry (man)"
         },
         {
           "id": "p_sorry_f",
@@ -698,7 +787,8 @@
           "components": [
             "w_kho_thot",
             "w_kha"
-          ]
+          ],
+          "en": "sorry (woman)"
         },
         {
           "id": "p_please_m",
@@ -708,7 +798,8 @@
           "components": [
             "w_ka_ru_na",
             "w_krap"
-          ]
+          ],
+          "en": "please (man)"
         },
         {
           "id": "p_please_f",
@@ -718,7 +809,8 @@
           "components": [
             "w_ka_ru_na",
             "w_kha"
-          ]
+          ],
+          "en": "please (woman)"
         },
         {
           "id": "p_where_is_it",
@@ -727,9 +819,12 @@
           "phonetic": "thîi nǎi",
           "components": [
             "w_thi_nai"
-          ]
+          ],
+          "en": "where is it?"
         }
-      ]
+      ],
+      "titleEn": "Basics 3: Politeness and questions",
+      "descriptionEn": "Polite expressions and basic questions"
     },
     {
       "id": "lesson-6",
@@ -740,37 +835,43 @@
           "id": "w_khao_pron",
           "th": "เขา",
           "fr": "il / elle",
-          "phonetic": "khâao"
+          "phonetic": "khâao",
+          "en": "he/she"
         },
         {
           "id": "w_rao",
           "th": "เรา",
           "fr": "nous",
-          "phonetic": "rao"
+          "phonetic": "rao",
+          "en": "We"
         },
         {
           "id": "w_mae",
           "th": "แม่",
           "fr": "mère",
-          "phonetic": "mâe"
+          "phonetic": "mâe",
+          "en": "mother"
         },
         {
           "id": "w_pho",
           "th": "พ่อ",
           "fr": "père",
-          "phonetic": "phɔ̂ɔ"
+          "phonetic": "phɔ̂ɔ",
+          "en": "father"
         },
         {
           "id": "w_phi",
           "th": "พี่",
           "fr": "grand frère / grande sœur",
-          "phonetic": "phîi"
+          "phonetic": "phîi",
+          "en": "big brother/big sister"
         },
         {
           "id": "w_nong",
           "th": "น้อง",
           "fr": "petit frère / petite sœur",
-          "phonetic": "nɔ́ɔng"
+          "phonetic": "nɔ́ɔng",
+          "en": "little brother/little sister"
         }
       ],
       "phrases": [
@@ -783,7 +884,8 @@
             "w_khao_pron",
             "w_chue",
             "w_arai"
-          ]
+          ],
+          "en": "what is his name?"
         },
         {
           "id": "p_dad_fine",
@@ -795,7 +897,8 @@
             "w_sabai",
             "w_dee",
             "w_mai"
-          ]
+          ],
+          "en": "how is dad?"
         },
         {
           "id": "p_two_older_siblings",
@@ -807,7 +910,8 @@
             "w_phi",
             "w_2",
             "w_khon"
-          ]
+          ],
+          "en": "there are two big brothers"
         },
         {
           "id": "p_mom_name",
@@ -818,7 +922,8 @@
             "w_mae",
             "w_chue",
             "w_arai"
-          ]
+          ],
+          "en": "what's mom's name?"
         },
         {
           "id": "p_where_is_dad",
@@ -829,7 +934,8 @@
             "w_pho",
             "w_pai",
             "w_thi_nai"
-          ]
+          ],
+          "en": "where is dad going?"
         },
         {
           "id": "p_we_are_good",
@@ -840,9 +946,12 @@
             "w_rao",
             "w_sabai",
             "w_dee"
-          ]
+          ],
+          "en": "we are fine"
         }
-      ]
+      ],
+      "titleEn": "Subjects and Family",
+      "descriptionEn": "Talk about others"
     },
     {
       "id": "lesson-7",
@@ -853,25 +962,29 @@
           "id": "w_pai",
           "th": "ไป",
           "fr": "aller",
-          "phonetic": "bpai"
+          "phonetic": "bpai",
+          "en": "go"
         },
         {
           "id": "w_ma",
           "th": "มา",
           "fr": "venir",
-          "phonetic": "maa"
+          "phonetic": "maa",
+          "en": "come"
         },
         {
           "id": "w_tham",
           "th": "ทำ",
           "fr": "faire",
-          "phonetic": "tham"
+          "phonetic": "tham",
+          "en": "TO DO"
         },
         {
           "id": "w_yak",
           "th": "อยาก",
           "fr": "vouloir",
-          "phonetic": "yàak"
+          "phonetic": "yàak",
+          "en": "to want"
         }
       ],
       "phrases": [
@@ -883,7 +996,8 @@
           "components": [
             "w_pai",
             "w_thi_nai"
-          ]
+          ],
+          "en": "where are you going?"
         },
         {
           "id": "p_want_eat",
@@ -894,7 +1008,8 @@
             "w_yak",
             "w_kin",
             "w_khao"
-          ]
+          ],
+          "en": "I want to eat"
         },
         {
           "id": "p_have_water",
@@ -905,7 +1020,8 @@
             "w_mee",
             "w_nam",
             "w_mai"
-          ]
+          ],
+          "en": "do you have water?"
         },
         {
           "id": "p_what_are_you_doing",
@@ -915,7 +1031,8 @@
           "components": [
             "w_tham",
             "w_arai"
-          ]
+          ],
+          "en": "what are you doing ?"
         },
         {
           "id": "p_come_here_m",
@@ -925,7 +1042,8 @@
           "components": [
             "w_ma",
             "w_krap"
-          ]
+          ],
+          "en": "I come (man)"
         },
         {
           "id": "p_want_to_go_f",
@@ -936,9 +1054,12 @@
             "w_yak",
             "w_pai",
             "w_kha"
-          ]
+          ],
+          "en": "I want to go (woman)"
         }
-      ]
+      ],
+      "titleEn": "Useful verbs",
+      "descriptionEn": "Everyday actions"
     },
     {
       "id": "lesson-8",
@@ -949,37 +1070,43 @@
           "id": "w_thao_rai",
           "th": "เท่าไหร่",
           "fr": "combien",
-          "phonetic": "thâo rai"
+          "phonetic": "thâo rai",
+          "en": "How much"
         },
         {
           "id": "w_phaeng",
           "th": "แพง",
           "fr": "cher",
-          "phonetic": "phaeng"
+          "phonetic": "phaeng",
+          "en": "Dear"
         },
         {
           "id": "w_lot",
           "th": "ลด",
           "fr": "réduire",
-          "phonetic": "lót"
+          "phonetic": "lót",
+          "en": "reduce"
         },
         {
           "id": "w_dai",
           "th": "ได้",
           "fr": "pouvoir",
-          "phonetic": "dâai"
+          "phonetic": "dâai",
+          "en": "power"
         },
         {
           "id": "w_baht",
           "th": "บาท",
           "fr": "baht (monnaie)",
-          "phonetic": "bàat"
+          "phonetic": "bàat",
+          "en": "baht (currency)"
         },
         {
           "id": "w_sue",
           "th": "ซื้อ",
           "fr": "acheter",
-          "phonetic": "súue"
+          "phonetic": "súue",
+          "en": "buy"
         }
       ],
       "phrases": [
@@ -991,7 +1118,8 @@
           "components": [
             "w_thao_rai",
             "w_krap"
-          ]
+          ],
+          "en": "how much does it cost? "
         },
         {
           "id": "p_very_expensive",
@@ -1001,7 +1129,8 @@
           "components": [
             "w_phaeng",
             "w_mak"
-          ]
+          ],
+          "en": "very expensive"
         },
         {
           "id": "p_discount",
@@ -1012,7 +1141,8 @@
             "w_lot",
             "w_dai",
             "w_mai"
-          ]
+          ],
+          "en": "can you lower the price?"
         },
         {
           "id": "p_nine_baht",
@@ -1022,7 +1152,8 @@
           "components": [
             "w_9",
             "w_baht"
-          ]
+          ],
+          "en": "nine baht"
         },
         {
           "id": "p_buy_three",
@@ -1032,7 +1163,8 @@
           "components": [
             "w_sue",
             "w_3"
-          ]
+          ],
+          "en": "buy three"
         },
         {
           "id": "p_how_much_f",
@@ -1042,7 +1174,8 @@
           "components": [
             "w_thao_rai",
             "w_kha"
-          ]
+          ],
+          "en": "how much does it cost? "
         },
         {
           "id": "p_buy_water",
@@ -1052,7 +1185,8 @@
           "components": [
             "w_sue",
             "w_nam"
-          ]
+          ],
+          "en": "buy water"
         },
         {
           "id": "p_cannot_reduce",
@@ -1063,9 +1197,12 @@
             "w_lot",
             "w_mai_neg",
             "w_dai"
-          ]
+          ],
+          "en": "I can't lower the price"
         }
-      ]
+      ],
+      "titleEn": "At the market (Buy)",
+      "descriptionEn": "Negotiate and buy"
     },
     {
       "id": "lesson-9",
@@ -1076,25 +1213,29 @@
           "id": "w_hiw",
           "th": "หิว",
           "fr": "avoir faim",
-          "phonetic": "hǐw"
+          "phonetic": "hǐw",
+          "en": "to be hungry"
         },
         {
           "id": "w_nueay",
           "th": "เหนื่อย",
           "fr": "fatigué",
-          "phonetic": "nùeay"
+          "phonetic": "nùeay",
+          "en": "fatigue"
         },
         {
           "id": "w_dee_jai",
           "th": "ดีใจ",
           "fr": "heureux",
-          "phonetic": "dii jai"
+          "phonetic": "dii jai",
+          "en": "happy"
         },
         {
           "id": "w_chop",
           "th": "ชอบ",
           "fr": "aimer",
-          "phonetic": "chɔ̂ɔp"
+          "phonetic": "chɔ̂ɔp",
+          "en": "to like"
         }
       ],
       "phrases": [
@@ -1106,7 +1247,8 @@
           "components": [
             "w_hiw",
             "w_mak"
-          ]
+          ],
+          "en": "I'm very hungry"
         },
         {
           "id": "p_like_q",
@@ -1116,7 +1258,8 @@
           "components": [
             "w_chop",
             "w_mai"
-          ]
+          ],
+          "en": "do you like it?"
         },
         {
           "id": "p_very_tired",
@@ -1126,7 +1269,8 @@
           "components": [
             "w_nueay",
             "w_mak"
-          ]
+          ],
+          "en": "I am very tired"
         },
         {
           "id": "p_happy_m",
@@ -1136,7 +1280,8 @@
           "components": [
             "w_dee_jai",
             "w_krap"
-          ]
+          ],
+          "en": "I am happy (man)"
         },
         {
           "id": "p_happy_f",
@@ -1146,7 +1291,8 @@
           "components": [
             "w_dee_jai",
             "w_kha"
-          ]
+          ],
+          "en": "I am happy (woman)"
         },
         {
           "id": "p_not_like",
@@ -1156,7 +1302,8 @@
           "components": [
             "w_mai_neg",
             "w_chop"
-          ]
+          ],
+          "en": "I don't like"
         },
         {
           "id": "p_i_like_it",
@@ -1166,7 +1313,8 @@
           "components": [
             "w_phom",
             "w_chop"
-          ]
+          ],
+          "en": "I like (man)"
         },
         {
           "id": "p_i_like_it_f",
@@ -1176,9 +1324,12 @@
           "components": [
             "w_chan",
             "w_chop"
-          ]
+          ],
+          "en": "I like (woman)"
         }
-      ]
+      ],
+      "titleEn": "States and Feelings",
+      "descriptionEn": "Express your mental and physical state"
     },
     {
       "id": "lesson-10",
@@ -1186,7 +1337,9 @@
       "description": "Révision globale (30 questions)",
       "isReview": true,
       "words": [],
-      "phrases": []
+      "phrases": [],
+      "titleEn": "Unit 1 assessment",
+      "descriptionEn": "Global review (30 questions)"
     },
     {
       "id": "lesson-11",
@@ -1197,31 +1350,36 @@
           "id": "w_rot",
           "th": "รถ",
           "fr": "voiture / véhicule",
-          "phonetic": "rót"
+          "phonetic": "rót",
+          "en": "car / vehicle"
         },
         {
           "id": "w_fai",
           "th": "ไฟ",
           "fr": "feu / électricité",
-          "phonetic": "fai"
+          "phonetic": "fai",
+          "en": "fire/electricity"
         },
         {
           "id": "w_sathannee",
           "th": "สถานี",
           "fr": "station",
-          "phonetic": "sà-thǎa-nii"
+          "phonetic": "sà-thǎa-nii",
+          "en": "station"
         },
         {
           "id": "w_sanambin",
           "th": "สนามบิน",
           "fr": "aéroport",
-          "phonetic": "sà-nǎam-bin"
+          "phonetic": "sà-nǎam-bin",
+          "en": "airport"
         },
         {
           "id": "w_khi",
           "th": "ขี่",
           "fr": "conduire (moto/vélo)",
-          "phonetic": "khìi"
+          "phonetic": "khìi",
+          "en": "drive (motorcycle/bicycle)"
         }
       ],
       "phrases": [
@@ -1234,7 +1392,8 @@
             "w_sathannee",
             "w_rot",
             "w_fai"
-          ]
+          ],
+          "en": "train station (train station)"
         },
         {
           "id": "p_go_airport",
@@ -1244,7 +1403,8 @@
           "components": [
             "w_pai",
             "w_sanambin"
-          ]
+          ],
+          "en": "go to the airport"
         },
         {
           "id": "p_ride_car",
@@ -1254,7 +1414,8 @@
           "components": [
             "w_khi",
             "w_rot"
-          ]
+          ],
+          "en": "drive a car"
         },
         {
           "id": "p_train_good",
@@ -1265,7 +1426,8 @@
             "w_rot",
             "w_fai",
             "w_dee"
-          ]
+          ],
+          "en": "the train is good"
         },
         {
           "id": "p_where_station",
@@ -1275,9 +1437,12 @@
           "components": [
             "w_sathannee",
             "w_thi_nai"
-          ]
+          ],
+          "en": "where is the station?"
         }
-      ]
+      ],
+      "titleEn": "Transportation",
+      "descriptionEn": "Getting around town"
     },
     {
       "id": "lesson-12",
@@ -1288,31 +1453,36 @@
           "id": "w_wan",
           "th": "วัน",
           "fr": "jour",
-          "phonetic": "wan"
+          "phonetic": "wan",
+          "en": "day"
         },
         {
           "id": "w_nee",
           "th": "นี้",
           "fr": "ce / ceci",
-          "phonetic": "nee"
+          "phonetic": "nee",
+          "en": "this/this"
         },
         {
           "id": "w_phrung",
           "th": "พรุ่ง",
           "fr": "demain (base)",
-          "phonetic": "phrung"
+          "phonetic": "phrung",
+          "en": "tomorrow (basic)"
         },
         {
           "id": "w_muea",
           "th": "เมื่อ",
           "fr": "quand (passé)",
-          "phonetic": "mûea"
+          "phonetic": "mûea",
+          "en": "when (past)"
         },
         {
           "id": "w_wela",
           "th": "เวลา",
           "fr": "temps / heure",
-          "phonetic": "wee-laa"
+          "phonetic": "wee-laa",
+          "en": "time / hour"
         }
       ],
       "phrases": [
@@ -1324,7 +1494,8 @@
           "components": [
             "w_wan",
             "w_nee"
-          ]
+          ],
+          "en": "Today"
         },
         {
           "id": "p_tomorrow",
@@ -1334,7 +1505,8 @@
           "components": [
             "w_phrung",
             "w_nee"
-          ]
+          ],
+          "en": "tomorrow"
         },
         {
           "id": "p_yesterday",
@@ -1345,7 +1517,8 @@
             "w_muea",
             "w_wan",
             "w_nee"
-          ]
+          ],
+          "en": "yesterday"
         },
         {
           "id": "p_five_days",
@@ -1355,7 +1528,8 @@
           "components": [
             "w_5",
             "w_wan"
-          ]
+          ],
+          "en": "five days"
         },
         {
           "id": "p_what_time_is_it",
@@ -1365,7 +1539,8 @@
           "components": [
             "w_wela",
             "w_arai"
-          ]
+          ],
+          "en": "what time is it?"
         },
         {
           "id": "p_go_tomorrow",
@@ -1376,7 +1551,8 @@
             "w_pai",
             "w_phrung",
             "w_nee"
-          ]
+          ],
+          "en": "go tomorrow"
         },
         {
           "id": "p_yesterday_good",
@@ -1388,9 +1564,12 @@
             "w_wan",
             "w_nee",
             "w_dee"
-          ]
+          ],
+          "en": "yesterday was good"
         }
-      ]
+      ],
+      "titleEn": "Time & days",
+      "descriptionEn": "Today, tomorrow, yesterday..."
     },
     {
       "id": "lesson-13",
@@ -1401,25 +1580,29 @@
           "id": "w_sai",
           "th": "ซ้าย",
           "fr": "gauche",
-          "phonetic": "sáai"
+          "phonetic": "sáai",
+          "en": "LEFT"
         },
         {
           "id": "w_khwa",
           "th": "ขวา",
           "fr": "droite",
-          "phonetic": "khwǎa"
+          "phonetic": "khwǎa",
+          "en": "RIGHT"
         },
         {
           "id": "w_trong",
           "th": "ตรง",
           "fr": "droit / direct",
-          "phonetic": "dtrong"
+          "phonetic": "dtrong",
+          "en": "straight / direct"
         },
         {
           "id": "w_liao",
           "th": "เลี้ยว",
           "fr": "tourner",
-          "phonetic": "líiao"
+          "phonetic": "líiao",
+          "en": "turn"
         }
       ],
       "phrases": [
@@ -1431,7 +1614,8 @@
           "components": [
             "w_liao",
             "w_sai"
-          ]
+          ],
+          "en": "turn left"
         },
         {
           "id": "p_turn_right",
@@ -1441,7 +1625,8 @@
           "components": [
             "w_liao",
             "w_khwa"
-          ]
+          ],
+          "en": "Turn right"
         },
         {
           "id": "p_go_straight",
@@ -1451,7 +1636,8 @@
           "components": [
             "w_trong",
             "w_pai"
-          ]
+          ],
+          "en": "Go straight"
         },
         {
           "id": "p_go_left",
@@ -1461,7 +1647,8 @@
           "components": [
             "w_pai",
             "w_sai"
-          ]
+          ],
+          "en": "go left"
         },
         {
           "id": "p_go_right",
@@ -1471,7 +1658,8 @@
           "components": [
             "w_pai",
             "w_khwa"
-          ]
+          ],
+          "en": "go right"
         },
         {
           "id": "p_turn_straight",
@@ -1482,9 +1670,12 @@
             "w_trong",
             "w_pai",
             "w_kha"
-          ]
+          ],
+          "en": "go straight (woman)"
         }
-      ]
+      ],
+      "titleEn": "Directions",
+      "descriptionEn": "Left, right, straight"
     },
     {
       "id": "lesson-14",
@@ -1495,25 +1686,29 @@
           "id": "w_chai",
           "th": "ใช่",
           "fr": "oui / exact",
-          "phonetic": "châi"
+          "phonetic": "châi",
+          "en": "yes / correct"
         },
         {
           "id": "w_mai_question",
           "th": "ไม่ใช่",
           "fr": "non / ce n'est pas",
-          "phonetic": "mǎi châi"
+          "phonetic": "mǎi châi",
+          "en": "no / it's not"
         },
         {
           "id": "w_nit_noi",
           "th": "นิดหน่อย",
           "fr": "un peu",
-          "phonetic": "nít nòi"
+          "phonetic": "nít nòi",
+          "en": "A little"
         },
         {
           "id": "w_pood",
           "th": "พูด",
           "fr": "parler",
-          "phonetic": "phûut"
+          "phonetic": "phûut",
+          "en": "talk"
         }
       ],
       "phrases": [
@@ -1525,7 +1720,8 @@
           "components": [
             "w_chai",
             "w_krap"
-          ]
+          ],
+          "en": "yes (man)"
         },
         {
           "id": "p_speak_thai_little",
@@ -1536,7 +1732,8 @@
             "w_pood",
             "w_dai",
             "w_nit_noi"
-          ]
+          ],
+          "en": "I speak a little (Thai)"
         },
         {
           "id": "p_yes_f",
@@ -1546,7 +1743,8 @@
           "components": [
             "w_chai",
             "w_kha"
-          ]
+          ],
+          "en": "yes (woman)"
         },
         {
           "id": "p_no_m",
@@ -1556,7 +1754,8 @@
           "components": [
             "w_mai_question",
             "w_krap"
-          ]
+          ],
+          "en": "no (man)"
         },
         {
           "id": "p_no_f",
@@ -1566,7 +1765,8 @@
           "components": [
             "w_mai_question",
             "w_kha"
-          ]
+          ],
+          "en": "no (woman)"
         },
         {
           "id": "p_speak_little",
@@ -1576,9 +1776,12 @@
           "components": [
             "w_pood",
             "w_nit_noi"
-          ]
+          ],
+          "en": "talk a little"
         }
-      ]
+      ],
+      "titleEn": "Conversation Basics",
+      "descriptionEn": "Yes, no, maybe, please"
     },
     {
       "id": "lesson-15",
@@ -1589,31 +1792,36 @@
           "id": "w_jep",
           "th": "เจ็บ",
           "fr": "avoir mal",
-          "phonetic": "jèp"
+          "phonetic": "jèp",
+          "en": "to be in pain"
         },
         {
           "id": "w_puat",
           "th": "ปวด",
           "fr": "douleur (plus interne)",
-          "phonetic": "bpùuat"
+          "phonetic": "bpùuat",
+          "en": "pain (more internal)"
         },
         {
           "id": "w_hua",
           "th": "หัว",
           "fr": "tête",
-          "phonetic": "hǔua"
+          "phonetic": "hǔua",
+          "en": "head"
         },
         {
           "id": "w_thong",
           "th": "ท้อง",
           "fr": "ventre",
-          "phonetic": "thɔ́ɔng"
+          "phonetic": "thɔ́ɔng",
+          "en": "belly"
         },
         {
           "id": "w_rong_phayaban",
           "th": "โรงพยาบาล",
           "fr": "hôpital",
-          "phonetic": "roong phá-yaa-baan"
+          "phonetic": "roong phá-yaa-baan",
+          "en": "hospital"
         }
       ],
       "phrases": [
@@ -1625,7 +1833,8 @@
           "components": [
             "w_puat",
             "w_hua"
-          ]
+          ],
+          "en": "I have a headache"
         },
         {
           "id": "p_stomach_ache",
@@ -1635,7 +1844,8 @@
           "components": [
             "w_puat",
             "w_thong"
-          ]
+          ],
+          "en": "I have a stomach ache"
         },
         {
           "id": "p_go_hospital",
@@ -1645,7 +1855,8 @@
           "components": [
             "w_pai",
             "w_rong_phayaban"
-          ]
+          ],
+          "en": "go to the hospital"
         },
         {
           "id": "p_head_hospital",
@@ -1657,7 +1868,8 @@
             "w_hua",
             "w_pai",
             "w_rong_phayaban"
-          ]
+          ],
+          "en": "I have a headache, I'm going to the hospital"
         },
         {
           "id": "p_where_hospital",
@@ -1667,7 +1879,8 @@
           "components": [
             "w_rong_phayaban",
             "w_thi_nai"
-          ]
+          ],
+          "en": "where is the hospital?"
         },
         {
           "id": "p_stomach_ache_very",
@@ -1678,9 +1891,12 @@
             "w_puat",
             "w_thong",
             "w_mak"
-          ]
+          ],
+          "en": "I have a very bad stomach ache"
         }
-      ]
+      ],
+      "titleEn": "Body & Health",
+      "descriptionEn": "I'm in pain, medicine"
     },
     {
       "id": "lesson-16",
@@ -1691,25 +1907,29 @@
           "id": "w_yai",
           "th": "ใหญ่",
           "fr": "grand",
-          "phonetic": "yài"
+          "phonetic": "yài",
+          "en": "big"
         },
         {
           "id": "w_lek",
           "th": "เล็ก",
           "fr": "petit",
-          "phonetic": "lék"
+          "phonetic": "lék",
+          "en": "little"
         },
         {
           "id": "w_ron",
           "th": "ร้อน",
           "fr": "chaud",
-          "phonetic": "rɔ́ɔn"
+          "phonetic": "rɔ́ɔn",
+          "en": "hot"
         },
         {
           "id": "w_naow",
           "th": "หนาว",
           "fr": "froid",
-          "phonetic": "nǎao"
+          "phonetic": "nǎao",
+          "en": "cold"
         }
       ],
       "phrases": [
@@ -1721,7 +1941,8 @@
           "components": [
             "w_ron",
             "w_mak"
-          ]
+          ],
+          "en": "it's very hot"
         },
         {
           "id": "p_not_big",
@@ -1731,7 +1952,8 @@
           "components": [
             "w_mai_neg",
             "w_yai"
-          ]
+          ],
+          "en": "it's not big"
         },
         {
           "id": "p_hot_not",
@@ -1741,7 +1963,8 @@
           "components": [
             "w_mai_neg",
             "w_ron"
-          ]
+          ],
+          "en": "it's not hot"
         },
         {
           "id": "p_cold_m",
@@ -1751,7 +1974,8 @@
           "components": [
             "w_naow",
             "w_krap"
-          ]
+          ],
+          "en": "I'm cold (man)"
         },
         {
           "id": "p_big_car",
@@ -1761,7 +1985,8 @@
           "components": [
             "w_rot",
             "w_yai"
-          ]
+          ],
+          "en": "big car"
         },
         {
           "id": "p_small_house",
@@ -1771,9 +1996,12 @@
           "components": [
             "w_baan",
             "w_lek"
-          ]
+          ],
+          "en": "little house"
         }
-      ]
+      ],
+      "titleEn": "Common Adjectives",
+      "descriptionEn": "Big, small, hot, cold"
     },
     {
       "id": "lesson-17",
@@ -1784,31 +2012,36 @@
           "id": "w_see_color",
           "th": "สี",
           "fr": "couleur",
-          "phonetic": "sìi"
+          "phonetic": "sìi",
+          "en": "color"
         },
         {
           "id": "w_daeng",
           "th": "แดง",
           "fr": "rouge",
-          "phonetic": "daeng"
+          "phonetic": "daeng",
+          "en": "red"
         },
         {
           "id": "w_khao_color",
           "th": "ขาว",
           "fr": "blanc",
-          "phonetic": "khâao"
+          "phonetic": "khâao",
+          "en": "white"
         },
         {
           "id": "w_dam",
           "th": "ดำ",
           "fr": "noir",
-          "phonetic": "dam"
+          "phonetic": "dam",
+          "en": "black"
         },
         {
           "id": "w_nam_ngoen",
           "th": "น้ำเงิน",
           "fr": "bleu (foncé)",
-          "phonetic": "náam ngoen"
+          "phonetic": "náam ngoen",
+          "en": "blue (dark)"
         }
       ],
       "phrases": [
@@ -1820,7 +2053,8 @@
           "components": [
             "w_see_color",
             "w_daeng"
-          ]
+          ],
+          "en": "the color red"
         },
         {
           "id": "p_want_black",
@@ -1832,7 +2066,8 @@
             "w_dai",
             "w_see_color",
             "w_dam"
-          ]
+          ],
+          "en": "I want black"
         },
         {
           "id": "p_what_color",
@@ -1842,7 +2077,8 @@
           "components": [
             "w_see_color",
             "w_arai"
-          ]
+          ],
+          "en": "what color?"
         },
         {
           "id": "p_white_shirt",
@@ -1852,7 +2088,8 @@
           "components": [
             "w_see_color",
             "w_khao_color"
-          ]
+          ],
+          "en": "white color"
         },
         {
           "id": "p_blue_pen",
@@ -1862,7 +2099,8 @@
           "components": [
             "w_see_color",
             "w_nam_ngoen"
-          ]
+          ],
+          "en": "blue"
         },
         {
           "id": "p_want_red",
@@ -1874,9 +2112,12 @@
             "w_dai",
             "w_see_color",
             "w_daeng"
-          ]
+          ],
+          "en": "I want red"
         }
-      ]
+      ],
+      "titleEn": "Colors",
+      "descriptionEn": "Red, blue, white, black..."
     },
     {
       "id": "lesson-18",
@@ -1887,25 +2128,29 @@
           "id": "w_baan",
           "th": "บ้าน",
           "fr": "maison",
-          "phonetic": "bâan"
+          "phonetic": "bâan",
+          "en": "House"
         },
         {
           "id": "w_hong",
           "th": "ห้อง",
           "fr": "pièce / salle",
-          "phonetic": "hɔ̂ng"
+          "phonetic": "hɔ̂ng",
+          "en": "room / room"
         },
         {
           "id": "w_non",
           "th": "นอน",
           "fr": "dormir",
-          "phonetic": "nɔɔn"
+          "phonetic": "nɔɔn",
+          "en": "sleep"
         },
         {
           "id": "w_hong_nam",
           "th": "ห้องน้ำ",
           "fr": "toilettes / salle de bain",
-          "phonetic": "hɔ̂ng náam"
+          "phonetic": "hɔ̂ng náam",
+          "en": "toilet / bathroom"
         }
       ],
       "phrases": [
@@ -1917,7 +2162,8 @@
           "components": [
             "w_pai",
             "w_baan"
-          ]
+          ],
+          "en": "go home"
         },
         {
           "id": "p_where_bathroom",
@@ -1927,7 +2173,8 @@
           "components": [
             "w_hong_nam",
             "w_thi_nai"
-          ]
+          ],
+          "en": "Where is the restroom ?"
         },
         {
           "id": "p_want_sleep",
@@ -1937,7 +2184,8 @@
           "components": [
             "w_yak",
             "w_non"
-          ]
+          ],
+          "en": "I want to sleep"
         },
         {
           "id": "p_big_house",
@@ -1947,7 +2195,8 @@
           "components": [
             "w_baan",
             "w_yai"
-          ]
+          ],
+          "en": "big house"
         },
         {
           "id": "p_sleep_room",
@@ -1957,7 +2206,8 @@
           "components": [
             "w_hong",
             "w_non"
-          ]
+          ],
+          "en": "bedroom"
         },
         {
           "id": "p_where_sleep",
@@ -1967,9 +2217,12 @@
           "components": [
             "w_non",
             "w_thi_nai"
-          ]
+          ],
+          "en": "where do you sleep?"
         }
-      ]
+      ],
+      "titleEn": "Home & Daily",
+      "descriptionEn": "Bedroom, sleep, water"
     },
     {
       "id": "lesson-19",
@@ -1977,7 +2230,9 @@
       "description": "Révision de l'unité 2 (30 questions)",
       "isReview": true,
       "words": [],
-      "phrases": []
+      "phrases": [],
+      "titleEn": "Unit 2 assessment",
+      "descriptionEn": "Unit 2 review (30 questions)"
     },
     {
       "id": "lesson-20",
@@ -1988,25 +2243,29 @@
           "id": "w_kai",
           "th": "ไก่",
           "fr": "poulet",
-          "phonetic": "kài"
+          "phonetic": "kài",
+          "en": "chicken"
         },
         {
           "id": "w_moo",
           "th": "หมู",
           "fr": "porc",
-          "phonetic": "mǔu"
+          "phonetic": "mǔu",
+          "en": "pork"
         },
         {
           "id": "w_pla",
           "th": "ปลา",
           "fr": "poisson",
-          "phonetic": "bplaa"
+          "phonetic": "bplaa",
+          "en": "fish"
         },
         {
           "id": "w_nuea",
           "th": "เนื้อ",
           "fr": "viande / boeuf",
-          "phonetic": "núea"
+          "phonetic": "núea",
+          "en": "meat/beef"
         }
       ],
       "phrases": [
@@ -2018,7 +2277,8 @@
           "components": [
             "w_kin",
             "w_kai"
-          ]
+          ],
+          "en": "eat chicken"
         },
         {
           "id": "p_want_fish",
@@ -2029,7 +2289,8 @@
             "w_yak",
             "w_kin",
             "w_pla"
-          ]
+          ],
+          "en": "I want to eat fish"
         },
         {
           "id": "p_pork_delicious",
@@ -2039,7 +2300,8 @@
           "components": [
             "w_moo",
             "w_aroi"
-          ]
+          ],
+          "en": "the pork is delicious"
         },
         {
           "id": "p_want_beef",
@@ -2049,7 +2311,8 @@
           "components": [
             "w_ao",
             "w_nuea"
-          ]
+          ],
+          "en": "I have beef"
         },
         {
           "id": "p_not_eat_meat",
@@ -2060,7 +2323,8 @@
             "w_mai_neg",
             "w_kin",
             "w_nuea"
-          ]
+          ],
+          "en": "I don't eat meat"
         },
         {
           "id": "p_fish_water",
@@ -2070,9 +2334,12 @@
           "components": [
             "w_pla",
             "w_nam"
-          ]
+          ],
+          "en": "fish in water"
         }
-      ]
+      ],
+      "titleEn": "On the Menu: Meats",
+      "descriptionEn": "Chicken, pork, fish"
     },
     {
       "id": "lesson-21",
@@ -2083,25 +2350,29 @@
           "id": "w_kafae",
           "th": "กาแฟ",
           "fr": "café",
-          "phonetic": "kaa-fae"
+          "phonetic": "kaa-fae",
+          "en": "coffee"
         },
         {
           "id": "w_cha",
           "th": "ชา",
           "fr": "thé",
-          "phonetic": "chaa"
+          "phonetic": "chaa",
+          "en": "tea"
         },
         {
           "id": "w_bia",
           "th": "เบียร์",
           "fr": "bière",
-          "phonetic": "bia"
+          "phonetic": "bia",
+          "en": "beer"
         },
         {
           "id": "w_duem",
           "th": "ดื่ม",
           "fr": "boire",
-          "phonetic": "dùuem"
+          "phonetic": "dùuem",
+          "en": "drink"
         }
       ],
       "phrases": [
@@ -2113,7 +2384,8 @@
           "components": [
             "w_duem",
             "w_nam"
-          ]
+          ],
+          "en": "drink water"
         },
         {
           "id": "p_want_coffee_m",
@@ -2124,7 +2396,8 @@
             "w_ao",
             "w_kafae",
             "w_krap"
-          ]
+          ],
+          "en": "I have a coffee (man)"
         },
         {
           "id": "p_want_tea_f",
@@ -2135,7 +2408,8 @@
             "w_ao",
             "w_cha",
             "w_kha"
-          ]
+          ],
+          "en": "I have tea (woman)"
         },
         {
           "id": "p_drink_beer",
@@ -2145,7 +2419,8 @@
           "components": [
             "w_duem",
             "w_bia"
-          ]
+          ],
+          "en": "drink beer"
         },
         {
           "id": "p_no_beer",
@@ -2156,7 +2431,8 @@
             "w_mai_neg",
             "w_duem",
             "w_bia"
-          ]
+          ],
+          "en": "I don't drink beer"
         },
         {
           "id": "p_coffee_water",
@@ -2166,9 +2442,12 @@
           "components": [
             "w_kafae",
             "w_nam"
-          ]
+          ],
+          "en": "coffee and water"
         }
-      ]
+      ],
+      "titleEn": "Drinks and Thirst",
+      "descriptionEn": "Coffee, tea, drink"
     },
     {
       "id": "lesson-22",
@@ -2179,19 +2458,22 @@
           "id": "w_waan",
           "th": "หวาน",
           "fr": "sucré",
-          "phonetic": "wǎan"
+          "phonetic": "wǎan",
+          "en": "sugar"
         },
         {
           "id": "w_khem",
           "th": "เค็ม",
           "fr": "salé",
-          "phonetic": "khem"
+          "phonetic": "khem",
+          "en": "dirty"
         },
         {
           "id": "w_priao",
           "th": "เปรี้ยว",
           "fr": "aigre / acide",
-          "phonetic": "bprîiao"
+          "phonetic": "bprîiao",
+          "en": "sour/acid"
         }
       ],
       "phrases": [
@@ -2203,7 +2485,8 @@
           "components": [
             "w_waan",
             "w_mak"
-          ]
+          ],
+          "en": "very sweet"
         },
         {
           "id": "p_not_spicy",
@@ -2213,7 +2496,8 @@
           "components": [
             "w_mai_neg",
             "w_phet"
-          ]
+          ],
+          "en": "not spicy"
         },
         {
           "id": "p_salty",
@@ -2223,7 +2507,8 @@
           "components": [
             "w_khem",
             "w_mak"
-          ]
+          ],
+          "en": "very salty"
         },
         {
           "id": "p_sour",
@@ -2233,7 +2518,8 @@
           "components": [
             "w_priao",
             "w_mak"
-          ]
+          ],
+          "en": "very acidic"
         },
         {
           "id": "p_not_sweet",
@@ -2243,7 +2529,8 @@
           "components": [
             "w_mai_neg",
             "w_waan"
-          ]
+          ],
+          "en": "not sweet"
         },
         {
           "id": "p_delicious_sweet",
@@ -2253,9 +2540,12 @@
           "components": [
             "w_waan",
             "w_aroi"
-          ]
+          ],
+          "en": "sweet and delicious"
         }
-      ]
+      ],
+      "titleEn": "Flavors",
+      "descriptionEn": "Sweet, salty, spicy"
     },
     {
       "id": "lesson-23",
@@ -2266,19 +2556,22 @@
           "id": "w_gep_ngoen",
           "th": "เก็บเงิน",
           "fr": "l'addition",
-          "phonetic": "gèp ngoen"
+          "phonetic": "gèp ngoen",
+          "en": "the addition"
         },
         {
           "id": "w_hiw",
           "th": "หิว",
           "fr": "avoir faim",
-          "phonetic": "hǐw"
+          "phonetic": "hǐw",
+          "en": "to be hungry"
         },
         {
           "id": "w_im",
           "th": "อิ่ม",
           "fr": "rassasié / plein",
-          "phonetic": "ìm"
+          "phonetic": "ìm",
+          "en": "satisfied / full"
         }
       ],
       "phrases": [
@@ -2290,7 +2583,8 @@
           "components": [
             "w_gep_ngoen",
             "w_krap"
-          ]
+          ],
+          "en": "The check, please"
         },
         {
           "id": "p_very_hungry",
@@ -2300,7 +2594,8 @@
           "components": [
             "w_hiw",
             "w_mak"
-          ]
+          ],
+          "en": "I'm very hungry"
         },
         {
           "id": "p_bill_please_f",
@@ -2310,7 +2605,8 @@
           "components": [
             "w_gep_ngoen",
             "w_kha"
-          ]
+          ],
+          "en": "the bill please (woman)"
         },
         {
           "id": "p_full",
@@ -2320,7 +2616,8 @@
           "components": [
             "w_im",
             "w_laew"
-          ]
+          ],
+          "en": "I am full"
         },
         {
           "id": "p_full_m",
@@ -2331,7 +2628,8 @@
             "w_im",
             "w_laew",
             "w_krap"
-          ]
+          ],
+          "en": "I'm full (man)"
         },
         {
           "id": "p_full_f",
@@ -2342,9 +2640,12 @@
             "w_im",
             "w_laew",
             "w_kha"
-          ]
+          ],
+          "en": "I am full (woman)"
         }
-      ]
+      ],
+      "titleEn": "The Service",
+      "descriptionEn": "Hunger, addition"
     },
     {
       "id": "lesson-24",
@@ -2352,7 +2653,9 @@
       "description": "Test sur la nourriture",
       "isReview": true,
       "words": [],
-      "phrases": []
+      "phrases": [],
+      "titleEn": "Unit 3 Assessment",
+      "descriptionEn": "Food test"
     },
     {
       "id": "lesson-25",
@@ -2363,25 +2666,29 @@
           "id": "w_doo",
           "th": "ดู",
           "fr": "regarder",
-          "phonetic": "duu"
+          "phonetic": "duu",
+          "en": "look"
         },
         {
           "id": "w_fang",
           "th": "ฟัง",
           "fr": "écouter",
-          "phonetic": "fang"
+          "phonetic": "fang",
+          "en": "listen"
         },
         {
           "id": "w_doen",
           "th": "เดิน",
           "fr": "marcher",
-          "phonetic": "doen"
+          "phonetic": "doen",
+          "en": "to walk"
         },
         {
           "id": "w_nang",
           "th": "หนัง",
           "fr": "film",
-          "phonetic": "nâng"
+          "phonetic": "nâng",
+          "en": "movie"
         }
       ],
       "phrases": [
@@ -2393,7 +2700,8 @@
           "components": [
             "w_doo",
             "w_nang"
-          ]
+          ],
+          "en": "watch a movie"
         },
         {
           "id": "p_listen_me",
@@ -2403,7 +2711,8 @@
           "components": [
             "w_fang",
             "w_phom"
-          ]
+          ],
+          "en": "listen to me"
         },
         {
           "id": "p_walk_where",
@@ -2414,7 +2723,8 @@
             "w_doen",
             "w_pai",
             "w_thi_nai"
-          ]
+          ],
+          "en": "where are you walking?"
         },
         {
           "id": "p_look_this",
@@ -2424,7 +2734,8 @@
           "components": [
             "w_doo",
             "w_nee"
-          ]
+          ],
+          "en": "look at this"
         },
         {
           "id": "p_watch_film_f",
@@ -2435,9 +2746,12 @@
             "w_doo",
             "w_nang",
             "w_kha"
-          ]
+          ],
+          "en": "I'm watching a movie (woman)"
         }
-      ]
+      ],
+      "titleEn": "Action verbs 1",
+      "descriptionEn": "Watch, listen, walk"
     },
     {
       "id": "lesson-26",
@@ -2448,19 +2762,22 @@
           "id": "w_tham_ngan",
           "th": "ทำงาน",
           "fr": "travailler",
-          "phonetic": "tham-ngaan"
+          "phonetic": "tham-ngaan",
+          "en": "to work"
         },
         {
           "id": "w_len",
           "th": "เล่น",
           "fr": "jouer",
-          "phonetic": "lên"
+          "phonetic": "lên",
+          "en": "play"
         },
         {
           "id": "w_kreng",
           "th": "เก่ง",
           "fr": "doué / bien",
-          "phonetic": "gèng"
+          "phonetic": "gèng",
+          "en": "gifted / good"
         }
       ],
       "phrases": [
@@ -2472,7 +2789,8 @@
           "components": [
             "w_len",
             "w_kreng"
-          ]
+          ],
+          "en": "play well"
         },
         {
           "id": "p_go_work",
@@ -2482,7 +2800,8 @@
           "components": [
             "w_pai",
             "w_tham_ngan"
-          ]
+          ],
+          "en": "go to work"
         },
         {
           "id": "p_work_much",
@@ -2492,7 +2811,8 @@
           "components": [
             "w_tham_ngan",
             "w_mak"
-          ]
+          ],
+          "en": "work a lot"
         },
         {
           "id": "p_play_what",
@@ -2502,7 +2822,8 @@
           "components": [
             "w_len",
             "w_arai"
-          ]
+          ],
+          "en": "what are you playing?"
         },
         {
           "id": "p_very_good",
@@ -2512,7 +2833,8 @@
           "components": [
             "w_kreng",
             "w_mak"
-          ]
+          ],
+          "en": "very gifted"
         },
         {
           "id": "p_not_work",
@@ -2522,9 +2844,12 @@
           "components": [
             "w_mai_neg",
             "w_tham_ngan"
-          ]
+          ],
+          "en": "I don't work"
         }
-      ]
+      ],
+      "titleEn": "Action verbs 2",
+      "descriptionEn": "Work, sleep, play"
     },
     {
       "id": "lesson-27",
@@ -2535,25 +2860,29 @@
           "id": "w_rian",
           "th": "เรียน",
           "fr": "apprendre",
-          "phonetic": "riian"
+          "phonetic": "riian",
+          "en": "learn"
         },
         {
           "id": "w_aan",
           "th": "อ่าน",
           "fr": "lire",
-          "phonetic": "àan"
+          "phonetic": "àan",
+          "en": "read"
         },
         {
           "id": "w_khian",
           "th": "เขียน",
           "fr": "écrire",
-          "phonetic": "khǐian"
+          "phonetic": "khǐian",
+          "en": "to write"
         },
         {
           "id": "w_nangsue",
           "th": "หนังสือ",
           "fr": "livre",
-          "phonetic": "nǎng-sǔue"
+          "phonetic": "nǎng-sǔue",
+          "en": "book"
         }
       ],
       "phrases": [
@@ -2565,7 +2894,8 @@
           "components": [
             "w_aan",
             "w_nangsue"
-          ]
+          ],
+          "en": "read a book"
         },
         {
           "id": "p_learn_thai",
@@ -2574,7 +2904,8 @@
           "phonetic": "riian phaa-sǎa thai",
           "components": [
             "w_rian"
-          ]
+          ],
+          "en": "learn Thai"
         },
         {
           "id": "p_learn_much",
@@ -2584,7 +2915,8 @@
           "components": [
             "w_rian",
             "w_mak"
-          ]
+          ],
+          "en": "learn a lot"
         },
         {
           "id": "p_write_book",
@@ -2594,7 +2926,8 @@
           "components": [
             "w_khian",
             "w_nangsue"
-          ]
+          ],
+          "en": "write a book"
         },
         {
           "id": "p_read_good",
@@ -2604,7 +2937,8 @@
           "components": [
             "w_aan",
             "w_kreng"
-          ]
+          ],
+          "en": "read well (gifted)"
         },
         {
           "id": "p_what_book",
@@ -2614,9 +2948,12 @@
           "components": [
             "w_nangsue",
             "w_arai"
-          ]
+          ],
+          "en": "what book?"
         }
-      ]
+      ],
+      "titleEn": "Learning",
+      "descriptionEn": "Learn, read, write"
     },
     {
       "id": "lesson-28",
@@ -2627,19 +2964,22 @@
           "id": "w_khai",
           "th": "ขาย",
           "fr": "vendre",
-          "phonetic": "khǎai"
+          "phonetic": "khǎai",
+          "en": "sell"
         },
         {
           "id": "w_hai",
           "th": "ให้",
           "fr": "donner",
-          "phonetic": "hâi"
+          "phonetic": "hâi",
+          "en": "give"
         },
         {
           "id": "w_ngoen",
           "th": "เงิน",
           "fr": "argent",
-          "phonetic": "ngoen"
+          "phonetic": "ngoen",
+          "en": "money"
         }
       ],
       "phrases": [
@@ -2652,7 +2992,8 @@
             "w_mee",
             "w_ngoen",
             "w_mai"
-          ]
+          ],
+          "en": "do you have money?"
         },
         {
           "id": "p_sell_what",
@@ -2662,7 +3003,8 @@
           "components": [
             "w_khai",
             "w_arai"
-          ]
+          ],
+          "en": "what are you selling?"
         },
         {
           "id": "p_give_money",
@@ -2672,7 +3014,8 @@
           "components": [
             "w_hai",
             "w_ngoen"
-          ]
+          ],
+          "en": "give money"
         },
         {
           "id": "p_want_sell",
@@ -2682,7 +3025,8 @@
           "components": [
             "w_yak",
             "w_khai"
-          ]
+          ],
+          "en": "I want to sell"
         },
         {
           "id": "p_no_money",
@@ -2693,9 +3037,12 @@
             "w_mai_neg",
             "w_mee",
             "w_ngoen"
-          ]
+          ],
+          "en": "I have no money"
         }
-      ]
+      ],
+      "titleEn": "Trade",
+      "descriptionEn": "Sell, give, money"
     },
     {
       "id": "lesson-29",
@@ -2703,7 +3050,9 @@
       "description": "Test sur les actions",
       "isReview": true,
       "words": [],
-      "phrases": []
+      "phrases": [],
+      "titleEn": "Unit 4 Assessment",
+      "descriptionEn": "Stock test"
     },
     {
       "id": "lesson-30",
@@ -2714,19 +3063,22 @@
           "id": "w_chao",
           "th": "เช้า",
           "fr": "matin",
-          "phonetic": "cháao"
+          "phonetic": "cháao",
+          "en": "Morning"
         },
         {
           "id": "w_yen",
           "th": "เย็น",
           "fr": "soir",
-          "phonetic": "yen"
+          "phonetic": "yen",
+          "en": "evening"
         },
         {
           "id": "w_khuen",
           "th": "คืน",
           "fr": "nuit",
-          "phonetic": "kheun"
+          "phonetic": "kheun",
+          "en": "night"
         }
       ],
       "phrases": [
@@ -2738,7 +3090,8 @@
           "components": [
             "w_chao",
             "w_nee"
-          ]
+          ],
+          "en": "This morning"
         },
         {
           "id": "p_work_morning",
@@ -2749,7 +3102,8 @@
             "w_tham_ngan",
             "w_chao",
             "w_nee"
-          ]
+          ],
+          "en": "work this morning"
         },
         {
           "id": "p_eat_evening",
@@ -2760,7 +3114,8 @@
             "w_kin",
             "w_khao",
             "w_yen"
-          ]
+          ],
+          "en": "eat in the evening"
         },
         {
           "id": "p_sleep_night",
@@ -2771,7 +3126,8 @@
             "w_non",
             "w_khuen",
             "w_nee"
-          ]
+          ],
+          "en": "sleep tonight"
         },
         {
           "id": "p_good_evening",
@@ -2781,9 +3137,12 @@
           "components": [
             "w_sawatdee",
             "w_yen"
-          ]
+          ],
+          "en": "Good evening"
         }
-      ]
+      ],
+      "titleEn": "Times of the day",
+      "descriptionEn": "Morning, Evening, Night"
     },
     {
       "id": "lesson-31",
@@ -2794,19 +3153,22 @@
           "id": "w_fon",
           "th": "ฝน",
           "fr": "pluie",
-          "phonetic": "fǒn"
+          "phonetic": "fǒn",
+          "en": "rain"
         },
         {
           "id": "w_tok",
           "th": "ตก",
           "fr": "tomber",
-          "phonetic": "dtòk"
+          "phonetic": "dtòk",
+          "en": "to fall"
         },
         {
           "id": "w_daet",
           "th": "แดด",
           "fr": "soleil (rayons)",
-          "phonetic": "dàet"
+          "phonetic": "dàet",
+          "en": "sun (rays)"
         }
       ],
       "phrases": [
@@ -2818,7 +3180,8 @@
           "components": [
             "w_fon",
             "w_tok"
-          ]
+          ],
+          "en": "it's raining"
         },
         {
           "id": "p_hot_sun",
@@ -2828,7 +3191,8 @@
           "components": [
             "w_daet",
             "w_ron"
-          ]
+          ],
+          "en": "the sun is hot"
         },
         {
           "id": "p_rain_much",
@@ -2839,7 +3203,8 @@
             "w_fon",
             "w_tok",
             "w_mak"
-          ]
+          ],
+          "en": "it rains a lot"
         },
         {
           "id": "p_no_rain",
@@ -2850,7 +3215,8 @@
             "w_fon",
             "w_mai_neg",
             "w_tok"
-          ]
+          ],
+          "en": "it's not raining"
         },
         {
           "id": "p_sun_out",
@@ -2860,9 +3226,12 @@
           "components": [
             "w_mee",
             "w_daet"
-          ]
+          ],
+          "en": "there is sun"
         }
-      ]
+      ],
+      "titleEn": "Basic weather",
+      "descriptionEn": "Rain, Sun"
     },
     {
       "id": "lesson-32",
@@ -2873,19 +3242,22 @@
           "id": "w_lom",
           "th": "ลม",
           "fr": "vent",
-          "phonetic": "lom"
+          "phonetic": "lom",
+          "en": "wind"
         },
         {
           "id": "w_ron",
           "th": "ร้อน",
           "fr": "chaud",
-          "phonetic": "rɔ́ɔn"
+          "phonetic": "rɔ́ɔn",
+          "en": "hot"
         },
         {
           "id": "w_naow",
           "th": "หนาว",
           "fr": "froid",
-          "phonetic": "nǎao"
+          "phonetic": "nǎao",
+          "en": "cold"
         }
       ],
       "phrases": [
@@ -2897,7 +3269,8 @@
           "components": [
             "w_naow",
             "w_mak"
-          ]
+          ],
+          "en": "it's very cold"
         },
         {
           "id": "p_wind_strong",
@@ -2907,7 +3280,8 @@
           "components": [
             "w_lom",
             "w_mak"
-          ]
+          ],
+          "en": "lots of wind"
         },
         {
           "id": "p_cold_wind",
@@ -2917,7 +3291,8 @@
           "components": [
             "w_lom",
             "w_naow"
-          ]
+          ],
+          "en": "cold wind"
         },
         {
           "id": "p_hot_not_cold",
@@ -2928,7 +3303,8 @@
             "w_ron",
             "w_mai_neg",
             "w_naow"
-          ]
+          ],
+          "en": "warm, not cold"
         },
         {
           "id": "p_weather_good",
@@ -2937,9 +3313,12 @@
           "phonetic": "aa-gàat dii",
           "components": [
             "w_dee"
-          ]
+          ],
+          "en": "the weather is nice"
         }
-      ]
+      ],
+      "titleEn": "Temperatures",
+      "descriptionEn": "Hot, cold, air"
     },
     {
       "id": "lesson-33",
@@ -2950,19 +3329,22 @@
           "id": "w_muearai",
           "th": "เมื่อไหร่",
           "fr": "quand ?",
-          "phonetic": "mûea-rài"
+          "phonetic": "mûea-rài",
+          "en": "When ?"
         },
         {
           "id": "w_ki",
           "th": "กี่",
           "fr": "combien de",
-          "phonetic": "ki"
+          "phonetic": "ki",
+          "en": "how many"
         },
         {
           "id": "w_mong",
           "th": "โมง",
           "fr": "heure",
-          "phonetic": "moong"
+          "phonetic": "moong",
+          "en": "hour"
         }
       ],
       "phrases": [
@@ -2974,7 +3356,8 @@
           "components": [
             "w_ki",
             "w_mong"
-          ]
+          ],
+          "en": "what time ?"
         },
         {
           "id": "p_go_when",
@@ -2984,7 +3367,8 @@
           "components": [
             "w_pai",
             "w_muearai"
-          ]
+          ],
+          "en": "When are you going there?"
         },
         {
           "id": "p_what_time_go",
@@ -2995,7 +3379,8 @@
             "w_pai",
             "w_ki",
             "w_mong"
-          ]
+          ],
+          "en": "What time are you going there?"
         },
         {
           "id": "p_eat_when",
@@ -3005,7 +3390,8 @@
           "components": [
             "w_kin",
             "w_muearai"
-          ]
+          ],
+          "en": "When do you eat?"
         },
         {
           "id": "p_five_oclock",
@@ -3015,7 +3401,8 @@
           "components": [
             "w_5",
             "w_mong"
-          ]
+          ],
+          "en": "five o'clock"
         },
         {
           "id": "p_arrive_when",
@@ -3025,9 +3412,12 @@
           "components": [
             "w_ma",
             "w_muearai"
-          ]
+          ],
+          "en": "when are you arriving?"
         }
-      ]
+      ],
+      "titleEn": "Time matters",
+      "descriptionEn": "When ?"
     },
     {
       "id": "lesson-34",
@@ -3035,7 +3425,9 @@
       "description": "Test Temps et Météo",
       "isReview": true,
       "words": [],
-      "phrases": []
+      "phrases": [],
+      "titleEn": "Unit 5 Assessment",
+      "descriptionEn": "Time and Weather Test"
     },
     {
       "id": "lesson-35",
@@ -3046,13 +3438,15 @@
           "id": "w_rong_raem",
           "th": "โรงแรม",
           "fr": "hôtel",
-          "phonetic": "roong-raem"
+          "phonetic": "roong-raem",
+          "en": "hotel"
         },
         {
           "id": "w_rong_rian",
           "th": "โรงเรียน",
           "fr": "école",
-          "phonetic": "roong-riian"
+          "phonetic": "roong-riian",
+          "en": "school"
         }
       ],
       "phrases": [
@@ -3064,7 +3458,8 @@
           "components": [
             "w_rong_raem",
             "w_thi_nai"
-          ]
+          ],
+          "en": "where is the hotel?"
         },
         {
           "id": "p_go_school",
@@ -3074,7 +3469,8 @@
           "components": [
             "w_pai",
             "w_rong_rian"
-          ]
+          ],
+          "en": "go to school"
         },
         {
           "id": "p_school_big",
@@ -3084,7 +3480,8 @@
           "components": [
             "w_rong_rian",
             "w_yai"
-          ]
+          ],
+          "en": "big school"
         },
         {
           "id": "p_hotel_good",
@@ -3094,7 +3491,8 @@
           "components": [
             "w_rong_raem",
             "w_dee"
-          ]
+          ],
+          "en": "good hotel"
         },
         {
           "id": "p_which_hotel",
@@ -3104,9 +3502,12 @@
           "components": [
             "w_rong_raem",
             "w_arai"
-          ]
+          ],
+          "en": "which hotel?"
         }
-      ]
+      ],
+      "titleEn": "Places 1",
+      "descriptionEn": "Hotel, school"
     },
     {
       "id": "lesson-36",
@@ -3117,19 +3518,22 @@
           "id": "w_talat",
           "th": "ตลาด",
           "fr": "marché",
-          "phonetic": "dtà-làat"
+          "phonetic": "dtà-làat",
+          "en": "walk"
         },
         {
           "id": "w_thanon",
           "th": "ถนน",
           "fr": "rue",
-          "phonetic": "thà-nǒn"
+          "phonetic": "thà-nǒn",
+          "en": "Street"
         },
         {
           "id": "w_suan",
           "th": "สวน",
           "fr": "parc",
-          "phonetic": "sǔuan"
+          "phonetic": "sǔuan",
+          "en": "park"
         }
       ],
       "phrases": [
@@ -3141,7 +3545,8 @@
           "components": [
             "w_pai",
             "w_talat"
-          ]
+          ],
+          "en": "go to the market"
         },
         {
           "id": "p_big_market",
@@ -3151,7 +3556,8 @@
           "components": [
             "w_talat",
             "w_yai"
-          ]
+          ],
+          "en": "big market"
         },
         {
           "id": "p_park_beautiful",
@@ -3161,7 +3567,8 @@
           "components": [
             "w_suan",
             "w_suay"
-          ]
+          ],
+          "en": "beautiful park"
         },
         {
           "id": "p_where_street",
@@ -3171,7 +3578,8 @@
           "components": [
             "w_thanon",
             "w_thi_nai"
-          ]
+          ],
+          "en": "where is the street?"
         },
         {
           "id": "p_go_park",
@@ -3181,9 +3589,12 @@
           "components": [
             "w_pai",
             "w_suan"
-          ]
+          ],
+          "en": "go to the park"
         }
-      ]
+      ],
+      "titleEn": "Locations 2",
+      "descriptionEn": "Market, street"
     },
     {
       "id": "lesson-37",
@@ -3194,19 +3605,22 @@
           "id": "w_rot_me",
           "th": "รถเมล์",
           "fr": "bus",
-          "phonetic": "rót-mee"
+          "phonetic": "rót-mee",
+          "en": "bus"
         },
         {
           "id": "w_ruea",
           "th": "เรือ",
           "fr": "bateau",
-          "phonetic": "ruea"
+          "phonetic": "ruea",
+          "en": "boat"
         },
         {
           "id": "w_nang_v",
           "th": "นั่ง",
           "fr": "s'asseoir / prendre (bus)",
-          "phonetic": "nâng"
+          "phonetic": "nâng",
+          "en": "sit / take (bus)"
         }
       ],
       "phrases": [
@@ -3218,7 +3632,8 @@
           "components": [
             "w_nang_v",
             "w_rot_me"
-          ]
+          ],
+          "en": "take the bus"
         },
         {
           "id": "p_take_boat",
@@ -3228,7 +3643,8 @@
           "components": [
             "w_nang_v",
             "w_ruea"
-          ]
+          ],
+          "en": "take a boat"
         },
         {
           "id": "p_where_bus",
@@ -3238,7 +3654,8 @@
           "components": [
             "w_rot_me",
             "w_thi_nai"
-          ]
+          ],
+          "en": "where is the bus?"
         },
         {
           "id": "p_sit_here",
@@ -3248,7 +3665,8 @@
           "components": [
             "w_nang_v",
             "w_thi_nai"
-          ]
+          ],
+          "en": "sit here"
         },
         {
           "id": "p_boat_big",
@@ -3258,9 +3676,12 @@
           "components": [
             "w_ruea",
             "w_yai"
-          ]
+          ],
+          "en": "big boat"
         }
-      ]
+      ],
+      "titleEn": "Public transport",
+      "descriptionEn": "Bus, boat"
     },
     {
       "id": "lesson-38",
@@ -3271,19 +3692,22 @@
           "id": "w_kruang_bin",
           "th": "เครื่องบิน",
           "fr": "avion",
-          "phonetic": "khrûeang-bin"
+          "phonetic": "khrûeang-bin",
+          "en": "plane"
         },
         {
           "id": "w_bin",
           "th": "บิน",
           "fr": "voler",
-          "phonetic": "bin"
+          "phonetic": "bin",
+          "en": "fly"
         },
         {
           "id": "w_tua",
           "th": "ตั๋ว",
           "fr": "billet / ticket",
-          "phonetic": "dtǔua"
+          "phonetic": "dtǔua",
+          "en": "ticket / ticket"
         }
       ],
       "phrases": [
@@ -3295,7 +3719,8 @@
           "components": [
             "w_tua",
             "w_kruang_bin"
-          ]
+          ],
+          "en": "plane ticket"
         },
         {
           "id": "p_fly_airplane",
@@ -3305,7 +3730,8 @@
           "components": [
             "w_bin",
             "w_pai"
-          ]
+          ],
+          "en": "fly away"
         },
         {
           "id": "p_buy_ticket",
@@ -3315,7 +3741,8 @@
           "components": [
             "w_sue",
             "w_tua"
-          ]
+          ],
+          "en": "buy a ticket"
         },
         {
           "id": "p_ticket_expensive",
@@ -3325,7 +3752,8 @@
           "components": [
             "w_tua",
             "w_phaeng"
-          ]
+          ],
+          "en": "the ticket is expensive"
         },
         {
           "id": "p_airplane_big",
@@ -3335,9 +3763,12 @@
           "components": [
             "w_kruang_bin",
             "w_yai"
-          ]
+          ],
+          "en": "large plane"
         }
-      ]
+      ],
+      "titleEn": "Aviation",
+      "descriptionEn": "Airplane, fly"
     },
     {
       "id": "lesson-39",
@@ -3345,7 +3776,9 @@
       "description": "Test Lieux et Trajets",
       "isReview": true,
       "words": [],
-      "phrases": []
+      "phrases": [],
+      "titleEn": "Unit 6 Assessment",
+      "descriptionEn": "Places and Routes Test"
     },
     {
       "id": "lesson-40",
@@ -3356,19 +3789,22 @@
           "id": "w_suea",
           "th": "เสื้อ",
           "fr": "chemise / haut",
-          "phonetic": "sûea"
+          "phonetic": "sûea",
+          "en": "shirt / top"
         },
         {
           "id": "w_kangkeng",
           "th": "กางเกง",
           "fr": "pantalon",
-          "phonetic": "gaang-geeng"
+          "phonetic": "gaang-geeng",
+          "en": "pants"
         },
         {
           "id": "w_rong_thao",
           "th": "รองเท้า",
           "fr": "chaussures",
-          "phonetic": "rɔɔng-tháao"
+          "phonetic": "rɔɔng-tháao",
+          "en": "shoes"
         }
       ],
       "phrases": [
@@ -3380,7 +3816,8 @@
           "components": [
             "w_sue",
             "w_suea"
-          ]
+          ],
+          "en": "buy a shirt"
         },
         {
           "id": "p_sell_pants",
@@ -3390,7 +3827,8 @@
           "components": [
             "w_khai",
             "w_kangkeng"
-          ]
+          ],
+          "en": "sell pants"
         },
         {
           "id": "p_want_shoes",
@@ -3401,7 +3839,8 @@
             "w_yak",
             "w_dai",
             "w_rong_thao"
-          ]
+          ],
+          "en": "I want shoes"
         },
         {
           "id": "p_shoes_beautiful",
@@ -3411,7 +3850,8 @@
           "components": [
             "w_rong_thao",
             "w_suay"
-          ]
+          ],
+          "en": "beautiful shoes"
         },
         {
           "id": "p_shirt_big",
@@ -3421,9 +3861,12 @@
           "components": [
             "w_suea",
             "w_yai"
-          ]
+          ],
+          "en": "wide shirt"
         }
-      ]
+      ],
+      "titleEn": "Clothes",
+      "descriptionEn": "Shirt, pants"
     },
     {
       "id": "lesson-41",
@@ -3434,19 +3877,22 @@
           "id": "w_khiao",
           "th": "เขียว",
           "fr": "vert",
-          "phonetic": "khǐiao"
+          "phonetic": "khǐiao",
+          "en": "Green"
         },
         {
           "id": "w_lueang",
           "th": "เหลือง",
           "fr": "jaune",
-          "phonetic": "lǔeang"
+          "phonetic": "lǔeang",
+          "en": "YELLOW"
         },
         {
           "id": "w_chomphu",
           "th": "ชมพู",
           "fr": "rose",
-          "phonetic": "chom-phuu"
+          "phonetic": "chom-phuu",
+          "en": "pink"
         }
       ],
       "phrases": [
@@ -3459,7 +3905,8 @@
             "w_suea",
             "w_see_color",
             "w_khiao"
-          ]
+          ],
+          "en": "green shirt"
         },
         {
           "id": "p_yellow_shirt",
@@ -3470,7 +3917,8 @@
             "w_suea",
             "w_see_color",
             "w_lueang"
-          ]
+          ],
+          "en": "yellow shirt"
         },
         {
           "id": "p_pink_shoes",
@@ -3481,7 +3929,8 @@
             "w_rong_thao",
             "w_see_color",
             "w_chomphu"
-          ]
+          ],
+          "en": "pink shoes"
         },
         {
           "id": "p_like_green",
@@ -3492,7 +3941,8 @@
             "w_chop",
             "w_see_color",
             "w_khiao"
-          ]
+          ],
+          "en": "I like green"
         },
         {
           "id": "p_pant_yellow",
@@ -3503,9 +3953,12 @@
             "w_kangkeng",
             "w_see_color",
             "w_lueang"
-          ]
+          ],
+          "en": "yellow pants"
         }
-      ]
+      ],
+      "titleEn": "Secondary colors",
+      "descriptionEn": "Green, yellow, pink"
     },
     {
       "id": "lesson-42",
@@ -3516,19 +3969,22 @@
           "id": "w_mai_new",
           "th": "ใหม่",
           "fr": "nouveau",
-          "phonetic": "mǎi"
+          "phonetic": "mǎi",
+          "en": "new"
         },
         {
           "id": "w_kao",
           "th": "เก่า",
           "fr": "vieux",
-          "phonetic": "kâao"
+          "phonetic": "kâao",
+          "en": "old"
         },
         {
           "id": "w_suay",
           "th": "สวย",
           "fr": "beau / joli",
-          "phonetic": "sǔuay"
+          "phonetic": "sǔuay",
+          "en": "beautiful / pretty"
         }
       ],
       "phrases": [
@@ -3540,7 +3996,8 @@
           "components": [
             "w_suay",
             "w_mak"
-          ]
+          ],
+          "en": "very beautiful"
         },
         {
           "id": "p_new_shirt",
@@ -3550,7 +4007,8 @@
           "components": [
             "w_suea",
             "w_mai_new"
-          ]
+          ],
+          "en": "new shirt"
         },
         {
           "id": "p_old_car",
@@ -3560,7 +4018,8 @@
           "components": [
             "w_rot",
             "w_kao"
-          ]
+          ],
+          "en": "old car"
         },
         {
           "id": "p_house_beautiful",
@@ -3570,7 +4029,8 @@
           "components": [
             "w_baan",
             "w_suay"
-          ]
+          ],
+          "en": "beautiful house"
         },
         {
           "id": "p_new_not_old",
@@ -3581,9 +4041,12 @@
             "w_mai_new",
             "w_mai_neg",
             "w_kao"
-          ]
+          ],
+          "en": "new, not old"
         }
-      ]
+      ],
+      "titleEn": "Description Objects",
+      "descriptionEn": "New, old"
     },
     {
       "id": "lesson-43",
@@ -3594,19 +4057,22 @@
           "id": "w_thuk",
           "th": "ถูก",
           "fr": "bon marché / correct",
-          "phonetic": "thùuk"
+          "phonetic": "thùuk",
+          "en": "cheap/ok"
         },
         {
           "id": "w_phaeng",
           "th": "แพง",
           "fr": "cher",
-          "phonetic": "phaeng"
+          "phonetic": "phaeng",
+          "en": "Dear"
         },
         {
           "id": "w_sai",
           "th": "ใส่",
           "fr": "mettre / porter",
-          "phonetic": "sáai"
+          "phonetic": "sáai",
+          "en": "put / wear"
         }
       ],
       "phrases": [
@@ -3618,7 +4084,8 @@
           "components": [
             "w_mai_neg",
             "w_phaeng"
-          ]
+          ],
+          "en": "it's not expensive"
         },
         {
           "id": "p_cheap_shirt",
@@ -3628,7 +4095,8 @@
           "components": [
             "w_suea",
             "w_thuk"
-          ]
+          ],
+          "en": "cheap shirt"
         },
         {
           "id": "p_expensive_shoes",
@@ -3638,7 +4106,8 @@
           "components": [
             "w_rong_thao",
             "w_phaeng"
-          ]
+          ],
+          "en": "expensive shoes"
         },
         {
           "id": "p_put_shirt",
@@ -3648,7 +4117,8 @@
           "components": [
             "w_sai",
             "w_suea"
-          ]
+          ],
+          "en": "put on a shirt"
         },
         {
           "id": "p_cheap_food",
@@ -3658,9 +4128,12 @@
           "components": [
             "w_khao",
             "w_thuk"
-          ]
+          ],
+          "en": "cheap rice (food)"
         }
-      ]
+      ],
+      "titleEn": "Prizes and Money",
+      "descriptionEn": "Cheap, expensive"
     },
     {
       "id": "lesson-44",
@@ -3668,7 +4141,9 @@
       "description": "Test Achats et Apparences",
       "isReview": true,
       "words": [],
-      "phrases": []
+      "phrases": [],
+      "titleEn": "Unit 7 Assessment",
+      "descriptionEn": "Purchases and Appearances Test"
     },
     {
       "id": "lesson-45",
@@ -3679,19 +4154,22 @@
           "id": "w_luk",
           "th": "ลูก",
           "fr": "enfant (son enfant)",
-          "phonetic": "lûuk"
+          "phonetic": "lûuk",
+          "en": "child (his child)"
         },
         {
           "id": "w_dek",
           "th": "เด็ก",
           "fr": "enfant (général)",
-          "phonetic": "dèk"
+          "phonetic": "dèk",
+          "en": "child (general)"
         },
         {
           "id": "w_phuean",
           "th": "เพื่อน",
           "fr": "ami",
-          "phonetic": "phûean"
+          "phonetic": "phûean",
+          "en": "friend"
         }
       ],
       "phrases": [
@@ -3703,7 +4181,8 @@
           "components": [
             "w_phuean",
             "w_phom"
-          ]
+          ],
+          "en": "my friend"
         },
         {
           "id": "p_four_friends",
@@ -3714,7 +4193,8 @@
             "w_phuean",
             "w_4",
             "w_khon"
-          ]
+          ],
+          "en": "four friends"
         },
         {
           "id": "p_one_child",
@@ -3725,7 +4205,8 @@
             "w_luk",
             "w_1",
             "w_khon"
-          ]
+          ],
+          "en": "a child"
         },
         {
           "id": "p_friend_eat",
@@ -3736,7 +4217,8 @@
             "w_phuean",
             "w_kin",
             "w_khao"
-          ]
+          ],
+          "en": "the friend eats"
         },
         {
           "id": "p_child_play",
@@ -3746,7 +4228,8 @@
           "components": [
             "w_dek",
             "w_len"
-          ]
+          ],
+          "en": "the child is playing"
         },
         {
           "id": "p_my_child",
@@ -3756,7 +4239,8 @@
           "components": [
             "w_luk",
             "w_phom"
-          ]
+          ],
+          "en": "my child"
         },
         {
           "id": "p_where_friend",
@@ -3766,9 +4250,12 @@
           "components": [
             "w_phuean",
             "w_thi_nai"
-          ]
+          ],
+          "en": "where is the friend?"
         }
-      ]
+      ],
+      "titleEn": "Close family",
+      "descriptionEn": "Children, brothers"
     },
     {
       "id": "lesson-46",
@@ -3779,19 +4266,22 @@
           "id": "w_ta",
           "th": "ตา",
           "fr": "oeil",
-          "phonetic": "dtaa"
+          "phonetic": "dtaa",
+          "en": "eye"
         },
         {
           "id": "w_pak",
           "th": "ปาก",
           "fr": "bouche",
-          "phonetic": "bpàak"
+          "phonetic": "bpàak",
+          "en": "mouth"
         },
         {
           "id": "w_mue",
           "th": "มือ",
           "fr": "main",
-          "phonetic": "muue"
+          "phonetic": "muue",
+          "en": "hand"
         }
       ],
       "phrases": [
@@ -3803,7 +4293,8 @@
           "components": [
             "w_jep",
             "w_mue"
-          ]
+          ],
+          "en": "my hand hurts"
         },
         {
           "id": "p_hurt_eye",
@@ -3813,7 +4304,8 @@
           "components": [
             "w_jep",
             "w_ta"
-          ]
+          ],
+          "en": "my eye hurts"
         },
         {
           "id": "p_red_mouth",
@@ -3823,7 +4315,8 @@
           "components": [
             "w_pak",
             "w_daeng"
-          ]
+          ],
+          "en": "red mouth"
         },
         {
           "id": "p_big_hand",
@@ -3833,7 +4326,8 @@
           "components": [
             "w_mue",
             "w_yai"
-          ]
+          ],
+          "en": "big hand"
         },
         {
           "id": "p_wash_hand",
@@ -3842,9 +4336,12 @@
           "phonetic": "láang muue",
           "components": [
             "w_mue"
-          ]
+          ],
+          "en": "wash your hands"
         }
-      ]
+      ],
+      "titleEn": "The body",
+      "descriptionEn": "Eye, mouth, hand"
     },
     {
       "id": "lesson-47",
@@ -3855,19 +4352,22 @@
           "id": "w_sung",
           "th": "สูง",
           "fr": "grand (taille)",
-          "phonetic": "sǔung"
+          "phonetic": "sǔung",
+          "en": "large (size)"
         },
         {
           "id": "w_tia",
           "th": "เตี้ย",
           "fr": "petit (taille)",
-          "phonetic": "dtîia"
+          "phonetic": "dtîia",
+          "en": "small (size)"
         },
         {
           "id": "w_uan",
           "th": "อ้วน",
           "fr": "gros",
-          "phonetic": "ûuan"
+          "phonetic": "ûuan",
+          "en": "fat"
         }
       ],
       "phrases": [
@@ -3879,7 +4379,8 @@
           "components": [
             "w_khao_pron",
             "w_sung"
-          ]
+          ],
+          "en": "he is big"
         },
         {
           "id": "p_she_short",
@@ -3889,7 +4390,8 @@
           "components": [
             "w_khao_pron",
             "w_tia"
-          ]
+          ],
+          "en": "she is small (size)"
         },
         {
           "id": "p_fat_cat",
@@ -3899,7 +4401,8 @@
           "components": [
             "w_khao_pron",
             "w_uan"
-          ]
+          ],
+          "en": "he is big"
         },
         {
           "id": "p_tall_friend",
@@ -3909,7 +4412,8 @@
           "components": [
             "w_phuean",
             "w_sung"
-          ]
+          ],
+          "en": "big friend"
         },
         {
           "id": "p_not_fat",
@@ -3919,9 +4423,12 @@
           "components": [
             "w_mai_neg",
             "w_uan"
-          ]
+          ],
+          "en": "not big"
         }
-      ]
+      ],
+      "titleEn": "Physical appearance",
+      "descriptionEn": "Big, small, big"
     },
     {
       "id": "lesson-48",
@@ -3932,19 +4439,22 @@
           "id": "w_jai_dee",
           "th": "ใจดี",
           "fr": "gentil",
-          "phonetic": "jai dii"
+          "phonetic": "jai dii",
+          "en": "kind"
         },
         {
           "id": "w_sanuk",
           "th": "สนุก",
           "fr": "amusant",
-          "phonetic": "sà-nùk"
+          "phonetic": "sà-nùk",
+          "en": "amusing"
         },
         {
           "id": "w_nak_rian",
           "th": "นักเรียน",
           "fr": "étudiant",
-          "phonetic": "nák-riian"
+          "phonetic": "nák-riian",
+          "en": "student"
         }
       ],
       "phrases": [
@@ -3956,7 +4466,8 @@
           "components": [
             "w_nak_rian",
             "w_kreng"
-          ]
+          ],
+          "en": "good student"
         },
         {
           "id": "p_kind_friend",
@@ -3966,7 +4477,8 @@
           "components": [
             "w_phuean",
             "w_jai_dee"
-          ]
+          ],
+          "en": "kind friend"
         },
         {
           "id": "p_fun_game",
@@ -3976,7 +4488,8 @@
           "components": [
             "w_len",
             "w_sanuk"
-          ]
+          ],
+          "en": "playing is fun"
         },
         {
           "id": "p_student_learn",
@@ -3986,7 +4499,8 @@
           "components": [
             "w_nak_rian",
             "w_rian"
-          ]
+          ],
+          "en": "the student learns"
         },
         {
           "id": "p_not_fun",
@@ -3996,9 +4510,12 @@
           "components": [
             "w_mai_neg",
             "w_sanuk"
-          ]
+          ],
+          "en": "not fun"
         }
-      ]
+      ],
+      "titleEn": "Character",
+      "descriptionEn": "Kind, fun"
     },
     {
       "id": "lesson-49",
@@ -4006,7 +4523,9 @@
       "description": "Test Famille et Corps",
       "isReview": true,
       "words": [],
-      "phrases": []
+      "phrases": [],
+      "titleEn": "Unit 8 Assessment",
+      "descriptionEn": "Family and Body Test"
     },
     {
       "id": "lesson-50",
@@ -4017,19 +4536,22 @@
           "id": "w_puay",
           "th": "ป่วย",
           "fr": "malade",
-          "phonetic": "bpùay"
+          "phonetic": "bpùay",
+          "en": "sick"
         },
         {
           "id": "w_mo",
           "th": "หมอ",
           "fr": "médecin",
-          "phonetic": "mɔ̌ɔ"
+          "phonetic": "mɔ̌ɔ",
+          "en": "doctor"
         },
         {
           "id": "w_ya",
           "th": "ยา",
           "fr": "médicament",
-          "phonetic": "yaa"
+          "phonetic": "yaa",
+          "en": "medicine"
         }
       ],
       "phrases": [
@@ -4041,7 +4563,8 @@
           "components": [
             "w_kin",
             "w_ya"
-          ]
+          ],
+          "en": "take medicine"
         },
         {
           "id": "p_auto_lesson-50_0",
@@ -4051,7 +4574,8 @@
           "components": [
             "w_mue",
             "w_8"
-          ]
+          ],
+          "en": "[Practice] hand / eight"
         },
         {
           "id": "p_auto_lesson-50_1",
@@ -4061,7 +4585,8 @@
           "components": [
             "w_wan",
             "w_sabai"
-          ]
+          ],
+          "en": "[Practical] day / good / comfortable"
         },
         {
           "id": "p_auto_lesson-50_2",
@@ -4071,7 +4596,8 @@
           "components": [
             "w_bin",
             "w_nong"
-          ]
+          ],
+          "en": "[Practical] steal / little brother / little sister"
         },
         {
           "id": "p_auto_lesson-50_3",
@@ -4081,9 +4607,12 @@
           "components": [
             "w_la",
             "w_mai_neg"
-          ]
+          ],
+          "en": "[Practice] and (to return the question) / not"
         }
-      ]
+      ],
+      "titleEn": "At the hospital",
+      "descriptionEn": "Sick, medicine"
     },
     {
       "id": "lesson-51",
@@ -4094,19 +4623,22 @@
           "id": "w_khai",
           "th": "ไข้",
           "fr": "fièvre",
-          "phonetic": "khǎai"
+          "phonetic": "khǎai",
+          "en": "fever"
         },
         {
           "id": "w_ay",
           "th": "ไอ",
           "fr": "tousser",
-          "phonetic": "ai"
+          "phonetic": "ai",
+          "en": "to cough"
         },
         {
           "id": "w_nueay",
           "th": "เหนื่อย",
           "fr": "fatigué",
-          "phonetic": "nùeay"
+          "phonetic": "nùeay",
+          "en": "fatigue"
         }
       ],
       "phrases": [
@@ -4118,7 +4650,8 @@
           "components": [
             "w_mee",
             "w_khai"
-          ]
+          ],
+          "en": "I have a fever"
         },
         {
           "id": "p_auto_lesson-51_0",
@@ -4128,7 +4661,8 @@
           "components": [
             "w_non",
             "w_ta"
-          ]
+          ],
+          "en": "[Practical] sleep / eye"
         },
         {
           "id": "p_auto_lesson-51_1",
@@ -4138,7 +4672,8 @@
           "components": [
             "w_thi_nai",
             "w_hiw"
-          ]
+          ],
+          "en": "[Practical] where / be hungry"
         },
         {
           "id": "p_auto_lesson-51_2",
@@ -4148,7 +4683,8 @@
           "components": [
             "w_ya",
             "w_phaeng"
-          ]
+          ],
+          "en": "[Practical] medicine / expensive"
         },
         {
           "id": "p_auto_lesson-51_3",
@@ -4158,9 +4694,12 @@
           "components": [
             "w_khao_pron",
             "w_kafae"
-          ]
+          ],
+          "en": "[Practice] he/she/coffee"
         }
-      ]
+      ],
+      "titleEn": "Symptoms",
+      "descriptionEn": "Fever, tired"
     },
     {
       "id": "lesson-52",
@@ -4171,19 +4710,22 @@
           "id": "w_sia_jai",
           "th": "เสียใจ",
           "fr": "triste / désolé",
-          "phonetic": "sǐia-jai"
+          "phonetic": "sǐia-jai",
+          "en": "sad / sorry"
         },
         {
           "id": "w_klua",
           "th": "กลัว",
           "fr": "avoir peur",
-          "phonetic": "glua"
+          "phonetic": "glua",
+          "en": "be afraid"
         },
         {
           "id": "w_krot",
           "th": "โกรธ",
           "fr": "fâché",
-          "phonetic": "gròot"
+          "phonetic": "gròot",
+          "en": "angry"
         }
       ],
       "phrases": [
@@ -4195,7 +4737,8 @@
           "components": [
             "w_mai_neg",
             "w_klua"
-          ]
+          ],
+          "en": "I'm not afraid"
         },
         {
           "id": "p_auto_lesson-52_0",
@@ -4205,7 +4748,8 @@
           "components": [
             "w_la",
             "w_moo"
-          ]
+          ],
+          "en": "[Practical] and (to return the question) / pig"
         },
         {
           "id": "p_auto_lesson-52_1",
@@ -4215,7 +4759,8 @@
           "components": [
             "w_6",
             "w_bia"
-          ]
+          ],
+          "en": "[Practical] six / beer"
         },
         {
           "id": "p_auto_lesson-52_2",
@@ -4225,7 +4770,8 @@
           "components": [
             "w_phom",
             "w_nong"
-          ]
+          ],
+          "en": "[Practice] I (man) / little brother / little sister"
         },
         {
           "id": "p_auto_lesson-52_3",
@@ -4235,9 +4781,12 @@
           "components": [
             "w_hai",
             "w_see_color"
-          ]
+          ],
+          "en": "[Practice] give / color"
         }
-      ]
+      ],
+      "titleEn": "Feelings",
+      "descriptionEn": "Sad, scared, angry"
     },
     {
       "id": "lesson-53",
@@ -4248,19 +4797,22 @@
           "id": "w_khit",
           "th": "คิด",
           "fr": "penser",
-          "phonetic": "khít"
+          "phonetic": "khít",
+          "en": "think"
         },
         {
           "id": "w_ru",
           "th": "รู้",
           "fr": "savoir / connaitre",
-          "phonetic": "rúu"
+          "phonetic": "rúu",
+          "en": "know / know"
         },
         {
           "id": "w_jing",
           "th": "จริง",
           "fr": "vrai / vraiment",
-          "phonetic": "jing"
+          "phonetic": "jing",
+          "en": "true / really"
         }
       ],
       "phrases": [
@@ -4272,7 +4824,8 @@
           "components": [
             "w_mai_neg",
             "w_ru"
-          ]
+          ],
+          "en": "I don't know"
         },
         {
           "id": "p_auto_lesson-53_0",
@@ -4282,7 +4835,8 @@
           "components": [
             "w_laew",
             "w_8"
-          ]
+          ],
+          "en": "[Practice] then / and (transition) / eight"
         },
         {
           "id": "p_auto_lesson-53_1",
@@ -4292,7 +4846,8 @@
           "components": [
             "w_hua",
             "w_khao_pron"
-          ]
+          ],
+          "en": "[Practice] head/he/she"
         },
         {
           "id": "p_auto_lesson-53_2",
@@ -4302,7 +4857,8 @@
           "components": [
             "w_nueay",
             "w_nang"
-          ]
+          ],
+          "en": "[Practical] tired / film"
         },
         {
           "id": "p_auto_lesson-53_3",
@@ -4312,9 +4868,12 @@
           "components": [
             "w_tham",
             "w_rian"
-          ]
+          ],
+          "en": "[Practice] do / learn"
         }
-      ]
+      ],
+      "titleEn": "Cognitive reactions",
+      "descriptionEn": "Think, know"
     },
     {
       "id": "lesson-54",
@@ -4322,7 +4881,9 @@
       "description": "Test Sentiments et Santé",
       "isReview": true,
       "words": [],
-      "phrases": []
+      "phrases": [],
+      "titleEn": "Unit 9 Assessment",
+      "descriptionEn": "Feelings and Health Test"
     },
     {
       "id": "lesson-55",
@@ -4333,13 +4894,15 @@
           "id": "w_samoe",
           "th": "เสมอ",
           "fr": "toujours",
-          "phonetic": "sà-mǒe"
+          "phonetic": "sà-mǒe",
+          "en": "always"
         },
         {
           "id": "w_boi",
           "th": "บ่อย",
           "fr": "souvent",
-          "phonetic": "bɔ̀i"
+          "phonetic": "bɔ̀i",
+          "en": "often"
         }
       ],
       "phrases": [
@@ -4351,7 +4914,8 @@
           "components": [
             "w_ma",
             "w_boi"
-          ]
+          ],
+          "en": "come often"
         },
         {
           "id": "p_auto_lesson-55_0",
@@ -4361,7 +4925,8 @@
           "components": [
             "w_lom",
             "w_nang"
-          ]
+          ],
+          "en": "[Practical] wind / film"
         },
         {
           "id": "p_auto_lesson-55_1",
@@ -4371,7 +4936,8 @@
           "components": [
             "w_fang",
             "w_6"
-          ]
+          ],
+          "en": "[Practice] listen / six"
         },
         {
           "id": "p_auto_lesson-55_2",
@@ -4381,7 +4947,8 @@
           "components": [
             "w_trong",
             "w_mong"
-          ]
+          ],
+          "en": "[Practice] law / direct / time"
         },
         {
           "id": "p_auto_lesson-55_3",
@@ -4391,9 +4958,12 @@
           "components": [
             "w_waan",
             "w_dek"
-          ]
+          ],
+          "en": "[Practical] sweet / child (general)"
         }
-      ]
+      ],
+      "titleEn": "Frequency 1",
+      "descriptionEn": "Always, often"
     },
     {
       "id": "lesson-56",
@@ -4404,13 +4974,15 @@
           "id": "w_mai_khoei",
           "th": "ไม่เคย",
           "fr": "jamais",
-          "phonetic": "mâi-khoei"
+          "phonetic": "mâi-khoei",
+          "en": "Never"
         },
         {
           "id": "w_bang_thi",
           "th": "บางที",
           "fr": "parfois",
-          "phonetic": "baang-thii"
+          "phonetic": "baang-thii",
+          "en": "Sometimes"
         }
       ],
       "phrases": [
@@ -4422,7 +4994,8 @@
           "components": [
             "w_mai_khoei",
             "w_kin"
-          ]
+          ],
+          "en": "never eaten"
         },
         {
           "id": "p_auto_lesson-56_0",
@@ -4432,7 +5005,8 @@
           "components": [
             "w_puay",
             "w_thong"
-          ]
+          ],
+          "en": "[Practice] sick / stomach"
         },
         {
           "id": "p_auto_lesson-56_1",
@@ -4442,7 +5016,8 @@
           "components": [
             "w_doo",
             "w_bia"
-          ]
+          ],
+          "en": "[Practical] watch / beer"
         },
         {
           "id": "p_auto_lesson-56_2",
@@ -4452,7 +5027,8 @@
           "components": [
             "w_rong_rian",
             "w_sue"
-          ]
+          ],
+          "en": "[Practical] school / buy"
         },
         {
           "id": "p_auto_lesson-56_3",
@@ -4462,9 +5038,12 @@
           "components": [
             "w_mo",
             "w_khwa"
-          ]
+          ],
+          "en": "[Practice] doctor / right"
         }
-      ]
+      ],
+      "titleEn": "Frequency 2",
+      "descriptionEn": "Never, sometimes"
     },
     {
       "id": "lesson-57",
@@ -4475,13 +5054,15 @@
           "id": "w_thammai",
           "th": "ทำไม",
           "fr": "pourquoi ?",
-          "phonetic": "tham-mai"
+          "phonetic": "tham-mai",
+          "en": "Why ?"
         },
         {
           "id": "w_khrai",
           "th": "ใคร",
           "fr": "qui ?",
-          "phonetic": "khrai"
+          "phonetic": "khrai",
+          "en": "Who ?"
         }
       ],
       "phrases": [
@@ -4492,7 +5073,8 @@
           "phonetic": "khrai",
           "components": [
             "w_khrai"
-          ]
+          ],
+          "en": "who is it ?"
         },
         {
           "id": "p_auto_lesson-57_0",
@@ -4502,7 +5084,8 @@
           "components": [
             "w_rot",
             "w_duem"
-          ]
+          ],
+          "en": "[Practical] car / vehicle / drink"
         },
         {
           "id": "p_auto_lesson-57_1",
@@ -4512,7 +5095,8 @@
           "components": [
             "w_nuea",
             "w_ya"
-          ]
+          ],
+          "en": "[Practical] meat / beef / medicine"
         },
         {
           "id": "p_auto_lesson-57_2",
@@ -4522,7 +5106,8 @@
           "components": [
             "w_muearai",
             "w_ron"
-          ]
+          ],
+          "en": "[Practice] when? "
         },
         {
           "id": "p_auto_lesson-57_3",
@@ -4532,9 +5117,12 @@
           "components": [
             "w_priao",
             "w_ma"
-          ]
+          ],
+          "en": "[Practical] sour / sour / come"
         }
-      ]
+      ],
+      "titleEn": "Question words",
+      "descriptionEn": "Why, who"
     },
     {
       "id": "lesson-58",
@@ -4545,13 +5133,15 @@
           "id": "w_at_ja",
           "th": "อาจจะ",
           "fr": "peut-être",
-          "phonetic": "àat-jà"
+          "phonetic": "àat-jà",
+          "en": "maybe"
         },
         {
           "id": "w_kap",
           "th": "กับ",
           "fr": "avec / et",
-          "phonetic": "gàp"
+          "phonetic": "gàp",
+          "en": "with / and"
         }
       ],
       "phrases": [
@@ -4564,7 +5154,8 @@
             "w_pai",
             "w_kap",
             "w_phuean"
-          ]
+          ],
+          "en": "go with a friend"
         },
         {
           "id": "p_auto_lesson-58_0",
@@ -4574,7 +5165,8 @@
           "components": [
             "w_jai_dee",
             "w_nee"
-          ]
+          ],
+          "en": "[Practice] nice / this / this"
         },
         {
           "id": "p_auto_lesson-58_1",
@@ -4584,7 +5176,8 @@
           "components": [
             "w_waan",
             "w_thuk"
-          ]
+          ],
+          "en": "[Convenient] sweet / cheap / okay"
         },
         {
           "id": "p_auto_lesson-58_2",
@@ -4594,7 +5187,8 @@
           "components": [
             "w_mae",
             "w_nong"
-          ]
+          ],
+          "en": "[Practical] mother / little brother / little sister"
         },
         {
           "id": "p_auto_lesson-58_3",
@@ -4604,9 +5198,12 @@
           "components": [
             "w_kafae",
             "w_kho_thot"
-          ]
+          ],
+          "en": "[Practical] coffee / sorry / sorry"
         }
-      ]
+      ],
+      "titleEn": "Useful and nuances",
+      "descriptionEn": "Perhaps, with"
     },
     {
       "id": "lesson-59",
@@ -4614,7 +5211,9 @@
       "description": "Test final du Niveau A1 (Toutes Unités)",
       "isReview": true,
       "words": [],
-      "phrases": []
+      "phrases": [],
+      "titleEn": "The A1 Grand Assessment",
+      "descriptionEn": "Final test of Level A1 (All Units)"
     }
   ]
 }

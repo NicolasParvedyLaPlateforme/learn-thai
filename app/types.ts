@@ -2,6 +2,7 @@ export interface Word {
   id: string;
   th: string;
   fr: string;
+  en?: string;
   phonetic: string;
 }
 
@@ -9,6 +10,7 @@ export interface Phrase {
   id: string;
   th: string;
   fr: string;
+  en?: string;
   phonetic: string;
   components: string[]; // array of word ids
 }
@@ -16,7 +18,9 @@ export interface Phrase {
 export interface Lesson {
   id: string;
   title: string;
+  titleEn?: string;
   description: string;
+  descriptionEn?: string;
   words: Word[];
   phrases: Phrase[];
   isReview?: boolean;

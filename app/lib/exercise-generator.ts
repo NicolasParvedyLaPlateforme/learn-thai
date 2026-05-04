@@ -133,14 +133,14 @@ export function getWritingClustersAndGroups(text: string): { characters: string[
   return { characters, groups };
 }
 
-export function generateWritingExercises(allLessons: Lesson[], completedLessonIds: string[]): Exercise[] {
+export function generateWritingExercises(allLessons: Lesson[], completedLessonIds: string[], language: string = 'fr'): Exercise[] {
   const completedLessons = allLessons.filter(l => completedLessonIds.includes(l.id));
   if (completedLessons.length === 0) return [];
 
   const candidateItems: { fr: string, th: string }[] = [];
   completedLessons.forEach(l => {
-    l.words.forEach(w => candidateItems.push({ fr: w.fr, th: w.th }));
-    l.phrases.forEach(p => candidateItems.push({ fr: p.fr, th: p.th }));
+    l.words.forEach(w => candidateItems.push({ fr: language === 'en' ? (w.en || w.fr) : w.fr, th: w.th }));
+    l.phrases.forEach(p => candidateItems.push({ fr: language === 'en' ? (p.en || p.fr) : p.fr, th: p.th }));
   });
 
   if (candidateItems.length === 0) return [];
@@ -162,7 +162,7 @@ export function generateWritingExercises(allLessons: Lesson[], completedLessonId
   });
 }
 
-export function generateEndlessReviewExercises(allLessons: Lesson[], completedLessonIds: string[]): Exercise[] {
+export function generateEndlessReviewExercises(allLessons: Lesson[], completedLessonIds: string[], language: string = 'fr'): Exercise[] {
   const completedLessons = allLessons.filter(l => completedLessonIds.includes(l.id));
   if (completedLessons.length === 0) return [];
 
@@ -176,7 +176,7 @@ export function generateEndlessReviewExercises(allLessons: Lesson[], completedLe
       exercises.push({
         id: `endless-wm-${word.id}-${Date.now()}-${Math.random()}`,
         type: 'word-match',
-        question: word.fr,
+        question: language === 'en' ? (word.en || word.fr) : word.fr,
         answer: word.th,
         options: shuffle([word, ...distractors]),
         hideHints: false // The user requested hints always on
@@ -189,7 +189,7 @@ export function generateEndlessReviewExercises(allLessons: Lesson[], completedLe
       exercises.push({
         id: `endless-sb-${phrase.id}-${Date.now()}-${Math.random()}`,
         type: 'sentence-builder',
-        question: phrase.fr,
+        question: language === 'en' ? (phrase.en || phrase.fr) : phrase.fr,
         answer: phrase.th,
         options: shuffle([...phraseWords, ...distractors]),
         correctComponents: phrase.components,
@@ -201,7 +201,7 @@ export function generateEndlessReviewExercises(allLessons: Lesson[], completedLe
   return shuffle(exercises).slice(0, 20); // Return a batch of 20 random exercises
 }
 
-export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: number = 0): Exercise[] {
+export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: number = 0, language: string = 'fr'): Exercise[] {
   let exercises: Exercise[] = [];
   const globalWords = allLessons.flatMap(l => l.words);
 
@@ -229,7 +229,7 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
         exercises.push({
           id: `rev-wm-${word.id}`,
           type: 'word-match',
-          question: word.fr,
+          question: language === 'en' ? (word.en || word.fr) : word.fr,
           answer: word.th,
           options: shuffle([word, ...distractors]),
           hideHints: reviewHideHints
@@ -242,7 +242,7 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
         exercises.push({
           id: `rev-sb-${phrase.id}`,
           type: 'sentence-builder',
-          question: phrase.fr,
+          question: language === 'en' ? (phrase.en || phrase.fr) : phrase.fr,
           answer: phrase.th,
           options: shuffle([...phraseWords, ...distractors]),
           correctComponents: phrase.components,
@@ -275,7 +275,7 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
     wmExercises.push({
       id: `wm-${word.id}-${Date.now()}-${Math.random()}`,
       type: 'word-match',
-      question: word.fr,
+      question: language === 'en' ? (word.en || word.fr) : word.fr,
       answer: word.th,
       options: shuffle([word, ...distractors]),
       hideHints: false
@@ -289,7 +289,7 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
     sbExercises.push({
       id: `sb-${phrase.id}-${Date.now()}-${Math.random()}`,
       type: 'sentence-builder',
-      question: phrase.fr,
+      question: language === 'en' ? (phrase.en || phrase.fr) : phrase.fr,
       answer: phrase.th,
       options: shuffle([...phraseWords, ...distractors]),
       correctComponents: phrase.components,

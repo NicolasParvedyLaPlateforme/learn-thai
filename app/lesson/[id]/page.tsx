@@ -21,7 +21,7 @@ export default function LessonPage() {
   const params = useParams();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { completeLesson, lessonLevels } = useProgressStore();
+  const { completeLesson, lessonLevels, language } = useProgressStore();
   
   const lessonId = params.id as string;
   const requestedLevelStr = searchParams.get('level');
@@ -35,7 +35,7 @@ export default function LessonPage() {
   
   // We need to stabilize exercises generation since it shuffles.
   const [exercises, setExercises] = useState<Exercise[]>(() => {
-    return lesson ? generateExercises(lesson, data.lessons, currentLevel) : [];
+    return lesson ? generateExercises(lesson, data.lessons, currentLevel, language) : [];
   });
   const [currentIndex, setCurrentIndex] = useState(0);
   
@@ -111,13 +111,15 @@ export default function LessonPage() {
         <div className="text-orange-500 mb-6">
           <Check size={120} className="mx-auto" />
         </div>
-        <h1 className="text-3xl font-extrabold text-slate-800 mb-2 text-center">Niveau {Math.min(currentLevel + 1, 4)} terminé !</h1>
+        <h1 className="text-3xl font-extrabold text-slate-800 mb-2 text-center">
+          {language === 'en' ? `Level ${Math.min(currentLevel + 1, 4)} completed!` : `Niveau ${Math.min(currentLevel + 1, 4)} terminé !`}
+        </h1>
         <p className="text-slate-500 mb-8 text-center text-lg font-medium">+ {10 + exercises.length} XP</p>
         <button 
           onClick={() => router.push('/')}
           className="px-12 py-3 rounded-xl bg-emerald-500 border-b-4 border-emerald-700 text-white font-bold text-lg shadow-lg hover:bg-emerald-400 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest w-full max-w-sm"
         >
-          Continuer
+          {language === 'en' ? 'Continue' : 'Continuer'}
         </button>
       </div>
     );
@@ -137,7 +139,9 @@ export default function LessonPage() {
               style={{ width: `${progress}%` }}
             />
           </div>
-          <div className="font-bold text-slate-400">Niv. {Math.min(currentLevel + 1, 4)}</div>
+          <div className="font-bold text-slate-400">
+            {language === 'en' ? 'Lvl.' : 'Niv.'} {Math.min(currentLevel + 1, 4)}
+          </div>
         </div>
       </header>
 
@@ -154,7 +158,9 @@ export default function LessonPage() {
             
             <div className="flex-1 mt-2 md:mt-0">
               <h2 className="text-2xl md:text-3xl font-extrabold text-slate-800 mb-4 md:mb-6">
-                {currentExercise.type === 'word-match' ? "Sélectionnez la bonne traduction" : "Traduisez cette phrase"}
+                {currentExercise.type === 'word-match' 
+                  ? (language === 'en' ? "Select the correct translation" : "Sélectionnez la bonne traduction")
+                  : (language === 'en' ? "Translate this sentence" : "Traduisez cette phrase")}
               </h2>
               <div className="relative inline-block pb-1">
                 <SentenceWithHints 
@@ -201,16 +207,18 @@ export default function LessonPage() {
             {isChecking && isCorrect && (
               <div className="flex items-center justify-center sm:justify-start gap-3 text-emerald-600 font-extrabold text-xl">
                 <div className="bg-white text-emerald-500 rounded-full p-1"><Check size={24} strokeWidth={3} /></div>
-                Excellent !
+                {language === 'en' ? 'Excellent!' : 'Excellent !'}
               </div>
             )}
             {isChecking && !isCorrect && (
               <div className="flex flex-col text-rose-600 font-extrabold text-xl gap-1 items-center sm:items-start">
                 <div className="flex items-center gap-3">
                   <div className="bg-white text-rose-500 rounded-full p-1"><X size={24} strokeWidth={3} /></div>
-                  Incorrect.
+                  {language === 'en' ? 'Incorrect.' : 'Incorrect.'}
                 </div>
-                <div className="text-rose-800 text-sm mt-1 uppercase tracking-widest hidden sm:block">Réponse correcte :</div>
+                <div className="text-rose-800 text-sm mt-1 uppercase tracking-widest hidden sm:block">
+                  {language === 'en' ? 'Correct answer:' : 'Réponse correcte :'}
+                </div>
                 <div className="text-rose-900 font-medium font-thai text-xl md:text-2xl mt-1 sm:mt-0">{currentExercise.answer}</div>
               </div>
             )}
@@ -227,7 +235,7 @@ export default function LessonPage() {
                 : 'bg-emerald-500 border-emerald-700 text-white hover:bg-emerald-400'}
             `}
           >
-            {isChecking ? 'Continuer' : 'Vérifier'}
+            {isChecking ? (language === 'en' ? 'Continue' : 'Continuer') : (language === 'en' ? 'Check' : 'Vérifier')}
           </button>
         </div>
       </footer>

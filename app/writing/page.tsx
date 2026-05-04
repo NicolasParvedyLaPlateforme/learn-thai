@@ -15,7 +15,7 @@ const data = courseData as CourseData;
 
 export default function WritingPage() {
   const router = useRouter();
-  const { completedLessons, completeLesson } = useProgressStore();
+  const { completedLessons, completeLesson, language } = useProgressStore();
   
   const [exercises, setExercises] = useState<Exercise[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -41,7 +41,7 @@ export default function WritingPage() {
         }
         
         if (targetLessons.length > 0) {
-           setExercises(generateWritingExercises(data.lessons, targetLessons));
+           setExercises(generateWritingExercises(data.lessons, targetLessons, language));
         }
         initialized = true;
       }
@@ -49,7 +49,7 @@ export default function WritingPage() {
     return () => clearTimeout(timer);
   }, [completedLessons]);
 
-  if (!mounted) return <div className="p-8 text-center text-slate-500 font-medium">Chargement...</div>;
+  if (!mounted) return <div className="p-8 text-center text-slate-500 font-medium">{language === 'en' ? 'Loading...' : 'Chargement...'}</div>;
 
   const params = typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : null;
   const hasLessonId = !!params?.get('lessonId');
@@ -57,19 +57,23 @@ export default function WritingPage() {
   if (completedLessons.length === 0 && !hasLessonId) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-[#FAFAFA] font-sans">
-        <h1 className="text-3xl font-extrabold text-slate-800 mb-4 text-center">Aucune leçon complétée</h1>
-        <p className="text-slate-500 mb-8 text-center text-lg font-medium">Vous devez compléter au moins une leçon pour pratiquer l&apos;écriture !</p>
+        <h1 className="text-3xl font-extrabold text-slate-800 mb-4 text-center">
+          {language === 'en' ? 'No completed lessons' : 'Aucune leçon complétée'}
+        </h1>
+        <p className="text-slate-500 mb-8 text-center text-lg font-medium">
+          {language === 'en' ? 'You must complete at least one lesson to practice writing!' : 'Vous devez compléter au moins une leçon pour pratiquer l\'écriture !'}
+        </p>
         <button 
           onClick={() => router.push('/')}
           className="px-12 py-3 rounded-xl bg-emerald-500 border-b-4 border-emerald-700 text-white font-bold text-lg shadow-lg hover:bg-emerald-400 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest w-full max-w-sm"
         >
-          Retour
+          {language === 'en' ? 'Back' : 'Retour'}
         </button>
       </div>
     );
   }
 
-  if (exercises.length === 0) return <div className="p-8 text-center text-slate-500 font-medium">Génération des exercices...</div>;
+  if (exercises.length === 0) return <div className="p-8 text-center text-slate-500 font-medium">{language === 'en' ? 'Generating exercises...' : 'Génération des exercices...'}</div>;
 
   const currentExercise = exercises[currentIndex];
   // Loop back or refill if needed
@@ -84,7 +88,7 @@ export default function WritingPage() {
             const params = new URLSearchParams(window.location.search);
             const lessonId = params.get('lessonId');
             const targetLessons = lessonId ? [lessonId] : completedLessons;
-            setExercises(generateWritingExercises(data.lessons, targetLessons));
+            setExercises(generateWritingExercises(data.lessons, targetLessons, language));
             setCurrentIndex(0);
           } else {
             setCurrentIndex(currentIndex + 1);
@@ -136,7 +140,7 @@ export default function WritingPage() {
               style={{ width: `${progress}%` }}
             />
           </div>
-          <div className="font-bold text-slate-400">Écriture ∞</div>
+          <div className="font-bold text-slate-400">{language === 'en' ? 'Writing ∞' : 'Écriture ∞'}</div>
         </div>
       </header>
 
@@ -151,7 +155,7 @@ export default function WritingPage() {
             
             <div className="flex-1">
               <h2 className="text-2xl md:text-3xl font-extrabold text-slate-800 mb-4 md:mb-6">
-                Écrivez ce mot en thaï
+                {language === 'en' ? 'Write this word in Thai' : 'Écrivez ce mot en thaï'}
               </h2>
               <div className="relative inline-block pb-1">
                 <SentenceWithHints 
@@ -262,16 +266,18 @@ export default function WritingPage() {
             {isChecking && isCorrect && (
               <div className="flex items-center justify-center sm:justify-start gap-3 text-emerald-600 font-extrabold text-xl">
                 <div className="bg-white text-emerald-500 rounded-full p-1"><Check size={24} strokeWidth={3} /></div>
-                Parfait !
+                {language === 'en' ? 'Perfect!' : 'Parfait !'}
               </div>
             )}
             {isChecking && !isCorrect && (
               <div className="flex flex-col text-rose-600 font-extrabold text-xl gap-1 items-center sm:items-start">
                 <div className="flex items-center gap-3">
                   <div className="bg-white text-rose-500 rounded-full p-1"><X size={24} strokeWidth={3} /></div>
-                  Presque...
+                  {language === 'en' ? 'Almost...' : 'Presque...'}
                 </div>
-                <div className="text-rose-800 text-sm mt-1 uppercase tracking-widest hidden sm:block">La bonne écriture était :</div>
+                <div className="text-rose-800 text-sm mt-1 uppercase tracking-widest hidden sm:block">
+                  {language === 'en' ? 'The exact spelling was:' : 'La bonne écriture était :'}
+                </div>
                 <div className="text-rose-900 font-medium font-thai text-2xl md:text-3xl mt-1 tracking-wider">{currentExercise.answer}</div>
               </div>
             )}
@@ -288,7 +294,7 @@ export default function WritingPage() {
                 : 'bg-emerald-500 border-emerald-700 text-white hover:bg-emerald-400'}
             `}
           >
-            {isChecking ? 'Continuer' : 'Vérifier'}
+            {isChecking ? (language === 'en' ? 'Continue' : 'Continuer') : (language === 'en' ? 'Check' : 'Vérifier')}
           </button>
         </div>
       </footer>
