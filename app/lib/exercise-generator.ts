@@ -358,5 +358,43 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
      }
   }
   
-  return [...result, ...waitlist];
+  const finalResult = [...result, ...waitlist];
+  
+  const exercisesWithIntros: Exercise[] = [];
+  const introducedIds = new Set<string>();
+
+  for (const ex of finalResult) {
+    if (level === 0 && !lesson.isReview && ex.type === 'word-match') {
+      const word = lesson.words.find(w => w.th === ex.answer);
+      if (word && !introducedIds.has(word.id)) {
+        introducedIds.add(word.id);
+        exercisesWithIntros.push({
+          id: `intro-${word.id}-${Math.random()}`,
+          type: 'intro',
+          question: language === 'en' ? (word.en || word.fr) : word.fr,
+          answer: word.th,
+          options: [],
+          introItem: word,
+          hideHints: false
+        });
+      }
+    } else if (level === 1 && !lesson.isReview && ex.type === 'sentence-builder') {
+      const phrase = lesson.phrases.find(p => p.th === ex.answer);
+      if (phrase && !introducedIds.has(phrase.id)) {
+        introducedIds.add(phrase.id);
+        exercisesWithIntros.push({
+          id: `intro-${phrase.id}-${Math.random()}`,
+          type: 'intro',
+          question: language === 'en' ? (phrase.en || phrase.fr) : phrase.fr,
+          answer: phrase.th,
+          options: [],
+          introItem: phrase,
+          hideHints: false
+        });
+      }
+    }
+    exercisesWithIntros.push(ex);
+  }
+
+  return exercisesWithIntros;
 }

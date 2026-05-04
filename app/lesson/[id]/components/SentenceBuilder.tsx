@@ -1,5 +1,9 @@
 import { Exercise } from '../../../types';
 import { playThaiTTS } from '../../../lib/tts';
+import { THAI_ALPHABET } from '../../../lib/alphabet-data';
+import { useState } from 'react';
+import { HelpCircle } from 'lucide-react';
+import { useProgressStore } from '../../../lib/store';
 
 interface Props {
   exercise: Exercise;
@@ -9,11 +13,14 @@ interface Props {
 }
 
 export default function SentenceBuilder({ exercise, selected, onChange, disabled }: Props) {
+  const { language } = useProgressStore();
+  const [showHint, setShowHint] = useState(false);
   
   const handleSelect = (wordTh: string) => {
     if (disabled) return;
     onChange([...selected, wordTh]);
     playThaiTTS(wordTh);
+    setShowHint(false); // Hide hint once they make a choice
   };
 
   const handleRemove = (index: number) => {
@@ -21,6 +28,7 @@ export default function SentenceBuilder({ exercise, selected, onChange, disabled
     const newSelected = [...selected];
     newSelected.splice(index, 1);
     onChange(newSelected);
+    setShowHint(false);
   };
 
   const isDense = exercise.options.length > 7;
@@ -30,16 +38,37 @@ export default function SentenceBuilder({ exercise, selected, onChange, disabled
     usedCounts[s] = (usedCounts[s] || 0) + 1;
   });
 
+  // Calculate hint for the NEXT expected word
+  let nextHintLetter = '';
+  let nextHintPronunciation = '';
+  if (exercise.correctComponents && selected.length < exercise.correctComponents.length) {
+    const expectedWordId = exercise.correctComponents[selected.length];
+    const expectedWord = exercise.options.find(o => o.id === expectedWordId)?.th;
+    if (expectedWord && expectedWord.length > 0) {
+      const firstChar = expectedWord[0];
+      const alphaInfo = THAI_ALPHABET.find(a => a.letter === firstChar);
+      if (alphaInfo) {
+        nextHintLetter = alphaInfo.letter;
+        nextHintPronunciation = language === 'en' ? (alphaInfo.exampleTranslationEn || alphaInfo.exampleTranslation) : alphaInfo.exampleTranslation;
+        // The pronunciation usually is in the "exampleWord" or we can just use the pronunciation property
+        // But the user said: "comme So sala ou do dek" - which is the exampleWord (e.g. "ศ ศาลา" or "ด เด็ก" or its pronunciation "sɔ̌ɔ sǎa-laa")
+        // Let's show the name:
+        nextHintPronunciation = alphaInfo.exampleWord; // e.g. "ศ ศาลา"
+      }
+    }
+  }
+
   return (
     <div className="flex flex-col gap-4 w-full max-w-2xl mx-auto">
       
       {/* Target area (Answer) */}
-      <div className={`min-h-[100px] border-y-2 border-slate-200 py-4 flex flex-wrap gap-2 items-center justify-center`}>
+      <div className={`min-h-[100px] border-y-2 border-slate-200 py-4 flex flex-wrap gap-2 items-center justify-center relative`}>
         {selected.length === 0 && (
-          <span className="text-slate-400 p-2 font-medium">Formez la phrase ici...</span>
+          <span className="text-slate-400 p-2 font-medium">{language === 'en' ? 'Build the sentence here...' : 'Formez la phrase ici...'}</span>
         )}
         {selected.map((word, idx) => {
           let isCorrect = true;
+          
           if (exercise.type === 'sentence-builder' && exercise.correctComponents) {
             const expectedWordId = exercise.correctComponents[idx];
             const expectedWord = exercise.options.find(o => o.id === expectedWordId)?.th;
@@ -52,11 +81,35 @@ export default function SentenceBuilder({ exercise, selected, onChange, disabled
             key={`sel-${idx}`}
             onClick={() => handleRemove(idx)}
             disabled={disabled}
-            className={`bg-white border-2 border-b-4 ${isCorrect ? 'border-slate-200' : 'border-rose-200'} rounded-xl font-medium ${textColorClass} shadow-sm transition-all hover:-translate-y-0.5 active:translate-y-0.5 active:border-b-2 font-thai ${isDense ? 'px-3 py-1.5 text-2xl sm:px-4 sm:py-2 flex items-center h-12 sm:h-14 sm:text-3xl' : 'px-4 py-2 text-3xl sm:px-5 sm:py-3 sm:text-4xl flex items-center h-16 sm:h-20'}`}
+            className={`bg-white text-center border-2 border-b-4 ${isCorrect ? 'border-slate-200' : 'border-rose-200'} rounded-xl font-medium ${textColorClass} shadow-sm transition-all hover:-translate-y-0.5 active:translate-y-0.5 active:border-b-2 font-thai px-2 sm:px-3 flex items-center justify-center min-w-[3rem] sm:min-w-[4rem] h-12 sm:h-16`}
           >
-            <span className="leading-none pt-1">{word}</span>
+            <span className="leading-none text-2xl sm:text-3xl">{word}</span>
           </button>
         )})}
+        
+        {/* Hint System */}
+        {!disabled && selected.length < (exercise.correctComponents?.length || 0) && (
+          <div className="relative inline-flex items-center ml-2">
+            {showHint ? (
+              <div 
+                className="bg-amber-100 border-2 border-amber-300 text-amber-800 rounded-xl px-3 py-2 flex flex-col items-center justify-center cursor-pointer shadow-sm animate-pulse-once"
+                onClick={() => playThaiTTS(nextHintLetter)}
+                title={language === 'en' ? 'Next character hint' : 'Indice de la prochaine lettre'}
+              >
+                 <span className="font-thai text-xl">{nextHintLetter}</span>
+                 <span className="text-xs font-semibold mt-0.5">{nextHintPronunciation}</span>
+              </div>
+            ) : (
+              <button
+                onClick={() => setShowHint(true)}
+                className="w-10 h-10 rounded-full bg-slate-100 text-slate-400 hover:bg-slate-200 hover:text-slate-600 flex items-center justify-center transition-colors"
+                title={language === 'en' ? 'Show hint' : 'Afficher un indice'}
+              >
+                <HelpCircle size={20} />
+              </button>
+            )}
+          </div>
+        )}
       </div>
 
       {/* Word bank */}
@@ -73,14 +126,13 @@ export default function SentenceBuilder({ exercise, selected, onChange, disabled
               onClick={() => handleSelect(opt.th)}
               disabled={disabled || isUsed}
               className={`
-                rounded-xl font-medium font-thai select-none transition-all
-                ${isDense ? 'px-3 py-1.5 text-xl sm:px-4 sm:py-2 flex items-center h-10 sm:h-12 sm:text-2xl' : 'px-4 py-2 text-2xl sm:px-5 sm:py-3 sm:text-3xl flex items-center h-14 sm:h-16'}
+                rounded-xl text-center font-medium font-thai select-none transition-all flex items-center justify-center px-4 sm:px-5 min-w-[3rem] sm:min-w-[4rem] h-12 sm:h-16
                 ${!isUsed 
                   ? 'bg-white border-2 border-b-4 border-slate-200 text-slate-700 hover:bg-slate-50 cursor-pointer active:translate-y-0.5 active:border-b-2' 
                   : 'bg-slate-100 border-2 border-slate-100 text-transparent pointer-events-none'}
               `}
             >
-              <span className="leading-none pt-1">{opt.th}</span>
+              <span className="leading-none text-xl sm:text-2xl">{opt.th}</span>
             </button>
           );
         })}

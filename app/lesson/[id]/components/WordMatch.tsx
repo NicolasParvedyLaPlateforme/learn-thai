@@ -35,8 +35,7 @@ export default function WordMatch({ exercise, selected, onChange, disabled }: Pr
               ${disabled ? 'cursor-default' : 'cursor-pointer'}
             `}
           >
-            <span className={`font-thai font-semibold ${isDense ? 'text-lg sm:text-xl mb-0.5 sm:mb-1' : 'text-xl sm:text-2xl mb-1 sm:mb-2'}`}>{opt.th}</span>
-            <span className={`font-medium opacity-80 ${isDense ? 'text-[10px] sm:text-xs' : 'text-xs sm:text-sm'}`}>{opt.phonetic}</span>
+            <span className={`font-thai font-semibold ${isDense ? 'text-lg sm:text-xl' : 'text-xl sm:text-2xl'}`}>{opt.th}</span>
           </button>
         );
       })}

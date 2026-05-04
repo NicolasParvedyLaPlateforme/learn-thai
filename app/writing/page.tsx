@@ -47,7 +47,7 @@ export default function WritingPage() {
       }
     }, 0);
     return () => clearTimeout(timer);
-  }, [completedLessons]);
+  }, [completedLessons, language]);
 
   if (!mounted) return <div className="p-8 text-center text-slate-500 font-medium">{language === 'en' ? 'Loading...' : 'Chargement...'}</div>;
 

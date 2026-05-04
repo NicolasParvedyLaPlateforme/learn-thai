@@ -30,15 +30,16 @@ export interface CourseData {
   lessons: Lesson[];
 }
 
-export type ExerciseType = 'word-match' | 'sentence-builder' | 'writing';
+export type ExerciseType = 'word-match' | 'sentence-builder' | 'writing' | 'intro';
 
 export interface Exercise {
   id: string;
   type: ExerciseType;
   question: string; // The French text
   answer: string; // The Thai text
-  options: Word[]; // Words to select from
+  options: Word[] | {id: string, th: string, fr: string, phonetic: string}[]; // Words to select from
   correctComponents?: string[]; // For sentence builder
   componentGroups?: number[]; // To logically group correctComponents for visual display
   hideHints?: boolean; // If true, tooltips won't be shown
+  introItem?: Word | Phrase; // For intro exercises
 }
