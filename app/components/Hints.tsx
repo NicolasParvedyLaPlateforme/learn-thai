@@ -87,7 +87,7 @@ export function TooltipHint({ children, tooltipContent, className = '', audioTex
 }
 
 // A simple component to render the french question with tooltips (hints)
-export function SentenceWithHints({text, dictionary, phrases, isSentence, exerciseOptions, hideHints, alwaysShowPhonetic, answerTh, correctComponents, charHintRegex}: {text: string, dictionary: Word[], phrases: Phrase[], isSentence: boolean, exerciseOptions: Word[], hideHints?: boolean, alwaysShowPhonetic?: boolean, answerTh?: string, correctComponents?: string[], charHintRegex?: RegExp}) {
+export function SentenceWithHints({text, dictionary, phrases, isSentence, exerciseOptions, hideHints, disableTooltips, alwaysShowPhonetic, answerTh, correctComponents, charHintRegex}: {text: string, dictionary: Word[], phrases: Phrase[], isSentence: boolean, exerciseOptions: Word[], hideHints?: boolean, disableTooltips?: boolean, alwaysShowPhonetic?: boolean, answerTh?: string, correctComponents?: string[], charHintRegex?: RegExp}) {
   const { language } = useProgressStore();
   // Try to match the ENTIRE phrase/word first
   const exactPhrase = phrases.find(p => p.fr.toLowerCase() === text.toLowerCase() || (p.en?.toLowerCase() === text.toLowerCase()));
@@ -96,6 +96,10 @@ export function SentenceWithHints({text, dictionary, phrases, isSentence, exerci
   
   const tooltipTranslation = answerTh || exactMatch?.th;
   const phonetic = exactMatch?.phonetic;
+
+  const getDottedClass = () => {
+    return disableTooltips ? "" : "border-b-2 border-dotted border-slate-300";
+  };
   
   // Create the main text content, always wrapping it in a TooltipHint if we have the translation
   const mainContent = (
@@ -103,16 +107,16 @@ export function SentenceWithHints({text, dictionary, phrases, isSentence, exerci
       {exactMatch ? (
         alwaysShowPhonetic ? (
           <span className="inline-flex flex-col w-full text-center sm:text-left sm:w-auto relative group">
-            <span className="border-b-2 border-dotted border-slate-300 inline-block">{text}</span>
+            <span className={`inline-block ${getDottedClass()}`}>{text}</span>
             <span className="text-sm md:text-base font-medium tracking-wide">[<ColoredPhonetic phonetic={exactMatch.phonetic} charHintRegex={charHintRegex} />]</span>
           </span>
         ) : (
-          <span className="border-b-2 border-dotted border-slate-300 inline-block">
+          <span className={`inline-block ${getDottedClass()}`}>
             {text}
           </span>
         )
       ) : (
-        <span className="border-b-2 border-dotted border-slate-300 inline-block">
+        <span className={`inline-block ${getDottedClass()}`}>
           {text}
         </span>
       )}
@@ -121,7 +125,7 @@ export function SentenceWithHints({text, dictionary, phrases, isSentence, exerci
 
   return (
     <div className="flex flex-col gap-4">
-      {tooltipTranslation ? (
+      {tooltipTranslation && !disableTooltips ? (
         <TooltipHint 
           className="inline-block"
           tooltipContent={
@@ -144,7 +148,7 @@ export function SentenceWithHints({text, dictionary, phrases, isSentence, exerci
             {language === 'en' ? '💡 Useful vocabulary:' : '💡 Vocabulaire utile :'}
           </span>
           <div className="flex flex-wrap gap-x-4 gap-y-2">
-            {exerciseOptions.filter(w => correctComponents ? correctComponents.includes(w.id) : true).map((w, i) => (
+            {exerciseOptions.map((w, i) => (
               <TooltipHint 
                 key={i}
                 className="inline-flex items-center gap-1.5 bg-white px-2 py-1 rounded border border-slate-200 shadow-sm"

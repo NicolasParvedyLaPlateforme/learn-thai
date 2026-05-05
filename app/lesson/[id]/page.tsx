@@ -13,6 +13,7 @@ import { playThaiTTS, preloadThaiVoices } from '../../lib/tts';
 // Exercise Components
 import WordMatch from './components/WordMatch';
 import SentenceBuilder from './components/SentenceBuilder';
+import PairMatch from '../../components/PairMatch';
 import { TooltipHint, SentenceWithHints } from '../../components/Hints';
 
 const data = courseData as CourseData;
@@ -127,7 +128,7 @@ export default function LessonPage() {
           <Check size={120} className="mx-auto" />
         </div>
         <h1 className="text-3xl font-extrabold text-slate-800 mb-2 text-center">
-          {language === 'en' ? `Level ${Math.min(currentLevel + 1, 4)} completed!` : `Niveau ${Math.min(currentLevel + 1, 4)} terminé !`}
+          {language === 'en' ? `Level ${Math.min(currentLevel + 1, 5)} completed!` : `Niveau ${Math.min(currentLevel + 1, 5)} terminé !`}
         </h1>
         <p className="text-slate-500 mb-8 text-center text-lg font-medium">+ {10 + exercises.length} XP</p>
         <button 
@@ -155,7 +156,7 @@ export default function LessonPage() {
             />
           </div>
           <div className="font-bold text-slate-400 flex items-center gap-3">
-            <span>{language === 'en' ? 'Lvl.' : 'Niv.'} {Math.min(currentLevel + 1, 4)}</span>
+            <span>{language === 'en' ? 'Lvl.' : 'Niv.'} {Math.min(currentLevel + 1, 5)}</span>
             <button 
               onClick={() => setShowInfoModal(true)}
               className="text-slate-400 hover:text-indigo-500 transition-colors p-1"
@@ -222,7 +223,9 @@ export default function LessonPage() {
                   ? (language === 'en' ? "New expression!" : "Nouvelle expression !")
                   : currentExercise.type === 'word-match' 
                     ? (language === 'en' ? "Select the correct translation" : "Sélectionnez la bonne traduction")
-                    : (language === 'en' ? "Translate this sentence" : "Traduisez cette phrase")}
+                    : currentExercise.type === 'pair-matching'
+                      ? currentExercise.question
+                      : (language === 'en' ? "Translate this sentence" : "Traduisez cette phrase")}
               </h2>
               <div className="relative inline-block pb-1">
                 {currentExercise.type === 'intro' ? (
@@ -244,7 +247,7 @@ export default function LessonPage() {
                       </div>
                     </div>
                   </div>
-                ) : (
+                ) : currentExercise.type === 'pair-matching' ? null : (
                   <SentenceWithHints 
                     text={currentExercise.question} 
                     dictionary={lesson.words} 
@@ -270,6 +273,18 @@ export default function LessonPage() {
                 onChange={setSelectedAnswer}
                 disabled={isChecking}
               />
+            ) : currentExercise.type === 'pair-matching' ? (
+              <PairMatch 
+                key={currentExercise.id}
+                pairs={currentExercise.pairs as Word[]}
+                onComplete={() => {
+                  setIsCorrect(true);
+                  setIsChecking(true);
+                  setTimeout(() => {
+                    document.getElementById('next-btn')?.click();
+                  }, 1200);
+                }}
+              />
             ) : (
               <SentenceBuilder 
                 exercise={currentExercise}
@@ -283,7 +298,7 @@ export default function LessonPage() {
       </main>
 
       {/* Footer Actions */}
-      <footer className={`shrink-0 min-h-[100px] md:h-32 py-4 md:py-0 border-t-2 border-slate-200 flex items-center justify-center px-4 md:px-8 transition-colors duration-300 ${isChecking ? (isCorrect ? 'bg-emerald-50' : 'bg-rose-50 border-rose-200') : 'bg-white'}`}>
+      <footer className={`shrink-0 min-h-[100px] md:h-32 py-4 md:py-0 border-t-2 border-slate-200 flex items-center justify-center px-4 md:px-8 transition-colors duration-300 ${isChecking ? (isCorrect ? 'bg-emerald-50' : 'bg-rose-50 border-rose-200') : 'bg-white'} ${currentExercise.type === 'pair-matching' && !isChecking ? 'hidden md:flex opacity-0 pointer-events-none' : ''}`}>
         <div className="w-full max-w-4xl flex sm:flex-row flex-col items-center justify-between gap-4">
           
           <div className="flex-1 w-full text-center sm:text-left">
@@ -308,8 +323,9 @@ export default function LessonPage() {
           </div>
 
           <button
+            id="next-btn"
             onClick={handleCheck}
-            disabled={currentExercise.type !== 'intro' && (!selectedAnswer || (Array.isArray(selectedAnswer) && selectedAnswer.length === 0))}
+            disabled={currentExercise.type !== 'intro' && !isChecking && (!selectedAnswer || (Array.isArray(selectedAnswer) && selectedAnswer.length === 0))}
             className={`w-full sm:w-auto px-12 py-3 rounded-xl border-b-4 font-bold text-lg shadow-lg hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest disabled:opacity-50 disabled:scale-100 disabled:shadow-none
               ${currentExercise.type === 'intro' ? 'bg-emerald-500 border-emerald-700 text-white hover:bg-emerald-400' :
               isChecking 

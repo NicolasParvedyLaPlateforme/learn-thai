@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useProgressStore } from './lib/store';
 import courseData from './data/course.json';
-import { BookOpen, CheckCircle, Flame, Star, Play, Crown, RotateCcw, Pencil, X } from 'lucide-react';
+import { BookOpen, CheckCircle, Star, Play, Crown, RotateCcw, Pencil, X } from 'lucide-react';
 import { CourseData, Lesson } from './types';
 
 const data = courseData as CourseData;
@@ -161,6 +161,10 @@ export default function Home() {
               <RotateCcw size={18} />
               <span className="hidden sm:inline">Rappel</span>
             </Link>
+            <Link href="/review-pairs" className="text-fuchsia-500 hover:text-fuchsia-600 bg-fuchsia-50 hover:bg-fuchsia-100 px-3 sm:px-4 py-2 rounded-xl flex items-center gap-2 transition-colors">
+              <BookOpen size={18} />
+              <span className="hidden sm:inline">{mounted && language === 'en' ? 'Pairs' : 'Paires'}</span>
+            </Link>
             <Link href="/writing" className="text-emerald-500 hover:text-emerald-600 bg-emerald-50 hover:bg-emerald-100 px-3 sm:px-4 py-2 rounded-xl flex items-center gap-2 transition-colors">
               <Pencil size={18} />
               <span className="hidden sm:inline">{mounted && language === 'en' ? "Writing" : "Écriture"}</span>
@@ -177,10 +181,6 @@ export default function Home() {
               </button>
             )}
 
-            <div className="flex items-center gap-1 text-orange-500 text-base sm:text-lg">
-              <Flame size={20} className="fill-orange-500 sm:w-[22px] sm:h-[22px]" />
-              <span>0</span>
-            </div>
             <div className="flex items-center gap-1 text-rose-500 text-base sm:text-lg">
               <Star size={20} className="fill-rose-500 sm:w-[22px] sm:h-[22px]" />
               <span>{mounted ? xp : 0}<span className="ml-1 hidden sm:inline">XP</span></span>
@@ -264,7 +264,7 @@ export default function Home() {
                                     if (isUnlocked) {
                                       e.preventDefault();
                                       setSelectedLesson({lesson, isCompleted, unitColor: unit.colorClass, unitBorder: unit.borderClass});
-                                      setModalLevel(Math.min(lessonLevels[lesson.id] || 0, 3));
+                                      setModalLevel(Math.min(lessonLevels[lesson.id] || 0, 4));
                                     }
                                   }}
                                   className="group flex flex-col items-center relative z-10"
@@ -285,9 +285,9 @@ export default function Home() {
                                   <div className="relative">
                                     <div className={
                                       `w-20 h-20 md:w-24 md:h-24 rounded-[2rem] flex items-center justify-center border-b-[6px] transition-transform shadow-sm relative z-0
-                                      ${level >= 4
+                                      ${level >= 5
                                         ? unit.shades.l4
-                                        : level === 3
+                                        : level === 4 || level === 3
                                           ? unit.shades.l3
                                           : level === 2
                                             ? unit.shades.l2
@@ -300,13 +300,13 @@ export default function Home() {
                                       {lesson.isReview ? (
                                         <Star size={40} className={level > 0 || isUnlocked ? `fill-current stroke-current` : `stroke-slate-300 stroke-[2.5]`} />
                                       ) : (
-                                        level >= 4 ? <Crown size={40} className="stroke-current stroke-[2.5]" fill="currentColor" /> :
+                                        level >= 5 ? <Crown size={40} className="stroke-current stroke-[2.5]" fill="currentColor" /> :
                                         level > 0 ? <CheckCircle size={40} className="stroke-current stroke-[2.5]" /> : <Play size={40} className="ml-1 fill-current stroke-current" />
                                       )}
                                     </div>
 
                                     {/* Crown/Level Badge */}
-                                    {(level > 0 && level < 4) && (
+                                    {(level > 0 && level < 5) && (
                                       <div className={`absolute -bottom-2 -right-3 z-20 bg-white border-2 border-slate-200 rounded-full w-8 h-8 flex items-center justify-center text-xs font-black shadow-sm ${unit.textClass}`}>
                                         {level}
                                       </div>
@@ -367,7 +367,7 @@ export default function Home() {
                   {language === 'en' ? 'Choose a level' : 'Choisir un niveau'}
                 </h4>
                 <div className="flex gap-3">
-                  {[0, 1, 2, 3].map((levelIndex) => {
+                  {[0, 1, 2, 3, 4].map((levelIndex) => {
                     const currentProgress = lessonLevels[selectedLesson.lesson.id] || 0;
                     const isCompletedLevel = levelIndex < currentProgress;
                     const isAccessible = levelIndex <= currentProgress;

@@ -30,7 +30,7 @@ export interface CourseData {
   lessons: Lesson[];
 }
 
-export type ExerciseType = 'word-match' | 'sentence-builder' | 'writing' | 'intro';
+export type ExerciseType = 'word-match' | 'sentence-builder' | 'writing' | 'intro' | 'pair-matching';
 
 export interface Exercise {
   id: string;
@@ -38,8 +38,10 @@ export interface Exercise {
   question: string; // The French text
   answer: string; // The Thai text
   options: Word[] | {id: string, th: string, fr: string, phonetic: string}[]; // Words to select from
+  pairs?: Word[]; // For pair-matching
   correctComponents?: string[]; // For sentence builder
   componentGroups?: number[]; // To logically group correctComponents for visual display
   hideHints?: boolean; // If true, tooltips won't be shown
+  disableTooltips?: boolean;
   introItem?: Word | Phrase; // For intro exercises
 }

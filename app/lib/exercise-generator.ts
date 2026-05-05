@@ -162,30 +162,62 @@ export function generateWritingExercises(allLessons: Lesson[], completedLessonId
   });
 }
 
-export function generateEndlessReviewExercises(allLessons: Lesson[], completedLessonIds: string[], language: string = 'fr'): Exercise[] {
+export interface ReviewOptions {
+  showWordHints: boolean;
+  showUsefulVocab: boolean;
+  includeDistractors: boolean;
+  limitDistractors: number;
+}
+
+export function generateEndlessReviewExercises(
+  allLessons: Lesson[], 
+  completedLessonIds: string[], 
+  language: string = 'fr',
+  options?: ReviewOptions
+): Exercise[] {
   const completedLessons = allLessons.filter(l => completedLessonIds.includes(l.id));
   if (completedLessons.length === 0) return [];
 
+  const defaultOptions: ReviewOptions = {
+    showWordHints: true,
+    showUsefulVocab: true,
+    includeDistractors: true,
+    limitDistractors: 2,
+    ...options
+  };
+
   let exercises: Exercise[] = [];
   const globalWords = allLessons.flatMap(l => l.words);
+  
+  // Create collections of number words
+  const numberLessons = allLessons.filter(l => l.title.toLowerCase().includes('nombre') || l.titleEn?.toLowerCase().includes('number'));
+  const numberWords = numberLessons.flatMap(l => l.words);
 
   completedLessons.forEach(prevLesson => {
+    const isNumberLesson = prevLesson.title.toLowerCase().includes('nombre') || prevLesson.titleEn?.toLowerCase().includes('number');
+    const distractorPool = isNumberLesson ? numberWords : globalWords;
+    const numDistractors = defaultOptions.includeDistractors ? defaultOptions.limitDistractors : 0;
+
     // word match
     prevLesson.words.forEach(word => {
-      const distractors = shuffle(globalWords.filter(w => w.id !== word.id)).slice(0, 5);
+      // Word match always has 3 distractors (4 options total)
+      const distractors = shuffle(distractorPool.filter(w => w.id !== word.id)).slice(0, 3);
       exercises.push({
         id: `endless-wm-${word.id}-${Date.now()}-${Math.random()}`,
         type: 'word-match',
         question: language === 'en' ? (word.en || word.fr) : word.fr,
         answer: word.th,
         options: shuffle([word, ...distractors]),
-        hideHints: false // The user requested hints always on
-      });
+        hideHints: !defaultOptions.showUsefulVocab,
+        disableTooltips: !defaultOptions.showWordHints,
+      } as any); // Type assertion for now since we'll add these options to Exercise interface
     });
     // sentence builder
     prevLesson.phrases.forEach(phrase => {
       const phraseWords = phrase.components.map(id => globalWords.find(w => w.id === id)).filter(Boolean) as Word[];
-      const distractors = shuffle(globalWords.filter(w => !phrase.components.includes(w.id))).slice(0, 5);
+      // Distractors for sentence builder: shouldn't use number words unless it's a number lesson
+      const sbDistractorPool = isNumberLesson ? numberWords : globalWords;
+      const distractors = shuffle(sbDistractorPool.filter(w => !phrase.components.includes(w.id))).slice(0, numDistractors);
       exercises.push({
         id: `endless-sb-${phrase.id}-${Date.now()}-${Math.random()}`,
         type: 'sentence-builder',
@@ -193,8 +225,9 @@ export function generateEndlessReviewExercises(allLessons: Lesson[], completedLe
         answer: phrase.th,
         options: shuffle([...phraseWords, ...distractors]),
         correctComponents: phrase.components,
-        hideHints: false // The user requested hints always on
-      });
+        hideHints: !defaultOptions.showUsefulVocab,
+        disableTooltips: !defaultOptions.showWordHints,
+      } as any);
     });
   });
 
@@ -225,7 +258,8 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
     previousLessons.forEach(prevLesson => {
       // word match
       prevLesson.words.forEach(word => {
-        const distractors = shuffle(globalWords.filter(w => w.id !== word.id)).slice(0, reviewWMDistractors);
+        // Always 3 distractors for word-match = 4 options
+        const distractors = shuffle(globalWords.filter(w => w.id !== word.id)).slice(0, 3);
         exercises.push({
           id: `rev-wm-${word.id}`,
           type: 'word-match',
@@ -327,12 +361,30 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
     if (wmPool.length === 0) wmPool = [...sbPool].slice(0, 4);
     if (sbPool.length === 0) sbPool = [...wmPool];
     finalExercises = [...wmPool, ...sbPool];
-  } else {
+  } else if (level === 3) {
     // Level 4: Only sentence-builder
     let sbPool = [...sbExercises];
     while (sbPool.length < 10 && sbExercises.length > 0) sbPool = [...sbPool, ...shuffle(sbExercises)];
     if (sbPool.length === 0) sbPool = [...wmExercises];
     finalExercises = sbPool;
+  } else {
+    // Level 5 (index 4): Only pair-matching
+    let pmExercises: Exercise[] = [];
+    const allWordsForPairsRaw = lesson.words.length >= 4 ? lesson.words : globalWords;
+    const allWordsForPairs = Array.from(new Map(allWordsForPairsRaw.map(w => [w.id, w])).values());
+    for (let i = 0; i < 5; i++) {
+      const selectedPairs = shuffle(allWordsForPairs).slice(0, 4);
+      pmExercises.push({
+        id: `pm-${Date.now()}-${Math.random()}`,
+        type: 'pair-matching',
+        question: language === 'en' ? 'Match the words' : 'Reliez les mots correspondants',
+        answer: '',
+        options: selectedPairs,
+        pairs: selectedPairs,
+        hideHints: true
+      });
+    }
+    finalExercises = pmExercises;
   }
 
   // Prevent same questions consecutively
@@ -397,4 +449,31 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
   }
 
   return exercisesWithIntros;
+}
+
+export function generateEndlessPairMatching(
+  allLessons: Lesson[],
+  completedLessonIds: string[],
+  language: string = 'fr'
+): Exercise[] {
+  const completedLessons = allLessons.filter(l => completedLessonIds.includes(l.id));
+  if (completedLessons.length === 0) return [];
+  const globalWordsRaw = completedLessons.flatMap(l => l.words);
+  const globalWords = Array.from(new Map(globalWordsRaw.map(w => [w.id, w])).values());
+  if (globalWords.length < 4) return [];
+
+  let exercises: Exercise[] = [];
+  for (let i = 0; i < 20; i++) {
+    const selectedPairs = shuffle(globalWords).slice(0, 4);
+    exercises.push({
+      id: `endless-pm-${Date.now()}-${Math.random()}`,
+      type: 'pair-matching',
+      question: language === 'en' ? 'Match the words' : 'Reliez les mots correspondants',
+      answer: '',
+      options: selectedPairs,
+      pairs: selectedPairs,
+      hideHints: true
+    });
+  }
+  return exercises;
 }

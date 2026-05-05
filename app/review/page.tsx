@@ -5,8 +5,9 @@ import { useRouter } from 'next/navigation';
 import { useProgressStore } from '../lib/store';
 import courseData from '../data/course.json';
 import { generateEndlessReviewExercises } from '../lib/exercise-generator';
+import type { ReviewOptions } from '../lib/exercise-generator';
 import { Exercise, CourseData, Word } from '../types';
-import { X, Check } from 'lucide-react';
+import { X, Check, Settings, Play } from 'lucide-react';
 import { playThaiTTS, preloadThaiVoices } from '../lib/tts';
 
 // Exercise Components
@@ -23,6 +24,15 @@ export default function ReviewPage() {
   const [exercises, setExercises] = useState<Exercise[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   
+  // Options State
+  const [showOptions, setShowOptions] = useState(true);
+  const [options, setOptions] = useState<ReviewOptions>({
+    showWordHints: true,
+    showUsefulVocab: true,
+    includeDistractors: true,
+    limitDistractors: 2,
+  });
+  
   // Interaction State
   const [selectedAnswer, setSelectedAnswer] = useState<string | string[] | null>(null);
   const [isChecking, setIsChecking] = useState(false);
@@ -33,15 +43,19 @@ export default function ReviewPage() {
     let initialized = false;
     const timer = setTimeout(() => {
       setMounted(true);
-      if(!initialized && completedLessons.length > 0) {
-        setExercises(generateEndlessReviewExercises(data.lessons, completedLessons, language));
-        initialized = true;
-      }
+      // We don't generate exercises right away anymore, we wait for user to click Start
     }, 0);
     
     preloadThaiVoices();
     return () => clearTimeout(timer);
   }, [completedLessons, language]);
+
+  const handleStartReview = () => {
+    if (completedLessons.length > 0) {
+      setExercises(generateEndlessReviewExercises(data.lessons, completedLessons, language, options));
+      setShowOptions(false);
+    }
+  };
 
   if (!mounted) return <div className="p-8 text-center text-slate-500 font-medium">{language === 'en' ? 'Loading...' : 'Chargement...'}</div>;
 
@@ -64,6 +78,79 @@ export default function ReviewPage() {
     );
   }
 
+  if (showOptions) {
+    return (
+      <div className="min-h-screen bg-[#FAFAFA] font-sans text-slate-800 flex flex-col items-center p-4">
+        <header className="w-full max-w-2xl mt-4 flex items-center justify-between mb-8">
+          <button onClick={() => router.push('/')} className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-full transition-colors">
+            <X size={28} />
+          </button>
+          <div className="text-xl font-bold text-slate-700 flex items-center gap-2">
+            <Settings size={20} className="text-indigo-500" />
+            {language === 'en' ? 'Review Options' : 'Options de rappel'}
+          </div>
+          <div className="w-11"></div>
+        </header>
+
+        <div className="w-full max-w-2xl bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-slate-200">
+          <div className="space-y-6">
+            
+            {/* Option 1: Tooltips (Aide au survol) */}
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="font-bold text-lg text-slate-800">{language === 'en' ? 'Word hints on hover' : 'Aide au survol (points soulignés)'}</h3>
+                <p className="text-slate-500 text-sm mt-1">{language === 'en' ? 'Show translation and audio when you hover over words' : 'Afficher la traduction et le son au survol des mots'}</p>
+              </div>
+              <label className="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" className="sr-only peer" checked={options.showWordHints} onChange={() => setOptions({...options, showWordHints: !options.showWordHints})} />
+                <div className="w-14 h-7 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-indigo-500"></div>
+              </label>
+            </div>
+
+            <div className="w-full h-px bg-slate-100"></div>
+
+            {/* Option 2: Useful Vocab */}
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="font-bold text-lg text-slate-800">{language === 'en' ? 'Useful vocabulary block' : 'Bloc vocabulaire utile'}</h3>
+                <p className="text-slate-500 text-sm mt-1">{language === 'en' ? 'Show the list of words involved under the exercise' : 'Afficher la liste des mots impliqués sous l\'exercice'}</p>
+              </div>
+              <label className="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" className="sr-only peer" checked={options.showUsefulVocab} onChange={() => setOptions({...options, showUsefulVocab: !options.showUsefulVocab})} />
+                <div className="w-14 h-7 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-indigo-500"></div>
+              </label>
+            </div>
+
+            <div className="w-full h-px bg-slate-100"></div>
+
+            {/* Option 3: Distractors */}
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="font-bold text-lg text-slate-800">{language === 'en' ? 'False answers (Distractors)' : 'Faux choix (Distracteurs)'}</h3>
+                <p className="text-slate-500 text-sm mt-1">{language === 'en' ? 'Include wrong choices in options' : 'Inclure de mauvaises réponses dans les choix'}</p>
+              </div>
+              <label className="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" className="sr-only peer" checked={options.includeDistractors} onChange={() => setOptions({...options, includeDistractors: !options.includeDistractors})} />
+                <div className="w-14 h-7 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-indigo-500"></div>
+              </label>
+            </div>
+
+          </div>
+
+          <div className="mt-10">
+            <button 
+              onClick={handleStartReview}
+              className="w-full py-4 rounded-2xl bg-indigo-500 border-b-4 border-indigo-700 text-white font-extrabold text-xl shadow-sm hover:bg-indigo-400 active:translate-y-1 active:border-b-0 transition-all flex items-center justify-center gap-2"
+            >
+              <Play size={24} className="fill-white" />
+              {language === 'en' ? 'START REVIEW' : 'COMMENCER LE RAPPEL'}
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   if (exercises.length === 0) return <div className="p-8 text-center text-slate-500 font-medium">{language === 'en' ? 'Loading...' : 'Chargement...'}</div>;
 
   const currentExercise = exercises[currentIndex];
@@ -79,7 +166,7 @@ export default function ReviewPage() {
           
           if (currentIndex >= exercises.length - 3) {
             // Refill exercises when running low
-            setExercises(prev => [...prev, ...generateEndlessReviewExercises(data.lessons, completedLessons, language)]);
+            setExercises(prev => [...prev, ...generateEndlessReviewExercises(data.lessons, completedLessons, language, options)]);
           }
           
           setCurrentIndex(currentIndex + 1);
@@ -165,6 +252,7 @@ export default function ReviewPage() {
                   isSentence={currentExercise.type === 'sentence-builder'}
                   exerciseOptions={currentExercise.options as Word[]}
                   hideHints={currentExercise.hideHints}
+                  disableTooltips={currentExercise.disableTooltips}
                   alwaysShowPhonetic={currentExercise.type === 'writing'}
                 />
               </div>
