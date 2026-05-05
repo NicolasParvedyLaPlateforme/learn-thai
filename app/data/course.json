@@ -349,6 +349,27 @@
           "fr": "dix",
           "phonetic": "sìp",
           "en": "ten"
+        },
+        {
+          "id": "w_pi",
+          "th": "ปี",
+          "fr": "année / ans",
+          "phonetic": "pii",
+          "en": "year / years"
+        },
+        {
+          "id": "w_duean",
+          "th": "เดือน",
+          "fr": "mois",
+          "phonetic": "duean",
+          "en": "month"
+        },
+        {
+          "id": "w_khrang",
+          "th": "ครั้ง",
+          "fr": "fois",
+          "phonetic": "khráng",
+          "en": "time"
         }
       ],
       "phrases": [
@@ -411,6 +432,61 @@
             "w_5"
           ],
           "en": "five"
+        },
+        {
+          "id": "p_new_l3_1",
+          "th": "หนึ่งปี",
+          "fr": "un an",
+          "phonetic": "nùeng pii",
+          "components": [
+            "w_1",
+            "w_pi"
+          ],
+          "en": "one year"
+        },
+        {
+          "id": "p_new_l3_2",
+          "th": "สองเดือน",
+          "fr": "deux mois",
+          "phonetic": "sɔ̌ng duean",
+          "components": [
+            "w_2",
+            "w_duean"
+          ],
+          "en": "two months"
+        },
+        {
+          "id": "p_new_l3_3",
+          "th": "สามครั้ง",
+          "fr": "trois fois",
+          "phonetic": "sǎam khráng",
+          "components": [
+            "w_3",
+            "w_khrang"
+          ],
+          "en": "three times"
+        },
+        {
+          "id": "p_new_l3_4",
+          "th": "สี่ปี",
+          "fr": "quatre ans",
+          "phonetic": "sìi pii",
+          "components": [
+            "w_4",
+            "w_pi"
+          ],
+          "en": "four years"
+        },
+        {
+          "id": "p_new_l3_5",
+          "th": "ห้าเดือน",
+          "fr": "cinq mois",
+          "phonetic": "hâa duean",
+          "components": [
+            "w_5",
+            "w_duean"
+          ],
+          "en": "five months"
         }
       ],
       "titleEn": "Numbers 1 to 10",
@@ -625,6 +701,27 @@
           "fr": "vouloir / prendre",
           "phonetic": "ao",
           "en": "want / take"
+        },
+        {
+          "id": "w_kai",
+          "th": "ไก่",
+          "fr": "poulet",
+          "phonetic": "kài",
+          "en": "chicken"
+        },
+        {
+          "id": "w_khai",
+          "th": "ไข่",
+          "fr": "oeuf",
+          "phonetic": "khài",
+          "en": "egg"
+        },
+        {
+          "id": "w_mu",
+          "th": "หมู",
+          "fr": "porc",
+          "phonetic": "mǔu",
+          "en": "pork"
         }
       ],
       "phrases": [
@@ -706,6 +803,62 @@
             "w_kha"
           ],
           "en": "very delicious (woman)"
+        },
+        {
+          "id": "p_new_l4_1",
+          "th": "กินไก่",
+          "fr": "manger du poulet",
+          "phonetic": "kin kài",
+          "components": [
+            "w_kin",
+            "w_kai"
+          ],
+          "en": "eat chicken"
+        },
+        {
+          "id": "p_new_l4_2",
+          "th": "เอาไข่",
+          "fr": "je veux un oeuf",
+          "phonetic": "ao khài",
+          "components": [
+            "w_ao",
+            "w_khai"
+          ],
+          "en": "I want an egg"
+        },
+        {
+          "id": "p_new_l4_3",
+          "th": "หมูอร่อย",
+          "fr": "le porc est délicieux",
+          "phonetic": "mǔu à-rɔ̀i",
+          "components": [
+            "w_mu",
+            "w_aroi"
+          ],
+          "en": "pork is delicious"
+        },
+        {
+          "id": "p_new_l4_4",
+          "th": "ไก่เผ็ด",
+          "fr": "poulet épicé",
+          "phonetic": "kài phèt",
+          "components": [
+            "w_kai",
+            "w_phet"
+          ],
+          "en": "spicy chicken"
+        },
+        {
+          "id": "p_new_l4_5",
+          "th": "ไม่กินหมู",
+          "fr": "je ne mange pas de porc",
+          "phonetic": "mâi kin mǔu",
+          "components": [
+            "w_mai_neg",
+            "w_kin",
+            "w_mu"
+          ],
+          "en": "I don't eat pork"
         }
       ],
       "titleEn": "Food: At the restaurant",
@@ -743,6 +896,27 @@
           "fr": "comprendre",
           "phonetic": "khâo jai",
           "en": "to understand"
+        },
+        {
+          "id": "w_chuai",
+          "th": "ช่วย",
+          "fr": "aider",
+          "phonetic": "chûay",
+          "en": "help"
+        },
+        {
+          "id": "w_noi",
+          "th": "หน่อย",
+          "fr": "un peu",
+          "phonetic": "nɔ̀i",
+          "en": "a little"
+        },
+        {
+          "id": "w_phut",
+          "th": "พูด",
+          "fr": "parler",
+          "phonetic": "phûut",
+          "en": "speak"
         }
       ],
       "phrases": [
@@ -821,6 +995,63 @@
             "w_thi_nai"
           ],
           "en": "where is it?"
+        },
+        {
+          "id": "p_new_l5_1",
+          "th": "ช่วยหน่อย",
+          "fr": "aidez-moi un peu",
+          "phonetic": "chûay nɔ̀i",
+          "components": [
+            "w_chuai",
+            "w_noi"
+          ],
+          "en": "help me a little"
+        },
+        {
+          "id": "p_new_l5_2",
+          "th": "พูดอะไร",
+          "fr": "que dis-tu ?",
+          "phonetic": "phûut à-rai",
+          "components": [
+            "w_phut",
+            "w_arai"
+          ],
+          "en": "what are you saying?"
+        },
+        {
+          "id": "p_new_l5_3",
+          "th": "ไม่เข้าใจหน่อย",
+          "fr": "je ne comprends pas un peu",
+          "phonetic": "mâi khâo jai nɔ̀i",
+          "components": [
+            "w_mai_neg",
+            "w_khao_jai",
+            "w_noi"
+          ],
+          "en": "I don't understand a bit"
+        },
+        {
+          "id": "p_new_l5_4",
+          "th": "ช่วยพูดหน่อย",
+          "fr": "parlez un peu s'il vous plaît",
+          "phonetic": "chûay phûut nɔ̀i",
+          "components": [
+            "w_chuai",
+            "w_phut",
+            "w_noi"
+          ],
+          "en": "please speak a little"
+        },
+        {
+          "id": "p_new_l5_5",
+          "th": "พูดที่ไหน",
+          "fr": "parler où ?",
+          "phonetic": "phûut thîi nǎi",
+          "components": [
+            "w_phut",
+            "w_thi_nai"
+          ],
+          "en": "speak where?"
         }
       ],
       "titleEn": "Basics 3: Politeness and questions",
@@ -872,6 +1103,27 @@
           "fr": "petit frère / petite sœur",
           "phonetic": "nɔ́ɔng",
           "en": "little brother/little sister"
+        },
+        {
+          "id": "w_phuean",
+          "th": "เพื่อน",
+          "fr": "ami",
+          "phonetic": "phûean",
+          "en": "friend"
+        },
+        {
+          "id": "w_khru",
+          "th": "ครู",
+          "fr": "professeur",
+          "phonetic": "khruu",
+          "en": "teacher"
+        },
+        {
+          "id": "w_dek",
+          "th": "เด็ก",
+          "fr": "enfant",
+          "phonetic": "dèk",
+          "en": "child"
         }
       ],
       "phrases": [
@@ -948,6 +1200,65 @@
             "w_dee"
           ],
           "en": "we are fine"
+        },
+        {
+          "id": "p_new_l6_1",
+          "th": "เพื่อนชื่ออะไร",
+          "fr": "comment s'appelle ton ami ?",
+          "phonetic": "phûean chûue à-rai",
+          "components": [
+            "w_phuean",
+            "w_chue",
+            "w_arai"
+          ],
+          "en": "what's your friend's name?"
+        },
+        {
+          "id": "p_new_l6_2",
+          "th": "เด็กกินข้าว",
+          "fr": "l'enfant mange du riz",
+          "phonetic": "dèk kin khâao",
+          "components": [
+            "w_dek",
+            "w_kin",
+            "w_khao"
+          ],
+          "en": "the child eats rice"
+        },
+        {
+          "id": "p_new_l6_3",
+          "th": "ครูใจดี",
+          "fr": "le prof est bon (bien)",
+          "phonetic": "khruu dii",
+          "components": [
+            "w_khru",
+            "w_dee"
+          ],
+          "en": "the teacher is good"
+        },
+        {
+          "id": "p_new_l6_4",
+          "th": "เพื่อนสบายดีไหม",
+          "fr": "est-ce que ton ami va bien ?",
+          "phonetic": "phûean sà-baai dii mǎi",
+          "components": [
+            "w_phuean",
+            "w_sabai",
+            "w_dee",
+            "w_mai"
+          ],
+          "en": "is your friend well?"
+        },
+        {
+          "id": "p_new_l6_5",
+          "th": "แม่ของเด็ก",
+          "fr": "la mère de l'enfant",
+          "phonetic": "mâe dèk",
+          "components": [
+            "w_mae",
+            "w_dek"
+          ],
+          "en": "the child's mother"
         }
       ],
       "titleEn": "Subjects and Family",
@@ -985,6 +1296,27 @@
           "fr": "vouloir",
           "phonetic": "yàak",
           "en": "to want"
+        },
+        {
+          "id": "w_du",
+          "th": "ดู",
+          "fr": "regarder",
+          "phonetic": "duu",
+          "en": "watch"
+        },
+        {
+          "id": "w_ro",
+          "th": "รอ",
+          "fr": "attendre",
+          "phonetic": "rɔɔ",
+          "en": "wait"
+        },
+        {
+          "id": "w_khit",
+          "th": "คิด",
+          "fr": "penser",
+          "phonetic": "khít",
+          "en": "think"
         }
       ],
       "phrases": [
@@ -1056,6 +1388,61 @@
             "w_kha"
           ],
           "en": "I want to go (woman)"
+        },
+        {
+          "id": "p_new_l7_1",
+          "th": "ดูอะไร",
+          "fr": "regardes-tu quoi ?",
+          "phonetic": "duu à-rai",
+          "components": [
+            "w_du",
+            "w_arai"
+          ],
+          "en": "what are you watching?"
+        },
+        {
+          "id": "p_new_l7_2",
+          "th": "อยากรอ",
+          "fr": "vouloir attendre",
+          "phonetic": "yàak rɔɔ",
+          "components": [
+            "w_yak",
+            "w_ro"
+          ],
+          "en": "want to wait"
+        },
+        {
+          "id": "p_new_l7_3",
+          "th": "คิดอะไร",
+          "fr": "à quoi penses-tu ?",
+          "phonetic": "khít à-rai",
+          "components": [
+            "w_khit",
+            "w_arai"
+          ],
+          "en": "what are you thinking about?"
+        },
+        {
+          "id": "p_new_l7_4",
+          "th": "มาดู",
+          "fr": "viens regarder",
+          "phonetic": "maa duu",
+          "components": [
+            "w_ma",
+            "w_du"
+          ],
+          "en": "come watch"
+        },
+        {
+          "id": "p_new_l7_5",
+          "th": "ทำไมรอ",
+          "fr": "pourquoi (que fais-tu) attendre",
+          "phonetic": "tham rɔɔ",
+          "components": [
+            "w_tham",
+            "w_ro"
+          ],
+          "en": "doing wait (waiting)"
         }
       ],
       "titleEn": "Useful verbs",
@@ -1107,6 +1494,27 @@
           "fr": "acheter",
           "phonetic": "súue",
           "en": "buy"
+        },
+        {
+          "id": "w_khai",
+          "th": "ขาย",
+          "fr": "vendre",
+          "phonetic": "khǎai",
+          "en": "sell"
+        },
+        {
+          "id": "w_ngern",
+          "th": "เงิน",
+          "fr": "argent",
+          "phonetic": "ngen",
+          "en": "money"
+        },
+        {
+          "id": "w_thuk",
+          "th": "ถูก",
+          "fr": "pas cher",
+          "phonetic": "thùuk",
+          "en": "cheap"
         }
       ],
       "phrases": [
@@ -1199,6 +1607,63 @@
             "w_dai"
           ],
           "en": "I can't lower the price"
+        },
+        {
+          "id": "p_new_l8_1",
+          "th": "ขายเท่าไหร่",
+          "fr": "tu vends à combien ?",
+          "phonetic": "khǎai thâo rai",
+          "components": [
+            "w_khai",
+            "w_thao_rai"
+          ],
+          "en": "how much do you sell it for?"
+        },
+        {
+          "id": "p_new_l8_2",
+          "th": "ถูกมาก",
+          "fr": "très bon marché",
+          "phonetic": "thùuk mâak",
+          "components": [
+            "w_thuk",
+            "w_mak"
+          ],
+          "en": "very cheap"
+        },
+        {
+          "id": "p_new_l8_3",
+          "th": "มีเงินไหม",
+          "fr": "as-tu de l'argent ?",
+          "phonetic": "mii ngen mǎi",
+          "components": [
+            "w_mee",
+            "w_ngern",
+            "w_mai"
+          ],
+          "en": "do you have money?"
+        },
+        {
+          "id": "p_new_l8_4",
+          "th": "ขายถูก",
+          "fr": "vendre pas cher",
+          "phonetic": "khǎai thùuk",
+          "components": [
+            "w_khai",
+            "w_thuk"
+          ],
+          "en": "sell cheap"
+        },
+        {
+          "id": "p_new_l8_5",
+          "th": "เงินสิบบาท",
+          "fr": "dix bahts (d'argent)",
+          "phonetic": "ngen sìp bàat",
+          "components": [
+            "w_ngern",
+            "w_10",
+            "w_baht"
+          ],
+          "en": "ten baht money"
         }
       ],
       "titleEn": "At the market (Buy)",
@@ -1236,6 +1701,27 @@
           "fr": "aimer",
           "phonetic": "chɔ̂ɔp",
           "en": "to like"
+        },
+        {
+          "id": "w_krot",
+          "th": "โกรธ",
+          "fr": "en colère",
+          "phonetic": "kròot",
+          "en": "angry"
+        },
+        {
+          "id": "w_nguang",
+          "th": "ง่วง",
+          "fr": "avoir sommeil",
+          "phonetic": "ngûang",
+          "en": "sleepy"
+        },
+        {
+          "id": "w_sao",
+          "th": "เศร้า",
+          "fr": "triste",
+          "phonetic": "sâo",
+          "en": "sad"
         }
       ],
       "phrases": [
@@ -1326,6 +1812,61 @@
             "w_chop"
           ],
           "en": "I like (woman)"
+        },
+        {
+          "id": "p_new_l9_1",
+          "th": "โกรธมาก",
+          "fr": "très en colère",
+          "phonetic": "kròot mâak",
+          "components": [
+            "w_krot",
+            "w_mak"
+          ],
+          "en": "very angry"
+        },
+        {
+          "id": "p_new_l9_2",
+          "th": "ง่วงมาก",
+          "fr": "avoir très sommeil",
+          "phonetic": "ngûang mâak",
+          "components": [
+            "w_nguang",
+            "w_mak"
+          ],
+          "en": "very sleepy"
+        },
+        {
+          "id": "p_new_l9_3",
+          "th": "ไม่เศร้า",
+          "fr": "pas triste",
+          "phonetic": "mâi sâo",
+          "components": [
+            "w_mai_neg",
+            "w_sao"
+          ],
+          "en": "not sad"
+        },
+        {
+          "id": "p_new_l9_4",
+          "th": "พ่อโกรธ",
+          "fr": "papa est en colère",
+          "phonetic": "phɔ̂ɔ kròot",
+          "components": [
+            "w_pho",
+            "w_krot"
+          ],
+          "en": "dad is angry"
+        },
+        {
+          "id": "p_new_l9_5",
+          "th": "เด็กเศร้า",
+          "fr": "l'enfant est triste",
+          "phonetic": "dèk sâo",
+          "components": [
+            "w_dek",
+            "w_sao"
+          ],
+          "en": "the child is sad"
         }
       ],
       "titleEn": "States and Feelings",
@@ -2648,6 +3189,416 @@
       "descriptionEn": "Hunger, addition"
     },
     {
+      "id": "lesson-24-a1",
+      "title": "Ext: Nouveaux Fruits",
+      "description": "Plus de vocabulaire pour cette unité.",
+      "titleEn": "Ext: New Fruits",
+      "descriptionEn": "More vocabulary for this unit.",
+      "words": [
+        {
+          "id": "w_lesson-24-a1_0",
+          "th": "แอปเปิล",
+          "fr": "pomme",
+          "en": "apple",
+          "phonetic": "mǎep-pən"
+        },
+        {
+          "id": "w_lesson-24-a1_1",
+          "th": "กล้วย",
+          "fr": "banane",
+          "en": "banana",
+          "phonetic": "klûay"
+        },
+        {
+          "id": "w_lesson-24-a1_2",
+          "th": "ส้ม",
+          "fr": "orange",
+          "en": "orange",
+          "phonetic": "sôm"
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_new_lesson-24-a1_0",
+          "th": "กินแอปเปิล",
+          "fr": "Manger une pomme",
+          "en": "Eat an apple",
+          "phonetic": "",
+          "components": [
+            "w_lesson-24-a1_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-24-a1_1",
+          "th": "เอาส้ม",
+          "fr": "Vouloir une orange",
+          "en": "Want an orange",
+          "phonetic": "",
+          "components": [
+            "w_lesson-24-a1_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-24-a1_2",
+          "th": "กล้วยอร่อย",
+          "fr": "Banane délicieuse",
+          "en": "Delicious banana",
+          "phonetic": "",
+          "components": [
+            "w_lesson-24-a1_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-24-a1_3",
+          "th": "ขอแอปเปิล",
+          "fr": "Je voudrais une pomme",
+          "en": "I would like an apple",
+          "phonetic": "",
+          "components": [
+            "w_lesson-24-a1_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-24-a1_4",
+          "th": "ไม่กินส้ม",
+          "fr": "Ne pas manger d'orange",
+          "en": "Don't eat orange",
+          "phonetic": "",
+          "components": [
+            "w_lesson-24-a1_0"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lesson-24-a2",
+      "title": "Ext: Légumes",
+      "description": "Plus de vocabulaire pour cette unité.",
+      "titleEn": "Ext: Vegetables",
+      "descriptionEn": "More vocabulary for this unit.",
+      "words": [
+        {
+          "id": "w_lesson-24-a2_0",
+          "th": "มะเขือเทศ",
+          "fr": "tomate",
+          "en": "tomato",
+          "phonetic": "má-khǔea-thêet"
+        },
+        {
+          "id": "w_lesson-24-a2_1",
+          "th": "แตงกวา",
+          "fr": "concombre",
+          "en": "cucumber",
+          "phonetic": "taeng-kwaa"
+        },
+        {
+          "id": "w_lesson-24-a2_2",
+          "th": "ผัก",
+          "fr": "légume",
+          "en": "vegetable",
+          "phonetic": "phàk"
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_new_lesson-24-a2_0",
+          "th": "กินผัก",
+          "fr": "Manger des légumes",
+          "en": "Eat vegetables",
+          "phonetic": "",
+          "components": [
+            "w_lesson-24-a2_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-24-a2_1",
+          "th": "ไม่ชอบแตงกวา",
+          "fr": "Ne pas aimer le concombre",
+          "en": "Don't like cucumber",
+          "phonetic": "",
+          "components": [
+            "w_lesson-24-a2_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-24-a2_2",
+          "th": "ซื้อมะเขือเทศ",
+          "fr": "Acheter une tomate",
+          "en": "Buy a tomato",
+          "phonetic": "",
+          "components": [
+            "w_lesson-24-a2_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-24-a2_3",
+          "th": "ผักสีเขียว",
+          "fr": "Légume vert",
+          "en": "Green vegetable",
+          "phonetic": "",
+          "components": [
+            "w_lesson-24-a2_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-24-a2_4",
+          "th": "เอาแตงกวา",
+          "fr": "Vouloir du concombre",
+          "en": "Want cucumber",
+          "phonetic": "",
+          "components": [
+            "w_lesson-24-a2_0"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lesson-24-a3",
+      "title": "Ext: Ustensiles",
+      "description": "Plus de vocabulaire pour cette unité.",
+      "titleEn": "Ext: Utensils",
+      "descriptionEn": "More vocabulary for this unit.",
+      "words": [
+        {
+          "id": "w_lesson-24-a3_0",
+          "th": "ช้อน",
+          "fr": "cuillère",
+          "en": "spoon",
+          "phonetic": "chɔ́ɔn"
+        },
+        {
+          "id": "w_lesson-24-a3_1",
+          "th": "ส้อม",
+          "fr": "fourchette",
+          "en": "fork",
+          "phonetic": "sɔ̂m"
+        },
+        {
+          "id": "w_lesson-24-a3_2",
+          "th": "จาน",
+          "fr": "assiette",
+          "en": "plate",
+          "phonetic": "jaan"
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_new_lesson-24-a3_0",
+          "th": "ขอช้อน",
+          "fr": "Je voudrais une cuillère",
+          "en": "I'd like a spoon",
+          "phonetic": "",
+          "components": [
+            "w_lesson-24-a3_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-24-a3_1",
+          "th": "ใช้ส้อม",
+          "fr": "Utiliser une fourchette",
+          "en": "Use a fork",
+          "phonetic": "",
+          "components": [
+            "w_lesson-24-a3_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-24-a3_2",
+          "th": "จานใหญ่",
+          "fr": "Grande assiette",
+          "en": "Big plate",
+          "phonetic": "",
+          "components": [
+            "w_lesson-24-a3_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-24-a3_3",
+          "th": "ล้างจาน",
+          "fr": "Laver les assiettes",
+          "en": "Wash plates",
+          "phonetic": "",
+          "components": [
+            "w_lesson-24-a3_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-24-a3_4",
+          "th": "เอาส้อมไหม",
+          "fr": "Voulez-vous une fourchette ?",
+          "en": "Do you want a fork?",
+          "phonetic": "",
+          "components": [
+            "w_lesson-24-a3_0"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lesson-24-a4",
+      "title": "Ext: Cuissons",
+      "description": "Plus de vocabulaire pour cette unité.",
+      "titleEn": "Ext: Cooking",
+      "descriptionEn": "More vocabulary for this unit.",
+      "words": [
+        {
+          "id": "w_lesson-24-a4_0",
+          "th": "ทอด",
+          "fr": "frit",
+          "en": "fried",
+          "phonetic": "thɔ̂ɔt"
+        },
+        {
+          "id": "w_lesson-24-a4_1",
+          "th": "ต้ม",
+          "fr": "bouilli",
+          "en": "boiled",
+          "phonetic": "tôm"
+        },
+        {
+          "id": "w_lesson-24-a4_2",
+          "th": "ย่าง",
+          "fr": "grillé",
+          "en": "grilled",
+          "phonetic": "yâang"
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_new_lesson-24-a4_0",
+          "th": "ไก่ทอด",
+          "fr": "Poulet frit",
+          "en": "Fried chicken",
+          "phonetic": "",
+          "components": [
+            "w_lesson-24-a4_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-24-a4_1",
+          "th": "หมูย่าง",
+          "fr": "Porc grillé",
+          "en": "Grilled pork",
+          "phonetic": "",
+          "components": [
+            "w_lesson-24-a4_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-24-a4_2",
+          "th": "ไข่ต้ม",
+          "fr": "Oeuf dur",
+          "en": "Boiled egg",
+          "phonetic": "",
+          "components": [
+            "w_lesson-24-a4_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-24-a4_3",
+          "th": "ทอดไข่",
+          "fr": "Frire un oeuf",
+          "en": "Fry an egg",
+          "phonetic": "",
+          "components": [
+            "w_lesson-24-a4_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-24-a4_4",
+          "th": "ชอบไก่ย่าง",
+          "fr": "Aimer le poulet grillé",
+          "en": "Like grilled chicken",
+          "phonetic": "",
+          "components": [
+            "w_lesson-24-a4_0"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lesson-24-a5",
+      "title": "Ext: Compléments",
+      "description": "Plus de vocabulaire pour cette unité.",
+      "titleEn": "Ext: Extras",
+      "descriptionEn": "More vocabulary for this unit.",
+      "words": [
+        {
+          "id": "w_lesson-24-a5_0",
+          "th": "ของหวาน",
+          "fr": "dessert",
+          "en": "dessert",
+          "phonetic": "khɔ̌ɔng-wǎan"
+        },
+        {
+          "id": "w_lesson-24-a5_1",
+          "th": "ซุป",
+          "fr": "soupe",
+          "en": "soup",
+          "phonetic": "súp"
+        },
+        {
+          "id": "w_lesson-24-a5_2",
+          "th": "น้ำแข็ง",
+          "fr": "glaçon",
+          "en": "ice",
+          "phonetic": "náam-khǎeng"
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_new_lesson-24-a5_0",
+          "th": "ซุปอร่อย",
+          "fr": "Soupe délicieuse",
+          "en": "Delicious soup",
+          "phonetic": "",
+          "components": [
+            "w_lesson-24-a5_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-24-a5_1",
+          "th": "ขอน้ำแข็ง",
+          "fr": "Je voudrais des glaçons",
+          "en": "I want ice",
+          "phonetic": "",
+          "components": [
+            "w_lesson-24-a5_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-24-a5_2",
+          "th": "กินของหวาน",
+          "fr": "Manger un dessert",
+          "en": "Eat dessert",
+          "phonetic": "",
+          "components": [
+            "w_lesson-24-a5_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-24-a5_3",
+          "th": "ไม่เอาของหวาน",
+          "fr": "Ne pas vouloir de dessert",
+          "en": "Don't want dessert",
+          "phonetic": "",
+          "components": [
+            "w_lesson-24-a5_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-24-a5_4",
+          "th": "ซุปร้อน",
+          "fr": "Soupe chaude",
+          "en": "Hot soup",
+          "phonetic": "",
+          "components": [
+            "w_lesson-24-a5_0"
+          ]
+        }
+      ]
+    },
+    {
       "id": "lesson-24",
       "title": "Bilan Unité 3",
       "description": "Test sur la nourriture",
@@ -3045,6 +3996,416 @@
       "descriptionEn": "Sell, give, money"
     },
     {
+      "id": "lesson-29-a1",
+      "title": "Ext: Mouvements",
+      "description": "Plus de vocabulaire pour cette unité.",
+      "titleEn": "Ext: Movements",
+      "descriptionEn": "More vocabulary for this unit.",
+      "words": [
+        {
+          "id": "w_lesson-29-a1_0",
+          "th": "วิ่ง",
+          "fr": "courir",
+          "en": "run",
+          "phonetic": "wîng"
+        },
+        {
+          "id": "w_lesson-29-a1_1",
+          "th": "เดิน",
+          "fr": "marcher",
+          "en": "walk",
+          "phonetic": "dǝǝn"
+        },
+        {
+          "id": "w_lesson-29-a1_2",
+          "th": "หยุด",
+          "fr": "arrêter",
+          "en": "stop",
+          "phonetic": "yùt"
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_new_lesson-29-a1_0",
+          "th": "เดินไป",
+          "fr": "Marcher vers",
+          "en": "Walk to",
+          "phonetic": "",
+          "components": [
+            "w_lesson-29-a1_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-29-a1_1",
+          "th": "วิ่งเร็ว",
+          "fr": "Courir vite",
+          "en": "Run fast",
+          "phonetic": "",
+          "components": [
+            "w_lesson-29-a1_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-29-a1_2",
+          "th": "ช่วยหยุด",
+          "fr": "Veuillez vous arrêter",
+          "en": "Please stop",
+          "phonetic": "",
+          "components": [
+            "w_lesson-29-a1_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-29-a1_3",
+          "th": "กำลังเดิน",
+          "fr": "En train de marcher",
+          "en": "Walking",
+          "phonetic": "",
+          "components": [
+            "w_lesson-29-a1_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-29-a1_4",
+          "th": "หยุดที่นี่",
+          "fr": "S'arrêter ici",
+          "en": "Stop here",
+          "phonetic": "",
+          "components": [
+            "w_lesson-29-a1_0"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lesson-29-a2",
+      "title": "Ext: Dialogues",
+      "description": "Plus de vocabulaire pour cette unité.",
+      "titleEn": "Ext: Dialogues",
+      "descriptionEn": "More vocabulary for this unit.",
+      "words": [
+        {
+          "id": "w_lesson-29-a2_0",
+          "th": "ถาม",
+          "fr": "demander",
+          "en": "ask",
+          "phonetic": "thǎam"
+        },
+        {
+          "id": "w_lesson-29-a2_1",
+          "th": "ตอบ",
+          "fr": "répondre",
+          "en": "answer",
+          "phonetic": "tɔ̀ɔp"
+        },
+        {
+          "id": "w_lesson-29-a2_2",
+          "th": "อ่าน",
+          "fr": "lire",
+          "en": "read",
+          "phonetic": "àan"
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_new_lesson-29-a2_0",
+          "th": "ขอถาม",
+          "fr": "Je voudrais demander",
+          "en": "I'd like to ask",
+          "phonetic": "",
+          "components": [
+            "w_lesson-29-a2_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-29-a2_1",
+          "th": "กรุณาตอบ",
+          "fr": "Veuillez répondre",
+          "en": "Please answer",
+          "phonetic": "",
+          "components": [
+            "w_lesson-29-a2_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-29-a2_2",
+          "th": "อ่านหนังสือ",
+          "fr": "Lire un livre",
+          "en": "Read a book",
+          "phonetic": "",
+          "components": [
+            "w_lesson-29-a2_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-29-a2_3",
+          "th": "ไม่ตอบ",
+          "fr": "Ne pas répondre",
+          "en": "Not answer",
+          "phonetic": "",
+          "components": [
+            "w_lesson-29-a2_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-29-a2_4",
+          "th": "ชอบอ่าน",
+          "fr": "Aimer lire",
+          "en": "Like reading",
+          "phonetic": "",
+          "components": [
+            "w_lesson-29-a2_0"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lesson-29-a3",
+      "title": "Ext: Maison",
+      "description": "Plus de vocabulaire pour cette unité.",
+      "titleEn": "Ext: House verbs",
+      "descriptionEn": "More vocabulary for this unit.",
+      "words": [
+        {
+          "id": "w_lesson-29-a3_0",
+          "th": "ทำความสะอาด",
+          "fr": "nettoyer",
+          "en": "clean",
+          "phonetic": "tham-khwaam-sà-àat"
+        },
+        {
+          "id": "w_lesson-29-a3_1",
+          "th": "ซัก",
+          "fr": "laver",
+          "en": "wash",
+          "phonetic": "sák"
+        },
+        {
+          "id": "w_lesson-29-a3_2",
+          "th": "ทำอาหาร",
+          "fr": "cuisiner",
+          "en": "cook",
+          "phonetic": "tham-aa-hǎan"
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_new_lesson-29-a3_0",
+          "th": "กำลังทำอาหาร",
+          "fr": "En train de cuisiner",
+          "en": "Cooking",
+          "phonetic": "",
+          "components": [
+            "w_lesson-29-a3_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-29-a3_1",
+          "th": "ซักเสื้อผ้า",
+          "fr": "Laver les vêtements",
+          "en": "Wash clothes",
+          "phonetic": "",
+          "components": [
+            "w_lesson-29-a3_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-29-a3_2",
+          "th": "ทำความสะอาดบ้าน",
+          "fr": "Nettoyer la maison",
+          "en": "Clean house",
+          "phonetic": "",
+          "components": [
+            "w_lesson-29-a3_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-29-a3_3",
+          "th": "ชอบทำอาหาร",
+          "fr": "Aimer cuisiner",
+          "en": "Like cooking",
+          "phonetic": "",
+          "components": [
+            "w_lesson-29-a3_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-29-a3_4",
+          "th": "ไม่ซัก",
+          "fr": "Ne pas laver",
+          "en": "Not washing",
+          "phonetic": "",
+          "components": [
+            "w_lesson-29-a3_0"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lesson-29-a4",
+      "title": "Ext: Objets",
+      "description": "Plus de vocabulaire pour cette unité.",
+      "titleEn": "Ext: Object verbs",
+      "descriptionEn": "More vocabulary for this unit.",
+      "words": [
+        {
+          "id": "w_lesson-29-a4_0",
+          "th": "เปิด",
+          "fr": "ouvrir",
+          "en": "open",
+          "phonetic": "pǝ̀ǝt"
+        },
+        {
+          "id": "w_lesson-29-a4_1",
+          "th": "ปิด",
+          "fr": "fermer",
+          "en": "close",
+          "phonetic": "pìt"
+        },
+        {
+          "id": "w_lesson-29-a4_2",
+          "th": "ใช้",
+          "fr": "utiliser",
+          "en": "use",
+          "phonetic": "chái"
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_new_lesson-29-a4_0",
+          "th": "เปิดประตู",
+          "fr": "Ouvrir la porte",
+          "en": "Open door",
+          "phonetic": "",
+          "components": [
+            "w_lesson-29-a4_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-29-a4_1",
+          "th": "ปิดหน้าต่าง",
+          "fr": "Fermer la fenêtre",
+          "en": "Close window",
+          "phonetic": "",
+          "components": [
+            "w_lesson-29-a4_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-29-a4_2",
+          "th": "ใช้เงิน",
+          "fr": "Utiliser de l'เงิน",
+          "en": "Use money",
+          "phonetic": "",
+          "components": [
+            "w_lesson-29-a4_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-29-a4_3",
+          "th": "ช่วยปิด",
+          "fr": "Veuillez fermer",
+          "en": "Please close",
+          "phonetic": "",
+          "components": [
+            "w_lesson-29-a4_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-29-a4_4",
+          "th": "ไม่เปิด",
+          "fr": "Ne pas ouvrir",
+          "en": "Not open",
+          "phonetic": "",
+          "components": [
+            "w_lesson-29-a4_0"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lesson-29-a5",
+      "title": "Ext: Transitions",
+      "description": "Plus de vocabulaire pour cette unité.",
+      "titleEn": "Ext: Transitions",
+      "descriptionEn": "More vocabulary for this unit.",
+      "words": [
+        {
+          "id": "w_lesson-29-a5_0",
+          "th": "เริ่ม",
+          "fr": "commencer",
+          "en": "begin",
+          "phonetic": "rə̂əm"
+        },
+        {
+          "id": "w_lesson-29-a5_1",
+          "th": "เสร็จ",
+          "fr": "finir",
+          "en": "finish",
+          "phonetic": "sèt"
+        },
+        {
+          "id": "w_lesson-29-a5_2",
+          "th": "เปลี่ยน",
+          "fr": "changer",
+          "en": "change",
+          "phonetic": "plìan"
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_new_lesson-29-a5_0",
+          "th": "เริ่มทำ",
+          "fr": "Commencer à faire",
+          "en": "Begin doing",
+          "phonetic": "",
+          "components": [
+            "w_lesson-29-a5_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-29-a5_1",
+          "th": "เสร็จแล้ว",
+          "fr": "Déjà fini",
+          "en": "Already finished",
+          "phonetic": "",
+          "components": [
+            "w_lesson-29-a5_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-29-a5_2",
+          "th": "เปลี่ยนชุด",
+          "fr": "Changer de vêtements",
+          "en": "Change clothes",
+          "phonetic": "",
+          "components": [
+            "w_lesson-29-a5_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-29-a5_3",
+          "th": "ยังไม่เสร็จ",
+          "fr": "Pas encore fini",
+          "en": "Not finished yet",
+          "phonetic": "",
+          "components": [
+            "w_lesson-29-a5_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-29-a5_4",
+          "th": "เพิ่งเริ่ม",
+          "fr": "Viens de commencer",
+          "en": "Just began",
+          "phonetic": "",
+          "components": [
+            "w_lesson-29-a5_0"
+          ]
+        }
+      ]
+    },
+    {
       "id": "lesson-29",
       "title": "Bilan Unité 4",
       "description": "Test sur les actions",
@@ -3420,6 +4781,416 @@
       "descriptionEn": "When ?"
     },
     {
+      "id": "lesson-34-a1",
+      "title": "Ext: Climats",
+      "description": "Plus de vocabulaire pour cette unité.",
+      "titleEn": "Ext: Climates",
+      "descriptionEn": "More vocabulary for this unit.",
+      "words": [
+        {
+          "id": "w_lesson-34-a1_0",
+          "th": "ลม",
+          "fr": "vent",
+          "en": "wind",
+          "phonetic": "lom"
+        },
+        {
+          "id": "w_lesson-34-a1_1",
+          "th": "หิมะ",
+          "fr": "neige",
+          "en": "snow",
+          "phonetic": "hì-má"
+        },
+        {
+          "id": "w_lesson-34-a1_2",
+          "th": "พายุ",
+          "fr": "tempête",
+          "en": "storm",
+          "phonetic": "phaa-yú"
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_new_lesson-34-a1_0",
+          "th": "ลมแรง",
+          "fr": "Vent fort",
+          "en": "Strong wind",
+          "phonetic": "",
+          "components": [
+            "w_lesson-34-a1_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-34-a1_1",
+          "th": "มีพายุ",
+          "fr": "Il y a une tempête",
+          "en": "There is a storm",
+          "phonetic": "",
+          "components": [
+            "w_lesson-34-a1_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-34-a1_2",
+          "th": "หิมะตก",
+          "fr": "Il neige",
+          "en": "It's snowing",
+          "phonetic": "",
+          "components": [
+            "w_lesson-34-a1_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-34-a1_3",
+          "th": "ไม่ชอบลม",
+          "fr": "Ne pas aimer le vent",
+          "en": "Don't like wind",
+          "phonetic": "",
+          "components": [
+            "w_lesson-34-a1_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-34-a1_4",
+          "th": "พายุใหญ่",
+          "fr": "Grosse tempête",
+          "en": "Big storm",
+          "phonetic": "",
+          "components": [
+            "w_lesson-34-a1_0"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lesson-34-a2",
+      "title": "Ext: Saisons",
+      "description": "Plus de vocabulaire pour cette unité.",
+      "titleEn": "Ext: Seasons",
+      "descriptionEn": "More vocabulary for this unit.",
+      "words": [
+        {
+          "id": "w_lesson-34-a2_0",
+          "th": "ฤดูร้อน",
+          "fr": "été",
+          "en": "summer",
+          "phonetic": "rʉ́-duu-rɔ́ɔn"
+        },
+        {
+          "id": "w_lesson-34-a2_1",
+          "th": "ฤดูหนาว",
+          "fr": "hiver",
+          "en": "winter",
+          "phonetic": "rʉ́-duu-nǎao"
+        },
+        {
+          "id": "w_lesson-34-a2_2",
+          "th": "ฤดูฝน",
+          "fr": "saison des pluies",
+          "en": "rainy season",
+          "phonetic": "rʉ́-duu-fǒn"
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_new_lesson-34-a2_0",
+          "th": "ชอบฤดูร้อน",
+          "fr": "Aimer l'été",
+          "en": "Like summer",
+          "phonetic": "",
+          "components": [
+            "w_lesson-34-a2_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-34-a2_1",
+          "th": "ฤดูหนาวเย็น",
+          "fr": "L'hiver est froid",
+          "en": "Winter is cold",
+          "phonetic": "",
+          "components": [
+            "w_lesson-34-a2_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-34-a2_2",
+          "th": "เกลียดฤดูฝน",
+          "fr": "Détester la saison des pluies",
+          "en": "Hate rainy season",
+          "phonetic": "",
+          "components": [
+            "w_lesson-34-a2_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-34-a2_3",
+          "th": "ไปในฤดูร้อน",
+          "fr": "Y aller en été",
+          "en": "Go in summer",
+          "phonetic": "",
+          "components": [
+            "w_lesson-34-a2_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-34-a2_4",
+          "th": "ร้อนมาก",
+          "fr": "Très chaud",
+          "en": "Very hot",
+          "phonetic": "",
+          "components": [
+            "w_lesson-34-a2_0"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lesson-34-a3",
+      "title": "Ext: Jours",
+      "description": "Plus de vocabulaire pour cette unité.",
+      "titleEn": "Ext: Days",
+      "descriptionEn": "More vocabulary for this unit.",
+      "words": [
+        {
+          "id": "w_lesson-34-a3_0",
+          "th": "วันนี้",
+          "fr": "aujourd'hui",
+          "en": "today",
+          "phonetic": "wan-níi"
+        },
+        {
+          "id": "w_lesson-34-a3_1",
+          "th": "พรุ่งนี้",
+          "fr": "demain",
+          "en": "tomorrow",
+          "phonetic": "phrûng-níi"
+        },
+        {
+          "id": "w_lesson-34-a3_2",
+          "th": "เมื่อวาน",
+          "fr": "hier",
+          "en": "yesterday",
+          "phonetic": "mʉ̂a-waan"
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_new_lesson-34-a3_0",
+          "th": "วันนี้ร้อน",
+          "fr": "Aujourd'hui il fait chaud",
+          "en": "Today is hot",
+          "phonetic": "",
+          "components": [
+            "w_lesson-34-a3_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-34-a3_1",
+          "th": "เจอกันพรุ่งนี้",
+          "fr": "À demain",
+          "en": "See you tomorrow",
+          "phonetic": "",
+          "components": [
+            "w_lesson-34-a3_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-34-a3_2",
+          "th": "เมื่อวานไป",
+          "fr": "J'y suis allé hier",
+          "en": "Went yesterday",
+          "phonetic": "",
+          "components": [
+            "w_lesson-34-a3_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-34-a3_3",
+          "th": "วันนี้กินอะไร",
+          "fr": "Que mange-t-on aujourd'hui ?",
+          "en": "What to eat today?",
+          "phonetic": "",
+          "components": [
+            "w_lesson-34-a3_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-34-a3_4",
+          "th": "ไม่ทำพรุ่งนี้",
+          "fr": "Pas fait demain",
+          "en": "Not doing tomorrow",
+          "phonetic": "",
+          "components": [
+            "w_lesson-34-a3_0"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lesson-34-a4",
+      "title": "Ext: Périodes",
+      "description": "Plus de vocabulaire pour cette unité.",
+      "titleEn": "Ext: Periods",
+      "descriptionEn": "More vocabulary for this unit.",
+      "words": [
+        {
+          "id": "w_lesson-34-a4_0",
+          "th": "เช้า",
+          "fr": "matin",
+          "en": "morning",
+          "phonetic": "cháo"
+        },
+        {
+          "id": "w_lesson-34-a4_1",
+          "th": "บ่าย",
+          "fr": "après-midi",
+          "en": "afternoon",
+          "phonetic": "bàai"
+        },
+        {
+          "id": "w_lesson-34-a4_2",
+          "th": "เย็น",
+          "fr": "soir",
+          "en": "evening",
+          "phonetic": "yen"
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_new_lesson-34-a4_0",
+          "th": "ไปตอนเช้า",
+          "fr": "Aller le matin",
+          "en": "Go in morning",
+          "phonetic": "",
+          "components": [
+            "w_lesson-34-a4_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-34-a4_1",
+          "th": "นอนตอนบ่าย",
+          "fr": "Dormir l'après-midi",
+          "en": "Sleep afternoon",
+          "phonetic": "",
+          "components": [
+            "w_lesson-34-a4_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-34-a4_2",
+          "th": "กินตอนเย็น",
+          "fr": "Manger le soir",
+          "en": "Eat at evening",
+          "phonetic": "",
+          "components": [
+            "w_lesson-34-a4_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-34-a4_3",
+          "th": "ตอนเช้าหนาว",
+          "fr": "Il fait froid le matin",
+          "en": "Cold morning",
+          "phonetic": "",
+          "components": [
+            "w_lesson-34-a4_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-34-a4_4",
+          "th": "เจอกันตอนเย็น",
+          "fr": "Se voir ce soir",
+          "en": "See you this evening",
+          "phonetic": "",
+          "components": [
+            "w_lesson-34-a4_0"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lesson-34-a5",
+      "title": "Ext: Durées",
+      "description": "Plus de vocabulaire pour cette unité.",
+      "titleEn": "Ext: Durations",
+      "descriptionEn": "More vocabulary for this unit.",
+      "words": [
+        {
+          "id": "w_lesson-34-a5_0",
+          "th": "นาที",
+          "fr": "minute",
+          "en": "minute",
+          "phonetic": "naa-thii"
+        },
+        {
+          "id": "w_lesson-34-a5_1",
+          "th": "ชั่วโมง",
+          "fr": "heure",
+          "en": "hour",
+          "phonetic": "chûa-moong"
+        },
+        {
+          "id": "w_lesson-34-a5_2",
+          "th": "วินาที",
+          "fr": "seconde",
+          "en": "second",
+          "phonetic": "wí-naa-thii"
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_new_lesson-34-a5_0",
+          "th": "ห้านาที",
+          "fr": "Cinq minutes",
+          "en": "Five minutes",
+          "phonetic": "",
+          "components": [
+            "w_lesson-34-a5_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-34-a5_1",
+          "th": "หนึ่งชั่วโมง",
+          "fr": "Une heure",
+          "en": "One hour",
+          "phonetic": "",
+          "components": [
+            "w_lesson-34-a5_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-34-a5_2",
+          "th": "รอสักพัก",
+          "fr": "Attendre un instant",
+          "en": "Wait a moment",
+          "phonetic": "",
+          "components": [
+            "w_lesson-34-a5_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-34-a5_3",
+          "th": "สามนาที",
+          "fr": "Trois minutes",
+          "en": "Three minutes",
+          "phonetic": "",
+          "components": [
+            "w_lesson-34-a5_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-34-a5_4",
+          "th": "สองชั่วโมง",
+          "fr": "Deux heures",
+          "en": "Two hours",
+          "phonetic": "",
+          "components": [
+            "w_lesson-34-a5_0"
+          ]
+        }
+      ]
+    },
+    {
       "id": "lesson-34",
       "title": "Bilan Unité 5",
       "description": "Test Temps et Météo",
@@ -3769,6 +5540,416 @@
       ],
       "titleEn": "Aviation",
       "descriptionEn": "Airplane, fly"
+    },
+    {
+      "id": "lesson-39-a1",
+      "title": "Ext: Bâtiments",
+      "description": "Plus de vocabulaire pour cette unité.",
+      "titleEn": "Ext: Buildings",
+      "descriptionEn": "More vocabulary for this unit.",
+      "words": [
+        {
+          "id": "w_lesson-39-a1_0",
+          "th": "ธนาคาร",
+          "fr": "banque",
+          "en": "bank",
+          "phonetic": "thá-naa-khaan"
+        },
+        {
+          "id": "w_lesson-39-a1_1",
+          "th": "โรงพยาบาล",
+          "fr": "hôpital",
+          "en": "hospital",
+          "phonetic": "roong-pha-yaa-baan"
+        },
+        {
+          "id": "w_lesson-39-a1_2",
+          "th": "สถานีตำรวจ",
+          "fr": "commissariat",
+          "en": "police stat.",
+          "phonetic": "sà-thǎa-nii-tam-rùat"
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_new_lesson-39-a1_0",
+          "th": "ไปธนาคาร",
+          "fr": "Aller à la banque",
+          "en": "Go to bank",
+          "phonetic": "",
+          "components": [
+            "w_lesson-39-a1_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-39-a1_1",
+          "th": "หมอที่โรงพยาบาล",
+          "fr": "Docteur à l'hôpital",
+          "en": "Doctor at hospital",
+          "phonetic": "",
+          "components": [
+            "w_lesson-39-a1_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-39-a1_2",
+          "th": "หาตำรวจ",
+          "fr": "Chercher la police",
+          "en": "Find police",
+          "phonetic": "",
+          "components": [
+            "w_lesson-39-a1_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-39-a1_3",
+          "th": "โรงพยาบาลใหญ่",
+          "fr": "Le grand hôpital",
+          "en": "Big hospital",
+          "phonetic": "",
+          "components": [
+            "w_lesson-39-a1_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-39-a1_4",
+          "th": "อยู่ธนาคาร",
+          "fr": "Être à la banque",
+          "en": "At the bank",
+          "phonetic": "",
+          "components": [
+            "w_lesson-39-a1_0"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lesson-39-a2",
+      "title": "Ext: Directions",
+      "description": "Plus de vocabulaire pour cette unité.",
+      "titleEn": "Ext: Directions",
+      "descriptionEn": "More vocabulary for this unit.",
+      "words": [
+        {
+          "id": "w_lesson-39-a2_0",
+          "th": "เหนือ",
+          "fr": "nord",
+          "en": "north",
+          "phonetic": "nʉ̌a"
+        },
+        {
+          "id": "w_lesson-39-a2_1",
+          "th": "ใต้",
+          "fr": "sud",
+          "en": "south",
+          "phonetic": "dtâai"
+        },
+        {
+          "id": "w_lesson-39-a2_2",
+          "th": "ตะวันออก",
+          "fr": "est",
+          "en": "east",
+          "phonetic": "tà-wan-ɔ̀ɔk"
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_new_lesson-39-a2_0",
+          "th": "ภาคเหนือ",
+          "fr": "Région du nord",
+          "en": "North region",
+          "phonetic": "",
+          "components": [
+            "w_lesson-39-a2_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-39-a2_1",
+          "th": "ไปภาคใต้",
+          "fr": "Aller au sud",
+          "en": "Go south",
+          "phonetic": "",
+          "components": [
+            "w_lesson-39-a2_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-39-a2_2",
+          "th": "ทิศตะวันออก",
+          "fr": "L'est",
+          "en": "The east",
+          "phonetic": "",
+          "components": [
+            "w_lesson-39-a2_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-39-a2_3",
+          "th": "คนใต้",
+          "fr": "Les gens du sud",
+          "en": "Southern people",
+          "phonetic": "",
+          "components": [
+            "w_lesson-39-a2_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-39-a2_4",
+          "th": "ลมเหนือ",
+          "fr": "Vent du nord",
+          "en": "North wind",
+          "phonetic": "",
+          "components": [
+            "w_lesson-39-a2_0"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lesson-39-a3",
+      "title": "Ext: Voyage",
+      "description": "Plus de vocabulaire pour cette unité.",
+      "titleEn": "Ext: Travel",
+      "descriptionEn": "More vocabulary for this unit.",
+      "words": [
+        {
+          "id": "w_lesson-39-a3_0",
+          "th": "ตั๋ว",
+          "fr": "billet",
+          "en": "ticket",
+          "phonetic": "dtǔa"
+        },
+        {
+          "id": "w_lesson-39-a3_1",
+          "th": "สถานี",
+          "fr": "station",
+          "en": "station",
+          "phonetic": "sà-thǎa-nii"
+        },
+        {
+          "id": "w_lesson-39-a3_2",
+          "th": "แผนที่",
+          "fr": "carte",
+          "en": "map",
+          "phonetic": "phǎen-thîi"
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_new_lesson-39-a3_0",
+          "th": "ซื้อตั๋ว",
+          "fr": "Acheter un billet",
+          "en": "Buy ticket",
+          "phonetic": "",
+          "components": [
+            "w_lesson-39-a3_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-39-a3_1",
+          "th": "สถานีรถไฟ",
+          "fr": "Gare féroviaire",
+          "en": "Train station",
+          "phonetic": "",
+          "components": [
+            "w_lesson-39-a3_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-39-a3_2",
+          "th": "ดูแผนที่",
+          "fr": "Regarder la carte",
+          "en": "Look at map",
+          "phonetic": "",
+          "components": [
+            "w_lesson-39-a3_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-39-a3_3",
+          "th": "ตั๋วสองใบ",
+          "fr": "Deux billets",
+          "en": "Two tickets",
+          "phonetic": "",
+          "components": [
+            "w_lesson-39-a3_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-39-a3_4",
+          "th": "สถานีไหน",
+          "fr": "Quelle station ?",
+          "en": "Which station?",
+          "phonetic": "",
+          "components": [
+            "w_lesson-39-a3_0"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lesson-39-a4",
+      "title": "Ext: Véhicules",
+      "description": "Plus de vocabulaire pour cette unité.",
+      "titleEn": "Ext: Vehicles",
+      "descriptionEn": "More vocabulary for this unit.",
+      "words": [
+        {
+          "id": "w_lesson-39-a4_0",
+          "th": "รถ",
+          "fr": "voiture",
+          "en": "car",
+          "phonetic": "rót"
+        },
+        {
+          "id": "w_lesson-39-a4_1",
+          "th": "รถไฟ",
+          "fr": "train",
+          "en": "train",
+          "phonetic": "rót-fai"
+        },
+        {
+          "id": "w_lesson-39-a4_2",
+          "th": "รถเมล์",
+          "fr": "bus",
+          "en": "bus",
+          "phonetic": "rót-mee"
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_new_lesson-39-a4_0",
+          "th": "ขับรถ",
+          "fr": "Conduire",
+          "en": "Drive a car",
+          "phonetic": "",
+          "components": [
+            "w_lesson-39-a4_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-39-a4_1",
+          "th": "ขึ้นรถไฟ",
+          "fr": "Prendre le train",
+          "en": "Take train",
+          "phonetic": "",
+          "components": [
+            "w_lesson-39-a4_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-39-a4_2",
+          "th": "รอรถเมล์",
+          "fr": "Attendre le bus",
+          "en": "Wait for bus",
+          "phonetic": "",
+          "components": [
+            "w_lesson-39-a4_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-39-a4_3",
+          "th": "รถสวย",
+          "fr": "Belle voiture",
+          "en": "Beautiful car",
+          "phonetic": "",
+          "components": [
+            "w_lesson-39-a4_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-39-a4_4",
+          "th": "รถไฟช้า",
+          "fr": "Le train est lent",
+          "en": "Train is slow",
+          "phonetic": "",
+          "components": [
+            "w_lesson-39-a4_0"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lesson-39-a5",
+      "title": "Ext: Guides",
+      "description": "Plus de vocabulaire pour cette unité.",
+      "titleEn": "Ext: Guiding",
+      "descriptionEn": "More vocabulary for this unit.",
+      "words": [
+        {
+          "id": "w_lesson-39-a5_0",
+          "th": "ตรง",
+          "fr": "tout droit",
+          "en": "straight",
+          "phonetic": "dtrong"
+        },
+        {
+          "id": "w_lesson-39-a5_1",
+          "th": "ซ้าย",
+          "fr": "gauche",
+          "en": "left",
+          "phonetic": "sáai"
+        },
+        {
+          "id": "w_lesson-39-a5_2",
+          "th": "ขวา",
+          "fr": "droite",
+          "en": "right",
+          "phonetic": "khwǎa"
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_new_lesson-39-a5_0",
+          "th": "เดินตรงไป",
+          "fr": "Marcher tout droit",
+          "en": "Walk straight",
+          "phonetic": "",
+          "components": [
+            "w_lesson-39-a5_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-39-a5_1",
+          "th": "เลี้ยวซ้าย",
+          "fr": "Tourner à gauche",
+          "en": "Turn left",
+          "phonetic": "",
+          "components": [
+            "w_lesson-39-a5_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-39-a5_2",
+          "th": "เลี้ยวขวา",
+          "fr": "Tourner à droite",
+          "en": "Turn right",
+          "phonetic": "",
+          "components": [
+            "w_lesson-39-a5_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-39-a5_3",
+          "th": "อยู่ทางขวา",
+          "fr": "C'est sur la droite",
+          "en": "It's on the right",
+          "phonetic": "",
+          "components": [
+            "w_lesson-39-a5_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-39-a5_4",
+          "th": "ไปทางซ้าย",
+          "fr": "Aller à gauche",
+          "en": "Go left",
+          "phonetic": "",
+          "components": [
+            "w_lesson-39-a5_0"
+          ]
+        }
+      ]
     },
     {
       "id": "lesson-39",
@@ -4134,6 +6315,416 @@
       ],
       "titleEn": "Prizes and Money",
       "descriptionEn": "Cheap, expensive"
+    },
+    {
+      "id": "lesson-44-a1",
+      "title": "Ext: Accessoires",
+      "description": "Plus de vocabulaire pour cette unité.",
+      "titleEn": "Ext: Accessories",
+      "descriptionEn": "More vocabulary for this unit.",
+      "words": [
+        {
+          "id": "w_lesson-44-a1_0",
+          "th": "รองเท้า",
+          "fr": "chaussures",
+          "en": "shoes",
+          "phonetic": "rɔɔng-tháo"
+        },
+        {
+          "id": "w_lesson-44-a1_1",
+          "th": "หมวก",
+          "fr": "chapeau",
+          "en": "hat",
+          "phonetic": "mùak"
+        },
+        {
+          "id": "w_lesson-44-a1_2",
+          "th": "กระเป๋า",
+          "fr": "sac",
+          "en": "bag",
+          "phonetic": "krà-pǎo"
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_new_lesson-44-a1_0",
+          "th": "ใส่รองเท้า",
+          "fr": "Mettre ses chaussures",
+          "en": "Wear shoes",
+          "phonetic": "",
+          "components": [
+            "w_lesson-44-a1_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-44-a1_1",
+          "th": "หมวกสวย",
+          "fr": "Beau chapeau",
+          "en": "Beautiful hat",
+          "phonetic": "",
+          "components": [
+            "w_lesson-44-a1_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-44-a1_2",
+          "th": "กระเป๋าใหญ่",
+          "fr": "Grand sac",
+          "en": "Big bag",
+          "phonetic": "",
+          "components": [
+            "w_lesson-44-a1_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-44-a1_3",
+          "th": "ซื้อรองเท้า",
+          "fr": "Acheter des chaussures",
+          "en": "Buy shoes",
+          "phonetic": "",
+          "components": [
+            "w_lesson-44-a1_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-44-a1_4",
+          "th": "ชอบกระเป๋า",
+          "fr": "Aimer le sac",
+          "en": "Like the bag",
+          "phonetic": "",
+          "components": [
+            "w_lesson-44-a1_0"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lesson-44-a2",
+      "title": "Ext: Placard",
+      "description": "Plus de vocabulaire pour cette unité.",
+      "titleEn": "Ext: Wardrobe",
+      "descriptionEn": "More vocabulary for this unit.",
+      "words": [
+        {
+          "id": "w_lesson-44-a2_0",
+          "th": "กระโปรง",
+          "fr": "jupe",
+          "en": "skirt",
+          "phonetic": "krà-proong"
+        },
+        {
+          "id": "w_lesson-44-a2_1",
+          "th": "ชุด",
+          "fr": "robe/ensemble",
+          "en": "dress/suit",
+          "phonetic": "chút"
+        },
+        {
+          "id": "w_lesson-44-a2_2",
+          "th": "ถุงเท้า",
+          "fr": "chaussettes",
+          "en": "socks",
+          "phonetic": "thǔng-tháo"
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_new_lesson-44-a2_0",
+          "th": "กระโปรงสั้น",
+          "fr": "Jupe courte",
+          "en": "Short skirt",
+          "phonetic": "",
+          "components": [
+            "w_lesson-44-a2_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-44-a2_1",
+          "th": "ถุงเท้าสีดำ",
+          "fr": "Chaussettes noires",
+          "en": "Black socks",
+          "phonetic": "",
+          "components": [
+            "w_lesson-44-a2_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-44-a2_2",
+          "th": "ชุดสวยมาก",
+          "fr": "Très belle robe",
+          "en": "Very beautiful dress",
+          "phonetic": "",
+          "components": [
+            "w_lesson-44-a2_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-44-a2_3",
+          "th": "ใส่ชุดใหม่",
+          "fr": "Mettre de nouveaux vêtements",
+          "en": "Wear new dress",
+          "phonetic": "",
+          "components": [
+            "w_lesson-44-a2_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-44-a2_4",
+          "th": "ไม่ใส่กระโปรง",
+          "fr": "Ne pas porter de jupe",
+          "en": "Not wear skirt",
+          "phonetic": "",
+          "components": [
+            "w_lesson-44-a2_0"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lesson-44-a3",
+      "title": "Ext: Taille",
+      "description": "Plus de vocabulaire pour cette unité.",
+      "titleEn": "Ext: Size",
+      "descriptionEn": "More vocabulary for this unit.",
+      "words": [
+        {
+          "id": "w_lesson-44-a3_0",
+          "th": "ใหญ่",
+          "fr": "grand",
+          "en": "big",
+          "phonetic": "yài"
+        },
+        {
+          "id": "w_lesson-44-a3_1",
+          "th": "เล็ก",
+          "fr": "petit",
+          "en": "small",
+          "phonetic": "lék"
+        },
+        {
+          "id": "w_lesson-44-a3_2",
+          "th": "ยาว",
+          "fr": "long",
+          "en": "long",
+          "phonetic": "yaao"
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_new_lesson-44-a3_0",
+          "th": "เสื้อใหญ่",
+          "fr": "Grande chemise",
+          "en": "Big shirt",
+          "phonetic": "",
+          "components": [
+            "w_lesson-44-a3_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-44-a3_1",
+          "th": "จานเล็ก",
+          "fr": "Petite assiette",
+          "en": "Small plate",
+          "phonetic": "",
+          "components": [
+            "w_lesson-44-a3_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-44-a3_2",
+          "th": "ผมยาว",
+          "fr": "Cheveux longs",
+          "en": "Long hair",
+          "phonetic": "",
+          "components": [
+            "w_lesson-44-a3_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-44-a3_3",
+          "th": "ไม้ตียาว",
+          "fr": "Bâton long",
+          "en": "Long stick",
+          "phonetic": "",
+          "components": [
+            "w_lesson-44-a3_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-44-a3_4",
+          "th": "อยากได้ใหญ่",
+          "fr": "En vouloir un grand",
+          "en": "Want a big one",
+          "phonetic": "",
+          "components": [
+            "w_lesson-44-a3_0"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lesson-44-a4",
+      "title": "Ext: Mesure",
+      "description": "Plus de vocabulaire pour cette unité.",
+      "titleEn": "Ext: Measure",
+      "descriptionEn": "More vocabulary for this unit.",
+      "words": [
+        {
+          "id": "w_lesson-44-a4_0",
+          "th": "สั้น",
+          "fr": "court",
+          "en": "short",
+          "phonetic": "sân"
+        },
+        {
+          "id": "w_lesson-44-a4_1",
+          "th": "หนัก",
+          "fr": "lourd",
+          "en": "heavy",
+          "phonetic": "nàk"
+        },
+        {
+          "id": "w_lesson-44-a4_2",
+          "th": "เบา",
+          "fr": "léger",
+          "en": "light",
+          "phonetic": "bao"
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_new_lesson-44-a4_0",
+          "th": "ผมสั้น",
+          "fr": "Cheveux courts",
+          "en": "Short hair",
+          "phonetic": "",
+          "components": [
+            "w_lesson-44-a4_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-44-a4_1",
+          "th": "กระเป๋าหนัก",
+          "fr": "Sac lourd",
+          "en": "Heavy bag",
+          "phonetic": "",
+          "components": [
+            "w_lesson-44-a4_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-44-a4_2",
+          "th": "รองเท้าเบา",
+          "fr": "Chaussures légères",
+          "en": "Light shoes",
+          "phonetic": "",
+          "components": [
+            "w_lesson-44-a4_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-44-a4_3",
+          "th": "หนักมาก",
+          "fr": "Très lourd",
+          "en": "Very heavy",
+          "phonetic": "",
+          "components": [
+            "w_lesson-44-a4_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-44-a4_4",
+          "th": "ของเบา",
+          "fr": "Objet léger",
+          "en": "Light object",
+          "phonetic": "",
+          "components": [
+            "w_lesson-44-a4_0"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lesson-44-a5",
+      "title": "Ext: Matériaux",
+      "description": "Plus de vocabulaire pour cette unité.",
+      "titleEn": "Ext: Materials",
+      "descriptionEn": "More vocabulary for this unit.",
+      "words": [
+        {
+          "id": "w_lesson-44-a5_0",
+          "th": "ทอง",
+          "fr": "or",
+          "en": "gold",
+          "phonetic": "thɔɔng"
+        },
+        {
+          "id": "w_lesson-44-a5_1",
+          "th": "เงิน",
+          "fr": "argent/métal",
+          "en": "silver",
+          "phonetic": "ngen"
+        },
+        {
+          "id": "w_lesson-44-a5_2",
+          "th": "เพชร",
+          "fr": "diamant",
+          "en": "diamond",
+          "phonetic": "phét"
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_new_lesson-44-a5_0",
+          "th": "ซื้อทอง",
+          "fr": "Acheter de l'or",
+          "en": "Buy gold",
+          "phonetic": "",
+          "components": [
+            "w_lesson-44-a5_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-44-a5_1",
+          "th": "แหวนเงิน",
+          "fr": "Bague en argent",
+          "en": "Silver ring",
+          "phonetic": "",
+          "components": [
+            "w_lesson-44-a5_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-44-a5_2",
+          "th": "ชอบเพชร",
+          "fr": "Aimer les diamants",
+          "en": "Like diamonds",
+          "phonetic": "",
+          "components": [
+            "w_lesson-44-a5_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-44-a5_3",
+          "th": "สร้อยทอง",
+          "fr": "Collier en or",
+          "en": "Gold necklace",
+          "phonetic": "",
+          "components": [
+            "w_lesson-44-a5_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-44-a5_4",
+          "th": "เพชรแพง",
+          "fr": "Diamant cher",
+          "en": "Expensive diamond",
+          "phonetic": "",
+          "components": [
+            "w_lesson-44-a5_0"
+          ]
+        }
+      ]
     },
     {
       "id": "lesson-44",
@@ -4518,6 +7109,416 @@
       "descriptionEn": "Kind, fun"
     },
     {
+      "id": "lesson-49-a1",
+      "title": "Ext: Aînés",
+      "description": "Plus de vocabulaire pour cette unité.",
+      "titleEn": "Ext: Elders",
+      "descriptionEn": "More vocabulary for this unit.",
+      "words": [
+        {
+          "id": "w_lesson-49-a1_0",
+          "th": "ปู่",
+          "fr": "grand-père",
+          "en": "grandfather",
+          "phonetic": "pùu"
+        },
+        {
+          "id": "w_lesson-49-a1_1",
+          "th": "ย่า",
+          "fr": "grand-mère",
+          "en": "grandmother",
+          "phonetic": "yâa"
+        },
+        {
+          "id": "w_lesson-49-a1_2",
+          "th": "ลุง",
+          "fr": "oncle",
+          "en": "uncle",
+          "phonetic": "lung"
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_new_lesson-49-a1_0",
+          "th": "ปู่ใจดี",
+          "fr": "Grand-père est gentil",
+          "en": "Grandfather is nice",
+          "phonetic": "",
+          "components": [
+            "w_lesson-49-a1_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-49-a1_1",
+          "th": "รักย่า",
+          "fr": "Aimer grand-mère",
+          "en": "Love grandmother",
+          "phonetic": "",
+          "components": [
+            "w_lesson-49-a1_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-49-a1_2",
+          "th": "ลุงมาหา",
+          "fr": "Oncle vient visiter",
+          "en": "Uncle comes visiting",
+          "phonetic": "",
+          "components": [
+            "w_lesson-49-a1_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-49-a1_3",
+          "th": "บ้านปู่",
+          "fr": "La maison de grand-père",
+          "en": "Grandfather's house",
+          "phonetic": "",
+          "components": [
+            "w_lesson-49-a1_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-49-a1_4",
+          "th": "ย่าทำอาหาร",
+          "fr": "Grand-mère cuisine",
+          "en": "Grandmother cooks",
+          "phonetic": "",
+          "components": [
+            "w_lesson-49-a1_0"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lesson-49-a2",
+      "title": "Ext: Parenté",
+      "description": "Plus de vocabulaire pour cette unité.",
+      "titleEn": "Ext: Relatives",
+      "descriptionEn": "More vocabulary for this unit.",
+      "words": [
+        {
+          "id": "w_lesson-49-a2_0",
+          "th": "ป้า",
+          "fr": "tante",
+          "en": "aunt",
+          "phonetic": "pâa"
+        },
+        {
+          "id": "w_lesson-49-a2_1",
+          "th": "ลูกพี่ลูกน้อง",
+          "fr": "cousin",
+          "en": "cousin",
+          "phonetic": "lûuk-phîi-lûuk-nɔ́ɔng"
+        },
+        {
+          "id": "w_lesson-49-a2_2",
+          "th": "หลาน",
+          "fr": "neveu/petit-fils",
+          "en": "nephew",
+          "phonetic": "lǎan"
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_new_lesson-49-a2_0",
+          "th": "ป้ารักหลาน",
+          "fr": "La tante aime son neveu",
+          "en": "Aunt loves nephew",
+          "phonetic": "",
+          "components": [
+            "w_lesson-49-a2_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-49-a2_1",
+          "th": "ลูกพี่ลูกน้องมา",
+          "fr": "Le cousin vient",
+          "en": "Cousin comes",
+          "phonetic": "",
+          "components": [
+            "w_lesson-49-a2_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-49-a2_2",
+          "th": "มีหลาน",
+          "fr": "Avoir un neveu",
+          "en": "Have a nephew",
+          "phonetic": "",
+          "components": [
+            "w_lesson-49-a2_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-49-a2_3",
+          "th": "ป้าใจดี",
+          "fr": "Tante gentille",
+          "en": "Nice aunt",
+          "phonetic": "",
+          "components": [
+            "w_lesson-49-a2_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-49-a2_4",
+          "th": "ให้หลาน",
+          "fr": "Donner au neveu",
+          "en": "Give to nephew",
+          "phonetic": "",
+          "components": [
+            "w_lesson-49-a2_0"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lesson-49-a3",
+      "title": "Ext: Beauté",
+      "description": "Plus de vocabulaire pour cette unité.",
+      "titleEn": "Ext: Beauty",
+      "descriptionEn": "More vocabulary for this unit.",
+      "words": [
+        {
+          "id": "w_lesson-49-a3_0",
+          "th": "สวย",
+          "fr": "belle",
+          "en": "beautiful",
+          "phonetic": "sǔay"
+        },
+        {
+          "id": "w_lesson-49-a3_1",
+          "th": "หล่อ",
+          "fr": "beau",
+          "en": "handsome",
+          "phonetic": "lɔ̀ɔ"
+        },
+        {
+          "id": "w_lesson-49-a3_2",
+          "th": "น่ารัก",
+          "fr": "mignon",
+          "en": "cute",
+          "phonetic": "nâa-rák"
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_new_lesson-49-a3_0",
+          "th": "ผู้หญิงสวย",
+          "fr": "Belle femme",
+          "en": "Beautiful woman",
+          "phonetic": "",
+          "components": [
+            "w_lesson-49-a3_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-49-a3_1",
+          "th": "ผู้ชายหล่อ",
+          "fr": "Beau garçon",
+          "en": "Handsome man",
+          "phonetic": "",
+          "components": [
+            "w_lesson-49-a3_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-49-a3_2",
+          "th": "เด็กน่ารัก",
+          "fr": "Mignon enfant",
+          "en": "Cute child",
+          "phonetic": "",
+          "components": [
+            "w_lesson-49-a3_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-49-a3_3",
+          "th": "น่ารักมาก",
+          "fr": "Très mignon!",
+          "en": "Very cute!",
+          "phonetic": "",
+          "components": [
+            "w_lesson-49-a3_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-49-a3_4",
+          "th": "รถสวย",
+          "fr": "Belleรถรถ",
+          "en": "Beautiful car",
+          "phonetic": "",
+          "components": [
+            "w_lesson-49-a3_0"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lesson-49-a4",
+      "title": "Ext: Corpulence",
+      "description": "Plus de vocabulaire pour cette unité.",
+      "titleEn": "Ext: Body shape",
+      "descriptionEn": "More vocabulary for this unit.",
+      "words": [
+        {
+          "id": "w_lesson-49-a4_0",
+          "th": "อ้วน",
+          "fr": "gros(se)",
+          "en": "fat",
+          "phonetic": "ûan"
+        },
+        {
+          "id": "w_lesson-49-a4_1",
+          "th": "ผอม",
+          "fr": "mince",
+          "en": "thin",
+          "phonetic": "phɔ̌ɔm"
+        },
+        {
+          "id": "w_lesson-49-a4_2",
+          "th": "สูง",
+          "fr": "grand (taille)",
+          "en": "tall",
+          "phonetic": "sǔung"
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_new_lesson-49-a4_0",
+          "th": "คนสูง",
+          "fr": "Une grande personne",
+          "en": "Tall person",
+          "phonetic": "",
+          "components": [
+            "w_lesson-49-a4_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-49-a4_1",
+          "th": "แมวอ้วน",
+          "fr": "Un gros chat",
+          "en": "Fat cat",
+          "phonetic": "",
+          "components": [
+            "w_lesson-49-a4_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-49-a4_2",
+          "th": "เขาผอม",
+          "fr": "Il est mince",
+          "en": "He is thin",
+          "phonetic": "",
+          "components": [
+            "w_lesson-49-a4_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-49-a4_3",
+          "th": "อยากสูง",
+          "fr": "Vouloir être grand",
+          "en": "Want to be tall",
+          "phonetic": "",
+          "components": [
+            "w_lesson-49-a4_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-49-a4_4",
+          "th": "อ้วนมาก",
+          "fr": "Très gros",
+          "en": "Very fat",
+          "phonetic": "",
+          "components": [
+            "w_lesson-49-a4_0"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lesson-49-a5",
+      "title": "Ext: Qualités",
+      "description": "Plus de vocabulaire pour cette unité.",
+      "titleEn": "Ext: Qualities",
+      "descriptionEn": "More vocabulary for this unit.",
+      "words": [
+        {
+          "id": "w_lesson-49-a5_0",
+          "th": "เตี้ย",
+          "fr": "petit (taille)",
+          "en": "short",
+          "phonetic": "dtîa"
+        },
+        {
+          "id": "w_lesson-49-a5_1",
+          "th": "ฉลาด",
+          "fr": "intelligent",
+          "en": "clever",
+          "phonetic": "chà-làat"
+        },
+        {
+          "id": "w_lesson-49-a5_2",
+          "th": "โง่",
+          "fr": "bête",
+          "en": "stupid",
+          "phonetic": "ngôo"
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_new_lesson-49-a5_0",
+          "th": "คนเตี้ย",
+          "fr": "Une personne petite",
+          "en": "Short person",
+          "phonetic": "",
+          "components": [
+            "w_lesson-49-a5_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-49-a5_1",
+          "th": "หมาฉลาด",
+          "fr": "Un chien intelligent",
+          "en": "Clever dog",
+          "phonetic": "",
+          "components": [
+            "w_lesson-49-a5_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-49-a5_2",
+          "th": "ไม่โง่",
+          "fr": "Pas stupide",
+          "en": "Not stupid",
+          "phonetic": "",
+          "components": [
+            "w_lesson-49-a5_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-49-a5_3",
+          "th": "เขาฉลาดมาก",
+          "fr": "Il est très intelligent",
+          "en": "He is very clever",
+          "phonetic": "",
+          "components": [
+            "w_lesson-49-a5_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-49-a5_4",
+          "th": "คนนั้นเก่ง",
+          "fr": "Cette personne est excellente",
+          "en": "That person is great",
+          "phonetic": "",
+          "components": [
+            "w_lesson-49-a5_0"
+          ]
+        }
+      ]
+    },
+    {
       "id": "lesson-49",
       "title": "Bilan Unité 8",
       "description": "Test Famille et Corps",
@@ -4876,6 +7877,416 @@
       "descriptionEn": "Think, know"
     },
     {
+      "id": "lesson-54-a1",
+      "title": "Ext: Santé",
+      "description": "Plus de vocabulaire pour cette unité.",
+      "titleEn": "Ext: Health",
+      "descriptionEn": "More vocabulary for this unit.",
+      "words": [
+        {
+          "id": "w_lesson-54-a1_0",
+          "th": "ยา",
+          "fr": "médicament",
+          "en": "medicine",
+          "phonetic": "yaa"
+        },
+        {
+          "id": "w_lesson-54-a1_1",
+          "th": "ร้านขายยา",
+          "fr": "pharmacie",
+          "en": "pharmacy",
+          "phonetic": "ráan-khǎai-yaa"
+        },
+        {
+          "id": "w_lesson-54-a1_2",
+          "th": "หมอ",
+          "fr": "médecin",
+          "en": "doctor",
+          "phonetic": "mɔ̌ɔ"
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_new_lesson-54-a1_0",
+          "th": "กินยา",
+          "fr": "Prendre un médicament",
+          "en": "Take medicine",
+          "phonetic": "",
+          "components": [
+            "w_lesson-54-a1_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-54-a1_1",
+          "th": "ไปหาหมอ",
+          "fr": "Aller chez le médecin",
+          "en": "Go to doctor",
+          "phonetic": "",
+          "components": [
+            "w_lesson-54-a1_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-54-a1_2",
+          "th": "ร้านขายยาอยู่ไหน",
+          "fr": "Où est la pharmacie?",
+          "en": "Where is pharmacy?",
+          "phonetic": "",
+          "components": [
+            "w_lesson-54-a1_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-54-a1_3",
+          "th": "หมอใจดี",
+          "fr": "Un docteur gentil",
+          "en": "Nice doctor",
+          "phonetic": "",
+          "components": [
+            "w_lesson-54-a1_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-54-a1_4",
+          "th": "ซื้อยา",
+          "fr": "Acheter des médicaments",
+          "en": "Buy medicine",
+          "phonetic": "",
+          "components": [
+            "w_lesson-54-a1_0"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lesson-54-a2",
+      "title": "Ext: Maux",
+      "description": "Plus de vocabulaire pour cette unité.",
+      "titleEn": "Ext: Illness",
+      "descriptionEn": "More vocabulary for this unit.",
+      "words": [
+        {
+          "id": "w_lesson-54-a2_0",
+          "th": "เจ็บ",
+          "fr": "avoir mal",
+          "en": "pain",
+          "phonetic": "jèp"
+        },
+        {
+          "id": "w_lesson-54-a2_1",
+          "th": "ไข้",
+          "fr": "fièvre",
+          "en": "fever",
+          "phonetic": "khâi"
+        },
+        {
+          "id": "w_lesson-54-a2_2",
+          "th": "ไอ",
+          "fr": "ตู้",
+          "en": "cough",
+          "phonetic": "ai"
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_new_lesson-54-a2_0",
+          "th": "เจ็บหัว",
+          "fr": "Avoir mal à la tête",
+          "en": "Headache",
+          "phonetic": "",
+          "components": [
+            "w_lesson-54-a2_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-54-a2_1",
+          "th": "มีไข้",
+          "fr": "Avoir de la fièvre",
+          "en": "Have fever",
+          "phonetic": "",
+          "components": [
+            "w_lesson-54-a2_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-54-a2_2",
+          "th": "ไอมาก",
+          "fr": "Tousser beaucoup",
+          "en": "Cough a lot",
+          "phonetic": "",
+          "components": [
+            "w_lesson-54-a2_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-54-a2_3",
+          "th": "ไม่เจ็บ",
+          "fr": "Ne pas avoir mal",
+          "en": "No pain",
+          "phonetic": "",
+          "components": [
+            "w_lesson-54-a2_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-54-a2_4",
+          "th": "ปวดตา",
+          "fr": "Avoir mal aux yeux",
+          "en": "Eye pain",
+          "phonetic": "",
+          "components": [
+            "w_lesson-54-a2_0"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lesson-54-a3",
+      "title": "Ext: Émotions",
+      "description": "Plus de vocabulaire pour cette unité.",
+      "titleEn": "Ext: Emotions",
+      "descriptionEn": "More vocabulary for this unit.",
+      "words": [
+        {
+          "id": "w_lesson-54-a3_0",
+          "th": "มีความสุข",
+          "fr": "heureux",
+          "en": "happy",
+          "phonetic": "mii-khwaam-sùk"
+        },
+        {
+          "id": "w_lesson-54-a3_1",
+          "th": "โมโห",
+          "fr": "en colère",
+          "en": "mad",
+          "phonetic": "mo-ho"
+        },
+        {
+          "id": "w_lesson-54-a3_2",
+          "th": "กลัว",
+          "fr": "avoir peur",
+          "en": "scared",
+          "phonetic": "klua"
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_new_lesson-54-a3_0",
+          "th": "ฉันมีความสุข",
+          "fr": "Je suis heureux",
+          "en": "I'm happy",
+          "phonetic": "",
+          "components": [
+            "w_lesson-54-a3_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-54-a3_1",
+          "th": "อย่าโมโห",
+          "fr": "Ne te fâche pas",
+          "en": "Don't be mad",
+          "phonetic": "",
+          "components": [
+            "w_lesson-54-a3_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-54-a3_2",
+          "th": "กลัวผี",
+          "fr": "Avoir peur des fantômes",
+          "en": "Scared of ghosts",
+          "phonetic": "",
+          "components": [
+            "w_lesson-54-a3_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-54-a3_3",
+          "th": "เขาโมโหมาก",
+          "fr": "Il est très en colère",
+          "en": "He is very angry",
+          "phonetic": "",
+          "components": [
+            "w_lesson-54-a3_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-54-a3_4",
+          "th": "ไม่ต้องกลัว",
+          "fr": "N'aie pas peur!",
+          "en": "Don't be scared!",
+          "phonetic": "",
+          "components": [
+            "w_lesson-54-a3_0"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lesson-54-a4",
+      "title": "Ext: Besoins",
+      "description": "Plus de vocabulaire pour cette unité.",
+      "titleEn": "Ext: Needs",
+      "descriptionEn": "More vocabulary for this unit.",
+      "words": [
+        {
+          "id": "w_lesson-54-a4_0",
+          "th": "เหนื่อย",
+          "fr": "fatigué",
+          "en": "tired",
+          "phonetic": "nʉ̀ai"
+        },
+        {
+          "id": "w_lesson-54-a4_1",
+          "th": "หิว",
+          "fr": "avoir faim",
+          "en": "hungry",
+          "phonetic": "hǐu"
+        },
+        {
+          "id": "w_lesson-54-a4_2",
+          "th": "หิวน้ำ",
+          "fr": "avoir soif",
+          "en": "thirsty",
+          "phonetic": "hǐu-náam"
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_new_lesson-54-a4_0",
+          "th": "หิวข้าว",
+          "fr": "Avoir faim",
+          "en": "Hungry",
+          "phonetic": "",
+          "components": [
+            "w_lesson-54-a4_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-54-a4_1",
+          "th": "เหนื่อยมาก",
+          "fr": "Très fatigué",
+          "en": "Very tired",
+          "phonetic": "",
+          "components": [
+            "w_lesson-54-a4_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-54-a4_2",
+          "th": "หิวน้ำไหม",
+          "fr": "As-tu soif?",
+          "en": "Are you thirsty?",
+          "phonetic": "",
+          "components": [
+            "w_lesson-54-a4_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-54-a4_3",
+          "th": "พักก่อน",
+          "fr": "Repose-toi",
+          "en": "Rest first",
+          "phonetic": "",
+          "components": [
+            "w_lesson-54-a4_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-54-a4_4",
+          "th": "ไม่หิว",
+          "fr": "Je n'ai pas faim",
+          "en": "Not hungry",
+          "phonetic": "",
+          "components": [
+            "w_lesson-54-a4_0"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lesson-54-a5",
+      "title": "Ext: Visage",
+      "description": "Plus de vocabulaire pour cette unité.",
+      "titleEn": "Ext: Face",
+      "descriptionEn": "More vocabulary for this unit.",
+      "words": [
+        {
+          "id": "w_lesson-54-a5_0",
+          "th": "ยิ้ม",
+          "fr": "sourire",
+          "en": "smile",
+          "phonetic": "yím"
+        },
+        {
+          "id": "w_lesson-54-a5_1",
+          "th": "ร้องไห้",
+          "fr": "pleurer",
+          "en": "cry",
+          "phonetic": "rɔ́ɔng-hâai"
+        },
+        {
+          "id": "w_lesson-54-a5_2",
+          "th": "หัวเราะ",
+          "fr": "rire",
+          "en": "laugh",
+          "phonetic": "hǔa-rɔ́"
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_new_lesson-54-a5_0",
+          "th": "เขายิ้ม",
+          "fr": "Il sourit",
+          "en": "He smiles",
+          "phonetic": "",
+          "components": [
+            "w_lesson-54-a5_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-54-a5_1",
+          "th": "เด็กร้องไห้",
+          "fr": "L'enfant pleure",
+          "en": "Child cries",
+          "phonetic": "",
+          "components": [
+            "w_lesson-54-a5_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-54-a5_2",
+          "th": "หัวเราะดัง",
+          "fr": "Rire fort",
+          "en": "Laugh loud",
+          "phonetic": "",
+          "components": [
+            "w_lesson-54-a5_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-54-a5_3",
+          "th": "อย่าร้องไห้",
+          "fr": "Ne pleure pas!",
+          "en": "Don't cry!",
+          "phonetic": "",
+          "components": [
+            "w_lesson-54-a5_0"
+          ]
+        },
+        {
+          "id": "p_new_lesson-54-a5_4",
+          "th": "ยิ้มสวย",
+          "fr": "Beau sourire",
+          "en": "Beautiful smile",
+          "phonetic": "",
+          "components": [
+            "w_lesson-54-a5_0"
+          ]
+        }
+      ]
+    },
+    {
       "id": "lesson-54",
       "title": "Bilan Unité 9",
       "description": "Test Sentiments et Santé",
@@ -5207,6 +8618,548 @@
     },
     {
       "id": "lesson-59",
+      "title": "Les Nombres 11 à 10 000",
+      "description": "Compter au-delà de 10",
+      "words": [
+        {
+          "id": "w_et",
+          "th": "เอ็ด",
+          "fr": "un (1 dans 11, 21...)",
+          "phonetic": "èt",
+          "en": "one (1 in 11, 21...)"
+        },
+        {
+          "id": "w_yii",
+          "th": "ยี่",
+          "fr": "deux (2 dans 20)",
+          "phonetic": "yîi",
+          "en": "two (2 in 20)"
+        },
+        {
+          "id": "w_roi",
+          "th": "ร้อย",
+          "fr": "cent",
+          "phonetic": "rɔ́ɔi",
+          "en": "hundred"
+        },
+        {
+          "id": "w_phan",
+          "th": "พัน",
+          "fr": "mille",
+          "phonetic": "phan",
+          "en": "thousand"
+        },
+        {
+          "id": "w_muen",
+          "th": "หมื่น",
+          "fr": "dix mille",
+          "phonetic": "mùuen",
+          "en": "ten thousand"
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_eleven",
+          "th": "สิบเอ็ด",
+          "fr": "onze",
+          "phonetic": "sìp èt",
+          "components": [
+            "w_10",
+            "w_et"
+          ],
+          "en": "eleven"
+        },
+        {
+          "id": "p_twenty",
+          "th": "ยี่สิบ",
+          "fr": "vingt",
+          "phonetic": "yîi sìp",
+          "components": [
+            "w_yii",
+            "w_10"
+          ],
+          "en": "twenty"
+        },
+        {
+          "id": "p_twenty_one",
+          "th": "ยี่สิบเอ็ด",
+          "fr": "vingt-et-un",
+          "phonetic": "yîi sìp èt",
+          "components": [
+            "w_yii",
+            "w_10",
+            "w_et"
+          ],
+          "en": "twenty-one"
+        },
+        {
+          "id": "p_one_hundred",
+          "th": "หนึ่งร้อย",
+          "fr": "cent",
+          "phonetic": "nùeng rɔ́ɔi",
+          "components": [
+            "w_1",
+            "w_roi"
+          ],
+          "en": "one hundred"
+        },
+        {
+          "id": "p_one_thousand",
+          "th": "หนึ่งพัน",
+          "fr": "mille",
+          "phonetic": "nùeng phan",
+          "components": [
+            "w_1",
+            "w_phan"
+          ],
+          "en": "one thousand"
+        },
+        {
+          "id": "p_ten_thousand",
+          "th": "หนึ่งหมื่น",
+          "fr": "dix mille",
+          "phonetic": "nùeng mùuen",
+          "components": [
+            "w_1",
+            "w_muen"
+          ],
+          "en": "ten thousand"
+        }
+      ],
+      "titleEn": "Numbers 11 to 10,000",
+      "descriptionEn": "Count beyond 10"
+    },
+    {
+      "id": "lesson-60",
+      "title": "Jours de la semaine",
+      "description": "Lundi à Dimanche",
+      "words": [
+        {
+          "id": "w_jan",
+          "th": "จันทร์",
+          "fr": "lundi",
+          "phonetic": "jan",
+          "en": "Monday"
+        },
+        {
+          "id": "w_angkhan",
+          "th": "อังคาร",
+          "fr": "mardi",
+          "phonetic": "ang-khaan",
+          "en": "Tuesday"
+        },
+        {
+          "id": "w_phut",
+          "th": "พุธ",
+          "fr": "mercredi",
+          "phonetic": "phút",
+          "en": "Wednesday"
+        },
+        {
+          "id": "w_phruehat",
+          "th": "พฤหัสบดี",
+          "fr": "jeudi",
+          "phonetic": "phrɯ́-hàt-sà-bɔɔ-dii",
+          "en": "Thursday"
+        },
+        {
+          "id": "w_suk",
+          "th": "ศุกร์",
+          "fr": "vendredi",
+          "phonetic": "sùk",
+          "en": "Friday"
+        },
+        {
+          "id": "w_sao_day",
+          "th": "เสาร์",
+          "fr": "samedi",
+          "phonetic": "sǎo",
+          "en": "Saturday"
+        },
+        {
+          "id": "w_athit",
+          "th": "อาทิตย์",
+          "fr": "dimanche",
+          "phonetic": "aa-thít",
+          "en": "Sunday"
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_monday",
+          "th": "วันจันทร์",
+          "fr": "lundi",
+          "phonetic": "wan jan",
+          "components": [
+            "w_wan",
+            "w_jan"
+          ],
+          "en": "Monday"
+        },
+        {
+          "id": "p_tuesday",
+          "th": "วันอังคาร",
+          "fr": "mardi",
+          "phonetic": "wan ang-khaan",
+          "components": [
+            "w_wan",
+            "w_angkhan"
+          ],
+          "en": "Tuesday"
+        },
+        {
+          "id": "p_wednesday",
+          "th": "วันพุธ",
+          "fr": "mercredi",
+          "phonetic": "wan phút",
+          "components": [
+            "w_wan",
+            "w_phut"
+          ],
+          "en": "Wednesday"
+        },
+        {
+          "id": "p_thursday",
+          "th": "วันพฤหัสบดี",
+          "fr": "jeudi",
+          "phonetic": "wan phrɯ́-hàt-sà-bɔɔ-dii",
+          "components": [
+            "w_wan",
+            "w_phruehat"
+          ],
+          "en": "Thursday"
+        },
+        {
+          "id": "p_friday",
+          "th": "วันศุกร์",
+          "fr": "vendredi",
+          "phonetic": "wan sùk",
+          "components": [
+            "w_wan",
+            "w_suk"
+          ],
+          "en": "Friday"
+        },
+        {
+          "id": "p_saturday",
+          "th": "วันเสาร์",
+          "fr": "samedi",
+          "phonetic": "wan sǎo",
+          "components": [
+            "w_wan",
+            "w_sao_day"
+          ],
+          "en": "Saturday"
+        },
+        {
+          "id": "p_sunday",
+          "th": "วันอาทิตย์",
+          "fr": "dimanche",
+          "phonetic": "wan aa-thít",
+          "components": [
+            "w_wan",
+            "w_athit"
+          ],
+          "en": "Sunday"
+        }
+      ],
+      "titleEn": "Days of the week",
+      "descriptionEn": "Monday to Sunday"
+    },
+    {
+      "id": "lesson-61",
+      "title": "Nationalités et Âge",
+      "description": "Se présenter (suite)",
+      "words": [
+        {
+          "id": "w_aayu",
+          "th": "อายุ",
+          "fr": "âge",
+          "phonetic": "aa-yú",
+          "en": "age"
+        },
+        {
+          "id": "w_pii",
+          "th": "ปี",
+          "fr": "an / année",
+          "phonetic": "bpii",
+          "en": "year"
+        },
+        {
+          "id": "w_farangset",
+          "th": "ฝรั่งเศส",
+          "fr": "France / français",
+          "phonetic": "fà-ràng-sèet",
+          "en": "France / French"
+        },
+        {
+          "id": "w_angkrit",
+          "th": "อังกฤษ",
+          "fr": "Angleterre / anglais",
+          "phonetic": "ang-grìt",
+          "en": "England / English"
+        },
+        {
+          "id": "w_phuak_khao",
+          "th": "พวกเขา",
+          "fr": "ils / elles",
+          "phonetic": "phûak khao",
+          "en": "they"
+        },
+        {
+          "id": "w_phasa",
+          "th": "ภาษา",
+          "fr": "langue",
+          "phonetic": "phaa-sǎa",
+          "en": "language"
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_how_old",
+          "th": "อายุเท่าไหร่",
+          "fr": "quel âge as-tu ?",
+          "phonetic": "aa-yú thâo-rài",
+          "components": [
+            "w_aayu",
+            "w_thao_rai"
+          ],
+          "en": "how old are you?"
+        },
+        {
+          "id": "p_thirty_years_old",
+          "th": "อายุสามสิบปี",
+          "fr": "j'ai trente ans",
+          "phonetic": "aa-yú sǎam sìp bpii",
+          "components": [
+            "w_aayu",
+            "w_3",
+            "w_10",
+            "w_pii"
+          ],
+          "en": "I am thirty years old"
+        },
+        {
+          "id": "p_french_person",
+          "th": "คนฝรั่งเศส",
+          "fr": "personne française",
+          "phonetic": "khon fà-ràng-sèet",
+          "components": [
+            "w_khon",
+            "w_farangset"
+          ],
+          "en": "French person"
+        },
+        {
+          "id": "p_english_language",
+          "th": "ภาษาอังกฤษ",
+          "fr": "langue anglaise",
+          "phonetic": "phaa-sǎa ang-grìt",
+          "components": [
+            "w_phasa",
+            "w_angkrit"
+          ],
+          "en": "English language"
+        },
+        {
+          "id": "p_they_go",
+          "th": "พวกเขาไป",
+          "fr": "ils y vont",
+          "phonetic": "phûak khao bpai",
+          "components": [
+            "w_phuak_khao",
+            "w_pai"
+          ],
+          "en": "they go"
+        }
+      ],
+      "titleEn": "Nationalities and Age",
+      "descriptionEn": "Introduce yourself (cont)"
+    },
+    {
+      "id": "lesson-62",
+      "title": "Directions et Transports 2",
+      "description": "Hôtel, marché, taxis",
+      "words": [
+        {
+          "id": "w_rong_raem",
+          "th": "โรงแรม",
+          "fr": "hôtel",
+          "phonetic": "roong-raem",
+          "en": "hotel"
+        },
+        {
+          "id": "w_talat",
+          "th": "ตลาด",
+          "fr": "marché",
+          "phonetic": "dtà-làat",
+          "en": "market"
+        },
+        {
+          "id": "w_khao",
+          "th": "เข้า",
+          "fr": "entrer",
+          "phonetic": "khâo",
+          "en": "enter"
+        },
+        {
+          "id": "w_ook",
+          "th": "ออก",
+          "fr": "sortir",
+          "phonetic": "ɔ̀ɔk",
+          "en": "go out"
+        },
+        {
+          "id": "w_yut",
+          "th": "หยุด",
+          "fr": "arrêter",
+          "phonetic": "yùt",
+          "en": "stop"
+        },
+        {
+          "id": "w_thii",
+          "th": "ที่",
+          "fr": "à / chez",
+          "phonetic": "thîi",
+          "en": "at"
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_go_hotel",
+          "th": "ไปโรงแรม",
+          "fr": "aller à l'hôtel",
+          "phonetic": "bpai roong-raem",
+          "components": [
+            "w_pai",
+            "w_rong_raem"
+          ],
+          "en": "go to the hotel"
+        },
+        {
+          "id": "p_go_market",
+          "th": "ไปตลาด",
+          "fr": "aller au marché",
+          "phonetic": "bpai dtà-làat",
+          "components": [
+            "w_pai",
+            "w_talat"
+          ],
+          "en": "go to the market"
+        },
+        {
+          "id": "p_stop_here",
+          "th": "หยุดที่นี่",
+          "fr": "arrêtez-vous ici",
+          "phonetic": "yùt thîi nîi",
+          "components": [
+            "w_yut",
+            "w_thii",
+            "w_nee"
+          ],
+          "en": "stop here"
+        },
+        {
+          "id": "p_enter_hotel",
+          "th": "เข้าโรงแรม",
+          "fr": "entrer dans l'hôtel",
+          "phonetic": "khâo roong-raem",
+          "components": [
+            "w_khao",
+            "w_rong_raem"
+          ],
+          "en": "enter the hotel"
+        }
+      ],
+      "titleEn": "Directions and Transport 2",
+      "descriptionEn": "Hotel, market, taxis"
+    },
+    {
+      "id": "lesson-63",
+      "title": "Au Restaurant : La Suite",
+      "description": "L'addition, encore une fois",
+      "words": [
+        {
+          "id": "w_check_bin",
+          "th": "เช็คบิล",
+          "fr": "l'addition",
+          "phonetic": "chék bin",
+          "en": "the bill"
+        },
+        {
+          "id": "w_eek",
+          "th": "อีก",
+          "fr": "encore / plus",
+          "phonetic": "ìik",
+          "en": "again / more"
+        },
+        {
+          "id": "w_khrang",
+          "th": "ครั้ง",
+          "fr": "fois",
+          "phonetic": "khráng",
+          "en": "time (frequency)"
+        },
+        {
+          "id": "w_duay_kan",
+          "th": "ด้วยกัน",
+          "fr": "ensemble",
+          "phonetic": "dûay gan",
+          "en": "together"
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_bill_please_eng",
+          "th": "เช็คบิลครับ",
+          "fr": "l'addition s'il vous plaît (homme)",
+          "phonetic": "chék bin khráp",
+          "components": [
+            "w_check_bin",
+            "w_krap"
+          ],
+          "en": "the bill please (man)"
+        },
+        {
+          "id": "p_one_more_time",
+          "th": "อีกครั้ง",
+          "fr": "encore une fois",
+          "phonetic": "ìik khráng",
+          "components": [
+            "w_eek",
+            "w_khrang"
+          ],
+          "en": "one more time"
+        },
+        {
+          "id": "p_speak_again",
+          "th": "พูดอีกครั้ง",
+          "fr": "répétez s'il vous plaît",
+          "phonetic": "phûut ìik khráng",
+          "components": [
+            "w_pood",
+            "w_eek",
+            "w_khrang"
+          ],
+          "en": "please repeat"
+        },
+        {
+          "id": "p_go_together",
+          "th": "ไปด้วยกัน",
+          "fr": "y aller ensemble",
+          "phonetic": "bpai dûay gan",
+          "components": [
+            "w_pai",
+            "w_duay_kan"
+          ],
+          "en": "go together"
+        }
+      ],
+      "titleEn": "At the Restaurant: Continued",
+      "descriptionEn": "The bill, one more time"
+    },
+    {
+      "id": "lesson-64",
       "title": "Le Grand Bilan A1",
       "description": "Test final du Niveau A1 (Toutes Unités)",
       "isReview": true,

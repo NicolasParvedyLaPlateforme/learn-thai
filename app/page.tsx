@@ -39,7 +39,7 @@ const UNITS = [
       l3: "bg-orange-400 border-orange-600 text-white hover:bg-orange-500",
       l4: "bg-orange-500 border-orange-700 text-white hover:bg-orange-600"
     },
-    startIndex: 20, endIndex: 25
+    startIndex: 20, endIndex: 30
   },
   {
     id: 'unit-4', title: "Unité 4 : Verbes d'action", titleEn: "Unit 4: Action Verbs", description: "Regarder, jouer, travailler et apprendre.", descriptionEn: "Watching, playing, working, and learning.", colorClass: "bg-purple-500", borderClass: "border-purple-700", textClass: "text-purple-500", hoverClass: "hover:bg-purple-400", lightTextClass: "text-purple-100", bgMutedClass: "bg-purple-700/50",
@@ -49,7 +49,7 @@ const UNITS = [
       l3: "bg-purple-400 border-purple-600 text-white hover:bg-purple-500",
       l4: "bg-purple-500 border-purple-700 text-white hover:bg-purple-600"
     },
-    startIndex: 25, endIndex: 30
+    startIndex: 30, endIndex: 40
   },
   {
     id: 'unit-5', title: "Unité 5 : Le temps & Météo", titleEn: "Unit 5: Time & Weather", description: "Jours, heures, pluie et chaleur.", descriptionEn: "Days, hours, rain, and heat.", colorClass: "bg-cyan-500", borderClass: "border-cyan-700", textClass: "text-cyan-500", hoverClass: "hover:bg-cyan-400", lightTextClass: "text-cyan-100", bgMutedClass: "bg-cyan-700/50",
@@ -59,7 +59,7 @@ const UNITS = [
       l3: "bg-cyan-400 border-cyan-600 text-white hover:bg-cyan-500",
       l4: "bg-cyan-500 border-cyan-700 text-white hover:bg-cyan-600"
     },
-    startIndex: 30, endIndex: 35
+    startIndex: 40, endIndex: 50
   },
   {
     id: 'unit-6', title: "Unité 6 : En Ville & Trajets", titleEn: "Unit 6: In the City & Commuting", description: "Bâtiments, école et moyens de transports.", descriptionEn: "Buildings, schools, and transportation.", colorClass: "bg-pink-500", borderClass: "border-pink-700", textClass: "text-pink-500", hoverClass: "hover:bg-pink-400", lightTextClass: "text-pink-100", bgMutedClass: "bg-pink-700/50",
@@ -69,7 +69,7 @@ const UNITS = [
       l3: "bg-pink-400 border-pink-600 text-white hover:bg-pink-500",
       l4: "bg-pink-500 border-pink-700 text-white hover:bg-pink-600"
     },
-    startIndex: 35, endIndex: 40
+    startIndex: 50, endIndex: 60
   },
   {
     id: 'unit-7', title: "Unité 7 : Achats & Vêtements", titleEn: "Unit 7: Shopping & Clothes", description: "Couleurs, vêtements et argent.", descriptionEn: "Colors, clothes, and money.", colorClass: "bg-yellow-500", borderClass: "border-yellow-700", textClass: "text-yellow-500", hoverClass: "hover:bg-yellow-400", lightTextClass: "text-yellow-100", bgMutedClass: "bg-yellow-700/50",
@@ -79,7 +79,7 @@ const UNITS = [
       l3: "bg-yellow-400 border-yellow-600 text-yellow-900 hover:bg-yellow-500",
       l4: "bg-yellow-500 border-yellow-700 text-yellow-900 hover:bg-yellow-600"
     },
-    startIndex: 40, endIndex: 45
+    startIndex: 60, endIndex: 70
   },
   {
     id: 'unit-8', title: "Unité 8 : Description & Famille", titleEn: "Unit 8: Description & Family", description: "Apparence, frères, sœurs et amis.", descriptionEn: "Appearance, siblings, and friends.", colorClass: "bg-indigo-500", borderClass: "border-indigo-700", textClass: "text-indigo-500", hoverClass: "hover:bg-indigo-400", lightTextClass: "text-indigo-100", bgMutedClass: "bg-indigo-700/50",
@@ -89,7 +89,7 @@ const UNITS = [
       l3: "bg-indigo-400 border-indigo-600 text-white hover:bg-indigo-500",
       l4: "bg-indigo-500 border-indigo-700 text-white hover:bg-indigo-600"
     },
-    startIndex: 45, endIndex: 50
+    startIndex: 70, endIndex: 80
   },
   {
     id: 'unit-9', title: "Unité 9 : Santé & Émotions", titleEn: "Unit 9: Health & Emotions", description: "Docteur, tristesse, douleur et joie.", descriptionEn: "Doctor, sadness, pain, and joy.", colorClass: "bg-rose-500", borderClass: "border-rose-700", textClass: "text-rose-500", hoverClass: "hover:bg-rose-400", lightTextClass: "text-rose-100", bgMutedClass: "bg-rose-700/50",
@@ -99,7 +99,7 @@ const UNITS = [
       l3: "bg-rose-400 border-rose-600 text-white hover:bg-rose-500",
       l4: "bg-rose-500 border-rose-700 text-white hover:bg-rose-600"
     },
-    startIndex: 50, endIndex: 55
+    startIndex: 80, endIndex: 90
   },
   {
     id: 'unit-10', title: "Unité 10 : Le Grand Bilan A1", titleEn: "Unit 10: The Grand A1 Review", description: "Expressions, habitudes et tests finaux !", descriptionEn: "Expressions, habits, and final tests!", colorClass: "bg-teal-500", borderClass: "border-teal-700", textClass: "text-teal-500", hoverClass: "hover:bg-teal-400", lightTextClass: "text-teal-100", bgMutedClass: "bg-teal-700/50",
@@ -109,7 +109,7 @@ const UNITS = [
       l3: "bg-teal-400 border-teal-600 text-white hover:bg-teal-500",
       l4: "bg-teal-500 border-teal-700 text-white hover:bg-teal-600"
     },
-    startIndex: 55, endIndex: 60
+    startIndex: 90, endIndex: 100
   }
 ];
 
