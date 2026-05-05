@@ -8,6 +8,7 @@ import { generateEndlessPairMatching } from '../lib/exercise-generator';
 import { Exercise, CourseData, Word } from '../types';
 import { X, Check, Play } from 'lucide-react';
 import { playThaiTTS, preloadThaiVoices } from '../lib/tts';
+import { motion, AnimatePresence } from 'motion/react';
 
 // Exercise Components
 import PairMatch from '../components/PairMatch';
@@ -104,38 +105,48 @@ export default function ReviewPairsPage() {
       {/* Main Exercise Area */}
       <main className="flex-1 overflow-y-auto flex flex-col items-center py-6 md:py-12 px-4 w-full">
         <div className="w-full max-w-3xl flex flex-col justify-center flex-1">
-        
-          <div className="flex items-start gap-4 md:gap-8 mb-4 md:mb-8">
-            <div className="hidden md:flex w-32 h-32 bg-fuchsia-100 rounded-3xl items-center justify-center text-5xl shadow-sm border border-fuchsia-200 relative flex-shrink-0">
-               <span className="animate-pulse">🎴</span>
-               <div className="absolute -right-2 -top-2 w-6 h-6 bg-fuchsia-500 border-2 border-white rounded-full"></div>
-            </div>
-            
-            <div className="flex-1 mt-2 md:mt-0">
-              <h2 className="text-2xl md:text-3xl font-extrabold text-slate-800 mb-4 md:mb-6">
-                {currentExercise.question}
-              </h2>
-            </div>
-          </div>
-
-          <div className="mt-2">
-            <PairMatch 
+          <AnimatePresence mode="wait">
+            <motion.div 
               key={currentExercise.id}
-              pairs={currentExercise.pairs as Word[]}
-              onComplete={() => {
-                setIsCorrect(true);
-                setIsChecking(true);
-                setTimeout(() => {
-                  document.getElementById('next-btn')?.click();
-                }, 1200);
-              }}
-            />
-          </div>
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20, transition: { duration: 0.2 } }}
+              transition={{ duration: 0.3 }}
+              className="w-full"
+            >
+              <div className="flex items-start gap-4 md:gap-8 mb-4 md:mb-8">
+                <div className="hidden md:flex w-32 h-32 bg-fuchsia-100 rounded-3xl items-center justify-center text-5xl shadow-sm border border-fuchsia-200 relative flex-shrink-0">
+                   <span className="animate-pulse">🎴</span>
+                   <div className="absolute -right-2 -top-2 w-6 h-6 bg-fuchsia-500 border-2 border-white rounded-full"></div>
+                </div>
+                
+                <div className="flex-1 mt-2 md:mt-0">
+                  <h2 className="text-2xl md:text-3xl font-extrabold text-slate-800 mb-4 md:mb-6">
+                    {currentExercise.question}
+                  </h2>
+                </div>
+              </div>
+
+              <div className="mt-2">
+                <PairMatch 
+                  key={currentExercise.id}
+                  pairs={currentExercise.pairs as Word[]}
+                  onComplete={() => {
+                    setIsCorrect(true);
+                    setIsChecking(true);
+                    setTimeout(() => {
+                      document.getElementById('next-btn')?.click();
+                    }, 2000);
+                  }}
+                />
+              </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
       </main>
 
       {/* Footer Actions */}
-      <footer className={`shrink-0 min-h-[100px] md:h-32 py-4 md:py-0 border-t-2 border-slate-200 flex flex-col justify-center px-4 md:px-8 transition-colors duration-300 ${isChecking ? 'bg-emerald-50' : 'bg-white hidden opacity-0 pointer-events-none'}`}>
+      <footer className={`shrink-0 min-h-[100px] md:h-32 py-4 md:py-0 border-t-2 border-slate-200 flex flex-col justify-center px-4 md:px-8 transition-colors duration-300 hidden`}>
         <div className="w-full max-w-4xl mx-auto flex sm:flex-row flex-col items-center justify-between gap-4">
           
           <div className="flex-1 w-full text-center sm:text-left">

@@ -9,6 +9,7 @@ import { Exercise, Lesson, CourseData, Word, Phrase } from '../../types';
 import { X, Check } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { playThaiTTS, preloadThaiVoices } from '../../lib/tts';
+import { motion, AnimatePresence } from 'motion/react';
 
 // Exercise Components
 import WordMatch from './components/WordMatch';
@@ -211,94 +212,105 @@ export default function LessonPage() {
           )}
         
           {/* The Question / Hint System */}
-          <div className="flex items-start gap-4 md:gap-8 mb-4 md:mb-8">
-            <div className="hidden md:flex w-32 h-32 bg-emerald-100 rounded-3xl items-center justify-center text-5xl shadow-sm border border-emerald-200 relative flex-shrink-0">
-               <span className="animate-bounce">🐘</span>
-               <div className="absolute -right-2 -top-2 w-6 h-6 bg-emerald-500 border-2 border-white rounded-full"></div>
-            </div>
-            
-            <div className="flex-1 mt-2 md:mt-0">
-              <h2 className="text-2xl md:text-3xl font-extrabold text-slate-800 mb-4 md:mb-6">
-                {currentExercise.type === 'intro'
-                  ? (language === 'en' ? "New expression!" : "Nouvelle expression !")
-                  : currentExercise.type === 'word-match' 
-                    ? (language === 'en' ? "Select the correct translation" : "Sélectionnez la bonne traduction")
-                    : currentExercise.type === 'pair-matching'
-                      ? currentExercise.question
-                      : (language === 'en' ? "Translate this sentence" : "Traduisez cette phrase")}
-              </h2>
-              <div className="relative inline-block pb-1">
-                {currentExercise.type === 'intro' ? (
-                  <div className="flex flex-col items-start gap-4">
-                    <p className="text-2xl text-slate-600 font-medium">{currentExercise.question}</p>
-                    <div 
-                      className="inline-flex items-center gap-3 bg-white px-5 py-3 rounded-2xl border-2 border-emerald-100 shadow-sm cursor-pointer hover:bg-emerald-50 transition-colors"
-                      onClick={() => playThaiTTS(currentExercise.answer)}
-                    >
-                      <span className="font-thai text-3xl md:text-4xl text-emerald-600 font-semibold">{currentExercise.answer}</span>
-                      {currentExercise.introItem && (
-                        <div className="flex flex-col border-l-2 border-emerald-100 pl-3">
-                           <span className="font-medium text-slate-500 text-sm">{language === 'en' ? 'Pronunciation' : 'Prononciation'}</span>
-                           <span className="font-bold text-slate-700">{currentExercise.introItem.phonetic}</span>
+          <AnimatePresence mode="wait">
+            <motion.div 
+              key={currentExercise.id}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20, transition: { duration: 0.2 } }}
+              transition={{ duration: 0.3 }}
+              className="w-full"
+            >
+              <div className="flex items-start gap-4 md:gap-8 mb-4 md:mb-8">
+                <div className="hidden md:flex w-32 h-32 bg-emerald-100 rounded-3xl items-center justify-center text-5xl shadow-sm border border-emerald-200 relative flex-shrink-0">
+                   <span className="animate-bounce">🐘</span>
+                   <div className="absolute -right-2 -top-2 w-6 h-6 bg-emerald-500 border-2 border-white rounded-full"></div>
+                </div>
+                
+                <div className="flex-1 mt-2 md:mt-0">
+                  <h2 className="text-2xl md:text-3xl font-extrabold text-slate-800 mb-4 md:mb-6">
+                    {currentExercise.type === 'intro'
+                      ? (language === 'en' ? "New expression!" : "Nouvelle expression !")
+                      : currentExercise.type === 'word-match' 
+                        ? (language === 'en' ? "Select the correct translation" : "Sélectionnez la bonne traduction")
+                        : currentExercise.type === 'pair-matching'
+                          ? currentExercise.question
+                          : (language === 'en' ? "Translate this sentence" : "Traduisez cette phrase")}
+                  </h2>
+                  <div className="relative inline-block pb-1">
+                    {currentExercise.type === 'intro' ? (
+                      <div className="flex flex-col items-start gap-4">
+                        <p className="text-2xl text-slate-600 font-medium">{currentExercise.question}</p>
+                        <div 
+                          className="inline-flex items-center gap-3 bg-white px-5 py-3 rounded-2xl border-2 border-emerald-100 shadow-sm cursor-pointer hover:bg-emerald-50 transition-colors"
+                          onClick={() => playThaiTTS(currentExercise.answer)}
+                        >
+                          <span className="font-thai text-3xl md:text-4xl text-emerald-600 font-semibold">{currentExercise.answer}</span>
+                          {currentExercise.introItem && (
+                            <div className="flex flex-col border-l-2 border-emerald-100 pl-3">
+                               <span className="font-medium text-slate-500 text-sm">{language === 'en' ? 'Pronunciation' : 'Prononciation'}</span>
+                               <span className="font-bold text-slate-700">{currentExercise.introItem.phonetic}</span>
+                            </div>
+                          )}
+                          <div className="ml-2 bg-emerald-100 text-emerald-600 p-2 rounded-full">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
+                          </div>
                         </div>
-                      )}
-                      <div className="ml-2 bg-emerald-100 text-emerald-600 p-2 rounded-full">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
                       </div>
-                    </div>
+                    ) : currentExercise.type === 'pair-matching' ? null : (
+                      <SentenceWithHints 
+                        text={currentExercise.question} 
+                        dictionary={lesson.words} 
+                        phrases={lesson.phrases}
+                        isSentence={currentExercise.type === 'sentence-builder'}
+                        exerciseOptions={currentExercise.options as Word[]}
+                        hideHints={currentExercise.hideHints}
+                        alwaysShowPhonetic={true}
+                        answerTh={currentExercise.answer}
+                        correctComponents={currentExercise.correctComponents}
+                      />
+                    )}
                   </div>
-                ) : currentExercise.type === 'pair-matching' ? null : (
-                  <SentenceWithHints 
-                    text={currentExercise.question} 
-                    dictionary={lesson.words} 
-                    phrases={lesson.phrases}
-                    isSentence={currentExercise.type === 'sentence-builder'}
-                    exerciseOptions={currentExercise.options as Word[]}
-                    hideHints={currentExercise.hideHints}
-                    alwaysShowPhonetic={true}
-                    answerTh={currentExercise.answer}
-                    correctComponents={currentExercise.correctComponents}
+                </div>
+              </div>
+
+              {/* Exercise Options */}
+              <div className="mt-8">
+                {currentExercise.type === 'intro' ? null : currentExercise.type === 'word-match' ? (
+                  <WordMatch 
+                    exercise={currentExercise} 
+                    selected={selectedAnswer as string} 
+                    onChange={setSelectedAnswer}
+                    disabled={isChecking}
+                  />
+                ) : currentExercise.type === 'pair-matching' ? (
+                  <PairMatch 
+                    key={currentExercise.id}
+                    pairs={currentExercise.pairs as Word[]}
+                    onComplete={() => {
+                      setIsCorrect(true);
+                      setIsChecking(true);
+                      setTimeout(() => {
+                        document.getElementById('next-btn')?.click();
+                      }, 2000);
+                    }}
+                  />
+                ) : (
+                  <SentenceBuilder 
+                    exercise={currentExercise}
+                    selected={selectedAnswer as string[] || []}
+                    onChange={setSelectedAnswer}
+                    disabled={isChecking}
                   />
                 )}
               </div>
-            </div>
-          </div>
-
-          {/* Exercise Options */}
-          <div className="mt-8">
-            {currentExercise.type === 'intro' ? null : currentExercise.type === 'word-match' ? (
-              <WordMatch 
-                exercise={currentExercise} 
-                selected={selectedAnswer as string} 
-                onChange={setSelectedAnswer}
-                disabled={isChecking}
-              />
-            ) : currentExercise.type === 'pair-matching' ? (
-              <PairMatch 
-                key={currentExercise.id}
-                pairs={currentExercise.pairs as Word[]}
-                onComplete={() => {
-                  setIsCorrect(true);
-                  setIsChecking(true);
-                  setTimeout(() => {
-                    document.getElementById('next-btn')?.click();
-                  }, 1200);
-                }}
-              />
-            ) : (
-              <SentenceBuilder 
-                exercise={currentExercise}
-                selected={selectedAnswer as string[] || []}
-                onChange={setSelectedAnswer}
-                disabled={isChecking}
-              />
-            )}
-          </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
       </main>
 
       {/* Footer Actions */}
-      <footer className={`shrink-0 min-h-[100px] md:h-32 py-4 md:py-0 border-t-2 border-slate-200 flex items-center justify-center px-4 md:px-8 transition-colors duration-300 ${isChecking ? (isCorrect ? 'bg-emerald-50' : 'bg-rose-50 border-rose-200') : 'bg-white'} ${currentExercise.type === 'pair-matching' && !isChecking ? 'hidden md:flex opacity-0 pointer-events-none' : ''}`}>
+      <footer className={`shrink-0 min-h-[100px] md:h-32 py-4 md:py-0 border-t-2 border-slate-200 items-center justify-center px-4 md:px-8 transition-colors duration-300 ${isChecking && currentExercise.type !== 'pair-matching' ? (isCorrect ? 'bg-emerald-50' : 'bg-rose-50 border-rose-200') : 'bg-white'} ${currentExercise.type === 'pair-matching' ? 'hidden' : 'flex'}`}>
         <div className="w-full max-w-4xl flex sm:flex-row flex-col items-center justify-between gap-4">
           
           <div className="flex-1 w-full text-center sm:text-left">

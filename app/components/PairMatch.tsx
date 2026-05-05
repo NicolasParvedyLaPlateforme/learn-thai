@@ -85,11 +85,13 @@ export default function PairMatch({ pairs, onComplete }: PairMatchProps) {
     };
   }, [matchedIds.size, pairs.length]); // Removed onComplete to prevent infinite renders
 
+  const isAllMatched = matchedIds.size > 0 && matchedIds.size === pairs.length;
+
   return (
-    <div className="w-full flex justify-between gap-4 py-8">
-      {/* Left Column (FR/EN) */}
-      <div className="flex flex-col gap-4 flex-1">
-        <AnimatePresence>
+    <div className="relative w-full py-2 sm:py-8">
+      <div className={`w-full flex justify-between gap-4 transition-opacity duration-500 ${isAllMatched ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+        {/* Left Column (FR/EN) */}
+        <div className="flex flex-col gap-3 sm:gap-4 flex-1">
           {leftCards.map(card => {
             const isMatched = matchedIds.has(card.id);
             const isSelected = selectedLeft === card.id;
@@ -98,12 +100,11 @@ export default function PairMatch({ pairs, onComplete }: PairMatchProps) {
             return (
               <motion.button
                 key={`L-${card.id}`}
-                layout
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: isMatched ? 0 : 1, scale: isMatched ? 0.9 : 1 }}
                 onClick={() => handleSelectLeft(card.id)}
                 disabled={isMatched}
-                className={`p-4 rounded-xl text-lg font-medium border-b-4 transition-all min-h-[80px] sm:min-h-[100px] flex items-center justify-center
+                className={`px-2 py-4 rounded-xl text-base sm:text-lg font-medium border-b-4 transition-all h-24 sm:h-32 flex items-center justify-center text-center leading-tight
                   ${isMatched ? 'pointer-events-none' : ''}
                   ${isSelected 
                     ? isError 
@@ -117,12 +118,10 @@ export default function PairMatch({ pairs, onComplete }: PairMatchProps) {
               </motion.button>
             );
           })}
-        </AnimatePresence>
-      </div>
+        </div>
 
-      {/* Right Column (TH) */}
-      <div className="flex flex-col gap-4 flex-1">
-        <AnimatePresence>
+        {/* Right Column (TH) */}
+        <div className="flex flex-col gap-3 sm:gap-4 flex-1">
           {rightCards.map(card => {
             const isMatched = matchedIds.has(card.id);
             const isSelected = selectedRight === card.id;
@@ -131,12 +130,11 @@ export default function PairMatch({ pairs, onComplete }: PairMatchProps) {
             return (
               <motion.button
                 key={`R-${card.id}`}
-                layout
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: isMatched ? 0 : 1, scale: isMatched ? 0.9 : 1 }}
                 onClick={() => handleSelectRight(card.id)}
                 disabled={isMatched}
-                className={`p-4 rounded-xl text-lg font-medium border-b-4 transition-all min-h-[80px] sm:min-h-[100px] flex items-center justify-center
+                className={`px-2 py-4 rounded-xl text-base sm:text-lg font-medium border-b-4 transition-all h-24 sm:h-32 flex items-center justify-center text-center leading-tight
                   ${isMatched ? 'pointer-events-none' : ''}
                   ${isSelected 
                     ? isError 
@@ -146,15 +144,30 @@ export default function PairMatch({ pairs, onComplete }: PairMatchProps) {
                   }
                 `}
               >
-                <div className="flex flex-col items-center">
-                  <span className="text-xl">{card.text}</span>
-                  <span className="text-sm opacity-60 font-mono mt-1 text-slate-500">[{card.phonetic}]</span>
+                <div className="flex flex-col items-center justify-center h-full">
+                  <span className="text-xl sm:text-2xl">{card.text}</span>
+                  <span className="text-xs sm:text-sm opacity-60 font-mono mt-1 text-slate-500">[{card.phonetic}]</span>
                 </div>
               </motion.button>
             );
           })}
-        </AnimatePresence>
+        </div>
       </div>
+
+      <AnimatePresence>
+        {isAllMatched && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="absolute inset-0 flex items-center justify-center z-10"
+          >
+            <div className="bg-emerald-500 text-white font-black text-3xl md:text-5xl px-8 py-6 rounded-[2rem] shadow-2xl flex items-center gap-4 border-b-[6px] border-emerald-700">
+              <span className="text-4xl md:text-5xl">✨</span>
+              {language === 'en' ? 'Excellent!' : 'Bravo !'}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
