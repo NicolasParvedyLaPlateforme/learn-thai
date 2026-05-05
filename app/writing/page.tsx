@@ -7,7 +7,9 @@ import courseData from '../data/course.json';
 import { generateWritingExercises } from '../lib/exercise-generator';
 import { Exercise, CourseData, Word } from '../types';
 import { X, Check } from 'lucide-react';
+import { playThaiTTS } from '../lib/tts';
 
+import { getCharacterHint } from '../lib/phonetic-mapper';
 import VirtualKeyboard from './components/VirtualKeyboard';
 import { SentenceWithHints } from '../components/Hints';
 
@@ -116,6 +118,7 @@ export default function WritingPage() {
 
     setIsCorrect(correct);
     setIsChecking(true);
+    playThaiTTS(currentExercise.answer);
   };
 
   const getDictionaryForExercise = () => {
@@ -125,6 +128,11 @@ export default function WritingPage() {
   const getPhrasesForExercise = () => {
      return data.lessons.flatMap(l => l.phrases);
   };
+
+  const nextCharIdx = selectedAnswer.length;
+  const charHint = currentExercise.correctComponents && nextCharIdx < currentExercise.correctComponents.length
+    ? getCharacterHint(currentExercise.correctComponents, nextCharIdx)
+    : undefined;
 
   return (
     <div className="h-[100dvh] flex flex-col bg-[#FAFAFA] font-sans text-slate-800 overflow-hidden">
@@ -166,6 +174,7 @@ export default function WritingPage() {
                   exerciseOptions={[]} // No vocab needed for hints here as it's writing
                   hideHints={false}
                   alwaysShowPhonetic={true}
+                  charHintRegex={charHint?.highlightRegex}
                 />
               </div>
               <div className="mt-8 md:mt-10">
@@ -244,6 +253,15 @@ export default function WritingPage() {
                   })()}
                 </div>
               </div>
+              
+              {charHint && !isChecking && (
+                <div className="mt-6 p-4 rounded-xl border border-orange-200 bg-orange-50 flex items-start gap-3">
+                  <div className="text-xl">💡</div>
+                  <div className="text-orange-800 text-sm font-medium leading-relaxed">
+                    {language === 'en' ? charHint.noteEn : charHint.note}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 

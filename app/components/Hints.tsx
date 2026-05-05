@@ -87,7 +87,7 @@ export function TooltipHint({ children, tooltipContent, className = '', audioTex
 }
 
 // A simple component to render the french question with tooltips (hints)
-export function SentenceWithHints({text, dictionary, phrases, isSentence, exerciseOptions, hideHints, alwaysShowPhonetic, answerTh, correctComponents}: {text: string, dictionary: Word[], phrases: Phrase[], isSentence: boolean, exerciseOptions: Word[], hideHints?: boolean, alwaysShowPhonetic?: boolean, answerTh?: string, correctComponents?: string[]}) {
+export function SentenceWithHints({text, dictionary, phrases, isSentence, exerciseOptions, hideHints, alwaysShowPhonetic, answerTh, correctComponents, charHintRegex}: {text: string, dictionary: Word[], phrases: Phrase[], isSentence: boolean, exerciseOptions: Word[], hideHints?: boolean, alwaysShowPhonetic?: boolean, answerTh?: string, correctComponents?: string[], charHintRegex?: RegExp}) {
   const { language } = useProgressStore();
   // Try to match the ENTIRE phrase/word first
   const exactPhrase = phrases.find(p => p.fr.toLowerCase() === text.toLowerCase() || (p.en?.toLowerCase() === text.toLowerCase()));
@@ -104,7 +104,7 @@ export function SentenceWithHints({text, dictionary, phrases, isSentence, exerci
         alwaysShowPhonetic ? (
           <span className="inline-flex flex-col w-full text-center sm:text-left sm:w-auto relative group">
             <span className="border-b-2 border-dotted border-slate-300 inline-block">{text}</span>
-            <span className="text-sm md:text-base font-medium tracking-wide">[<ColoredPhonetic phonetic={exactMatch.phonetic} />]</span>
+            <span className="text-sm md:text-base font-medium tracking-wide">[<ColoredPhonetic phonetic={exactMatch.phonetic} charHintRegex={charHintRegex} />]</span>
           </span>
         ) : (
           <span className="border-b-2 border-dotted border-slate-300 inline-block">
@@ -127,7 +127,7 @@ export function SentenceWithHints({text, dictionary, phrases, isSentence, exerci
           tooltipContent={
             <>
               <span className="font-thai text-lg font-bold text-slate-800">{tooltipTranslation}</span>
-              {phonetic && <span className="text-slate-500 text-xs ml-2">(<ColoredPhonetic phonetic={phonetic} />)</span>}
+              {phonetic && <span className="text-slate-500 text-xs ml-2">(<ColoredPhonetic phonetic={phonetic} charHintRegex={charHintRegex} />)</span>}
             </>
           }
           audioText={tooltipTranslation}

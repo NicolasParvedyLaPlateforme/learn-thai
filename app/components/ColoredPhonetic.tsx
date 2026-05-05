@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function ColoredPhonetic({ phonetic }: { phonetic: string }) {
+export function ColoredPhonetic({ phonetic, charHintRegex }: { phonetic: string; charHintRegex?: RegExp }) {
   // Split the phonetic string into logical syllables/words. 
   // Often separated by spaces or hyphens.
   // We want to color each syllable independently.
@@ -37,17 +37,41 @@ export function ColoredPhonetic({ phonetic }: { phonetic: string }) {
   // Split by (\s|-)
   const tokens = phonetic.split(/(\s|-)/g);
 
+  // Helper to render token with optional regex highlighting
+  const renderToken = (token: string, toneClass: string, key: number) => {
+    if (!charHintRegex) {
+      return <span key={key} className={toneClass}>{token}</span>;
+    }
+
+    // Try to match the regex within the token
+    // We only want to highlight the first occurrence or specific occurrences based on the regex
+    // Since RegExp might have global flag or not, let's just do a simple replacement
+    // React elements need to be built from split strings
+    const match = token.match(charHintRegex);
+    if (!match) {
+      return <span key={key} className={toneClass}>{token}</span>;
+    }
+
+    const startIdx = match.index!;
+    const endIdx = startIdx + match[0].length;
+    
+    // We also make the highlight orange as requested
+    return (
+      <span key={key} className={toneClass}>
+        {token.substring(0, startIdx)}
+        <span className="bg-orange-200 text-orange-700 px-[2px] rounded font-bold border border-orange-300 shadow-sm">{token.substring(startIdx, endIdx)}</span>
+        {token.substring(endIdx)}
+      </span>
+    );
+  };
+
   return (
     <span className="font-medium font-sans">
       {tokens.map((token, index) => {
         if (token === '-' || token === ' ') {
           return <span key={index} className="text-slate-400">{token}</span>;
         }
-        return (
-          <span key={index} className={parseToneClass(token)}>
-            {token}
-          </span>
-        );
+        return renderToken(token, parseToneClass(token), index);
       })}
     </span>
   );
