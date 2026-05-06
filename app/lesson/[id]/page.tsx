@@ -292,7 +292,7 @@ export default function LessonPage() {
                       setIsChecking(true);
                       setTimeout(() => {
                         document.getElementById('next-btn')?.click();
-                      }, 2000);
+                      }, 500);
                     }}
                   />
                 ) : (

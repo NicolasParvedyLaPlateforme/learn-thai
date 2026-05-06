@@ -306,7 +306,7 @@ export default function Home() {
                                     </div>
 
                                     {/* Crown/Level Badge */}
-                                    {(level > 0 && level < 5) && (
+                                    {(level > 0 && level <= 5) && (
                                       <div className={`absolute -bottom-2 -right-3 z-20 bg-white border-2 border-slate-200 rounded-full w-8 h-8 flex items-center justify-center text-xs font-black shadow-sm ${unit.textClass}`}>
                                         {level}
                                       </div>

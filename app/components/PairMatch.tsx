@@ -34,7 +34,9 @@ export default function PairMatch({ pairs, onComplete }: PairMatchProps) {
     }));
 
     // shuffle
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setLeftCards([...lefts].sort(() => Math.random() - 0.5));
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setRightCards([...rights].sort(() => Math.random() - 0.5));
   }, [pairs, language]);
 
@@ -78,11 +80,12 @@ export default function PairMatch({ pairs, onComplete }: PairMatchProps) {
     if (matchedIds.size > 0 && matchedIds.size === pairs.length) {
       timeout = setTimeout(() => {
         onComplete();
-      }, 800);
+      }, 400);
     }
     return () => {
       if (timeout) clearTimeout(timeout);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [matchedIds.size, pairs.length]); // Removed onComplete to prevent infinite renders
 
   const isAllMatched = matchedIds.size > 0 && matchedIds.size === pairs.length;
@@ -102,9 +105,11 @@ export default function PairMatch({ pairs, onComplete }: PairMatchProps) {
                 key={`L-${card.id}`}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: isMatched ? 0 : 1, scale: isMatched ? 0.9 : 1 }}
+                transition={{ duration: 0.25, ease: "easeOut" }}
                 onClick={() => handleSelectLeft(card.id)}
                 disabled={isMatched}
-                className={`px-2 py-4 rounded-xl text-base sm:text-lg font-medium border-b-4 transition-all h-24 sm:h-32 flex items-center justify-center text-center leading-tight
+                style={{ WebkitTapHighlightColor: 'transparent', willChange: 'opacity, transform' }}
+                className={`px-2 py-4 rounded-xl text-base sm:text-lg font-medium border-b-4 transition-colors h-24 sm:h-32 flex items-center justify-center text-center leading-tight transform-gpu backface-hidden
                   ${isMatched ? 'pointer-events-none' : ''}
                   ${isSelected 
                     ? isError 
@@ -132,9 +137,11 @@ export default function PairMatch({ pairs, onComplete }: PairMatchProps) {
                 key={`R-${card.id}`}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: isMatched ? 0 : 1, scale: isMatched ? 0.9 : 1 }}
+                transition={{ duration: 0.25, ease: "easeOut" }}
                 onClick={() => handleSelectRight(card.id)}
                 disabled={isMatched}
-                className={`px-2 py-4 rounded-xl text-base sm:text-lg font-medium border-b-4 transition-all h-24 sm:h-32 flex items-center justify-center text-center leading-tight
+                style={{ WebkitTapHighlightColor: 'transparent', willChange: 'opacity, transform' }}
+                className={`px-2 py-4 rounded-xl text-base sm:text-lg font-medium border-b-4 transition-colors h-24 sm:h-32 flex items-center justify-center text-center leading-tight transform-gpu backface-hidden
                   ${isMatched ? 'pointer-events-none' : ''}
                   ${isSelected 
                     ? isError 
