@@ -366,8 +366,8 @@ export default function Home() {
                 <h4 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">
                   {language === 'en' ? 'Choose a level' : 'Choisir un niveau'}
                 </h4>
-                <div className="flex gap-3">
-                  {[0, 1, 2, 3, 4].map((levelIndex) => {
+                <div className="flex flex-wrap gap-2 sm:gap-3">
+                  {[0, 1, 2, 3, 4, 5, 6].map((levelIndex) => {
                     const currentProgress = lessonLevels[selectedLesson.lesson.id] || 0;
                     const isCompletedLevel = levelIndex < currentProgress;
                     const isAccessible = levelIndex <= currentProgress;
@@ -381,7 +381,7 @@ export default function Home() {
                           }
                         }}
                         disabled={!isAccessible}
-                        className={`flex-1 flex flex-col items-center justify-center py-3 rounded-2xl border-b-4 transition-all
+                        className={`flex-1 min-w-[3.5rem] sm:min-w-[4rem] flex flex-col items-center justify-center py-3 rounded-2xl border-b-4 transition-all
                           ${isSelected 
                             ? `${selectedLesson.unitColor} ${selectedLesson.unitBorder} text-white scale-105 shadow-md` 
                             : isCompletedLevel 
