@@ -370,17 +370,19 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
   } else {
     // Level 5 (index 4): Only pair-matching
     let pmExercises: Exercise[] = [];
-    const allWordsForPairsRaw = lesson.words.length >= 4 ? lesson.words : globalWords;
-    const allWordsForPairs = Array.from(new Map(allWordsForPairsRaw.map(w => [w.id, w])).values());
+    const allItemsRaw = [...lesson.words, ...lesson.phrases];
+    const allGlobalItemsRaw = [...globalWords, ...allLessons.flatMap(l => l.phrases)];
+    const allItemsForPairsRaw = allItemsRaw.length >= 4 ? allItemsRaw : allGlobalItemsRaw;
+    const allItemsForPairs = Array.from(new Map(allItemsForPairsRaw.map(w => [w.id, w])).values());
     for (let i = 0; i < 5; i++) {
-      const selectedPairs = shuffle(allWordsForPairs).slice(0, 4);
+      const selectedPairs = shuffle(allItemsForPairs).slice(0, 4);
       pmExercises.push({
         id: `pm-${Date.now()}-${Math.random()}`,
         type: 'pair-matching',
-        question: language === 'en' ? 'Match the words' : 'Reliez les mots correspondants',
+        question: language === 'en' ? 'Match the pairs' : 'Reliez les paires correspondantes',
         answer: '',
-        options: selectedPairs,
-        pairs: selectedPairs,
+        options: selectedPairs as any,
+        pairs: selectedPairs as any,
         hideHints: true
       });
     }
@@ -458,20 +460,20 @@ export function generateEndlessPairMatching(
 ): Exercise[] {
   const completedLessons = allLessons.filter(l => completedLessonIds.includes(l.id));
   if (completedLessons.length === 0) return [];
-  const globalWordsRaw = completedLessons.flatMap(l => l.words);
-  const globalWords = Array.from(new Map(globalWordsRaw.map(w => [w.id, w])).values());
-  if (globalWords.length < 4) return [];
+  const globalItemsRaw = completedLessons.flatMap(l => [...l.words, ...l.phrases]);
+  const globalItems = Array.from(new Map(globalItemsRaw.map(w => [w.id, w])).values());
+  if (globalItems.length < 4) return [];
 
   let exercises: Exercise[] = [];
   for (let i = 0; i < 20; i++) {
-    const selectedPairs = shuffle(globalWords).slice(0, 4);
+    const selectedPairs = shuffle(globalItems).slice(0, 4);
     exercises.push({
       id: `endless-pm-${Date.now()}-${Math.random()}`,
       type: 'pair-matching',
-      question: language === 'en' ? 'Match the words' : 'Reliez les mots correspondants',
+      question: language === 'en' ? 'Match the pairs' : 'Reliez les paires correspondantes',
       answer: '',
-      options: selectedPairs,
-      pairs: selectedPairs,
+      options: selectedPairs as any,
+      pairs: selectedPairs as any,
       hideHints: true
     });
   }
