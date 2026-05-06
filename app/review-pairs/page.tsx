@@ -131,6 +131,7 @@ export default function ReviewPairsPage() {
                 <PairMatch 
                   key={currentExercise.id}
                   pairs={currentExercise.pairs as Word[]}
+                  mode={currentExercise.pairMatchMode}
                   onComplete={() => {
                     setIsCorrect(true);
                     setIsChecking(true);

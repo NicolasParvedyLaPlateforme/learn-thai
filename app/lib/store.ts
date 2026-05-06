@@ -27,7 +27,7 @@ export const useProgressStore = create<ProgressState>()(
       setLanguage: (lang) => set({ language: lang }),
       completeLesson: (lessonId, earnedXp) => set((state) => {
         const currentLevel = state.lessonLevels[lessonId] || 0;
-        const newLevel = Math.min(currentLevel + 1, 5); // Max level 5
+        const newLevel = Math.min(currentLevel + 1, 7); // Max level 7
         return {
           completedLessons: state.completedLessons.includes(lessonId) 
             ? state.completedLessons 

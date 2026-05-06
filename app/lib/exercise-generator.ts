@@ -367,13 +367,20 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
     while (sbPool.length < 10 && sbExercises.length > 0) sbPool = [...sbPool, ...shuffle(sbExercises)];
     if (sbPool.length === 0) sbPool = [...wmExercises];
     finalExercises = sbPool;
-  } else {
-    // Level 5 (index 4): Only pair-matching
+  } else if (level >= 4 && level <= 6) {
+    // Level 5 (index 4): Normal pair-matching
+    // Level 6 (index 5): Pair-matching audio-only
+    // Level 7 (index 6): Pair-matching script-only
     let pmExercises: Exercise[] = [];
     const allItemsRaw = [...lesson.words, ...lesson.phrases];
     const allGlobalItemsRaw = [...globalWords, ...allLessons.flatMap(l => l.phrases)];
     const allItemsForPairsRaw = allItemsRaw.length >= 4 ? allItemsRaw : allGlobalItemsRaw;
     const allItemsForPairs = Array.from(new Map(allItemsForPairsRaw.map(w => [w.id, w])).values());
+    
+    let pairMatchMode: 'normal' | 'audio-only' | 'script-only' = 'normal';
+    if (level === 5) pairMatchMode = 'audio-only';
+    if (level === 6) pairMatchMode = 'script-only';
+
     for (let i = 0; i < 5; i++) {
       const selectedPairs = shuffle(allItemsForPairs).slice(0, 4);
       pmExercises.push({
@@ -383,7 +390,8 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
         answer: '',
         options: selectedPairs as any,
         pairs: selectedPairs as any,
-        hideHints: true
+        hideHints: true,
+        pairMatchMode
       });
     }
     finalExercises = pmExercises;
@@ -467,6 +475,16 @@ export function generateEndlessPairMatching(
   let exercises: Exercise[] = [];
   for (let i = 0; i < 20; i++) {
     const selectedPairs = shuffle(globalItems).slice(0, 4);
+    
+    // Pick a random mode for review
+    const modeRoll = Math.random();
+    let mode: 'normal' | 'audio-only' | 'script-only' = 'normal';
+    if (modeRoll < 0.33) {
+      mode = 'audio-only';
+    } else if (modeRoll < 0.66) {
+      mode = 'script-only';
+    }
+
     exercises.push({
       id: `endless-pm-${Date.now()}-${Math.random()}`,
       type: 'pair-matching',
@@ -474,7 +492,8 @@ export function generateEndlessPairMatching(
       answer: '',
       options: selectedPairs as any,
       pairs: selectedPairs as any,
-      hideHints: true
+      hideHints: true,
+      pairMatchMode: mode
     });
   }
   return exercises;

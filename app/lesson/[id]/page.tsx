@@ -287,6 +287,7 @@ export default function LessonPage() {
                   <PairMatch 
                     key={currentExercise.id}
                     pairs={currentExercise.pairs as Word[]}
+                    mode={currentExercise.pairMatchMode}
                     onComplete={() => {
                       setIsCorrect(true);
                       setIsChecking(true);

@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Word } from '../types';
+import { Volume2 } from 'lucide-react';
 import { playThaiTTS } from '../lib/tts';
 import { useProgressStore } from '../lib/store';
 import { motion, AnimatePresence } from 'motion/react';
 
 interface PairMatchProps {
   pairs: Word[];
+  mode?: 'normal' | 'audio-only' | 'script-only';
   onComplete: () => void;
 }
 
-export default function PairMatch({ pairs, onComplete }: PairMatchProps) {
+export default function PairMatch({ pairs, mode = 'normal', onComplete }: PairMatchProps) {
   const { language } = useProgressStore();
   const [leftCards, setLeftCards] = useState<{id: string, text: string, type: 'left'}[]>([]);
   const [rightCards, setRightCards] = useState<{id: string, text: string, phonetic: string, type: 'right'}[]>([]);
@@ -34,9 +36,7 @@ export default function PairMatch({ pairs, onComplete }: PairMatchProps) {
     }));
 
     // shuffle
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setLeftCards([...lefts].sort(() => Math.random() - 0.5));
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setRightCards([...rights].sort(() => Math.random() - 0.5));
   }, [pairs, language]);
 
@@ -152,8 +152,16 @@ export default function PairMatch({ pairs, onComplete }: PairMatchProps) {
                 `}
               >
                 <div className="flex flex-col items-center justify-center h-full">
-                  <span className="text-xl sm:text-2xl">{card.text}</span>
-                  <span className="text-xs sm:text-sm opacity-60 font-mono mt-1 text-slate-500">[{card.phonetic}]</span>
+                  {mode === 'audio-only' ? (
+                    <Volume2 className={`w-8 h-8 sm:w-10 sm:h-10 ${isSelected || isMatched ? 'text-indigo-600' : 'text-slate-400'}`} />
+                  ) : (
+                    <>
+                      <span className="text-xl sm:text-2xl">{card.text}</span>
+                      {mode !== 'script-only' && (
+                        <span className="text-xs sm:text-sm opacity-60 font-mono mt-1 text-slate-500">[{card.phonetic}]</span>
+                      )}
+                    </>
+                  )}
                 </div>
               </motion.button>
             );

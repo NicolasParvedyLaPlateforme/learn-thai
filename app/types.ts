@@ -44,4 +44,5 @@ export interface Exercise {
   hideHints?: boolean; // If true, tooltips won't be shown
   disableTooltips?: boolean;
   introItem?: Word | Phrase; // For intro exercises
+  pairMatchMode?: 'normal' | 'audio-only' | 'script-only';
 }
