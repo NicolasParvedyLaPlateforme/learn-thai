@@ -103,7 +103,7 @@ export default function AlphabetPage() {
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col">
       <div className="h-14 px-4 flex items-center border-b border-slate-200 bg-white">
-        <Link href="/" className="text-slate-400 hover:text-slate-600">
+        <Link href="/learn" className="text-slate-400 hover:text-slate-600">
           <X size={24} />
         </Link>
         <div className="flex-1 px-8">

@@ -50,7 +50,7 @@ export default function LessonPage() {
 
   useEffect(() => {
     if (!lesson) {
-      router.push('/');
+      router.push('/learn');
     }
     preloadThaiVoices();
   }, [lesson, router]);
@@ -133,7 +133,7 @@ export default function LessonPage() {
         </h1>
         <p className="text-slate-500 mb-8 text-center text-lg font-medium">+ {10 + exercises.length} XP</p>
         <button 
-          onClick={() => router.push('/')}
+          onClick={() => router.push('/learn')}
           className="px-12 py-3 rounded-xl bg-emerald-500 border-b-4 border-emerald-700 text-white font-bold text-lg shadow-lg hover:bg-emerald-400 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest w-full max-w-sm"
         >
           {language === 'en' ? 'Continue' : 'Continuer'}
@@ -147,7 +147,7 @@ export default function LessonPage() {
       {/* Header / Progress bar */}
       <header className="h-16 px-8 flex items-center shrink-0 justify-between border-b border-slate-200 bg-white">
         <div className="flex items-center gap-6 w-full max-w-4xl mx-auto flex-1">
-          <button onClick={() => router.push('/')} className="text-slate-400 hover:text-slate-600 transition-colors">
+          <button onClick={() => router.push('/learn')} className="text-slate-400 hover:text-slate-600 transition-colors">
             <X size={24} strokeWidth={2.5} />
           </button>
           <div className="flex-1 h-3 bg-slate-100 rounded-full overflow-hidden">

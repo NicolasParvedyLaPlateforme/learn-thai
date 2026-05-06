@@ -69,7 +69,7 @@ export default function ReviewPage() {
           {language === 'en' ? 'You must complete at least one lesson to access this!' : 'Vous devez compléter au moins une leçon pour pouvoir y accéder !'}
         </p>
         <button 
-          onClick={() => router.push('/')}
+          onClick={() => router.push('/learn')}
           className="px-12 py-3 rounded-xl bg-indigo-500 border-b-4 border-indigo-700 text-white font-bold text-lg shadow-lg hover:bg-indigo-400 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest w-full max-w-sm"
         >
           {language === 'en' ? 'Back' : 'Retour'}
@@ -82,7 +82,7 @@ export default function ReviewPage() {
     return (
       <div className="min-h-screen bg-[#FAFAFA] font-sans text-slate-800 flex flex-col items-center p-4">
         <header className="w-full max-w-2xl mt-4 flex items-center justify-between mb-8">
-          <button onClick={() => router.push('/')} className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-full transition-colors">
+          <button onClick={() => router.push('/learn')} className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-full transition-colors">
             <X size={28} />
           </button>
           <div className="text-xl font-bold text-slate-700 flex items-center gap-2">
@@ -214,7 +214,7 @@ export default function ReviewPage() {
       {/* Header / Progress bar */}
       <header className="h-16 px-8 flex items-center shrink-0 justify-between border-b border-slate-200 bg-white">
         <div className="flex items-center gap-6 w-full max-w-4xl mx-auto flex-1">
-          <button onClick={() => router.push('/')} className="text-slate-400 hover:text-slate-600 transition-colors">
+          <button onClick={() => router.push('/learn')} className="text-slate-400 hover:text-slate-600 transition-colors">
             <X size={24} strokeWidth={2.5} />
           </button>
           <div className="flex-1 h-3 bg-slate-100 rounded-full overflow-hidden">
