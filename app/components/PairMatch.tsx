@@ -36,7 +36,6 @@ export default function PairMatch({ pairs, mode = 'normal', onComplete }: PairMa
     }));
 
     // shuffle
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setLeftCards([...lefts].sort(() => Math.random() - 0.5));
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setRightCards([...rights].sort(() => Math.random() - 0.5));
@@ -51,7 +50,9 @@ export default function PairMatch({ pairs, mode = 'normal', onComplete }: PairMa
   const handleSelectRight = (id: string) => {
     if (matchedIds.has(id)) return;
     setSelectedRight(id);
-    playThaiTTS(pairs.find(p => p.id === id)?.th || '');
+    if (mode !== 'script-only') {
+      playThaiTTS(pairs.find(p => p.id === id)?.th || '');
+    }
     checkMatch(selectedLeft, id);
   };
 
@@ -60,6 +61,7 @@ export default function PairMatch({ pairs, mode = 'normal', onComplete }: PairMa
 
     if (leftId === rightId) {
       // Match!
+      playThaiTTS(pairs.find(p => p.id === leftId)?.th || '');
       setTimeout(() => {
         setMatchedIds(prev => new Set(prev).add(leftId));
         setSelectedLeft(null);

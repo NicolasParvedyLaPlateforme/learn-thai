@@ -6,7 +6,7 @@ import { useProgressStore } from '../../lib/store';
 import courseData from '../../data/course.json';
 import { generateExercises } from '../../lib/exercise-generator';
 import { Exercise, Lesson, CourseData, Word, Phrase } from '../../types';
-import { X, Check } from 'lucide-react';
+import { X, Check, Star } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { playThaiTTS, preloadThaiVoices } from '../../lib/tts';
 import { motion, AnimatePresence } from 'motion/react';
@@ -129,7 +129,7 @@ export default function LessonPage() {
           <Check size={120} className="mx-auto" />
         </div>
         <h1 className="text-3xl font-extrabold text-slate-800 mb-2 text-center">
-          {language === 'en' ? `Level ${Math.min(currentLevel + 1, 5)} completed!` : `Niveau ${Math.min(currentLevel + 1, 5)} terminé !`}
+          {language === 'en' ? `Level ${currentLevel + 1} completed!` : `Niveau ${currentLevel + 1} terminé !`}
         </h1>
         <p className="text-slate-500 mb-8 text-center text-lg font-medium">+ {10 + exercises.length} XP</p>
         <button 
@@ -157,7 +157,11 @@ export default function LessonPage() {
             />
           </div>
           <div className="font-bold text-slate-400 flex items-center gap-3">
-            <span>{language === 'en' ? 'Lvl.' : 'Niv.'} {Math.min(currentLevel + 1, 5)}</span>
+            {currentLevel + 1 < 7 ? (
+              <span>{language === 'en' ? 'Lvl.' : 'Niv.'} {currentLevel + 2}</span>
+            ) : (
+              <span className="flex items-center text-amber-500"><Star size={18} className="fill-current" /></span>
+            )}
             <button 
               onClick={() => setShowInfoModal(true)}
               className="text-slate-400 hover:text-indigo-500 transition-colors p-1"

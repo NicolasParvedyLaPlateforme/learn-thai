@@ -37,7 +37,7 @@ export default function LandingPage() {
               Apprenez le <span className="text-emerald-500">Thaï</span> de la bonne façon.
             </h1>
             <p className="text-lg md:text-xl text-slate-600 mb-8 max-w-xl mx-auto md:mx-0 font-medium leading-relaxed">
-              La méthode la plus amusante, efficace et gratuite pour apprendre le thaïlandais. Parlez dès le premier jour, pratiquez l'écriture et maîtrisez l'alphabet étape par étape.
+              La méthode la plus amusante, efficace et gratuite pour apprendre le thaïlandais. Parlez dès le premier jour, pratiquez l&apos;écriture et maîtrisez l&apos;alphabet étape par étape.
             </p>
             
             <div className="flex flex-col sm:flex-row items-center gap-4 justify-center md:justify-start">

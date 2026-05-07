@@ -264,7 +264,7 @@ export default function Home() {
                                     if (isUnlocked) {
                                       e.preventDefault();
                                       setSelectedLesson({lesson, isCompleted, unitColor: unit.colorClass, unitBorder: unit.borderClass});
-                                      setModalLevel(Math.min(lessonLevels[lesson.id] || 0, 4));
+                                      setModalLevel(Math.min(lessonLevels[lesson.id] || 0, 6));
                                     }
                                   }}
                                   className="group flex flex-col items-center relative z-10"
