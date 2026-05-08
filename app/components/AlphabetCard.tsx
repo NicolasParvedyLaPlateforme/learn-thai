@@ -7,9 +7,10 @@ import { useProgressStore } from '../lib/store';
 interface AlphabetCardProps {
   item: AlphabetItem;
   onPlayAudio?: () => void;
+  minimal?: boolean;
 }
 
-export function AlphabetCard({ item, onPlayAudio }: AlphabetCardProps) {
+export function AlphabetCard({ item, onPlayAudio, minimal }: AlphabetCardProps) {
   const language = useProgressStore((state) => state.language);
   const [isFlipped, setIsFlipped] = useState(false);
 
@@ -28,9 +29,25 @@ export function AlphabetCard({ item, onPlayAudio }: AlphabetCardProps) {
   const colors = getClassColors();
   const hintText = language === 'en' ? item.mnemonicHintEn : item.mnemonicHintFr;
 
+  if (minimal) {
+    return (
+      <div 
+        className={`w-32 h-32 rounded-3xl border-2 ${colors.border} ${colors.bg} shadow-sm flex flex-col items-center justify-center p-2 relative group`}
+        onClick={onPlayAudio}
+      >
+        <span className={`text-6xl font-medium ${colors.text} drop-shadow-sm font-thai`}>{item.letter}</span>
+        {onPlayAudio && (
+          <div className="absolute top-2 right-2 text-current opacity-50 group-hover:opacity-100 transition-opacity">
+            <Volume2 size={16} />
+          </div>
+        )}
+      </div>
+    );
+  }
+
   return (
     <div 
-      className="w-64 h-64 relative cursor-pointer"
+      className="w-64 h-64 relative cursor-pointer font-thai"
       style={{ perspective: '1000px' }}
       onClick={() => {
         setIsFlipped(!isFlipped);
@@ -51,14 +68,14 @@ export function AlphabetCard({ item, onPlayAudio }: AlphabetCardProps) {
           style={{ backfaceVisibility: 'hidden' }}
         >
           {item.consonantClass && (
-             <div className={`absolute top-3 left-0 right-0 text-center text-xs font-bold uppercase tracking-wider ${colors.text} opacity-80`}>
+             <div className={`absolute top-3 left-0 right-0 text-center text-xs font-bold uppercase tracking-wider ${colors.text} opacity-80 font-sans`}>
                 {item.consonantClass} Class
              </div>
           )}
           
           {/* Visual approximation / Mnemonic styling */}
           <div className="flex-1 flex flex-col items-center justify-center w-full relative">
-            <span className={`text-8xl font-bold font-sans ${colors.text} opacity-20 absolute select-none pointer-events-none`}>
+            <span className={`text-8xl font-bold ${colors.text} opacity-20 absolute select-none pointer-events-none`}>
               {item.letter}
             </span>
             <div className="z-10 text-center flex flex-col items-center justify-center h-full pt-4">
@@ -70,7 +87,7 @@ export function AlphabetCard({ item, onPlayAudio }: AlphabetCardProps) {
                     ) : null}
                     <span className={`text-7xl font-medium ${colors.text} z-10 drop-shadow-md`}>{item.letter}</span>
                   </div>
-                  <p className={`text-[15px] font-semibold mt-1 ${colors.text} px-2 leading-tight text-center max-w-[90%]`}>{hintText}</p>
+                  <p className={`text-[15px] font-semibold mt-1 ${colors.text} px-2 leading-tight text-center max-w-[90%] font-sans`}>{hintText}</p>
                 </div>
               ) : (
                  <span className={`text-8xl ${colors.text}`}>{item.letter}</span>
@@ -78,7 +95,7 @@ export function AlphabetCard({ item, onPlayAudio }: AlphabetCardProps) {
             </div>
           </div>
           
-          <div className="absolute bottom-4 text-slate-400 text-xs">
+          <div className="absolute bottom-4 text-slate-400 text-xs font-sans">
              {language === 'en' ? 'Tap to flip' : 'Appuyez pour retourner'}
           </div>
         </div>
@@ -106,3 +123,4 @@ export function AlphabetCard({ item, onPlayAudio }: AlphabetCardProps) {
     </div>
   );
 }
+

@@ -4,6 +4,7 @@ export interface Word {
   fr: string;
   en?: string;
   phonetic: string;
+  explanation?: string;
 }
 
 export interface Phrase {
@@ -13,6 +14,7 @@ export interface Phrase {
   en?: string;
   phonetic: string;
   components: string[]; // array of word ids
+  explanation?: string;
 }
 
 export interface Lesson {

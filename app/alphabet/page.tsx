@@ -1,272 +1,303 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { X, Volume2 } from 'lucide-react';
 import { useProgressStore } from '../lib/store';
-import { THAI_ALPHABET, AlphabetItem } from '../lib/alphabet-data';
+import { getAlphabetLessons, AlphabetLessonDef } from '../lib/alphabet-utils';
+import { BookOpen, CheckCircle, Star, Play, Crown, X } from 'lucide-react';
 
-import { playThaiTTS, preloadThaiVoices } from '../lib/tts';
-import { ColoredPhonetic } from '../components/ColoredPhonetic';
-import { AlphabetCard } from '../components/AlphabetCard';
-
-export default function AlphabetPage() {
+export default function AlphabetMenuPage() {
   const router = useRouter();
-  const { seenAlphabets, markAlphabetSeen, language } = useProgressStore();
-  
+  const { completedLessons, lessonLevels, xp, resetLessonLevel, language } = useProgressStore();
   const [mounted, setMounted] = useState(false);
-  const [currentItem, setCurrentItem] = useState<AlphabetItem | null>(null);
-  const [isLessonPhase, setIsLessonPhase] = useState(false);
-  
-  // Exercise state
-  const [options, setOptions] = useState<AlphabetItem[]>([]);
-  const [selectedOption, setSelectedOption] = useState<AlphabetItem | null>(null);
-  const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
+  const [selectedLesson, setSelectedLesson] = useState<{lesson: AlphabetLessonDef, isCompleted: boolean, unitColor: string, unitBorder: string} | null>(null);
+  const [modalLevel, setModalLevel] = useState(0);
+  const [cols, setCols] = useState(5);
 
-  const generateOptions = useCallback((correctItem: AlphabetItem) => {
-    // Pick 1 distractor of the same type
-    const samesTypeDistractors = THAI_ALPHABET.filter(i => i.type === correctItem.type && i.letter !== correctItem.letter);
-    const distractor = samesTypeDistractors[Math.floor(Math.random() * samesTypeDistractors.length)];
-    
-    // Shuffle the two options
-    const newOptions = [correctItem, distractor].sort(() => Math.random() - 0.5);
-    setOptions(newOptions);
-  }, []);
+  const { consonants, vowels } = getAlphabetLessons();
 
-  const pickNextItem = useCallback((currentSeen: string[]) => {
-    // Basic progression: maybe prioritize unseen, or just totally random?
-    // Let's do 30% chance for a new one, 70% for review, unless no reviews available.
-    let itemToPick: AlphabetItem;
-    
-    const unseen = THAI_ALPHABET.filter(i => !currentSeen.includes(i.letter));
-    const seen = THAI_ALPHABET.filter(i => currentSeen.includes(i.letter));
-    
-    const isNew = unseen.length > 0 && (seen.length === 0 || Math.random() < 0.3);
-
-    if (isNew) {
-      // Pick unseen
-      itemToPick = unseen[Math.floor(Math.random() * unseen.length)];
-      setIsLessonPhase(true);
-    } else {
-      // Pick seen
-      itemToPick = seen[Math.floor(Math.random() * seen.length)];
-      setIsLessonPhase(false);
+  const UNITS = [
+    {
+      id: 'unit-alpha-1', title: "Les Consonnes", titleEn: "Consonants", description: "Mémorisez les consonnes thaïes", descriptionEn: "Memorize the Thai consonants", colorClass: "bg-indigo-500", borderClass: "border-indigo-700", textClass: "text-indigo-500", hoverClass: "hover:bg-indigo-400", lightTextClass: "text-indigo-100", bgMutedClass: "bg-indigo-700/50",
+      shades: {
+        l1: "bg-indigo-200 border-indigo-400 text-indigo-800 hover:bg-indigo-300",
+        l2: "bg-indigo-300 border-indigo-500 text-indigo-900 hover:bg-indigo-400",
+        l3: "bg-indigo-400 border-indigo-600 text-white hover:bg-indigo-500",
+        l4: "bg-indigo-500 border-indigo-700 text-white hover:bg-indigo-600"
+      },
+      lessons: consonants
+    },
+    {
+      id: 'unit-alpha-2', title: "Les Voyelles", titleEn: "Vowels", description: "Apprenez les sons de voyelles", descriptionEn: "Learn the vowel sounds", colorClass: "bg-fuchsia-500", borderClass: "border-fuchsia-700", textClass: "text-fuchsia-500", hoverClass: "hover:bg-fuchsia-400", lightTextClass: "text-fuchsia-100", bgMutedClass: "bg-fuchsia-700/50",
+      shades: {
+        l1: "bg-fuchsia-200 border-fuchsia-400 text-fuchsia-800 hover:bg-fuchsia-300",
+        l2: "bg-fuchsia-300 border-fuchsia-500 text-fuchsia-900 hover:bg-fuchsia-400",
+        l3: "bg-fuchsia-400 border-fuchsia-600 text-white hover:bg-fuchsia-500",
+        l4: "bg-fuchsia-500 border-fuchsia-700 text-white hover:bg-fuchsia-600"
+      },
+      lessons: vowels
     }
-
-    setCurrentItem(itemToPick);
-    generateOptions(itemToPick);
-    setSelectedOption(null);
-    setIsCorrect(null);
-  }, [generateOptions]);
+  ];
 
   useEffect(() => {
-    let initialized = false;
-    const timer = setTimeout(() => {
-      setMounted(true)
-      if(!initialized) {
-        pickNextItem(seenAlphabets);
-        initialized = true;
-      }
-    }, 0);
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    const updateCols = () => {
+      if (window.innerWidth >= 1024) setCols(5);
+      else if (window.innerWidth >= 768) setCols(4);
+      else if (window.innerWidth >= 640) setCols(3);
+      else setCols(2);
+    };
     
-    // Pre-load voices for Safari/Chrome so they are ready when the user clicks
-    preloadThaiVoices();
-    return () => clearTimeout(timer);
-  }, [pickNextItem, seenAlphabets]);
-
-  const handleNextInLesson = () => {
-    if (currentItem) {
-      markAlphabetSeen(currentItem.letter);
-      // We know it is now seen, we switch to exercise phase for this item
-      setIsLessonPhase(false);
-    }
-  };
-
-  const handleCheck = () => {
-    if (selectedOption?.letter === currentItem?.letter) {
-      setIsCorrect(true);
-    } else {
-      setIsCorrect(false);
-    }
-  };
-
-  const handleContinue = () => {
-    pickNextItem(useProgressStore.getState().seenAlphabets);
-  };
-
-  const playTTS = (text: string) => {
-    playThaiTTS(text);
-  };
-
-  const getOptionColorClass = (opt: AlphabetItem, isSelected: boolean, isCorrectState: boolean | null) => {
-    if (isSelected) {
-      if (isCorrectState === true) return 'border-emerald-500 bg-emerald-50 text-emerald-600 shadow-md';
-      if (isCorrectState === false) return 'border-rose-500 bg-rose-50 text-rose-600 shadow-md';
-      return 'border-indigo-500 bg-indigo-50 text-indigo-600 shadow-sm';
-    }
-    
-    // Unselected state with semantic colors
-    if (opt.type === 'vowel') return 'border-purple-200 bg-white text-purple-600 hover:bg-purple-50';
-    switch (opt.consonantClass) {
-      case 'low': return 'border-blue-200 bg-white text-blue-500 hover:bg-blue-50';
-      case 'mid': return 'border-teal-200 bg-white text-teal-600 hover:bg-teal-50';
-      case 'high': return 'border-orange-200 bg-white text-orange-500 hover:bg-orange-50';
-      default: return 'border-slate-200 bg-white text-slate-700 hover:bg-slate-50';
-    }
-  };
-
-  if (!mounted || !currentItem) return null;
+    updateCols();
+    window.addEventListener('resize', updateCols);
+    return () => window.removeEventListener('resize', updateCols);
+  }, []);
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col">
-      <div className="h-14 px-4 flex items-center border-b border-slate-200 bg-white">
-        <Link href="/learn" className="text-slate-400 hover:text-slate-600">
-          <X size={24} />
-        </Link>
-        <div className="flex-1 px-8">
-          <div className="h-3 bg-slate-100 rounded-full overflow-hidden">
-            <div className="h-full bg-emerald-500 rounded-full w-full" />
+    <div className="min-h-screen bg-[#FAFAFA] font-sans text-slate-800 pb-20 overflow-hidden">
+      
+      {/* Header */}
+      <header className="sticky top-0 bg-white border-b border-slate-200 z-50 px-4 md:px-8 h-16 flex items-center justify-between shadow-sm">
+        <div className="flex items-center justify-between w-full max-w-4xl mx-auto flex-1 gap-2 sm:gap-6">
+          <div className="flex items-center gap-2">
+            <Link href="/" className="bg-emerald-500 text-white p-2 rounded-xl shadow-md border-b-4 border-emerald-700 hover:translate-y-px hover:border-b-2 active:border-b-0 active:translate-y-[4px] transition-all">
+              <BookOpen size={24} />
+            </Link>
+            <h1 className="text-xl font-bold text-slate-800 tracking-tight hidden md:block">Alphabet</h1>
+          </div>
+          
+          <div className="flex items-center gap-2 sm:gap-4 font-bold">
+            <Link href="/learn" className="text-slate-500 hover:text-slate-600 bg-slate-50 hover:bg-slate-100 px-3 sm:px-4 py-2 rounded-xl flex items-center gap-2 transition-colors">
+              <X size={18} />
+              <span className="hidden sm:inline">{mounted && language === 'en' ? 'Close' : 'Fermer'}</span>
+            </Link>
           </div>
         </div>
-      </div>
+      </header>
 
-      <main className="flex-1 w-full max-w-2xl mx-auto flex flex-col p-4 md:p-8">
-        {isLessonPhase ? (
-          <div className="flex-1 flex flex-col">
-            <h1 className="text-2xl font-bold text-slate-800 text-center mb-8">
-              {language === 'en' ? 'New letter!' : 'Nouvelle lettre !'}
-            </h1>
-            
-            <div className="flex-1 flex flex-col items-center justify-center -mt-8">
-              <AlphabetCard item={currentItem} onPlayAudio={() => playTTS(currentItem.exampleWord)} />
-              
-              <div className="mt-12 space-y-4 text-center">
-                <p className="text-2xl font-bold text-slate-800"><ColoredPhonetic phonetic={currentItem.pronunciation} /></p>
-                <div className="text-xl text-slate-600">
-                  <span className="font-bold">{currentItem.exampleWord}</span> 
-                  <span className="opacity-75"> ({language === 'en' ? currentItem.exampleTranslationEn : currentItem.exampleTranslation})</span>
+      {/* Main Content */}
+      <main className="max-w-2xl mx-auto px-4 mt-8 flex flex-col gap-12">
+        {UNITS.map((unit) => {
+          const unitLessons = unit.lessons;
+          const completedInUnit = unitLessons.filter(l => completedLessons.includes(l.id)).length;
+          const progressPercent = mounted && unitLessons.length > 0 ? (completedInUnit / unitLessons.length) * 100 : 0;
+          
+          return (
+            <div key={unit.id} className="relative z-0">
+              <div className={`mb-8 p-6 ${unit.colorClass} rounded-3xl text-white shadow-md relative overflow-hidden border-b-4 ${unit.borderClass}`}>
+                <div className="relative z-10">
+                  <h2 className="text-3xl font-extrabold mb-2">{mounted && language === 'en' ? unit.titleEn : unit.title}</h2>
+                  <p className={`${unit.lightTextClass} mb-6 font-medium`}>{mounted && language === 'en' ? unit.descriptionEn : unit.description}</p>
+                  <div className={`w-full ${unit.bgMutedClass} rounded-full h-3 overflow-hidden shadow-inner`}>
+                    <div 
+                      className="bg-white h-full rounded-full transition-all duration-1000 shadow-[0_0_8px_rgba(255,255,255,0.5)]" 
+                      style={{ width: `${progressPercent}%` }}
+                    ></div>
+                  </div>
+                </div>
+                <div className={`absolute -bottom-8 -right-8 opacity-20 drop-shadow-xl text-black`}>
+                  <BookOpen size={160} />
+                </div>
+              </div>
+
+              {/* Lesson Path Grid */}
+              <div className="flex justify-center relative w-full mb-12">
+                <div className="flex flex-col items-center w-full max-w-5xl">
+                  {(() => {
+                    const rows = [];
+                    for (let i = 0; i < unitLessons.length; i += cols) {
+                      rows.push(unitLessons.slice(i, i + cols));
+                    }
+                    
+                    return rows.map((row, rIndex) => (
+                      <div key={rIndex} className={`flex w-full justify-start ${rIndex % 2 === 1 ? 'flex-row-reverse' : 'flex-row'}`}>
+                        {row.map((lesson, indexInRow) => {
+                          const itemIndex = rIndex * cols + indexInRow;
+                          const isCompleted = mounted ? completedLessons.includes(lesson.id) : false;
+                          const level = mounted ? (lessonLevels[lesson.id] || 0) : 0;
+                          
+                          // Unlock if it's the very first alphabet lesson in this unit, or previous is complete
+                          const prevLessonInUnit = itemIndex > 0 ? unitLessons[itemIndex - 1] : null;
+                          const isUnlocked = itemIndex === 0 || (mounted && prevLessonInUnit && completedLessons.includes(prevLessonInUnit.id));
+                          
+                          const isLastOverall = itemIndex === unitLessons.length - 1;
+                          const isLastInRow = indexInRow === row.length - 1;
+                          
+                          const pathRight = !isLastOverall && !isLastInRow && rIndex % 2 === 0;
+                          const pathLeft = !isLastOverall && !isLastInRow && rIndex % 2 === 1;
+                          const pathDown = !isLastOverall && isLastInRow;
+
+                          const nextLesson = !isLastOverall ? unitLessons[itemIndex + 1] : null;
+                          const nextUnlocked = nextLesson && (mounted && completedLessons.includes(nextLesson.id));
+                          
+                          const pathColorClass = (isUnlocked && nextUnlocked) ? unit.colorClass : "bg-slate-200";
+
+                          return (
+                            <div key={lesson.id} className="relative py-6 md:py-8" style={{ flex: `0 0 ${100 / cols}%` }}>
+                              
+                              {/* Path Connections */}
+                              {pathRight && (
+                                <div className={`absolute top-1/2 left-1/2 w-full h-[16px] -translate-y-1/2 -z-10 rounded-full transition-colors duration-500 opacity-80 ${pathColorClass}`} />
+                              )}
+                              {pathLeft && (
+                                <div className={`absolute top-1/2 right-1/2 w-full h-[16px] -translate-y-1/2 -z-10 rounded-full transition-colors duration-500 opacity-80 ${pathColorClass}`} />
+                              )}
+                              {pathDown && (
+                                <div className={`absolute top-1/2 left-1/2 w-[16px] h-full -translate-x-1/2 -z-10 rounded-full transition-colors duration-500 opacity-80 ${pathColorClass}`} />
+                              )}
+
+                              <div className="relative group/lesson flex justify-center w-full">
+                                <button 
+                                  onClick={(e) => {
+                                    if (isUnlocked) {
+                                      e.preventDefault();
+                                      setSelectedLesson({lesson, isCompleted, unitColor: unit.colorClass, unitBorder: unit.borderClass});
+                                      setModalLevel(Math.min(lessonLevels[lesson.id] || 0, 1)); // Max level 2 for alphabet
+                                    }
+                                  }}
+                                  className="group flex flex-col items-center relative z-10"
+                                >
+                                  
+                                  <div className="absolute -top-16 opacity-0 group-hover:opacity-100 transition-opacity bg-white px-4 py-3 rounded-2xl shadow-xl border-2 border-slate-200 whitespace-nowrap z-50 pointer-events-none">
+                                    <p className="font-extrabold text-slate-800 uppercase tracking-wide text-sm flex items-center gap-2">
+                                      {mounted && language === 'en' ? lesson.titleEn : lesson.title}
+                                    </p>
+                                    <p className="text-xs text-slate-500 font-medium mt-0.5">
+                                      {lesson.items.map(i => i.letter).join(' • ')}
+                                    </p>
+                                    <div className="absolute -bottom-2.5 left-1/2 -translate-x-1/2 w-4 h-4 bg-white border-b-2 border-r-2 border-slate-200 rotate-45"></div>
+                                  </div>
+
+                                  <div className="relative">
+                                    <div className={
+                                      `w-20 h-20 md:w-24 md:h-24 rounded-[2rem] flex items-center justify-center border-b-[6px] transition-transform shadow-sm relative z-0 text-3xl font-thai
+                                      ${level >= 2
+                                        ? unit.shades.l4
+                                        : level === 1
+                                          ? unit.shades.l2
+                                            : isUnlocked 
+                                              ? `bg-white border-2 border-slate-200 ${unit.textClass} hover:bg-slate-50 active:translate-y-1 active:border-b-2` 
+                                              : 'bg-slate-100 border-2 border-slate-200 text-slate-300 shadow-none pointer-events-none cursor-not-allowed'}`
+                                    }>
+                                      {level >= 2 ? <Crown size={40} className="stroke-current stroke-[2.5]" fill="currentColor" /> :
+                                      level > 0 ? <CheckCircle size={40} className="stroke-current stroke-[2.5]" /> : lesson.items[0]?.letter}
+                                    </div>
+
+                                    {/* Crown/Level Badge */}
+                                    {(level > 0 && level <= 2) && (
+                                      <div className={`absolute -bottom-2 -right-3 z-20 bg-white border-2 border-slate-200 rounded-full w-8 h-8 flex items-center justify-center text-xs font-black shadow-sm ${unit.textClass}`}>
+                                        {level}
+                                      </div>
+                                    )}
+                                  </div>
+                                </button>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    ));
+                  })()}
                 </div>
               </div>
             </div>
+          );
+        })}
+      </main>
 
-            <button
-              onClick={handleNextInLesson}
-              className="w-full bg-indigo-500 hover:bg-indigo-400 active:bg-indigo-600 text-white font-bold py-4 rounded-2xl transition-all shadow-[0_4px_0_#4338ca] hover:shadow-[0_4px_0_#4338ca] active:shadow-[0_0px_0_#4338ca] active:translate-y-[4px] mt-auto"
-            >
-              {language === 'en' ? 'Next' : 'Suivant'}
-            </button>
-          </div>
-        ) : (
-          <div className="flex-1 flex flex-col">
-            <h2 className="text-2xl font-bold text-slate-800 mb-8">
-              {language === 'en' ? 'Find the correct letter for:' : 'Complétez le mot'} (<ColoredPhonetic phonetic={currentItem.pronunciation} />)
-            </h2>
-
-            <div className="flex-1 flex flex-col items-center">
-              <div className="text-4xl md:text-5xl font-medium text-slate-800 mb-12 flex items-center gap-2">
-                <span>{currentItem.exampleWord.substring(0, currentItem.exampleWord.indexOf(currentItem.letter))}</span>
-                <div className="w-16 h-20 md:w-20 md:h-24 border-b-4 border-slate-300 flex items-center justify-center text-indigo-500 pb-2">
-                  {selectedOption ? selectedOption.letter : ''}
-                </div>
-                <span>{currentItem.exampleWord.substring(currentItem.exampleWord.indexOf(currentItem.letter) + currentItem.letter.length)}</span>
-                
-                <button 
-                  onClick={() => playTTS(currentItem.exampleWord)}
-                  className="ml-2 p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-full transition-colors"
-                >
-                  <Volume2 size={24} />
-                </button>
+      {/* Selected Lesson Modal */}
+      {selectedLesson && (
+        <div 
+          className="fixed inset-0 z-[100] flex items-end md:items-center justify-center bg-slate-900/40 backdrop-blur-sm p-0 md:p-4 transition-all"
+          onClick={() => setSelectedLesson(null)}
+        >
+          <div 
+            className="w-full md:max-w-md bg-white rounded-t-3xl md:rounded-3xl shadow-2xl overflow-hidden flex flex-col mb-0 md:mb-12 animate-in slide-in-from-bottom-full duration-300 relative border-t-8 border-slate-200"
+            style={{ borderTopColor: 'var(--tw-colors-emerald-500)' }} 
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className={`p-6 ${selectedLesson.unitColor} flex justify-between items-start text-white`}>
+              <div>
+                <p className="font-bold text-white/80 uppercase tracking-widest text-sm mb-1">
+                  Alphabet
+                </p>
+                <h3 className="text-2xl font-extrabold">
+                  {language === 'en' ? selectedLesson.lesson.titleEn : selectedLesson.lesson.title}
+                </h3>
               </div>
-
-              <div className="w-full max-w-lg grid grid-cols-2 gap-4">
-                {options.map((opt, i) => (
-                  <button
-                    key={i}
-                    onClick={() => {
-                      if (isCorrect === null) setSelectedOption(opt);
-                    }}
-                    className={`
-                      aspect-square rounded-2xl border-2 flex flex-col items-center justify-center transition-all relative overflow-hidden p-3
-                      group
-                      ${isCorrect !== null ? 'cursor-default' : 'hover:-translate-y-1 cursor-pointer active:scale-95 shadow-sm hover:shadow-md'}
-                      ${getOptionColorClass(opt, selectedOption === opt, isCorrect)}
-                    `}
-                  >
-                    {opt.consonantClass && (
-                       <div className="absolute top-3 left-0 right-0 text-center text-[11px] font-bold uppercase tracking-wider opacity-70">
-                          {opt.consonantClass}
-                       </div>
-                    )}
-                    
-                    <div className="relative flex-1 flex flex-col items-center justify-center w-full mt-4">
-                      {opt.mnemonicEmoji && (
-                         <span className="text-6xl absolute z-0 opacity-30 mix-blend-multiply filter drop-shadow-sm transition-transform group-hover:scale-110 duration-300">
-                           {opt.mnemonicEmoji}
-                         </span>
-                      )}
-                      <span className="text-6xl font-medium z-10 drop-shadow-sm">{opt.letter}</span>
-                    </div>
-                    
-                    {(opt.mnemonicHintEn || opt.mnemonicHintFr) && (
-                      <span className="w-full text-center text-[13px] leading-tight px-2 opacity-90 font-semibold mt-2 mb-1">
-                        {language === 'en' ? opt.mnemonicHintEn : opt.mnemonicHintFr}
-                      </span>
-                    )}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className="mt-auto pt-8">
-              <button
-                onClick={handleCheck}
-                disabled={!selectedOption || isCorrect !== null}
-                className={`w-full font-bold py-4 rounded-2xl transition-all ${
-                  isCorrect !== null 
-                    ? 'opacity-0 pointer-events-none' 
-                    : selectedOption
-                      ? 'bg-emerald-500 hover:bg-emerald-400 active:bg-emerald-600 text-white shadow-[0_4px_0_#059669] hover:shadow-[0_4px_0_#059669] active:shadow-[0_0px_0_#059669] active:translate-y-[4px]'
-                      : 'bg-slate-200 text-slate-400 cursor-not-allowed'
-                }`}
+              <button 
+                onClick={() => setSelectedLesson(null)} 
+                className="bg-white/20 hover:bg-white/30 text-white rounded-full p-2 transition-colors -mr-2 -mt-2"
               >
-                {language === 'en' ? 'Check' : 'Vérifier'}
+                <X size={20} />
               </button>
             </div>
-          </div>
-        )}
-      </main>
-      
-      {/* Feedback Banner */}
-      {isCorrect !== null && (
-        <div className={`fixed bottom-0 left-0 right-0 p-4 md:p-6 shadow-[0_-4px_16px_rgba(0,0,0,0.05)] border-t z-50 ${isCorrect ? 'bg-emerald-100 border-emerald-200/50' : 'bg-rose-100 border-rose-200/50'}`}>
-          <div className="max-w-2xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-0">
-            <div className="flex items-center gap-4">
-              <div className={`shrink-0 w-12 h-12 rounded-full flex items-center justify-center ${isCorrect ? 'bg-white text-emerald-500' : 'bg-white text-rose-500'}`}>
-                {isCorrect ? <span className="text-2xl">✓</span> : <X size={24} />}
-              </div>
-              <div className="flex flex-col">
-                <div className={`font-bold text-lg md:text-xl ${isCorrect ? 'text-emerald-700' : 'text-rose-700'}`}>
-                  {isCorrect ? (language === 'en' ? 'Excellent!' : 'Excellent !') : (language === 'en' ? 'The correct answer was: ' : 'La bonne réponse était : ') + currentItem.letter}
+
+            <div className="p-6">
+              <p className="text-slate-600 font-medium mb-8 text-lg">
+                {language === 'en' ? 'Learn these letters:' : 'Apprenez ces lettres :'} <strong className="text-3xl font-thai ml-2">{selectedLesson.lesson.items.map(i => i.letter).join(' ')}</strong>
+              </p>
+
+              <div className="mb-8">
+                <h4 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">
+                  {language === 'en' ? 'Choose a level' : 'Choisir un niveau'}
+                </h4>
+                <div className="flex flex-wrap gap-2 sm:gap-3">
+                  {[0, 1].map((levelIndex) => {
+                    const currentProgress = lessonLevels[selectedLesson.lesson.id] || 0;
+                    const isCompletedLevel = levelIndex < currentProgress;
+                    const isAccessible = levelIndex <= currentProgress;
+                    const isSelected = modalLevel === levelIndex;
+                    return (
+                      <button
+                        key={levelIndex}
+                        onClick={() => {
+                          if (isAccessible) {
+                            setModalLevel(levelIndex);
+                          }
+                        }}
+                        disabled={!isAccessible}
+                        className={`flex-1 min-w-[3.5rem] sm:min-w-[4rem] flex flex-col items-center justify-center py-3 rounded-2xl border-b-4 transition-all
+                          ${isSelected 
+                            ? `${selectedLesson.unitColor} ${selectedLesson.unitBorder} text-white scale-105 shadow-md` 
+                            : isCompletedLevel 
+                              ? 'bg-slate-100 border-slate-200 text-slate-800 hover:bg-slate-200' 
+                              : isAccessible
+                                ? 'bg-white border-2 border-slate-200 text-slate-600 hover:border-slate-300'
+                                : 'bg-slate-50 border-2 border-slate-100 text-slate-300 opacity-50 cursor-not-allowed'
+                          }`}
+                      >
+                        <span className="font-extrabold text-lg mb-1">{levelIndex + 1}</span>
+                        {isCompletedLevel && !isSelected ? (
+                          <CheckCircle size={16} className={isSelected ? "text-white" : "text-emerald-500"} />
+                        ) : (
+                          <Crown size={16} className={isSelected ? "text-white opacity-80" : "opacity-40"} />
+                        )}
+                      </button>
+                    );
+                  })}
                 </div>
-                {(currentItem.mnemonicHintEn || currentItem.mnemonicHintFr) && (
-                  <div className={`text-sm md:text-base opacity-80 ${isCorrect ? 'text-emerald-700' : 'text-rose-700'}`}>
-                    {language === 'en' ? currentItem.mnemonicHintEn : currentItem.mnemonicHintFr}
-                  </div>
-                )}
+              </div>
+
+              <div className="flex flex-col gap-3">
+                <Link
+                  href={`/alphabet/lesson/${selectedLesson.lesson.id}?level=${modalLevel + 1}`}
+                  className={`w-full py-4 rounded-xl border-b-4 font-bold text-lg text-white shadow-lg flex items-center justify-center hover:opacity-90 active:translate-y-1 transition-all ${selectedLesson.unitColor} ${selectedLesson.unitBorder}`}
+                >
+                  <Play size={20} className="mr-2 fill-current" />
+                  {language === 'en' ? `Start level ${modalLevel + 1}` : `Démarrer le niveau ${modalLevel + 1}`}
+                </Link>
               </div>
             </div>
-            <button
-               onClick={handleContinue}
-               className={`w-full md:w-auto font-bold py-4 md:py-3 px-8 rounded-xl md:rounded-2xl transition-all shadow-[0_4px_0_rgba(0,0,0,0.1)] active:shadow-[0_0px_0] active:translate-y-[4px] ${
-                 isCorrect ? 'bg-emerald-500 text-white hover:bg-emerald-400' : 'bg-rose-500 text-white hover:bg-rose-400'
-               }`}
-            >
-              {language === 'en' ? 'Continue' : 'Continuer'}
-            </button>
           </div>
         </div>
       )}
+
     </div>
   );
 }
+

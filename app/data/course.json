@@ -9084,7 +9084,8 @@
           "th": "เช็คบิล",
           "fr": "l'addition",
           "phonetic": "chék bin",
-          "en": "the bill"
+          "en": "the bill",
+          "explanation": "Ce mot vient de l'anglais 'Check bill'. Le son 'k' final s'écrit avec 'ค' (qui fait normalement 'kh' au début) respectant la translittération anglaise."
         },
         {
           "id": "w_eek",
