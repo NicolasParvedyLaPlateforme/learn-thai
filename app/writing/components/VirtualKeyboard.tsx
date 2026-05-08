@@ -58,13 +58,19 @@ export default function VirtualKeyboard({ exercise, selected, onChange, disabled
             isCorrect = char === exercise.correctComponents[idx];
           }
           
-          const textColorClass = isCorrect ? "text-emerald-600" : "text-rose-500";
+          // In blind mode and NOT checking (disabled is false), don't show colors
+          const showColors = exercise.blindMode ? disabled : true;
+          let textColorClass = "text-slate-700";
+          if (showColors) {
+             textColorClass = isCorrect ? "text-emerald-600" : "text-rose-500";
+          }
+          
           return (
             <button
-              key={`sel-${idx}`}
-              onClick={() => handleRemove(idx)}
-              disabled={disabled}
-              className={`bg-white border-2 border-b-4 ${isCorrect ? 'border-slate-200' : 'border-rose-200'} rounded-xl font-medium ${textColorClass} shadow-sm transition-all hover:-translate-y-0.5 active:translate-y-0.5 active:border-b-2 font-thai ${isDense ? 'px-3 py-1.5 text-3xl sm:px-4 sm:py-2 flex items-center justify-center min-w-[3.5rem] h-14 sm:h-16 sm:text-4xl' : 'px-4 py-2 text-4xl sm:px-5 sm:py-3 sm:text-5xl flex items-center justify-center min-w-[4.5rem] h-16 sm:h-20'}`}
+               key={`sel-${idx}`}
+               onClick={() => handleRemove(idx)}
+               disabled={disabled}
+               className={`bg-white border-2 border-b-4 ${showColors ? (isCorrect ? 'border-slate-200' : 'border-rose-200') : 'border-slate-200'} rounded-xl font-medium ${textColorClass} shadow-sm transition-all hover:-translate-y-0.5 active:translate-y-0.5 active:border-b-2 font-thai ${isDense ? 'px-3 py-1.5 text-3xl sm:px-4 sm:py-2 flex items-center justify-center min-w-[3.5rem] h-14 sm:h-16 sm:text-4xl' : 'px-4 py-2 text-4xl sm:px-5 sm:py-3 sm:text-5xl flex items-center justify-center min-w-[4.5rem] h-16 sm:h-20'}`}
             >
               <span className="leading-none pt-1">{char}</span>
             </button>

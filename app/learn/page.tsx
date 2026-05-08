@@ -264,7 +264,7 @@ export default function Home() {
                                     if (isUnlocked) {
                                       e.preventDefault();
                                       setSelectedLesson({lesson, isCompleted, unitColor: unit.colorClass, unitBorder: unit.borderClass});
-                                      setModalLevel(Math.min(lessonLevels[lesson.id] || 0, 6));
+                                      setModalLevel(Math.min(lessonLevels[lesson.id] || 0, 8));
                                     }
                                   }}
                                   className="group flex flex-col items-center relative z-10"
@@ -285,13 +285,13 @@ export default function Home() {
                                   <div className="relative">
                                     <div className={
                                       `w-20 h-20 md:w-24 md:h-24 rounded-[2rem] flex items-center justify-center border-b-[6px] transition-transform shadow-sm relative z-0
-                                      ${level >= 5
+                                      ${level >= 7
                                         ? unit.shades.l4
-                                        : level === 4 || level === 3
+                                        : level >= 5
                                           ? unit.shades.l3
-                                          : level === 2
+                                          : level >= 3
                                             ? unit.shades.l2
-                                            : level === 1
+                                            : level >= 1
                                               ? unit.shades.l1
                                               : isUnlocked 
                                                 ? `bg-white border-2 border-slate-200 ${unit.textClass} hover:bg-slate-50 active:translate-y-1 active:border-b-2` 
@@ -300,13 +300,13 @@ export default function Home() {
                                       {lesson.isReview ? (
                                         <Star size={40} className={level > 0 || isUnlocked ? `fill-current stroke-current` : `stroke-slate-300 stroke-[2.5]`} />
                                       ) : (
-                                        level >= 5 ? <Crown size={40} className="stroke-current stroke-[2.5]" fill="currentColor" /> :
+                                        level >= 8 ? <Crown size={40} className="stroke-current stroke-[2.5]" fill="currentColor" /> :
                                         level > 0 ? <CheckCircle size={40} className="stroke-current stroke-[2.5]" /> : <Play size={40} className="ml-1 fill-current stroke-current" />
                                       )}
                                     </div>
 
                                     {/* Crown/Level Badge */}
-                                    {(level > 0 && level <= 7) && (
+                                    {(level > 0 && level <= 9) && (
                                       <div className={`absolute -bottom-2 -right-3 z-20 bg-white border-2 border-slate-200 rounded-full w-8 h-8 flex items-center justify-center text-xs font-black shadow-sm ${unit.textClass}`}>
                                         {level}
                                       </div>
@@ -367,7 +367,7 @@ export default function Home() {
                   {language === 'en' ? 'Choose a level' : 'Choisir un niveau'}
                 </h4>
                 <div className="flex flex-wrap gap-2 sm:gap-3">
-                  {[0, 1, 2, 3, 4, 5, 6].map((levelIndex) => {
+                  {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((levelIndex) => {
                     const currentProgress = lessonLevels[selectedLesson.lesson.id] || 0;
                     const isCompletedLevel = levelIndex < currentProgress;
                     const isAccessible = levelIndex <= currentProgress;

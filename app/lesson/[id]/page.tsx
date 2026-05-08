@@ -16,6 +16,7 @@ import WordMatch from './components/WordMatch';
 import SentenceBuilder from './components/SentenceBuilder';
 import PairMatch from '../../components/PairMatch';
 import { TooltipHint, SentenceWithHints } from '../../components/Hints';
+import VirtualKeyboard from '../../writing/components/VirtualKeyboard';
 
 const data = courseData as CourseData;
 
@@ -115,6 +116,10 @@ export default function LessonPage() {
       const builtSentence = (selectedAnswer as string[]).join('').replace(/\s+/g, '');
       const expectedSentence = currentExercise.answer.replace(/\s+/g, '');
       correct = builtSentence === expectedSentence;
+    } else if (currentExercise.type === 'writing') {
+      const builtValue = (selectedAnswer as string[]).join('').replace(/\s+/g, '');
+      const targetValue = currentExercise.answer.replace(/\s+/g, '');
+      correct = builtValue === targetValue;
     }
 
     setIsCorrect(correct);
@@ -239,7 +244,9 @@ export default function LessonPage() {
                         ? (language === 'en' ? "Select the correct translation" : "Sélectionnez la bonne traduction")
                         : currentExercise.type === 'pair-matching'
                           ? currentExercise.question
-                          : (language === 'en' ? "Translate this sentence" : "Traduisez cette phrase")}
+                          : currentExercise.type === 'writing' && currentExercise.blindMode
+                            ? (language === 'en' ? "Write this " + (currentExercise.id.includes('phrase') ? "sentence" : "word") + " in Thai" : "Écrivez ce " + (currentExercise.id.includes('phrase') ? "phrase" : "mot") + " en thaï")
+                            : (language === 'en' ? "Translate this sentence" : "Traduisez cette phrase")}
                   </h2>
                   <div className="relative inline-block pb-1">
                     {currentExercise.type === 'intro' ? (
@@ -269,10 +276,28 @@ export default function LessonPage() {
                         isSentence={currentExercise.type === 'sentence-builder'}
                         exerciseOptions={currentExercise.options as Word[]}
                         hideHints={currentExercise.hideHints}
+                        disableTooltips={currentExercise.blindMode}
                         alwaysShowPhonetic={true}
                         answerTh={currentExercise.answer}
                         correctComponents={currentExercise.correctComponents}
                       />
+                    )}
+
+                    {currentExercise.type === 'writing' && currentExercise.blindMode && currentExercise.correctComponents && !isChecking && (
+                       <button 
+                         className="mt-4 flex items-center justify-center gap-2 bg-indigo-50 border border-indigo-200 text-indigo-600 px-4 py-2 rounded-xl text-sm font-semibold hover:bg-indigo-100 transition-colors"
+                         onClick={() => {
+                            const selectedLen = (selectedAnswer as string[] || []).length;
+                            if (selectedLen < currentExercise.correctComponents!.length) {
+                               playThaiTTS(currentExercise.correctComponents![selectedLen]);
+                            } else {
+                               playThaiTTS(currentExercise.answer); // Fallback to full word if finished typing
+                            }
+                         }}
+                       >
+                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
+                         {language === 'en' ? 'Sound of next letter' : 'Son de la prochaine lettre'}
+                       </button>
                     )}
                   </div>
                 </div>
@@ -300,11 +325,18 @@ export default function LessonPage() {
                       }, 500);
                     }}
                   />
+                ) : currentExercise.type === 'writing' ? (
+                  <VirtualKeyboard 
+                    exercise={currentExercise}
+                    selected={selectedAnswer as string[] || []}
+                    onChange={setSelectedAnswer as any}
+                    disabled={isChecking}
+                  />
                 ) : (
                   <SentenceBuilder 
                     exercise={currentExercise}
                     selected={selectedAnswer as string[] || []}
-                    onChange={setSelectedAnswer}
+                    onChange={setSelectedAnswer as any}
                     disabled={isChecking}
                   />
                 )}
@@ -330,6 +362,11 @@ export default function LessonPage() {
                 <div className="flex items-center gap-3">
                   <div className="bg-white text-rose-500 rounded-full p-1"><X size={24} strokeWidth={3} /></div>
                   {language === 'en' ? 'Incorrect.' : 'Incorrect.'}
+                  {currentExercise.type === 'writing' && currentExercise.blindMode && currentExercise.correctComponents && (
+                    <span className="text-sm font-bold opacity-80 ml-2">
+                       {Math.round(((selectedAnswer as string[] || []).filter((c: string, i: number) => c === currentExercise.correctComponents![i]).length / currentExercise.correctComponents!.length) * 100)}% {language === 'en' ? 'match' : 'réussite'}
+                    </span>
+                  )}
                 </div>
                 <div className="text-rose-800 text-sm mt-1 uppercase tracking-widest hidden sm:block">
                   {language === 'en' ? 'Correct answer:' : 'Réponse correcte :'}

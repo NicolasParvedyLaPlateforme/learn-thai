@@ -395,7 +395,66 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
       });
     }
     finalExercises = pmExercises;
+  } else if (level === 7) {
+    // Level 8: Blind writing words
+    let wrPool: Exercise[] = [];
+    lesson.words.forEach(w => {
+       const { characters, groups } = getWritingClustersAndGroups(w.th.replace(/\s+/g, ''));
+       wrPool.push({
+          id: `wr-blind-word-${w.id}-${Date.now()}-${Math.random()}`,
+          type: 'writing',
+          question: language === 'en' ? (w.en || w.fr) : w.fr,
+          answer: w.th,
+          options: shuffle(characters.map((c, i) => ({ id: `c-${i}`, th: c, fr: '', phonetic: '' }))),
+          correctComponents: characters,
+          componentGroups: groups,
+          hideHints: true,
+          blindMode: true
+       });
+    });
+    wrPool = shuffle(wrPool);
+    while (wrPool.length < 10 && wrPool.length > 0) wrPool = [...wrPool, ...shuffle(wrPool)];
+    finalExercises = wrPool.slice(0, 10);
+  } else if (level === 8) {
+    // Level 9: Blind writing phrases
+    let wrPool: Exercise[] = [];
+    lesson.phrases.forEach(p => {
+       const { characters, groups } = getWritingClustersAndGroups(p.th.replace(/\s+/g, ''));
+       wrPool.push({
+          id: `wr-blind-phrase-${p.id}-${Date.now()}-${Math.random()}`,
+          type: 'writing',
+          question: language === 'en' ? (p.en || p.fr) : p.fr,
+          answer: p.th,
+          options: shuffle(characters.map((c, i) => ({ id: `c-${i}`, th: c, fr: '', phonetic: '' }))),
+          correctComponents: characters,
+          componentGroups: groups,
+          hideHints: true,
+          blindMode: true
+       });
+    });
+    wrPool = shuffle(wrPool);
+    while (wrPool.length < 10 && wrPool.length > 0) wrPool = [...wrPool, ...shuffle(wrPool)];
+    if (wrPool.length === 0) { // Fallback if no phrases
+       lesson.words.forEach(w => {
+         const { characters, groups } = getWritingClustersAndGroups(w.th.replace(/\s+/g, ''));
+         wrPool.push({
+            id: `wr-blind-word-${w.id}-${Date.now()}-${Math.random()}`,
+            type: 'writing',
+            question: language === 'en' ? (w.en || w.fr) : w.fr,
+            answer: w.th,
+            options: shuffle(characters.map((c, i) => ({ id: `c-${i}`, th: c, fr: '', phonetic: '' }))),
+            correctComponents: characters,
+            componentGroups: groups,
+            hideHints: true,
+            blindMode: true
+         });
+       });
+       wrPool = shuffle(wrPool);
+       while (wrPool.length < 10 && wrPool.length > 0) wrPool = [...wrPool, ...shuffle(wrPool)];
+    }
+    finalExercises = wrPool.slice(0, 10);
   }
+
 
   // Prevent same questions consecutively
   const result: Exercise[] = [];

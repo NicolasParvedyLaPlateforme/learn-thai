@@ -45,6 +45,7 @@ export interface Exercise {
   componentGroups?: number[]; // To logically group correctComponents for visual display
   hideHints?: boolean; // If true, tooltips won't be shown
   disableTooltips?: boolean;
+  blindMode?: boolean; // If true, Thai sentence is hidden and sound hint is provided
   introItem?: Word | Phrase; // For intro exercises
   pairMatchMode?: 'normal' | 'audio-only' | 'script-only';
 }
