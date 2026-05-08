@@ -84,7 +84,7 @@ export default function PairMatch({ pairs, mode = 'normal', onComplete }: PairMa
     if (matchedIds.size > 0 && matchedIds.size === pairs.length) {
       timeout = setTimeout(() => {
         onComplete();
-      }, 400);
+      }, 1000);
     }
     return () => {
       if (timeout) clearTimeout(timeout);

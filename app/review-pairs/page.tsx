@@ -103,7 +103,7 @@ export default function ReviewPairsPage() {
       </header>
 
       {/* Main Exercise Area */}
-      <main className="flex-1 overflow-y-auto flex flex-col items-center py-6 md:py-12 px-4 w-full">
+      <main className="flex-1 overflow-y-auto flex flex-col items-center py-2 sm:py-6 md:py-12 px-4 w-full">
         <div className="w-full max-w-3xl flex flex-col justify-center flex-1">
           <AnimatePresence mode="wait">
             <motion.div 
@@ -121,7 +121,7 @@ export default function ReviewPairsPage() {
                 </div>
                 
                 <div className="flex-1 mt-2 md:mt-0">
-                  <h2 className="text-2xl md:text-3xl font-extrabold text-slate-800 mb-4 md:mb-6">
+                  <h2 className="text-2xl md:text-3xl font-extrabold text-slate-800 mb-4 md:mb-6 text-center md:text-left">
                     {currentExercise.question}
                   </h2>
                 </div>
@@ -133,11 +133,13 @@ export default function ReviewPairsPage() {
                   pairs={currentExercise.pairs as Word[]}
                   mode={currentExercise.pairMatchMode}
                   onComplete={() => {
-                    setIsCorrect(true);
-                    setIsChecking(true);
-                    setTimeout(() => {
-                      document.getElementById('next-btn')?.click();
-                    }, 500);
+                    completeLesson('review-dummy', 1); // grant 1 xp
+                    if (currentIndex >= exercises.length - 3) {
+                      setExercises(prev => [...prev, ...generateEndlessPairMatching(data.lessons, completedLessons, language)]);
+                    }
+                    setCurrentIndex(prev => prev + 1);
+                    setIsChecking(false);
+                    setIsCorrect(null);
                   }}
                 />
               </div>

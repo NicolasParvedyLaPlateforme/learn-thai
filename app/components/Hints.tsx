@@ -103,7 +103,7 @@ export function SentenceWithHints({text, dictionary, phrases, isSentence, exerci
   
   // Create the main text content, always wrapping it in a TooltipHint if we have the translation
   const mainContent = (
-    <span className="flex flex-wrap items-end gap-x-2 gap-y-4 leading-relaxed text-xl md:text-2xl font-medium">
+    <span className="flex flex-wrap justify-center md:justify-start items-end gap-x-2 gap-y-4 leading-relaxed text-xl md:text-2xl font-medium">
       {exactMatch ? (
         alwaysShowPhonetic ? (
           <span className="inline-flex flex-col w-full text-center sm:text-left sm:w-auto relative group">

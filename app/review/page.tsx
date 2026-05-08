@@ -235,7 +235,7 @@ export default function ReviewPage() {
       </header>
 
       {/* Main Exercise Area */}
-      <main className="flex-1 overflow-y-auto flex flex-col items-center py-6 md:py-12 px-4 w-full">
+      <main className="flex-1 overflow-y-auto flex flex-col items-center py-2 sm:py-6 md:py-12 px-4 w-full">
         <div className="w-full max-w-3xl flex flex-col justify-center flex-1">
         
           {/* The Question / Hint System */}
@@ -246,12 +246,12 @@ export default function ReviewPage() {
             </div>
             
             <div className="flex-1 mt-2 md:mt-0">
-              <h2 className="text-2xl md:text-3xl font-extrabold text-slate-800 mb-4 md:mb-6">
+              <h2 className="text-2xl md:text-3xl font-extrabold text-slate-800 mb-4 md:mb-6 text-center md:text-left">
                 {currentExercise.type === 'word-match' 
                   ? (language === 'en' ? "Select the correct translation:" : "Sélectionnez la bonne traduction")
                   : (language === 'en' ? "Translate this sentence:" : "Traduisez cette phrase")}
               </h2>
-              <div className="relative inline-block pb-1">
+              <div className="relative inline-block pb-1 w-full text-center md:text-left">
                 <SentenceWithHints 
                   text={currentExercise.question} 
                   dictionary={getDictionaryForExercise()} 

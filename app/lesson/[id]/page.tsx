@@ -188,7 +188,7 @@ export default function LessonPage() {
       </header>
 
       {/* Main Exercise Area */}
-      <main className="flex-1 overflow-y-auto flex flex-col items-center py-6 md:py-12 px-4 w-full relative">
+      <main className="flex-1 overflow-y-auto flex flex-col items-center py-2 sm:py-6 md:py-12 px-4 w-full relative">
         <div className="w-full max-w-3xl flex flex-col justify-center flex-1">
         
           {/* Glossary Modal */}
@@ -246,7 +246,7 @@ export default function LessonPage() {
                 </div>
                 
                 <div className="flex-1 mt-2 md:mt-0">
-                  <h2 className="text-2xl md:text-3xl font-extrabold text-slate-800 mb-4 md:mb-6">
+                  <h2 className="text-2xl md:text-3xl font-extrabold text-slate-800 mb-4 md:mb-6 text-center md:text-left">
                     {currentExercise.type === 'intro'
                       ? (language === 'en' ? "New expression!" : "Nouvelle expression !")
                       : currentExercise.type === 'word-match' 
@@ -257,9 +257,9 @@ export default function LessonPage() {
                             ? (language === 'en' ? "Write this " + (currentExercise.id.includes('phrase') ? "sentence" : "word") + " in Thai" : "Écrivez ce " + (currentExercise.id.includes('phrase') ? "phrase" : "mot") + " en thaï")
                             : (language === 'en' ? "Translate this sentence" : "Traduisez cette phrase")}
                   </h2>
-                  <div className="relative inline-block pb-1">
+                  <div className="relative inline-block pb-1 w-full text-center md:text-left">
                     {currentExercise.type === 'intro' ? (
-                      <div className="flex flex-col items-start gap-4">
+                      <div className="flex flex-col items-center md:items-start gap-4">
                         <p className="text-2xl text-slate-600 font-medium">{currentExercise.question}</p>
                         <div 
                           className="inline-flex items-center gap-3 bg-white px-5 py-3 rounded-2xl border-2 border-emerald-100 shadow-sm cursor-pointer hover:bg-emerald-50 transition-colors"
@@ -327,11 +327,20 @@ export default function LessonPage() {
                     pairs={currentExercise.pairs as Word[]}
                     mode={currentExercise.pairMatchMode}
                     onComplete={() => {
-                      setIsCorrect(true);
-                      setIsChecking(true);
-                      setTimeout(() => {
-                        document.getElementById('next-btn')?.click();
-                      }, 500);
+                      if (currentIndex < exercises.length - 1) {
+                        setCurrentIndex(prev => prev + 1);
+                        setIsChecking(false);
+                        setIsCorrect(null);
+                        setSelectedAnswer(null);
+                      } else {
+                        setIsFinished(true);
+                        completeLesson(lesson.id, 10 + exercises.length, currentLevel);
+                        confetti({
+                          particleCount: 150,
+                          spread: 70,
+                          origin: { y: 0.6 }
+                        });
+                      }
                     }}
                   />
                 ) : currentExercise.type === 'writing' ? (
