@@ -38,13 +38,6 @@ export default function VirtualKeyboard({ exercise, selected, onChange, disabled
     return code === 0x0E31 || (code >= 0x0E34 && code <= 0x0E3A) || (code >= 0x0E47 && code <= 0x0E4E);
   };
 
-  const handleRemove = (index: number) => {
-    if (disabled) return;
-    const newSelected = [...selected];
-    newSelected.splice(index, 1);
-    onChange(newSelected);
-  };
-
   return (
     <div className="flex flex-col gap-4 w-full max-w-2xl mx-auto">
       {/* Selected area */}
@@ -52,30 +45,29 @@ export default function VirtualKeyboard({ exercise, selected, onChange, disabled
         {selected.length === 0 && (
           <span className="text-slate-400 p-2 font-medium">Écrivez ici...</span>
         )}
-        {selected.map((char, idx) => {
-          let isCorrect = true;
-          if (exercise.type === 'writing' && exercise.correctComponents) {
-            isCorrect = char === exercise.correctComponents[idx];
-          }
-          
-          // In blind mode and NOT checking (disabled is false), don't show colors
-          const showColors = exercise.blindMode ? disabled : true;
-          let textColorClass = "text-slate-700";
-          if (showColors) {
-             textColorClass = isCorrect ? "text-emerald-600" : "text-rose-500";
-          }
-          
-          return (
-            <button
-               key={`sel-${idx}`}
-               onClick={() => handleRemove(idx)}
-               disabled={disabled}
-               className={`bg-white border-2 border-b-4 ${showColors ? (isCorrect ? 'border-slate-200' : 'border-rose-200') : 'border-slate-200'} rounded-xl font-medium ${textColorClass} shadow-sm transition-all hover:-translate-y-0.5 active:translate-y-0.5 active:border-b-2 font-thai ${isDense ? 'px-3 py-1.5 text-3xl sm:px-4 sm:py-2 flex items-center justify-center min-w-[3.5rem] h-14 sm:h-16 sm:text-4xl' : 'px-4 py-2 text-4xl sm:px-5 sm:py-3 sm:text-5xl flex items-center justify-center min-w-[4.5rem] h-16 sm:h-20'}`}
-            >
-              <span className="leading-none pt-1">{char}</span>
-            </button>
-          )
-        })}
+        {selected.length > 0 && (
+          <div className="bg-white border-2 border-b-4 border-slate-200 rounded-xl px-6 py-3 sm:px-8 sm:py-4 shadow-sm text-5xl sm:text-6xl font-thai leading-relaxed text-center break-all">
+            {selected.map((char, idx) => {
+              let isCorrect = true;
+              if (exercise.type === 'writing' && exercise.correctComponents) {
+                isCorrect = char === exercise.correctComponents[idx];
+              }
+              
+              // In blind mode and NOT checking (disabled is false), don't show colors
+              const showColors = exercise.blindMode ? disabled : true;
+              let textColorClass = "text-slate-700";
+              if (showColors) {
+                 textColorClass = isCorrect ? "text-emerald-600" : "text-rose-500";
+              }
+              
+              return (
+                <span key={`sel-${idx}`} className={textColorClass}>
+                  {char}
+                </span>
+              )
+            })}
+          </div>
+        )}
       </div>
 
       {/* Keyboard area */}

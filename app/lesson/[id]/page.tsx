@@ -6,7 +6,7 @@ import { useProgressStore } from '../../lib/store';
 import courseData from '../../data/course.json';
 import { generateExercises } from '../../lib/exercise-generator';
 import { Exercise, Lesson, CourseData, Word, Phrase } from '../../types';
-import { X, Check, Star } from 'lucide-react';
+import { X, Check, Star, Crown } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { playThaiTTS, preloadThaiVoices } from '../../lib/tts';
 import { motion, AnimatePresence } from 'motion/react';
@@ -71,7 +71,7 @@ export default function LessonPage() {
           setSelectedAnswer(null);
        } else {
           setIsFinished(true);
-          completeLesson(lesson.id, 10 + exercises.length);
+          completeLesson(lesson.id, 10 + exercises.length, currentLevel);
           confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }});
        }
        return;
@@ -88,7 +88,7 @@ export default function LessonPage() {
         } else {
           // Finished
           setIsFinished(true);
-          completeLesson(lesson.id, 10 + exercises.length);
+          completeLesson(lesson.id, 10 + exercises.length, currentLevel);
           confetti({
             particleCount: 150,
             spread: 70,
@@ -162,10 +162,10 @@ export default function LessonPage() {
             />
           </div>
           <div className="font-bold text-slate-400 flex items-center gap-3">
-            {currentLevel + 1 < 7 ? (
+            {currentLevel + 1 < 9 ? (
               <span>{language === 'en' ? 'Lvl.' : 'Niv.'} {currentLevel + 2}</span>
             ) : (
-              <span className="flex items-center text-amber-500"><Star size={18} className="fill-current" /></span>
+              <span className="flex items-center text-amber-500"><Crown size={18} className="fill-current stroke-[2.5]" /></span>
             )}
             <button 
               onClick={() => setShowInfoModal(true)}
@@ -371,7 +371,21 @@ export default function LessonPage() {
                 <div className="text-rose-800 text-sm mt-1 uppercase tracking-widest hidden sm:block">
                   {language === 'en' ? 'Correct answer:' : 'Réponse correcte :'}
                 </div>
-                <div className="text-rose-900 font-medium font-thai text-xl md:text-2xl mt-1 sm:mt-0">{currentExercise.answer}</div>
+                <div className="font-medium font-thai text-xl md:text-2xl mt-1 sm:mt-0">
+                  {currentExercise.type === 'writing' && currentExercise.blindMode && currentExercise.correctComponents ? (
+                    currentExercise.correctComponents.map((char, i) => {
+                      const typedChar = (selectedAnswer as string[] || [])[i];
+                      const isMatch = typedChar === char;
+                      return (
+                        <span key={i} className={isMatch ? "text-emerald-600" : "text-rose-600"}>
+                          {char}
+                        </span>
+                      );
+                    })
+                  ) : (
+                    <span className="text-rose-900">{currentExercise.answer}</span>
+                  )}
+                </div>
               </div>
             )}
           </div>

@@ -10,7 +10,7 @@ interface ProgressState {
   xp: number;
   seenAlphabets: string[]; // Keep track of seen alphabet letters
   setLanguage: (lang: AppLanguage) => void;
-  completeLesson: (lessonId: string, earnedXp: number) => void;
+  completeLesson: (lessonId: string, earnedXp: number, playedLevel?: number) => void;
   resetProgress: () => void;
   resetLessonLevel: (lessonId: string) => void;
   markAlphabetSeen: (letter: string) => void;
@@ -25,9 +25,19 @@ export const useProgressStore = create<ProgressState>()(
       xp: 0,
       seenAlphabets: [],
       setLanguage: (lang) => set({ language: lang }),
-      completeLesson: (lessonId, earnedXp) => set((state) => {
+      completeLesson: (lessonId, earnedXp, playedLevel) => set((state) => {
         const currentLevel = state.lessonLevels[lessonId] || 0;
-        const newLevel = Math.min(currentLevel + 1, 7); // Max level 7
+        // If playedLevel is provided, only unlock the next level if we played the currently available max level
+        let newLevel = currentLevel;
+        if (playedLevel !== undefined) {
+          if (playedLevel === currentLevel) {
+             newLevel = Math.min(currentLevel + 1, 9); // Max level 9
+          }
+        } else {
+           // Fallback if not provided
+           newLevel = Math.min(currentLevel + 1, 9);
+        }
+        
         return {
           completedLessons: state.completedLessons.includes(lessonId) 
             ? state.completedLessons 

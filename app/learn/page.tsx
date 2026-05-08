@@ -300,7 +300,7 @@ export default function Home() {
                                       {lesson.isReview ? (
                                         <Star size={40} className={level > 0 || isUnlocked ? `fill-current stroke-current` : `stroke-slate-300 stroke-[2.5]`} />
                                       ) : (
-                                        level >= 8 ? <Crown size={40} className="stroke-current stroke-[2.5]" fill="currentColor" /> :
+                                        level >= 9 ? <Crown size={40} className="stroke-current stroke-[2.5]" fill="currentColor" /> :
                                         level > 0 ? <CheckCircle size={40} className="stroke-current stroke-[2.5]" /> : <Play size={40} className="ml-1 fill-current stroke-current" />
                                       )}
                                     </div>
@@ -394,8 +394,10 @@ export default function Home() {
                         <span className="font-extrabold text-lg mb-1">{levelIndex + 1}</span>
                         {isCompletedLevel && !isSelected ? (
                           <CheckCircle size={16} className={isSelected ? "text-white" : "text-emerald-500"} />
-                        ) : (
+                        ) : levelIndex === 8 ? (
                           <Crown size={16} className={isSelected ? "text-white opacity-80" : "opacity-40"} />
+                        ) : (
+                          <Star size={16} className={isSelected ? "text-white opacity-80" : "opacity-40"} />
                         )}
                       </button>
                     );
