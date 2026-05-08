@@ -231,11 +231,29 @@ export default function AlphabetLessonPage() {
                      {currentExercise.explanation ? (
                        <p className="leading-relaxed">{currentExercise.explanation}</p>
                      ) : (
-                       <p className="leading-relaxed">
-                         {language === 'en' 
-                           ? `Hint: The letter you are looking for belongs to the ${currentExercise.item.consonantClass} class.` 
-                           : `Indice : La lettre recherchée appartient à la classe ${currentExercise.item.consonantClass === 'high' ? 'Haute' : currentExercise.item.consonantClass === 'mid' ? 'Moyenne' : 'Basse'}.`}
-                       </p>
+                       <div className="leading-relaxed flex flex-col gap-1.5">
+                         <p>
+                           {language === 'en' 
+                             ? `Hint: The letter is called `
+                             : `Indice : La lettre s'appelle `}
+                           <span className="font-bold font-thai text-lg">{currentExercise.item.exampleWord}</span> 
+                           <span className="opacity-80"> ({currentExercise.item.pronunciation})</span>.
+                         </p>
+                         {(currentExercise.item.mnemonicHintEn || currentExercise.item.mnemonicHintFr) && (
+                           <p className="text-sm border-l-2 border-indigo-200 pl-2 opacity-90">
+                             {language === 'en' 
+                               ? `Think of the visual mnemonic: "${currentExercise.item.mnemonicHintEn}".` 
+                               : `Pensez au moyen mnémotechnique : "${currentExercise.item.mnemonicHintFr}".`}
+                           </p>
+                         )}
+                         {currentExercise.item.type === 'vowel' && (
+                           <p className="text-sm mt-1 bg-indigo-100/50 p-2 rounded">
+                             {language === 'en'
+                               ? "💡 Tip: A double letter in the pronunciation (like 'aa' or 'ii') means it's a long vowel, while a single letter means a short vowel."
+                               : "💡 Astuce : Une double voyelle dans la transcription (comme 'aa' ou 'ii') indique que c'est une voyelle longue. Une lettre simple (comme 'a' ou 'i') indique une voyelle courte."}
+                           </p>
+                         )}
+                       </div>
                      )}
                    </div>
                  </motion.div>
