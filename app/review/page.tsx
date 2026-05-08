@@ -9,6 +9,7 @@ import type { ReviewOptions } from '../lib/exercise-generator';
 import { Exercise, CourseData, Word } from '../types';
 import { X, Check, Settings, Play } from 'lucide-react';
 import { playThaiTTS, preloadThaiVoices } from '../lib/tts';
+import { motion, AnimatePresence } from 'motion/react';
 
 // Exercise Components
 import WordMatch from '../lesson/[id]/components/WordMatch';
@@ -209,6 +210,12 @@ export default function ReviewPage() {
      return data.lessons.flatMap(l => l.phrases);
   };
 
+  const isAnswerComplete = currentExercise.type === 'sentence-builder' && currentExercise.correctComponents
+      ? Array.isArray(selectedAnswer) && selectedAnswer.length === currentExercise.correctComponents.length
+      : selectedAnswer !== null && (!Array.isArray(selectedAnswer) || (selectedAnswer as any[]).length > 0);
+
+  const showFooter = isChecking || isAnswerComplete;
+
   return (
     <div className="h-[100dvh] flex flex-col bg-[#FAFAFA] font-sans text-slate-800 overflow-hidden">
       {/* Header / Progress bar */}
@@ -281,45 +288,58 @@ export default function ReviewPage() {
       </main>
 
       {/* Footer Actions */}
-      <footer className={`shrink-0 min-h-[100px] md:h-32 py-4 md:py-0 border-t-2 border-slate-200 flex items-center justify-center px-4 md:px-8 transition-colors duration-300 ${isChecking ? (isCorrect ? 'bg-indigo-50' : 'bg-rose-50 border-rose-200') : 'bg-white'}`}>
-        <div className="w-full max-w-4xl flex sm:flex-row flex-col items-center justify-between gap-4">
-          
-          <div className="flex-1 w-full text-center sm:text-left">
-            {isChecking && isCorrect && (
-              <div className="flex items-center justify-center sm:justify-start gap-3 text-indigo-600 font-extrabold text-xl">
-                <div className="bg-white text-indigo-500 rounded-full p-1"><Check size={24} strokeWidth={3} /></div>
-                {language === 'en' ? 'Excellent!' : 'Excellent !'}
+      <>
+        <div className="shrink-0 min-h-[100px] md:min-h-[128px] w-full bg-transparent"></div>
+        <AnimatePresence>
+          {showFooter && (
+            <motion.footer 
+              initial={{ y: "100%", opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: "100%", opacity: 0 }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              className={`fixed bottom-0 left-0 right-0 w-full min-h-[100px] md:min-h-[128px] py-4 md:py-0 border-t-2 items-center justify-center px-4 md:px-8 flex transition-colors duration-300 z-50 overflow-y-auto max-h-[50vh] ${isChecking ? (isCorrect ? 'bg-indigo-50 border-indigo-200' : 'bg-rose-50 border-rose-200 shadow-[0_-10px_40px_rgba(244,63,94,0.1)]') : 'bg-white border-slate-200 shadow-[0_-10px_40px_rgba(0,0,0,0.05)]'}`}
+            >
+              <div className="w-full max-w-4xl flex sm:flex-row flex-col items-center justify-between gap-4">
+              
+              <div className="flex-1 w-full text-center sm:text-left">
+                {isChecking && isCorrect && (
+                  <div className="flex items-center justify-center sm:justify-start gap-3 text-indigo-600 font-extrabold text-xl">
+                    <div className="bg-white text-indigo-500 rounded-full p-1"><Check size={24} strokeWidth={3} /></div>
+                    {language === 'en' ? 'Excellent!' : 'Excellent !'}
+                  </div>
+                )}
+                {isChecking && !isCorrect && (
+                  <div className="flex flex-col text-rose-600 font-extrabold text-xl gap-1 items-center sm:items-start">
+                    <div className="flex items-center gap-3">
+                      <div className="bg-white text-rose-500 rounded-full p-1"><X size={24} strokeWidth={3} /></div>
+                      {language === 'en' ? 'Incorrect.' : 'Incorrect.'}
+                    </div>
+                    <div className="text-rose-800 text-sm mt-1 uppercase tracking-widest">
+                      {language === 'en' ? 'Correct answer:' : 'Réponse correcte :'}
+                    </div>
+                    <div className="text-rose-900 font-medium font-thai text-xl md:text-2xl mt-1 sm:mt-0">{currentExercise.answer}</div>
+                  </div>
+                )}
               </div>
-            )}
-            {isChecking && !isCorrect && (
-              <div className="flex flex-col text-rose-600 font-extrabold text-xl gap-1 items-center sm:items-start">
-                <div className="flex items-center gap-3">
-                  <div className="bg-white text-rose-500 rounded-full p-1"><X size={24} strokeWidth={3} /></div>
-                  {language === 'en' ? 'Incorrect.' : 'Incorrect.'}
-                </div>
-                <div className="text-rose-800 text-sm mt-1 uppercase tracking-widest hidden sm:block">
-                  {language === 'en' ? 'Correct answer:' : 'Réponse correcte :'}
-                </div>
-                <div className="text-rose-900 font-medium font-thai text-xl md:text-2xl mt-1 sm:mt-0">{currentExercise.answer}</div>
-              </div>
-            )}
-          </div>
 
-          <button
-            onClick={handleCheck}
-            disabled={!selectedAnswer || (Array.isArray(selectedAnswer) && selectedAnswer.length === 0)}
-            className={`w-full sm:w-auto px-12 py-3 rounded-xl border-b-4 font-bold text-lg shadow-lg hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest disabled:opacity-50 disabled:scale-100 disabled:shadow-none
-              ${isChecking 
-                ? (isCorrect 
-                  ? 'bg-indigo-500 border-indigo-700 text-white hover:bg-indigo-400' 
-                  : 'bg-rose-500 border-rose-700 text-white hover:bg-rose-400') 
-                : 'bg-indigo-500 border-indigo-700 text-white hover:bg-indigo-400'}
-            `}
-          >
-            {isChecking ? (language === 'en' ? 'Continue' : 'Continuer') : (language === 'en' ? 'Check' : 'Vérifier')}
-          </button>
-        </div>
-      </footer>
+              <button
+                onClick={handleCheck}
+                disabled={!isChecking && (!selectedAnswer || (Array.isArray(selectedAnswer) && (currentExercise.type === 'sentence-builder' && currentExercise.correctComponents ? selectedAnswer.length !== currentExercise.correctComponents.length : selectedAnswer.length === 0)))}
+                className={`w-full sm:w-auto px-12 py-3 rounded-xl border-b-4 font-bold text-lg shadow-lg hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest disabled:opacity-50 disabled:scale-100 disabled:shadow-none
+                  ${isChecking 
+                    ? (isCorrect 
+                      ? 'bg-indigo-500 border-indigo-700 text-white hover:bg-indigo-400' 
+                      : 'bg-rose-500 border-rose-700 text-white hover:bg-rose-400') 
+                    : 'bg-indigo-500 border-indigo-700 text-white hover:bg-indigo-400'}
+                `}
+              >
+                {isChecking ? (language === 'en' ? 'Continue' : 'Continuer') : (language === 'en' ? 'Check' : 'Vérifier')}
+              </button>
+            </div>
+          </motion.footer>
+        )}
+      </AnimatePresence>
+      </>
     </div>
   );
 }

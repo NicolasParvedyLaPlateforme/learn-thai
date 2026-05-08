@@ -62,54 +62,56 @@ export default function SentenceBuilder({ exercise, selected, onChange, disabled
     <div className="flex flex-col gap-4 w-full max-w-2xl mx-auto">
       
       {/* Target area (Answer) */}
-      <div className={`min-h-[100px] border-y-2 border-slate-200 py-4 flex flex-wrap gap-2 items-center justify-center relative`}>
-        {selected.length === 0 && (
-          <span className="text-slate-400 p-2 font-medium">{language === 'en' ? 'Build the sentence here...' : 'Formez la phrase ici...'}</span>
-        )}
-        {selected.map((word, idx) => {
-          let isCorrect = true;
+      <div className={`min-h-[120px] border-y-2 border-slate-200 py-4 flex flex-col gap-2 items-center justify-center relative`}>
+        <div className="flex flex-wrap gap-2 items-center justify-center min-h-[64px] sm:min-h-[80px]">
+          {selected.length === 0 && (
+            <span className="text-slate-400 p-2 font-medium">{language === 'en' ? 'Build the sentence here...' : 'Formez la phrase ici...'}</span>
+          )}
+          {selected.map((word, idx) => {
+            let isCorrect = true;
+            
+            if (exercise.type === 'sentence-builder' && exercise.correctComponents) {
+              const expectedWordId = exercise.correctComponents[idx];
+              const expectedWord = exercise.options.find(o => o.id === expectedWordId)?.th;
+              isCorrect = word === expectedWord;
+            }
+            
+            const textColorClass = isCorrect ? "text-emerald-600" : "text-rose-500";
+            return (
+            <button
+              key={`sel-${idx}`}
+              onClick={() => handleRemove(idx)}
+              disabled={disabled}
+              className={`bg-white text-center border-2 border-b-4 ${isCorrect ? 'border-slate-200' : 'border-rose-200'} rounded-xl font-medium ${textColorClass} shadow-sm transition-all hover:-translate-y-0.5 active:translate-y-0.5 active:border-b-2 font-thai px-2 sm:px-3 flex items-center justify-center min-w-[3rem] sm:min-w-[4rem] h-12 sm:h-16`}
+            >
+              <span className="leading-none text-2xl sm:text-3xl">{word}</span>
+            </button>
+          )})}
           
-          if (exercise.type === 'sentence-builder' && exercise.correctComponents) {
-            const expectedWordId = exercise.correctComponents[idx];
-            const expectedWord = exercise.options.find(o => o.id === expectedWordId)?.th;
-            isCorrect = word === expectedWord;
-          }
-          
-          const textColorClass = isCorrect ? "text-emerald-600" : "text-rose-500";
-          return (
-          <button
-            key={`sel-${idx}`}
-            onClick={() => handleRemove(idx)}
-            disabled={disabled}
-            className={`bg-white text-center border-2 border-b-4 ${isCorrect ? 'border-slate-200' : 'border-rose-200'} rounded-xl font-medium ${textColorClass} shadow-sm transition-all hover:-translate-y-0.5 active:translate-y-0.5 active:border-b-2 font-thai px-2 sm:px-3 flex items-center justify-center min-w-[3rem] sm:min-w-[4rem] h-12 sm:h-16`}
-          >
-            <span className="leading-none text-2xl sm:text-3xl">{word}</span>
-          </button>
-        )})}
-        
-        {/* Hint System */}
-        {!disabled && selected.length < (exercise.correctComponents?.length || 0) && (
-          <div className="relative inline-flex items-center ml-2">
-            {showHint ? (
-              <div 
-                className="bg-amber-100 border-2 border-amber-300 text-amber-800 rounded-xl px-3 py-2 flex flex-col items-center justify-center cursor-pointer shadow-sm animate-pulse-once"
-                onClick={() => playThaiTTS(nextHintLetter)}
-                title={language === 'en' ? 'Next character hint' : 'Indice de la prochaine lettre'}
-              >
-                 <span className="font-thai text-xl">{nextHintLetter}</span>
-                 <span className="text-xs font-semibold mt-0.5">{nextHintPronunciation}</span>
-              </div>
-            ) : (
-              <button
-                onClick={() => setShowHint(true)}
-                className="w-10 h-10 rounded-full bg-slate-100 text-slate-400 hover:bg-slate-200 hover:text-slate-600 flex items-center justify-center transition-colors"
-                title={language === 'en' ? 'Show hint' : 'Afficher un indice'}
-              >
-                <HelpCircle size={20} />
-              </button>
-            )}
-          </div>
-        )}
+          {/* Hint System */}
+          {!disabled && selected.length < (exercise.correctComponents?.length || 0) && (
+            <div className="relative inline-flex items-center ml-2">
+              {showHint ? (
+                <div 
+                  className="bg-amber-100 border-2 border-amber-300 text-amber-800 rounded-xl px-3 py-2 flex flex-col items-center justify-center cursor-pointer shadow-sm animate-pulse-once"
+                  onClick={() => playThaiTTS(nextHintLetter)}
+                  title={language === 'en' ? 'Next character hint' : 'Indice de la prochaine lettre'}
+                >
+                   <span className="font-thai text-xl">{nextHintLetter}</span>
+                   <span className="text-xs font-semibold mt-0.5">{nextHintPronunciation}</span>
+                </div>
+              ) : (
+                <button
+                  onClick={() => setShowHint(true)}
+                  className="w-10 h-10 rounded-full bg-slate-100 text-slate-400 hover:bg-slate-200 hover:text-slate-600 flex items-center justify-center transition-colors"
+                  title={language === 'en' ? 'Show hint' : 'Afficher un indice'}
+                >
+                  <HelpCircle size={20} />
+                </button>
+              )}
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Word bank */}

@@ -41,13 +41,12 @@ export default function VirtualKeyboard({ exercise, selected, onChange, disabled
   return (
     <div className="flex flex-col gap-4 w-full max-w-2xl mx-auto">
       {/* Selected area */}
-      <div className={`min-h-[80px] border-y-2 border-slate-200 py-4 flex flex-wrap gap-2 items-center justify-center`}>
-        {selected.length === 0 && (
-          <span className="text-slate-400 p-2 font-medium">Écrivez ici...</span>
-        )}
-        {selected.length > 0 && (
-          <div className="bg-white border-2 border-b-4 border-slate-200 rounded-xl px-6 py-3 sm:px-8 sm:py-4 shadow-sm text-5xl sm:text-6xl font-thai leading-relaxed text-center break-all">
-            {selected.map((char, idx) => {
+      <div className={`min-h-[100px] border-y-2 border-slate-200 py-4 flex flex-col gap-2 items-center justify-center`}>
+        <div className="bg-white border-2 border-b-4 border-slate-200 rounded-xl px-4 py-2 sm:px-5 sm:py-3 shadow-sm text-3xl sm:text-4xl font-thai leading-relaxed text-center break-all min-w-[180px] min-h-[64px] sm:min-h-[76px] flex justify-center items-center">
+          {selected.length === 0 ? (
+            <span className="text-slate-400 p-2 font-medium text-base sm:text-lg font-sans">Écrivez ici...</span>
+          ) : (
+            selected.map((char, idx) => {
               let isCorrect = true;
               if (exercise.type === 'writing' && exercise.correctComponents) {
                 isCorrect = char === exercise.correctComponents[idx];
@@ -65,9 +64,9 @@ export default function VirtualKeyboard({ exercise, selected, onChange, disabled
                   {char}
                 </span>
               )
-            })}
-          </div>
-        )}
+            })
+          )}
+        </div>
       </div>
 
       {/* Keyboard area */}
