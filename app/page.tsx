@@ -45,7 +45,7 @@ export default function LandingPage() {
                 href="/learn"
                 className="w-full sm:w-auto bg-emerald-500 hover:bg-emerald-400 text-white px-8 py-4 pb-5 rounded-2xl font-bold text-lg border-b-4 border-emerald-700 hover:-translate-y-1 active:translate-y-1 active:border-b-0 transition-all shadow-lg flex items-center justify-center uppercase tracking-wider"
               >
-                Commencer l'apprentissage
+                Commencer l&apos;apprentissage
               </Link>
             </div>
             
@@ -109,7 +109,7 @@ export default function LandingPage() {
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-extrabold mb-6 text-slate-800">Une méthode complète et variée</h2>
-            <p className="text-lg md:text-xl text-slate-500 max-w-2xl mx-auto font-medium">Ne vous ennuyez jamais avec une multitude d'exercices conçus pour améliorer chaque aspect de votre apprentissage du thaï.</p>
+            <p className="text-lg md:text-xl text-slate-500 max-w-2xl mx-auto font-medium">Ne vous ennuyez jamais avec une multitude d&apos;exercices conçus pour améliorer chaque aspect de votre apprentissage du thaï.</p>
           </div>
 
           <div className="flex flex-col gap-24">
@@ -124,7 +124,7 @@ export default function LandingPage() {
                   Relier les paires
                 </h3>
                 <p className="text-lg text-slate-600 font-medium leading-relaxed">
-                  Apprenez le vocabulaire en associant les mots thaïlandais à leur traduction. Avec ou sans l'audio, avec ou sans le texte. Relevez le défi pour muscler votre mémoire.
+                  Apprenez le vocabulaire en associant les mots thaïlandais à leur traduction. Avec ou sans l&apos;audio, avec ou sans le texte. Relevez le défi pour muscler votre mémoire.
                 </p>
               </div>
               <div className="flex-1 w-full max-w-md bg-white p-6 rounded-[2.5rem] shadow-xl border-[6px] border-slate-100 transform rotate-1 hover:rotate-0 transition-all">

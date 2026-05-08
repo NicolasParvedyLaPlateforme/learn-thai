@@ -9,6 +9,7 @@ import { THAI_ALPHABET, AlphabetItem } from '../lib/alphabet-data';
 
 import { playThaiTTS, preloadThaiVoices } from '../lib/tts';
 import { ColoredPhonetic } from '../components/ColoredPhonetic';
+import { AlphabetCard } from '../components/AlphabetCard';
 
 export default function AlphabetPage() {
   const router = useRouter();
@@ -98,6 +99,23 @@ export default function AlphabetPage() {
     playThaiTTS(text);
   };
 
+  const getOptionColorClass = (opt: AlphabetItem, isSelected: boolean, isCorrectState: boolean | null) => {
+    if (isSelected) {
+      if (isCorrectState === true) return 'border-emerald-500 bg-emerald-50 text-emerald-600 shadow-md';
+      if (isCorrectState === false) return 'border-rose-500 bg-rose-50 text-rose-600 shadow-md';
+      return 'border-indigo-500 bg-indigo-50 text-indigo-600 shadow-sm';
+    }
+    
+    // Unselected state with semantic colors
+    if (opt.type === 'vowel') return 'border-purple-200 bg-white text-purple-600 hover:bg-purple-50';
+    switch (opt.consonantClass) {
+      case 'low': return 'border-blue-200 bg-white text-blue-500 hover:bg-blue-50';
+      case 'mid': return 'border-teal-200 bg-white text-teal-600 hover:bg-teal-50';
+      case 'high': return 'border-orange-200 bg-white text-orange-500 hover:bg-orange-50';
+      default: return 'border-slate-200 bg-white text-slate-700 hover:bg-slate-50';
+    }
+  };
+
   if (!mounted || !currentItem) return null;
 
   return (
@@ -121,12 +139,7 @@ export default function AlphabetPage() {
             </h1>
             
             <div className="flex-1 flex flex-col items-center justify-center -mt-8">
-              <div className="w-48 h-48 bg-white rounded-3xl shadow-sm border-2 border-slate-100 flex items-center justify-center relative cursor-pointer active:scale-95 transition-transform" onClick={() => playTTS(currentItem.exampleWord)}>
-                <span className="text-7xl font-medium text-slate-800">{currentItem.letter}</span>
-                <div className="absolute top-4 right-4 text-slate-300">
-                  <Volume2 size={24} />
-                </div>
-              </div>
+              <AlphabetCard item={currentItem} onPlayAudio={() => playTTS(currentItem.exampleWord)} />
               
               <div className="mt-12 space-y-4 text-center">
                 <p className="text-2xl font-bold text-slate-800"><ColoredPhonetic phonetic={currentItem.pronunciation} /></p>
@@ -166,7 +179,7 @@ export default function AlphabetPage() {
                 </button>
               </div>
 
-              <div className="w-full max-w-sm grid grid-cols-2 gap-4">
+              <div className="w-full max-w-lg grid grid-cols-2 gap-4">
                 {options.map((opt, i) => (
                   <button
                     key={i}
@@ -174,20 +187,32 @@ export default function AlphabetPage() {
                       if (isCorrect === null) setSelectedOption(opt);
                     }}
                     className={`
-                      aspect-[4/3] rounded-2xl border-2 text-4xl font-medium flex items-center justify-center transition-all
-                      ${isCorrect !== null ? 'cursor-default' : 'hover:bg-slate-50 cursor-pointer active:scale-95'}
-                      ${
-                        selectedOption === opt
-                          ? isCorrect === true
-                            ? 'border-emerald-500 bg-emerald-50 text-emerald-600'
-                            : isCorrect === false
-                            ? 'border-rose-500 bg-rose-50 text-rose-600'
-                            : 'border-indigo-500 bg-indigo-50 text-indigo-600'
-                          : 'border-slate-200 bg-white text-slate-700'
-                      }
+                      aspect-square rounded-2xl border-2 flex flex-col items-center justify-center transition-all relative overflow-hidden p-3
+                      group
+                      ${isCorrect !== null ? 'cursor-default' : 'hover:-translate-y-1 cursor-pointer active:scale-95 shadow-sm hover:shadow-md'}
+                      ${getOptionColorClass(opt, selectedOption === opt, isCorrect)}
                     `}
                   >
-                    {opt.letter}
+                    {opt.consonantClass && (
+                       <div className="absolute top-3 left-0 right-0 text-center text-[11px] font-bold uppercase tracking-wider opacity-70">
+                          {opt.consonantClass}
+                       </div>
+                    )}
+                    
+                    <div className="relative flex-1 flex flex-col items-center justify-center w-full mt-4">
+                      {opt.mnemonicEmoji && (
+                         <span className="text-6xl absolute z-0 opacity-30 mix-blend-multiply filter drop-shadow-sm transition-transform group-hover:scale-110 duration-300">
+                           {opt.mnemonicEmoji}
+                         </span>
+                      )}
+                      <span className="text-6xl font-medium z-10 drop-shadow-sm">{opt.letter}</span>
+                    </div>
+                    
+                    {(opt.mnemonicHintEn || opt.mnemonicHintFr) && (
+                      <span className="w-full text-center text-[13px] leading-tight px-2 opacity-90 font-semibold mt-2 mb-1">
+                        {language === 'en' ? opt.mnemonicHintEn : opt.mnemonicHintFr}
+                      </span>
+                    )}
                   </button>
                 ))}
               </div>
@@ -220,8 +245,15 @@ export default function AlphabetPage() {
               <div className={`shrink-0 w-12 h-12 rounded-full flex items-center justify-center ${isCorrect ? 'bg-white text-emerald-500' : 'bg-white text-rose-500'}`}>
                 {isCorrect ? <span className="text-2xl">✓</span> : <X size={24} />}
               </div>
-              <div className={`font-bold text-lg md:text-xl ${isCorrect ? 'text-emerald-700' : 'text-rose-700'}`}>
-                {isCorrect ? (language === 'en' ? 'Excellent!' : 'Excellent !') : (language === 'en' ? 'The correct answer was: ' : 'La bonne réponse était : ') + currentItem.letter}
+              <div className="flex flex-col">
+                <div className={`font-bold text-lg md:text-xl ${isCorrect ? 'text-emerald-700' : 'text-rose-700'}`}>
+                  {isCorrect ? (language === 'en' ? 'Excellent!' : 'Excellent !') : (language === 'en' ? 'The correct answer was: ' : 'La bonne réponse était : ') + currentItem.letter}
+                </div>
+                {(currentItem.mnemonicHintEn || currentItem.mnemonicHintFr) && (
+                  <div className={`text-sm md:text-base opacity-80 ${isCorrect ? 'text-emerald-700' : 'text-rose-700'}`}>
+                    {language === 'en' ? currentItem.mnemonicHintEn : currentItem.mnemonicHintFr}
+                  </div>
+                )}
               </div>
             </div>
             <button
