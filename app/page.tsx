@@ -239,7 +239,7 @@ export default function LandingPage() {
                   Écrire des mots
                 </h3>
                 <p className="text-lg text-slate-600 font-medium leading-relaxed">
-                  Pratiquez l'orthographe en assemblant les bonnes consonnes et voyelles pour former des mots complets en thaï. Une aide intelligente est à votre disposition en cas de difficulté.
+                  Pratiquez l&apos;orthographe en assemblant les bonnes consonnes et voyelles pour former des mots complets en thaï. Une aide intelligente est à votre disposition en cas de difficulté.
                 </p>
               </div>
               <div className="flex-1 w-full max-w-lg bg-white p-8 rounded-[2.5rem] shadow-xl border-[6px] border-slate-100 transform -rotate-1 hover:rotate-0 transition-all flex flex-col">
@@ -263,7 +263,7 @@ export default function LandingPage() {
                 </div>
 
                 <div className="bg-orange-50 border border-orange-200 rounded-xl p-4 mb-8 text-orange-800 text-sm flex gap-3 items-start shadow-sm">
-                   <span className="text-lg">💡</span> Consonne 'h' (Ho Nam). Ici, elle sera muette et modifiera le ton de la consonne suivante.
+                   <span className="text-lg">💡</span> Consonne &apos;h&apos; (Ho Nam). Ici, elle sera muette et modifiera le ton de la consonne suivante.
                 </div>
 
                 <div className="border-t-2 border-b-2 border-slate-100 py-6 mb-8 flex items-center justify-center">
@@ -290,7 +290,7 @@ export default function LandingPage() {
         <div className="max-w-6xl mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-4">Près de 1000 mots et phrases classés</h2>
           <p className="text-emerald-100 text-lg md:text-xl font-medium max-w-2xl mx-auto">
-            Une base de données riche et étudiée, pensée pour vous faire progresser des bases jusqu'aux discussions avancées.
+            Une base de données riche et étudiée, pensée pour vous faire progresser des bases jusqu&apos;aux discussions avancées.
           </p>
         </div>
       </section>
@@ -330,18 +330,18 @@ export default function LandingPage() {
       <section className="bg-slate-800 text-white py-24 text-center px-4 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent"></div>
         <h2 className="text-4xl md:text-5xl font-extrabold mb-6 relative z-10 text-white">Apprenez le thaï dès maintenant.</h2>
-        <p className="text-xl text-slate-300 mb-10 max-w-xl mx-auto relative z-10 font-medium">Rejoignez-nous et commencez l'Unité 1. Mettez-vous directement dans le bain, aucune inscription requise pour commencer !</p>
+        <p className="text-xl text-slate-300 mb-10 max-w-xl mx-auto relative z-10 font-medium">Rejoignez-nous et commencez l&apos;Unité 1. Mettez-vous directement dans le bain, aucune inscription requise pour commencer !</p>
         <Link 
           href="/learn"
           className="inline-flex w-full sm:w-auto bg-emerald-500 hover:bg-emerald-400 text-white px-10 py-5 pb-6 rounded-2xl font-black text-xl border-b-[6px] border-emerald-700 hover:-translate-y-1 active:translate-y-1 active:border-b-0 transition-all shadow-xl items-center justify-center uppercase tracking-widest relative z-10"
         >
-          C'est parti !
+          C&apos;est parti !
         </Link>
       </section>
 
       {/* Footer */}
       <footer className="bg-slate-900 text-slate-500 py-8 text-center text-sm font-medium">
-        <p>© {new Date().getFullYear()} ThaiLearn. Apprendre le thaï n'a jamais été aussi facile.</p>
+        <p>© {new Date().getFullYear()} ThaiLearn. Apprendre le thaï n&apos;a jamais été aussi facile.</p>
       </footer>
     </div>
   );

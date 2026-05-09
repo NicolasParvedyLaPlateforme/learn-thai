@@ -31,11 +31,11 @@ export const useProgressStore = create<ProgressState>()(
         let newLevel = currentLevel;
         if (playedLevel !== undefined) {
           if (playedLevel === currentLevel) {
-             newLevel = Math.min(currentLevel + 1, 9); // Max level 9
+             newLevel = Math.min(currentLevel + 1, 10); // Max level 10
           }
         } else {
            // Fallback if not provided
-           newLevel = Math.min(currentLevel + 1, 9);
+           newLevel = Math.min(currentLevel + 1, 10);
         }
         
         return {

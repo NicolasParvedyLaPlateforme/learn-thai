@@ -453,6 +453,50 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
        while (wrPool.length < 10 && wrPool.length > 0) wrPool = [...wrPool, ...shuffle(wrPool)];
     }
     finalExercises = wrPool.slice(0, 10);
+  } else if (level === 9) {
+    // Level 10 combined: First run levels 0-8, then append free typing test
+    let previousLevels: Exercise[] = [];
+    for (let l = 0; l <= 8; l++) {
+      // Collect exercises from levels 1-9 (indices 0-8)
+      previousLevels.push(...generateExercises(lesson, allLessons, l, language));
+    }
+    
+    // Now generate the free typing words and phrases
+    let ftPool: Exercise[] = [];
+    
+    // First add words
+    lesson.words.forEach(w => {
+      ftPool.push({
+        id: `ft-word-${w.id}-${Date.now()}-${Math.random()}`,
+        type: 'free-typing',
+        question: language === 'en' ? (w.en || w.fr) : w.fr,
+        answer: w.th,
+        options: [],
+        hideHints: true,
+      });
+    });
+
+    // Then add phrases
+    let ftPhrases: Exercise[] = [];
+    lesson.phrases.forEach(p => {
+      ftPhrases.push({
+        id: `ft-phrase-${p.id}-${Date.now()}-${Math.random()}`,
+        type: 'free-typing',
+        question: language === 'en' ? (p.en || p.fr) : p.fr,
+        answer: p.th,
+        options: [],
+        hideHints: true,
+      });
+    });
+
+    ftPool = shuffle(ftPool);
+    ftPhrases = shuffle(ftPhrases);
+    
+    let combinedPool = [...ftPool, ...ftPhrases];
+    while (combinedPool.length < 10 && combinedPool.length > 0) combinedPool = [...combinedPool, ...shuffle(combinedPool)];
+    
+    // Return all previous levels followed by free typing test
+    return [...previousLevels, ...combinedPool.slice(0, 10)];
   }
 
 

@@ -36,9 +36,12 @@ export default function PairMatch({ pairs, mode = 'normal', onComplete }: PairMa
     }));
 
     // shuffle
-    setLeftCards([...lefts].sort(() => Math.random() - 0.5));
+    const leftsSorted = [...lefts].sort(() => Math.random() - 0.5);
+    const rightsSorted = [...rights].sort(() => Math.random() - 0.5);
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    setRightCards([...rights].sort(() => Math.random() - 0.5));
+    setLeftCards(leftsSorted);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setRightCards(rightsSorted);
   }, [pairs, language]);
 
   const handleSelectLeft = (id: string) => {

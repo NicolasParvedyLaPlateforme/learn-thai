@@ -69,6 +69,7 @@ export default function AlphabetLessonPage() {
         proceedToNext(exercises.length);
       } else {
         // Retry logic: Add at the end of the queue with a new ID for animations
+        // eslint-disable-next-line react-hooks/purity
         const retryExercise = { ...currentExercise, id: currentExercise.id + '-retry-' + Date.now() };
         setExercises(prev => [...prev, retryExercise]);
         proceedToNext(exercises.length + 1);

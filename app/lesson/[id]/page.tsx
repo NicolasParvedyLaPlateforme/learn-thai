@@ -17,6 +17,7 @@ import SentenceBuilder from './components/SentenceBuilder';
 import PairMatch from '../../components/PairMatch';
 import { TooltipHint, SentenceWithHints } from '../../components/Hints';
 import VirtualKeyboard from '../../writing/components/VirtualKeyboard';
+import FreeTypingInput from './components/FreeTypingInput';
 
 const data = courseData as CourseData;
 
@@ -120,6 +121,32 @@ export default function LessonPage() {
       const builtValue = (selectedAnswer as string[]).join('').replace(/\s+/g, '');
       const targetValue = currentExercise.answer.replace(/\s+/g, '');
       correct = builtValue === targetValue;
+    } else if (currentExercise.type === 'free-typing') {
+      const builtValue = typeof selectedAnswer === 'string' ? selectedAnswer.replace(/\s+/g, '') : '';
+      const targetValue = currentExercise.answer.replace(/\s+/g, '');
+      
+      const levenshtein = (a: string, b: string): number => {
+        if (a.length === 0) return b.length;
+        if (b.length === 0) return a.length;
+        const matrix = Array.from({ length: a.length + 1 }, () => new Array(b.length + 1).fill(0));
+        for (let i = 0; i <= a.length; i++) matrix[i][0] = i;
+        for (let j = 0; j <= b.length; j++) matrix[0][j] = j;
+        for (let i = 1; i <= a.length; i++) {
+          for (let j = 1; j <= b.length; j++) {
+            const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+            matrix[i][j] = Math.min(
+              matrix[i - 1][j] + 1,
+              matrix[i][j - 1] + 1,
+              matrix[i - 1][j - 1] + cost
+            );
+          }
+        }
+        return matrix[a.length][b.length];
+      };
+      
+      const editDist = levenshtein(builtValue, targetValue);
+      const similarity = 1 - (editDist / Math.max(builtValue.length, targetValue.length));
+      correct = similarity >= 0.8;
     }
 
     setIsCorrect(correct);
@@ -148,6 +175,8 @@ export default function LessonPage() {
   }
 
   const isAnswerComplete = currentExercise.type === 'intro' ? true 
+    : currentExercise.type === 'free-typing'
+      ? typeof selectedAnswer === 'string' && selectedAnswer.trim().length > 0
     : (currentExercise.type === 'writing' || currentExercise.type === 'sentence-builder') && currentExercise.correctComponents
       ? Array.isArray(selectedAnswer) && selectedAnswer.length === currentExercise.correctComponents.length
       : selectedAnswer !== null && (!Array.isArray(selectedAnswer) || (selectedAnswer as any[]).length > 0);
@@ -350,6 +379,13 @@ export default function LessonPage() {
                     onChange={setSelectedAnswer as any}
                     disabled={isChecking}
                   />
+                ) : currentExercise.type === 'free-typing' ? (
+                  <FreeTypingInput 
+                    exercise={currentExercise}
+                    selected={(selectedAnswer as string) || ''}
+                    onChange={setSelectedAnswer as any}
+                    disabled={isChecking}
+                  />
                 ) : (
                   <SentenceBuilder 
                     exercise={currentExercise}
@@ -394,6 +430,32 @@ export default function LessonPage() {
                   {currentExercise.type === 'writing' && currentExercise.blindMode && currentExercise.correctComponents && (
                     <span className="text-sm font-bold opacity-80 ml-2">
                        {Math.round(((selectedAnswer as string[] || []).filter((c: string, i: number) => c === currentExercise.correctComponents![i]).length / currentExercise.correctComponents!.length) * 100)}% {language === 'en' ? 'match' : 'réussite'}
+                    </span>
+                  )}
+                  {currentExercise.type === 'free-typing' && typeof selectedAnswer === 'string' && (
+                    <span className="text-sm font-bold opacity-80 ml-2">
+                      {Math.round((1 - (
+                        (() => {
+                           const a = selectedAnswer.replace(/\s+/g, '');
+                           const b = currentExercise.answer.replace(/\s+/g, '');
+                           if (a.length === 0) return b.length / Math.max(1, b.length);
+                           if (b.length === 0) return a.length / Math.max(1, a.length);
+                           const matrix = Array.from({ length: a.length + 1 }, () => new Array(b.length + 1).fill(0));
+                           for (let i = 0; i <= a.length; i++) matrix[i][0] = i;
+                           for (let j = 0; j <= b.length; j++) matrix[0][j] = j;
+                           for (let i = 1; i <= a.length; i++) {
+                             for (let j = 1; j <= b.length; j++) {
+                               const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+                               matrix[i][j] = Math.min(
+                                 matrix[i - 1][j] + 1,
+                                 matrix[i][j - 1] + 1,
+                                 matrix[i - 1][j - 1] + cost
+                               );
+                             }
+                           }
+                           return matrix[a.length][b.length] / Math.max(a.length, b.length);
+                        })()
+                      )) * 100)}% {language === 'en' ? 'match' : 'réussite'}
                     </span>
                   )}
                 </div>
