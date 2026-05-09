@@ -1,6 +1,7 @@
 import { Exercise } from '../../types';
 import { playThaiTTS } from '../../lib/tts';
 import { Delete } from 'lucide-react';
+import { useProgressStore } from '../../lib/store';
 
 interface Props {
   exercise: Exercise;
@@ -10,6 +11,7 @@ interface Props {
 }
 
 export default function VirtualKeyboard({ exercise, selected, onChange, disabled }: Props) {
+  const { language } = useProgressStore();
   
   const handleSelect = (charTh: string) => {
     if (disabled) return;
@@ -44,27 +46,43 @@ export default function VirtualKeyboard({ exercise, selected, onChange, disabled
       <div className={`min-h-[100px] border-y-2 border-slate-200 py-4 flex flex-col gap-2 items-center justify-center`}>
         <div className="bg-white border-2 border-b-4 border-slate-200 rounded-xl px-4 py-2 sm:px-5 sm:py-3 shadow-sm text-3xl sm:text-4xl font-thai leading-relaxed text-center break-all min-w-[180px] min-h-[64px] sm:min-h-[76px] flex justify-center items-center">
           {selected.length === 0 ? (
-            <span className="text-slate-400 p-2 font-medium text-base sm:text-lg font-sans">Écrivez ici...</span>
+            <span className="text-slate-400 p-2 font-medium text-base sm:text-lg font-sans">
+              {language === 'en' ? 'Write here...' : 'Écrivez ici...'}
+            </span>
           ) : (
-            selected.map((char, idx) => {
-              let isCorrect = true;
-              if (exercise.type === 'writing' && exercise.correctComponents) {
-                isCorrect = char === exercise.correctComponents[idx];
-              }
-              
-              // In blind mode and NOT checking (disabled is false), don't show colors
+            (() => {
+              const clusters: { chars: string, isCorrect: boolean }[] = [];
+              selected.forEach((char, idx) => {
+                let isCorrect = true;
+                if (exercise.type === 'writing' && exercise.correctComponents) {
+                  isCorrect = char === exercise.correctComponents[idx];
+                }
+                
+                if (clusters.length === 0 || !isCombining(char)) {
+                  clusters.push({ chars: char, isCorrect });
+                } else {
+                  clusters[clusters.length - 1].chars += char;
+                  if (!isCorrect) {
+                    clusters[clusters.length - 1].isCorrect = false;
+                  }
+                }
+              });
+
               const showColors = exercise.blindMode ? disabled : true;
-              let textColorClass = "text-slate-700";
-              if (showColors) {
-                 textColorClass = isCorrect ? "text-emerald-600" : "text-rose-500";
-              }
-              
-              return (
-                <span key={`sel-${idx}`} className={textColorClass}>
-                  {char}
-                </span>
-              )
-            })
+
+              return clusters.map((cluster, idx) => {
+                let textColorClass = "text-slate-700";
+                if (showColors) {
+                  textColorClass = cluster.isCorrect ? "text-emerald-600" : "text-rose-500";
+                }
+                
+                return (
+                  <span key={`sel-cluster-${idx}`} className={textColorClass}>
+                    {cluster.chars}
+                  </span>
+                );
+              });
+            })()
           )}
         </div>
       </div>

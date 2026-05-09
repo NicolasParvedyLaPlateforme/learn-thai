@@ -402,15 +402,33 @@ export default function LessonPage() {
                 </div>
                 <div className="font-medium font-thai text-xl md:text-2xl mt-1 sm:mt-0">
                   {currentExercise.type === 'writing' && currentExercise.blindMode && currentExercise.correctComponents ? (
-                    currentExercise.correctComponents.map((char, i) => {
-                      const typedChar = (selectedAnswer as string[] || [])[i];
-                      const isMatch = typedChar === char;
-                      return (
-                        <span key={i} className={isMatch ? "text-emerald-600" : "text-rose-600"}>
-                          {char}
+                    (() => {
+                      const isCombiningLocal = (charStr: string) => {
+                        if (!charStr) return false;
+                        const code = charStr.charCodeAt(0);
+                        return code === 0x0E31 || (code >= 0x0E34 && code <= 0x0E3A) || (code >= 0x0E47 && code <= 0x0E4E);
+                      };
+                      const clusters: { chars: string, isMatch: boolean }[] = [];
+                      currentExercise.correctComponents.forEach((char, i) => {
+                        const typedChar = (selectedAnswer as string[] || [])[i];
+                        const isMatch = typedChar === char;
+                        
+                        if (clusters.length === 0 || !isCombiningLocal(char)) {
+                          clusters.push({ chars: char, isMatch });
+                        } else {
+                          clusters[clusters.length - 1].chars += char;
+                          if (!isMatch) {
+                            clusters[clusters.length - 1].isMatch = false;
+                          }
+                        }
+                      });
+
+                      return clusters.map((cluster, idx) => (
+                        <span key={`ans-cluster-${idx}`} className={cluster.isMatch ? "text-emerald-600" : "text-rose-600"}>
+                          {cluster.chars}
                         </span>
-                      );
-                    })
+                      ));
+                    })()
                   ) : (
                     <span className="text-rose-900">{currentExercise.answer}</span>
                   )}
