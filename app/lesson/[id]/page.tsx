@@ -50,15 +50,17 @@ export default function LessonPage() {
   const [isFinished, setIsFinished] = useState(false);
   const [showInfoModal, setShowInfoModal] = useState(false);
 
+  const [isClient, setIsClient] = useState(false);
+
   useEffect(() => {
+    setIsClient(true);
     if (!lesson) {
       router.push('/learn');
     }
     preloadThaiVoices();
   }, [lesson, router]);
 
-
-  if (!lesson || exercises.length === 0) return <div className="p-8 text-center">Chargement...</div>;
+  if (!isClient || !lesson || exercises.length === 0) return <div className="p-8 text-center">Chargement...</div>;
 
   const currentExercise = exercises[currentIndex];
   const progress = (currentIndex / exercises.length) * 100;

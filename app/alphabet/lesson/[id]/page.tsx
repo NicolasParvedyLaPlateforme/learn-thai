@@ -42,14 +42,17 @@ export default function AlphabetLessonPage() {
   const [isFinished, setIsFinished] = useState(false);
   const [showHint, setShowHint] = useState(false);
 
+  const [isClient, setIsClient] = useState(false);
+
   useEffect(() => {
+    setIsClient(true);
     if (!lesson || exercises.length === 0) {
       router.push('/alphabet');
     }
     preloadThaiVoices();
   }, [lesson, exercises, router]);
 
-  if (!lesson || exercises.length === 0) return <div className="p-8 text-center">Loading...</div>;
+  if (!isClient || !lesson || exercises.length === 0) return <div className="p-8 text-center">Loading...</div>;
 
   const currentExercise = exercises[currentIndex];
   const progress = (currentIndex / exercises.length) * 100;
