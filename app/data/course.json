@@ -917,6 +917,13 @@
           "fr": "parler",
           "phonetic": "phûut",
           "en": "speak"
+        }, 
+        {
+          "id": "w_khoi",
+          "th": "ค่อย",
+          "fr": "très / vraiment",
+          "phonetic": "khòi",
+          "en": "really / quite"
         }
       ],
       "phrases": [
