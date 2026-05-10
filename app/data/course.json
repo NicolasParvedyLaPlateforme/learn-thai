@@ -53,6 +53,62 @@
           "fr": "est-ce que (question)",
           "phonetic": "mǎi",
           "en": "does (question)"
+        },
+        {
+          "id": "w_kho_req",
+          "th": "ขอ",
+          "fr": "je voudrais/demander",
+          "en": "request/would like",
+          "phonetic": "khǒo"
+        },
+        {
+          "id": "w_gamlang",
+          "th": "กำลัง",
+          "fr": "en train de",
+          "en": "in the process of",
+          "phonetic": "kam-lang"
+        },
+        {
+          "id": "w_ha",
+          "th": "หา",
+          "fr": "chercher",
+          "en": "look for",
+          "phonetic": "hǎa"
+        },
+        {
+          "id": "w_nai",
+          "th": "ใน",
+          "fr": "dans",
+          "en": "in",
+          "phonetic": "nai"
+        },
+        {
+          "id": "w_thi_ni",
+          "th": "ที่นี่",
+          "fr": "ici",
+          "en": "here",
+          "phonetic": "thîi-nîi"
+        },
+        {
+          "id": "w_nan",
+          "th": "นั้น",
+          "fr": "ce/cette (là)",
+          "en": "that",
+          "phonetic": "nán"
+        },
+        {
+          "id": "w_phak_kon",
+          "th": "พักก่อน",
+          "fr": "reposer (d'abord)",
+          "en": "rest first",
+          "phonetic": "phák gɔ̀ɔn"
+        },
+        {
+          "th": "ใจ",
+          "en": "heart",
+          "id": "w_jai",
+          "fr": "cœur",
+          "phonetic": "jai"
         }
       ],
       "phrases": [
@@ -722,6 +778,13 @@
           "fr": "porc",
           "phonetic": "mǔu",
           "en": "pork"
+        },
+        {
+          "th": "ไข่",
+          "en": "egg",
+          "id": "w_khai_egg",
+          "fr": "œuf",
+          "phonetic": "khài"
         }
       ],
       "phrases": [
@@ -822,7 +885,7 @@
           "phonetic": "ao khài",
           "components": [
             "w_ao",
-            "w_khai"
+            "w_khai_egg"
           ],
           "en": "I want an egg"
         },
@@ -917,13 +980,20 @@
           "fr": "parler",
           "phonetic": "phûut",
           "en": "speak"
-        }, 
+        },
         {
           "id": "w_khoi",
           "th": "ค่อย",
           "fr": "très / vraiment",
           "phonetic": "khòi",
           "en": "really / quite"
+        },
+        {
+          "th": "ที่ไหน",
+          "en": "where",
+          "id": "w_thinai",
+          "fr": "où",
+          "phonetic": "thîi-nǎi"
         }
       ],
       "phrases": [
@@ -999,7 +1069,7 @@
           "fr": "c'est où ?",
           "phonetic": "thîi nǎi",
           "components": [
-            "w_thi_nai"
+            "w_thinai"
           ],
           "en": "where is it?"
         },
@@ -1056,7 +1126,7 @@
           "phonetic": "phûut thîi nǎi",
           "components": [
             "w_phut",
-            "w_thi_nai"
+            "w_thinai"
           ],
           "en": "speak where?"
         }
@@ -1138,6 +1208,13 @@
           "fr": "aller",
           "phonetic": "bpai",
           "en": "go"
+        },
+        {
+          "th": "ของ",
+          "en": "of/belonging to",
+          "id": "w_khong_of",
+          "fr": "de (appartenance)",
+          "phonetic": "khǒng"
         }
       ],
       "phrases": [
@@ -1199,7 +1276,7 @@
           "components": [
             "w_pho",
             "w_pai",
-            "w_thi_nai"
+            "w_thinai"
           ],
           "en": "where is dad going?"
         },
@@ -1246,7 +1323,7 @@
           "phonetic": "khruu dii",
           "components": [
             "w_khru",
-            "w_dee"
+            "w_jai_dee"
           ],
           "en": "the teacher is good"
         },
@@ -1270,6 +1347,7 @@
           "phonetic": "mâe dèk",
           "components": [
             "w_mae",
+            "w_khong_of",
             "w_dek"
           ],
           "en": "the child's mother"
@@ -1283,7 +1361,6 @@
       "title": "Verbes utiles",
       "description": "Actions de tous les jours",
       "words": [
-        
         {
           "id": "w_ma",
           "th": "มา",
@@ -1342,7 +1419,7 @@
           "phonetic": "bpai thîi nǎi",
           "components": [
             "w_pai",
-            "w_thi_nai"
+            "w_thinai"
           ],
           "en": "where are you going?"
         },
@@ -1511,7 +1588,7 @@
           "en": "buy"
         },
         {
-          "id": "w_khai",
+          "id": "w_khai_sell",
           "th": "ขาย",
           "fr": "vendre",
           "phonetic": "khǎai",
@@ -1629,7 +1706,7 @@
           "fr": "tu vends à combien ?",
           "phonetic": "khǎai thâo rai",
           "components": [
-            "w_khai",
+            "w_khai_sell",
             "w_thao_rai"
           ],
           "en": "how much do you sell it for?"
@@ -1663,7 +1740,7 @@
           "fr": "vendre pas cher",
           "phonetic": "khǎai thùuk",
           "components": [
-            "w_khai",
+            "w_khai_sell",
             "w_thuk"
           ],
           "en": "sell cheap"
@@ -1943,7 +2020,7 @@
           "fr": "conduire (voiture/camion)",
           "phonetic": "khàp",
           "en": "to drive (car/truck)"
-        }, 
+        },
         {
           "id": "w_yuu",
           "th": "อยู่",
@@ -1960,8 +2037,7 @@
           "phonetic": "sà-thǎa-nii rót fai",
           "components": [
             "w_sathannee",
-            "w_rot",
-            "w_fai"
+            "w_lesson-39-a4_1"
           ],
           "en": "train station (train station)"
         },
@@ -1993,8 +2069,7 @@
           "fr": "le train est bien",
           "phonetic": "rót fai dii",
           "components": [
-            "w_rot",
-            "w_fai",
+            "w_lesson-39-a4_1",
             "w_dee"
           ],
           "en": "the train is good"
@@ -2007,7 +2082,7 @@
           "components": [
             "w_sathannee",
             "w_yuu",
-            "w_thi_nai"
+            "w_thinai"
           ],
           "en": "where is the station?"
         }
@@ -2054,6 +2129,27 @@
           "fr": "temps / heure",
           "phonetic": "wee-laa",
           "en": "time / hour"
+        },
+        {
+          "th": "วาน",
+          "en": "yesterday (prefix)",
+          "id": "w_wan_yesterday",
+          "fr": "hier",
+          "phonetic": "waan"
+        },
+        {
+          "th": "พรุ่งนี้",
+          "en": "tomorrow",
+          "id": "w_phrungnii",
+          "fr": "demain",
+          "phonetic": "phrûng-níi"
+        },
+        {
+          "th": "นี้",
+          "en": "this (modifier)",
+          "id": "w_nii_this",
+          "fr": "ce / cette",
+          "phonetic": "níi"
         }
       ],
       "phrases": [
@@ -2063,8 +2159,7 @@
           "fr": "aujourd'hui",
           "phonetic": "wan níi",
           "components": [
-            "w_wan",
-            "w_nee"
+            "w_lesson-34-a3_0"
           ],
           "en": "Today"
         },
@@ -2074,8 +2169,7 @@
           "fr": "demain",
           "phonetic": "phrûng níi",
           "components": [
-            "w_phrung",
-            "w_nee"
+            "w_phrungnii"
           ],
           "en": "tomorrow"
         },
@@ -2086,8 +2180,8 @@
           "phonetic": "mûea waan níi",
           "components": [
             "w_muea",
-            "w_wan",
-            "w_nee"
+            "w_wan_yesterday",
+            "w_nii_this"
           ],
           "en": "yesterday"
         },
@@ -2120,8 +2214,7 @@
           "phonetic": "bpai phrûng níi",
           "components": [
             "w_pai",
-            "w_phrung",
-            "w_nee"
+            "w_phrungnii"
           ],
           "en": "go tomorrow"
         },
@@ -2132,8 +2225,8 @@
           "phonetic": "mûea waan níi dii",
           "components": [
             "w_muea",
-            "w_wan",
-            "w_nee",
+            "w_wan_yesterday",
+            "w_nii_this",
             "w_dee"
           ],
           "en": "yesterday was good"
@@ -2300,7 +2393,7 @@
           "fr": "je parle un peu (thaï)",
           "phonetic": "phûut dâai nit noi",
           "components": [
-            "w_pood",
+            "w_phut",
             "w_dai",
             "w_nit_noi"
           ],
@@ -2345,7 +2438,7 @@
           "fr": "parler un peu",
           "phonetic": "phûut nít nòi",
           "components": [
-            "w_pood",
+            "w_phut",
             "w_nit_noi"
           ],
           "en": "talk a little"
@@ -2449,7 +2542,7 @@
           "phonetic": "roong phá-yaa-baan thîi nǎi",
           "components": [
             "w_rong_phayaban",
-            "w_thi_nai"
+            "w_thinai"
           ],
           "en": "where is the hospital?"
         },
@@ -2711,7 +2804,7 @@
           "fr": "toilettes / salle de bain",
           "phonetic": "hɔ̂ng náam",
           "en": "toilet / bathroom"
-        }, 
+        },
         {
           "id": "w_yu",
           "th": "อยู่",
@@ -2739,8 +2832,8 @@
           "phonetic": "hɔ̂ng náam yu thîi nǎi",
           "components": [
             "w_hong_nam",
-            "w_yu",
-            "w_thi_nai"
+            "w_yuu",
+            "w_thinai"
           ],
           "en": "Where is the restroom ?"
         },
@@ -2784,7 +2877,7 @@
           "phonetic": "nɔɔn thîi nǎi",
           "components": [
             "w_non",
-            "w_thi_nai"
+            "w_thinai"
           ],
           "en": "where do you sleep?"
         },
@@ -2819,7 +2912,7 @@
       "description": "Poulet, porc, poisson",
       "words": [
         {
-          "id": "w_kai",
+          "id": "w_kai_2",
           "th": "ไก่",
           "fr": "poulet",
           "phonetic": "kài",
@@ -2877,7 +2970,7 @@
           "fr": "le porc est délicieux",
           "phonetic": "mǔu à-rɔ̀i",
           "components": [
-            "w_moo",
+            "w_mu",
             "w_aroi"
           ],
           "en": "the pork is delicious"
@@ -2912,6 +3005,7 @@
           "phonetic": "bplaa nai náam",
           "components": [
             "w_pla",
+            "w_nai",
             "w_nam"
           ],
           "en": "fish in water"
@@ -3139,7 +3233,7 @@
           "en": "the addition"
         },
         {
-          "id": "w_hiw",
+          "id": "w_hiw_2",
           "th": "หิว",
           "fr": "avoir faim",
           "phonetic": "hǐw",
@@ -3151,6 +3245,13 @@
           "fr": "rassasié / plein",
           "phonetic": "ìm",
           "en": "satisfied / full"
+        },
+        {
+          "th": "ด้วย",
+          "en": "also/please",
+          "id": "w_duay",
+          "fr": "aussi / s'il vous plaît",
+          "phonetic": "dûay"
         }
       ],
       "phrases": [
@@ -3161,6 +3262,7 @@
           "phonetic": "gèp ngoen duay khráp",
           "components": [
             "w_gep_ngoen",
+            "w_duay",
             "w_krap"
           ],
           "en": "The check, please"
@@ -3183,6 +3285,7 @@
           "phonetic": "gèp ngoen duay khâ",
           "components": [
             "w_gep_ngoen",
+            "w_duay",
             "w_kha"
           ],
           "en": "the bill please (woman)"
@@ -3263,6 +3366,7 @@
           "en": "Eat an apple",
           "phonetic": "",
           "components": [
+            "w_kin",
             "w_lesson-24-a1_0"
           ]
         },
@@ -3273,7 +3377,8 @@
           "en": "Want an orange",
           "phonetic": "",
           "components": [
-            "w_lesson-24-a1_0"
+            "w_ao",
+            "w_lesson-24-a1_2"
           ]
         },
         {
@@ -3283,7 +3388,8 @@
           "en": "Delicious banana",
           "phonetic": "",
           "components": [
-            "w_lesson-24-a1_0"
+            "w_lesson-24-a1_1",
+            "w_aroi"
           ]
         },
         {
@@ -3293,6 +3399,7 @@
           "en": "I would like an apple",
           "phonetic": "",
           "components": [
+            "w_kho_req",
             "w_lesson-24-a1_0"
           ]
         },
@@ -3303,7 +3410,9 @@
           "en": "Don't eat orange",
           "phonetic": "",
           "components": [
-            "w_lesson-24-a1_0"
+            "w_mai_neg",
+            "w_kin",
+            "w_lesson-24-a1_2"
           ]
         }
       ]
@@ -3335,6 +3444,13 @@
           "fr": "légume",
           "en": "vegetable",
           "phonetic": "phàk"
+        },
+        {
+          "id": "w_khiao",
+          "th": "เขียว",
+          "fr": "vert",
+          "phonetic": "khǐiao",
+          "en": "Green"
         }
       ],
       "phrases": [
@@ -3345,7 +3461,8 @@
           "en": "Eat vegetables",
           "phonetic": "",
           "components": [
-            "w_lesson-24-a2_0"
+            "w_kin",
+            "w_lesson-24-a2_2"
           ]
         },
         {
@@ -3355,7 +3472,9 @@
           "en": "Don't like cucumber",
           "phonetic": "",
           "components": [
-            "w_lesson-24-a2_0"
+            "w_mai_neg",
+            "w_chop",
+            "w_lesson-24-a2_1"
           ]
         },
         {
@@ -3365,6 +3484,7 @@
           "en": "Buy a tomato",
           "phonetic": "",
           "components": [
+            "w_sue",
             "w_lesson-24-a2_0"
           ]
         },
@@ -3375,7 +3495,9 @@
           "en": "Green vegetable",
           "phonetic": "",
           "components": [
-            "w_lesson-24-a2_0"
+            "w_lesson-24-a2_2",
+            "w_see_color",
+            "w_khiao"
           ]
         },
         {
@@ -3385,7 +3507,8 @@
           "en": "Want cucumber",
           "phonetic": "",
           "components": [
-            "w_lesson-24-a2_0"
+            "w_ao",
+            "w_lesson-24-a2_1"
           ]
         }
       ]
@@ -3417,6 +3540,20 @@
           "fr": "assiette",
           "en": "plate",
           "phonetic": "jaan"
+        },
+        {
+          "id": "w_lesson-29-a4_2",
+          "th": "ใช้",
+          "fr": "utiliser",
+          "en": "use",
+          "phonetic": "chái"
+        },
+        {
+          "th": "ล้าง",
+          "en": "wash",
+          "id": "w_lang",
+          "fr": "laver",
+          "phonetic": "láang"
         }
       ],
       "phrases": [
@@ -3427,6 +3564,7 @@
           "en": "I'd like a spoon",
           "phonetic": "",
           "components": [
+            "w_kho_req",
             "w_lesson-24-a3_0"
           ]
         },
@@ -3437,7 +3575,8 @@
           "en": "Use a fork",
           "phonetic": "",
           "components": [
-            "w_lesson-24-a3_0"
+            "w_lesson-29-a4_2",
+            "w_lesson-24-a3_1"
           ]
         },
         {
@@ -3447,7 +3586,8 @@
           "en": "Big plate",
           "phonetic": "",
           "components": [
-            "w_lesson-24-a3_0"
+            "w_lesson-24-a3_2",
+            "w_yai"
           ]
         },
         {
@@ -3457,7 +3597,8 @@
           "en": "Wash plates",
           "phonetic": "",
           "components": [
-            "w_lesson-24-a3_0"
+            "w_lang",
+            "w_lesson-24-a3_2"
           ]
         },
         {
@@ -3467,7 +3608,9 @@
           "en": "Do you want a fork?",
           "phonetic": "",
           "components": [
-            "w_lesson-24-a3_0"
+            "w_ao",
+            "w_lesson-24-a3_1",
+            "w_mai"
           ]
         }
       ]
@@ -3509,6 +3652,7 @@
           "en": "Fried chicken",
           "phonetic": "",
           "components": [
+            "w_kai",
             "w_lesson-24-a4_0"
           ]
         },
@@ -3519,7 +3663,8 @@
           "en": "Grilled pork",
           "phonetic": "",
           "components": [
-            "w_lesson-24-a4_0"
+            "w_mu",
+            "w_lesson-24-a4_2"
           ]
         },
         {
@@ -3529,7 +3674,8 @@
           "en": "Boiled egg",
           "phonetic": "",
           "components": [
-            "w_lesson-24-a4_0"
+            "w_khai_egg",
+            "w_lesson-24-a4_1"
           ]
         },
         {
@@ -3539,7 +3685,8 @@
           "en": "Fry an egg",
           "phonetic": "",
           "components": [
-            "w_lesson-24-a4_0"
+            "w_lesson-24-a4_0",
+            "w_khai_egg"
           ]
         },
         {
@@ -3549,7 +3696,9 @@
           "en": "Like grilled chicken",
           "phonetic": "",
           "components": [
-            "w_lesson-24-a4_0"
+            "w_chop",
+            "w_kai",
+            "w_lesson-24-a4_2"
           ]
         }
       ]
@@ -3591,7 +3740,8 @@
           "en": "Delicious soup",
           "phonetic": "",
           "components": [
-            "w_lesson-24-a5_0"
+            "w_lesson-24-a5_1",
+            "w_aroi"
           ]
         },
         {
@@ -3601,7 +3751,8 @@
           "en": "I want ice",
           "phonetic": "",
           "components": [
-            "w_lesson-24-a5_0"
+            "w_kho_req",
+            "w_lesson-24-a5_2"
           ]
         },
         {
@@ -3611,6 +3762,7 @@
           "en": "Eat dessert",
           "phonetic": "",
           "components": [
+            "w_kin",
             "w_lesson-24-a5_0"
           ]
         },
@@ -3621,6 +3773,8 @@
           "en": "Don't want dessert",
           "phonetic": "",
           "components": [
+            "w_mai_neg",
+            "w_ao",
             "w_lesson-24-a5_0"
           ]
         },
@@ -3631,7 +3785,8 @@
           "en": "Hot soup",
           "phonetic": "",
           "components": [
-            "w_lesson-24-a5_0"
+            "w_lesson-24-a5_1",
+            "w_ron"
           ]
         }
       ]
@@ -3678,6 +3833,13 @@
           "fr": "film",
           "phonetic": "nâng",
           "en": "movie"
+        },
+        {
+          "th": "นี่",
+          "en": "here/this",
+          "id": "w_nii_here",
+          "fr": "ici / ceci",
+          "phonetic": "nîi"
         }
       ],
       "phrases": [
@@ -3687,7 +3849,7 @@
           "fr": "regarder un film",
           "phonetic": "duu nâng",
           "components": [
-            "w_doo",
+            "w_du",
             "w_nang"
           ],
           "en": "watch a movie"
@@ -3711,7 +3873,7 @@
           "components": [
             "w_doen",
             "w_pai",
-            "w_thi_nai"
+            "w_thinai"
           ],
           "en": "where are you walking?"
         },
@@ -3721,8 +3883,8 @@
           "fr": "regarde ça",
           "phonetic": "duu nîi",
           "components": [
-            "w_doo",
-            "w_nee"
+            "w_du",
+            "w_nii_here"
           ],
           "en": "look at this"
         },
@@ -3732,7 +3894,7 @@
           "fr": "je regarde un film (femme)",
           "phonetic": "duu nâng khâ",
           "components": [
-            "w_doo",
+            "w_du",
             "w_nang",
             "w_kha"
           ],
@@ -3872,6 +4034,20 @@
           "fr": "livre",
           "phonetic": "nǎng-sǔue",
           "en": "book"
+        },
+        {
+          "th": "ภาษา",
+          "en": "language",
+          "id": "w_phaasaa",
+          "fr": "langue",
+          "phonetic": "phaa-sǎa"
+        },
+        {
+          "th": "ไทย",
+          "en": "Thai",
+          "id": "w_thai",
+          "fr": "thaï",
+          "phonetic": "thai"
         }
       ],
       "phrases": [
@@ -3892,7 +4068,9 @@
           "fr": "apprendre le thaï",
           "phonetic": "riian phaa-sǎa thai",
           "components": [
-            "w_rian"
+            "w_rian",
+            "w_phaasaa",
+            "w_thai"
           ],
           "en": "learn Thai"
         },
@@ -3950,7 +4128,7 @@
       "description": "Vendre, donner, argent",
       "words": [
         {
-          "id": "w_khai",
+          "id": "w_khai_sell_2",
           "th": "ขาย",
           "fr": "vendre",
           "phonetic": "khǎai",
@@ -3979,7 +4157,7 @@
           "phonetic": "mii ngoen mǎi",
           "components": [
             "w_mee",
-            "w_ngoen",
+            "w_ngern",
             "w_mai"
           ],
           "en": "do you have money?"
@@ -3990,7 +4168,7 @@
           "fr": "tu vends quoi ?",
           "phonetic": "khǎai à-rai",
           "components": [
-            "w_khai",
+            "w_khai_sell",
             "w_arai"
           ],
           "en": "what are you selling?"
@@ -4002,7 +4180,7 @@
           "phonetic": "hâi ngoen",
           "components": [
             "w_hai",
-            "w_ngoen"
+            "w_ngern"
           ],
           "en": "give money"
         },
@@ -4013,7 +4191,7 @@
           "phonetic": "yàak khǎai",
           "components": [
             "w_yak",
-            "w_khai"
+            "w_khai_sell"
           ],
           "en": "I want to sell"
         },
@@ -4025,7 +4203,7 @@
           "components": [
             "w_mai_neg",
             "w_mee",
-            "w_ngoen"
+            "w_ngern"
           ],
           "en": "I have no money"
         }
@@ -4060,6 +4238,13 @@
           "fr": "arrêter",
           "en": "stop",
           "phonetic": "yùt"
+        },
+        {
+          "th": "เร็ว",
+          "en": "fast",
+          "id": "w_rew",
+          "fr": "rapide",
+          "phonetic": "reo"
         }
       ],
       "phrases": [
@@ -4070,7 +4255,8 @@
           "en": "Walk to",
           "phonetic": "",
           "components": [
-            "w_lesson-29-a1_0"
+            "w_doen",
+            "w_pai"
           ]
         },
         {
@@ -4080,7 +4266,8 @@
           "en": "Run fast",
           "phonetic": "",
           "components": [
-            "w_lesson-29-a1_0"
+            "w_lesson-29-a1_0",
+            "w_rew"
           ]
         },
         {
@@ -4090,7 +4277,8 @@
           "en": "Please stop",
           "phonetic": "",
           "components": [
-            "w_lesson-29-a1_0"
+            "w_chuai",
+            "w_lesson-29-a1_2"
           ]
         },
         {
@@ -4100,7 +4288,8 @@
           "en": "Walking",
           "phonetic": "",
           "components": [
-            "w_lesson-29-a1_0"
+            "w_gamlang",
+            "w_doen"
           ]
         },
         {
@@ -4110,7 +4299,8 @@
           "en": "Stop here",
           "phonetic": "",
           "components": [
-            "w_lesson-29-a1_0"
+            "w_lesson-29-a1_2",
+            "w_thi_ni"
           ]
         }
       ]
@@ -4152,6 +4342,7 @@
           "en": "I'd like to ask",
           "phonetic": "",
           "components": [
+            "w_kho_req",
             "w_lesson-29-a2_0"
           ]
         },
@@ -4162,7 +4353,8 @@
           "en": "Please answer",
           "phonetic": "",
           "components": [
-            "w_lesson-29-a2_0"
+            "w_ka_ru_na",
+            "w_lesson-29-a2_1"
           ]
         },
         {
@@ -4172,7 +4364,8 @@
           "en": "Read a book",
           "phonetic": "",
           "components": [
-            "w_lesson-29-a2_0"
+            "w_aan",
+            "w_nangsue"
           ]
         },
         {
@@ -4182,7 +4375,8 @@
           "en": "Not answer",
           "phonetic": "",
           "components": [
-            "w_lesson-29-a2_0"
+            "w_mai_neg",
+            "w_lesson-29-a2_1"
           ]
         },
         {
@@ -4192,7 +4386,8 @@
           "en": "Like reading",
           "phonetic": "",
           "components": [
-            "w_lesson-29-a2_0"
+            "w_chop",
+            "w_aan"
           ]
         }
       ]
@@ -4224,6 +4419,20 @@
           "fr": "cuisiner",
           "en": "cook",
           "phonetic": "tham-aa-hǎan"
+        },
+        {
+          "id": "w_suea",
+          "th": "เสื้อ",
+          "fr": "chemise / haut",
+          "phonetic": "sûea",
+          "en": "shirt / top"
+        },
+        {
+          "th": "ผ้า",
+          "en": "cloth",
+          "id": "w_pha_cloth",
+          "fr": "tissu / vêtement",
+          "phonetic": "phâa"
         }
       ],
       "phrases": [
@@ -4234,7 +4443,8 @@
           "en": "Cooking",
           "phonetic": "",
           "components": [
-            "w_lesson-29-a3_0"
+            "w_gamlang",
+            "w_lesson-29-a3_2"
           ]
         },
         {
@@ -4244,7 +4454,9 @@
           "en": "Wash clothes",
           "phonetic": "",
           "components": [
-            "w_lesson-29-a3_0"
+            "w_lesson-29-a3_1",
+            "w_suea",
+            "w_pha_cloth"
           ]
         },
         {
@@ -4254,7 +4466,8 @@
           "en": "Clean house",
           "phonetic": "",
           "components": [
-            "w_lesson-29-a3_0"
+            "w_lesson-29-a3_0",
+            "w_baan"
           ]
         },
         {
@@ -4264,7 +4477,8 @@
           "en": "Like cooking",
           "phonetic": "",
           "components": [
-            "w_lesson-29-a3_0"
+            "w_chop",
+            "w_lesson-29-a3_2"
           ]
         },
         {
@@ -4274,7 +4488,8 @@
           "en": "Not washing",
           "phonetic": "",
           "components": [
-            "w_lesson-29-a3_0"
+            "w_mai_neg",
+            "w_lesson-29-a3_1"
           ]
         }
       ]
@@ -4301,11 +4516,18 @@
           "phonetic": "pìt"
         },
         {
-          "id": "w_lesson-29-a4_2",
-          "th": "ใช้",
-          "fr": "utiliser",
-          "en": "use",
-          "phonetic": "chái"
+          "th": "หน้าต่าง",
+          "en": "window",
+          "id": "w_natang",
+          "fr": "fenêtre",
+          "phonetic": "nâa tàang"
+        },
+        {
+          "th": "ประตู",
+          "en": "door",
+          "id": "w_pratu",
+          "fr": "porte",
+          "phonetic": "bpra-dtoo"
         }
       ],
       "phrases": [
@@ -4316,7 +4538,8 @@
           "en": "Open door",
           "phonetic": "",
           "components": [
-            "w_lesson-29-a4_0"
+            "w_lesson-29-a4_0",
+            "w_pratu"
           ]
         },
         {
@@ -4326,7 +4549,8 @@
           "en": "Close window",
           "phonetic": "",
           "components": [
-            "w_lesson-29-a4_0"
+            "w_lesson-29-a4_1",
+            "w_natang"
           ]
         },
         {
@@ -4336,7 +4560,8 @@
           "en": "Use money",
           "phonetic": "",
           "components": [
-            "w_lesson-29-a4_0"
+            "w_lesson-29-a4_2",
+            "w_ngern"
           ]
         },
         {
@@ -4346,7 +4571,8 @@
           "en": "Please close",
           "phonetic": "",
           "components": [
-            "w_lesson-29-a4_0"
+            "w_chuai",
+            "w_lesson-29-a4_1"
           ]
         },
         {
@@ -4356,6 +4582,7 @@
           "en": "Not open",
           "phonetic": "",
           "components": [
+            "w_mai_neg",
             "w_lesson-29-a4_0"
           ]
         }
@@ -4388,6 +4615,27 @@
           "fr": "changer",
           "en": "change",
           "phonetic": "plìan"
+        },
+        {
+          "id": "w_lesson-44-a2_1",
+          "th": "ชุด",
+          "fr": "robe/ensemble",
+          "en": "dress/suit",
+          "phonetic": "chút"
+        },
+        {
+          "th": "ยัง",
+          "en": "still/yet",
+          "id": "w_yang",
+          "fr": "encore",
+          "phonetic": "yang"
+        },
+        {
+          "th": "เพิ่ง",
+          "en": "just now",
+          "id": "w_phoeng",
+          "fr": "venir de",
+          "phonetic": "phôeng"
         }
       ],
       "phrases": [
@@ -4398,7 +4646,8 @@
           "en": "Begin doing",
           "phonetic": "",
           "components": [
-            "w_lesson-29-a5_0"
+            "w_lesson-29-a5_0",
+            "w_tham"
           ]
         },
         {
@@ -4408,7 +4657,8 @@
           "en": "Already finished",
           "phonetic": "",
           "components": [
-            "w_lesson-29-a5_0"
+            "w_lesson-29-a5_1",
+            "w_laew"
           ]
         },
         {
@@ -4418,7 +4668,8 @@
           "en": "Change clothes",
           "phonetic": "",
           "components": [
-            "w_lesson-29-a5_0"
+            "w_lesson-29-a5_2",
+            "w_lesson-44-a2_1"
           ]
         },
         {
@@ -4428,7 +4679,9 @@
           "en": "Not finished yet",
           "phonetic": "",
           "components": [
-            "w_lesson-29-a5_0"
+            "w_yang",
+            "w_mai_neg",
+            "w_lesson-29-a5_1"
           ]
         },
         {
@@ -4438,6 +4691,7 @@
           "en": "Just began",
           "phonetic": "",
           "components": [
+            "w_phoeng",
             "w_lesson-29-a5_0"
           ]
         }
@@ -4478,6 +4732,13 @@
           "fr": "nuit",
           "phonetic": "kheun",
           "en": "night"
+        },
+        {
+          "th": "ตอน",
+          "en": "part/period",
+          "id": "w_ton",
+          "fr": "moment / partie",
+          "phonetic": "dtoon"
         }
       ],
       "phrases": [
@@ -4488,7 +4749,7 @@
           "phonetic": "cháao nee",
           "components": [
             "w_chao",
-            "w_nee"
+            "w_nii_this"
           ],
           "en": "This morning"
         },
@@ -4500,7 +4761,7 @@
           "components": [
             "w_tham_ngan",
             "w_chao",
-            "w_nee"
+            "w_nii_this"
           ],
           "en": "work this morning"
         },
@@ -4518,13 +4779,13 @@
         },
         {
           "id": "p_sleep_night",
-          "th": "นอนคินนี้",
+          "th": "นอนคืนนี้",
           "fr": "dormir cette nuit",
           "phonetic": "nɔɔn kheun nee",
           "components": [
             "w_non",
             "w_khuen",
-            "w_nee"
+            "w_nii_this"
           ],
           "en": "sleep tonight"
         },
@@ -4535,6 +4796,7 @@
           "phonetic": "sà-wàt-dii dtoon yen",
           "components": [
             "w_sawatdee",
+            "w_ton",
             "w_yen"
           ],
           "en": "Good evening"
@@ -4645,18 +4907,25 @@
           "en": "wind"
         },
         {
-          "id": "w_ron",
+          "id": "w_ron_2",
           "th": "ร้อน",
           "fr": "chaud",
           "phonetic": "rɔ́ɔn",
           "en": "hot"
         },
         {
-          "id": "w_naow",
+          "id": "w_naow_2",
           "th": "หนาว",
           "fr": "froid",
           "phonetic": "nǎao",
           "en": "cold"
+        },
+        {
+          "th": "อากาศ",
+          "en": "weather",
+          "id": "w_akat",
+          "fr": "temps / météo",
+          "phonetic": "aa-gàat"
         }
       ],
       "phrases": [
@@ -4711,6 +4980,7 @@
           "fr": "il fait beau",
           "phonetic": "aa-gàat dii",
           "components": [
+            "w_akat",
             "w_dee"
           ],
           "en": "the weather is nice"
@@ -4753,7 +5023,7 @@
           "fr": "quelle heure ?",
           "phonetic": "ki moong",
           "components": [
-            "w_ki",
+            "w_gee",
             "w_mong"
           ],
           "en": "what time ?"
@@ -4776,7 +5046,7 @@
           "phonetic": "bpai ki moong",
           "components": [
             "w_pai",
-            "w_ki",
+            "w_gee",
             "w_mong"
           ],
           "en": "What time are you going there?"
@@ -4845,6 +5115,13 @@
           "fr": "tempête",
           "en": "storm",
           "phonetic": "phaa-yú"
+        },
+        {
+          "th": "แรง",
+          "en": "strong",
+          "id": "w_raeng",
+          "fr": "fort",
+          "phonetic": "raeng"
         }
       ],
       "phrases": [
@@ -4855,7 +5132,8 @@
           "en": "Strong wind",
           "phonetic": "",
           "components": [
-            "w_lesson-34-a1_0"
+            "w_lom",
+            "w_raeng"
           ]
         },
         {
@@ -4865,7 +5143,8 @@
           "en": "There is a storm",
           "phonetic": "",
           "components": [
-            "w_lesson-34-a1_0"
+            "w_mee",
+            "w_lesson-34-a1_2"
           ]
         },
         {
@@ -4875,7 +5154,8 @@
           "en": "It's snowing",
           "phonetic": "",
           "components": [
-            "w_lesson-34-a1_0"
+            "w_lesson-34-a1_1",
+            "w_tok"
           ]
         },
         {
@@ -4885,7 +5165,9 @@
           "en": "Don't like wind",
           "phonetic": "",
           "components": [
-            "w_lesson-34-a1_0"
+            "w_mai_neg",
+            "w_chop",
+            "w_lom"
           ]
         },
         {
@@ -4895,7 +5177,8 @@
           "en": "Big storm",
           "phonetic": "",
           "components": [
-            "w_lesson-34-a1_0"
+            "w_lesson-34-a1_2",
+            "w_yai"
           ]
         }
       ]
@@ -4927,6 +5210,20 @@
           "fr": "saison des pluies",
           "en": "rainy season",
           "phonetic": "rʉ́-duu-fǒn"
+        },
+        {
+          "th": "เกลียด",
+          "en": "hate",
+          "id": "w_kliat",
+          "fr": "détester",
+          "phonetic": "glìiat"
+        },
+        {
+          "th": "ฤดูฝน",
+          "en": "rainy season",
+          "id": "w_rudufon",
+          "fr": "saison des pluies",
+          "phonetic": "rú-duu fǒn"
         }
       ],
       "phrases": [
@@ -4937,6 +5234,7 @@
           "en": "Like summer",
           "phonetic": "",
           "components": [
+            "w_chop",
             "w_lesson-34-a2_0"
           ]
         },
@@ -4947,7 +5245,8 @@
           "en": "Winter is cold",
           "phonetic": "",
           "components": [
-            "w_lesson-34-a2_0"
+            "w_lesson-34-a2_1",
+            "w_yen"
           ]
         },
         {
@@ -4957,7 +5256,8 @@
           "en": "Hate rainy season",
           "phonetic": "",
           "components": [
-            "w_lesson-34-a2_0"
+            "w_kliat",
+            "w_rudufon"
           ]
         },
         {
@@ -4967,6 +5267,8 @@
           "en": "Go in summer",
           "phonetic": "",
           "components": [
+            "w_pai",
+            "w_nai",
             "w_lesson-34-a2_0"
           ]
         },
@@ -4977,7 +5279,8 @@
           "en": "Very hot",
           "phonetic": "",
           "components": [
-            "w_lesson-34-a2_0"
+            "w_ron",
+            "w_mak"
           ]
         }
       ]
@@ -5009,6 +5312,13 @@
           "fr": "hier",
           "en": "yesterday",
           "phonetic": "mʉ̂a-waan"
+        },
+        {
+          "th": "เจอกัน",
+          "en": "see each other",
+          "id": "w_joegan",
+          "fr": "se voir",
+          "phonetic": "joe-gan"
         }
       ],
       "phrases": [
@@ -5019,7 +5329,8 @@
           "en": "Today is hot",
           "phonetic": "",
           "components": [
-            "w_lesson-34-a3_0"
+            "w_lesson-34-a3_0",
+            "w_ron"
           ]
         },
         {
@@ -5029,7 +5340,8 @@
           "en": "See you tomorrow",
           "phonetic": "",
           "components": [
-            "w_lesson-34-a3_0"
+            "w_joegan",
+            "w_phrungnii"
           ]
         },
         {
@@ -5039,7 +5351,8 @@
           "en": "Went yesterday",
           "phonetic": "",
           "components": [
-            "w_lesson-34-a3_0"
+            "w_lesson-34-a3_2",
+            "w_pai"
           ]
         },
         {
@@ -5049,7 +5362,9 @@
           "en": "What to eat today?",
           "phonetic": "",
           "components": [
-            "w_lesson-34-a3_0"
+            "w_lesson-34-a3_0",
+            "w_kin",
+            "w_arai"
           ]
         },
         {
@@ -5059,7 +5374,9 @@
           "en": "Not doing tomorrow",
           "phonetic": "",
           "components": [
-            "w_lesson-34-a3_0"
+            "w_mai_neg",
+            "w_tham",
+            "w_phrungnii"
           ]
         }
       ]
@@ -5091,6 +5408,13 @@
           "fr": "soir",
           "en": "evening",
           "phonetic": "yen"
+        },
+        {
+          "th": "บ่าย",
+          "en": "afternoon",
+          "id": "w_bai",
+          "fr": "après-midi",
+          "phonetic": "bàai"
         }
       ],
       "phrases": [
@@ -5101,7 +5425,9 @@
           "en": "Go in morning",
           "phonetic": "",
           "components": [
-            "w_lesson-34-a4_0"
+            "w_pai",
+            "w_ton",
+            "w_chao"
           ]
         },
         {
@@ -5111,7 +5437,9 @@
           "en": "Sleep afternoon",
           "phonetic": "",
           "components": [
-            "w_lesson-34-a4_0"
+            "w_non",
+            "w_ton",
+            "w_bai"
           ]
         },
         {
@@ -5121,7 +5449,9 @@
           "en": "Eat at evening",
           "phonetic": "",
           "components": [
-            "w_lesson-34-a4_0"
+            "w_kin",
+            "w_ton",
+            "w_yen"
           ]
         },
         {
@@ -5131,7 +5461,9 @@
           "en": "Cold morning",
           "phonetic": "",
           "components": [
-            "w_lesson-34-a4_0"
+            "w_ton",
+            "w_chao",
+            "w_naow"
           ]
         },
         {
@@ -5141,7 +5473,9 @@
           "en": "See you this evening",
           "phonetic": "",
           "components": [
-            "w_lesson-34-a4_0"
+            "w_joegan",
+            "w_ton",
+            "w_yen"
           ]
         }
       ]
@@ -5173,6 +5507,13 @@
           "fr": "seconde",
           "en": "second",
           "phonetic": "wí-naa-thii"
+        },
+        {
+          "th": "สักพัก",
+          "en": "a while",
+          "id": "w_sakphak",
+          "fr": "un moment",
+          "phonetic": "sàk-phák"
         }
       ],
       "phrases": [
@@ -5183,6 +5524,7 @@
           "en": "Five minutes",
           "phonetic": "",
           "components": [
+            "w_5",
             "w_lesson-34-a5_0"
           ]
         },
@@ -5193,7 +5535,8 @@
           "en": "One hour",
           "phonetic": "",
           "components": [
-            "w_lesson-34-a5_0"
+            "w_1",
+            "w_lesson-34-a5_1"
           ]
         },
         {
@@ -5203,7 +5546,8 @@
           "en": "Wait a moment",
           "phonetic": "",
           "components": [
-            "w_lesson-34-a5_0"
+            "w_ro",
+            "w_sakphak"
           ]
         },
         {
@@ -5213,6 +5557,7 @@
           "en": "Three minutes",
           "phonetic": "",
           "components": [
+            "w_3",
             "w_lesson-34-a5_0"
           ]
         },
@@ -5223,7 +5568,8 @@
           "en": "Two hours",
           "phonetic": "",
           "components": [
-            "w_lesson-34-a5_0"
+            "w_2",
+            "w_lesson-34-a5_1"
           ]
         }
       ]
@@ -5266,7 +5612,8 @@
           "phonetic": "roong-raem yu thîi nǎi",
           "components": [
             "w_rong_raem",
-            "w_thi_nai"
+            "w_yuu",
+            "w_thinai"
           ],
           "en": "where is the hotel?"
         },
@@ -5343,6 +5690,13 @@
           "fr": "parc",
           "phonetic": "sǔuan",
           "en": "park"
+        },
+        {
+          "id": "w_suay",
+          "th": "สวย",
+          "fr": "beau / joli",
+          "phonetic": "sǔuay",
+          "en": "beautiful / pretty"
         }
       ],
       "phrases": [
@@ -5386,7 +5740,7 @@
           "phonetic": "thà-nǒn thîi nǎi",
           "components": [
             "w_thanon",
-            "w_thi_nai"
+            "w_thinai"
           ],
           "en": "where is the street?"
         },
@@ -5462,7 +5816,7 @@
           "phonetic": "rót-mee thîi nǎi",
           "components": [
             "w_rot_me",
-            "w_thi_nai"
+            "w_thinai"
           ],
           "en": "where is the bus?"
         },
@@ -5473,7 +5827,7 @@
           "phonetic": "nâng thîi nîi",
           "components": [
             "w_nang_v",
-            "w_thi_nai"
+            "w_thi_ni"
           ],
           "en": "sit here"
         },
@@ -5606,6 +5960,27 @@
           "fr": "commissariat",
           "en": "police stat.",
           "phonetic": "sà-thǎa-nii-tam-rùat"
+        },
+        {
+          "id": "w_mo",
+          "th": "หมอ",
+          "fr": "médecin",
+          "phonetic": "mɔ̌ɔ",
+          "en": "doctor"
+        },
+        {
+          "id": "w_thii",
+          "th": "ที่",
+          "fr": "à / chez",
+          "phonetic": "thîi",
+          "en": "at"
+        },
+        {
+          "th": "ตำรวจ",
+          "en": "police",
+          "id": "w_tamruat",
+          "fr": "police",
+          "phonetic": "dtam-rùuat"
         }
       ],
       "phrases": [
@@ -5616,6 +5991,7 @@
           "en": "Go to bank",
           "phonetic": "",
           "components": [
+            "w_pai",
             "w_lesson-39-a1_0"
           ]
         },
@@ -5626,7 +6002,9 @@
           "en": "Doctor at hospital",
           "phonetic": "",
           "components": [
-            "w_lesson-39-a1_0"
+            "w_mo",
+            "w_thii",
+            "w_rong_phayaban"
           ]
         },
         {
@@ -5636,7 +6014,8 @@
           "en": "Find police",
           "phonetic": "",
           "components": [
-            "w_lesson-39-a1_0"
+            "w_ha",
+            "w_tamruat"
           ]
         },
         {
@@ -5646,7 +6025,8 @@
           "en": "Big hospital",
           "phonetic": "",
           "components": [
-            "w_lesson-39-a1_0"
+            "w_rong_phayaban",
+            "w_yai"
           ]
         },
         {
@@ -5656,6 +6036,7 @@
           "en": "At the bank",
           "phonetic": "",
           "components": [
+            "w_yuu",
             "w_lesson-39-a1_0"
           ]
         }
@@ -5688,6 +6069,20 @@
           "fr": "est",
           "en": "east",
           "phonetic": "tà-wan-ɔ̀ɔk"
+        },
+        {
+          "th": "ภาค",
+          "en": "region",
+          "id": "w_phak",
+          "fr": "région",
+          "phonetic": "phâak"
+        },
+        {
+          "th": "ทิศตะวันออก",
+          "en": "East",
+          "id": "w_thittawanok",
+          "fr": "est",
+          "phonetic": "thít dtà-wan-ɔ̀ɔk"
         }
       ],
       "phrases": [
@@ -5698,6 +6093,7 @@
           "en": "North region",
           "phonetic": "",
           "components": [
+            "w_phak",
             "w_lesson-39-a2_0"
           ]
         },
@@ -5708,7 +6104,9 @@
           "en": "Go south",
           "phonetic": "",
           "components": [
-            "w_lesson-39-a2_0"
+            "w_pai",
+            "w_phak",
+            "w_lesson-39-a2_1"
           ]
         },
         {
@@ -5718,7 +6116,7 @@
           "en": "The east",
           "phonetic": "",
           "components": [
-            "w_lesson-39-a2_0"
+            "w_thittawanok"
           ]
         },
         {
@@ -5728,7 +6126,8 @@
           "en": "Southern people",
           "phonetic": "",
           "components": [
-            "w_lesson-39-a2_0"
+            "w_khon",
+            "w_lesson-39-a2_1"
           ]
         },
         {
@@ -5738,6 +6137,7 @@
           "en": "North wind",
           "phonetic": "",
           "components": [
+            "w_lom",
             "w_lesson-39-a2_0"
           ]
         }
@@ -5770,6 +6170,27 @@
           "fr": "carte",
           "en": "map",
           "phonetic": "phǎen-thîi"
+        },
+        {
+          "id": "w_lesson-39-a4_1",
+          "th": "รถไฟ",
+          "fr": "train",
+          "en": "train",
+          "phonetic": "rót-fai"
+        },
+        {
+          "th": "ใบ",
+          "en": "classifier (ticket/leaf)",
+          "id": "w_bai_class",
+          "fr": "classificateur",
+          "phonetic": "bai"
+        },
+        {
+          "th": "ไหน",
+          "en": "which/where",
+          "id": "w_nai_which",
+          "fr": "quel / où",
+          "phonetic": "nǎi"
         }
       ],
       "phrases": [
@@ -5780,7 +6201,8 @@
           "en": "Buy ticket",
           "phonetic": "",
           "components": [
-            "w_lesson-39-a3_0"
+            "w_sue",
+            "w_tua"
           ]
         },
         {
@@ -5790,7 +6212,8 @@
           "en": "Train station",
           "phonetic": "",
           "components": [
-            "w_lesson-39-a3_0"
+            "w_sathannee",
+            "w_lesson-39-a4_1"
           ]
         },
         {
@@ -5800,7 +6223,8 @@
           "en": "Look at map",
           "phonetic": "",
           "components": [
-            "w_lesson-39-a3_0"
+            "w_du",
+            "w_lesson-39-a3_2"
           ]
         },
         {
@@ -5810,7 +6234,9 @@
           "en": "Two tickets",
           "phonetic": "",
           "components": [
-            "w_lesson-39-a3_0"
+            "w_tua",
+            "w_2",
+            "w_bai_class"
           ]
         },
         {
@@ -5820,7 +6246,8 @@
           "en": "Which station?",
           "phonetic": "",
           "components": [
-            "w_lesson-39-a3_0"
+            "w_sathannee",
+            "w_nai_which"
           ]
         }
       ]
@@ -5840,18 +6267,25 @@
           "phonetic": "rót"
         },
         {
-          "id": "w_lesson-39-a4_1",
-          "th": "รถไฟ",
-          "fr": "train",
-          "en": "train",
-          "phonetic": "rót-fai"
-        },
-        {
           "id": "w_lesson-39-a4_2",
           "th": "รถเมล์",
           "fr": "bus",
           "en": "bus",
           "phonetic": "rót-mee"
+        },
+        {
+          "th": "ขึ้น",
+          "en": "go up / board",
+          "id": "w_khuen_up",
+          "fr": "monter",
+          "phonetic": "khûen"
+        },
+        {
+          "th": "ช้า",
+          "en": "slow",
+          "id": "w_cha_slow",
+          "fr": "lent",
+          "phonetic": "cháa"
         }
       ],
       "phrases": [
@@ -5862,7 +6296,8 @@
           "en": "Drive a car",
           "phonetic": "",
           "components": [
-            "w_lesson-39-a4_0"
+            "w_khap",
+            "w_rot"
           ]
         },
         {
@@ -5872,7 +6307,8 @@
           "en": "Take train",
           "phonetic": "",
           "components": [
-            "w_lesson-39-a4_0"
+            "w_khuen_up",
+            "w_lesson-39-a4_1"
           ]
         },
         {
@@ -5882,7 +6318,8 @@
           "en": "Wait for bus",
           "phonetic": "",
           "components": [
-            "w_lesson-39-a4_0"
+            "w_ro",
+            "w_rot_me"
           ]
         },
         {
@@ -5892,7 +6329,8 @@
           "en": "Beautiful car",
           "phonetic": "",
           "components": [
-            "w_lesson-39-a4_0"
+            "w_rot",
+            "w_suay"
           ]
         },
         {
@@ -5902,7 +6340,8 @@
           "en": "Train is slow",
           "phonetic": "",
           "components": [
-            "w_lesson-39-a4_0"
+            "w_lesson-39-a4_1",
+            "w_cha_slow"
           ]
         }
       ]
@@ -5934,6 +6373,13 @@
           "fr": "droite",
           "en": "right",
           "phonetic": "khwǎa"
+        },
+        {
+          "th": "ทาง",
+          "en": "way",
+          "id": "w_thang_way",
+          "fr": "chemin",
+          "phonetic": "thaang"
         }
       ],
       "phrases": [
@@ -5944,7 +6390,9 @@
           "en": "Walk straight",
           "phonetic": "",
           "components": [
-            "w_lesson-39-a5_0"
+            "w_doen",
+            "w_trong",
+            "w_pai"
           ]
         },
         {
@@ -5954,7 +6402,8 @@
           "en": "Turn left",
           "phonetic": "",
           "components": [
-            "w_lesson-39-a5_0"
+            "w_liao",
+            "w_sai"
           ]
         },
         {
@@ -5964,7 +6413,8 @@
           "en": "Turn right",
           "phonetic": "",
           "components": [
-            "w_lesson-39-a5_0"
+            "w_liao",
+            "w_khwa"
           ]
         },
         {
@@ -5974,7 +6424,9 @@
           "en": "It's on the right",
           "phonetic": "",
           "components": [
-            "w_lesson-39-a5_0"
+            "w_yuu",
+            "w_thang_way",
+            "w_khwa"
           ]
         },
         {
@@ -5984,7 +6436,9 @@
           "en": "Go left",
           "phonetic": "",
           "components": [
-            "w_lesson-39-a5_0"
+            "w_pai",
+            "w_thang_way",
+            "w_sai"
           ]
         }
       ]
@@ -6004,13 +6458,6 @@
       "title": "Vêtements",
       "description": "Chemise, pantalon",
       "words": [
-        {
-          "id": "w_suea",
-          "th": "เสื้อ",
-          "fr": "chemise / haut",
-          "phonetic": "sûea",
-          "en": "shirt / top"
-        },
         {
           "id": "w_kangkeng",
           "th": "กางเกง",
@@ -6044,7 +6491,7 @@
           "fr": "vendre un pantalon",
           "phonetic": "khǎai gaang-geeng",
           "components": [
-            "w_khai",
+            "w_khai_sell",
             "w_kangkeng"
           ],
           "en": "sell pants"
@@ -6092,13 +6539,6 @@
       "title": "Couleurs secondaires",
       "description": "Vert, jaune, rose",
       "words": [
-        {
-          "id": "w_khiao",
-          "th": "เขียว",
-          "fr": "vert",
-          "phonetic": "khǐiao",
-          "en": "Green"
-        },
         {
           "id": "w_lueang",
           "th": "เหลือง",
@@ -6197,13 +6637,6 @@
           "fr": "vieux",
           "phonetic": "kâao",
           "en": "old"
-        },
-        {
-          "id": "w_suay",
-          "th": "สวย",
-          "fr": "beau / joli",
-          "phonetic": "sǔuay",
-          "en": "beautiful / pretty"
         }
       ],
       "phrases": [
@@ -6273,21 +6706,21 @@
       "description": "Bon marché, cher",
       "words": [
         {
-          "id": "w_thuk",
+          "id": "w_thuk_correct",
           "th": "ถูก",
           "fr": "bon marché / correct",
           "phonetic": "thùuk",
           "en": "cheap/ok"
         },
         {
-          "id": "w_phaeng",
+          "id": "w_phaeng_2",
           "th": "แพง",
           "fr": "cher",
           "phonetic": "phaeng",
           "en": "Dear"
         },
         {
-          "id": "w_sai",
+          "id": "w_sai_put",
           "th": "ใส่",
           "fr": "mettre / porter",
           "phonetic": "sáai",
@@ -6334,7 +6767,7 @@
           "fr": "mettre une chemise",
           "phonetic": "sáai sûea",
           "components": [
-            "w_sai",
+            "w_sai_put",
             "w_suea"
           ],
           "en": "put on a shirt"
@@ -6391,7 +6824,8 @@
           "en": "Wear shoes",
           "phonetic": "",
           "components": [
-            "w_lesson-44-a1_0"
+            "w_sai_put",
+            "w_rong_thao"
           ]
         },
         {
@@ -6401,7 +6835,8 @@
           "en": "Beautiful hat",
           "phonetic": "",
           "components": [
-            "w_lesson-44-a1_0"
+            "w_lesson-44-a1_1",
+            "w_suay"
           ]
         },
         {
@@ -6411,7 +6846,8 @@
           "en": "Big bag",
           "phonetic": "",
           "components": [
-            "w_lesson-44-a1_0"
+            "w_lesson-44-a1_2",
+            "w_yai"
           ]
         },
         {
@@ -6421,7 +6857,8 @@
           "en": "Buy shoes",
           "phonetic": "",
           "components": [
-            "w_lesson-44-a1_0"
+            "w_sue",
+            "w_rong_thao"
           ]
         },
         {
@@ -6431,7 +6868,8 @@
           "en": "Like the bag",
           "phonetic": "",
           "components": [
-            "w_lesson-44-a1_0"
+            "w_chop",
+            "w_lesson-44-a1_2"
           ]
         }
       ]
@@ -6451,18 +6889,18 @@
           "phonetic": "krà-proong"
         },
         {
-          "id": "w_lesson-44-a2_1",
-          "th": "ชุด",
-          "fr": "robe/ensemble",
-          "en": "dress/suit",
-          "phonetic": "chút"
-        },
-        {
           "id": "w_lesson-44-a2_2",
           "th": "ถุงเท้า",
           "fr": "chaussettes",
           "en": "socks",
           "phonetic": "thǔng-tháo"
+        },
+        {
+          "id": "w_lesson-44-a4_0",
+          "th": "สั้น",
+          "fr": "court",
+          "en": "short",
+          "phonetic": "sân"
         }
       ],
       "phrases": [
@@ -6473,7 +6911,8 @@
           "en": "Short skirt",
           "phonetic": "",
           "components": [
-            "w_lesson-44-a2_0"
+            "w_lesson-44-a2_0",
+            "w_lesson-44-a4_0"
           ]
         },
         {
@@ -6483,7 +6922,9 @@
           "en": "Black socks",
           "phonetic": "",
           "components": [
-            "w_lesson-44-a2_0"
+            "w_lesson-44-a2_2",
+            "w_see_color",
+            "w_dam"
           ]
         },
         {
@@ -6493,7 +6934,9 @@
           "en": "Very beautiful dress",
           "phonetic": "",
           "components": [
-            "w_lesson-44-a2_0"
+            "w_lesson-44-a2_1",
+            "w_suay",
+            "w_mak"
           ]
         },
         {
@@ -6503,7 +6946,9 @@
           "en": "Wear new dress",
           "phonetic": "",
           "components": [
-            "w_lesson-44-a2_0"
+            "w_sai_put",
+            "w_lesson-44-a2_1",
+            "w_mai_new"
           ]
         },
         {
@@ -6513,6 +6958,8 @@
           "en": "Not wear skirt",
           "phonetic": "",
           "components": [
+            "w_mai_neg",
+            "w_sai_put",
             "w_lesson-44-a2_0"
           ]
         }
@@ -6545,6 +6992,20 @@
           "fr": "long",
           "en": "long",
           "phonetic": "yaao"
+        },
+        {
+          "th": "ยาว",
+          "en": "long",
+          "id": "w_yao",
+          "fr": "long",
+          "phonetic": "yaao"
+        },
+        {
+          "th": "ไม้ตี",
+          "en": "bat/racket",
+          "id": "w_mai_tee",
+          "fr": "batte / raquette",
+          "phonetic": "máai dtii"
         }
       ],
       "phrases": [
@@ -6555,7 +7016,8 @@
           "en": "Big shirt",
           "phonetic": "",
           "components": [
-            "w_lesson-44-a3_0"
+            "w_suea",
+            "w_yai"
           ]
         },
         {
@@ -6565,7 +7027,8 @@
           "en": "Small plate",
           "phonetic": "",
           "components": [
-            "w_lesson-44-a3_0"
+            "w_lesson-24-a3_2",
+            "w_lek"
           ]
         },
         {
@@ -6575,7 +7038,8 @@
           "en": "Long hair",
           "phonetic": "",
           "components": [
-            "w_lesson-44-a3_0"
+            "w_phom",
+            "w_yao"
           ]
         },
         {
@@ -6585,7 +7049,8 @@
           "en": "Long stick",
           "phonetic": "",
           "components": [
-            "w_lesson-44-a3_0"
+            "w_mai_tee",
+            "w_yao"
           ]
         },
         {
@@ -6595,7 +7060,9 @@
           "en": "Want a big one",
           "phonetic": "",
           "components": [
-            "w_lesson-44-a3_0"
+            "w_yak",
+            "w_dai",
+            "w_yai"
           ]
         }
       ]
@@ -6607,13 +7074,6 @@
       "titleEn": "Ext: Measure",
       "descriptionEn": "More vocabulary for this unit.",
       "words": [
-        {
-          "id": "w_lesson-44-a4_0",
-          "th": "สั้น",
-          "fr": "court",
-          "en": "short",
-          "phonetic": "sân"
-        },
         {
           "id": "w_lesson-44-a4_1",
           "th": "หนัก",
@@ -6637,6 +7097,7 @@
           "en": "Short hair",
           "phonetic": "",
           "components": [
+            "w_phom",
             "w_lesson-44-a4_0"
           ]
         },
@@ -6647,7 +7108,8 @@
           "en": "Heavy bag",
           "phonetic": "",
           "components": [
-            "w_lesson-44-a4_0"
+            "w_lesson-44-a1_2",
+            "w_lesson-44-a4_1"
           ]
         },
         {
@@ -6657,7 +7119,8 @@
           "en": "Light shoes",
           "phonetic": "",
           "components": [
-            "w_lesson-44-a4_0"
+            "w_rong_thao",
+            "w_lesson-44-a4_2"
           ]
         },
         {
@@ -6667,7 +7130,8 @@
           "en": "Very heavy",
           "phonetic": "",
           "components": [
-            "w_lesson-44-a4_0"
+            "w_lesson-44-a4_1",
+            "w_mak"
           ]
         },
         {
@@ -6677,7 +7141,8 @@
           "en": "Light object",
           "phonetic": "",
           "components": [
-            "w_lesson-44-a4_0"
+            "w_khong_of",
+            "w_lesson-44-a4_2"
           ]
         }
       ]
@@ -6709,6 +7174,27 @@
           "fr": "diamant",
           "en": "diamond",
           "phonetic": "phét"
+        },
+        {
+          "id": "w_roi",
+          "th": "ร้อย",
+          "fr": "cent",
+          "phonetic": "rɔ́ɔi",
+          "en": "hundred"
+        },
+        {
+          "th": "แหวน",
+          "en": "ring",
+          "id": "w_waen",
+          "fr": "bague",
+          "phonetic": "wǎen"
+        },
+        {
+          "th": "สร้อย",
+          "en": "necklace",
+          "id": "w_soi",
+          "fr": "collier",
+          "phonetic": "sɔ̂y"
         }
       ],
       "phrases": [
@@ -6719,6 +7205,7 @@
           "en": "Buy gold",
           "phonetic": "",
           "components": [
+            "w_sue",
             "w_lesson-44-a5_0"
           ]
         },
@@ -6729,7 +7216,8 @@
           "en": "Silver ring",
           "phonetic": "",
           "components": [
-            "w_lesson-44-a5_0"
+            "w_waen",
+            "w_ngern"
           ]
         },
         {
@@ -6739,7 +7227,8 @@
           "en": "Like diamonds",
           "phonetic": "",
           "components": [
-            "w_lesson-44-a5_0"
+            "w_chop",
+            "w_lesson-44-a5_2"
           ]
         },
         {
@@ -6749,6 +7238,7 @@
           "en": "Gold necklace",
           "phonetic": "",
           "components": [
+            "w_soi",
             "w_lesson-44-a5_0"
           ]
         },
@@ -6759,7 +7249,8 @@
           "en": "Expensive diamond",
           "phonetic": "",
           "components": [
-            "w_lesson-44-a5_0"
+            "w_lesson-44-a5_2",
+            "w_phaeng"
           ]
         }
       ]
@@ -6787,14 +7278,14 @@
           "en": "child (his child)"
         },
         {
-          "id": "w_dek",
+          "id": "w_dek_2",
           "th": "เด็ก",
           "fr": "enfant (général)",
           "phonetic": "dèk",
           "en": "child (general)"
         },
         {
-          "id": "w_phuean",
+          "id": "w_phuean_2",
           "th": "เพื่อน",
           "fr": "ami",
           "phonetic": "phûean",
@@ -6878,7 +7369,7 @@
           "phonetic": "phûean thîi nǎi",
           "components": [
             "w_phuean",
-            "w_thi_nai"
+            "w_thinai"
           ],
           "en": "where is the friend?"
         }
@@ -6964,6 +7455,7 @@
           "fr": "laver les mains",
           "phonetic": "láang muue",
           "components": [
+            "w_lang",
             "w_mue"
           ],
           "en": "wash your hands"
@@ -7173,6 +7665,13 @@
           "fr": "oncle",
           "en": "uncle",
           "phonetic": "lung"
+        },
+        {
+          "th": "รัก",
+          "en": "love",
+          "id": "w_rak",
+          "fr": "aimer",
+          "phonetic": "rák"
         }
       ],
       "phrases": [
@@ -7183,7 +7682,8 @@
           "en": "Grandfather is nice",
           "phonetic": "",
           "components": [
-            "w_lesson-49-a1_0"
+            "w_lesson-49-a1_0",
+            "w_jai_dee"
           ]
         },
         {
@@ -7193,7 +7693,8 @@
           "en": "Love grandmother",
           "phonetic": "",
           "components": [
-            "w_lesson-49-a1_0"
+            "w_rak",
+            "w_lesson-49-a1_1"
           ]
         },
         {
@@ -7203,7 +7704,9 @@
           "en": "Uncle comes visiting",
           "phonetic": "",
           "components": [
-            "w_lesson-49-a1_0"
+            "w_lesson-49-a1_2",
+            "w_ma",
+            "w_ha"
           ]
         },
         {
@@ -7213,6 +7716,7 @@
           "en": "Grandfather's house",
           "phonetic": "",
           "components": [
+            "w_baan",
             "w_lesson-49-a1_0"
           ]
         },
@@ -7223,7 +7727,8 @@
           "en": "Grandmother cooks",
           "phonetic": "",
           "components": [
-            "w_lesson-49-a1_0"
+            "w_lesson-49-a1_1",
+            "w_lesson-29-a3_2"
           ]
         }
       ]
@@ -7265,7 +7770,9 @@
           "en": "Aunt loves nephew",
           "phonetic": "",
           "components": [
-            "w_lesson-49-a2_0"
+            "w_lesson-49-a2_0",
+            "w_rak",
+            "w_lesson-49-a2_2"
           ]
         },
         {
@@ -7275,7 +7782,8 @@
           "en": "Cousin comes",
           "phonetic": "",
           "components": [
-            "w_lesson-49-a2_0"
+            "w_lesson-49-a2_1",
+            "w_ma"
           ]
         },
         {
@@ -7285,7 +7793,8 @@
           "en": "Have a nephew",
           "phonetic": "",
           "components": [
-            "w_lesson-49-a2_0"
+            "w_mee",
+            "w_lesson-49-a2_2"
           ]
         },
         {
@@ -7295,7 +7804,8 @@
           "en": "Nice aunt",
           "phonetic": "",
           "components": [
-            "w_lesson-49-a2_0"
+            "w_lesson-49-a2_0",
+            "w_jai_dee"
           ]
         },
         {
@@ -7305,7 +7815,8 @@
           "en": "Give to nephew",
           "phonetic": "",
           "components": [
-            "w_lesson-49-a2_0"
+            "w_hai",
+            "w_lesson-49-a2_2"
           ]
         }
       ]
@@ -7337,6 +7848,20 @@
           "fr": "mignon",
           "en": "cute",
           "phonetic": "nâa-rák"
+        },
+        {
+          "th": "ผู้หญิง",
+          "en": "woman",
+          "id": "w_phuying",
+          "fr": "femme",
+          "phonetic": "phûu-yǐng"
+        },
+        {
+          "th": "ผู้ชาย",
+          "en": "man",
+          "id": "w_phuchai",
+          "fr": "homme",
+          "phonetic": "phûu-chaai"
         }
       ],
       "phrases": [
@@ -7347,7 +7872,8 @@
           "en": "Beautiful woman",
           "phonetic": "",
           "components": [
-            "w_lesson-49-a3_0"
+            "w_phuying",
+            "w_suay"
           ]
         },
         {
@@ -7357,7 +7883,8 @@
           "en": "Handsome man",
           "phonetic": "",
           "components": [
-            "w_lesson-49-a3_0"
+            "w_phuchai",
+            "w_lesson-49-a3_1"
           ]
         },
         {
@@ -7367,7 +7894,8 @@
           "en": "Cute child",
           "phonetic": "",
           "components": [
-            "w_lesson-49-a3_0"
+            "w_dek",
+            "w_lesson-49-a3_2"
           ]
         },
         {
@@ -7377,7 +7905,8 @@
           "en": "Very cute!",
           "phonetic": "",
           "components": [
-            "w_lesson-49-a3_0"
+            "w_lesson-49-a3_2",
+            "w_mak"
           ]
         },
         {
@@ -7387,7 +7916,8 @@
           "en": "Beautiful car",
           "phonetic": "",
           "components": [
-            "w_lesson-49-a3_0"
+            "w_rot",
+            "w_suay"
           ]
         }
       ]
@@ -7419,6 +7949,13 @@
           "fr": "grand (taille)",
           "en": "tall",
           "phonetic": "sǔung"
+        },
+        {
+          "th": "แมว",
+          "en": "cat",
+          "id": "w_maew",
+          "fr": "chat",
+          "phonetic": "maew"
         }
       ],
       "phrases": [
@@ -7429,7 +7966,8 @@
           "en": "Tall person",
           "phonetic": "",
           "components": [
-            "w_lesson-49-a4_0"
+            "w_khon",
+            "w_sung"
           ]
         },
         {
@@ -7439,7 +7977,8 @@
           "en": "Fat cat",
           "phonetic": "",
           "components": [
-            "w_lesson-49-a4_0"
+            "w_maew",
+            "w_uan"
           ]
         },
         {
@@ -7449,7 +7988,8 @@
           "en": "He is thin",
           "phonetic": "",
           "components": [
-            "w_lesson-49-a4_0"
+            "w_khao_pron",
+            "w_lesson-49-a4_1"
           ]
         },
         {
@@ -7459,7 +7999,8 @@
           "en": "Want to be tall",
           "phonetic": "",
           "components": [
-            "w_lesson-49-a4_0"
+            "w_yak",
+            "w_sung"
           ]
         },
         {
@@ -7469,7 +8010,8 @@
           "en": "Very fat",
           "phonetic": "",
           "components": [
-            "w_lesson-49-a4_0"
+            "w_uan",
+            "w_mak"
           ]
         }
       ]
@@ -7501,6 +8043,13 @@
           "fr": "bête",
           "en": "stupid",
           "phonetic": "ngôo"
+        },
+        {
+          "th": "หมา",
+          "en": "dog",
+          "id": "w_ma_dog",
+          "fr": "chien",
+          "phonetic": "mǎa"
         }
       ],
       "phrases": [
@@ -7511,7 +8060,8 @@
           "en": "Short person",
           "phonetic": "",
           "components": [
-            "w_lesson-49-a5_0"
+            "w_khon",
+            "w_tia"
           ]
         },
         {
@@ -7521,7 +8071,8 @@
           "en": "Clever dog",
           "phonetic": "",
           "components": [
-            "w_lesson-49-a5_0"
+            "w_ma_dog",
+            "w_lesson-49-a5_1"
           ]
         },
         {
@@ -7531,7 +8082,8 @@
           "en": "Not stupid",
           "phonetic": "",
           "components": [
-            "w_lesson-49-a5_0"
+            "w_mai_neg",
+            "w_lesson-49-a5_2"
           ]
         },
         {
@@ -7541,7 +8093,9 @@
           "en": "He is very clever",
           "phonetic": "",
           "components": [
-            "w_lesson-49-a5_0"
+            "w_khao_pron",
+            "w_lesson-49-a5_1",
+            "w_mak"
           ]
         },
         {
@@ -7551,7 +8105,9 @@
           "en": "That person is great",
           "phonetic": "",
           "components": [
-            "w_lesson-49-a5_0"
+            "w_khon",
+            "w_nan",
+            "w_kreng"
           ]
         }
       ]
@@ -7577,13 +8133,6 @@
           "fr": "malade",
           "phonetic": "bpùay",
           "en": "sick"
-        },
-        {
-          "id": "w_mo",
-          "th": "หมอ",
-          "fr": "médecin",
-          "phonetic": "mɔ̌ɔ",
-          "en": "doctor"
         },
         {
           "id": "w_ya",
@@ -7659,7 +8208,7 @@
       "description": "Fièvre, fatigué",
       "words": [
         {
-          "id": "w_khai",
+          "id": "w_khai_fever",
           "th": "ไข้",
           "fr": "fièvre",
           "phonetic": "khǎai",
@@ -7673,7 +8222,7 @@
           "en": "to cough"
         },
         {
-          "id": "w_nueay",
+          "id": "w_nueay_2",
           "th": "เหนื่อย",
           "fr": "fatigué",
           "phonetic": "nùeay",
@@ -7688,7 +8237,7 @@
           "phonetic": "mii khǎai",
           "components": [
             "w_mee",
-            "w_khai"
+            "w_khai_fever"
           ],
           "en": "I have a fever"
         },
@@ -7709,7 +8258,7 @@
           "fr": "[Pratique] où / avoir faim",
           "phonetic": "thîi nǎi hǐw",
           "components": [
-            "w_thi_nai",
+            "w_thinai",
             "w_hiw"
           ],
           "en": "[Practical] where / be hungry"
@@ -7760,7 +8309,7 @@
           "en": "be afraid"
         },
         {
-          "id": "w_krot",
+          "id": "w_krot_2",
           "th": "โกรธ",
           "fr": "fâché",
           "phonetic": "gròot",
@@ -7786,7 +8335,7 @@
           "phonetic": "lâ mǔu",
           "components": [
             "w_la",
-            "w_moo"
+            "w_mu"
           ],
           "en": "[Practical] and (to return the question) / pig"
         },
@@ -7833,7 +8382,7 @@
       "description": "Penser, savoir",
       "words": [
         {
-          "id": "w_khit",
+          "id": "w_khit_2",
           "th": "คิด",
           "fr": "penser",
           "phonetic": "khít",
@@ -7951,7 +8500,8 @@
           "en": "Take medicine",
           "phonetic": "",
           "components": [
-            "w_lesson-54-a1_0"
+            "w_kin",
+            "w_ya"
           ]
         },
         {
@@ -7961,7 +8511,9 @@
           "en": "Go to doctor",
           "phonetic": "",
           "components": [
-            "w_lesson-54-a1_0"
+            "w_pai",
+            "w_ha",
+            "w_mo"
           ]
         },
         {
@@ -7971,7 +8523,9 @@
           "en": "Where is pharmacy?",
           "phonetic": "",
           "components": [
-            "w_lesson-54-a1_0"
+            "w_lesson-54-a1_1",
+            "w_yuu",
+            "w_nai_which"
           ]
         },
         {
@@ -7981,7 +8535,8 @@
           "en": "Nice doctor",
           "phonetic": "",
           "components": [
-            "w_lesson-54-a1_0"
+            "w_mo",
+            "w_jai_dee"
           ]
         },
         {
@@ -7991,7 +8546,8 @@
           "en": "Buy medicine",
           "phonetic": "",
           "components": [
-            "w_lesson-54-a1_0"
+            "w_sue",
+            "w_ya"
           ]
         }
       ]
@@ -8033,7 +8589,8 @@
           "en": "Headache",
           "phonetic": "",
           "components": [
-            "w_lesson-54-a2_0"
+            "w_jep",
+            "w_hua"
           ]
         },
         {
@@ -8043,7 +8600,8 @@
           "en": "Have fever",
           "phonetic": "",
           "components": [
-            "w_lesson-54-a2_0"
+            "w_mee",
+            "w_khai_fever"
           ]
         },
         {
@@ -8053,7 +8611,8 @@
           "en": "Cough a lot",
           "phonetic": "",
           "components": [
-            "w_lesson-54-a2_0"
+            "w_ay",
+            "w_mak"
           ]
         },
         {
@@ -8063,7 +8622,8 @@
           "en": "No pain",
           "phonetic": "",
           "components": [
-            "w_lesson-54-a2_0"
+            "w_mai_neg",
+            "w_jep"
           ]
         },
         {
@@ -8073,7 +8633,8 @@
           "en": "Eye pain",
           "phonetic": "",
           "components": [
-            "w_lesson-54-a2_0"
+            "w_puat",
+            "w_ta"
           ]
         }
       ]
@@ -8105,6 +8666,27 @@
           "fr": "avoir peur",
           "en": "scared",
           "phonetic": "klua"
+        },
+        {
+          "th": "อย่า",
+          "en": "don't",
+          "id": "w_ya_dont",
+          "fr": "ne pas (impératif)",
+          "phonetic": "yàa"
+        },
+        {
+          "th": "ผี",
+          "en": "ghost",
+          "id": "w_phi_ghost",
+          "fr": "fantôme",
+          "phonetic": "phǐi"
+        },
+        {
+          "th": "ต้อง",
+          "en": "must",
+          "id": "w_tong",
+          "fr": "devoir",
+          "phonetic": "dtɔ̂ng"
         }
       ],
       "phrases": [
@@ -8115,6 +8697,7 @@
           "en": "I'm happy",
           "phonetic": "",
           "components": [
+            "w_chan",
             "w_lesson-54-a3_0"
           ]
         },
@@ -8125,7 +8708,8 @@
           "en": "Don't be mad",
           "phonetic": "",
           "components": [
-            "w_lesson-54-a3_0"
+            "w_ya_dont",
+            "w_lesson-54-a3_1"
           ]
         },
         {
@@ -8135,7 +8719,8 @@
           "en": "Scared of ghosts",
           "phonetic": "",
           "components": [
-            "w_lesson-54-a3_0"
+            "w_klua",
+            "w_phi_ghost"
           ]
         },
         {
@@ -8145,7 +8730,9 @@
           "en": "He is very angry",
           "phonetic": "",
           "components": [
-            "w_lesson-54-a3_0"
+            "w_khao_pron",
+            "w_lesson-54-a3_1",
+            "w_mak"
           ]
         },
         {
@@ -8155,7 +8742,9 @@
           "en": "Don't be scared!",
           "phonetic": "",
           "components": [
-            "w_lesson-54-a3_0"
+            "w_mai_neg",
+            "w_tong",
+            "w_klua"
           ]
         }
       ]
@@ -8197,7 +8786,8 @@
           "en": "Hungry",
           "phonetic": "",
           "components": [
-            "w_lesson-54-a4_0"
+            "w_hiw",
+            "w_khao"
           ]
         },
         {
@@ -8207,7 +8797,8 @@
           "en": "Very tired",
           "phonetic": "",
           "components": [
-            "w_lesson-54-a4_0"
+            "w_nueay",
+            "w_mak"
           ]
         },
         {
@@ -8217,7 +8808,8 @@
           "en": "Are you thirsty?",
           "phonetic": "",
           "components": [
-            "w_lesson-54-a4_0"
+            "w_lesson-54-a4_2",
+            "w_mai"
           ]
         },
         {
@@ -8227,7 +8819,7 @@
           "en": "Rest first",
           "phonetic": "",
           "components": [
-            "w_lesson-54-a4_0"
+            "w_phak_kon"
           ]
         },
         {
@@ -8237,7 +8829,8 @@
           "en": "Not hungry",
           "phonetic": "",
           "components": [
-            "w_lesson-54-a4_0"
+            "w_mai_neg",
+            "w_hiw"
           ]
         }
       ]
@@ -8269,6 +8862,13 @@
           "fr": "rire",
           "en": "laugh",
           "phonetic": "hǔa-rɔ́"
+        },
+        {
+          "th": "ดัง",
+          "en": "loud",
+          "id": "w_dang",
+          "fr": "fort (bruit)",
+          "phonetic": "dang"
         }
       ],
       "phrases": [
@@ -8279,6 +8879,7 @@
           "en": "He smiles",
           "phonetic": "",
           "components": [
+            "w_khao_pron",
             "w_lesson-54-a5_0"
           ]
         },
@@ -8289,7 +8890,8 @@
           "en": "Child cries",
           "phonetic": "",
           "components": [
-            "w_lesson-54-a5_0"
+            "w_dek",
+            "w_lesson-54-a5_1"
           ]
         },
         {
@@ -8299,7 +8901,8 @@
           "en": "Laugh loud",
           "phonetic": "",
           "components": [
-            "w_lesson-54-a5_0"
+            "w_lesson-54-a5_2",
+            "w_dang"
           ]
         },
         {
@@ -8309,7 +8912,8 @@
           "en": "Don't cry!",
           "phonetic": "",
           "components": [
-            "w_lesson-54-a5_0"
+            "w_ya_dont",
+            "w_lesson-54-a5_1"
           ]
         },
         {
@@ -8319,7 +8923,8 @@
           "en": "Beautiful smile",
           "phonetic": "",
           "components": [
-            "w_lesson-54-a5_0"
+            "w_lesson-54-a5_0",
+            "w_suay"
           ]
         }
       ]
@@ -8463,7 +9068,7 @@
           "fr": "[Pratique] regarder / bière",
           "phonetic": "duu bia",
           "components": [
-            "w_doo",
+            "w_du",
             "w_bia"
           ],
           "en": "[Practical] watch / beer"
@@ -8606,7 +9211,7 @@
           "phonetic": "jai dii nee",
           "components": [
             "w_jai_dee",
-            "w_nee"
+            "w_nii_this"
           ],
           "en": "[Practice] nice / this / this"
         },
@@ -8665,13 +9270,6 @@
           "fr": "deux (2 dans 20)",
           "phonetic": "yîi",
           "en": "two (2 in 20)"
-        },
-        {
-          "id": "w_roi",
-          "th": "ร้อย",
-          "fr": "cent",
-          "phonetic": "rɔ́ɔi",
-          "en": "hundred"
         },
         {
           "id": "w_phan",
@@ -8780,7 +9378,7 @@
           "en": "Tuesday"
         },
         {
-          "id": "w_phut",
+          "id": "w_phut_wed",
           "th": "พุธ",
           "fr": "mercredi",
           "phonetic": "phút",
@@ -8845,7 +9443,7 @@
           "phonetic": "wan phút",
           "components": [
             "w_wan",
-            "w_phut"
+            "w_phut_wed"
           ],
           "en": "Wednesday"
         },
@@ -8966,7 +9564,7 @@
             "w_aayu",
             "w_3",
             "w_10",
-            "w_pii"
+            "w_pi"
           ],
           "en": "I am thirty years old"
         },
@@ -8987,7 +9585,7 @@
           "fr": "langue anglaise",
           "phonetic": "phaa-sǎa ang-grìt",
           "components": [
-            "w_phasa",
+            "w_phaasaa",
             "w_angkrit"
           ],
           "en": "English language"
@@ -9013,21 +9611,21 @@
       "description": "Hôtel, marché, taxis",
       "words": [
         {
-          "id": "w_rong_raem",
+          "id": "w_rong_raem_2",
           "th": "โรงแรม",
           "fr": "hôtel",
           "phonetic": "roong-raem",
           "en": "hotel"
         },
         {
-          "id": "w_talat",
+          "id": "w_talat_2",
           "th": "ตลาด",
           "fr": "marché",
           "phonetic": "dtà-làat",
           "en": "market"
         },
         {
-          "id": "w_khao",
+          "id": "w_khao_enter",
           "th": "เข้า",
           "fr": "entrer",
           "phonetic": "khâo",
@@ -9046,13 +9644,6 @@
           "fr": "arrêter",
           "phonetic": "yùt",
           "en": "stop"
-        },
-        {
-          "id": "w_thii",
-          "th": "ที่",
-          "fr": "à / chez",
-          "phonetic": "thîi",
-          "en": "at"
         }
       ],
       "phrases": [
@@ -9084,9 +9675,8 @@
           "fr": "arrêtez-vous ici",
           "phonetic": "yùt thîi nîi",
           "components": [
-            "w_yut",
-            "w_thii",
-            "w_nee"
+            "w_lesson-29-a1_2",
+            "w_thi_ni"
           ],
           "en": "stop here"
         },
@@ -9096,7 +9686,7 @@
           "fr": "entrer dans l'hôtel",
           "phonetic": "khâo roong-raem",
           "components": [
-            "w_khao",
+            "w_khao_enter",
             "w_rong_raem"
           ],
           "en": "enter the hotel"
@@ -9126,7 +9716,7 @@
           "en": "again / more"
         },
         {
-          "id": "w_khrang",
+          "id": "w_khrang_2",
           "th": "ครั้ง",
           "fr": "fois",
           "phonetic": "khráng",
@@ -9169,7 +9759,7 @@
           "fr": "répétez s'il vous plaît",
           "phonetic": "phûut ìik khráng",
           "components": [
-            "w_pood",
+            "w_phut",
             "w_eek",
             "w_khrang"
           ],

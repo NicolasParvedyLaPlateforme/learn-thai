@@ -270,8 +270,7 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
           answer: word.th,
           options: shuffle([word, ...distractors]),
           hideHints: true,
-          disableTooltips: true,
-          hideColors: true
+          disableTooltips: true
         });
     });
     
@@ -284,16 +283,21 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
     itemsForSB.forEach(item => {
         const phrase = item as Phrase;
         const phraseWords = phrase.components.map(id => globalWords.find(w => w.id === id)).filter(Boolean) as Word[];
+        
+        // Add distractors to make it challenging and avoid single-card issues
+        const isNumberLesson = item.id.includes('num') || item.th.match(/[๐-๙]/);
+        const sbDistractorPool = isNumberLesson ? allLessons.find(l => l.id === 'lesson-3')?.words || globalWords : globalWords;
+        const distractors = shuffle(sbDistractorPool.filter(w => !phrase.components.includes(w.id))).slice(0, 3);
+        
         reviewExercises.push({
             id: `rev-sb-${item.id}-${Math.random()}`,
             type: 'sentence-builder',
             question: language === 'en' ? (item.en || item.fr) : item.fr,
             answer: item.th,
-            options: shuffle(phraseWords), // NO DISTRACTORS
+            options: shuffle([...phraseWords, ...distractors]),
             correctComponents: phrase.components,
             hideHints: true,
-            disableTooltips: true,
-            hideColors: true
+            disableTooltips: true
         });
     });
 
@@ -311,7 +315,6 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
             componentGroups: groups,
             hideHints: true,
             disableTooltips: true,
-            hideColors: true,
             blindMode: false
         });
     });
@@ -326,8 +329,7 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
             answer: item.th,
             options: [],
             hideHints: true,
-            disableTooltips: true,
-            hideColors: true
+            disableTooltips: true
         });
     });
     
