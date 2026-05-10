@@ -1,11 +1,18 @@
+let currentAudio: HTMLAudioElement | null = null;
+
 export const playThaiTTS = (text: string) => {
   if (typeof window === 'undefined') return;
   try {
+    if (currentAudio) {
+      currentAudio.pause();
+      currentAudio.currentTime = 0;
+    }
+    
     // Use our internal proxy API to bypass CORS and Adblockers (ERR_BLOCKED_BY_CLIENT)
     const url = `/api/tts?text=${encodeURIComponent(text)}`;
-    const audio = new Audio(url);
+    currentAudio = new Audio(url);
     
-    audio.play().catch(e => {
+    currentAudio.play().catch(e => {
       console.warn("Google TTS API playback failed, falling back to local speech synthesis:", e);
       fallbackTTS(text);
     });
