@@ -2008,7 +2008,7 @@
           "id": "w_phrung",
           "th": "พรุ่ง",
           "fr": "demain (base)",
-          "phonetic": "phrung",
+          "phonetic": "phrûng",
           "en": "tomorrow (basic)"
         },
         {
@@ -2567,7 +2567,7 @@
           "id": "w_khao_color",
           "th": "ขาว",
           "fr": "blanc",
-          "phonetic": "khâao",
+          "phonetic": "khǎao",
           "en": "white"
         },
         {
@@ -2677,7 +2677,7 @@
           "th": "ห้อง",
           "fr": "pièce / salle",
           "phonetic": "hɔ̂ng",
-          "en": "room / room"
+          "en": "room"
         },
         {
           "id": "w_non",
@@ -2692,6 +2692,13 @@
           "fr": "toilettes / salle de bain",
           "phonetic": "hɔ̂ng náam",
           "en": "toilet / bathroom"
+        }, 
+        {
+          "id": "w_yu",
+          "th": "อยู่",
+          "fr": "être (situé) / se trouver",
+          "phonetic": "yùu",
+          "en": "to be (located)"
         }
       ],
       "phrases": [
@@ -2713,6 +2720,7 @@
           "phonetic": "hɔ̂ng náam yu thîi nǎi",
           "components": [
             "w_hong_nam",
+            "w_yu",
             "w_thi_nai"
           ],
           "en": "Where is the restroom ?"
