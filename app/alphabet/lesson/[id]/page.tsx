@@ -11,8 +11,9 @@ import { playThaiTTS, preloadThaiVoices } from '../../../lib/tts';
 import { motion, AnimatePresence } from 'motion/react';
 import { ColoredPhonetic } from '../../../components/ColoredPhonetic';
 import { AlphabetCard } from '../../../components/AlphabetCard';
+import { Suspense } from 'react';
 
-export default function AlphabetLessonPage() {
+function AlphabetLessonContent() {
   const params = useParams();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -393,5 +394,13 @@ export default function AlphabetLessonPage() {
       </AnimatePresence>
       </>
     </div>
+  );
+}
+
+export default function AlphabetLessonPage() {
+  return (
+    <Suspense fallback={<div className="p-8 text-center min-h-screen bg-[#FAFAFA]">Loading...</div>}>
+      <AlphabetLessonContent />
+    </Suspense>
   );
 }

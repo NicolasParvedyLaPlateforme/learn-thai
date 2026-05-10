@@ -18,10 +18,11 @@ import PairMatch from '../../components/PairMatch';
 import { TooltipHint, SentenceWithHints } from '../../components/Hints';
 import VirtualKeyboard from '../../writing/components/VirtualKeyboard';
 import FreeTypingInput from './components/FreeTypingInput';
+import { Suspense } from 'react';
 
 const data = courseData as CourseData;
 
-export default function LessonPage() {
+function LessonPageContent() {
   const params = useParams();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -523,5 +524,13 @@ export default function LessonPage() {
         </>
       )}
     </div>
+  );
+}
+
+export default function LessonPage() {
+  return (
+    <Suspense fallback={<div className="p-8 text-center min-h-screen bg-[#FAFAFA]">Chargement...</div>}>
+      <LessonPageContent />
+    </Suspense>
   );
 }

@@ -1,7 +1,35 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { persist, createJSONStorage } from 'zustand/middleware';
 
 export type AppLanguage = 'fr' | 'en';
+
+const safeStorage = {
+  getItem: (name: string): string | null => {
+    if (typeof window === 'undefined') return null;
+    try {
+      return window.localStorage.getItem(name);
+    } catch (e) {
+      console.warn("localStorage not available, defaulting to empty", e);
+      return null;
+    }
+  },
+  setItem: (name: string, value: string): void => {
+    if (typeof window === 'undefined') return;
+    try {
+      window.localStorage.setItem(name, value);
+    } catch (e) {
+      console.warn("localStorage not available, unable to save state", e);
+    }
+  },
+  removeItem: (name: string): void => {
+    if (typeof window === 'undefined') return;
+    try {
+      window.localStorage.removeItem(name);
+    } catch (e) {
+      console.warn("localStorage not available", e);
+    }
+  },
+};
 
 interface ProgressState {
   language: AppLanguage;
@@ -64,6 +92,7 @@ export const useProgressStore = create<ProgressState>()(
     }),
     {
       name: 'thai-learning-progress',
+      storage: createJSONStorage(() => safeStorage),
     }
   )
 );
