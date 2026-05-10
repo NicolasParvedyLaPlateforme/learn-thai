@@ -87,7 +87,7 @@ export function TooltipHint({ children, tooltipContent, className = '', audioTex
 }
 
 // A simple component to render the french question with tooltips (hints)
-export function SentenceWithHints({text, dictionary, phrases, isSentence, exerciseOptions, hideHints, disableTooltips, alwaysShowPhonetic, answerTh, correctComponents, charHintRegex}: {text: string, dictionary: Word[], phrases: Phrase[], isSentence: boolean, exerciseOptions: Word[], hideHints?: boolean, disableTooltips?: boolean, alwaysShowPhonetic?: boolean, answerTh?: string, correctComponents?: string[], charHintRegex?: RegExp}) {
+export function SentenceWithHints({text, dictionary, phrases, isSentence, exerciseOptions, hideHints, disableTooltips, hideColors, alwaysShowPhonetic, answerTh, correctComponents, charHintRegex}: {text: string, dictionary: Word[], phrases: Phrase[], isSentence: boolean, exerciseOptions: Word[], hideHints?: boolean, disableTooltips?: boolean, hideColors?: boolean, alwaysShowPhonetic?: boolean, answerTh?: string, correctComponents?: string[], charHintRegex?: RegExp}) {
   const { language } = useProgressStore();
   // Try to match the ENTIRE phrase/word first
   const exactPhrase = phrases.find(p => p.fr.toLowerCase() === text.toLowerCase() || (p.en?.toLowerCase() === text.toLowerCase()));
@@ -108,7 +108,7 @@ export function SentenceWithHints({text, dictionary, phrases, isSentence, exerci
         alwaysShowPhonetic ? (
           <span className="inline-flex flex-col w-full text-center sm:text-left sm:w-auto relative group">
             <span className={`inline-block ${getDottedClass()}`}>{text}</span>
-            <span className="text-sm md:text-base font-medium tracking-wide">[<ColoredPhonetic phonetic={exactMatch.phonetic} charHintRegex={charHintRegex} />]</span>
+            <span className="text-sm md:text-base font-medium tracking-wide">[<ColoredPhonetic phonetic={exactMatch.phonetic} charHintRegex={charHintRegex} hideColors={hideColors} />]</span>
           </span>
         ) : (
           <span className={`inline-block ${getDottedClass()}`}>
@@ -131,7 +131,7 @@ export function SentenceWithHints({text, dictionary, phrases, isSentence, exerci
           tooltipContent={
             <>
               <span className="font-thai text-lg font-bold text-slate-800">{tooltipTranslation}</span>
-              {phonetic && <span className="text-slate-500 text-xs ml-2">(<ColoredPhonetic phonetic={phonetic} charHintRegex={charHintRegex} />)</span>}
+              {phonetic && <span className="text-slate-500 text-xs ml-2">(<ColoredPhonetic phonetic={phonetic} charHintRegex={charHintRegex} hideColors={hideColors} />)</span>}
             </>
           }
           audioText={tooltipTranslation}

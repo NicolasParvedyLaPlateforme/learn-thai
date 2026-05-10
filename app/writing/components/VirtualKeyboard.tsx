@@ -68,7 +68,7 @@ export default function VirtualKeyboard({ exercise, selected, onChange, disabled
                 }
               });
 
-              const showColors = exercise.blindMode ? disabled : true;
+              const showColors = exercise.hideColors ? disabled : (exercise.blindMode ? disabled : true);
 
               return clusters.map((cluster, idx) => {
                 let textColorClass = "text-slate-700";

@@ -260,6 +260,7 @@ export default function ReviewPage() {
                   exerciseOptions={currentExercise.options as Word[]}
                   hideHints={currentExercise.hideHints}
                   disableTooltips={currentExercise.disableTooltips}
+                  hideColors={currentExercise.hideColors}
                   alwaysShowPhonetic={currentExercise.type === 'writing'}
                 />
               </div>

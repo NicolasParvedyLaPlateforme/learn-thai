@@ -29,7 +29,7 @@ export default function WordMatch({ exercise, selected, onChange, disabled }: Pr
               relative rounded-2xl border-2 text-center transition-all flex flex-col items-center justify-center
               ${isDense ? 'p-2 sm:p-3 min-h-[70px] sm:min-h-[80px]' : 'p-4 sm:p-6 min-h-[100px] sm:min-h-[120px]'}
               ${isSelected 
-                ? 'bg-emerald-50 border-emerald-500 text-emerald-700 border-b-2 translate-y-0.5 shadow-[inset_0_0_0_1px_rgba(16,185,129,0.2)]' 
+                ? 'bg-indigo-50 border-indigo-500 text-indigo-700 border-b-2 translate-y-0.5 shadow-[inset_0_0_0_1px_rgba(99,102,241,0.2)]' 
                 : 'bg-white border-slate-200 border-b-4 text-slate-700 hover:bg-slate-50 active:border-b-2 active:translate-y-0.5'}
               ${disabled && !isSelected ? 'opacity-50' : ''}
               ${disabled ? 'cursor-default' : 'cursor-pointer'}

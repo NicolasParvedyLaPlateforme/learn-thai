@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function ColoredPhonetic({ phonetic, charHintRegex }: { phonetic: string; charHintRegex?: RegExp }) {
+export function ColoredPhonetic({ phonetic, charHintRegex, hideColors }: { phonetic: string; charHintRegex?: RegExp; hideColors?: boolean }) {
   // Split the phonetic string into logical syllables/words. 
   // Often separated by spaces or hyphens.
   // We want to color each syllable independently.
@@ -24,6 +24,7 @@ export function ColoredPhonetic({ phonetic, charHintRegex }: { phonetic: string;
   // Rising Tone: \u030C
 
   const parseToneClass = (word: string) => {
+    if (hideColors) return "text-slate-500";
     if (highToneRegex.test(word) || /\u0301/.test(word)) return "text-orange-500";
     if (fallingToneRegex.test(word) || /\u0302/.test(word)) return "text-red-500";
     if (risingToneRegex.test(word) || /\u030C/.test(word)) return "text-blue-500";

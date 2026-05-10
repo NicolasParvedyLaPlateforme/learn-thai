@@ -245,58 +245,94 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
   const baseSBDistractors = 3 + (level * 2); // lvl0:3, lvl1:5, lvl2:7, lvl3:9
 
   if (lesson.isReview) {
-    // Treat review as level+1 difficulty
-    const reviewHideHints = level >= 1;
-    const reviewWMDistractors = Math.min(11, 4 + (level * 2));
-    const reviewSBDistractors = Math.min(11, 4 + (level * 2));
-
-    // Find index of current lesson to only include previous lessons
     const currentIdx = allLessons.findIndex(l => l.id === lesson.id);
-    const previousLessons = allLessons.slice(0, currentIdx);
+    let unitStartIdx = 0;
+    for (let i = currentIdx - 1; i >= 0; i--) {
+      if (allLessons[i].isReview) {
+        unitStartIdx = i + 1;
+        break;
+      }
+    }
+    const unitLessons = allLessons.slice(unitStartIdx, currentIdx);
+    const unitWords = unitLessons.flatMap(l => l.words);
+    const unitPhrases = unitLessons.flatMap(l => l.phrases);
     
-    // Generate all possible exercises from previous lessons
-    previousLessons.forEach(prevLesson => {
-      // word match
-      prevLesson.words.forEach(word => {
-        // Always 3 distractors for word-match = 4 options
-        const distractors = shuffle(globalWords.filter(w => w.id !== word.id)).slice(0, 3);
-        exercises.push({
-          id: `rev-wm-${word.id}`,
+    let reviewExercises: Exercise[] = [];
+    
+    // 1. Word Match (6 exercises)
+    const shuffledWordsForWM = shuffle(unitWords).slice(0, 6);
+    shuffledWordsForWM.forEach(word => {
+        const distractors = shuffle(unitWords.filter(w => w.id !== word.id)).slice(0, 3);
+        reviewExercises.push({
+          id: `rev-wm-${word.id}-${Math.random()}`,
           type: 'word-match',
           question: language === 'en' ? (word.en || word.fr) : word.fr,
           answer: word.th,
           options: shuffle([word, ...distractors]),
-          hideHints: reviewHideHints
+          hideHints: true,
+          disableTooltips: true,
+          hideColors: true
         });
-      });
-      // sentence builder
-      prevLesson.phrases.forEach(phrase => {
+    });
+    
+    // Combine words and phrases for the rest
+    const allUnitItems = shuffle([...unitWords, ...unitPhrases]);
+    
+    // 2. Sentence Builder (8 exercises)
+    const itemsForSB = shuffle(unitPhrases).slice(0, 8);
+    const globalWords = allLessons.flatMap(l => l.words || []);
+    itemsForSB.forEach(item => {
+        const phrase = item as Phrase;
         const phraseWords = phrase.components.map(id => globalWords.find(w => w.id === id)).filter(Boolean) as Word[];
-        const distractors = shuffle(globalWords.filter(w => !phrase.components.includes(w.id))).slice(0, reviewSBDistractors);
-        exercises.push({
-          id: `rev-sb-${phrase.id}`,
-          type: 'sentence-builder',
-          question: language === 'en' ? (phrase.en || phrase.fr) : phrase.fr,
-          answer: phrase.th,
-          options: shuffle([...phraseWords, ...distractors]),
-          correctComponents: phrase.components,
-          hideHints: reviewHideHints
+        reviewExercises.push({
+            id: `rev-sb-${item.id}-${Math.random()}`,
+            type: 'sentence-builder',
+            question: language === 'en' ? (item.en || item.fr) : item.fr,
+            answer: item.th,
+            options: shuffle(phraseWords), // NO DISTRACTORS
+            correctComponents: phrase.components,
+            hideHints: true,
+            disableTooltips: true,
+            hideColors: true
         });
-      });
     });
 
-    // Shuffle and pick 30
-    let finalExercises = shuffle(exercises).slice(0, 30);
+    // 3. Writing (8 exercises)
+    const itemsForWriting = shuffle(allUnitItems).slice(0, 8);
+    itemsForWriting.forEach(item => {
+        const { characters, groups } = getWritingClustersAndGroups(item.th.replace(/\s+/g, ''));
+        reviewExercises.push({
+            id: `rev-wr-${item.id}-${Math.random()}`,
+            type: 'writing',
+            question: language === 'en' ? (item.en || item.fr) : item.fr,
+            answer: item.th,
+            options: shuffle(characters.map((c, i) => ({ id: `c-${i}`, th: c, fr: '', phonetic: '' }))),
+            correctComponents: characters,
+            componentGroups: groups,
+            hideHints: true,
+            disableTooltips: true,
+            hideColors: true,
+            blindMode: false
+        });
+    });
+
+    // 4. Free typing (8 exercises)
+    const itemsForFT = shuffle(allUnitItems).slice(0, 8);
+    itemsForFT.forEach(item => {
+        reviewExercises.push({
+            id: `rev-ft-${item.id}-${Math.random()}`,
+            type: 'free-typing',
+            question: language === 'en' ? (item.en || item.fr) : item.fr,
+            answer: item.th,
+            options: [],
+            hideHints: true,
+            disableTooltips: true,
+            hideColors: true
+        });
+    });
     
-    // Warm-up for reviews too
-    if (level >= 1) {
-      finalExercises.forEach((ex, idx) => {
-        if (idx < 5) {
-          ex.hideHints = false;
-        }
-      });
-    }
-    return finalExercises;
+    // Total is exactly 30: 6 + 8 + 8 + 8 = 30.
+    return reviewExercises;
   }
 
   // Normal lesson logic

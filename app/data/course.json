@@ -285,7 +285,7 @@
           "th": "หนึ่ง",
           "fr": "un",
           "phonetic": "nùeng",
-          "en": "A"
+          "en": "One"
         },
         {
           "id": "w_2",
@@ -692,7 +692,7 @@
           "id": "w_mai_neg",
           "th": "ไม่",
           "fr": "ne pas",
-          "phonetic": "mǎi",
+          "phonetic": "mâi",
           "en": "not"
         },
         {
@@ -1073,7 +1073,7 @@
           "id": "w_khao_pron",
           "th": "เขา",
           "fr": "il / elle",
-          "phonetic": "khâao",
+          "phonetic": "khǎo",
           "en": "he/she"
         },
         {
@@ -1131,6 +1131,13 @@
           "fr": "enfant",
           "phonetic": "dèk",
           "en": "child"
+        },
+        {
+          "id": "w_pai",
+          "th": "ไป",
+          "fr": "aller",
+          "phonetic": "bpai",
+          "en": "go"
         }
       ],
       "phrases": [
@@ -1276,13 +1283,7 @@
       "title": "Verbes utiles",
       "description": "Actions de tous les jours",
       "words": [
-        {
-          "id": "w_pai",
-          "th": "ไป",
-          "fr": "aller",
-          "phonetic": "bpai",
-          "en": "go"
-        },
+        
         {
           "id": "w_ma",
           "th": "มา",
@@ -1296,6 +1297,13 @@
           "fr": "faire",
           "phonetic": "tham",
           "en": "TO DO"
+        },
+        {
+          "id": "w_thammai",
+          "th": "ทำไม",
+          "fr": "pourquoi ?",
+          "phonetic": "tham-mai",
+          "en": "Why ?"
         },
         {
           "id": "w_yak",
@@ -1444,12 +1452,12 @@
           "id": "p_new_l7_5",
           "th": "ทำไมรอ",
           "fr": "pourquoi (que fais-tu) attendre",
-          "phonetic": "tham rɔɔ",
+          "phonetic": "tham-mai rɔɔ",
           "components": [
-            "w_tham",
+            "w_thammai",
             "w_ro"
           ],
-          "en": "doing wait (waiting)"
+          "en": "Why wait?"
         }
       ],
       "titleEn": "Useful verbs",
@@ -1928,6 +1936,20 @@
           "fr": "conduire (moto/vélo)",
           "phonetic": "khìi",
           "en": "drive (motorcycle/bicycle)"
+        },
+        {
+          "id": "w_khap",
+          "th": "ขับ",
+          "fr": "conduire (voiture/camion)",
+          "phonetic": "khàp",
+          "en": "to drive (car/truck)"
+        }, 
+        {
+          "id": "w_yuu",
+          "th": "อยู่",
+          "fr": "être (situé) / rester",
+          "phonetic": "yùu",
+          "en": "to be (located) / to stay"
         }
       ],
       "phrases": [
@@ -1960,7 +1982,7 @@
           "fr": "conduire une voiture",
           "phonetic": "khàp rót",
           "components": [
-            "w_khi",
+            "w_khap",
             "w_rot"
           ],
           "en": "drive a car"
@@ -1979,11 +2001,12 @@
         },
         {
           "id": "p_where_station",
-          "th": "สถานีที่ไหน",
+          "th": "สถานีอยู่ที่ไหน",
           "fr": "où est la station ?",
-          "phonetic": "sà-thǎa-nii thîi nǎi",
+          "phonetic": "sà-thǎa-nii yùu thîi nǎi",
           "components": [
             "w_sathannee",
+            "w_yuu",
             "w_thi_nai"
           ],
           "en": "where is the station?"
@@ -2535,17 +2558,6 @@
             "w_yai"
           ],
           "en": "big car"
-        },
-        {
-          "id": "p_small_house",
-          "th": "บ้านเล็ก",
-          "fr": "petite maison",
-          "phonetic": "bâan lék",
-          "components": [
-            "w_baan",
-            "w_lek"
-          ],
-          "en": "little house"
         }
       ],
       "titleEn": "Common Adjectives",
@@ -2775,6 +2787,17 @@
             "w_thi_nai"
           ],
           "en": "where do you sleep?"
+        },
+        {
+          "id": "p_small_house",
+          "th": "บ้านเล็ก",
+          "fr": "petite maison",
+          "phonetic": "bâan lék",
+          "components": [
+            "w_baan",
+            "w_lek"
+          ],
+          "en": "little house"
         }
       ],
       "titleEn": "Home & Daily",
@@ -8476,13 +8499,6 @@
       "title": "Mots d'interrogation",
       "description": "Pourquoi, qui",
       "words": [
-        {
-          "id": "w_thammai",
-          "th": "ทำไม",
-          "fr": "pourquoi ?",
-          "phonetic": "tham-mai",
-          "en": "Why ?"
-        },
         {
           "id": "w_khrai",
           "th": "ใคร",

@@ -332,7 +332,8 @@ function LessonPageContent() {
                         isSentence={currentExercise.type === 'sentence-builder'}
                         exerciseOptions={currentExercise.options as Word[]}
                         hideHints={currentExercise.hideHints}
-                        disableTooltips={currentExercise.blindMode}
+                        disableTooltips={currentExercise.disableTooltips || currentExercise.blindMode}
+                        hideColors={currentExercise.hideColors}
                         alwaysShowPhonetic={true}
                         answerTh={currentExercise.answer}
                         correctComponents={currentExercise.correctComponents}

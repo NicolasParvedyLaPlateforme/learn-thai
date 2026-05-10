@@ -76,13 +76,20 @@ export default function SentenceBuilder({ exercise, selected, onChange, disabled
               isCorrect = word === expectedWord;
             }
             
-            const textColorClass = isCorrect ? "text-emerald-600" : "text-rose-500";
+            const showColors = exercise.hideColors ? disabled : (exercise.blindMode ? disabled : true);
+            let textColorClass = "text-slate-700";
+            let borderColorClass = "border-slate-200";
+            if (showColors) {
+              textColorClass = isCorrect ? "text-emerald-600" : "text-rose-500";
+              borderColorClass = isCorrect ? "border-slate-200" : "border-rose-300";
+            }
+            
             return (
             <button
               key={`sel-${idx}`}
               onClick={() => handleRemove(idx)}
               disabled={disabled}
-              className={`bg-white text-center border-2 border-b-4 ${isCorrect ? 'border-slate-200' : 'border-rose-200'} rounded-xl font-medium ${textColorClass} shadow-sm transition-all hover:-translate-y-0.5 active:translate-y-0.5 active:border-b-2 font-thai px-2 sm:px-3 flex items-center justify-center min-w-[3rem] sm:min-w-[4rem] h-12 sm:h-16`}
+              className={`bg-white text-center border-2 border-b-4 rounded-xl font-medium ${textColorClass} ${borderColorClass} shadow-sm transition-all hover:-translate-y-0.5 active:translate-y-0.5 active:border-b-2 font-thai px-2 sm:px-3 flex items-center justify-center min-w-[3rem] sm:min-w-[4rem] h-12 sm:h-16`}
             >
               <span className="leading-none text-2xl sm:text-3xl">{word}</span>
             </button>
