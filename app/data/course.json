@@ -391,7 +391,7 @@
           "components": [
             "w_1"
           ],
-          "en": "A"
+          "en": "One"
         },
         {
           "id": "p_num_2",
@@ -881,7 +881,7 @@
           "th": "ที่ไหน",
           "fr": "où",
           "phonetic": "thîi nǎi",
-          "en": "Or"
+          "en": "Where"
         },
         {
           "id": "w_ka_ru_na",
@@ -1020,15 +1020,15 @@
         },
         {
           "id": "p_new_l5_3",
-          "th": "ไม่เข้าใจหน่อย",
-          "fr": "je ne comprends pas un peu",
-          "phonetic": "mâi khâo jai nɔ̀i",
+          "th": "ไม่ค่อยเข้าใจ",
+          "fr": "je ne comprends pas très bien",
+          "phonetic": "mâi khòi khâo jai",
           "components": [
             "w_mai_neg",
-            "w_khao_jai",
-            "w_noi"
+            "w_khoi",
+            "w_khao_jai"
           ],
-          "en": "I don't understand a bit"
+          "en": "I don't really understand"
         },
         {
           "id": "p_new_l5_4",
@@ -1465,7 +1465,7 @@
           "th": "แพง",
           "fr": "cher",
           "phonetic": "phaeng",
-          "en": "Dear"
+          "en": "expensive"
         },
         {
           "id": "w_lot",
@@ -1479,7 +1479,7 @@
           "th": "ได้",
           "fr": "pouvoir",
           "phonetic": "dâai",
-          "en": "power"
+          "en": "can"
         },
         {
           "id": "w_baht",
@@ -3007,7 +3007,7 @@
           "th": "เค็ม",
           "fr": "salé",
           "phonetic": "khem",
-          "en": "dirty"
+          "en": "salty"
         },
         {
           "id": "w_priao",
@@ -5290,7 +5290,7 @@
           "th": "ตลาด",
           "fr": "marché",
           "phonetic": "dtà-làat",
-          "en": "walk"
+          "en": "market"
         },
         {
           "id": "w_thanon",
@@ -7345,7 +7345,7 @@
         {
           "id": "p_new_lesson-49-a3_4",
           "th": "รถสวย",
-          "fr": "Belleรถรถ",
+          "fr": "Belle voiture",
           "en": "Beautiful car",
           "phonetic": "",
           "components": [
@@ -7598,7 +7598,7 @@
             "w_bin",
             "w_nong"
           ],
-          "en": "[Practical] steal / little brother / little sister"
+          "en": "[Practical] fly / little brother / little sister"
         },
         {
           "id": "p_auto_lesson-50_3",
@@ -8359,7 +8359,7 @@
             "w_trong",
             "w_mong"
           ],
-          "en": "[Practice] law / direct / time"
+          "en": "[Practice] straight / direct / time"
         },
         {
           "id": "p_auto_lesson-55_3",
