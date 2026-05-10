@@ -29,9 +29,7 @@ export default function AlphabetLessonPage() {
   
   const currentLevel = requestedLevelStr ? Math.max(0, parseInt(requestedLevelStr, 10) - 1) : savedLevel;
   
-  const [exercises, setExercises] = useState<AlphabetExercise[]>(() => {
-    return lesson ? generateAlphabetExercises(lesson, currentLevel, language) : [];
-  });
+  const [exercises, setExercises] = useState<AlphabetExercise[]>([]);
   
   const [currentIndex, setCurrentIndex] = useState(0);
   
@@ -46,11 +44,13 @@ export default function AlphabetLessonPage() {
 
   useEffect(() => {
     setIsClient(true);
-    if (!lesson || exercises.length === 0) {
+    if (!lesson) {
       router.push('/alphabet');
+      return;
     }
     preloadThaiVoices();
-  }, [lesson, exercises, router]);
+    setExercises((prev) => prev.length === 0 ? generateAlphabetExercises(lesson, currentLevel, language) : prev);
+  }, [lesson, router, currentLevel, language]);
 
   if (!isClient || !lesson || exercises.length === 0) return <div className="p-8 text-center">Loading...</div>;
 

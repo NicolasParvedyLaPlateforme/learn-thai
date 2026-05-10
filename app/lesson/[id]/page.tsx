@@ -37,10 +37,8 @@ export default function LessonPage() {
   // Use requested level if provided, otherwise the saved level
   const currentLevel = requestedLevelStr ? Math.max(0, parseInt(requestedLevelStr, 10) - 1) : savedLevel;
   
-  // We need to stabilize exercises generation since it shuffles.
-  const [exercises, setExercises] = useState<Exercise[]>(() => {
-    return lesson ? generateExercises(lesson, data.lessons, currentLevel, language) : [];
-  });
+  // We generate exercises only on the client inside useEffect to avoid hydration mismatched caused by Math.random().
+  const [exercises, setExercises] = useState<Exercise[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   
   // Interaction State
@@ -56,9 +54,11 @@ export default function LessonPage() {
     setIsClient(true);
     if (!lesson) {
       router.push('/learn');
+      return;
     }
     preloadThaiVoices();
-  }, [lesson, router]);
+    setExercises((prev) => prev.length === 0 ? generateExercises(lesson, data.lessons, currentLevel, language) : prev);
+  }, [lesson, router, currentLevel, language]);
 
   if (!isClient || !lesson || exercises.length === 0) return <div className="p-8 text-center">Chargement...</div>;
 
