@@ -17,7 +17,7 @@ const data = courseData as CourseData;
 
 export default function WritingPage() {
   const router = useRouter();
-  const { completedLessons, completeLesson, language } = useProgressStore();
+  const { completedLessons, completeLesson, language, _hasHydrated } = useProgressStore();
   
   const [exercises, setExercises] = useState<Exercise[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -29,6 +29,7 @@ export default function WritingPage() {
 
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
+    if (!_hasHydrated) return;
     let initialized = false;
     const timer = setTimeout(() => {
       setMounted(true);
@@ -39,7 +40,13 @@ export default function WritingPage() {
         let targetLessons = completedLessons;
         
         if (lessonId) {
-           targetLessons = [lessonId];
+           const isDev = params.has('dev');
+           const lessonIndex = data.lessons.findIndex(l => l.id === lessonId);
+           const isUnlocked = isDev || lessonIndex === 0 || (lessonIndex > 0 && completedLessons.includes(data.lessons[lessonIndex - 1].id));
+           
+           if (isUnlocked) {
+             targetLessons = [lessonId];
+           }
         }
         
         if (targetLessons.length > 0) {
@@ -49,7 +56,7 @@ export default function WritingPage() {
       }
     }, 0);
     return () => clearTimeout(timer);
-  }, [completedLessons, language]);
+  }, [completedLessons, language, _hasHydrated]);
 
   if (!mounted) return <div className="p-8 text-center text-slate-500 font-medium">{language === 'en' ? 'Loading...' : 'Chargement...'}</div>;
 

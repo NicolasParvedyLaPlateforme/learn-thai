@@ -26,17 +26,18 @@ function LessonPageContent() {
   const params = useParams();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { completeLesson, lessonLevels, language } = useProgressStore();
+  const { completeLesson, lessonLevels, language, completedLessons, _hasHydrated } = useProgressStore();
   
   const lessonId = params.id as string;
   const requestedLevelStr = searchParams.get('level');
+  const isDev = searchParams.has('dev');
   
   // Resolve lesson and exercises directly to avoid useEffect setState
   const lesson = data.lessons.find((l) => l.id === lessonId) || null;
   const savedLevel = lesson ? (lessonLevels[lesson.id] || 0) : 0;
   
   // Use requested level if provided, otherwise the saved level
-  const currentLevel = requestedLevelStr ? Math.max(0, parseInt(requestedLevelStr, 10) - 1) : savedLevel;
+  const currentLevel = requestedLevelStr ? (isDev ? Math.max(0, parseInt(requestedLevelStr, 10) - 1) : Math.min(savedLevel, Math.max(0, parseInt(requestedLevelStr, 10) - 1))) : savedLevel;
   
   // We generate exercises only on the client inside useEffect to avoid hydration mismatched caused by Math.random().
   const [exercises, setExercises] = useState<Exercise[]>([]);
@@ -53,15 +54,29 @@ function LessonPageContent() {
 
   useEffect(() => {
     setIsClient(true);
+    
+    // Ensure we don't start redirecting or generating if we haven't loaded local data
+    if (!_hasHydrated) return;
+
     if (!lesson) {
       router.push('/learn');
       return;
     }
+    
+    const isDevLocal = new URLSearchParams(window.location.search).has('dev');
+    const lessonIndex = data.lessons.findIndex((l) => l.id === lesson.id);
+    const isUnlocked = isDevLocal || lessonIndex === 0 || (lessonIndex > 0 && completedLessons.includes(data.lessons[lessonIndex - 1].id));
+    
+    if (!isUnlocked) {
+      router.push('/learn');
+      return;
+    }
+
     preloadThaiVoices();
     setExercises((prev) => prev.length === 0 ? generateExercises(lesson, data.lessons, currentLevel, language) : prev);
-  }, [lesson, router, currentLevel, language]);
+  }, [lesson, router, currentLevel, language, completedLessons, _hasHydrated]);
 
-  if (!isClient || !lesson || exercises.length === 0) return <div className="p-8 text-center">Chargement...</div>;
+  if (!isClient || !_hasHydrated || !lesson || exercises.length === 0) return <div className="p-8 text-center">Chargement...</div>;
 
   const currentExercise = exercises[currentIndex];
   const progress = (currentIndex / exercises.length) * 100;

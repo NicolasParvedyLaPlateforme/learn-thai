@@ -32,11 +32,13 @@ const safeStorage = {
 };
 
 interface ProgressState {
+  _hasHydrated: boolean;
   language: AppLanguage;
   completedLessons: string[];
   lessonLevels: Record<string, number>;
   xp: number;
   seenAlphabets: string[]; // Keep track of seen alphabet letters
+  setHasHydrated: (state: boolean) => void;
   setLanguage: (lang: AppLanguage) => void;
   completeLesson: (lessonId: string, earnedXp: number, playedLevel?: number) => void;
   resetProgress: () => void;
@@ -47,6 +49,8 @@ interface ProgressState {
 export const useProgressStore = create<ProgressState>()(
   persist(
     (set) => ({
+      _hasHydrated: false,
+      setHasHydrated: (state) => set({ _hasHydrated: state }),
       language: 'fr',
       completedLessons: [],
       lessonLevels: {},
@@ -93,6 +97,9 @@ export const useProgressStore = create<ProgressState>()(
     {
       name: 'thai-learning-progress',
       storage: createJSONStorage(() => safeStorage),
+      onRehydrateStorage: () => (state) => {
+        state?.setHasHydrated(true);
+      }
     }
   )
 );

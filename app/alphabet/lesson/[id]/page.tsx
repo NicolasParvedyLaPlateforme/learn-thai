@@ -17,10 +17,11 @@ function AlphabetLessonContent() {
   const params = useParams();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { completeLesson, lessonLevels, language, seenAlphabets, markAlphabetSeen } = useProgressStore();
+  const { completeLesson, lessonLevels, language, seenAlphabets, markAlphabetSeen, completedLessons, _hasHydrated } = useProgressStore();
   
   const lessonId = params.id as string;
   const requestedLevelStr = searchParams.get('level');
+  const isDev = searchParams.has('dev');
   
   // Resolve lesson
   const { consonants, vowels } = getAlphabetLessons();
@@ -28,7 +29,7 @@ function AlphabetLessonContent() {
   const lesson = allLessons.find(l => l.id === lessonId);
   const savedLevel = lesson ? (lessonLevels[lesson.id] || 0) : 0;
   
-  const currentLevel = requestedLevelStr ? Math.max(0, parseInt(requestedLevelStr, 10) - 1) : savedLevel;
+  const currentLevel = requestedLevelStr ? (isDev ? Math.max(0, parseInt(requestedLevelStr, 10) - 1) : Math.min(savedLevel, Math.max(0, parseInt(requestedLevelStr, 10) - 1))) : savedLevel;
   
   const [exercises, setExercises] = useState<AlphabetExercise[]>([]);
   
@@ -45,15 +46,35 @@ function AlphabetLessonContent() {
 
   useEffect(() => {
     setIsClient(true);
+    
+    if (!_hasHydrated) return;
+
     if (!lesson) {
       router.push('/alphabet');
       return;
     }
+
+    const { consonants, vowels } = getAlphabetLessons();
+    let unitLessons = consonants;
+    let lessonIndex = consonants.findIndex(l => l.id === lesson.id);
+    if (lessonIndex === -1) {
+      unitLessons = vowels;
+      lessonIndex = vowels.findIndex(l => l.id === lesson.id);
+    }
+    
+    const isDevLocal = new URLSearchParams(window.location.search).has('dev');
+    const isUnlocked = isDevLocal || lessonIndex === 0 || (lessonIndex > 0 && completedLessons.includes(unitLessons[lessonIndex - 1].id));
+    
+    if (!isUnlocked) {
+      router.push('/alphabet');
+      return;
+    }
+
     preloadThaiVoices();
     setExercises((prev) => prev.length === 0 ? generateAlphabetExercises(lesson, currentLevel, language) : prev);
-  }, [lesson, router, currentLevel, language]);
+  }, [lesson, router, currentLevel, language, completedLessons, _hasHydrated]);
 
-  if (!isClient || !lesson || exercises.length === 0) return <div className="p-8 text-center">Loading...</div>;
+  if (!isClient || !_hasHydrated || !lesson || exercises.length === 0) return <div className="p-8 text-center">Loading...</div>;
 
   const currentExercise = exercises[currentIndex];
   const progress = (currentIndex / exercises.length) * 100;
