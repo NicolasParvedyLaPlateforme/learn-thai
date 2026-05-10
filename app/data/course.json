@@ -1215,6 +1215,13 @@
           "id": "w_khong_of",
           "fr": "de (appartenance)",
           "phonetic": "khǒng"
+        },
+        {
+          "id": "w_jai_dee",
+          "th": "ใจดี",
+          "fr": "gentil",
+          "phonetic": "jai dii",
+          "en": "kind"
         }
       ],
       "phrases": [
@@ -2027,6 +2034,13 @@
           "fr": "être (situé) / rester",
           "phonetic": "yùu",
           "en": "to be (located) / to stay"
+        },
+        {
+          "id": "w_lesson-39-a4_1",
+          "th": "รถไฟ",
+          "fr": "train",
+          "en": "train",
+          "phonetic": "rót-fai"
         }
       ],
       "phrases": [
@@ -2150,6 +2164,13 @@
           "id": "w_nii_this",
           "fr": "ce / cette",
           "phonetic": "níi"
+        },
+        {
+          "id": "w_lesson-34-a3_0",
+          "th": "วันนี้",
+          "fr": "aujourd'hui",
+          "en": "today",
+          "phonetic": "wan-níi"
         }
       ],
       "phrases": [
@@ -5293,13 +5314,6 @@
       "descriptionEn": "More vocabulary for this unit.",
       "words": [
         {
-          "id": "w_lesson-34-a3_0",
-          "th": "วันนี้",
-          "fr": "aujourd'hui",
-          "en": "today",
-          "phonetic": "wan-níi"
-        },
-        {
           "id": "w_lesson-34-a3_1",
           "th": "พรุ่งนี้",
           "fr": "demain",
@@ -6170,13 +6184,6 @@
           "fr": "carte",
           "en": "map",
           "phonetic": "phǎen-thîi"
-        },
-        {
-          "id": "w_lesson-39-a4_1",
-          "th": "รถไฟ",
-          "fr": "train",
-          "en": "train",
-          "phonetic": "rót-fai"
         },
         {
           "th": "ใบ",
@@ -7556,13 +7563,6 @@
       "title": "Caractère",
       "description": "Gentil, amusant",
       "words": [
-        {
-          "id": "w_jai_dee",
-          "th": "ใจดี",
-          "fr": "gentil",
-          "phonetic": "jai dii",
-          "en": "kind"
-        },
         {
           "id": "w_sanuk",
           "th": "สนุก",
