@@ -26,7 +26,7 @@ function LessonPageContent() {
   const params = useParams();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { completeLesson, lessonLevels, language, completedLessons, _hasHydrated } = useProgressStore();
+  const { completeLesson, lessonLevels, language, completedLessons, unlockedLessons, _hasHydrated } = useProgressStore();
   
   const lessonId = params.id as string;
   const requestedLevelStr = searchParams.get('level');
@@ -65,7 +65,7 @@ function LessonPageContent() {
     
     const isDevLocal = new URLSearchParams(window.location.search).has('dev');
     const lessonIndex = data.lessons.findIndex((l) => l.id === lesson.id);
-    const isUnlocked = isDevLocal || lessonIndex === 0 || (lessonIndex > 0 && completedLessons.includes(data.lessons[lessonIndex - 1].id));
+    const isUnlocked = isDevLocal || lessonIndex === 0 || (lessonIndex > 0 && completedLessons.includes(data.lessons[lessonIndex - 1].id)) || unlockedLessons?.includes(lessonId);
     
     if (!isUnlocked) {
       router.push('/learn');

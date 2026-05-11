@@ -17,7 +17,7 @@ function AlphabetLessonContent() {
   const params = useParams();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { completeLesson, lessonLevels, language, seenAlphabets, markAlphabetSeen, completedLessons, _hasHydrated } = useProgressStore();
+  const { completeLesson, lessonLevels, language, seenAlphabets, markAlphabetSeen, completedLessons, unlockedLessons, _hasHydrated } = useProgressStore();
   
   const lessonId = params.id as string;
   const requestedLevelStr = searchParams.get('level');
@@ -63,7 +63,7 @@ function AlphabetLessonContent() {
     }
     
     const isDevLocal = new URLSearchParams(window.location.search).has('dev');
-    const isUnlocked = isDevLocal || lessonIndex === 0 || (lessonIndex > 0 && completedLessons.includes(unitLessons[lessonIndex - 1].id));
+    const isUnlocked = isDevLocal || lessonIndex === 0 || (lessonIndex > 0 && completedLessons.includes(unitLessons[lessonIndex - 1].id)) || unlockedLessons?.includes(lessonId);
     
     if (!isUnlocked) {
       router.push('/alphabet');

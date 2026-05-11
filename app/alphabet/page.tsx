@@ -5,13 +5,14 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useProgressStore } from '../lib/store';
 import { getAlphabetLessons, AlphabetLessonDef } from '../lib/alphabet-utils';
-import { BookOpen, CheckCircle, Star, Play, Crown, X } from 'lucide-react';
+import { BookOpen, CheckCircle, Star, Play, Crown, X, Unlock } from 'lucide-react';
 
 export default function AlphabetMenuPage() {
   const router = useRouter();
-  const { completedLessons, lessonLevels, xp, resetLessonLevel, language } = useProgressStore();
+  const { completedLessons, unlockedLessons, lessonLevels, xp, resetLessonLevel, unlockLessonManual, language } = useProgressStore();
   const [mounted, setMounted] = useState(false);
   const [selectedLesson, setSelectedLesson] = useState<{lesson: AlphabetLessonDef, isCompleted: boolean, unitColor: string, unitBorder: string} | null>(null);
+  const [lessonToUnlock, setLessonToUnlock] = useState<{lesson: AlphabetLessonDef, unitColor: string, unitBorder: string} | null>(null);
   const [modalLevel, setModalLevel] = useState(0);
   const [cols, setCols] = useState(5);
 
@@ -123,7 +124,7 @@ export default function AlphabetMenuPage() {
                           
                           // Unlock if it's the very first alphabet lesson in this unit, or previous is complete
                           const prevLessonInUnit = itemIndex > 0 ? unitLessons[itemIndex - 1] : null;
-                          const isUnlocked = itemIndex === 0 || (mounted && prevLessonInUnit && completedLessons.includes(prevLessonInUnit.id));
+                          const isUnlocked = itemIndex === 0 || (mounted && prevLessonInUnit && completedLessons.includes(prevLessonInUnit.id)) || (mounted && unlockedLessons?.includes(lesson.id));
                           
                           const isLastOverall = itemIndex === unitLessons.length - 1;
                           const isLastInRow = indexInRow === row.length - 1;
@@ -133,7 +134,7 @@ export default function AlphabetMenuPage() {
                           const pathDown = !isLastOverall && isLastInRow;
 
                           const nextLesson = !isLastOverall ? unitLessons[itemIndex + 1] : null;
-                          const nextUnlocked = nextLesson && (mounted && completedLessons.includes(nextLesson.id));
+                          const nextUnlocked = nextLesson && (mounted && (completedLessons.includes(nextLesson.id) || unlockedLessons?.includes(nextLesson.id)));
                           
                           const pathColorClass = (isUnlocked && nextUnlocked) ? unit.colorClass : "bg-slate-200";
 
@@ -154,13 +155,15 @@ export default function AlphabetMenuPage() {
                               <div className="relative group/lesson flex justify-center w-full">
                                 <button 
                                   onClick={(e) => {
+                                    e.preventDefault();
                                     if (isUnlocked) {
-                                      e.preventDefault();
                                       setSelectedLesson({lesson, isCompleted, unitColor: unit.colorClass, unitBorder: unit.borderClass});
                                       setModalLevel(Math.min(lessonLevels[lesson.id] || 0, 1)); // Max level 2 for alphabet
+                                    } else {
+                                      setLessonToUnlock({lesson, unitColor: unit.colorClass, unitBorder: unit.borderClass});
                                     }
                                   }}
-                                  className="group flex flex-col items-center relative z-10"
+                                  className="group flex flex-col items-center relative z-10 cursor-pointer"
                                 >
                                   
                                   <div className="absolute -top-16 opacity-0 group-hover:opacity-100 transition-opacity bg-white px-4 py-3 rounded-2xl shadow-xl border-2 border-slate-200 whitespace-nowrap z-50 pointer-events-none">
@@ -182,7 +185,7 @@ export default function AlphabetMenuPage() {
                                           ? unit.shades.l2
                                             : isUnlocked 
                                               ? `bg-white border-2 border-slate-200 ${unit.textClass} hover:bg-slate-50 active:translate-y-1 active:border-b-2` 
-                                              : 'bg-slate-100 border-2 border-slate-200 text-slate-300 shadow-none pointer-events-none cursor-not-allowed'}`
+                                              : 'bg-slate-100 border-2 border-slate-200 text-slate-300 shadow-none hover:bg-slate-200 active:translate-y-1 active:border-b-2'}`
                                     }>
                                       {level >= 2 ? <Crown size={40} className="stroke-current stroke-[2.5]" fill="currentColor" /> :
                                       level > 0 ? <CheckCircle size={40} className="stroke-current stroke-[2.5]" /> : lesson.items[0]?.letter}
@@ -292,6 +295,78 @@ export default function AlphabetMenuPage() {
                   <Play size={20} className="mr-2 fill-current" />
                   {language === 'en' ? `Start level ${modalLevel + 1}` : `Démarrer le niveau ${modalLevel + 1}`}
                 </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Unlock Lesson Modal */}
+      {lessonToUnlock && (
+        <div 
+          className="fixed inset-0 z-[100] flex items-end md:items-center justify-center bg-slate-900/40 backdrop-blur-sm p-0 md:p-4 transition-all"
+          onClick={() => setLessonToUnlock(null)}
+        >
+          <div 
+            className="w-full md:max-w-md bg-white rounded-t-3xl md:rounded-3xl shadow-2xl overflow-hidden flex flex-col mb-0 md:mb-12 animate-in slide-in-from-bottom-full duration-300 relative border-t-8 border-slate-200"
+            style={{ borderTopColor: 'var(--tw-colors-slate-400)' }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className={`p-6 bg-slate-100 flex justify-between items-start text-slate-800`}>
+              <div>
+                <p className="font-bold text-slate-500 uppercase tracking-widest text-sm mb-1">
+                  {language === 'en' ? 'Lesson Locked' : 'Leçon Verrouillée'}
+                </p>
+                <h3 className="text-2xl font-extrabold flex items-center gap-2">
+                  {language === 'en' ? lessonToUnlock.lesson.titleEn : lessonToUnlock.lesson.title}
+                </h3>
+              </div>
+              <button 
+                onClick={() => setLessonToUnlock(null)} 
+                className="bg-slate-200 hover:bg-slate-300 text-slate-600 rounded-full p-2 transition-colors -mr-2 -mt-2"
+              >
+                <X size={20} />
+              </button>
+            </div>
+
+            <div className="p-6 text-center">
+              <div className="mx-auto w-16 h-16 bg-slate-100 text-slate-400 flex items-center justify-center rounded-2xl mb-4 text-3xl font-thai font-bold">
+                {lessonToUnlock.lesson.items[0]?.letter}
+              </div>
+              <h4 className="text-xl font-bold text-slate-800 mb-2">
+                {language === 'en' ? 'Unlock this level?' : 'Débloquer ce niveau ?'}
+              </h4>
+              <p className="text-slate-500 font-medium mb-8">
+                {language === 'en' 
+                  ? 'You can manually unlock this level. You will be able to play level 1, and you will need to complete it to access the next levels.' 
+                  : 'Vous pouvez débloquer manuellement ce niveau. Vous aurez accès au niveau 1 et vous devrez le terminer pour accéder aux suivants.'}
+              </p>
+
+              <div className="flex flex-col gap-3">
+                <button
+                  onClick={() => {
+                    unlockLessonManual(lessonToUnlock.lesson.id);
+                    setLessonToUnlock(null);
+                    // Also immediately select it to open the play menu
+                    setSelectedLesson({
+                      lesson: lessonToUnlock.lesson, 
+                      isCompleted: false, 
+                      unitColor: lessonToUnlock.unitColor, 
+                      unitBorder: lessonToUnlock.unitBorder
+                    });
+                    setModalLevel(0);
+                  }}
+                  className={`w-full py-4 rounded-xl border-b-4 font-bold text-lg text-white shadow-lg flex items-center justify-center hover:opacity-90 active:translate-y-1 transition-all ${lessonToUnlock.unitColor} ${lessonToUnlock.unitBorder}`}
+                >
+                  <Unlock size={20} className="mr-2" />
+                  {language === 'en' ? 'Yes, unlock it' : 'Oui, débloquer'}
+                </button>
+                <button
+                  onClick={() => setLessonToUnlock(null)}
+                  className="w-full py-4 rounded-xl bg-slate-100 text-slate-500 font-bold flex items-center justify-center hover:bg-slate-200 transition-colors"
+                >
+                  {language === 'en' ? 'Cancel' : 'Annuler'}
+                </button>
               </div>
             </div>
           </div>

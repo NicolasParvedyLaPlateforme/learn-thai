@@ -17,7 +17,7 @@ const data = courseData as CourseData;
 
 export default function WritingPage() {
   const router = useRouter();
-  const { completedLessons, completeLesson, language, _hasHydrated } = useProgressStore();
+  const { completedLessons, unlockedLessons, completeLesson, language, _hasHydrated } = useProgressStore();
   
   const [exercises, setExercises] = useState<Exercise[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -42,7 +42,7 @@ export default function WritingPage() {
         if (lessonId) {
            const isDev = params.has('dev');
            const lessonIndex = data.lessons.findIndex(l => l.id === lessonId);
-           const isUnlocked = isDev || lessonIndex === 0 || (lessonIndex > 0 && completedLessons.includes(data.lessons[lessonIndex - 1].id));
+           const isUnlocked = isDev || lessonIndex === 0 || (lessonIndex > 0 && completedLessons.includes(data.lessons[lessonIndex - 1].id)) || unlockedLessons?.includes(lessonId);
            
            if (isUnlocked) {
              targetLessons = [lessonId];

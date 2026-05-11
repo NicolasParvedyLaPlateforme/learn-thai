@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useProgressStore } from '../lib/store';
 import courseData from '../data/course.json';
-import { BookOpen, CheckCircle, Star, Play, Crown, RotateCcw, Pencil, X } from 'lucide-react';
+import { BookOpen, CheckCircle, Star, Play, Crown, RotateCcw, Pencil, X, Unlock } from 'lucide-react';
 import { CourseData, Lesson } from '../types';
 
 const data = courseData as CourseData;
@@ -115,9 +115,10 @@ const UNITS = [
 
 export default function Home() {
   const router = useRouter();
-  const { completedLessons, lessonLevels, xp, resetLessonLevel, language, setLanguage } = useProgressStore();
+  const { completedLessons, unlockedLessons, lessonLevels, xp, resetLessonLevel, language, setLanguage, unlockLessonManual } = useProgressStore();
   const [mounted, setMounted] = useState(false);
   const [selectedLesson, setSelectedLesson] = useState<{lesson: Lesson, isCompleted: boolean, unitColor: string, unitBorder: string} | null>(null);
+  const [lessonToUnlock, setLessonToUnlock] = useState<{lesson: Lesson, unitColor: string, unitBorder: string} | null>(null);
   const [modalLevel, setModalLevel] = useState(0);
   const [cols, setCols] = useState(5);
 
@@ -230,7 +231,7 @@ export default function Home() {
                           const globalIndex = unit.startIndex + itemIndex;
                           const isCompleted = mounted ? completedLessons.includes(lesson.id) : false;
                           const level = mounted ? (lessonLevels[lesson.id] || 0) : 0;
-                          const isUnlocked = globalIndex === 0 || (mounted && completedLessons.includes(data.lessons[globalIndex - 1].id));
+                          const isUnlocked = globalIndex === 0 || (mounted && (completedLessons.includes(data.lessons[globalIndex - 1].id) || unlockedLessons?.includes(lesson.id)));
                           
                           const isLastOverall = itemIndex === unitLessons.length - 1;
                           const isLastInRow = indexInRow === row.length - 1;
@@ -240,7 +241,7 @@ export default function Home() {
                           const pathDown = !isLastOverall && isLastInRow;
 
                           const nextGlobalIndex = globalIndex + 1;
-                          const nextUnlocked = nextGlobalIndex < data.lessons.length && (mounted && completedLessons.includes(data.lessons[nextGlobalIndex - 1].id));
+                          const nextUnlocked = nextGlobalIndex < data.lessons.length && (mounted && (completedLessons.includes(data.lessons[nextGlobalIndex - 1].id) || unlockedLessons?.includes(data.lessons[nextGlobalIndex].id)));
                           
                           const pathColorClass = (isUnlocked && nextUnlocked) ? unit.colorClass : "bg-slate-200";
 
@@ -261,13 +262,15 @@ export default function Home() {
                               <div className="relative group/lesson flex justify-center w-full">
                                 <button 
                                   onClick={(e) => {
+                                    e.preventDefault();
                                     if (isUnlocked) {
-                                      e.preventDefault();
                                       setSelectedLesson({lesson, isCompleted, unitColor: unit.colorClass, unitBorder: unit.borderClass});
                                       setModalLevel(Math.min(lessonLevels[lesson.id] || 0, 8));
+                                    } else {
+                                      setLessonToUnlock({lesson, unitColor: unit.colorClass, unitBorder: unit.borderClass});
                                     }
                                   }}
-                                  className="group flex flex-col items-center relative z-10"
+                                  className="group flex flex-col items-center relative z-10 cursor-pointer"
                                 >
                                   
                                   {/* Tooltip on hover */}
@@ -295,7 +298,7 @@ export default function Home() {
                                               ? unit.shades.l1
                                               : isUnlocked 
                                                 ? `bg-white border-2 border-slate-200 ${unit.textClass} hover:bg-slate-50 active:translate-y-1 active:border-b-2` 
-                                                : 'bg-slate-100 border-2 border-slate-200 text-slate-300 shadow-none pointer-events-none cursor-not-allowed'}`
+                                                : 'bg-slate-100 border-2 border-slate-200 text-slate-300 shadow-none hover:bg-slate-200 active:translate-y-1 active:border-b-2'}`
                                     }>
                                       {lesson.isReview ? (
                                         <Star size={40} className={level > 0 || isUnlocked ? `fill-current stroke-current` : `stroke-slate-300 stroke-[2.5]`} />
@@ -435,6 +438,80 @@ export default function Home() {
                     </button>
                   </div>
                 )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Unlock Lesson Modal */}
+      {lessonToUnlock && (
+        <div 
+          className="fixed inset-0 z-[100] flex items-end md:items-center justify-center bg-slate-900/40 backdrop-blur-sm p-0 md:p-4 transition-all"
+          onClick={() => setLessonToUnlock(null)}
+        >
+          <div 
+            className="w-full md:max-w-md bg-white rounded-t-3xl md:rounded-3xl shadow-2xl overflow-hidden flex flex-col mb-0 md:mb-12 animate-in slide-in-from-bottom-full duration-300 relative border-t-8 border-slate-200"
+            style={{ borderTopColor: 'var(--tw-colors-slate-400)' }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className={`p-6 bg-slate-100 flex justify-between items-start text-slate-800`}>
+              <div>
+                <p className="font-bold text-slate-500 uppercase tracking-widest text-sm mb-1">
+                  {lessonToUnlock.lesson.isReview 
+                    ? (language === 'en' ? 'Review Test' : 'Test Bilan') 
+                    : (language === 'en' ? 'Lesson Locked' : 'Leçon Verrouillée')}
+                </p>
+                <h3 className="text-2xl font-extrabold">
+                  {language === 'en' ? (lessonToUnlock.lesson.titleEn || lessonToUnlock.lesson.title) : lessonToUnlock.lesson.title}
+                </h3>
+              </div>
+              <button 
+                onClick={() => setLessonToUnlock(null)} 
+                className="bg-slate-200 hover:bg-slate-300 text-slate-600 rounded-full p-2 transition-colors -mr-2 -mt-2"
+              >
+                <X size={20} />
+              </button>
+            </div>
+
+            <div className="p-6 text-center">
+              <div className="mx-auto w-16 h-16 bg-slate-100 text-slate-400 flex items-center justify-center rounded-2xl mb-4">
+                <BookOpen size={32} />
+              </div>
+              <h4 className="text-xl font-bold text-slate-800 mb-2">
+                {language === 'en' ? 'Unlock this level?' : 'Débloquer ce niveau ?'}
+              </h4>
+              <p className="text-slate-500 font-medium mb-8">
+                {language === 'en' 
+                  ? 'You can manually unlock this level. You will be able to play level 1, and you will need to complete it to access the next levels.' 
+                  : 'Vous pouvez débloquer manuellement ce niveau. Vous aurez accès au niveau 1 et vous devrez le terminer pour accéder aux suivants.'}
+              </p>
+
+              <div className="flex flex-col gap-3">
+                <button
+                  onClick={() => {
+                    unlockLessonManual(lessonToUnlock.lesson.id);
+                    setLessonToUnlock(null);
+                    // Also immediately select it to open the play menu
+                    setSelectedLesson({
+                      lesson: lessonToUnlock.lesson, 
+                      isCompleted: false, 
+                      unitColor: lessonToUnlock.unitColor, 
+                      unitBorder: lessonToUnlock.unitBorder
+                    });
+                    setModalLevel(0);
+                  }}
+                  className={`w-full py-4 rounded-xl border-b-4 font-bold text-lg text-white shadow-lg flex items-center justify-center hover:opacity-90 active:translate-y-1 transition-all ${lessonToUnlock.unitColor} ${lessonToUnlock.unitBorder}`}
+                >
+                  <Unlock size={20} className="mr-2" />
+                  {language === 'en' ? 'Yes, unlock it' : 'Oui, débloquer'}
+                </button>
+                <button
+                  onClick={() => setLessonToUnlock(null)}
+                  className="w-full py-4 rounded-xl bg-slate-100 text-slate-500 font-bold flex items-center justify-center hover:bg-slate-200 transition-colors"
+                >
+                  {language === 'en' ? 'Cancel' : 'Annuler'}
+                </button>
               </div>
             </div>
           </div>
