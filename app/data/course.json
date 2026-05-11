@@ -2022,7 +2022,7 @@
           "en": "to be (located) / to stay"
         },
         {
-          "id": "w_lesson-39-a4_1",
+          "id": "w_rot_fai",
           "th": "รถไฟ",
           "fr": "train",
           "en": "train",
@@ -2037,7 +2037,7 @@
           "phonetic": "sà-thǎa-nii rót fai",
           "components": [
             "w_sathannee",
-            "w_lesson-39-a4_1"
+            "w_rot_fai"
           ],
           "en": "train station (train station)"
         },
@@ -2069,7 +2069,7 @@
           "fr": "le train est bien",
           "phonetic": "rót fai dii",
           "components": [
-            "w_lesson-39-a4_1",
+            "w_rot_fai",
             "w_dee"
           ],
           "en": "the train is good"
@@ -2101,13 +2101,6 @@
           "fr": "jour",
           "phonetic": "wan",
           "en": "day"
-        },
-        {
-          "id": "w_nee",
-          "th": "นี้",
-          "fr": "ce / ceci",
-          "phonetic": "nee",
-          "en": "this/this"
         },
         {
           "id": "w_phrung",
@@ -2152,7 +2145,7 @@
           "phonetic": "níi"
         },
         {
-          "id": "w_lesson-34-a3_0",
+          "id": "w_wan_nii",
           "th": "วันนี้",
           "fr": "aujourd'hui",
           "en": "today",
@@ -2166,7 +2159,7 @@
           "fr": "aujourd'hui",
           "phonetic": "wan níi",
           "components": [
-            "w_lesson-34-a3_0"
+            "w_wan_nii"
           ],
           "en": "Today"
         },
@@ -2361,10 +2354,10 @@
           "en": "yes / correct"
         },
         {
-          "id": "w_mai_question",
+          "id": "w_mai_chai",
           "th": "ไม่ใช่",
           "fr": "non / ce n'est pas",
-          "phonetic": "mǎi châi",
+          "phonetic": "mâi châi",
           "en": "no / it's not"
         },
         {
@@ -2373,13 +2366,6 @@
           "fr": "un peu",
           "phonetic": "nít nòi",
           "en": "A little"
-        },
-        {
-          "id": "w_pood",
-          "th": "พูด",
-          "fr": "parler",
-          "phonetic": "phûut",
-          "en": "talk"
         }
       ],
       "phrases": [
@@ -2421,9 +2407,9 @@
           "id": "p_no_m",
           "th": "ไม่ใช่ครับ",
           "fr": "non (homme)",
-          "phonetic": "mǎi châi khráp",
+          "phonetic": "mâi châi khráp",
           "components": [
-            "w_mai_question",
+            "w_mai_chai",
             "w_krap"
           ],
           "en": "no (man)"
@@ -2432,9 +2418,9 @@
           "id": "p_no_f",
           "th": "ไม่ใช่ค่ะ",
           "fr": "non (femme)",
-          "phonetic": "mǎi châi khâ",
+          "phonetic": "mâi châi khâ",
           "components": [
-            "w_mai_question",
+            "w_mai_chai",
             "w_kha"
           ],
           "en": "no (woman)"
@@ -2522,7 +2508,7 @@
           "id": "p_go_hospital",
           "th": "ไปโรงพยาบาล",
           "fr": "aller à l'hôpital",
-          "phonetic": "bpai rong pha-ya-ban",
+          "phonetic": "bpai roong phá-yaa-baan",
           "components": [
             "w_pai",
             "w_rong_phayaban"
@@ -2619,7 +2605,7 @@
           "id": "p_not_big",
           "th": "ไม่ใหญ่",
           "fr": "ce n'est pas grand",
-          "phonetic": "mǎi yài",
+          "phonetic": "mâi yài",
           "components": [
             "w_mai_neg",
             "w_yai"
@@ -2741,7 +2727,7 @@
           "en": "what color?"
         },
         {
-          "id": "p_white_shirt",
+          "id": "p_color_white",
           "th": "สีขาว",
           "fr": "couleur blanche",
           "phonetic": "sìi khâao",
@@ -2811,13 +2797,6 @@
           "fr": "toilettes / salle de bain",
           "phonetic": "hɔ̂ng náam",
           "en": "toilet / bathroom"
-        },
-        {
-          "id": "w_yu",
-          "th": "อยู่",
-          "fr": "être (situé) / se trouver",
-          "phonetic": "yùu",
-          "en": "to be (located)"
         }
       ],
       "phrases": [
@@ -5329,7 +5308,7 @@
           "en": "Today is hot",
           "phonetic": "",
           "components": [
-            "w_lesson-34-a3_0",
+            "w_wan_nii",
             "w_ron"
           ]
         },
@@ -5362,7 +5341,7 @@
           "en": "What to eat today?",
           "phonetic": "",
           "components": [
-            "w_lesson-34-a3_0",
+            "w_wan_nii",
             "w_kin",
             "w_arai"
           ]
@@ -6206,7 +6185,7 @@
           "phonetic": "",
           "components": [
             "w_sathannee",
-            "w_lesson-39-a4_1"
+            "w_rot_fai"
           ]
         },
         {
@@ -6287,7 +6266,7 @@
           "th": "ขับรถ",
           "fr": "Conduire",
           "en": "Drive a car",
-          "phonetic": "",
+          "phonetic": "khàp rót",
           "components": [
             "w_khap",
             "w_rot"
@@ -6301,7 +6280,7 @@
           "phonetic": "",
           "components": [
             "w_khuen_up",
-            "w_lesson-39-a4_1"
+            "w_rot_fai"
           ]
         },
         {
@@ -6333,7 +6312,7 @@
           "en": "Train is slow",
           "phonetic": "",
           "components": [
-            "w_lesson-39-a4_1",
+            "w_rot_fai",
             "w_cha_slow"
           ]
         }
