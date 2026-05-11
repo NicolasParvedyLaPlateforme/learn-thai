@@ -53,62 +53,6 @@
           "fr": "est-ce que (question)",
           "phonetic": "mǎi",
           "en": "does (question)"
-        },
-        {
-          "id": "w_kho_req",
-          "th": "ขอ",
-          "fr": "je voudrais/demander",
-          "en": "request/would like",
-          "phonetic": "khǒo"
-        },
-        {
-          "id": "w_gamlang",
-          "th": "กำลัง",
-          "fr": "en train de",
-          "en": "in the process of",
-          "phonetic": "kam-lang"
-        },
-        {
-          "id": "w_ha",
-          "th": "หา",
-          "fr": "chercher",
-          "en": "look for",
-          "phonetic": "hǎa"
-        },
-        {
-          "id": "w_nai",
-          "th": "ใน",
-          "fr": "dans",
-          "en": "in",
-          "phonetic": "nai"
-        },
-        {
-          "id": "w_thi_ni",
-          "th": "ที่นี่",
-          "fr": "ici",
-          "en": "here",
-          "phonetic": "thîi-nîi"
-        },
-        {
-          "id": "w_nan",
-          "th": "นั้น",
-          "fr": "ce/cette (là)",
-          "en": "that",
-          "phonetic": "nán"
-        },
-        {
-          "id": "w_phak_kon",
-          "th": "พักก่อน",
-          "fr": "reposer (d'abord)",
-          "en": "rest first",
-          "phonetic": "phák gɔ̀ɔn"
-        },
-        {
-          "th": "ใจ",
-          "en": "heart",
-          "id": "w_jai",
-          "fr": "cœur",
-          "phonetic": "jai"
         }
       ],
       "phrases": [
@@ -737,6 +681,13 @@
           "phonetic": "mâak",
           "en": "very/a lot"
         },
+         {
+          "id": "w_kho_req",
+          "th": "ขอ",
+          "fr": "je voudrais/demander",
+          "en": "request/would like",
+          "phonetic": "khǒo"
+        },
         {
           "id": "w_phet",
           "th": "เผ็ด",
@@ -764,13 +715,6 @@
           "fr": "poulet",
           "phonetic": "kài",
           "en": "chicken"
-        },
-        {
-          "id": "w_khai",
-          "th": "ไข่",
-          "fr": "oeuf",
-          "phonetic": "khài",
-          "en": "egg"
         },
         {
           "id": "w_mu",
@@ -940,11 +884,11 @@
           "en": "sorry / sorry"
         },
         {
-          "id": "w_thi_nai",
-          "th": "ที่ไหน",
-          "fr": "où",
-          "phonetic": "thîi nǎi",
-          "en": "Where"
+          "id": "w_thi_ni",
+          "th": "ที่นี่",
+          "fr": "ici",
+          "en": "here",
+          "phonetic": "thîi-nîi"
         },
         {
           "id": "w_ka_ru_na",
@@ -985,8 +929,15 @@
           "id": "w_khoi",
           "th": "ค่อย",
           "fr": "très / vraiment",
-          "phonetic": "khòi",
+          "phonetic": "khôi",
           "en": "really / quite"
+        },
+        {
+          "id": "w_nai",
+          "th": "ใน",
+          "fr": "dans",
+          "en": "in",
+          "phonetic": "nai"
         },
         {
           "th": "ที่ไหน",
@@ -1001,7 +952,7 @@
           "id": "p_understand_q",
           "th": "เข้าใจไหม",
           "fr": "comprenez-vous ?",
-          "phonetic": "khâao jai mǎi",
+          "phonetic": "khâo jai mǎi",
           "components": [
             "w_khao_jai",
             "w_mai"
@@ -1012,7 +963,7 @@
           "id": "p_not_understand",
           "th": "ไม่เข้าใจ",
           "fr": "je ne comprends pas",
-          "phonetic": "mǎi khâao jai",
+          "phonetic": "mâi khâo jai",
           "components": [
             "w_mai_neg",
             "w_khao_jai"
@@ -1222,6 +1173,13 @@
           "fr": "gentil",
           "phonetic": "jai dii",
           "en": "kind"
+        },
+        {
+          "th": "ใจ",
+          "en": "heart",
+          "id": "w_jai",
+          "fr": "cœur",
+          "phonetic": "jai"
         }
       ],
       "phrases": [
@@ -1229,7 +1187,7 @@
           "id": "p_he_name",
           "th": "เขาชื่ออะไร",
           "fr": "comment s'appelle-t-il ?",
-          "phonetic": "khâao chûue à-rai",
+          "phonetic": "khǎo chûue à-rai",
           "components": [
             "w_khao_pron",
             "w_chue",
@@ -1411,6 +1369,20 @@
           "en": "wait"
         },
         {
+          "id": "w_ha",
+          "th": "หา",
+          "fr": "chercher",
+          "en": "look for",
+          "phonetic": "hǎa"
+        },
+        {
+          "id": "w_gamlang",
+          "th": "กำลัง",
+          "fr": "en train de",
+          "en": "in the process of",
+          "phonetic": "kam-lang"
+        },
+        {
           "id": "w_khit",
           "th": "คิด",
           "fr": "penser",
@@ -1535,7 +1507,7 @@
         {
           "id": "p_new_l7_5",
           "th": "ทำไมรอ",
-          "fr": "pourquoi (que fais-tu) attendre",
+          "fr": "pourquoi attendre",
           "phonetic": "tham-mai rɔɔ",
           "components": [
             "w_thammai",
@@ -1602,6 +1574,13 @@
           "en": "sell"
         },
         {
+          "id": "w_nan",
+          "th": "นั้น",
+          "fr": "ce/cette (là)",
+          "en": "that",
+          "phonetic": "nán"
+        },
+        {
           "id": "w_ngern",
           "th": "เงิน",
           "fr": "argent",
@@ -1655,7 +1634,7 @@
           "id": "p_nine_baht",
           "th": "เก้าบาท",
           "fr": "neuf bahts",
-          "phonetic": "gao bàat",
+          "phonetic": "kâao bàat",
           "components": [
             "w_9",
             "w_baht"
@@ -1793,6 +1772,13 @@
           "fr": "heureux",
           "phonetic": "dii jai",
           "en": "happy"
+        },
+        {
+          "id": "w_phak_kon",
+          "th": "พักก่อน",
+          "fr": "reposer (d'abord)",
+          "en": "rest first",
+          "phonetic": "phák gɔ̀ɔn"
         },
         {
           "id": "w_chop",
