@@ -77,7 +77,7 @@ export default function FreeTypingInput({ exercise, selected, onChange, disabled
           {vKeys.map((k, i) => {
             let displayStr = k;
             if (isCombining(k)) {
-                displayStr = '-' + k;
+                displayStr = '\u25CC' + k;
             }
             return (
               <button

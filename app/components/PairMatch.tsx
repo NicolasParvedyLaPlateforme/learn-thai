@@ -4,6 +4,7 @@ import { Volume2 } from 'lucide-react';
 import { playThaiTTS } from '../lib/tts';
 import { useProgressStore } from '../lib/store';
 import { motion, AnimatePresence } from 'motion/react';
+import { formatCombiningChar } from '../lib/alphabet-utils';
 
 interface PairMatchProps {
   pairs: Word[];
@@ -163,7 +164,7 @@ export default function PairMatch({ pairs, mode = 'normal', onComplete }: PairMa
                     <Volume2 className={`w-8 h-8 sm:w-10 sm:h-10 ${isSelected || isMatched ? 'text-indigo-600' : 'text-slate-400'}`} />
                   ) : (
                     <>
-                      <span className="text-xl sm:text-2xl">{card.text}</span>
+                      <span className="text-xl sm:text-2xl">{formatCombiningChar(card.text)}</span>
                       {mode !== 'script-only' && (
                         <span className="text-xs sm:text-sm opacity-60 font-mono mt-1 text-slate-500">[{card.phonetic}]</span>
                       )}

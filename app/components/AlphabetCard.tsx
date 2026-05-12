@@ -29,13 +29,21 @@ export function AlphabetCard({ item, onPlayAudio, minimal }: AlphabetCardProps) 
   const colors = getClassColors();
   const hintText = language === 'en' ? item.mnemonicHintEn : item.mnemonicHintFr;
 
+  const isCombining = (charStr: string) => {
+    if (!charStr) return false;
+    const code = charStr.charCodeAt(0);
+    return code === 0x0E31 || (code >= 0x0E34 && code <= 0x0E3A) || (code >= 0x0E47 && code <= 0x0E4E);
+  };
+  
+  const displayLetter = isCombining(item.letter) ? '\u25CC' + item.letter : item.letter;
+
   if (minimal) {
     return (
       <div 
         className={`w-32 h-32 rounded-3xl border-2 ${colors.border} ${colors.bg} shadow-sm flex flex-col items-center justify-center p-2 relative group`}
         onClick={onPlayAudio}
       >
-        <span className={`text-6xl font-medium ${colors.text} drop-shadow-sm font-thai`}>{item.letter}</span>
+        <span className={`text-6xl font-medium ${colors.text} drop-shadow-sm font-thai`}>{displayLetter}</span>
         {onPlayAudio && (
           <div className="absolute top-2 right-2 text-current opacity-50 group-hover:opacity-100 transition-opacity">
             <Volume2 size={16} />
@@ -76,7 +84,7 @@ export function AlphabetCard({ item, onPlayAudio, minimal }: AlphabetCardProps) 
           {/* Visual approximation / Mnemonic styling */}
           <div className="flex-1 flex flex-col items-center justify-center w-full relative">
             <span className={`text-8xl font-bold ${colors.text} opacity-20 absolute select-none pointer-events-none`}>
-              {item.letter}
+              {displayLetter}
             </span>
             <div className="z-10 text-center flex flex-col items-center justify-center h-full pt-4">
               {hintText || item.mnemonicEmoji ? (
@@ -85,12 +93,12 @@ export function AlphabetCard({ item, onPlayAudio, minimal }: AlphabetCardProps) 
                     {item.mnemonicEmoji ? (
                       <span className="text-6xl absolute z-0 opacity-40 mix-blend-multiply filter drop-shadow-sm">{item.mnemonicEmoji}</span>
                     ) : null}
-                    <span className={`text-7xl font-medium ${colors.text} z-10 drop-shadow-md`}>{item.letter}</span>
+                    <span className={`text-7xl font-medium ${colors.text} z-10 drop-shadow-md`}>{displayLetter}</span>
                   </div>
                   <p className={`text-[15px] font-semibold mt-1 ${colors.text} px-2 leading-tight text-center max-w-[90%] font-sans`}>{hintText}</p>
                 </div>
               ) : (
-                 <span className={`text-8xl ${colors.text}`}>{item.letter}</span>
+                 <span className={`text-8xl ${colors.text}`}>{displayLetter}</span>
               )}
             </div>
           </div>
@@ -105,7 +113,7 @@ export function AlphabetCard({ item, onPlayAudio, minimal }: AlphabetCardProps) 
           className="absolute inset-0 w-full h-full bg-white rounded-3xl border-2 border-slate-100 shadow-sm flex flex-col items-center justify-center relative"
           style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
         >
-          <span className="text-8xl font-medium text-slate-800">{item.letter}</span>
+          <span className="text-8xl font-medium text-slate-800">{displayLetter}</span>
           
           {onPlayAudio && (
             <div 

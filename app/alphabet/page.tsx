@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useProgressStore } from '../lib/store';
-import { getAlphabetLessons, AlphabetLessonDef } from '../lib/alphabet-utils';
+import { getAlphabetLessons, AlphabetLessonDef, formatCombiningChar } from '../lib/alphabet-utils';
 import { BookOpen, CheckCircle, Star, Play, Crown, X, Unlock } from 'lucide-react';
 
 export default function AlphabetMenuPage() {
@@ -171,7 +171,7 @@ export default function AlphabetMenuPage() {
                                       {mounted && language === 'en' ? lesson.titleEn : lesson.title}
                                     </p>
                                     <p className="text-xs text-slate-500 font-medium mt-0.5">
-                                      {lesson.items.map(i => i.letter).join(' • ')}
+                                      {lesson.items.map(i => formatCombiningChar(i.letter)).join(' • ')}
                                     </p>
                                     <div className="absolute -bottom-2.5 left-1/2 -translate-x-1/2 w-4 h-4 bg-white border-b-2 border-r-2 border-slate-200 rotate-45"></div>
                                   </div>
@@ -188,7 +188,7 @@ export default function AlphabetMenuPage() {
                                               : 'bg-slate-100 border-2 border-slate-200 text-slate-300 shadow-none hover:bg-slate-200 active:translate-y-1 active:border-b-2'}`
                                     }>
                                       {level >= 2 ? <Crown size={40} className="stroke-current stroke-[2.5]" fill="currentColor" /> :
-                                      level > 0 ? <CheckCircle size={40} className="stroke-current stroke-[2.5]" /> : lesson.items[0]?.letter}
+                                      level > 0 ? <CheckCircle size={40} className="stroke-current stroke-[2.5]" /> : lesson.items[0] ? formatCombiningChar(lesson.items[0].letter) : ''}
                                     </div>
 
                                     {/* Crown/Level Badge */}
@@ -243,7 +243,7 @@ export default function AlphabetMenuPage() {
 
             <div className="p-6">
               <p className="text-slate-600 font-medium mb-8 text-lg">
-                {language === 'en' ? 'Learn these letters:' : 'Apprenez ces lettres :'} <strong className="text-3xl font-thai ml-2">{selectedLesson.lesson.items.map(i => i.letter).join(' ')}</strong>
+                {language === 'en' ? 'Learn these letters:' : 'Apprenez ces lettres :'} <strong className="text-3xl font-thai ml-2">{selectedLesson.lesson.items.map(i => formatCombiningChar(i.letter)).join(' ')}</strong>
               </p>
 
               <div className="mb-8">

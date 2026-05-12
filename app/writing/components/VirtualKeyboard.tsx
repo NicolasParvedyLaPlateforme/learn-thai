@@ -98,7 +98,7 @@ export default function VirtualKeyboard({ exercise, selected, onChange, disabled
           
           let displayStr = opt.th;
           if (isCombining(opt.th)) {
-            displayStr = '-' + opt.th;
+            displayStr = '\u25CC' + opt.th;
           }
           
           return (

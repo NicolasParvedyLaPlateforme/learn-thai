@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import { useProgressStore } from '../../../lib/store';
-import { getAlphabetLessons, generateAlphabetExercises, AlphabetExercise, AlphabetLessonDef } from '../../../lib/alphabet-utils';
+import { getAlphabetLessons, generateAlphabetExercises, AlphabetExercise, AlphabetLessonDef, formatCombiningChar } from '../../../lib/alphabet-utils';
 import { AlphabetItem } from '../../../lib/alphabet-data';
 import { X, Check, Star, Volume2, HelpCircle, Info } from 'lucide-react';
 import confetti from 'canvas-confetti';
@@ -204,7 +204,7 @@ function AlphabetLessonContent() {
     // Replace the specific letter with a blank in the targetText
     let maskedText = currentExercise.targetText;
     const blank = <div className="inline-flex w-12 h-14 md:w-16 md:h-20 border-b-4 border-slate-300 items-center justify-center text-indigo-500 pb-2 mx-1 vertical-align-bottom">
-      {selectedOption ? selectedOption.letter : ''}
+      {selectedOption ? formatCombiningChar(selectedOption.letter) : ''}
     </div>;
     
     // Split to find the exact letter. We only replace the FIRST occurrence for simplicity, 
@@ -305,7 +305,7 @@ function AlphabetLessonContent() {
               `}
             >
               <div className="relative flex-1 flex flex-col items-center justify-center w-full mt-2 md:mt-4">
-                <span className="text-4xl md:text-6xl font-medium z-10 drop-shadow-sm font-thai">{opt.letter}</span>
+                <span className="text-4xl md:text-6xl font-medium z-10 drop-shadow-sm font-thai">{formatCombiningChar(opt.letter)}</span>
               </div>
               
               {(opt.mnemonicHintEn || opt.mnemonicHintFr) && (
@@ -390,7 +390,7 @@ function AlphabetLessonContent() {
                     <div className="text-rose-800 text-sm mt-1 uppercase tracking-widest">
                       {language === 'en' ? 'Correct answer:' : 'Réponse correcte :'}
                     </div>
-                    <div className="text-rose-900 font-medium font-thai text-xl md:text-2xl mt-1 sm:mt-0">{currentExercise.letterToPick}</div>
+                    <div className="text-rose-900 font-medium font-thai text-xl md:text-2xl mt-1 sm:mt-0">{formatCombiningChar(currentExercise.letterToPick!)}</div>
                   </div>
                 )}
               </div>

@@ -2,6 +2,13 @@ import { THAI_ALPHABET, AlphabetItem } from './alphabet-data';
 import courseData from '../data/course.json';
 import { CourseData } from '../types';
 
+export function formatCombiningChar(charStr: string): string {
+  if (!charStr) return charStr;
+  const code = charStr.charCodeAt(0);
+  const isCombining = code === 0x0E31 || (code >= 0x0E34 && code <= 0x0E3A) || (code >= 0x0E47 && code <= 0x0E4E);
+  return isCombining ? '\u25CC' + charStr : charStr;
+}
+
 export interface AlphabetLessonDef {
   id: string; // 'c-1'
   title: string;

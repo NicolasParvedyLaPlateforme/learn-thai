@@ -1,5 +1,6 @@
 import { Exercise } from '../../../types';
 import { playThaiTTS } from '../../../lib/tts';
+import { formatCombiningChar } from '../../../lib/alphabet-utils';
 
 interface Props {
   exercise: Exercise;
@@ -35,7 +36,7 @@ export default function WordMatch({ exercise, selected, onChange, disabled }: Pr
               ${disabled ? 'cursor-default' : 'cursor-pointer'}
             `}
           >
-            <span className={`font-thai font-semibold ${isDense ? 'text-lg sm:text-xl' : 'text-xl sm:text-2xl'}`}>{opt.th}</span>
+            <span className={`font-thai font-semibold ${isDense ? 'text-lg sm:text-xl' : 'text-xl sm:text-2xl'}`}>{formatCombiningChar(opt.th)}</span>
           </button>
         );
       })}
