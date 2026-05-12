@@ -6,7 +6,16 @@ export function formatCombiningChar(charStr: string): string {
   if (!charStr) return charStr;
   const code = charStr.charCodeAt(0);
   const isCombining = code === 0x0E31 || (code >= 0x0E34 && code <= 0x0E3A) || (code >= 0x0E47 && code <= 0x0E4E);
-  return isCombining ? '\u25CC' + charStr : charStr;
+  
+  if (isCombining) {
+    if (typeof navigator !== 'undefined') {
+      const isApple = /Mac|iPod|iPhone|iPad/.test(navigator.userAgent);
+      if (isApple) return charStr;
+    }
+    return '\u25CC' + charStr;
+  }
+  
+  return charStr;
 }
 
 export interface AlphabetLessonDef {

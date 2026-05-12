@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { AlphabetItem } from '../lib/alphabet-data';
+import { formatCombiningChar } from '../lib/alphabet-utils';
 import { Volume2 } from 'lucide-react';
 import { useProgressStore } from '../lib/store';
 
@@ -29,13 +30,7 @@ export function AlphabetCard({ item, onPlayAudio, minimal }: AlphabetCardProps) 
   const colors = getClassColors();
   const hintText = language === 'en' ? item.mnemonicHintEn : item.mnemonicHintFr;
 
-  const isCombining = (charStr: string) => {
-    if (!charStr) return false;
-    const code = charStr.charCodeAt(0);
-    return code === 0x0E31 || (code >= 0x0E34 && code <= 0x0E3A) || (code >= 0x0E47 && code <= 0x0E4E);
-  };
-  
-  const displayLetter = isCombining(item.letter) ? '\u25CC' + item.letter : item.letter;
+  const displayLetter = formatCombiningChar(item.letter);
 
   if (minimal) {
     return (

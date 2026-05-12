@@ -1,6 +1,7 @@
 import { Exercise } from '../../types';
 import { playThaiTTS } from '../../lib/tts';
 import { Delete } from 'lucide-react';
+import { formatCombiningChar } from '../../lib/alphabet-utils';
 import { useProgressStore } from '../../lib/store';
 
 interface Props {
@@ -96,10 +97,7 @@ export default function VirtualKeyboard({ exercise, selected, onChange, disabled
             usedCounts[opt.th]--;
           }
           
-          let displayStr = opt.th;
-          if (isCombining(opt.th)) {
-            displayStr = '\u25CC' + opt.th;
-          }
+          let displayStr = formatCombiningChar(opt.th);
           
           return (
             <button

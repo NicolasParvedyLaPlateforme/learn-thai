@@ -12,6 +12,7 @@ import { playThaiTTS } from '../lib/tts';
 import { getCharacterHint } from '../lib/phonetic-mapper';
 import VirtualKeyboard from './components/VirtualKeyboard';
 import { SentenceWithHints } from '../components/Hints';
+import { formatCombiningChar } from '../lib/alphabet-utils';
 
 const data = courseData as CourseData;
 
@@ -220,14 +221,10 @@ export default function WritingPage() {
                           color = "text-orange-500";
                         }
 
-                        const isCombining = (charStr: string) => {
-                          const code = charStr.charCodeAt(0);
-                          return code === 0x0E31 || (code >= 0x0E34 && code <= 0x0E3A) || (code >= 0x0E47 && code <= 0x0E4E);
-                        };
-
+                        // We handle combining marks using formatCombiningChar
                         let displayCluster = cluster;
-                        if (idx >= selectedAnswer.length && isCombining(cluster)) {
-                          displayCluster = '\u25CC' + cluster;
+                        if (idx >= selectedAnswer.length) {
+                          displayCluster = formatCombiningChar(cluster);
                         }
 
                         return { text: displayCluster, color };

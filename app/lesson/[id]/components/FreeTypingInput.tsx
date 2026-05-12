@@ -3,6 +3,8 @@ import { Exercise } from '../../../types';
 import { useProgressStore } from '../../../lib/store';
 import { Keyboard, Delete } from 'lucide-react';
 
+import { formatCombiningChar } from '../../../lib/alphabet-utils';
+
 interface Props {
   exercise: Exercise;
   selected: string;
@@ -30,11 +32,6 @@ export default function FreeTypingInput({ exercise, selected, onChange, disabled
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setVKeys(chars);
   }, [exercise.answer]);
-
-  const isCombining = (charStr: string) => {
-    const code = charStr.charCodeAt(0);
-    return code === 0x0E31 || (code >= 0x0E34 && code <= 0x0E3A) || (code >= 0x0E47 && code <= 0x0E4E);
-  };
 
   const handleVKeyClick = (char: string) => {
     onChange(selected + char);
@@ -75,10 +72,7 @@ export default function FreeTypingInput({ exercise, selected, onChange, disabled
       {showVirtual && (
         <div className="flex flex-wrap justify-center gap-2 sm:gap-3 p-4 bg-slate-100 rounded-2xl w-full border-2 border-slate-200 animate-in fade-in slide-in-from-bottom-4">
           {vKeys.map((k, i) => {
-            let displayStr = k;
-            if (isCombining(k)) {
-                displayStr = '\u25CC' + k;
-            }
+            const displayStr = formatCombiningChar(k);
             return (
               <button
                 key={i}
