@@ -115,7 +115,7 @@ const UNITS = [
 
 export default function Home() {
   const router = useRouter();
-  const { completedLessons, unlockedLessons, lessonLevels, xp, resetLessonLevel, language, setLanguage, unlockLessonManual } = useProgressStore();
+  const { completedLessons, unlockedLessons, lessonLevels, xp, resetLessonLevel, language, setLanguage, unlockLessonManual, autoDetectLanguage } = useProgressStore();
   const [mounted, setMounted] = useState(false);
   const [selectedLesson, setSelectedLesson] = useState<{lesson: Lesson, isCompleted: boolean, unitColor: string, unitBorder: string} | null>(null);
   const [lessonToUnlock, setLessonToUnlock] = useState<{lesson: Lesson, unitColor: string, unitBorder: string} | null>(null);
@@ -123,9 +123,12 @@ export default function Home() {
   const [cols, setCols] = useState(5);
 
   useEffect(() => {
-    const timer = setTimeout(() => setMounted(true), 0);
+    const timer = setTimeout(() => {
+      setMounted(true);
+      autoDetectLanguage();
+    }, 0);
     return () => clearTimeout(timer);
-  }, []);
+  }, [autoDetectLanguage]);
 
   useEffect(() => {
     const updateCols = () => {

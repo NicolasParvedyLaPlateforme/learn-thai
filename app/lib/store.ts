@@ -34,6 +34,7 @@ const safeStorage = {
 interface ProgressState {
   _hasHydrated: boolean;
   language: AppLanguage;
+  languageSetByUser: boolean;
   completedLessons: string[];
   unlockedLessons: string[];
   lessonLevels: Record<string, number>;
@@ -41,6 +42,7 @@ interface ProgressState {
   seenAlphabets: string[]; // Keep track of seen alphabet letters
   setHasHydrated: (state: boolean) => void;
   setLanguage: (lang: AppLanguage) => void;
+  autoDetectLanguage: () => void;
   completeLesson: (lessonId: string, earnedXp: number, playedLevel?: number) => void;
   unlockLessonManual: (lessonId: string) => void;
   resetProgress: () => void;
@@ -50,16 +52,28 @@ interface ProgressState {
 
 export const useProgressStore = create<ProgressState>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       _hasHydrated: false,
       setHasHydrated: (state) => set({ _hasHydrated: state }),
       language: 'fr',
+      languageSetByUser: false,
       completedLessons: [],
       unlockedLessons: [],
       lessonLevels: {},
       xp: 0,
       seenAlphabets: [],
-      setLanguage: (lang) => set({ language: lang }),
+      setLanguage: (lang) => set({ language: lang, languageSetByUser: true }),
+      autoDetectLanguage: () => {
+        const state = get();
+        if (!state.languageSetByUser && typeof window !== 'undefined' && window.navigator && window.navigator.language) {
+          const browserLang = window.navigator.language.toLowerCase();
+          if (browserLang.startsWith('en')) {
+            set({ language: 'en' });
+          } else if (browserLang.startsWith('fr')) {
+            set({ language: 'fr' });
+          }
+        }
+      },
       completeLesson: (lessonId, earnedXp, playedLevel) => set((state) => {
         const currentLevel = state.lessonLevels[lessonId] || 0;
         // If playedLevel is provided, only unlock the next level if we played the currently available max level

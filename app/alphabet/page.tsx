@@ -9,7 +9,7 @@ import { BookOpen, CheckCircle, Star, Play, Crown, X, Unlock } from 'lucide-reac
 
 export default function AlphabetMenuPage() {
   const router = useRouter();
-  const { completedLessons, unlockedLessons, lessonLevels, xp, resetLessonLevel, unlockLessonManual, language } = useProgressStore();
+  const { completedLessons, unlockedLessons, lessonLevels, xp, resetLessonLevel, unlockLessonManual, language, autoDetectLanguage } = useProgressStore();
   const [mounted, setMounted] = useState(false);
   const [selectedLesson, setSelectedLesson] = useState<{lesson: AlphabetLessonDef, isCompleted: boolean, unitColor: string, unitBorder: string} | null>(null);
   const [lessonToUnlock, setLessonToUnlock] = useState<{lesson: AlphabetLessonDef, unitColor: string, unitBorder: string} | null>(null);
@@ -44,7 +44,8 @@ export default function AlphabetMenuPage() {
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
-  }, []);
+    autoDetectLanguage();
+  }, [autoDetectLanguage]);
 
   useEffect(() => {
     const updateCols = () => {
