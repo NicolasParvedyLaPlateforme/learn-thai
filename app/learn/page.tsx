@@ -140,6 +140,25 @@ export default function Home() {
     return () => window.removeEventListener('resize', updateCols);
   }, []);
 
+  useEffect(() => {
+    if (mounted) {
+      const hash = window.location.hash;
+      if (hash) {
+        setTimeout(() => {
+          try {
+            const el = document.querySelector(hash);
+            if (el) {
+              const y = el.getBoundingClientRect().top + window.scrollY - 100;
+              window.scrollTo({ top: y, behavior: 'smooth' });
+            }
+          } catch (e) {
+            console.error(e);
+          }
+        }, 100);
+      }
+    }
+  }, [mounted]);
+
   return (
     <div className="min-h-screen bg-[#FAFAFA] font-sans text-slate-800 pb-20 overflow-hidden">
       
