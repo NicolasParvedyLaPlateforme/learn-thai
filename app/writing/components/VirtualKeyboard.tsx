@@ -48,7 +48,7 @@ export default function VirtualKeyboard({ exercise, selected, onChange, disabled
         <div className="bg-white border-2 border-b-4 border-slate-200 rounded-xl px-4 py-2 sm:px-5 sm:py-3 shadow-sm text-3xl sm:text-4xl font-thai leading-relaxed text-center break-all min-w-[180px] min-h-[64px] sm:min-h-[76px] flex justify-center items-center">
           {selected.length === 0 ? (
             <span className="text-slate-400 p-2 font-medium text-base sm:text-lg font-sans">
-              {language === 'en' ? 'Write here...' : 'Écrivez ici...'}
+              {language === 'en' ? 'Choose characters below...' : 'Choisissez des caractères ci-dessous...'}
             </span>
           ) : (
             (() => {
