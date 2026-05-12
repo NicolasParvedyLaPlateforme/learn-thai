@@ -178,7 +178,7 @@ export default function AlphabetMenuPage() {
                                     e.preventDefault();
                                     if (isUnlocked) {
                                       setSelectedLesson({lesson, isCompleted, unitColor: unit.colorClass, unitBorder: unit.borderClass});
-                                      setModalLevel(Math.min(lessonLevels[lesson.id] || 0, 1)); // Max level 2 for alphabet
+                                      setModalLevel(Math.min(lessonLevels[lesson.id] || 0, 3)); // Max level 4 for alphabet
                                     } else {
                                       setLessonToUnlock({lesson, unitColor: unit.colorClass, unitBorder: unit.borderClass});
                                     }
@@ -199,20 +199,20 @@ export default function AlphabetMenuPage() {
                                   <div className="relative">
                                     <div className={
                                       `w-20 h-20 md:w-24 md:h-24 rounded-[2rem] flex items-center justify-center border-b-[6px] transition-transform shadow-sm relative z-0 text-3xl font-thai
-                                      ${level >= 2
+                                      ${level >= 4
                                         ? unit.shades.l4
-                                        : level === 1
+                                        : level >= 2
                                           ? unit.shades.l2
                                             : isUnlocked 
                                               ? `bg-white border-2 border-slate-200 ${unit.textClass} hover:bg-slate-50 active:translate-y-1 active:border-b-2` 
                                               : 'bg-slate-100 border-2 border-slate-200 text-slate-300 shadow-none hover:bg-slate-200 active:translate-y-1 active:border-b-2'}`
                                     }>
-                                      {level >= 2 ? <Crown size={40} className="stroke-current stroke-[2.5]" fill="currentColor" /> :
+                                      {level >= 4 ? <Crown size={40} className="stroke-current stroke-[2.5]" fill="currentColor" /> :
                                       level > 0 ? <CheckCircle size={40} className="stroke-current stroke-[2.5]" /> : lesson.items[0] ? formatCombiningChar(lesson.items[0].letter) : ''}
                                     </div>
 
                                     {/* Crown/Level Badge */}
-                                    {(level > 0 && level <= 2) && (
+                                    {(level > 0 && level <= 4) && (
                                       <div className={`absolute -bottom-2 -right-3 z-20 bg-white border-2 border-slate-200 rounded-full w-8 h-8 flex items-center justify-center text-xs font-black shadow-sm ${unit.textClass}`}>
                                         {level}
                                       </div>
@@ -271,7 +271,7 @@ export default function AlphabetMenuPage() {
                   {language === 'en' ? 'Choose a level' : 'Choisir un niveau'}
                 </h4>
                 <div className="flex flex-wrap gap-2 sm:gap-3">
-                  {[0, 1].map((levelIndex) => {
+                  {[0, 1, 2, 3].map((levelIndex) => {
                     const currentProgress = lessonLevels[selectedLesson.lesson.id] || 0;
                     const isCompletedLevel = levelIndex < currentProgress;
                     const isAccessible = levelIndex <= currentProgress;

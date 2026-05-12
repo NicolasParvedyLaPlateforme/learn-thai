@@ -50,7 +50,7 @@ export function getAlphabetLessons(): { consonants: AlphabetLessonDef[], vowels:
   };
 }
 
-export type AlphabetExerciseType = 'intro' | 'word-match' | 'phrase-match' | 'review';
+export type AlphabetExerciseType = 'intro' | 'word-match' | 'phrase-match' | 'review' | 'phonetic-match' | 'audio-match';
 
 export interface AlphabetExercise {
   id: string;
@@ -129,8 +129,72 @@ export function generateAlphabetExercises(lessonDef: AlphabetLessonDef, level: n
         explanation
       });
     }
+  } else if (level === 1) {
+    // Level 2 -> Phonetic match
+    const options = [...lessonDef.items].sort(() => Math.random() - 0.5);
+    exercises.push({
+        id: `review-${Date.now()}`,
+        type: 'review',
+        item: lessonDef.items[0], // dummy
+        options: lessonDef.items, // the 3 to show
+        targetText: '',
+        targetTranslation: '',
+        letterToPick: '',
+        phonetic: ''
+    });
+    
+    const pms: AlphabetExercise[] = [];
+    for (let j = 0; j < 5; j++) {
+      for (const item of lessonDef.items) {
+         pms.push({
+             id: `phonetic-match-${item.letter}-${j}-${Date.now()}`,
+             type: 'phonetic-match',
+             item,
+             options, // all 3 items from this lesson
+             targetText: item.pronunciation,
+             targetTranslation: '',
+             letterToPick: item.letter,
+             phonetic: item.pronunciation
+         });
+      }
+    }
+    pms.sort(() => Math.random() - 0.5);
+    exercises.push(...pms);
+    
+  } else if (level === 2) {
+    // Level 3 -> Audio match
+    const options = [...lessonDef.items].sort(() => Math.random() - 0.5);
+    exercises.push({
+        id: `review-${Date.now()}`,
+        type: 'review',
+        item: lessonDef.items[0], // dummy
+        options: lessonDef.items, // the 3 to show
+        targetText: '',
+        targetTranslation: '',
+        letterToPick: '',
+        phonetic: ''
+    });
+    
+    const pms: AlphabetExercise[] = [];
+    for (let j = 0; j < 5; j++) {
+      for (const item of lessonDef.items) {
+         pms.push({
+             id: `audio-match-${item.letter}-${j}-${Date.now()}`,
+             type: 'audio-match',
+             item,
+             options, // all 3 items from this lesson
+             targetText: item.exampleWord,
+             targetTranslation: '',
+             letterToPick: item.letter,
+             phonetic: ''
+         });
+      }
+    }
+    pms.sort(() => Math.random() - 0.5);
+    exercises.push(...pms);
+
   } else {
-    // Level 1+ -> Only phrase match but ALL choices are from the learned letters limits to 3
+    // Level 4+ -> Phrase match with 3 choices from the learned letters
     const options = [...lessonDef.items].sort(() => Math.random() - 0.5);
     
     // Quick review intro

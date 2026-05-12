@@ -51,6 +51,19 @@ function AlphabetLessonContent() {
   }, []);
 
   useEffect(() => {
+    if (exercises.length > 0 && exercises[currentIndex]) {
+      const ex = exercises[currentIndex];
+      if (ex.type === 'audio-match') {
+        // slight delay to let render happen
+        const t = setTimeout(() => {
+          playThaiTTS(ex.item.exampleWord);
+        }, 300);
+        return () => clearTimeout(t);
+      }
+    }
+  }, [currentIndex, exercises]);
+
+  useEffect(() => {
     if (!_hasHydrated) return;
 
     if (!lesson) {
@@ -123,7 +136,11 @@ function AlphabetLessonContent() {
     setIsCorrect(correct);
     setIsChecking(true);
     if(correct) {
-       playThaiTTS(currentExercise.targetText);
+       if (currentExercise.type === 'phonetic-match' || currentExercise.type === 'audio-match') {
+         playThaiTTS(currentExercise.item.exampleWord);
+       } else {
+         playThaiTTS(currentExercise.targetText);
+       }
     }
   };
 
@@ -167,7 +184,7 @@ function AlphabetLessonContent() {
         </h1>
         <p className="text-slate-500 mb-8 text-center text-lg font-medium">+ 15 XP</p>
         <div className="flex flex-col sm:flex-row gap-4 w-full max-w-lg">
-          {currentLevel + 1 < 3 && (
+          {currentLevel + 1 < 4 && (
             <button 
               onClick={() => router.push(`/alphabet/lesson/${lesson.id}?level=${currentLevel + 2}`)}
               className="px-8 py-3 flex-1 rounded-xl bg-indigo-500 border-b-4 border-indigo-700 text-white font-bold text-lg shadow-lg hover:bg-indigo-400 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest"
@@ -218,6 +235,101 @@ function AlphabetLessonContent() {
               <div key={item.letter} className="flex flex-col items-center gap-4">
                 <AlphabetCard item={item} onPlayAudio={() => playThaiTTS(item.exampleWord)} minimal={true} />
               </div>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+    if (currentExercise.type === 'phonetic-match') {
+      return (
+        <div className="flex-1 flex flex-col items-center w-full max-w-lg mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-8 text-center">
+            {language === 'en' ? 'Which letter matches this sound?' : 'Quelle lettre correspond à ce son ?'}
+          </h2>
+
+          <div className="flex items-center gap-4 bg-white p-8 rounded-3xl shadow-sm border-2 border-slate-100 mb-10 w-full justify-center text-center flex-col">
+             <div className="text-4xl md:text-5xl font-bold text-indigo-600 flex items-center flex-wrap justify-center font-sans tracking-wide">
+                <ColoredPhonetic phonetic={currentExercise.phonetic} />
+             </div>
+          </div>
+
+          <div className={`w-full grid gap-3 md:gap-4 ${currentExercise.options.length === 3 ? 'grid-cols-3' : 'grid-cols-2'}`}>
+            {currentExercise.options.map((opt, i) => (
+              <button
+                key={i}
+                onClick={() => {
+                  if (isCorrect === null) {
+                    setSelectedOption(opt);
+                    playThaiTTS(opt.exampleWord);
+                  }
+                }}
+                className={`
+                  aspect-square rounded-2xl border-2 flex flex-col items-center justify-center transition-all relative overflow-hidden p-2 md:p-3
+                  group
+                  ${isCorrect !== null ? 'cursor-default' : 'hover:-translate-y-1 cursor-pointer active:scale-95 shadow-sm hover:shadow-md'}
+                  ${getOptionColorClass(opt, selectedOption?.letter === opt.letter, isCorrect)}
+                `}
+              >
+                <div className="relative flex-1 flex flex-col items-center justify-center w-full mt-2 md:mt-4">
+                  <span className="text-4xl md:text-6xl font-medium z-10 drop-shadow-sm font-thai">{formatCombiningChar(opt.letter)}</span>
+                </div>
+                
+                {(opt.mnemonicHintEn || opt.mnemonicHintFr) && (
+                  <span className="w-full text-center text-[10px] md:text-xs leading-tight px-0.5 opacity-90 font-semibold mt-1 md:mt-2 mb-1 hidden sm:block">
+                    {language === 'en' ? opt.mnemonicHintEn : opt.mnemonicHintFr}
+                  </span>
+                )}
+              </button>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+    if (currentExercise.type === 'audio-match') {
+      return (
+        <div className="flex-1 flex flex-col items-center w-full max-w-lg mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-8 text-center">
+            {language === 'en' ? 'Listen and select the correct letter' : 'Écoutez et sélectionnez la bonne lettre'}
+          </h2>
+
+          <div className="flex items-center gap-4 bg-white p-8 rounded-3xl shadow-sm border-2 border-slate-100 mb-10 w-full justify-center text-center flex-col">
+             <button 
+                onClick={() => playThaiTTS(currentExercise.item.exampleWord)}
+                className="w-24 h-24 bg-sky-500 rounded-full flex items-center justify-center text-white shadow-lg transition-transform hover:scale-105 active:scale-95 hover:bg-sky-400"
+              >
+                <Volume2 size={48} />
+              </button>
+          </div>
+
+          <div className={`w-full grid gap-3 md:gap-4 ${currentExercise.options.length === 3 ? 'grid-cols-3' : 'grid-cols-2'}`}>
+            {currentExercise.options.map((opt, i) => (
+              <button
+                key={i}
+                onClick={() => {
+                  if (isCorrect === null) {
+                    setSelectedOption(opt);
+                    playThaiTTS(opt.exampleWord);
+                  }
+                }}
+                className={`
+                  aspect-square rounded-2xl border-2 flex flex-col items-center justify-center transition-all relative overflow-hidden p-2 md:p-3
+                  group
+                  ${isCorrect !== null ? 'cursor-default' : 'hover:-translate-y-1 cursor-pointer active:scale-95 shadow-sm hover:shadow-md'}
+                  ${getOptionColorClass(opt, selectedOption?.letter === opt.letter, isCorrect)}
+                `}
+              >
+                <div className="relative flex-1 flex flex-col items-center justify-center w-full mt-2 md:mt-4">
+                  <span className="text-4xl md:text-6xl font-medium z-10 drop-shadow-sm font-thai">{formatCombiningChar(opt.letter)}</span>
+                </div>
+                
+                {(opt.mnemonicHintEn || opt.mnemonicHintFr) && (
+                  <span className="w-full text-center text-[10px] md:text-xs leading-tight px-0.5 opacity-90 font-semibold mt-1 md:mt-2 mb-1 hidden sm:block">
+                    {language === 'en' ? opt.mnemonicHintEn : opt.mnemonicHintFr}
+                  </span>
+                )}
+              </button>
             ))}
           </div>
         </div>
@@ -318,7 +430,10 @@ function AlphabetLessonContent() {
             <button
               key={i}
               onClick={() => {
-                if (isCorrect === null) setSelectedOption(opt);
+                if (isCorrect === null) {
+                  setSelectedOption(opt);
+                  playThaiTTS(opt.exampleWord);
+                }
               }}
               className={`
                 aspect-square rounded-2xl border-2 flex flex-col items-center justify-center transition-all relative overflow-hidden p-2 md:p-3

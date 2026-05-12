@@ -5,13 +5,12 @@ export const playThaiTTS = (text: string) => {
   try {
     const url = `/api/tts?text=${encodeURIComponent(text)}`;
     
-    if (!currentAudio) {
-      currentAudio = new Audio(url);
-    } else {
+    if (currentAudio) {
       currentAudio.pause();
-      currentAudio.src = url;
-      currentAudio.load();
+      currentAudio.removeAttribute('src'); // Better cleanup for mobile
     }
+    
+    currentAudio = new Audio(url);
     
     currentAudio.play().catch(e => {
       console.warn("Google TTS API playback failed, falling back to local speech synthesis:", e);
