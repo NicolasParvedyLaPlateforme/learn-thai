@@ -246,7 +246,7 @@ export default function Home() {
                           const pathColorClass = (isUnlocked && nextUnlocked) ? unit.colorClass : "bg-slate-200";
 
                           return (
-                            <div key={lesson.id} className="relative py-6 md:py-8" style={{ flex: `0 0 ${100 / cols}%` }}>
+                            <div id={`lesson-${lesson.id}`} key={lesson.id} className="relative py-6 md:py-8 scroll-mt-24" style={{ flex: `0 0 ${100 / cols}%` }}>
                               
                               {/* Path Connections */}
                               {pathRight && (

@@ -66,7 +66,7 @@ export default function AlphabetMenuPage() {
       <header className="sticky top-0 bg-white border-b border-slate-200 z-50 px-4 md:px-8 h-16 flex items-center justify-between shadow-sm">
         <div className="flex items-center justify-between w-full max-w-4xl mx-auto flex-1 gap-2 sm:gap-6">
           <div className="flex items-center gap-2">
-            <Link href="/" className="bg-emerald-500 text-white p-2 rounded-xl shadow-md border-b-4 border-emerald-700 hover:translate-y-px hover:border-b-2 active:border-b-0 active:translate-y-[4px] transition-all">
+            <Link href="/learn" className="bg-emerald-500 text-white p-2 rounded-xl shadow-md border-b-4 border-emerald-700 hover:translate-y-px hover:border-b-2 active:border-b-0 active:translate-y-[4px] transition-all">
               <BookOpen size={24} />
             </Link>
             <h1 className="text-xl font-bold text-slate-800 tracking-tight hidden md:block">Alphabet</h1>
@@ -139,7 +139,7 @@ export default function AlphabetMenuPage() {
                           const pathColorClass = (isUnlocked && nextUnlocked) ? unit.colorClass : "bg-slate-200";
 
                           return (
-                            <div key={lesson.id} className="relative py-6 md:py-8" style={{ flex: `0 0 ${100 / cols}%` }}>
+                            <div id={`lesson-${lesson.id}`} key={lesson.id} className="relative py-6 md:py-8 scroll-mt-24" style={{ flex: `0 0 ${100 / cols}%` }}>
                               
                               {/* Path Connections */}
                               {pathRight && (

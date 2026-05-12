@@ -50,11 +50,15 @@ function LessonPageContent() {
   const [isFinished, setIsFinished] = useState(false);
   const [showInfoModal, setShowInfoModal] = useState(false);
 
+  const [exercisesGeneratedFor, setExercisesGeneratedFor] = useState<{ id: string, level: number } | null>(null);
+
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
-    
+  }, []);
+
+  useEffect(() => {
     // Ensure we don't start redirecting or generating if we haven't loaded local data
     if (!_hasHydrated) return;
 
@@ -63,18 +67,27 @@ function LessonPageContent() {
       return;
     }
     
-    const isDevLocal = new URLSearchParams(window.location.search).has('dev');
-    const lessonIndex = data.lessons.findIndex((l) => l.id === lesson.id);
-    const isUnlocked = isDevLocal || lessonIndex === 0 || (lessonIndex > 0 && completedLessons.includes(data.lessons[lessonIndex - 1].id)) || unlockedLessons?.includes(lessonId);
-    
-    if (!isUnlocked) {
-      router.push('/learn');
-      return;
-    }
+    // Only check unlock initially or if not generated
+    if (!exercisesGeneratedFor || exercisesGeneratedFor.id !== lesson.id || exercisesGeneratedFor.level !== currentLevel) {
+      const isDevLocal = new URLSearchParams(window.location.search).has('dev');
+      const lessonIndex = data.lessons.findIndex((l) => l.id === lesson.id);
+      const isUnlocked = isDevLocal || lessonIndex === 0 || (lessonIndex > 0 && completedLessons.includes(data.lessons[lessonIndex - 1].id)) || unlockedLessons?.includes(lessonId);
+      
+      if (!isUnlocked) {
+        router.push('/learn');
+        return;
+      }
 
-    preloadThaiVoices();
-    setExercises((prev) => prev.length === 0 ? generateExercises(lesson, data.lessons, currentLevel, language) : prev);
-  }, [lesson, router, currentLevel, language, completedLessons, _hasHydrated]);
+      preloadThaiVoices();
+      setExercises(generateExercises(lesson, data.lessons, currentLevel, language));
+      setCurrentIndex(0);
+      setIsFinished(false);
+      setIsChecking(false);
+      setIsCorrect(null);
+      setSelectedAnswer(null);
+      setExercisesGeneratedFor({ id: lesson.id, level: currentLevel });
+    }
+  }, [lesson, router, currentLevel, language, completedLessons, _hasHydrated, lessonId, unlockedLessons, exercisesGeneratedFor]);
 
   if (!isClient || !_hasHydrated || !lesson || exercises.length === 0) return <div className="p-8 text-center">Chargement...</div>;
 
@@ -182,12 +195,22 @@ function LessonPageContent() {
           {language === 'en' ? `Level ${currentLevel + 1} completed!` : `Niveau ${currentLevel + 1} terminé !`}
         </h1>
         <p className="text-slate-500 mb-8 text-center text-lg font-medium">+ {10 + exercises.length} XP</p>
-        <button 
-          onClick={() => router.push('/learn')}
-          className="px-12 py-3 rounded-xl bg-emerald-500 border-b-4 border-emerald-700 text-white font-bold text-lg shadow-lg hover:bg-emerald-400 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest w-full max-w-sm"
-        >
-          {language === 'en' ? 'Continue' : 'Continuer'}
-        </button>
+        <div className="flex flex-col sm:flex-row gap-4 w-full max-w-lg">
+          {currentLevel + 1 < 9 && (
+            <button 
+              onClick={() => router.push(`/lesson/${lesson.id}?level=${currentLevel + 2}`)}
+              className="px-8 py-3 flex-1 rounded-xl bg-indigo-500 border-b-4 border-indigo-700 text-white font-bold text-lg shadow-lg hover:bg-indigo-400 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest"
+            >
+              {language === 'en' ? 'Next Level' : 'Prochain Niveau'}
+            </button>
+          )}
+          <button 
+            onClick={() => router.push(`/learn#lesson-${lesson.id}`)}
+            className="px-8 py-3 flex-1 rounded-xl bg-emerald-500 border-b-4 border-emerald-700 text-white font-bold text-lg shadow-lg hover:bg-emerald-400 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest"
+          >
+            {language === 'en' ? 'Back' : 'Retour'}
+          </button>
+        </div>
       </div>
     );
   }
@@ -208,7 +231,7 @@ function LessonPageContent() {
       {/* Header / Progress bar */}
       <header className="h-16 px-8 flex items-center shrink-0 justify-between border-b border-slate-200 bg-white">
         <div className="flex items-center gap-6 w-full max-w-4xl mx-auto flex-1">
-          <button onClick={() => router.push('/learn')} className="text-slate-400 hover:text-slate-600 transition-colors">
+          <button onClick={() => router.push(`/learn#lesson-${lesson.id}`)} className="text-slate-400 hover:text-slate-600 transition-colors">
             <X size={24} strokeWidth={2.5} />
           </button>
           <div className="flex-1 h-3 bg-slate-100 rounded-full overflow-hidden">

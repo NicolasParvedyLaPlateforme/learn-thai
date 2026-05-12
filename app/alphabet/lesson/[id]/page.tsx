@@ -42,11 +42,15 @@ function AlphabetLessonContent() {
   const [isFinished, setIsFinished] = useState(false);
   const [showHint, setShowHint] = useState(false);
 
+  const [exercisesGeneratedFor, setExercisesGeneratedFor] = useState<{ id: string, level: number } | null>(null);
+
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
-    
+  }, []);
+
+  useEffect(() => {
     if (!_hasHydrated) return;
 
     if (!lesson) {
@@ -54,25 +58,34 @@ function AlphabetLessonContent() {
       return;
     }
 
-    const { consonants, vowels } = getAlphabetLessons();
-    let unitLessons = consonants;
-    let lessonIndex = consonants.findIndex(l => l.id === lesson.id);
-    if (lessonIndex === -1) {
-      unitLessons = vowels;
-      lessonIndex = vowels.findIndex(l => l.id === lesson.id);
-    }
-    
-    const isDevLocal = new URLSearchParams(window.location.search).has('dev');
-    const isUnlocked = isDevLocal || lessonIndex === 0 || (lessonIndex > 0 && completedLessons.includes(unitLessons[lessonIndex - 1].id)) || unlockedLessons?.includes(lessonId);
-    
-    if (!isUnlocked) {
-      router.push('/alphabet');
-      return;
-    }
+    if (!exercisesGeneratedFor || exercisesGeneratedFor.id !== lesson.id || exercisesGeneratedFor.level !== currentLevel) {
+      const { consonants, vowels } = getAlphabetLessons();
+      let unitLessons = consonants;
+      let lessonIndex = consonants.findIndex(l => l.id === lesson.id);
+      if (lessonIndex === -1) {
+        unitLessons = vowels;
+        lessonIndex = vowels.findIndex(l => l.id === lesson.id);
+      }
+      
+      const isDevLocal = new URLSearchParams(window.location.search).has('dev');
+      const isUnlocked = isDevLocal || lessonIndex === 0 || (lessonIndex > 0 && completedLessons.includes(unitLessons[lessonIndex - 1].id)) || unlockedLessons?.includes(lessonId);
+      
+      if (!isUnlocked) {
+        router.push('/alphabet');
+        return;
+      }
 
-    preloadThaiVoices();
-    setExercises((prev) => prev.length === 0 ? generateAlphabetExercises(lesson, currentLevel, language) : prev);
-  }, [lesson, router, currentLevel, language, completedLessons, _hasHydrated]);
+      preloadThaiVoices();
+      setExercises(generateAlphabetExercises(lesson, currentLevel, language));
+      setCurrentIndex(0);
+      setIsFinished(false);
+      setIsChecking(false);
+      setIsCorrect(null);
+      setSelectedOption(null);
+      setShowHint(false);
+      setExercisesGeneratedFor({ id: lesson.id, level: currentLevel });
+    }
+  }, [lesson, router, currentLevel, language, completedLessons, _hasHydrated, lessonId, unlockedLessons, exercisesGeneratedFor]);
 
   if (!isClient || !_hasHydrated || !lesson || exercises.length === 0) return <div className="p-8 text-center">Loading...</div>;
 
@@ -153,12 +166,22 @@ function AlphabetLessonContent() {
           {language === 'en' ? `Level ${currentLevel + 1} completed!` : `Niveau ${currentLevel + 1} terminé !`}
         </h1>
         <p className="text-slate-500 mb-8 text-center text-lg font-medium">+ 15 XP</p>
-        <button 
-          onClick={() => router.push('/alphabet')}
-          className="px-12 py-3 rounded-xl bg-emerald-500 border-b-4 border-emerald-700 text-white font-bold text-lg shadow-lg hover:bg-emerald-400 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest w-full max-w-sm"
-        >
-          {language === 'en' ? 'Continue' : 'Continuer'}
-        </button>
+        <div className="flex flex-col sm:flex-row gap-4 w-full max-w-lg">
+          {currentLevel + 1 < 3 && (
+            <button 
+              onClick={() => router.push(`/alphabet/lesson/${lesson.id}?level=${currentLevel + 2}`)}
+              className="px-8 py-3 flex-1 rounded-xl bg-indigo-500 border-b-4 border-indigo-700 text-white font-bold text-lg shadow-lg hover:bg-indigo-400 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest"
+            >
+              {language === 'en' ? 'Next Level' : 'Prochain Niveau'}
+            </button>
+          )}
+          <button 
+            onClick={() => router.push(`/alphabet#lesson-${lesson.id}`)}
+            className="px-8 py-3 flex-1 rounded-xl bg-emerald-500 border-b-4 border-emerald-700 text-white font-bold text-lg shadow-lg hover:bg-emerald-400 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest"
+          >
+            {language === 'en' ? 'Back' : 'Retour'}
+          </button>
+        </div>
       </div>
     );
   }
@@ -325,7 +348,7 @@ function AlphabetLessonContent() {
       {/* Header */}
       <header className="h-16 px-4 md:px-8 flex items-center shrink-0 justify-between border-b border-slate-200 bg-white">
         <div className="flex items-center gap-4 md:gap-6 w-full max-w-4xl mx-auto flex-1">
-          <button onClick={() => router.push('/alphabet')} className="text-slate-400 hover:text-slate-600 transition-colors">
+          <button onClick={() => router.push(`/alphabet#lesson-${lesson.id}`)} className="text-slate-400 hover:text-slate-600 transition-colors">
             <X size={24} strokeWidth={2.5} />
           </button>
           <div className="flex-1 h-3 bg-slate-100 rounded-full overflow-hidden">
