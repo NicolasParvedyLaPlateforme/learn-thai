@@ -53,6 +53,7 @@ interface ProgressState {
   setLanguage: (lang: AppLanguage) => void;
   autoDetectLanguage: () => void;
   completeLesson: (lessonId: string, earnedXp: number, playedLevel?: number) => void;
+  addXp: (amount: number) => void;
   unlockLessonManual: (lessonId: string) => void;
   resetProgress: () => void;
   resetLessonLevel: (lessonId: string) => void;
@@ -118,6 +119,7 @@ export const useProgressStore = create<ProgressState>()(
           xp: state.xp + earnedXp
         };
       }),
+      addXp: (amount) => set((state) => ({ xp: state.xp + amount })),
       unlockLessonManual: (lessonId) => set((state) => ({
         unlockedLessons: state.unlockedLessons 
           ? (state.unlockedLessons.includes(lessonId) ? state.unlockedLessons : [...state.unlockedLessons, lessonId])

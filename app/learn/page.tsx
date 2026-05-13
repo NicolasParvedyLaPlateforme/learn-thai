@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useProgressStore } from '../lib/store';
 import courseData from '../data/course.json';
-import { BookOpen, CheckCircle, Star, Play, Crown, RotateCcw, Pencil, X, Unlock, Brain } from 'lucide-react';
+import { BookOpen, CheckCircle, Star, Play, Crown, RotateCcw, Pencil, X, Unlock, Brain, MessageCircle } from 'lucide-react';
 import { CourseData, Lesson } from '../types';
 
 import { WritingConfigModal } from '../components/WritingConfigModal';
@@ -120,6 +120,7 @@ export default function Home() {
   const { completedLessons, unlockedLessons, lessonLevels, xp, resetLessonLevel, language, setLanguage, unlockLessonManual, autoDetectLanguage } = useProgressStore();
   const [mounted, setMounted] = useState(false);
   const [isWritingConfigModalOpen, setWritingConfigModalOpen] = useState(false);
+  const [isPracticeModalOpen, setPracticeModalOpen] = useState(false);
   const [selectedLesson, setSelectedLesson] = useState<{lesson: Lesson, isCompleted: boolean, unitColor: string, unitBorder: string} | null>(null);
   const [lessonToUnlock, setLessonToUnlock] = useState<{lesson: Lesson, unitColor: string, unitBorder: string} | null>(null);
   const [modalLevel, setModalLevel] = useState(0);
@@ -166,11 +167,11 @@ export default function Home() {
   }, [mounted]);
 
   return (
-    <div className="min-h-screen bg-[#FAFAFA] font-sans text-slate-800 pb-20 overflow-hidden">
+    <div className="min-h-screen bg-[#FAFAFA] font-sans text-slate-800 pb-28 md:pb-20 overflow-hidden">
       
       {/* Header */}
-      <header className="sticky top-0 bg-white border-b border-slate-200 z-50 px-4 md:px-8 h-16 flex items-center justify-between shadow-sm">
-        <div className="flex items-center justify-between w-full max-w-4xl mx-auto flex-1 gap-2 sm:gap-6">
+      <header className="sticky top-0 bg-white border-b border-slate-200 z-50 h-16 shadow-sm">
+        <div className="flex items-center justify-between w-full max-w-2xl mx-auto h-full px-4 gap-2 sm:gap-6">
           <div className="flex items-center gap-2">
             <div className="bg-emerald-500 text-white p-2 rounded-xl">
               <BookOpen size={24} />
@@ -179,22 +180,6 @@ export default function Home() {
           </div>
           
           <div className="flex items-center gap-2 sm:gap-4 font-bold">
-            <Link href="/alphabet" className="text-emerald-500 hover:text-emerald-600 bg-emerald-50 hover:bg-emerald-100 px-3 sm:px-4 py-2 rounded-xl flex items-center gap-2 transition-colors">
-              <span className="font-extrabold text-lg sm:text-xl leading-none">A</span>
-              <span className="hidden sm:block">Alphabet</span>
-            </Link>
-            <Link href="/review" className="text-indigo-500 hover:text-indigo-600 bg-indigo-50 hover:bg-indigo-100 px-3 sm:px-4 py-2 rounded-xl flex items-center gap-2 transition-colors">
-              <Brain size={18} />
-              <span className="hidden sm:inline">Rappel</span>
-            </Link>
-            <Link href="/review-pairs" className="text-fuchsia-500 hover:text-fuchsia-600 bg-fuchsia-50 hover:bg-fuchsia-100 px-3 sm:px-4 py-2 rounded-xl flex items-center gap-2 transition-colors">
-              <BookOpen size={18} />
-              <span className="hidden sm:inline">{mounted && language === 'en' ? 'Pairs' : 'Paires'}</span>
-            </Link>
-            <button onClick={() => setWritingConfigModalOpen(true)} className="text-emerald-500 hover:text-emerald-600 bg-emerald-50 hover:bg-emerald-100 px-3 sm:px-4 py-2 rounded-xl flex items-center gap-2 transition-colors">
-              <Pencil size={18} />
-              <span className="hidden sm:inline">{mounted && language === 'en' ? "Writing" : "Écriture"}</span>
-            </button>
             
             {/* Language Switcher */}
             {mounted && (
@@ -217,6 +202,29 @@ export default function Home() {
 
       {/* Main Content */}
       <main className="max-w-2xl mx-auto px-4 mt-8 flex flex-col gap-12">
+        {/* Sections (Desktop/Tablet) */}
+        <div className="hidden md:grid grid-cols-2 md:grid-cols-5 gap-4">
+            <Link href="/alphabet" className="flex flex-col items-center gap-2 p-4 bg-white border-2 border-slate-200 border-b-4 rounded-2xl hover:-translate-y-1 hover:border-emerald-200 transition-all font-bold text-slate-700">
+              <div className="bg-emerald-100 text-emerald-500 w-12 h-12 rounded-full flex items-center justify-center text-2xl font-black">A</div>
+              <span>Alphabet</span>
+            </Link>
+            <Link href="/conversations" className="flex flex-col items-center gap-2 p-4 bg-white border-2 border-slate-200 border-b-4 rounded-2xl hover:-translate-y-1 hover:border-orange-200 transition-all font-bold text-slate-700">
+              <div className="bg-orange-100 text-orange-500 w-12 h-12 rounded-full flex items-center justify-center"><MessageCircle size={24} /></div>
+              <span>{mounted && language === 'en' ? 'Dialogs' : 'Discussions'}</span>
+            </Link>
+            <Link href="/review" className="flex flex-col items-center gap-2 p-4 bg-white border-2 border-slate-200 border-b-4 rounded-2xl hover:-translate-y-1 hover:border-indigo-200 transition-all font-bold text-slate-700">
+              <div className="bg-indigo-100 text-indigo-500 w-12 h-12 rounded-full flex items-center justify-center"><Brain size={24} /></div>
+              <span>{mounted && language === 'en' ? 'Review' : 'Rappel'}</span>
+            </Link>
+            <Link href="/review-pairs" className="flex flex-col items-center gap-2 p-4 bg-white border-2 border-slate-200 border-b-4 rounded-2xl hover:-translate-y-1 hover:border-fuchsia-200 transition-all font-bold text-slate-700">
+              <div className="bg-fuchsia-100 text-fuchsia-500 w-12 h-12 rounded-full flex items-center justify-center"><BookOpen size={24} /></div>
+              <span>{mounted && language === 'en' ? 'Pairs' : 'Paires'}</span>
+            </Link>
+            <button onClick={() => setWritingConfigModalOpen(true)} className="flex flex-col items-center gap-2 p-4 bg-white border-2 border-slate-200 border-b-4 rounded-2xl hover:-translate-y-1 hover:border-sky-200 transition-all font-bold text-slate-700">
+              <div className="bg-sky-100 text-sky-500 w-12 h-12 rounded-full flex items-center justify-center"><Pencil size={24} /></div>
+              <span>{mounted && language === 'en' ? 'Writing' : 'Écriture'}</span>
+            </button>
+        </div>
         {UNITS.map((unit) => {
           const unitLessons = data.lessons.slice(unit.startIndex, unit.endIndex);
           const completedInUnit = unitLessons.filter(l => completedLessons.includes(l.id)).length;
@@ -544,6 +552,91 @@ export default function Home() {
       )}
 
       <WritingConfigModal isOpen={isWritingConfigModalOpen} onClose={() => setWritingConfigModalOpen(false)} />
+
+      {/* Mobile Bottom Navigation */}
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 z-40 flex justify-around items-center h-[72px] pb-[env(safe-area-inset-bottom)]">
+        <Link href="/learn" className="flex flex-col items-center justify-center w-full h-full text-emerald-500">
+          <BookOpen size={24} className="fill-emerald-100 mb-1" />
+          <span className="text-[10px] font-bold">{language === 'en' ? 'Path' : 'Parcours'}</span>
+        </Link>
+        <Link href="/alphabet" className="flex flex-col items-center justify-center w-full h-full text-slate-400 hover:text-slate-600 transition-colors">
+          <div className="w-6 h-6 flex items-center justify-center font-black text-xl mb-1">A</div>
+          <span className="text-[10px] font-bold">Alphabet</span>
+        </Link>
+        <Link href="/conversations" className="flex flex-col items-center justify-center w-full h-full text-slate-400 hover:text-slate-600 transition-colors">
+          <MessageCircle size={24} className="mb-1" />
+          <span className="text-[10px] font-bold">{language === 'en' ? 'Dialogs' : 'Dialogues'}</span>
+        </Link>
+        <button onClick={() => setPracticeModalOpen(true)} className="flex flex-col items-center justify-center w-full h-full text-slate-400 hover:text-slate-600 transition-colors">
+          <Brain size={24} className="mb-1" />
+          <span className="text-[10px] font-bold">{language === 'en' ? 'Practice' : 'Pratique'}</span>
+        </button>
+      </nav>
+
+      {/* Mobile Practice Modal */}
+      {isPracticeModalOpen && (
+        <div 
+          className="md:hidden fixed inset-0 z-[100] flex items-end justify-center bg-slate-900/40 backdrop-blur-sm transition-all"
+          onClick={() => setPracticeModalOpen(false)}
+        >
+          <div 
+            className="w-full bg-[#FAFAFA] rounded-t-3xl shadow-2xl overflow-hidden flex flex-col pt-3 pb-8 px-4 animate-in slide-in-from-bottom-full duration-300 relative border-t-2 border-slate-200"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="w-12 h-1.5 bg-slate-200 rounded-full mx-auto mb-6"></div>
+            
+            <div className="flex justify-between items-center mb-6 px-2">
+              <h3 className="text-2xl font-extrabold text-slate-800">
+                {language === 'en' ? 'Practice' : 'Pratique'}
+              </h3>
+              <button 
+                onClick={() => setPracticeModalOpen(false)} 
+                className="bg-slate-200 hover:bg-slate-300 text-slate-600 rounded-full p-2 transition-colors"
+               >
+                 <X size={20} />
+              </button>
+            </div>
+            
+            <div className="flex flex-col gap-3">
+              <Link href="/review" className="flex items-center gap-4 p-4 bg-white border-2 border-slate-200 border-b-4 rounded-2xl active:translate-y-1 active:border-b-2 transition-all">
+                <div className="bg-indigo-100 text-indigo-500 w-14 h-14 rounded-xl flex items-center justify-center shrink-0">
+                  <Brain size={28} />
+                </div>
+                <div className="flex flex-col text-left">
+                  <span className="font-bold text-slate-800 text-lg">{language === 'en' ? 'Review' : 'Rappel'}</span>
+                  <span className="text-sm text-slate-500 font-medium">{language === 'en' ? 'Test your memory' : 'Testez votre mémoire'}</span>
+                </div>
+              </Link>
+              
+              <Link href="/review-pairs" className="flex items-center gap-4 p-4 bg-white border-2 border-slate-200 border-b-4 rounded-2xl active:translate-y-1 active:border-b-2 transition-all">
+                <div className="bg-fuchsia-100 text-fuchsia-500 w-14 h-14 rounded-xl flex items-center justify-center shrink-0">
+                  <BookOpen size={28} />
+                </div>
+                <div className="flex flex-col text-left">
+                  <span className="font-bold text-slate-800 text-lg">{language === 'en' ? 'Pairs' : 'Paires'}</span>
+                  <span className="text-sm text-slate-500 font-medium">{language === 'en' ? 'Match words' : 'Associez les mots'}</span>
+                </div>
+              </Link>
+
+              <button 
+                onClick={() => {
+                  setPracticeModalOpen(false);
+                  setWritingConfigModalOpen(true);
+                }}
+                className="flex items-center gap-4 p-4 bg-white border-2 border-slate-200 border-b-4 rounded-2xl active:translate-y-1 active:border-b-2 transition-all text-left"
+              >
+                <div className="bg-sky-100 text-sky-500 w-14 h-14 rounded-xl flex items-center justify-center shrink-0">
+                  <Pencil size={28} />
+                </div>
+                <div className="flex flex-col text-left">
+                  <span className="font-bold text-slate-800 text-lg">{language === 'en' ? 'Writing' : 'Écriture'}</span>
+                  <span className="text-sm text-slate-500 font-medium">{language === 'en' ? 'Practice writing' : 'Pratiquez l\'écriture'}</span>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

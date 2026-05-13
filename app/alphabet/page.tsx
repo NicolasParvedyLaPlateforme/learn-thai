@@ -83,8 +83,8 @@ export default function AlphabetMenuPage() {
     <div className="min-h-screen bg-[#FAFAFA] font-sans text-slate-800 pb-20 overflow-hidden">
       
       {/* Header */}
-      <header className="sticky top-0 bg-white border-b border-slate-200 z-50 px-4 md:px-8 h-16 flex items-center justify-between shadow-sm">
-        <div className="flex items-center justify-between w-full max-w-4xl mx-auto flex-1 gap-2 sm:gap-6">
+      <header className="sticky top-0 bg-white border-b border-slate-200 z-50 h-16 shadow-sm">
+        <div className="flex items-center justify-between w-full max-w-2xl mx-auto h-full px-4 gap-2 sm:gap-6">
           <div className="flex items-center gap-2">
             <Link href="/learn" className="bg-emerald-500 text-white p-2 rounded-xl shadow-md border-b-4 border-emerald-700 hover:translate-y-px hover:border-b-2 active:border-b-0 active:translate-y-[4px] transition-all">
               <BookOpen size={24} />

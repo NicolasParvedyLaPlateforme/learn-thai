@@ -219,8 +219,8 @@ export default function ReviewPage() {
   return (
     <div className="h-[100dvh] flex flex-col bg-[#FAFAFA] font-sans text-slate-800 overflow-hidden">
       {/* Header / Progress bar */}
-      <header className="h-16 px-8 flex items-center shrink-0 justify-between border-b border-slate-200 bg-white">
-        <div className="flex items-center gap-6 w-full max-w-4xl mx-auto flex-1">
+      <header className="h-16 flex items-center shrink-0 justify-between border-b border-slate-200 bg-white">
+        <div className="flex items-center gap-6 w-full max-w-2xl mx-auto h-full px-4 flex-1">
           <button onClick={() => router.push('/learn')} className="text-slate-400 hover:text-slate-600 transition-colors">
             <X size={24} strokeWidth={2.5} />
           </button>
@@ -298,9 +298,9 @@ export default function ReviewPage() {
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: "100%", opacity: 0 }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className={`fixed bottom-0 left-0 right-0 w-full min-h-[100px] md:min-h-[128px] py-4 md:py-0 border-t-2 items-center justify-center px-4 md:px-8 flex transition-colors duration-300 z-50 overflow-y-auto max-h-[50vh] ${isChecking ? (isCorrect ? 'bg-indigo-50 border-indigo-200' : 'bg-rose-50 border-rose-200 shadow-[0_-10px_40px_rgba(244,63,94,0.1)]') : 'bg-white border-slate-200 shadow-[0_-10px_40px_rgba(0,0,0,0.05)]'}`}
+              className={`fixed bottom-0 left-0 right-0 w-full min-h-[100px] md:min-h-[128px] py-4 md:py-0 border-t-2 items-center justify-center flex transition-colors duration-300 z-50 overflow-y-auto max-h-[50vh] ${isChecking ? (isCorrect ? 'bg-indigo-50 border-indigo-200' : 'bg-rose-50 border-rose-200 shadow-[0_-10px_40px_rgba(244,63,94,0.1)]') : 'bg-white border-slate-200 shadow-[0_-10px_40px_rgba(0,0,0,0.05)]'}`}
             >
-              <div className="w-full max-w-4xl flex sm:flex-row flex-col items-center justify-between gap-4">
+              <div className="w-full max-w-2xl px-4 flex sm:flex-row flex-col items-center justify-between gap-4">
               
               <div className="flex-1 w-full text-center sm:text-left">
                 {isChecking && isCorrect && (

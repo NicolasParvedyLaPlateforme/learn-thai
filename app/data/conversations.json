@@ -1,0 +1,48 @@
+{
+  "conversations": [
+    {
+      "id": "conv-1",
+      "unitId": "unit-1",
+      "title": "Salutations et Présentations",
+      "titleEn": "Greetings and Introductions",
+      "level": 1,
+      "dialogs": [
+        {
+          "speaker": "A",
+          "th": "สวัสดีครับ",
+          "phonetic": "sà-wàt-dii kráp",
+          "fr": "Bonjour (homme).",
+          "en": "Hello (male)."
+        },
+        {
+          "speaker": "B",
+          "th": "สวัสดีค่ะ",
+          "phonetic": "sà-wàt-dii kâ",
+          "fr": "Bonjour (femme).",
+          "en": "Hello (female)."
+        },
+        {
+          "speaker": "A",
+          "th": "สบายดีไหมครับ",
+          "phonetic": "sà-baai-dii măi kráp",
+          "fr": "Comment ça va ?",
+          "en": "How are you?"
+        },
+        {
+          "speaker": "B",
+          "th": "สบายดีค่ะ ขอบคุณค่ะ แล้วคุณล่ะคะ",
+          "phonetic": "sà-baai-dii kâ, kòp-kun kâ, láew kun lâ ká",
+          "fr": "Je vais bien, merci. Et vous ?",
+          "en": "I'm fine, thank you. And you?"
+        },
+        {
+          "speaker": "A",
+          "th": "สบายดีครับ",
+          "phonetic": "sà-baai-dii kráp",
+          "fr": "Je vais bien.",
+          "en": "I'm fine."
+        }
+      ]
+    }
+  ]
+}

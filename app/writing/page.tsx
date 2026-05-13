@@ -137,8 +137,8 @@ export default function WritingPage() {
   return (
     <div className="h-[100dvh] flex flex-col bg-[#FAFAFA] font-sans text-slate-800 overflow-hidden">
       {/* Header */}
-      <header className="h-16 px-8 flex items-center shrink-0 justify-between border-b border-slate-200 bg-white">
-        <div className="flex items-center gap-6 w-full max-w-4xl mx-auto flex-1">
+      <header className="h-16 flex items-center shrink-0 justify-between border-b border-slate-200 bg-white">
+        <div className="flex items-center gap-6 w-full max-w-2xl mx-auto h-full px-4 flex-1">
           <button onClick={() => router.push('/learn')} className="text-slate-400 hover:text-slate-600 transition-colors">
             <X size={24} strokeWidth={2.5} />
           </button>
@@ -295,8 +295,8 @@ export default function WritingPage() {
       </main>
 
       {/* Footer */}
-      <footer className={`shrink-0 min-h-[100px] md:h-32 py-4 md:py-0 border-t-2 border-slate-200 flex items-center justify-center px-4 md:px-8 transition-colors duration-300 ${isChecking ? (isCorrect ? 'bg-emerald-50' : 'bg-rose-50 border-rose-200') : 'bg-white'}`}>
-        <div className="w-full max-w-4xl flex sm:flex-row flex-col items-center justify-between gap-4">
+      <footer className={`shrink-0 min-h-[100px] md:h-32 py-4 md:py-0 border-t-2 border-slate-200 flex items-center justify-center transition-colors duration-300 ${isChecking ? (isCorrect ? 'bg-emerald-50' : 'bg-rose-50 border-rose-200') : 'bg-white'}`}>
+        <div className="w-full max-w-2xl px-4 flex sm:flex-row flex-col items-center justify-between gap-4">
           
           <div className="flex-1 w-full text-center sm:text-left">
             {isChecking && isCorrect && (
