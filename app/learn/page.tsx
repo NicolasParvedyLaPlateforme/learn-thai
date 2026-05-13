@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useProgressStore } from '../lib/store';
 import courseData from '../data/course.json';
-import { BookOpen, CheckCircle, Star, Play, Crown, RotateCcw, Pencil, X, Unlock } from 'lucide-react';
+import { BookOpen, CheckCircle, Star, Play, Crown, RotateCcw, Pencil, X, Unlock, Brain } from 'lucide-react';
 import { CourseData, Lesson } from '../types';
 
 const data = courseData as CourseData;
@@ -181,7 +181,7 @@ export default function Home() {
               <span className="hidden sm:block">Alphabet</span>
             </Link>
             <Link href="/review" className="text-indigo-500 hover:text-indigo-600 bg-indigo-50 hover:bg-indigo-100 px-3 sm:px-4 py-2 rounded-xl flex items-center gap-2 transition-colors">
-              <RotateCcw size={18} />
+              <Brain size={18} />
               <span className="hidden sm:inline">Rappel</span>
             </Link>
             <Link href="/review-pairs" className="text-fuchsia-500 hover:text-fuchsia-600 bg-fuchsia-50 hover:bg-fuchsia-100 px-3 sm:px-4 py-2 rounded-xl flex items-center gap-2 transition-colors">
@@ -287,7 +287,7 @@ export default function Home() {
                                     e.preventDefault();
                                     if (isUnlocked) {
                                       setSelectedLesson({lesson, isCompleted, unitColor: unit.colorClass, unitBorder: unit.borderClass});
-                                      setModalLevel(Math.min(lessonLevels[lesson.id] || 0, 8));
+                                      setModalLevel(Math.min(lessonLevels[lesson.id] || 0, 9));
                                     } else {
                                       setLessonToUnlock({lesson, unitColor: unit.colorClass, unitBorder: unit.borderClass});
                                     }
