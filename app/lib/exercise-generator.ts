@@ -144,7 +144,7 @@ export function generateWritingExercises(
 
   const candidateItems: { fr: string, th: string, id: string }[] = [];
   completedLessons.forEach(l => {
-    l.words.forEach(w => candidateItems.push({ fr: language === 'en' ? (w.en || w.fr) : w.fr, th: w.th, id: w.id }));
+    l.words.filter(w => w.id !== 'w_dots').forEach(w => candidateItems.push({ fr: language === 'en' ? (w.en || w.fr) : w.fr, th: w.th, id: w.id }));
     l.phrases.forEach(p => candidateItems.push({ fr: language === 'en' ? (p.en || p.fr) : p.fr, th: p.th, id: p.id }));
   });
 
@@ -196,11 +196,11 @@ export function generateEndlessReviewExercises(
   };
 
   let exercises: Exercise[] = [];
-  const globalWords = allLessons.flatMap(l => l.words);
+  const globalWords = allLessons.flatMap(l => l.words).filter(w => w.id !== 'w_dots');
   
   // Create collections of number words
   const numberLessons = allLessons.filter(l => l.title.toLowerCase().includes('nombre') || l.titleEn?.toLowerCase().includes('number'));
-  const numberWords = numberLessons.flatMap(l => l.words);
+  const numberWords = numberLessons.flatMap(l => l.words).filter(w => w.id !== 'w_dots');
 
   completedLessons.forEach(prevLesson => {
     const isNumberLesson = prevLesson.title.toLowerCase().includes('nombre') || prevLesson.titleEn?.toLowerCase().includes('number');
@@ -208,7 +208,7 @@ export function generateEndlessReviewExercises(
     const numDistractors = defaultOptions.includeDistractors ? defaultOptions.limitDistractors : 0;
 
     // word match
-    prevLesson.words.forEach(word => {
+    prevLesson.words.filter(w => w.id !== 'w_dots').forEach(word => {
       // Word match always has 3 distractors (4 options total)
       const distractors = shuffle(distractorPool.filter(w => w.id !== word.id)).slice(0, 3);
       exercises.push({
@@ -245,7 +245,8 @@ export function generateEndlessReviewExercises(
 
 export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: number = 0, language: string = 'fr'): Exercise[] {
   let exercises: Exercise[] = [];
-  const globalWords = allLessons.flatMap(l => l.words);
+  const globalWords = allLessons.flatMap(l => l.words).filter(w => w.id !== 'w_dots');
+  const validLessonWords = lesson.words.filter(w => w.id !== 'w_dots');
 
   // Difficulty settings based on level (0 to 3)
   const isMasterLevel = level >= 3;
@@ -263,7 +264,7 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
       }
     }
     const unitLessons = allLessons.slice(unitStartIdx, currentIdx);
-    const unitWords = unitLessons.flatMap(l => l.words);
+    const unitWords = unitLessons.flatMap(l => l.words).filter(w => w.id !== 'w_dots');
     const unitPhrases = unitLessons.flatMap(l => l.phrases);
     
     let reviewExercises: Exercise[] = [];
@@ -350,7 +351,7 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
   let wmExercises: Exercise[] = [];
   let sbExercises: Exercise[] = [];
 
-  lesson.words.forEach(word => {
+  validLessonWords.forEach(word => {
     // For all levels, 4 options (1 correct, 3 distractors)
     const distractors = shuffle(globalWords.filter(w => w.id !== word.id)).slice(0, 3);
     wmExercises.push({
@@ -419,7 +420,7 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
     // Level 6 (index 5): Pair-matching audio-only
     // Level 7 (index 6): Pair-matching script-only
     let pmExercises: Exercise[] = [];
-    const allItemsRaw = [...lesson.words, ...lesson.phrases];
+    const allItemsRaw = [...validLessonWords, ...lesson.phrases];
     const allGlobalItemsRaw = [...globalWords, ...allLessons.flatMap(l => l.phrases)];
     const allItemsForPairsRaw = allItemsRaw.length >= 4 ? allItemsRaw : allGlobalItemsRaw;
     const allItemsForPairs = Array.from(new Map(allItemsForPairsRaw.map(w => [w.id, w])).values());
@@ -445,7 +446,7 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
   } else if (level === 7) {
     // Level 8: Blind writing words
     let wrPool: Exercise[] = [];
-    lesson.words.forEach(w => {
+    validLessonWords.forEach(w => {
        const { characters, groups } = getWritingClustersAndGroups(w.th.replace(/\s+/g, ''));
        wrPool.push({
           id: `wr-blind-word-${w.id}-${Date.now()}-${Math.random()}`,
@@ -482,7 +483,7 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
     wrPool = shuffle(wrPool);
     while (wrPool.length < 10 && wrPool.length > 0) wrPool = [...wrPool, ...shuffle(wrPool)];
     if (wrPool.length === 0) { // Fallback if no phrases
-       lesson.words.forEach(w => {
+       validLessonWords.forEach(w => {
          const { characters, groups } = getWritingClustersAndGroups(w.th.replace(/\s+/g, ''));
          wrPool.push({
             id: `wr-blind-word-${w.id}-${Date.now()}-${Math.random()}`,
@@ -512,7 +513,7 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
     let ftPool: Exercise[] = [];
     
     // First add words
-    lesson.words.forEach(w => {
+    validLessonWords.forEach(w => {
       ftPool.push({
         id: `ft-word-${w.id}-${Date.now()}-${Math.random()}`,
         type: 'free-typing',
@@ -577,7 +578,7 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
 
   for (const ex of finalResult) {
     if (level === 0 && !lesson.isReview && ex.type === 'word-match') {
-      const word = lesson.words.find(w => w.th === ex.answer);
+      const word = validLessonWords.find(w => w.th === ex.answer);
       if (word && !introducedIds.has(word.id)) {
         introducedIds.add(word.id);
         exercisesWithIntros.push({
@@ -618,7 +619,7 @@ export function generateEndlessPairMatching(
 ): Exercise[] {
   const completedLessons = allLessons.filter(l => completedLessonIds.includes(l.id));
   if (completedLessons.length === 0) return [];
-  const globalItemsRaw = completedLessons.flatMap(l => [...l.words, ...l.phrases]);
+  const globalItemsRaw = completedLessons.flatMap(l => [...l.words.filter(w => w.id !== 'w_dots'), ...l.phrases]);
   const globalItems = Array.from(new Map(globalItemsRaw.map(w => [w.id, w])).values());
   if (globalItems.length < 4) return [];
 

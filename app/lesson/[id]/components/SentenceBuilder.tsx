@@ -41,19 +41,28 @@ export default function SentenceBuilder({ exercise, selected, onChange, disabled
   // Calculate hint for the NEXT expected word
   let nextHintLetter = '';
   let nextHintPronunciation = '';
-  if (exercise.correctComponents && selected.length < exercise.correctComponents.length) {
-    const expectedWordId = exercise.correctComponents[selected.length];
-    const expectedWord = exercise.options.find(o => o.id === expectedWordId)?.th;
-    if (expectedWord && expectedWord.length > 0) {
-      const firstChar = expectedWord[0];
-      const alphaInfo = THAI_ALPHABET.find(a => a.letter === firstChar);
-      if (alphaInfo) {
-        nextHintLetter = alphaInfo.letter;
-        nextHintPronunciation = language === 'en' ? (alphaInfo.exampleTranslationEn || alphaInfo.exampleTranslation) : alphaInfo.exampleTranslation;
-        // The pronunciation usually is in the "exampleWord" or we can just use the pronunciation property
-        // But the user said: "comme So sala ou do dek" - which is the exampleWord (e.g. "ศ ศาลา" or "ด เด็ก" or its pronunciation "sɔ̌ɔ sǎa-laa")
-        // Let's show the name:
-        nextHintPronunciation = alphaInfo.exampleWord; // e.g. "ศ ศาลา"
+  if (exercise.correctComponents) {
+    let targetIdx = 0;
+    let nonDotsCount = 0;
+    while (targetIdx < exercise.correctComponents.length) {
+      if (exercise.correctComponents[targetIdx] !== 'w_dots') {
+        if (nonDotsCount === selected.length) break;
+        nonDotsCount++;
+      }
+      targetIdx++;
+    }
+
+    if (targetIdx < exercise.correctComponents.length) {
+      const expectedWordId = exercise.correctComponents[targetIdx];
+      const expectedWord = exercise.options.find(o => o.id === expectedWordId)?.th;
+      if (expectedWord && expectedWord.length > 0) {
+        const firstChar = expectedWord[0];
+        const alphaInfo = THAI_ALPHABET.find(a => a.letter === firstChar);
+        if (alphaInfo) {
+          nextHintLetter = alphaInfo.letter;
+          nextHintPronunciation = language === 'en' ? (alphaInfo.exampleTranslationEn || alphaInfo.exampleTranslation) : alphaInfo.exampleTranslation;
+          nextHintPronunciation = alphaInfo.exampleWord; // e.g. "ศ ศาลา"
+        }
       }
     }
   }
@@ -67,36 +76,81 @@ export default function SentenceBuilder({ exercise, selected, onChange, disabled
           {selected.length === 0 && (
             <span className="text-slate-400 p-2 font-medium">{language === 'en' ? 'Build the sentence here...' : 'Formez la phrase ici...'}</span>
           )}
-          {selected.map((word, idx) => {
-            let isCorrect = true;
-            
-            if (exercise.type === 'sentence-builder' && exercise.correctComponents) {
-              const expectedWordId = exercise.correctComponents[idx];
-              const expectedWord = exercise.options.find(o => o.id === expectedWordId)?.th;
-              isCorrect = word === expectedWord;
+          {(() => {
+            const items = [];
+            if (exercise.correctComponents) {
+              let selIdx = 0;
+              for (let i = 0; i < exercise.correctComponents.length; i++) {
+                if (exercise.correctComponents[i] === 'w_dots') {
+                  items.push(
+                    <div key={`fixed-${i}`} className="bg-transparent border-2 border-dashed border-slate-300 text-slate-400 rounded-xl font-medium font-thai px-2 sm:px-3 flex items-center justify-center min-w-[3rem] sm:min-w-[4rem] h-12 sm:h-16">
+                      <span className="leading-none text-2xl sm:text-3xl">...</span>
+                    </div>
+                  );
+                } else if (selIdx < selected.length) {
+                  const word = selected[selIdx];
+                  const expectedWordId = exercise.correctComponents[i];
+                  const expectedWord = exercise.options.find(o => o.id === expectedWordId)?.th;
+                  const isCorrect = word === expectedWord;
+                  const showColors = exercise.hideColors ? disabled : (exercise.blindMode ? disabled : true);
+                  
+                  let textColorClass = "text-slate-700";
+                  let borderColorClass = "border-slate-200";
+                  if (showColors) {
+                    textColorClass = isCorrect ? "text-emerald-600" : "text-rose-500";
+                    borderColorClass = isCorrect ? "border-slate-200" : "border-rose-300";
+                  }
+                  
+                  const removeIdx = selIdx;
+                  items.push(
+                    <button
+                      key={`sel-${i}`}
+                      onClick={() => handleRemove(removeIdx)}
+                      disabled={disabled}
+                      className={`bg-white text-center border-2 border-b-4 rounded-xl font-medium ${textColorClass} ${borderColorClass} shadow-sm transition-all hover:-translate-y-0.5 active:translate-y-0.5 active:border-b-2 font-thai px-2 sm:px-3 flex items-center justify-center min-w-[3rem] sm:min-w-[4rem] h-12 sm:h-16`}
+                    >
+                      <span className="leading-none text-2xl sm:text-3xl">{word}</span>
+                    </button>
+                  );
+                  selIdx++;
+                }
+              }
+              // Anything over the expected non-dots items goes here
+              while (selIdx < selected.length) {
+                const word = selected[selIdx];
+                const removeIdx = selIdx;
+                items.push(
+                   <button
+                    key={`extra-${selIdx}`}
+                    onClick={() => handleRemove(removeIdx)}
+                    disabled={disabled}
+                    className={`bg-white text-center border-2 border-b-4 rounded-xl font-medium text-slate-700 border-slate-200 shadow-sm transition-all hover:-translate-y-0.5 active:translate-y-0.5 active:border-b-2 font-thai px-2 sm:px-3 flex items-center justify-center min-w-[3rem] sm:min-w-[4rem] h-12 sm:h-16`}
+                  >
+                    <span className="leading-none text-2xl sm:text-3xl">{word}</span>
+                   </button>
+                );
+                selIdx++;
+              }
+            } else {
+               // Fallback if no correct components
+               selected.forEach((word, idx) => {
+                 items.push(
+                    <button
+                      key={`sel-${idx}`}
+                      onClick={() => handleRemove(idx)}
+                      disabled={disabled}
+                      className={`bg-white text-center border-2 border-b-4 rounded-xl font-medium text-slate-700 border-slate-200 shadow-sm transition-all hover:-translate-y-0.5 active:translate-y-0.5 active:border-b-2 font-thai px-2 sm:px-3 flex items-center justify-center min-w-[3rem] sm:min-w-[4rem] h-12 sm:h-16`}
+                    >
+                      <span className="leading-none text-2xl sm:text-3xl">{word}</span>
+                    </button>
+                 );
+               });
             }
-            
-            const showColors = exercise.hideColors ? disabled : (exercise.blindMode ? disabled : true);
-            let textColorClass = "text-slate-700";
-            let borderColorClass = "border-slate-200";
-            if (showColors) {
-              textColorClass = isCorrect ? "text-emerald-600" : "text-rose-500";
-              borderColorClass = isCorrect ? "border-slate-200" : "border-rose-300";
-            }
-            
-            return (
-            <button
-              key={`sel-${idx}`}
-              onClick={() => handleRemove(idx)}
-              disabled={disabled}
-              className={`bg-white text-center border-2 border-b-4 rounded-xl font-medium ${textColorClass} ${borderColorClass} shadow-sm transition-all hover:-translate-y-0.5 active:translate-y-0.5 active:border-b-2 font-thai px-2 sm:px-3 flex items-center justify-center min-w-[3rem] sm:min-w-[4rem] h-12 sm:h-16`}
-            >
-              <span className="leading-none text-2xl sm:text-3xl">{word}</span>
-            </button>
-          )})}
+            return items;
+          })()}
           
           {/* Hint System */}
-          {!disabled && selected.length < (exercise.correctComponents?.length || 0) && (
+          {!disabled && selected.length < (exercise.correctComponents ? exercise.correctComponents.filter(c => c !== 'w_dots').length : 0) && (
             <div className="relative inline-flex items-center ml-2">
               {showHint ? (
                 <div 

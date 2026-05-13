@@ -146,7 +146,7 @@ function LessonPageContent() {
       correct = selectedAnswer === currentExercise.answer;
     } else if (currentExercise.type === 'sentence-builder') {
       const builtSentence = (selectedAnswer as string[]).join('').replace(/\s+/g, '');
-      const expectedSentence = currentExercise.answer.replace(/\s+/g, '');
+      const expectedSentence = currentExercise.answer.replace(/\s+/g, '').replace(/\.\.\./g, '');
       correct = builtSentence === expectedSentence;
     } else if (currentExercise.type === 'writing') {
       const builtValue = (selectedAnswer as string[]).join('').replace(/\s+/g, '');
@@ -219,7 +219,7 @@ function LessonPageContent() {
     : currentExercise.type === 'free-typing'
       ? typeof selectedAnswer === 'string' && selectedAnswer.trim().length > 0
     : (currentExercise.type === 'writing' || currentExercise.type === 'sentence-builder') && currentExercise.correctComponents
-      ? Array.isArray(selectedAnswer) && selectedAnswer.length === currentExercise.correctComponents.length
+      ? Array.isArray(selectedAnswer) && selectedAnswer.length === currentExercise.correctComponents.filter(c => c !== 'w_dots').length
       : selectedAnswer !== null && (!Array.isArray(selectedAnswer) || (selectedAnswer as any[]).length > 0);
 
   const showFooter = currentExercise.type !== 'pair-matching' && (
