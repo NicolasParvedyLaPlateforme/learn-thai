@@ -2,6 +2,7 @@ import type {Metadata} from 'next';
 import { Analytics } from "@vercel/analytics/next";
 import { Inter, Sarabun } from 'next/font/google';
 import './globals.css'; // Global styles
+import BottomNav from './components/BottomNav';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -24,6 +25,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
     <html lang="en" className={`${inter.variable} ${sarabun.variable}`}>
        <body className="font-sans antialiased text-slate-900 bg-slate-50 min-h-screen" suppressHydrationWarning>
          {children}
+         <BottomNav />
          <Analytics />
        </body>
     </html>

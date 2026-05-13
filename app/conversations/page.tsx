@@ -17,7 +17,7 @@ export default function ConversationsPage() {
   if (!mounted) return null;
 
   return (
-    <div className="min-h-screen bg-[#FAFAFA] font-sans text-slate-800 pb-20">
+    <div className="min-h-screen bg-[#FAFAFA] font-sans text-slate-800 pb-28 md:pb-20">
       {/* Header */}
       <header className="bg-white border-b border-slate-200 h-16 shadow-sm sticky top-0 z-50">
         <div className="flex items-center gap-4 max-w-2xl mx-auto h-full px-4 w-full">

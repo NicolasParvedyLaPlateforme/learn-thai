@@ -80,7 +80,7 @@ export default function AlphabetMenuPage() {
   }, [mounted]);
 
   return (
-    <div className="min-h-screen bg-[#FAFAFA] font-sans text-slate-800 pb-20 overflow-hidden">
+    <div className="min-h-screen bg-[#FAFAFA] font-sans text-slate-800 pb-28 md:pb-20 overflow-hidden">
       
       {/* Header */}
       <header className="sticky top-0 bg-white border-b border-slate-200 z-50 h-16 shadow-sm">
