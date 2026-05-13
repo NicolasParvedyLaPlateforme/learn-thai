@@ -2924,6 +2924,13 @@
           "fr": "viande / boeuf",
           "phonetic": "núea",
           "en": "meat/beef"
+        },
+        {
+          "id": "w_gung",
+          "th": "กุ้ง",
+          "fr": "crevette",
+          "phonetic": "gûng",
+          "en": "shrimp"
         }
       ],
       "phrases": [
@@ -2995,6 +3002,29 @@
             "w_nam"
           ],
           "en": "fish in water"
+        },
+        {
+          "id": "p_want_shrimp",
+          "th": "อยากกินกุ้ง",
+          "fr": "je veux manger des crevettes",
+          "phonetic": "yàak kin gûng",
+          "components": [
+            "w_yak",
+            "w_kin",
+            "w_gung"
+          ],
+          "en": "I want to eat shrimp"
+        },
+        {
+          "id": "p_eat_rice",
+          "th": "กินข้าว",
+          "fr": "manger du riz / manger",
+          "phonetic": "kin kâao",
+          "components": [
+            "w_kin",
+            "w_khao"
+          ],
+          "en": "eat rice / eat"
         }
       ],
       "titleEn": "On the Menu: Meats",
@@ -3032,6 +3062,13 @@
           "fr": "boire",
           "phonetic": "dùuem",
           "en": "drink"
+        },
+        {
+          "id": "w_kap",
+          "th": "กับ",
+          "fr": "avec / et",
+          "phonetic": "kàp",
+          "en": "with / and"
         }
       ],
       "phrases": [
@@ -3095,11 +3132,12 @@
         },
         {
           "id": "p_coffee_water",
-          "th": "กาแฟน้ำ",
+          "th": "กาแฟกับน้ำ",
           "fr": "café et eau",
-          "phonetic": "kaa-fae náam",
+          "phonetic": "kaa-fae kàp náam",
           "components": [
             "w_kafae",
+            "w_kap",
             "w_nam"
           ],
           "en": "coffee and water"
@@ -3245,7 +3283,7 @@
           "id": "p_bill_please",
           "th": "เก็บเงินด้วยครับ",
           "fr": "l'addition s'il vous plaît",
-          "phonetic": "gèp ngoen duay khráp",
+          "phonetic": "gèp ngoen dûay khráp",
           "components": [
             "w_gep_ngoen",
             "w_duay",
@@ -3268,7 +3306,7 @@
           "id": "p_bill_please_f",
           "th": "เก็บเงินด้วยค่ะ",
           "fr": "l'addition s'il vous plaît (femme)",
-          "phonetic": "gèp ngoen duay khâ",
+          "phonetic": "gèp ngoen dûay khâ",
           "components": [
             "w_gep_ngoen",
             "w_duay",
@@ -3327,7 +3365,7 @@
           "th": "แอปเปิล",
           "fr": "pomme",
           "en": "apple",
-          "phonetic": "mǎep-pən"
+          "phonetic": "aép-pən"
         },
         {
           "id": "w_lesson-24-a1_1",
@@ -3350,7 +3388,7 @@
           "th": "กินแอปเปิล",
           "fr": "Manger une pomme",
           "en": "Eat an apple",
-          "phonetic": "",
+          "phonetic": "kin aép-pən",
           "components": [
             "w_kin",
             "w_lesson-24-a1_0"
@@ -3361,7 +3399,7 @@
           "th": "เอาส้ม",
           "fr": "Vouloir une orange",
           "en": "Want an orange",
-          "phonetic": "",
+          "phonetic": "ao sôm",
           "components": [
             "w_ao",
             "w_lesson-24-a1_2"
@@ -3372,7 +3410,7 @@
           "th": "กล้วยอร่อย",
           "fr": "Banane délicieuse",
           "en": "Delicious banana",
-          "phonetic": "",
+          "phonetic": "klûay à-rɔ̀i",
           "components": [
             "w_lesson-24-a1_1",
             "w_aroi"
@@ -3383,7 +3421,7 @@
           "th": "ขอแอปเปิล",
           "fr": "Je voudrais une pomme",
           "en": "I would like an apple",
-          "phonetic": "",
+          "phonetic": "khɔ̌ɔ aép-pən",
           "components": [
             "w_kho_req",
             "w_lesson-24-a1_0"
@@ -3394,7 +3432,7 @@
           "th": "ไม่กินส้ม",
           "fr": "Ne pas manger d'orange",
           "en": "Don't eat orange",
-          "phonetic": "",
+          "phonetic": "mâi kin sôm",
           "components": [
             "w_mai_neg",
             "w_kin",
@@ -3445,7 +3483,7 @@
           "th": "กินผัก",
           "fr": "Manger des légumes",
           "en": "Eat vegetables",
-          "phonetic": "",
+          "phonetic": "kin phàk",
           "components": [
             "w_kin",
             "w_lesson-24-a2_2"
@@ -3456,7 +3494,7 @@
           "th": "ไม่ชอบแตงกวา",
           "fr": "Ne pas aimer le concombre",
           "en": "Don't like cucumber",
-          "phonetic": "",
+          "phonetic": "mâi chɔ̂ɔp taeng-kwaa",
           "components": [
             "w_mai_neg",
             "w_chop",
@@ -3468,7 +3506,7 @@
           "th": "ซื้อมะเขือเทศ",
           "fr": "Acheter une tomate",
           "en": "Buy a tomato",
-          "phonetic": "",
+          "phonetic": "súue má-khǔea-thêet",
           "components": [
             "w_sue",
             "w_lesson-24-a2_0"
@@ -3479,7 +3517,7 @@
           "th": "ผักสีเขียว",
           "fr": "Légume vert",
           "en": "Green vegetable",
-          "phonetic": "",
+          "phonetic": "phàk sǐi khǐiao",
           "components": [
             "w_lesson-24-a2_2",
             "w_see_color",
@@ -3491,7 +3529,7 @@
           "th": "เอาแตงกวา",
           "fr": "Vouloir du concombre",
           "en": "Want cucumber",
-          "phonetic": "",
+          "phonetic": "ao taeng-kwaa",
           "components": [
             "w_ao",
             "w_lesson-24-a2_1"
@@ -3540,6 +3578,27 @@
           "id": "w_lang",
           "fr": "laver",
           "phonetic": "láang"
+        },
+        {
+          "id": "w_lesson-24-a3_3",
+          "th": "ตะเกียบ",
+          "fr": "baguettes",
+          "en": "chopsticks",
+          "phonetic": "dtà-gìiap"
+        },
+        {
+          "id": "w_lesson-24-a3_4",
+          "th": "ถ้วย",
+          "fr": "bol",
+          "en": "bowl",
+          "phonetic": "thûay"
+        },
+        {
+          "id": "w_lesson-24-a5_1",
+          "th": "ซุป",
+          "fr": "soupe",
+          "en": "soup",
+          "phonetic": "súp"
         }
       ],
       "phrases": [
@@ -3548,7 +3607,7 @@
           "th": "ขอช้อน",
           "fr": "Je voudrais une cuillère",
           "en": "I'd like a spoon",
-          "phonetic": "",
+          "phonetic": "khɔ̌ɔ chɔ́ɔn",
           "components": [
             "w_kho_req",
             "w_lesson-24-a3_0"
@@ -3559,7 +3618,7 @@
           "th": "ใช้ส้อม",
           "fr": "Utiliser une fourchette",
           "en": "Use a fork",
-          "phonetic": "",
+          "phonetic": "chái sɔ̂m",
           "components": [
             "w_lesson-29-a4_2",
             "w_lesson-24-a3_1"
@@ -3570,7 +3629,7 @@
           "th": "จานใหญ่",
           "fr": "Grande assiette",
           "en": "Big plate",
-          "phonetic": "",
+          "phonetic": "jaan yài",
           "components": [
             "w_lesson-24-a3_2",
             "w_yai"
@@ -3581,7 +3640,7 @@
           "th": "ล้างจาน",
           "fr": "Laver les assiettes",
           "en": "Wash plates",
-          "phonetic": "",
+          "phonetic": "láang jaan",
           "components": [
             "w_lang",
             "w_lesson-24-a3_2"
@@ -3592,11 +3651,33 @@
           "th": "เอาส้อมไหม",
           "fr": "Voulez-vous une fourchette ?",
           "en": "Do you want a fork?",
-          "phonetic": "",
+          "phonetic": "ao sɔ̂m mǎi",
           "components": [
             "w_ao",
             "w_lesson-24-a3_1",
             "w_mai"
+          ]
+        },
+        {
+          "id": "p_new_lesson-24-a3_5",
+          "th": "ใช้ตะเกียบ",
+          "fr": "Utiliser des baguettes",
+          "en": "Use chopsticks",
+          "phonetic": "chái dtà-gìiap",
+          "components": [
+            "w_lesson-29-a4_2",
+            "w_lesson-24-a3_3"
+          ]
+        },
+        {
+          "id": "p_new_lesson-24-a3_6",
+          "th": "ถ้วยซุป",
+          "fr": "Un bol de soupe",
+          "en": "A bowl of soup",
+          "phonetic": "thûay súp",
+          "components": [
+            "w_lesson-24-a3_4",
+            "w_lesson-24-a5_1"
           ]
         }
       ]
@@ -3628,6 +3709,13 @@
           "fr": "grillé",
           "en": "grilled",
           "phonetic": "yâang"
+        },
+        {
+          "id": "w_lesson-24-a4_3",
+          "th": "ผัด",
+          "fr": "sauté",
+          "en": "stir-fried",
+          "phonetic": "phàt"
         }
       ],
       "phrases": [
@@ -3636,7 +3724,7 @@
           "th": "ไก่ทอด",
           "fr": "Poulet frit",
           "en": "Fried chicken",
-          "phonetic": "",
+          "phonetic": "kài thɔ̂ɔt",
           "components": [
             "w_kai",
             "w_lesson-24-a4_0"
@@ -3647,7 +3735,7 @@
           "th": "หมูย่าง",
           "fr": "Porc grillé",
           "en": "Grilled pork",
-          "phonetic": "",
+          "phonetic": "mǔu yâang",
           "components": [
             "w_mu",
             "w_lesson-24-a4_2"
@@ -3658,7 +3746,7 @@
           "th": "ไข่ต้ม",
           "fr": "Oeuf dur",
           "en": "Boiled egg",
-          "phonetic": "",
+          "phonetic": "khài tôm",
           "components": [
             "w_khai_egg",
             "w_lesson-24-a4_1"
@@ -3669,7 +3757,7 @@
           "th": "ทอดไข่",
           "fr": "Frire un oeuf",
           "en": "Fry an egg",
-          "phonetic": "",
+          "phonetic": "thɔ̂ɔt khài",
           "components": [
             "w_lesson-24-a4_0",
             "w_khai_egg"
@@ -3680,11 +3768,33 @@
           "th": "ชอบไก่ย่าง",
           "fr": "Aimer le poulet grillé",
           "en": "Like grilled chicken",
-          "phonetic": "",
+          "phonetic": "chɔ̂ɔp kài yâang",
           "components": [
             "w_chop",
             "w_kai",
             "w_lesson-24-a4_2"
+          ]
+        },
+        {
+          "id": "p_new_lesson-24-a4_5",
+          "th": "ผัดผัก",
+          "fr": "Légumes sautés",
+          "en": "Stir-fried vegetables",
+          "phonetic": "phàt phàk",
+          "components": [
+            "w_lesson-24-a4_3",
+            "w_lesson-24-a2_2"
+          ]
+        },
+        {
+          "id": "p_new_lesson-24-a4_6",
+          "th": "หมูผัด",
+          "fr": "Porc sauté",
+          "en": "Stir-fried pork",
+          "phonetic": "mǔu phàt",
+          "components": [
+            "w_mu",
+            "w_lesson-24-a4_3"
           ]
         }
       ]
@@ -3704,13 +3814,6 @@
           "phonetic": "khɔ̌ɔng-wǎan"
         },
         {
-          "id": "w_lesson-24-a5_1",
-          "th": "ซุป",
-          "fr": "soupe",
-          "en": "soup",
-          "phonetic": "súp"
-        },
-        {
           "id": "w_lesson-24-a5_2",
           "th": "น้ำแข็ง",
           "fr": "glaçon",
@@ -3724,7 +3827,7 @@
           "th": "ซุปอร่อย",
           "fr": "Soupe délicieuse",
           "en": "Delicious soup",
-          "phonetic": "",
+          "phonetic": "súp à-rɔ̀i",
           "components": [
             "w_lesson-24-a5_1",
             "w_aroi"
@@ -3735,7 +3838,7 @@
           "th": "ขอน้ำแข็ง",
           "fr": "Je voudrais des glaçons",
           "en": "I want ice",
-          "phonetic": "",
+          "phonetic": "khɔ̌ɔ náam-khǎeng",
           "components": [
             "w_kho_req",
             "w_lesson-24-a5_2"
@@ -3746,7 +3849,7 @@
           "th": "กินของหวาน",
           "fr": "Manger un dessert",
           "en": "Eat dessert",
-          "phonetic": "",
+          "phonetic": "kin khɔ̌ɔng-wǎan",
           "components": [
             "w_kin",
             "w_lesson-24-a5_0"
@@ -3757,7 +3860,7 @@
           "th": "ไม่เอาของหวาน",
           "fr": "Ne pas vouloir de dessert",
           "en": "Don't want dessert",
-          "phonetic": "",
+          "phonetic": "mâi ao khɔ̌ɔng-wǎan",
           "components": [
             "w_mai_neg",
             "w_ao",
@@ -3769,7 +3872,7 @@
           "th": "ซุปร้อน",
           "fr": "Soupe chaude",
           "en": "Hot soup",
-          "phonetic": "",
+          "phonetic": "súp rɔ́ɔn",
           "components": [
             "w_lesson-24-a5_1",
             "w_ron"
@@ -9147,13 +9250,6 @@
           "fr": "peut-être",
           "phonetic": "àat-jà",
           "en": "maybe"
-        },
-        {
-          "id": "w_kap",
-          "th": "กับ",
-          "fr": "avec / et",
-          "phonetic": "gàp",
-          "en": "with / and"
         }
       ],
       "phrases": [

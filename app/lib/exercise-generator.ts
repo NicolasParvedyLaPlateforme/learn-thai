@@ -248,12 +248,6 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
   const globalWords = allLessons.flatMap(l => l.words).filter(w => w.id !== 'w_dots');
   const validLessonWords = lesson.words.filter(w => w.id !== 'w_dots');
 
-  // Difficulty settings based on level (0 to 3)
-  const isMasterLevel = level >= 3;
-  const hideHints = level >= 2;
-  const baseWMDistractors = 3 + (level * 2); // lvl0:3, lvl1:5, lvl2:7, lvl3:9
-  const baseSBDistractors = 3 + (level * 2); // lvl0:3, lvl1:5, lvl2:7, lvl3:9
-
   if (lesson.isReview) {
     const currentIdx = allLessons.findIndex(l => l.id === lesson.id);
     let unitStartIdx = 0;
