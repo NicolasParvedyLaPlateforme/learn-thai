@@ -179,11 +179,19 @@ export default function WritingPage() {
                     charHintRegex={charHint?.highlightRegex}
                   />
                 ) : (
-                  <div className="text-xl md:text-2xl text-indigo-500 font-medium tracking-wider">
-                     {(() => {
-                        const matchItem = [...getDictionaryForExercise(), ...getPhrasesForExercise()].find(item => item.th === currentExercise.answer);
-                        return matchItem?.phonetic || currentExercise.question;
-                     })()}
+                  <div className="relative inline-block group">
+                    <div className={`text-xl md:text-2xl text-indigo-500 font-medium tracking-wider ${!writingConfig.disableDictionaryClick ? 'cursor-help border-b-2 border-dashed border-indigo-200 pb-1' : ''}`}>
+                       {(() => {
+                          const matchItem = [...getDictionaryForExercise(), ...getPhrasesForExercise()].find(item => item.th === currentExercise.answer);
+                          return matchItem?.phonetic || currentExercise.question;
+                       })()}
+                    </div>
+                    {!writingConfig.disableDictionaryClick && (
+                      <div className="absolute opacity-0 group-hover:opacity-100 transition-opacity bottom-full left-1/2 -translate-x-1/2 mb-2 px-4 py-2 bg-slate-800 text-white font-thai text-2xl rounded-xl shadow-xl whitespace-nowrap pointer-events-none z-10">
+                        {currentExercise.answer}
+                        <div className="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-slate-800"></div>
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
