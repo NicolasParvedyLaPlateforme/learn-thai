@@ -8,6 +8,8 @@ import courseData from '../data/course.json';
 import { BookOpen, CheckCircle, Star, Play, Crown, RotateCcw, Pencil, X, Unlock, Brain } from 'lucide-react';
 import { CourseData, Lesson } from '../types';
 
+import { WritingConfigModal } from '../components/WritingConfigModal';
+
 const data = courseData as CourseData;
 
 const UNITS = [
@@ -117,6 +119,7 @@ export default function Home() {
   const router = useRouter();
   const { completedLessons, unlockedLessons, lessonLevels, xp, resetLessonLevel, language, setLanguage, unlockLessonManual, autoDetectLanguage } = useProgressStore();
   const [mounted, setMounted] = useState(false);
+  const [isWritingConfigModalOpen, setWritingConfigModalOpen] = useState(false);
   const [selectedLesson, setSelectedLesson] = useState<{lesson: Lesson, isCompleted: boolean, unitColor: string, unitBorder: string} | null>(null);
   const [lessonToUnlock, setLessonToUnlock] = useState<{lesson: Lesson, unitColor: string, unitBorder: string} | null>(null);
   const [modalLevel, setModalLevel] = useState(0);
@@ -188,10 +191,10 @@ export default function Home() {
               <BookOpen size={18} />
               <span className="hidden sm:inline">{mounted && language === 'en' ? 'Pairs' : 'Paires'}</span>
             </Link>
-            <Link href="/writing" className="text-emerald-500 hover:text-emerald-600 bg-emerald-50 hover:bg-emerald-100 px-3 sm:px-4 py-2 rounded-xl flex items-center gap-2 transition-colors">
+            <button onClick={() => setWritingConfigModalOpen(true)} className="text-emerald-500 hover:text-emerald-600 bg-emerald-50 hover:bg-emerald-100 px-3 sm:px-4 py-2 rounded-xl flex items-center gap-2 transition-colors">
               <Pencil size={18} />
               <span className="hidden sm:inline">{mounted && language === 'en' ? "Writing" : "Écriture"}</span>
-            </Link>
+            </button>
             
             {/* Language Switcher */}
             {mounted && (
@@ -540,6 +543,7 @@ export default function Home() {
         </div>
       )}
 
+      <WritingConfigModal isOpen={isWritingConfigModalOpen} onClose={() => setWritingConfigModalOpen(false)} />
     </div>
   );
 }

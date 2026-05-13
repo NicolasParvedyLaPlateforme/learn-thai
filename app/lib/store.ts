@@ -3,6 +3,15 @@ import { persist, createJSONStorage } from 'zustand/middleware';
 
 export type AppLanguage = 'fr' | 'en';
 
+export interface WritingConfig {
+  lessonId: string | 'all';
+  selectedWordIds: string[] | null; // null means all words from the lesson/lessons
+  hideThai: boolean;
+  hideTranslation: boolean;
+  disableDictionaryClick: boolean;
+  hideCharacterHints: boolean;
+}
+
 const safeStorage = {
   getItem: (name: string): string | null => {
     if (typeof window === 'undefined') return null;
@@ -48,6 +57,8 @@ interface ProgressState {
   resetProgress: () => void;
   resetLessonLevel: (lessonId: string) => void;
   markAlphabetSeen: (letter: string) => void;
+  writingConfig: WritingConfig;
+  setWritingConfig: (config: Partial<WritingConfig>) => void;
 }
 
 export const useProgressStore = create<ProgressState>()(
@@ -62,6 +73,15 @@ export const useProgressStore = create<ProgressState>()(
       lessonLevels: {},
       xp: 0,
       seenAlphabets: [],
+      writingConfig: {
+        lessonId: 'all',
+        selectedWordIds: null,
+        hideThai: false,
+        hideTranslation: false,
+        disableDictionaryClick: false,
+        hideCharacterHints: false,
+      },
+      setWritingConfig: (config) => set((state) => ({ writingConfig: { ...state.writingConfig, ...config } })),
       setLanguage: (lang) => set({ language: lang, languageSetByUser: true }),
       autoDetectLanguage: () => {
         const state = get();

@@ -133,19 +133,28 @@ export function getWritingClustersAndGroups(text: string): { characters: string[
   return { characters, groups };
 }
 
-export function generateWritingExercises(allLessons: Lesson[], completedLessonIds: string[], language: string = 'fr'): Exercise[] {
+export function generateWritingExercises(
+  allLessons: Lesson[], 
+  completedLessonIds: string[], 
+  language: string = 'fr',
+  selectedWordIds: string[] | null = null
+): Exercise[] {
   const completedLessons = allLessons.filter(l => completedLessonIds.includes(l.id));
   if (completedLessons.length === 0) return [];
 
-  const candidateItems: { fr: string, th: string }[] = [];
+  const candidateItems: { fr: string, th: string, id: string }[] = [];
   completedLessons.forEach(l => {
-    l.words.forEach(w => candidateItems.push({ fr: language === 'en' ? (w.en || w.fr) : w.fr, th: w.th }));
-    l.phrases.forEach(p => candidateItems.push({ fr: language === 'en' ? (p.en || p.fr) : p.fr, th: p.th }));
+    l.words.forEach(w => candidateItems.push({ fr: language === 'en' ? (w.en || w.fr) : w.fr, th: w.th, id: w.id }));
+    l.phrases.forEach(p => candidateItems.push({ fr: language === 'en' ? (p.en || p.fr) : p.fr, th: p.th, id: p.id }));
   });
 
-  if (candidateItems.length === 0) return [];
+  const filteredItems = selectedWordIds 
+    ? candidateItems.filter(item => selectedWordIds.includes(item.id))
+    : candidateItems;
 
-  const shuffledCandidates = shuffle(candidateItems).slice(0, 20);
+  if (filteredItems.length === 0) return [];
+
+  const shuffledCandidates = shuffle(filteredItems).slice(0, 20);
   
   return shuffledCandidates.map((item, idx) => {
     const { characters, groups } = getWritingClustersAndGroups(item.th.replace(/\s+/g, ''));

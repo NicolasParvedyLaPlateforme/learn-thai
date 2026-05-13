@@ -18,7 +18,7 @@ const data = courseData as CourseData;
 
 export default function WritingPage() {
   const router = useRouter();
-  const { completedLessons, unlockedLessons, completeLesson, language, _hasHydrated } = useProgressStore();
+  const { completedLessons, unlockedLessons, completeLesson, language, _hasHydrated, writingConfig } = useProgressStore();
   
   const [exercises, setExercises] = useState<Exercise[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -35,29 +35,20 @@ export default function WritingPage() {
     const timer = setTimeout(() => {
       setMounted(true);
       if(!initialized) {
-        const params = new URLSearchParams(window.location.search);
-        const lessonId = params.get('lessonId');
-        
         let targetLessons = completedLessons;
         
-        if (lessonId) {
-           const isDev = params.has('dev');
-           const lessonIndex = data.lessons.findIndex(l => l.id === lessonId);
-           const isUnlocked = isDev || lessonIndex === 0 || (lessonIndex > 0 && completedLessons.includes(data.lessons[lessonIndex - 1].id)) || unlockedLessons?.includes(lessonId);
-           
-           if (isUnlocked) {
-             targetLessons = [lessonId];
-           }
+        if (writingConfig.lessonId !== 'all') {
+           targetLessons = [writingConfig.lessonId];
         }
         
         if (targetLessons.length > 0) {
-           setExercises(generateWritingExercises(data.lessons, targetLessons, language));
+           setExercises(generateWritingExercises(data.lessons, targetLessons, language, writingConfig.selectedWordIds));
         }
         initialized = true;
       }
     }, 0);
     return () => clearTimeout(timer);
-  }, [completedLessons, language, _hasHydrated, unlockedLessons]);
+  }, [completedLessons, language, _hasHydrated, unlockedLessons, writingConfig]);
 
   if (!mounted) return <div className="p-8 text-center text-slate-500 font-medium">{language === 'en' ? 'Loading...' : 'Chargement...'}</div>;
 
@@ -95,10 +86,11 @@ export default function WritingPage() {
           completeLesson('writing-dummy', 1);
           
           if (currentIndex >= exercises.length - 1) {
-            const params = new URLSearchParams(window.location.search);
-            const lessonId = params.get('lessonId');
-            const targetLessons = lessonId ? [lessonId] : completedLessons;
-            setExercises(generateWritingExercises(data.lessons, targetLessons, language));
+            let targetLessons = completedLessons;
+            if (writingConfig.lessonId !== 'all') {
+               targetLessons = [writingConfig.lessonId];
+            }
+            setExercises(generateWritingExercises(data.lessons, targetLessons, language, writingConfig.selectedWordIds));
             setCurrentIndex(0);
           } else {
             setCurrentIndex(currentIndex + 1);
@@ -173,17 +165,27 @@ export default function WritingPage() {
               <h2 className="text-2xl md:text-3xl font-extrabold text-slate-800 mb-4 md:mb-6 text-center md:text-left">
                 {language === 'en' ? 'Write this word in Thai' : 'Écrivez ce mot en thaï'}
               </h2>
-              <div className="relative inline-block pb-1 w-full text-center md:text-left">
-                <SentenceWithHints 
-                  text={currentExercise.question} 
-                  dictionary={getDictionaryForExercise()} 
-                  phrases={getPhrasesForExercise()}
-                  isSentence={false}
-                  exerciseOptions={[]} // No vocab needed for hints here as it's writing
-                  hideHints={false}
-                  alwaysShowPhonetic={true}
-                  charHintRegex={charHint?.highlightRegex}
-                />
+              <div className="relative inline-block pb-1 w-full text-center md:text-left min-h-[40px]">
+                {!writingConfig.hideTranslation ? (
+                  <SentenceWithHints 
+                    text={currentExercise.question} 
+                    dictionary={getDictionaryForExercise()} 
+                    phrases={getPhrasesForExercise()}
+                    isSentence={false}
+                    exerciseOptions={[]} // No vocab needed for hints here as it's writing
+                    hideHints={false}
+                    disableTooltips={writingConfig.disableDictionaryClick}
+                    alwaysShowPhonetic={true}
+                    charHintRegex={charHint?.highlightRegex}
+                  />
+                ) : (
+                  <div className="text-xl md:text-2xl text-indigo-500 font-medium tracking-wider">
+                     {(() => {
+                        const matchItem = [...getDictionaryForExercise(), ...getPhrasesForExercise()].find(item => item.th === currentExercise.answer);
+                        return matchItem?.phonetic || currentExercise.question;
+                     })()}
+                  </div>
+                )}
               </div>
               <div className="mt-8 md:mt-10">
                 <div className="text-4xl md:text-5xl font-thai font-medium flex flex-wrap gap-x-1 gap-y-3 leading-normal">
@@ -217,8 +219,12 @@ export default function WritingPage() {
                           } else {
                             color = "text-rose-500";
                           }
-                        } else if (idx === selectedAnswer.length) {
-                          color = "text-orange-500";
+                        } else {
+                          if (writingConfig.hideThai) {
+                            color = "text-transparent";
+                          } else if (idx === selectedAnswer.length) {
+                            color = "text-orange-500";
+                          }
                         }
 
                         // We handle combining marks using formatCombiningChar
@@ -258,7 +264,7 @@ export default function WritingPage() {
                 </div>
               </div>
               
-              {charHint && !isChecking && (
+              {!writingConfig.hideCharacterHints && charHint && !isChecking && (
                 <div className="mt-6 p-4 rounded-xl border border-orange-200 bg-orange-50 flex items-start gap-3">
                   <div className="text-xl">💡</div>
                   <div className="text-orange-800 text-sm font-medium leading-relaxed">
