@@ -6,7 +6,7 @@ import { useProgressStore } from '../../lib/store';
 import courseData from '../../data/course.json';
 import { generateExercises } from '../../lib/exercise-generator';
 import { Exercise, Lesson, CourseData, Word, Phrase } from '../../types';
-import { X, Check, Star, Crown } from 'lucide-react';
+import { X, Check, Star, Crown, Volume2 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { playThaiTTS, preloadThaiVoices } from '../../lib/tts';
 import { motion, AnimatePresence } from 'motion/react';
@@ -26,7 +26,7 @@ function LessonPageContent() {
   const params = useParams();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { completeLesson, lessonLevels, language, completedLessons, unlockedLessons, _hasHydrated } = useProgressStore();
+  const { completeLesson, lessonLevels, language, completedLessons, unlockedLessons, _hasHydrated, showRomanization, setShowRomanization } = useProgressStore();
   
   const lessonId = params.id as string;
   const requestedLevelStr = searchParams.get('level');
@@ -246,6 +246,17 @@ function LessonPageContent() {
             ) : (
               <span className="flex items-center text-amber-500"><Crown size={18} className="fill-current stroke-[2.5]" /></span>
             )}
+            
+            {!currentExercise?.forceHideRomanization && (
+              <button 
+                onClick={() => setShowRomanization(!showRomanization)}
+                className={`w-9 h-9 flex flex-col items-center justify-center rounded-xl font-bold border-2 transition-colors ${showRomanization ? "border-indigo-200 text-indigo-600 bg-indigo-50 hover:bg-indigo-100" : "border-slate-200 text-slate-400 bg-white hover:bg-slate-100"}`}
+                title={showRomanization ? (language === 'en' ? "Hide Pronunciation" : "Masquer la prononciation") : (language === 'en' ? "Show Pronunciation" : "Afficher la prononciation")}
+              >
+                <span className="text-xs font-mono">{showRomanization ? 'aA' : 'ก'}</span>
+              </button>
+            )}
+
             <button 
               onClick={() => setShowInfoModal(true)}
               className="text-slate-400 hover:text-indigo-500 transition-colors p-1"
@@ -276,7 +287,7 @@ function LessonPageContent() {
                       <div key={word.id} className="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between hover:border-emerald-200 transition-colors cursor-pointer" onClick={() => playThaiTTS(word.th)}>
                          <div>
                             <div className="text-xl font-thai font-semibold text-emerald-600">{word.th}</div>
-                            <div className="text-sm font-bold text-slate-500 mt-1">{word.phonetic}</div>
+                            {showRomanization && <div className="text-sm font-bold text-slate-500 mt-1">{word.phonetic}</div>}
                          </div>
                          <div className="text-right text-slate-700 font-medium">
                             {language === 'en' ? (word.en || word.fr) : word.fr}
@@ -287,7 +298,7 @@ function LessonPageContent() {
                       <div key={phrase.id} className="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between hover:border-emerald-200 transition-colors cursor-pointer gap-2" onClick={() => playThaiTTS(phrase.th)}>
                          <div>
                             <div className="text-xl font-thai font-semibold text-emerald-600">{phrase.th}</div>
-                            <div className="text-sm font-bold text-slate-500 mt-1">{phrase.phonetic}</div>
+                            {showRomanization && <div className="text-sm font-bold text-slate-500 mt-1">{phrase.phonetic}</div>}
                          </div>
                          <div className="sm:text-right text-slate-700 font-medium">
                             {language === 'en' ? (phrase.en || phrase.fr) : phrase.fr}
@@ -336,7 +347,7 @@ function LessonPageContent() {
                           onClick={() => playThaiTTS(currentExercise.answer)}
                         >
                           <span className="font-thai text-3xl md:text-4xl text-emerald-600 font-semibold">{currentExercise.answer}</span>
-                          {currentExercise.introItem && (
+                          {currentExercise.introItem && showRomanization && !currentExercise.forceHideRomanization && (
                             <div className="flex flex-col border-l-2 border-emerald-100 pl-3">
                                <span className="font-medium text-slate-500 text-sm">{language === 'en' ? 'Pronunciation' : 'Prononciation'}</span>
                                <span className="font-bold text-slate-700">{currentExercise.introItem.phonetic}</span>
@@ -348,36 +359,63 @@ function LessonPageContent() {
                         </div>
                       </div>
                     ) : currentExercise.type === 'pair-matching' ? null : (
-                      <SentenceWithHints 
-                        text={currentExercise.question} 
-                        dictionary={lesson.words} 
-                        phrases={lesson.phrases}
-                        isSentence={currentExercise.type === 'sentence-builder'}
-                        exerciseOptions={currentExercise.options as Word[]}
-                        hideHints={currentExercise.hideHints}
-                        disableTooltips={currentExercise.disableTooltips || currentExercise.blindMode}
-                        hideColors={currentExercise.hideColors}
-                        alwaysShowPhonetic={true}
-                        answerTh={currentExercise.answer}
-                        correctComponents={currentExercise.correctComponents}
-                      />
-                    )}
+                      (() => {
+                        let currentThaiWordForAudio: string | undefined;
+                        if (currentExercise.type === 'writing' && currentExercise.blindMode && currentExercise.correctComponents && !isChecking) {
+                            try {
+                                const segmenter = new (globalThis as any).Intl.Segmenter('th', { granularity: 'word' });
+                                const fullTextNoSpaces = currentExercise.correctComponents.join('');
+                                const segments: any[] = Array.from(segmenter.segment(fullTextNoSpaces)).filter((s:any) => s.segment.trim().length > 0);
+                                
+                                if (segments.length > 1) {
+                                  const selectedLen = Array.isArray(selectedAnswer) ? selectedAnswer.length : (selectedAnswer as string || '').replace(/\s+/g, '').length;
+                                  const currentStrLen = currentExercise.correctComponents.slice(0, selectedLen).join('').length;
 
-                    {currentExercise.type === 'writing' && currentExercise.blindMode && currentExercise.correctComponents && !isChecking && (
-                       <button 
-                         className="mt-4 flex items-center justify-center gap-2 bg-indigo-50 border border-indigo-200 text-indigo-600 px-4 py-2 rounded-xl text-sm font-semibold hover:bg-indigo-100 transition-colors"
-                         onClick={() => {
-                            const selectedLen = (selectedAnswer as string[] || []).length;
-                            if (selectedLen < currentExercise.correctComponents!.length) {
-                               playThaiTTS(currentExercise.correctComponents![selectedLen]);
-                            } else {
-                               playThaiTTS(currentExercise.answer); // Fallback to full word if finished typing
-                            }
-                         }}
-                       >
-                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
-                         {language === 'en' ? 'Sound of next letter' : 'Son de la prochaine lettre'}
-                       </button>
+                                  let currentWordSegment = segments.find(s => s.index <= currentStrLen && s.index + s.segment.length > currentStrLen);
+                                  if (!currentWordSegment) {
+                                      currentWordSegment = segments.find(s => s.index > currentStrLen) || segments[segments.length - 1];
+                                  }
+                                  if (currentWordSegment) {
+                                      currentThaiWordForAudio = currentWordSegment.segment;
+                                  }
+                                }
+                            } catch(e) {}
+                        }
+
+                        return (
+                          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4">
+                            <div className="flex-1 w-full flex justify-center md:justify-start">
+                              <SentenceWithHints 
+                                text={currentExercise.question} 
+                                dictionary={lesson.words} 
+                                phrases={lesson.phrases}
+                                isSentence={currentExercise.type === 'sentence-builder'}
+                                exerciseOptions={currentExercise.options as Word[]}
+                                hideHints={currentExercise.hideHints}
+                                disableTooltips={currentExercise.disableTooltips || currentExercise.blindMode}
+                                hideColors={currentExercise.hideColors}
+                                alwaysShowPhonetic={true}
+                                answerTh={currentExercise.answer}
+                                correctComponents={currentExercise.correctComponents}
+                                isChecking={isChecking}
+                                forceHideRomanization={currentExercise.forceHideRomanization}
+                                currentThaiWordForAudio={currentThaiWordForAudio}
+                                rightElement={
+                                  currentExercise.type === 'writing' && currentExercise.blindMode && currentExercise.correctComponents && !isChecking && (
+                                    <button 
+                                      onClick={() => playThaiTTS(currentExercise.answer)}
+                                      className="text-emerald-500 hover:text-emerald-600 bg-emerald-50 p-2 rounded-full transition-colors flex-shrink-0"
+                                      title={language === 'en' ? 'Listen to full phrase' : 'Écouter la phrase entière'}
+                                    >
+                                      <Volume2 size={24} strokeWidth={2.5} />
+                                    </button>
+                                  )
+                                }
+                              />
+                            </div>
+                          </div>
+                        );
+                      })()
                     )}
                   </div>
                 </div>
@@ -397,6 +435,7 @@ function LessonPageContent() {
                     key={currentExercise.id}
                     pairs={currentExercise.pairs as Word[]}
                     mode={currentExercise.pairMatchMode}
+                    forceHideRomanization={currentExercise.forceHideRomanization}
                     onComplete={() => {
                       if (currentIndex < exercises.length - 1) {
                         setCurrentIndex(prev => prev + 1);

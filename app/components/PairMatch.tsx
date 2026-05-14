@@ -10,10 +10,11 @@ interface PairMatchProps {
   pairs: Word[];
   mode?: 'normal' | 'audio-only' | 'script-only';
   onComplete: () => void;
+  forceHideRomanization?: boolean;
 }
 
-export default function PairMatch({ pairs, mode = 'normal', onComplete }: PairMatchProps) {
-  const { language } = useProgressStore();
+export default function PairMatch({ pairs, mode = 'normal', onComplete, forceHideRomanization }: PairMatchProps) {
+  const { language, showRomanization } = useProgressStore();
   const [leftCards, setLeftCards] = useState<{id: string, text: string, type: 'left'}[]>([]);
   const [rightCards, setRightCards] = useState<{id: string, text: string, phonetic: string, type: 'right'}[]>([]);
   
@@ -163,7 +164,7 @@ export default function PairMatch({ pairs, mode = 'normal', onComplete }: PairMa
                   ) : (
                     <>
                       <span className="text-xl sm:text-2xl">{formatCombiningChar(card.text)}</span>
-                      {mode !== 'script-only' && (
+                      {mode !== 'script-only' && (!forceHideRomanization && showRomanization || isMatched) && (
                         <span className="text-xs sm:text-sm opacity-60 font-mono mt-1 text-slate-500">[{card.phonetic}]</span>
                       )}
                     </>

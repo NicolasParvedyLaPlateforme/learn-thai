@@ -11,7 +11,7 @@ import conversationsData from '../../data/conversations.json';
 
 export default function ConversationExercisePage() {
   const { id } = useParams();
-  const { language, addXp } = useProgressStore();
+  const { language, addXp, showRomanization } = useProgressStore();
   const [mounted, setMounted] = useState(false);
   
   const conversation = conversationsData.conversations.find(c => c.id === id);
@@ -185,7 +185,7 @@ export default function ConversationExercisePage() {
                     {/* Phonetics and translation (shown when finished) */}
                     {isFinished && (
                       <div className={`px-2 flex flex-col gap-1 ${isSpeakerA ? 'text-left' : 'text-right'}`}>
-                        <span className="text-sm font-bold text-orange-500">{dialog.phonetic}</span>
+                        {showRomanization && <span className="text-sm font-bold text-orange-500">{dialog.phonetic}</span>}
                         <span className="text-sm font-medium text-slate-500">
                           {language === 'en' ? dialog.en : dialog.fr}
                         </span>

@@ -58,6 +58,8 @@ interface ProgressState {
   resetProgress: () => void;
   resetLessonLevel: (lessonId: string) => void;
   markAlphabetSeen: (letter: string) => void;
+  showRomanization: boolean;
+  setShowRomanization: (show: boolean) => void;
   writingConfig: WritingConfig;
   setWritingConfig: (config: Partial<WritingConfig>) => void;
 }
@@ -74,6 +76,8 @@ export const useProgressStore = create<ProgressState>()(
       lessonLevels: {},
       xp: 0,
       seenAlphabets: [],
+      showRomanization: true,
+      setShowRomanization: (show) => set({ showRomanization: show }),
       writingConfig: {
         lessonId: 'all',
         selectedWordIds: null,

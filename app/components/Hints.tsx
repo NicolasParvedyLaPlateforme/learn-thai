@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import { Volume2 } from 'lucide-react';
 import { Word, Phrase } from '../types';
 import { playThaiTTS } from '../lib/tts';
 import { ColoredPhonetic } from './ColoredPhonetic';
@@ -87,8 +88,8 @@ export function TooltipHint({ children, tooltipContent, className = '', audioTex
 }
 
 // A simple component to render the french question with tooltips (hints)
-export function SentenceWithHints({text, dictionary, phrases, isSentence, exerciseOptions, hideHints, disableTooltips, hideColors, alwaysShowPhonetic, answerTh, correctComponents, charHintRegex}: {text: string, dictionary: Word[], phrases: Phrase[], isSentence: boolean, exerciseOptions: Word[], hideHints?: boolean, disableTooltips?: boolean, hideColors?: boolean, alwaysShowPhonetic?: boolean, answerTh?: string, correctComponents?: string[], charHintRegex?: RegExp}) {
-  const { language } = useProgressStore();
+export function SentenceWithHints({text, dictionary, phrases, isSentence, exerciseOptions, hideHints, disableTooltips, hideColors, alwaysShowPhonetic, answerTh, correctComponents, charHintRegex, isChecking, forceHideRomanization, currentThaiWordForAudio, rightElement}: {text: string, dictionary: Word[], phrases: Phrase[], isSentence: boolean, exerciseOptions: Word[], hideHints?: boolean, disableTooltips?: boolean, hideColors?: boolean, alwaysShowPhonetic?: boolean, answerTh?: string, correctComponents?: string[], charHintRegex?: RegExp, isChecking?: boolean, forceHideRomanization?: boolean, currentThaiWordForAudio?: string, rightElement?: React.ReactNode}) {
+  const { language, showRomanization } = useProgressStore();
   // Try to match the ENTIRE phrase/word first
   const exactPhrase = phrases.find(p => p.fr.toLowerCase() === text.toLowerCase() || (p.en?.toLowerCase() === text.toLowerCase()));
   const exactWord = dictionary.find(w => w.fr.toLowerCase() === text.toLowerCase() || (w.en?.toLowerCase() === text.toLowerCase()));
@@ -101,24 +102,102 @@ export function SentenceWithHints({text, dictionary, phrases, isSentence, exerci
     return disableTooltips ? "" : "border-b-2 border-dotted border-slate-300";
   };
   
+  const shouldShowPhonetic = isChecking || (alwaysShowPhonetic && showRomanization && !forceHideRomanization);
+
+  let highlightedText: React.ReactNode = text;
+  let wordHighlighted = false;
+  
+  if (currentThaiWordForAudio) {
+      // find the dictionary entry
+      const currentDictWord = [...dictionary, ...phrases, ...exerciseOptions].find(w => w.th === currentThaiWordForAudio);
+      if (currentDictWord) {
+         // the mapping word to highlight:
+         const translatedWord = language === 'en' ? (currentDictWord.en || currentDictWord.fr) : currentDictWord.fr;
+         if (translatedWord) {
+             // 1. Try exact match
+             // 2. Try split by slashes (e.g. "bien / à l'aise")
+             // 3. Try individual words > 3 chars (e.g. "particule femme" -> "femme")
+             const searchPhrases = [
+               translatedWord,
+               ...translatedWord.split('/').map(s => s.trim()),
+               ...translatedWord.split(/[\s/]+/).filter(s => s.length > 3)
+             ];
+
+             for (const searchPhrase of searchPhrases) {
+               if (!searchPhrase) continue;
+               
+               const escapedWord = searchPhrase.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+               const isLetterStart = /^\\w/i.test(searchPhrase);
+               const isLetterEnd = /\\w$/i.test(searchPhrase);
+               
+               const prefix = isLetterStart ? `\\b` : ``;
+               const suffix = isLetterEnd ? `\\b` : ``;
+               
+               const regex = new RegExp(`(${prefix}${escapedWord}${suffix})`, 'i');
+               const parts = text.split(regex);
+               
+               if (parts.length > 1) { // found it
+                  highlightedText = parts.map((part, i) => {
+                     if (part.toLowerCase() === searchPhrase.toLowerCase()) {
+                        wordHighlighted = true;
+                        return (
+                           <span key={i} className="relative inline-block border-b-[3px] border-sky-400 text-sky-600 z-20 pb-0.5 font-bold">
+                              {part}
+                              <div className="absolute left-1/2 -translate-x-1/2 top-full mt-1.5 flex flex-col items-center">
+                                 <div className="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[6px] border-b-sky-200 -mb-[1px] z-10" />
+                                 <button onClick={(e) => {
+                                   e.preventDefault();
+                                   e.stopPropagation();
+                                   playThaiTTS(currentThaiWordForAudio);
+                                 }} className="bg-sky-50 border-2 border-sky-200 text-sky-600 p-1.5 rounded-full shadow-sm hover:bg-sky-100 hover:scale-105 active:scale-95 transition-all outline-none">
+                                    <Volume2 size={18} strokeWidth={2.5} />
+                                 </button>
+                              </div>
+                           </span>
+                        );
+                     }
+                     return part;
+                  });
+                  break; // Stop searching once we found a match
+               }
+             }
+         }
+      }
+  }
+
   // Create the main text content, always wrapping it in a TooltipHint if we have the translation
+  const innerText = (
+    <span className={`inline-block ${getDottedClass()}`}>
+      {highlightedText}
+    </span>
+  );
+
   const mainContent = (
-    <span className="flex flex-wrap justify-center md:justify-start items-end gap-x-2 gap-y-4 leading-relaxed text-xl md:text-2xl font-medium">
+    <span className="flex flex-wrap justify-center md:justify-start items-center gap-x-2 gap-y-6 leading-relaxed text-xl md:text-2xl font-medium pt-2 pb-6 relative">
       {exactMatch ? (
-        alwaysShowPhonetic ? (
-          <span className="inline-flex flex-col w-full text-center sm:text-left sm:w-auto relative group">
-            <span className={`inline-block ${getDottedClass()}`}>{text}</span>
-            <span className="text-sm md:text-base font-medium tracking-wide">[<ColoredPhonetic phonetic={exactMatch.phonetic} charHintRegex={charHintRegex} hideColors={hideColors} />]</span>
+        shouldShowPhonetic ? (
+          <span className="inline-flex flex-col text-center sm:text-left relative group">
+            {innerText}
+            <span className="text-sm md:text-base font-medium tracking-wide mt-1">[<ColoredPhonetic phonetic={exactMatch.phonetic} charHintRegex={charHintRegex} hideColors={hideColors} />]</span>
           </span>
         ) : (
-          <span className={`inline-block ${getDottedClass()}`}>
-            {text}
-          </span>
+          innerText
         )
       ) : (
-        <span className={`inline-block ${getDottedClass()}`}>
-          {text}
-        </span>
+        innerText
+      )}
+      {rightElement && <span className="ml-2 inline-flex items-center self-center shrink-0">{rightElement}</span>}
+      {currentThaiWordForAudio && !wordHighlighted && (
+        <div className="absolute left-1/2 -translate-x-1/2 top-full -mt-2 flex flex-col items-center z-10">
+           <div className="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[6px] border-b-sky-200 -mb-[1px] z-10" />
+           <button onClick={(e) => {
+             e.preventDefault();
+             e.stopPropagation();
+             playThaiTTS(currentThaiWordForAudio);
+           }} className="bg-sky-50 border-2 border-sky-200 text-sky-600 p-1.5 rounded-full shadow-sm hover:bg-sky-100 hover:scale-105 active:scale-95 transition-all outline-none">
+              <Volume2 size={18} strokeWidth={2.5} />
+           </button>
+        </div>
       )}
     </span>
   );
@@ -131,7 +210,7 @@ export function SentenceWithHints({text, dictionary, phrases, isSentence, exerci
           tooltipContent={
             <>
               <span className="font-thai text-lg font-bold text-slate-800">{tooltipTranslation}</span>
-              {phonetic && <span className="text-slate-500 text-xs ml-2">(<ColoredPhonetic phonetic={phonetic} charHintRegex={charHintRegex} hideColors={hideColors} />)</span>}
+              {phonetic && (!forceHideRomanization && showRomanization || isChecking) && <span className="text-slate-500 text-xs ml-2">(<ColoredPhonetic phonetic={phonetic} charHintRegex={charHintRegex} hideColors={hideColors} />)</span>}
             </>
           }
           audioText={tooltipTranslation}
@@ -152,7 +231,13 @@ export function SentenceWithHints({text, dictionary, phrases, isSentence, exerci
               <TooltipHint 
                 key={i}
                 className="inline-flex items-center gap-1.5 bg-white px-2 py-1 rounded border border-slate-200 shadow-sm"
-                tooltipContent={<><span className="text-slate-500 font-medium">{language === 'en' ? 'Pronunciation:' : 'Prononciation :'}</span> <span className="font-bold text-base"><ColoredPhonetic phonetic={w.phonetic} /></span></>}
+                tooltipContent={
+                  (!forceHideRomanization && showRomanization || isChecking) ? (
+                    <><span className="text-slate-500 font-medium">{language === 'en' ? 'Pronunciation:' : 'Prononciation :'}</span> <span className="font-bold text-base"><ColoredPhonetic phonetic={w.phonetic} /></span></>
+                  ) : (
+                    <span className="font-thai text-lg text-slate-800">{w.th}</span>
+                  )
+                }
                 audioText={w.th}
               >
                 <span className="font-thai text-lg md:text-xl text-emerald-600 font-semibold">{w.th}</span> 

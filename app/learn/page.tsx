@@ -117,7 +117,7 @@ const UNITS = [
 
 export default function Home() {
   const router = useRouter();
-  const { completedLessons, unlockedLessons, lessonLevels, xp, resetLessonLevel, language, setLanguage, unlockLessonManual, autoDetectLanguage } = useProgressStore();
+  const { completedLessons, unlockedLessons, lessonLevels, xp, resetLessonLevel, language, setLanguage, unlockLessonManual, autoDetectLanguage, showRomanization, setShowRomanization } = useProgressStore();
   const [mounted, setMounted] = useState(false);
   const [isWritingConfigModalOpen, setWritingConfigModalOpen] = useState(false);
   const [isPracticeModalOpen, setPracticeModalOpen] = useState(false);
@@ -181,11 +181,22 @@ export default function Home() {
           
           <div className="flex items-center gap-2 sm:gap-4 font-bold">
             
+            {/* Phonetic/Romanization Toggle */}
+            {mounted && (
+              <button 
+                onClick={() => setShowRomanization(!showRomanization)}
+                className={`ml-2 w-10 h-10 flex flex-col items-center justify-center rounded-xl font-bold border-2 transition-colors shadow-sm ${showRomanization ? "border-indigo-200 text-indigo-600 bg-indigo-50 hover:bg-indigo-100" : "border-slate-200 text-slate-400 bg-white hover:bg-slate-100"}`}
+                title={showRomanization ? (language === 'en' ? "Hide Pronunciation" : "Masquer la prononciation") : (language === 'en' ? "Show Pronunciation" : "Afficher la prononciation")}
+              >
+                <span className="text-xs font-mono">{showRomanization ? 'aA' : 'ก'}</span>
+              </button>
+            )}
+
             {/* Language Switcher */}
             {mounted && (
               <button 
                 onClick={() => setLanguage(language === 'fr' ? 'en' : 'fr')}
-                className="ml-2 w-10 h-10 flex flex-col items-center justify-center rounded-xl font-bold border-2 border-slate-200 text-slate-500 hover:bg-slate-100 transition-colors shadow-sm"
+                className="ml-2 w-10 h-10 flex flex-col items-center justify-center rounded-xl font-bold border-2 border-slate-200 bg-white text-slate-500 hover:bg-slate-100 transition-colors shadow-sm"
                 title={language === 'fr' ? "Switch to English" : "Passer en Français"}
               >
                 {language === 'fr' ? 'FR' : 'EN'}

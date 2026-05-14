@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 import { Exercise } from '../../../types';
 import { useProgressStore } from '../../../lib/store';
-import { Keyboard, Delete } from 'lucide-react';
+import { Keyboard, Delete, Volume2, ArrowUp } from 'lucide-react';
+import { playThaiTTS } from '../../../lib/tts';
 
 import { formatCombiningChar } from '../../../lib/alphabet-utils';
 
@@ -10,9 +11,10 @@ interface Props {
   selected: string;
   onChange: (val: string) => void;
   disabled: boolean;
+  isChecking?: boolean;
 }
 
-export default function FreeTypingInput({ exercise, selected, onChange, disabled }: Props) {
+export default function FreeTypingInput({ exercise, selected, onChange, disabled, isChecking }: Props) {
   const { language } = useProgressStore();
   const [showVirtual, setShowVirtual] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -48,25 +50,50 @@ export default function FreeTypingInput({ exercise, selected, onChange, disabled
 
   return (
     <div className="flex flex-col w-full max-w-2xl mx-auto items-center">
-      <div className="relative w-full mb-6 flex">
-        <input 
-          ref={inputRef}
-          type="text"
-          value={selected}
-          onChange={(e) => onChange(e.target.value)}
-          disabled={disabled}
-          className="w-full text-center font-thai text-3xl md:text-4xl py-4 px-6 md:py-6 border-4 border-slate-200 rounded-2xl focus:outline-none focus:border-indigo-400 focus:ring-4 focus:ring-indigo-100 transition-all text-slate-800 disabled:opacity-50 disabled:bg-slate-50"
-          placeholder={language === 'en' ? "Type in Thai..." : "Tapez en Thaï..."}
-          autoFocus
-          dir="ltr"
-        />
-        <button 
-          onClick={() => setShowVirtual(!showVirtual)}
-          className={`absolute right-4 top-1/2 -translate-y-1/2 p-2 sm:p-3 rounded-xl transition-all ${showVirtual ? 'bg-indigo-100 text-indigo-600' : 'bg-slate-100 text-slate-400 hover:text-slate-600 hover:bg-slate-200'}`}
-          title={language === 'en' ? "Toggle Virtual Keyboard" : "Basculer le clavier virtuel"}
-        >
-          <Keyboard size={24} />
-        </button>
+      <div className="relative w-full flex flex-col mb-6">
+        <div className="flex gap-3 items-center w-full justify-center">
+          <div className="relative flex-grow">
+            <input 
+              ref={inputRef}
+              type="text"
+              value={selected}
+              onChange={(e) => onChange(e.target.value)}
+              disabled={disabled}
+              className="w-full text-center font-thai text-3xl md:text-4xl py-4 px-6 md:py-6 border-4 border-slate-200 rounded-2xl focus:outline-none focus:border-indigo-400 focus:ring-4 focus:ring-indigo-100 transition-all text-slate-800 disabled:opacity-50 disabled:bg-slate-50"
+              placeholder={language === 'en' ? "Type in Thai..." : "Tapez en Thaï..."}
+              autoFocus
+              dir="ltr"
+            />
+            <button 
+              onClick={() => setShowVirtual(!showVirtual)}
+              className={`absolute right-3 top-1/2 -translate-y-1/2 p-2 sm:p-2 rounded-lg transition-all ${showVirtual ? 'bg-indigo-100 text-indigo-600' : 'bg-slate-100 text-slate-400 hover:text-slate-600 hover:bg-slate-200'}`}
+              title={language === 'en' ? "Toggle Virtual Keyboard" : "Basculer le clavier virtuel"}
+            >
+              <Keyboard size={24} />
+            </button>
+          </div>
+          {exercise.type === 'writing' && exercise.blindMode && exercise.correctComponents && !isChecking && (
+            <button 
+              className="flex items-center justify-center gap-1 bg-indigo-50 border border-indigo-200 text-indigo-600 p-3 sm:px-4 sm:py-3 rounded-xl sm:text-sm font-semibold hover:bg-indigo-100 transition-colors flex-shrink-0 self-stretch"
+              onClick={() => {
+                const selLen = selected.replace(/\s+/g, '').length;
+                const fullText = exercise.correctComponents!.join('');
+                if (selLen < fullText.length) {
+                  // We can't perfectly map to components since FreeTyping is unconstrained, but we can try 
+                  // just using the fullText string length
+                  const targetStr = fullText.charAt(selLen);
+                  playThaiTTS(targetStr);
+                } else {
+                  playThaiTTS(exercise.answer);
+                }
+              }}
+              title={language === 'en' ? 'Sound of next letter' : 'Son de la prochaine lettre'}
+            >
+              <Volume2 size={24} strokeWidth={2.5} />
+              <span className="font-bold text-lg leading-none">A</span>
+            </button>
+          )}
+        </div>
       </div>
 
       {showVirtual && (

@@ -6,7 +6,7 @@ import { useProgressStore } from '../lib/store';
 import courseData from '../data/course.json';
 import { generateWritingExercises } from '../lib/exercise-generator';
 import { Exercise, CourseData, Word } from '../types';
-import { X, Check } from 'lucide-react';
+import { X, Check, Volume2 } from 'lucide-react';
 import { playThaiTTS } from '../lib/tts';
 
 import { getCharacterHint } from '../lib/phonetic-mapper';
@@ -18,7 +18,7 @@ const data = courseData as CourseData;
 
 export default function WritingPage() {
   const router = useRouter();
-  const { completedLessons, unlockedLessons, completeLesson, language, _hasHydrated, writingConfig } = useProgressStore();
+  const { completedLessons, unlockedLessons, completeLesson, language, _hasHydrated, writingConfig, showRomanization, setShowRomanization } = useProgressStore();
   
   const [exercises, setExercises] = useState<Exercise[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -148,6 +148,15 @@ export default function WritingPage() {
               style={{ width: `${progress}%` }}
             />
           </div>
+          {!currentExercise?.forceHideRomanization && (
+            <button 
+              onClick={() => setShowRomanization(!showRomanization)}
+              className={`mr-2 w-9 h-9 flex flex-col items-center justify-center rounded-xl font-bold border-2 transition-colors ${showRomanization ? "border-indigo-200 text-indigo-600 bg-indigo-50 hover:bg-indigo-100" : "border-slate-200 text-slate-400 bg-white hover:bg-slate-100"}`}
+              title={showRomanization ? (language === 'en' ? "Hide Pronunciation" : "Masquer la prononciation") : (language === 'en' ? "Show Pronunciation" : "Afficher la prononciation")}
+            >
+              <span className="text-xs font-mono">{showRomanization ? 'aA' : 'ก'}</span>
+            </button>
+          )}
           <div className="font-bold text-slate-400">{language === 'en' ? 'Writing ∞' : 'Écriture ∞'}</div>
         </div>
       </header>
@@ -165,7 +174,7 @@ export default function WritingPage() {
               <h2 className="text-2xl md:text-3xl font-extrabold text-slate-800 mb-4 md:mb-6 text-center md:text-left">
                 {language === 'en' ? 'Write this word in Thai' : 'Écrivez ce mot en thaï'}
               </h2>
-              <div className="relative inline-block pb-1 w-full text-center md:text-left min-h-[40px]">
+              <div className="relative pb-1 w-full text-center md:text-left min-h-[40px]">
                 {!writingConfig.hideTranslation ? (
                   <SentenceWithHints 
                     text={currentExercise.question} 
@@ -177,20 +186,44 @@ export default function WritingPage() {
                     disableTooltips={writingConfig.disableDictionaryClick}
                     alwaysShowPhonetic={true}
                     charHintRegex={charHint?.highlightRegex}
+                    isChecking={isChecking}
+                    forceHideRomanization={currentExercise.forceHideRomanization}
+                    rightElement={
+                      !isChecking ? (
+                        <button 
+                           onClick={() => playThaiTTS(currentExercise.answer)}
+                           className="text-emerald-500 hover:text-emerald-600 bg-emerald-50 p-2 rounded-full transition-colors flex-shrink-0"
+                           title={language === 'en' ? 'Listen to full phrase' : 'Écouter la phrase entière'}
+                        >
+                           <Volume2 size={24} strokeWidth={2.5} />
+                        </button>
+                      ) : undefined
+                    }
                   />
                 ) : (
-                  <div className="relative inline-block group">
-                    <div className={`text-xl md:text-2xl text-indigo-500 font-medium tracking-wider ${!writingConfig.disableDictionaryClick ? 'cursor-help border-b-2 border-dashed border-indigo-200 pb-1' : ''}`}>
-                       {(() => {
-                          const matchItem = [...getDictionaryForExercise(), ...getPhrasesForExercise()].find(item => item.th === currentExercise.answer);
-                          return matchItem?.phonetic || currentExercise.question;
-                       })()}
-                    </div>
-                    {!writingConfig.disableDictionaryClick && (
-                      <div className="absolute opacity-0 group-hover:opacity-100 transition-opacity bottom-full left-1/2 -translate-x-1/2 mb-2 px-4 py-2 bg-slate-800 text-white font-thai text-2xl rounded-xl shadow-xl whitespace-nowrap pointer-events-none z-10">
-                        {currentExercise.answer}
-                        <div className="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-slate-800"></div>
+                  <div className="flex items-center justify-center md:justify-start gap-4">
+                    <div className="relative inline-block group">
+                      <div className={`text-xl md:text-2xl text-indigo-500 font-medium tracking-wider ${!writingConfig.disableDictionaryClick ? 'cursor-help border-b-2 border-dashed border-indigo-200 pb-1' : ''}`}>
+                         {(() => {
+                            const matchItem = [...getDictionaryForExercise(), ...getPhrasesForExercise()].find(item => item.th === currentExercise.answer);
+                            return matchItem?.phonetic || currentExercise.question;
+                         })()}
                       </div>
+                      {!writingConfig.disableDictionaryClick && (
+                        <div className="absolute opacity-0 group-hover:opacity-100 transition-opacity bottom-full left-1/2 -translate-x-1/2 mb-2 px-4 py-2 bg-slate-800 text-white font-thai text-2xl rounded-xl shadow-xl whitespace-nowrap pointer-events-none z-10">
+                          {currentExercise.answer}
+                          <div className="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-slate-800"></div>
+                        </div>
+                      )}
+                    </div>
+                    {!isChecking && (
+                      <button 
+                         onClick={() => playThaiTTS(currentExercise.answer)}
+                         className="text-emerald-500 hover:text-emerald-600 bg-emerald-50 p-2 rounded-full transition-colors flex-shrink-0"
+                         title={language === 'en' ? 'Listen to full phrase' : 'Écouter la phrase entière'}
+                      >
+                         <Volume2 size={24} strokeWidth={2.5} />
+                      </button>
                     )}
                   </div>
                 )}

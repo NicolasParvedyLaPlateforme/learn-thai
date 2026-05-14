@@ -408,7 +408,10 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
     let sbPool = [...sbExercises];
     while (sbPool.length < 10 && sbExercises.length > 0) sbPool = [...sbPool, ...shuffle(sbExercises)];
     if (sbPool.length === 0) sbPool = [...wmExercises];
-    finalExercises = sbPool;
+    finalExercises = sbPool.map((ex, i) => ({
+      ...ex,
+      forceHideRomanization: i >= Math.floor(sbPool.length / 2)
+    }));
   } else if (level >= 4 && level <= 6) {
     // Level 5 (index 4): Normal pair-matching
     // Level 6 (index 5): Pair-matching audio-only
@@ -433,7 +436,8 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
         options: selectedPairs as any,
         pairs: selectedPairs as any,
         hideHints: true,
-        pairMatchMode
+        pairMatchMode,
+        forceHideRomanization: level === 4 ? (i >= Math.floor(5 / 3)) : false // 1/3 have it, 2/3 don't
       });
     }
     finalExercises = pmExercises;
@@ -451,7 +455,8 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
           correctComponents: characters,
           componentGroups: groups,
           hideHints: true,
-          blindMode: true
+          blindMode: true,
+          forceHideRomanization: true
        });
     });
     wrPool = shuffle(wrPool);
@@ -471,7 +476,8 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
           correctComponents: characters,
           componentGroups: groups,
           hideHints: true,
-          blindMode: true
+          blindMode: true,
+          forceHideRomanization: true
        });
     });
     wrPool = shuffle(wrPool);
@@ -488,7 +494,8 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
             correctComponents: characters,
             componentGroups: groups,
             hideHints: true,
-            blindMode: true
+            blindMode: true,
+            forceHideRomanization: true
          });
        });
        wrPool = shuffle(wrPool);
@@ -538,7 +545,10 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
     while (combinedPool.length < 10 && combinedPool.length > 0) combinedPool = [...combinedPool, ...shuffle(combinedPool)];
     
     // Return all previous levels followed by free typing test
-    return [...previousLevels, ...combinedPool.slice(0, 10)];
+    return [...previousLevels, ...combinedPool.slice(0, 10)].map(ex => ({
+      ...ex,
+      forceHideRomanization: true
+    }));
   }
 
 

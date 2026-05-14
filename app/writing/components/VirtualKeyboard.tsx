@@ -1,6 +1,6 @@
 import { Exercise } from '../../types';
 import { playThaiTTS } from '../../lib/tts';
-import { Delete } from 'lucide-react';
+import { Delete, Volume2, ArrowUp } from 'lucide-react';
 import { formatCombiningChar } from '../../lib/alphabet-utils';
 import { useProgressStore } from '../../lib/store';
 
@@ -9,9 +9,10 @@ interface Props {
   selected: string[];
   onChange: (val: string[]) => void;
   disabled: boolean;
+  isChecking?: boolean;
 }
 
-export default function VirtualKeyboard({ exercise, selected, onChange, disabled }: Props) {
+export default function VirtualKeyboard({ exercise, selected, onChange, disabled, isChecking }: Props) {
   const { language } = useProgressStore();
   
   const handleSelect = (charTh: string) => {
@@ -44,46 +45,64 @@ export default function VirtualKeyboard({ exercise, selected, onChange, disabled
   return (
     <div className="flex flex-col gap-4 w-full max-w-2xl mx-auto">
       {/* Selected area */}
-      <div className={`min-h-[100px] border-y-2 border-slate-200 py-4 flex flex-col gap-2 items-center justify-center`}>
-        <div className="bg-white border-2 border-b-4 border-slate-200 rounded-xl px-4 py-2 sm:px-5 sm:py-3 shadow-sm text-3xl sm:text-4xl font-thai leading-relaxed text-center break-all min-w-[180px] min-h-[64px] sm:min-h-[76px] flex justify-center items-center">
-          {selected.length === 0 ? (
-            <span className="text-slate-400 p-2 font-medium text-base sm:text-lg font-sans">
-              {language === 'en' ? 'Choose characters below...' : 'Choisissez des caractères ci-dessous...'}
-            </span>
-          ) : (
-            (() => {
-              const clusters: { chars: string, isCorrect: boolean }[] = [];
-              selected.forEach((char, idx) => {
-                let isCorrect = true;
-                if (exercise.type === 'writing' && exercise.correctComponents) {
-                  isCorrect = char === exercise.correctComponents[idx];
-                }
-                
-                if (clusters.length === 0 || !isCombining(char)) {
-                  clusters.push({ chars: char, isCorrect });
-                } else {
-                  clusters[clusters.length - 1].chars += char;
-                  if (!isCorrect) {
-                    clusters[clusters.length - 1].isCorrect = false;
+      <div className={`min-h-[100px] border-y-2 border-slate-200 py-4 flex flex-col gap-2`}>
+        <div className="flex gap-3 justify-center items-center">
+          <div className="bg-white border-2 border-b-4 border-slate-200 rounded-xl px-4 py-2 sm:px-5 sm:py-3 shadow-sm text-3xl sm:text-4xl font-thai leading-relaxed text-center break-all min-w-[180px] min-h-[64px] sm:min-h-[76px] flex justify-center items-center">
+            {selected.length === 0 ? (
+              <span className="text-slate-400 p-2 font-medium text-base sm:text-lg font-sans">
+                {language === 'en' ? 'Choose characters below...' : 'Choisissez des caractères ci-dessous...'}
+              </span>
+            ) : (
+              (() => {
+                const clusters: { chars: string, isCorrect: boolean }[] = [];
+                selected.forEach((char, idx) => {
+                  let isCorrect = true;
+                  if (exercise.type === 'writing' && exercise.correctComponents) {
+                    isCorrect = char === exercise.correctComponents[idx];
                   }
-                }
-              });
+                  
+                  if (clusters.length === 0 || !isCombining(char)) {
+                    clusters.push({ chars: char, isCorrect });
+                  } else {
+                    clusters[clusters.length - 1].chars += char;
+                    if (!isCorrect) {
+                      clusters[clusters.length - 1].isCorrect = false;
+                    }
+                  }
+                });
 
-              const showColors = exercise.hideColors ? disabled : (exercise.blindMode ? disabled : true);
+                const showColors = exercise.hideColors ? disabled : (exercise.blindMode ? disabled : true);
 
-              return clusters.map((cluster, idx) => {
-                let textColorClass = "text-slate-700";
-                if (showColors) {
-                  textColorClass = cluster.isCorrect ? "text-emerald-600" : "text-rose-500";
+                return clusters.map((cluster, idx) => {
+                  let textColorClass = "text-slate-700";
+                  if (showColors) {
+                    textColorClass = cluster.isCorrect ? "text-emerald-600" : "text-rose-500";
+                  }
+                  
+                  return (
+                    <span key={`sel-cluster-${idx}`} className={textColorClass}>
+                      {cluster.chars}
+                    </span>
+                  );
+                });
+              })()
+            )}
+          </div>
+          {exercise.type === 'writing' && exercise.blindMode && exercise.correctComponents && !isChecking && (
+            <button 
+              className="flex items-center justify-center gap-1 bg-indigo-50 border border-indigo-200 text-indigo-600 p-3 sm:px-4 sm:py-3 rounded-xl sm:text-sm font-semibold hover:bg-indigo-100 transition-colors"
+              onClick={() => {
+                if (selected.length < exercise.correctComponents!.length) {
+                  playThaiTTS(exercise.correctComponents![selected.length]);
+                } else {
+                  playThaiTTS(exercise.answer);
                 }
-                
-                return (
-                  <span key={`sel-cluster-${idx}`} className={textColorClass}>
-                    {cluster.chars}
-                  </span>
-                );
-              });
-            })()
+              }}
+              title={language === 'en' ? 'Sound of next letter' : 'Son de la prochaine lettre'}
+            >
+              <Volume2 size={24} strokeWidth={2.5} />
+              <span className="font-bold text-lg leading-none">A</span>
+            </button>
           )}
         </div>
       </div>
