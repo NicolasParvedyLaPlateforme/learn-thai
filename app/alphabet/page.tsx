@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { createPortal } from 'react-dom';
 import { useProgressStore } from '../lib/store';
 import { getAlphabetLessons, AlphabetLessonDef, formatCombiningChar } from '../lib/alphabet-utils';
 import { BookOpen, CheckCircle, Star, Play, Crown, X, Unlock } from 'lucide-react';
@@ -439,7 +440,7 @@ export default function AlphabetMenuPage() {
       )}
 
       {/* Selected Lesson Modal */}
-      {selectedLesson && (
+      {selectedLesson && mounted && createPortal(
         <div 
           className="fixed inset-0 z-[100] flex items-end md:items-center justify-center bg-slate-900/40 backdrop-blur-sm p-0 md:p-4 transition-all"
           onClick={() => setSelectedLesson(null)}
@@ -523,11 +524,12 @@ export default function AlphabetMenuPage() {
               </div>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
 
       {/* Unlock Lesson Modal */}
-      {lessonToUnlock && (
+      {lessonToUnlock && mounted && createPortal(
         <div 
           className="fixed inset-0 z-[100] flex items-end md:items-center justify-center bg-slate-900/40 backdrop-blur-sm p-0 md:p-4 transition-all"
           onClick={() => setLessonToUnlock(null)}
@@ -595,7 +597,8 @@ export default function AlphabetMenuPage() {
               </div>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
 
     </div>

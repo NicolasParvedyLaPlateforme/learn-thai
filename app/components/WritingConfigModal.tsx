@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { createPortal } from 'react-dom';
 import { useProgressStore } from '../lib/store';
 import courseData from '../data/course.json';
 import { CourseData, Word, Phrase } from '../types';
@@ -33,7 +34,10 @@ export function WritingConfigModal({ isOpen, onClose }: { isOpen: boolean, onClo
     }
   }, [isOpen, writingConfig]);
 
-  if (!isOpen) return null;
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
+
+  if (!isOpen || !mounted) return null;
 
   const currentVocabulary = (() => {
     let words: Word[] = [];
@@ -87,8 +91,8 @@ export function WritingConfigModal({ isOpen, onClose }: { isOpen: boolean, onClo
     router.push('/writing');
   };
 
-  return (
-    <div className="fixed inset-0 bg-slate-900/60 flex items-center justify-center p-4 z-50 backdrop-blur-sm">
+  return createPortal(
+    <div className="fixed inset-0 bg-slate-900/60 flex items-center justify-center p-4 z-[200] backdrop-blur-sm">
       <div className="bg-white rounded-3xl w-full max-w-2xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh]">
         <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between sticky top-0 bg-white z-10">
           <h2 className="text-xl font-extrabold text-slate-800">
@@ -230,6 +234,7 @@ export function WritingConfigModal({ isOpen, onClose }: { isOpen: boolean, onClo
            </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
