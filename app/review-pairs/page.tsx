@@ -17,7 +17,7 @@ const data = courseData as CourseData;
 
 export default function ReviewPairsPage() {
   const router = useRouter();
-  const { completedLessons, xp, completeLesson, language } = useProgressStore();
+  const { completedLessons, xp, completeLesson, language, setExerciseRunning } = useProgressStore();
   
   const [exercises, setExercises] = useState<Exercise[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -27,6 +27,11 @@ export default function ReviewPairsPage() {
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
 
   const [mounted, setMounted] = useState(false);
+  
+  useEffect(() => {
+    setExerciseRunning(true);
+    return () => setExerciseRunning(false);
+  }, [setExerciseRunning]);
   
   useEffect(() => {
     let initialized = false;

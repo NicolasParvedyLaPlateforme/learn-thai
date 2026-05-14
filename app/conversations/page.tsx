@@ -19,7 +19,7 @@ export default function ConversationsPage() {
   return (
     <div className="min-h-screen bg-[#FAFAFA] font-sans text-slate-800 pb-28 md:pb-20">
       {/* Header */}
-      <header className="bg-white border-b border-slate-200 h-16 shadow-sm sticky top-0 z-50">
+      <header className="bg-white border-b border-slate-200 h-16 shadow-sm sticky top-0 z-50 md:hidden">
         <div className="flex items-center gap-4 max-w-2xl mx-auto h-full px-4 w-full">
           <Link href="/learn" className="text-slate-400 hover:text-slate-600 transition-colors">
             <ArrowLeft size={24} />

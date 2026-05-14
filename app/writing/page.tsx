@@ -18,7 +18,7 @@ const data = courseData as CourseData;
 
 export default function WritingPage() {
   const router = useRouter();
-  const { completedLessons, unlockedLessons, completeLesson, language, _hasHydrated, writingConfig, showRomanization, setShowRomanization } = useProgressStore();
+  const { completedLessons, unlockedLessons, completeLesson, language, _hasHydrated, writingConfig, showRomanization, setShowRomanization, setExerciseRunning } = useProgressStore();
   
   const [exercises, setExercises] = useState<Exercise[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -29,6 +29,12 @@ export default function WritingPage() {
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
 
   const [mounted, setMounted] = useState(false);
+  
+  useEffect(() => {
+    setExerciseRunning(true);
+    return () => setExerciseRunning(false);
+  }, [setExerciseRunning]);
+  
   useEffect(() => {
     if (!_hasHydrated) return;
     let initialized = false;

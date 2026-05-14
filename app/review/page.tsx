@@ -20,13 +20,19 @@ const data = courseData as CourseData;
 
 export default function ReviewPage() {
   const router = useRouter();
-  const { completedLessons, xp, completeLesson, language } = useProgressStore();
+  const { completedLessons, xp, completeLesson, language, setExerciseRunning } = useProgressStore();
   
   const [exercises, setExercises] = useState<Exercise[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   
   // Options State
   const [showOptions, setShowOptions] = useState(true);
+  
+  useEffect(() => {
+    // Return to default state when exiting component
+    return () => setExerciseRunning(false);
+  }, [setExerciseRunning]);
+
   const [options, setOptions] = useState<ReviewOptions>({
     showWordHints: true,
     showUsefulVocab: true,
@@ -55,6 +61,7 @@ export default function ReviewPage() {
     if (completedLessons.length > 0) {
       setExercises(generateEndlessReviewExercises(data.lessons, completedLessons, language, options));
       setShowOptions(false);
+      setExerciseRunning(true);
     }
   };
 

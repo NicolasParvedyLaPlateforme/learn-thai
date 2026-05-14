@@ -20,12 +20,17 @@ export const metadata: Metadata = {
   description: 'Apprenez le thaïlandais facilement',
 };
 
+import DesktopSidebarLeft from './components/DesktopSidebarLeft';
+
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="en" className={`${inter.variable} ${sarabun.variable}`}>
-       <body className="font-sans antialiased text-slate-900 bg-slate-50 min-h-screen" suppressHydrationWarning>
-         {children}
-         <BottomNav />
+       <body className="font-sans antialiased text-slate-900 bg-slate-50 min-h-screen flex" suppressHydrationWarning>
+         <DesktopSidebarLeft />
+         <div className="flex-1 flex flex-col min-h-screen min-w-0 overflow-x-hidden overflow-y-auto">
+           {children}
+           <BottomNav />
+         </div>
          <Analytics />
        </body>
     </html>

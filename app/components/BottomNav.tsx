@@ -14,7 +14,7 @@ export default function BottomNav() {
   const [isWritingConfigModalOpen, setWritingConfigModalOpen] = useState(false);
 
   // Define visibility logic
-  const isLearnActive = pathname === '/learn' || pathname === '/';
+  const isLearnActive = pathname === '/learn';
   const isAlphabetActive = pathname === '/alphabet';
   const isConversationsActive = pathname === '/conversations';
   

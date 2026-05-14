@@ -49,6 +49,8 @@ interface ProgressState {
   lessonLevels: Record<string, number>;
   xp: number;
   seenAlphabets: string[]; // Keep track of seen alphabet letters
+  isExerciseRunning: boolean;
+  setExerciseRunning: (state: boolean) => void;
   setHasHydrated: (state: boolean) => void;
   setLanguage: (lang: AppLanguage) => void;
   autoDetectLanguage: () => void;
@@ -62,6 +64,8 @@ interface ProgressState {
   setShowRomanization: (show: boolean) => void;
   writingConfig: WritingConfig;
   setWritingConfig: (config: Partial<WritingConfig>) => void;
+  lastActiveUnitIndex: number;
+  setLastActiveUnitIndex: (index: number) => void;
 }
 
 export const useProgressStore = create<ProgressState>()(
@@ -76,6 +80,8 @@ export const useProgressStore = create<ProgressState>()(
       lessonLevels: {},
       xp: 0,
       seenAlphabets: [],
+      isExerciseRunning: false,
+      setExerciseRunning: (state) => set({ isExerciseRunning: state }),
       showRomanization: true,
       setShowRomanization: (show) => set({ showRomanization: show }),
       writingConfig: {
@@ -86,6 +92,8 @@ export const useProgressStore = create<ProgressState>()(
         disableDictionaryClick: false,
         hideCharacterHints: false,
       },
+      lastActiveUnitIndex: 0,
+      setLastActiveUnitIndex: (index) => set({ lastActiveUnitIndex: index }),
       setWritingConfig: (config) => set((state) => ({ writingConfig: { ...state.writingConfig, ...config } })),
       setLanguage: (lang) => set({ language: lang, languageSetByUser: true }),
       autoDetectLanguage: () => {
@@ -145,6 +153,9 @@ export const useProgressStore = create<ProgressState>()(
     {
       name: 'thai-learning-progress',
       storage: createJSONStorage(() => safeStorage),
+      partialize: (state) => Object.fromEntries(
+        Object.entries(state).filter(([key]) => !['_hasHydrated', 'isExerciseRunning'].includes(key))
+      ),
       onRehydrateStorage: () => (state) => {
         state?.setHasHydrated(true);
       }
