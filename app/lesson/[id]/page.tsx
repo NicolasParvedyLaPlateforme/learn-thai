@@ -94,7 +94,7 @@ function LessonPageContent() {
   const currentExercise = exercises[currentIndex];
   const progress = (currentIndex / exercises.length) * 100;
 
-  const handleCheck = () => {
+  const handleCheck = (overrideAnswer?: any) => {
     if (currentExercise.type === 'intro') {
        if (currentIndex < exercises.length - 1) {
           setCurrentIndex(currentIndex + 1);
@@ -139,21 +139,22 @@ function LessonPageContent() {
     }
 
     // Validate
-    if (!selectedAnswer) return;
+    const answerToCheck = typeof overrideAnswer === 'string' ? overrideAnswer : selectedAnswer;
+    if (!answerToCheck) return;
     
     let correct = false;
     if (currentExercise.type === 'word-match') {
-      correct = selectedAnswer === currentExercise.answer;
+      correct = answerToCheck === currentExercise.answer;
     } else if (currentExercise.type === 'sentence-builder') {
-      const builtSentence = (selectedAnswer as string[]).join('').replace(/\s+/g, '');
+      const builtSentence = (answerToCheck as string[]).join('').replace(/\s+/g, '');
       const expectedSentence = currentExercise.answer.replace(/\s+/g, '').replace(/\.\.\./g, '');
       correct = builtSentence === expectedSentence;
     } else if (currentExercise.type === 'writing') {
-      const builtValue = (selectedAnswer as string[]).join('').replace(/\s+/g, '');
+      const builtValue = (answerToCheck as string[]).join('').replace(/\s+/g, '');
       const targetValue = currentExercise.answer.replace(/\s+/g, '');
       correct = builtValue === targetValue;
     } else if (currentExercise.type === 'free-typing') {
-      const builtValue = typeof selectedAnswer === 'string' ? selectedAnswer.replace(/\s+/g, '') : '';
+      const builtValue = typeof answerToCheck === 'string' ? answerToCheck.replace(/\s+/g, '') : '';
       const targetValue = currentExercise.answer.replace(/\s+/g, '');
       
       const levenshtein = (a: string, b: string): number => {
@@ -429,6 +430,7 @@ function LessonPageContent() {
                     selected={selectedAnswer as string} 
                     onChange={setSelectedAnswer}
                     disabled={isChecking}
+                    onAutoCheck={() => handleCheck(currentExercise.answer)}
                   />
                 ) : currentExercise.type === 'pair-matching' ? (
                   <PairMatch 
