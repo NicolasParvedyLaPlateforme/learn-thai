@@ -3093,7 +3093,7 @@
             "w_kafae",
             "w_krap"
           ],
-          "en": "I have a coffee (man)"
+          "en": "I'll have a coffee (man)"
         },
         {
           "id": "p_want_tea_f",
@@ -3105,7 +3105,7 @@
             "w_cha",
             "w_kha"
           ],
-          "en": "I have tea (woman)"
+          "en": "I'll have tea (woman)"
         },
         {
           "id": "p_drink_beer",
@@ -4492,21 +4492,21 @@
           "id": "w_lesson-29-a3_0",
           "th": "ทำความสะอาด",
           "fr": "nettoyer",
-          "en": "clean",
+          "en": "to clean",
           "phonetic": "tham-khwaam-sà-àat"
         },
         {
           "id": "w_lesson-29-a3_1",
           "th": "ซัก",
           "fr": "laver",
-          "en": "wash",
+          "en": "to wash",
           "phonetic": "sák"
         },
         {
           "id": "w_lesson-29-a3_2",
           "th": "ทำอาหาร",
           "fr": "cuisiner",
-          "en": "cook",
+          "en": "to cook",
           "phonetic": "tham-aa-hǎan"
         },
         {
