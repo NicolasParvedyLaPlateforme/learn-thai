@@ -27,4 +27,12 @@
     background-color: #cbd5e1;
     border-radius: 9999px;
   }
+
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
 }

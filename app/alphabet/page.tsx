@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { createPortal } from 'react-dom';
 import { useProgressStore } from '../lib/store';
 import { getAlphabetLessons, AlphabetLessonDef, formatCombiningChar } from '../lib/alphabet-utils';
-import { BookOpen, CheckCircle, Star, Play, Crown, X, Unlock } from 'lucide-react';
+import { BookOpen, CheckCircle, Star, Play, Crown, X, Unlock, Lock } from 'lucide-react';
 
 export default function AlphabetMenuPage() {
   const router = useRouter();
@@ -90,158 +90,180 @@ export default function AlphabetMenuPage() {
     <div className="min-h-screen bg-[#FAFAFA] font-sans text-slate-800 pb-28 md:pb-20 overflow-hidden">
       
       {/* Header */}
-      <header className="sticky top-0 bg-white border-b border-slate-200 z-50 h-16 shadow-sm md:hidden">
+      <header className="sticky top-0 bg-[#FAFAFA]/95 backdrop-blur-sm z-50 h-[3.75rem] md:hidden">
         <div className="flex items-center justify-between w-full max-w-2xl mx-auto h-full px-4 gap-2 sm:gap-6">
-          <div className="flex items-center gap-2">
-            <Link href="/learn" className="bg-emerald-500 text-white p-2 rounded-xl shadow-md border-b-4 border-emerald-700 hover:translate-y-px hover:border-b-2 active:border-b-0 active:translate-y-[4px] transition-all">
-              <BookOpen size={24} />
+          <div className="flex items-center gap-3">
+            <Link href="/learn" className="w-9 h-9 bg-emerald-600 rounded-xl flex items-center justify-center text-white shadow-sm">
+              <BookOpen size={20} />
             </Link>
-            <h1 className="text-xl font-bold text-slate-800 tracking-tight hidden md:block">Alphabet</h1>
+            <h1 className="text-xl font-extrabold text-slate-800 tracking-tight">Alphabet</h1>
           </div>
           
           <div className="flex items-center gap-2 sm:gap-4 font-bold">
-            <Link href="/learn" className="text-slate-500 hover:text-slate-600 bg-slate-50 hover:bg-slate-100 px-3 sm:px-4 py-2 rounded-xl flex items-center gap-2 transition-colors">
-              <X size={18} />
-              <span className="hidden sm:inline">{mounted && language === 'en' ? 'Close' : 'Fermer'}</span>
+            <Link href="/learn" className="text-slate-500 hover:text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-full w-9 h-9 flex items-center justify-center transition-colors shadow-sm">
+              <X size={20} />
             </Link>
           </div>
         </div>
       </header>
 
       {/* Main Content (Mobile Only) */}
-      <main className="max-w-2xl mx-auto px-4 mt-8 flex flex-col gap-12 md:hidden">
-        {UNITS.map((unit) => {
+      <main className="max-w-2xl mx-auto px-4 mt-2 flex flex-col gap-8 md:hidden">
+        {/* Mobile Unit Selector */}
+        <div className="flex overflow-x-auto hide-scrollbar gap-2 pb-4 -mx-4 px-4 sticky top-[3.75rem] z-40 bg-[#FAFAFA]/95 backdrop-blur-sm pt-2">
+          {UNITS.map((u, i) => (
+            <button
+              key={`nav-m-${u.id}`}
+              onClick={() => handleUnitSelect(i)}
+              className={`flex-shrink-0 px-6 py-2.5 rounded-full font-bold text-[15px] transition-all shadow-sm ${
+                i === activeUnitIndex 
+                  ? `${u.colorClass} text-white` 
+                  : 'bg-slate-100 text-slate-500 hover:bg-slate-200'
+              }`}
+            >
+              {language === 'en' ? u.titleEn : u.title}
+            </button>
+          ))}
+        </div>
+
+        {(() => {
+          const unit = UNITS[activeUnitIndex];
           const unitLessons = unit.lessons;
           const completedInUnit = unitLessons.filter(l => completedLessons.includes(l.id)).length;
           const progressPercent = mounted && unitLessons.length > 0 ? (completedInUnit / unitLessons.length) * 100 : 0;
           
           return (
             <div key={unit.id} className="relative z-0">
-              <div className={`mb-8 p-6 ${unit.colorClass} rounded-3xl text-white shadow-md relative overflow-hidden border-b-4 ${unit.borderClass}`}>
-                <div className="relative z-10">
-                  <h2 className="text-3xl font-extrabold mb-2">{mounted && language === 'en' ? unit.titleEn : unit.title}</h2>
-                  <p className={`${unit.lightTextClass} mb-6 font-medium`}>{mounted && language === 'en' ? unit.descriptionEn : unit.description}</p>
-                  <div className={`w-full ${unit.bgMutedClass} rounded-full h-3 overflow-hidden shadow-inner`}>
-                    <div 
-                      className="bg-white h-full rounded-full transition-all duration-1000 shadow-[0_0_8px_rgba(255,255,255,0.5)]" 
-                      style={{ width: `${progressPercent}%` }}
-                    ></div>
+              <div className={`mb-10 p-6 sm:p-8 ${unit.colorClass} rounded-[2rem] text-white shadow-lg relative overflow-hidden border-b-[6px] ${unit.borderClass}`}>
+                <div className="relative z-10 w-full flex flex-col items-center text-center">
+                  <h2 className="text-3xl font-extrabold mb-2 text-white drop-shadow-sm">{mounted && language === 'en' ? unit.titleEn : unit.title}</h2>
+                  <p className="text-white/90 mb-8 font-medium text-lg leading-snug">{mounted && language === 'en' ? unit.descriptionEn : unit.description}</p>
+                  
+                  <div className="w-full max-w-[280px]">
+                    <div className="w-full bg-black/10 rounded-full h-4 overflow-hidden mb-6 shadow-inner">
+                      <div 
+                        className="bg-white h-full rounded-full transition-all duration-1000 shadow-[0_0_10px_rgba(255,255,255,0.7)]" 
+                        style={{ width: `${progressPercent}%` }}
+                      ></div>
+                    </div>
+                    
+                    {unlockedLessons && progressPercent < 100 && (
+                      <button 
+                        className="w-full bg-white text-slate-800 font-black tracking-widest uppercase py-4 rounded-2xl shadow-[0_4px_0_rgba(0,0,0,0.1)] active:translate-y-[4px] active:shadow-none transition-all"
+                        onClick={() => {
+                           let firstUncompletedIdx = unitLessons.findIndex(l => !completedLessons.includes(l.id));
+                           if (firstUncompletedIdx === -1) firstUncompletedIdx = 0;
+                           const l = unitLessons[firstUncompletedIdx];
+                           const level = lessonLevels[l.id] || 0;
+                           setSelectedLesson({lesson: l, isCompleted: completedLessons.includes(l.id), unitColor: unit.colorClass, unitBorder: unit.borderClass});
+                           setModalLevel(Math.min(level, 3));
+                        }}
+                      >
+                        {mounted && language === 'en' ? 'Continue' : 'Continuer'}
+                      </button>
+                    )}
                   </div>
                 </div>
-                <div className={`absolute -bottom-8 -right-8 opacity-20 drop-shadow-xl text-black`}>
-                  <BookOpen size={160} />
+                <div className={`absolute -bottom-12 -left-12 opacity-10 drop-shadow-2xl text-black rotate-[-15deg] pointer-events-none`}>
+                  <BookOpen size={240} />
+                </div>
+                <div className={`absolute -top-12 -right-12 opacity-10 drop-shadow-2xl text-white rotate-[15deg] pointer-events-none`}>
+                  <Star size={160} />
                 </div>
               </div>
 
-              {/* Lesson Path Grid */}
-              <div className="flex justify-center relative w-full mb-12">
-                <div className="flex flex-col items-center w-full max-w-5xl">
-                  {(() => {
-                    const rows = [];
-                    for (let i = 0; i < unitLessons.length; i += cols) {
-                      rows.push(unitLessons.slice(i, i + cols));
-                    }
-                    
-                    return rows.map((row, rIndex) => (
-                      <div key={rIndex} className={`flex w-full justify-start ${rIndex % 2 === 1 ? 'flex-row-reverse' : 'flex-row'}`}>
-                        {row.map((lesson, indexInRow) => {
-                          const itemIndex = rIndex * cols + indexInRow;
-                          const isCompleted = mounted ? completedLessons.includes(lesson.id) : false;
-                          const level = mounted ? (lessonLevels[lesson.id] || 0) : 0;
+              {/* Vertical Timeline of Lessons (Mobile) */}
+              <div className="flex flex-col relative w-full items-center mt-4 pb-20">
+                 <div className="absolute left-1/2 top-0 bottom-0 w-3 -translate-x-1/2 bg-slate-200 rounded-full z-0"></div>
+                 
+                 {unitLessons.map((lesson, idx) => {
+                   const isCompleted = mounted ? completedLessons.includes(lesson.id) : false;
+                   const level = mounted ? (lessonLevels[lesson.id] || 0) : 0;
+                   const prevLessonInUnit = idx > 0 ? unitLessons[idx - 1] : null;
+                   const isUnlocked = idx === 0 || (mounted && prevLessonInUnit && completedLessons.includes(prevLessonInUnit.id)) || (mounted && unlockedLessons?.includes(lesson.id));
+                   const isMaxLevel = level >= 4;
+
+                   const nextLesson = idx < unitLessons.length - 1 ? unitLessons[idx + 1] : null;
+                   const nextUnlocked = nextLesson && (mounted && (completedLessons.includes(nextLesson.id) || unlockedLessons?.includes(nextLesson.id)));
+                   const showLineToNext = idx < unitLessons.length - 1;
+                   const lineToNextColor = isUnlocked && nextUnlocked ? unit.colorClass : "bg-slate-200";
+
+                   return (
+                     <div id={`lesson-${lesson.id}`} key={`mobile-node-${lesson.id}`} className="relative flex flex-col items-center w-full scroll-mt-24 z-10 mb-8 sm:mb-12 group">
+                        {/* Circle Node */}
+                        <div 
+                          className={`relative shrink-0 mb-4 z-10 ${isUnlocked ? 'cursor-pointer hover:scale-105 active:scale-95 transition-all' : ''}`}
+                          onClick={() => {
+                            if (isUnlocked) {
+                              setSelectedLesson({lesson, isCompleted: isMaxLevel, unitColor: unit.colorClass, unitBorder: unit.borderClass});
+                              setModalLevel(Math.min(level, 3));
+                            } else {
+                              setLessonToUnlock({lesson, unitColor: unit.colorClass, unitBorder: unit.borderClass});
+                            }
+                          }}
+                        >
+                          <div className={`w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center border-b-[6px] relative z-10 text-4xl sm:text-5xl font-thai shadow-sm
+                            ${isMaxLevel 
+                              ? unit.colorClass + ' text-white ' + unit.borderClass 
+                              : level >= 3 ? unit.shades.l3 : level >= 2 ? unit.shades.l2 : level >= 1 ? unit.shades.l1
+                              : isUnlocked ? 'bg-white ' + unit.textClass + ' border-slate-200 border-2 active:border-b-2 active:translate-y-1' 
+                              : 'bg-slate-100 text-slate-300 border-slate-200 border-2 shadow-none'}`}
+                          >
+                            {!isUnlocked ? <Lock size={32} className="text-slate-300" /> : isMaxLevel ? <Crown size={40} className="stroke-[3]" fill="currentColor" /> : level > 0 ? <CheckCircle size={40} className="stroke-current stroke-[2.5]" /> : lesson.items[0] ? formatCombiningChar(lesson.items[0].letter) : ''}
+                          </div>
                           
-                          // Unlock if it's the very first alphabet lesson in this unit, or previous is complete
-                          const prevLessonInUnit = itemIndex > 0 ? unitLessons[itemIndex - 1] : null;
-                          const isUnlocked = itemIndex === 0 || (mounted && prevLessonInUnit && completedLessons.includes(prevLessonInUnit.id)) || (mounted && unlockedLessons?.includes(lesson.id));
-                          
-                          const isLastOverall = itemIndex === unitLessons.length - 1;
-                          const isLastInRow = indexInRow === row.length - 1;
-                          
-                          const pathRight = !isLastOverall && !isLastInRow && rIndex % 2 === 0;
-                          const pathLeft = !isLastOverall && !isLastInRow && rIndex % 2 === 1;
-                          const pathDown = !isLastOverall && isLastInRow;
-
-                          const nextLesson = !isLastOverall ? unitLessons[itemIndex + 1] : null;
-                          const nextUnlocked = nextLesson && (mounted && (completedLessons.includes(nextLesson.id) || unlockedLessons?.includes(nextLesson.id)));
-                          
-                          const pathColorClass = (isUnlocked && nextUnlocked) ? unit.colorClass : "bg-slate-200";
-
-                          return (
-                            <div id={`lesson-${lesson.id}`} key={lesson.id} className="relative py-6 md:py-8 scroll-mt-24" style={{ flex: `0 0 ${100 / cols}%` }}>
-                              
-                              {/* Path Connections */}
-                              {pathRight && (
-                                <div className={`absolute top-1/2 left-1/2 w-full h-[16px] -translate-y-1/2 -z-10 rounded-full transition-colors duration-500 opacity-80 ${pathColorClass}`} />
-                              )}
-                              {pathLeft && (
-                                <div className={`absolute top-1/2 right-1/2 w-full h-[16px] -translate-y-1/2 -z-10 rounded-full transition-colors duration-500 opacity-80 ${pathColorClass}`} />
-                              )}
-                              {pathDown && (
-                                <div className={`absolute top-1/2 left-1/2 w-[16px] h-full -translate-x-1/2 -z-10 rounded-full transition-colors duration-500 opacity-80 ${pathColorClass}`} />
-                              )}
-
-                              <div className="relative group/lesson flex justify-center w-full">
-                                <button 
-                                  onClick={(e) => {
-                                    e.preventDefault();
-                                    if (isUnlocked) {
-                                      setSelectedLesson({lesson, isCompleted, unitColor: unit.colorClass, unitBorder: unit.borderClass});
-                                      setModalLevel(Math.min(lessonLevels[lesson.id] || 0, 3)); // Max level 4 for alphabet
-                                    } else {
-                                      setLessonToUnlock({lesson, unitColor: unit.colorClass, unitBorder: unit.borderClass});
-                                    }
-                                  }}
-                                  className="group flex flex-col items-center relative z-10 cursor-pointer"
-                                >
-                                  
-                                  <div className="absolute -top-16 opacity-0 group-hover:opacity-100 transition-opacity bg-white px-4 py-3 rounded-2xl shadow-xl border-2 border-slate-200 whitespace-nowrap z-50 pointer-events-none">
-                                    <p className="font-extrabold text-slate-800 uppercase tracking-wide text-sm flex items-center gap-2">
-                                      {mounted && language === 'en' ? lesson.titleEn : lesson.title}
-                                    </p>
-                                    <p className="text-xs text-slate-500 font-medium mt-0.5">
-                                      {lesson.items.map(i => formatCombiningChar(i.letter)).join(' • ')}
-                                    </p>
-                                    <div className="absolute -bottom-2.5 left-1/2 -translate-x-1/2 w-4 h-4 bg-white border-b-2 border-r-2 border-slate-200 rotate-45"></div>
-                                  </div>
-
-                                  <div className="relative">
-                                    <div className={
-                                      `w-20 h-20 md:w-24 md:h-24 rounded-[2rem] flex items-center justify-center border-b-[6px] transition-transform shadow-sm relative z-0 text-3xl font-thai
-                                      ${level >= 4
-                                        ? unit.colorClass + ' text-white ' + unit.borderClass
-                                        : level >= 3
-                                          ? unit.shades.l3
-                                          : level >= 2
-                                            ? unit.shades.l2
-                                            : level >= 1
-                                              ? unit.shades.l1
-                                              : isUnlocked 
-                                                ? `bg-white border-2 border-slate-200 ${unit.textClass} hover:bg-slate-50 active:translate-y-1 active:border-b-2` 
-                                                : 'bg-slate-100 border-2 border-slate-200 text-slate-300 shadow-none hover:bg-slate-200 active:translate-y-1 active:border-b-2'}`
-                                    }>
-                                      {level >= 4 ? <Crown size={40} className="stroke-current stroke-[2.5]" fill="currentColor" /> :
-                                      level > 0 ? <CheckCircle size={40} className="stroke-current stroke-[2.5]" /> : lesson.items[0] ? formatCombiningChar(lesson.items[0].letter) : ''}
-                                    </div>
-
-                                    {/* Crown/Level Badge */}
-                                    {(level > 0 && level <= 4) && (
-                                      <div className={`absolute -bottom-2 -right-3 z-20 bg-white border-2 border-slate-200 rounded-full w-8 h-8 flex items-center justify-center text-xs font-black shadow-sm ${unit.textClass}`}>
-                                        {level}
-                                      </div>
-                                    )}
-                                  </div>
-                                </button>
-                              </div>
+                          {(level > 0 && level <= 4) && (
+                            <div className={`absolute -bottom-2 -right-2 z-20 bg-white border-2 border-slate-200 rounded-full w-8 h-8 flex items-center justify-center text-xs font-black shadow-sm ${unit.textClass}`}>
+                              {level}
                             </div>
-                          );
-                        })}
-                      </div>
-                    ));
-                  })()}
-                </div>
+                          )}
+                        </div>
+                        
+                        {/* Card */}
+                        <div 
+                          className={`w-full max-w-[280px] sm:max-w-[320px] rounded-[1.5rem] p-5 flex flex-col items-center text-center transition-all z-10 
+                            ${isUnlocked 
+                              ? 'bg-white border-2 border-slate-200 border-b-[6px] cursor-pointer hover:border-slate-300 active:translate-y-[4px] active:border-b-2 shadow-sm relative' 
+                              : 'bg-slate-50 border-2 border-slate-100 opacity-90'}`}
+                          onClick={() => {
+                            if (isUnlocked) {
+                              setSelectedLesson({lesson, isCompleted, unitColor: unit.colorClass, unitBorder: unit.borderClass});
+                              setModalLevel(Math.min(level, 3));
+                            } else {
+                              setLessonToUnlock({lesson, unitColor: unit.colorClass, unitBorder: unit.borderClass});
+                            }
+                          }}
+                        >
+                           <h4 className={`font-extrabold text-xl ${isUnlocked ? 'text-slate-800' : 'text-slate-400'}`}>
+                             {mounted && language === 'en' ? lesson.titleEn : lesson.title}
+                           </h4>
+                           <span className={`text-base font-bold mt-1 tracking-wide ${isUnlocked ? 'text-slate-500 font-thai' : 'text-slate-400'}`}>
+                             {lesson.items.map(i => formatCombiningChar(i.letter)).join(' • ')}
+                           </span>
+                           
+                           {isUnlocked && (
+                             <>
+                               <div className="bg-slate-100 rounded-full px-3 py-1 text-xs font-bold text-slate-500 mt-3 mb-4">
+                                 {mounted && language === 'en' ? 'Level' : 'Niveau'} {level}/4
+                               </div>
+                               
+                               <button className={`w-full py-3.5 rounded-2xl font-black tracking-widest text-sm transition-all uppercase ${isMaxLevel ? 'bg-slate-100 text-slate-500 active:bg-slate-200' : unit.colorClass + ' text-white shadow-[0_4px_0_rgba(0,0,0,0.1)] active:shadow-none active:translate-y-[4px]'}`}>
+                                 {isMaxLevel ? (mounted && language === 'en' ? 'Review' : 'Réviser') : (mounted && language === 'en' ? 'Continue' : 'Continuer')}
+                               </button>
+                             </>
+                           )}
+                        </div>
+
+                        {showLineToNext && (
+                           <div className={`absolute top-[4.5rem] left-1/2 -translate-x-1/2 w-3 h-[calc(100%+2rem)] sm:h-[calc(100%+3rem)] ${lineToNextColor} z-0`}></div>
+                        )}
+                     </div>
+                   )
+                 })}
               </div>
             </div>
           );
-        })}
+        })()}
       </main>
 
       {/* Main Content (Desktop Only) */}
@@ -343,7 +365,7 @@ export default function AlphabetMenuPage() {
                               )}
                               
                               {showLineToNext && (
-                                 <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 w-2.5 h-full ${lineToNextColor} z-0`}></div>
+                                 <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 w-2.5 h-[calc(100%+1rem)] ${lineToNextColor} z-0`}></div>
                               )}
                             </div>
                             
