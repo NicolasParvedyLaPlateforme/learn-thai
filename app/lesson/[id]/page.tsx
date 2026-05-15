@@ -26,7 +26,7 @@ function LessonPageContent() {
   const params = useParams();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { completeLesson, lessonLevels, language, completedLessons, unlockedLessons, _hasHydrated, showRomanization, setShowRomanization } = useProgressStore();
+  const { completeLesson, lessonLevels, language, completedLessons, unlockedLessons, _hasHydrated, showRomanization, setShowRomanization, setLastActiveUnitIndex } = useProgressStore();
   
   const lessonId = params.id as string;
   const requestedLevelStr = searchParams.get('level');
@@ -187,6 +187,13 @@ function LessonPageContent() {
   };
 
   if (isFinished) {
+    const lessonIndex = data.lessons.findIndex(l => l.id === lesson.id);
+    const unitEndIndices = [11, 20, 30, 40, 50, 60, 70, 80, 90, 100];
+    let currentUnitIndex = unitEndIndices.findIndex(idx => lessonIndex < idx);
+    if (currentUnitIndex === -1 && lessonIndex >= 0) currentUnitIndex = unitEndIndices.length - 1;
+    const isEndOfUnit = unitEndIndices.includes(lessonIndex + 1);
+    const nextUnitIndex = isEndOfUnit && currentUnitIndex !== -1 && currentUnitIndex < unitEndIndices.length - 1 ? currentUnitIndex + 1 : -1;
+
     return (
       <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-[#FAFAFA] font-sans">
         <div className="text-orange-500 mb-6">
@@ -197,17 +204,28 @@ function LessonPageContent() {
         </h1>
         <p className="text-slate-500 mb-8 text-center text-lg font-medium">+ {10 + exercises.length} XP</p>
         <div className="flex flex-col sm:flex-row gap-4 w-full max-w-lg">
+          {nextUnitIndex !== -1 && (
+             <button 
+               onClick={() => {
+                 setLastActiveUnitIndex(nextUnitIndex);
+                 router.push('/learn');
+               }}
+               className="px-8 py-3 flex-1 rounded-xl bg-amber-500 border-b-4 border-amber-700 text-white font-bold text-lg shadow-lg hover:bg-amber-400 hover:scale-[1.02] active:scale-95 transition-all text-center"
+             >
+               {language === 'en' ? 'Next Unit' : 'Aller à l\'unité suivante'}
+             </button>
+          )}
           {currentLevel + 1 < 9 && (
             <button 
               onClick={() => router.push(`/lesson/${lesson.id}?level=${currentLevel + 2}`)}
-              className="px-8 py-3 flex-1 rounded-xl bg-indigo-500 border-b-4 border-indigo-700 text-white font-bold text-lg shadow-lg hover:bg-indigo-400 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest"
+              className="px-8 py-3 flex-1 rounded-xl bg-indigo-500 border-b-4 border-indigo-700 text-white font-bold text-lg shadow-lg hover:bg-indigo-400 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest text-center"
             >
               {language === 'en' ? 'Next Level' : 'Prochain Niveau'}
             </button>
           )}
           <button 
             onClick={() => router.push(`/learn#lesson-${lesson.id}`)}
-            className="px-8 py-3 flex-1 rounded-xl bg-emerald-500 border-b-4 border-emerald-700 text-white font-bold text-lg shadow-lg hover:bg-emerald-400 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest"
+            className="px-8 py-3 flex-1 rounded-xl bg-emerald-500 border-b-4 border-emerald-700 text-white font-bold text-lg shadow-lg hover:bg-emerald-400 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest text-center"
           >
             {language === 'en' ? 'Back' : 'Retour'}
           </button>

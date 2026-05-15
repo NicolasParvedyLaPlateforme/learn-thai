@@ -27,7 +27,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
     <html lang="en" className={`${inter.variable} ${sarabun.variable}`}>
        <body className="font-sans antialiased text-slate-900 bg-slate-50 min-h-screen flex" suppressHydrationWarning>
          <DesktopSidebarLeft />
-         <div className="flex-1 flex flex-col min-h-screen min-w-0 overflow-x-hidden overflow-y-auto">
+         <div className="flex-1 flex flex-col min-h-screen min-w-0">
            {children}
            <BottomNav />
          </div>
