@@ -52,6 +52,15 @@ export default function AlphabetMenuPage() {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
     autoDetectLanguage();
+    
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const unitParam = params.get('unit');
+      if (unitParam && parseInt(unitParam) >= 0 && parseInt(unitParam) <= 1) {
+        setActiveUnitIndex(parseInt(unitParam));
+        window.history.replaceState({}, '', '/alphabet');
+      }
+    }
   }, [autoDetectLanguage]);
 
   useEffect(() => {
@@ -260,6 +269,17 @@ export default function AlphabetMenuPage() {
                      </div>
                    )
                  })}
+                 
+                 {activeUnitIndex < UNITS.length - 1 && (
+                     <div className="mt-8 z-10 w-full px-4 relative flex justify-center">
+                         <button 
+                             onClick={() => handleUnitSelect(activeUnitIndex + 1)}
+                             className="px-8 py-4 rounded-2xl bg-amber-50 text-amber-500 border-b-4 border-amber-200 hover:bg-amber-100 hover:border-amber-300 hover:text-amber-600 font-extrabold shadow-sm transition-all text-center active:border-b-0 active:translate-y-1 w-full max-w-[280px] sm:max-w-[320px]"
+                         >
+                            {mounted && language === 'en' ? 'Next Unit' : 'Unité Suivante'}
+                         </button>
+                     </div>
+                 )}
               </div>
             </div>
           );
@@ -400,6 +420,17 @@ export default function AlphabetMenuPage() {
                          </div>
                        )
                      })}
+                     
+                     {activeUnitIndex < UNITS.length - 1 && (
+                        <div className="mt-12 z-10 w-full pl-0 md:pl-[6rem] relative flex justify-start">
+                             <button 
+                                 onClick={() => handleUnitSelect(activeUnitIndex + 1)}
+                                 className="px-8 py-4 rounded-2xl bg-amber-50 text-amber-500 hover:bg-amber-100 hover:text-amber-600 font-extrabold shadow-sm transition-all text-center border-2 border-amber-200 border-b-4 active:border-b-2 active:translate-y-1 text-lg group w-full max-w-[280px]"
+                             >
+                                {language === 'en' ? 'Next Unit' : 'Unité Suivante'}
+                             </button>
+                        </div>
+                     )}
                   </div>
                 </div>
               );
