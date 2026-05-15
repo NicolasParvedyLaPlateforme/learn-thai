@@ -25,7 +25,7 @@ import DesktopSidebarLeft from './components/DesktopSidebarLeft';
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="en" className={`${inter.variable} ${sarabun.variable}`}>
-       <body className="font-sans antialiased text-slate-900 bg-slate-50 min-h-screen flex overflow-x-hidden" suppressHydrationWarning>
+       <body className="font-sans antialiased text-slate-900 bg-slate-50 min-h-screen flex" suppressHydrationWarning>
          <DesktopSidebarLeft />
          <div className="flex-1 flex flex-col min-h-screen min-w-0">
            {children}

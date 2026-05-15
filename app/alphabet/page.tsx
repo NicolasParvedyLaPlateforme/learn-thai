@@ -90,7 +90,7 @@ export default function AlphabetMenuPage() {
     <div className="min-h-screen bg-[#FAFAFA] font-sans text-slate-800 pb-28 md:pb-20">
       
       {/* Header */}
-      <header className="sticky top-0 bg-[#FAFAFA]/95 backdrop-blur-sm z-50 h-[3.75rem] md:hidden">
+      <header className="bg-[#FAFAFA]/95 backdrop-blur-sm z-50 h-[3.75rem] md:hidden">
         <div className="flex items-center justify-between w-full max-w-2xl mx-auto h-full px-4 gap-2 sm:gap-6">
           <div className="flex items-center gap-3">
             <Link href="/learn" className="w-9 h-9 bg-emerald-600 rounded-xl flex items-center justify-center text-white shadow-sm">
@@ -110,7 +110,7 @@ export default function AlphabetMenuPage() {
       {/* Main Content (Mobile Only) */}
       <main className="max-w-2xl mx-auto px-4 mt-2 flex flex-col gap-8 md:hidden">
         {/* Mobile Unit Selector */}
-        <div className="flex overflow-x-auto hide-scrollbar gap-2 pb-4 -mx-4 px-4 sticky top-[3.75rem] z-40 bg-[#FAFAFA]/95 backdrop-blur-sm pt-2 transition-all duration-300">
+        <div className="flex overflow-x-auto hide-scrollbar gap-2 pb-4 -mx-4 px-4 sticky top-0 z-40 bg-[#FAFAFA]/95 backdrop-blur-sm pt-2 transition-all duration-300">
           {UNITS.map((u, i) => (
             <button
               key={`nav-m-${u.id}`}
