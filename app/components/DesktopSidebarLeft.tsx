@@ -3,14 +3,12 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { BookOpen, MessageCircle, Brain, Pencil, Globe, Bell, Puzzle, Star } from 'lucide-react';
+import { BookOpen, MessageCircle, Brain, Globe, Star } from 'lucide-react';
 import { useProgressStore } from '../lib/store';
-import { WritingConfigModal } from './WritingConfigModal';
 
 export default function DesktopSidebarLeft() {
   const pathname = usePathname();
-  const { language, setLanguage, xp, completedLessons, lessonLevels, isExerciseRunning } = useProgressStore();
-  const [isWritingConfigModalOpen, setWritingConfigModalOpen] = useState(false);
+  const { language, setLanguage, xp, completedLessons, isExerciseRunning } = useProgressStore();
 
   // Hidden on routes where we don't want the app shell
   const isLearnActive = pathname === '/learn';
@@ -18,12 +16,13 @@ export default function DesktopSidebarLeft() {
   const isConversationsActive = pathname === '/conversations';
   const isReviewActive = pathname === '/review';
   const isPairsActive = pathname === '/review-pairs';
+  const isPracticeActive = pathname === '/practice';
   
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
   // Decide whether to show navigation
-  const isVisible = (isLearnActive || isAlphabetActive || isConversationsActive || isReviewActive || isPairsActive || pathname === '/writing') && !isExerciseRunning;
+  const isVisible = (isLearnActive || isAlphabetActive || isConversationsActive || isReviewActive || isPairsActive || pathname === '/writing' || isPracticeActive) && !isExerciseRunning;
 
   if (!isVisible || !mounted) return null;
 
@@ -33,8 +32,6 @@ export default function DesktopSidebarLeft() {
 
   return (
     <>
-      <WritingConfigModal isOpen={isWritingConfigModalOpen} onClose={() => setWritingConfigModalOpen(false)} />
-      
       {/* Spacer for desktop layout so content doesn't get hidden behind absolute sidebar depending on setup we want */}
       <div className="hidden md:block w-20 xl:w-64 shrink-0 transition-all duration-300 ease-in-out"></div>
 
@@ -54,17 +51,7 @@ export default function DesktopSidebarLeft() {
           <NavItem href="/learn" icon={<BookOpen size={24} />} label={language === 'en' ? 'Home' : 'Accueil'} active={isLearnActive} />
           <NavItem href="/alphabet" icon={<Globe size={24} />} label="Alphabet" active={isAlphabetActive} />
           <NavItem href="/conversations" icon={<MessageCircle size={24} />} label={language === 'en' ? 'Discussions' : 'Discussions'} active={isConversationsActive} />
-          <NavItem href="/review" icon={<Brain size={24} />} label={language === 'en' ? 'Review' : 'Rappel'} active={isReviewActive} />
-          <NavItem href="/review-pairs" icon={<Puzzle size={24} />} label={language === 'en' ? 'Pairs' : 'Paires'} active={isPairsActive} />
-          <button 
-            onClick={() => setWritingConfigModalOpen(true)}
-            className="flex items-center rounded-xl transition-all h-12 overflow-hidden text-slate-600 hover:bg-emerald-50 hover:text-emerald-700 w-12 mx-auto justify-center group-hover:w-full group-hover:justify-start group-hover:px-4 group-hover:gap-4 xl:gap-4 xl:w-full xl:justify-start xl:px-4"
-          >
-            <div className="shrink-0 flex items-center justify-center w-6 h-6"><Pencil size={24} /></div>
-            <span className="whitespace-nowrap transition-all duration-300 overflow-hidden opacity-0 w-0 group-hover:opacity-100 group-hover:w-auto xl:opacity-100 xl:w-auto font-bold">
-              {language === 'en' ? 'Writing' : 'Écritures'}
-            </span>
-          </button>
+          <NavItem href="/practice" icon={<Brain size={24} />} label={language === 'en' ? 'Practice' : 'Pratique'} active={isPracticeActive} />
         </div>
 
         {/* User Summary / Level */}

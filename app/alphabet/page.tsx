@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { createPortal } from 'react-dom';
@@ -10,7 +11,7 @@ import { BookOpen, CheckCircle, Star, Play, Crown, X, Unlock, Lock } from 'lucid
 
 export default function AlphabetMenuPage() {
   const router = useRouter();
-  const { completedLessons, unlockedLessons, lessonLevels, xp, resetLessonLevel, unlockLessonManual, language, autoDetectLanguage } = useProgressStore();
+  const { completedLessons, unlockedLessons, lessonLevels, xp, resetLessonLevel, unlockLessonManual, language, setLanguage, autoDetectLanguage } = useProgressStore();
   const [mounted, setMounted] = useState(false);
   const [selectedLesson, setSelectedLesson] = useState<{lesson: AlphabetLessonDef, isCompleted: boolean, unitColor: string, unitBorder: string} | null>(null);
   const [lessonToUnlock, setLessonToUnlock] = useState<{lesson: AlphabetLessonDef, unitColor: string, unitBorder: string} | null>(null);
@@ -99,19 +100,31 @@ export default function AlphabetMenuPage() {
     <div className="min-h-screen bg-[#FAFAFA] font-sans text-slate-800 pb-28 md:pb-20">
       
       {/* Header */}
+      {/* Mobile Top Header */}
       <header className="bg-[#FAFAFA]/95 backdrop-blur-sm z-50 h-[3.75rem] md:hidden">
-        <div className="flex items-center justify-between w-full max-w-2xl mx-auto h-full px-4 gap-2 sm:gap-6">
+        <div className="flex items-center justify-between w-full h-full px-4 md:px-8 gap-2 sm:gap-6">
           <div className="flex items-center gap-3">
-            <Link href="/learn" className="w-9 h-9 bg-emerald-600 rounded-xl flex items-center justify-center text-white shadow-sm">
+            <Link href="/learn" className="w-9 h-9 bg-emerald-600 rounded-xl flex items-center justify-center text-white shadow-sm md:hidden">
               <BookOpen size={20} />
             </Link>
-            <h1 className="text-xl font-extrabold text-slate-800 tracking-tight">Alphabet</h1>
+            <h1 className="text-xl font-extrabold text-slate-800 tracking-tight md:hidden">Alphabet</h1>
           </div>
           
-          <div className="flex items-center gap-2 sm:gap-4 font-bold">
-            <Link href="/learn" className="text-slate-500 hover:text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-full w-9 h-9 flex items-center justify-center transition-colors shadow-sm">
-              <X size={20} />
-            </Link>
+          <div className="flex items-center gap-2">
+            {mounted && (
+              <button 
+                 onClick={() => setLanguage(language === 'fr' ? 'en' : 'fr')}
+                 className="flex items-center justify-center px-4 py-2 rounded-full bg-slate-100 text-slate-500 font-extrabold text-sm hover:bg-slate-200 transition-colors"
+                 title={language === 'fr' ? "Switch to English" : "Passer en Français"}
+              >
+                 {language === 'fr' ? 'FR' : 'EN'}
+              </button>
+            )}
+            
+            <div className="flex items-center gap-1.5 px-3 py-1.5 bg-amber-50 text-amber-600 rounded-xl font-extrabold text-sm">
+              <Star size={18} className="fill-amber-400 stroke-amber-400" />
+              <span>{mounted ? xp : 0} XP</span>
+            </div>
           </div>
         </div>
       </header>
@@ -482,164 +495,184 @@ export default function AlphabetMenuPage() {
       )}
 
       {/* Selected Lesson Modal */}
-      {selectedLesson && mounted && createPortal(
-        <div 
-          className="fixed inset-0 z-[100] flex items-end md:items-center justify-center bg-slate-900/40 backdrop-blur-sm p-0 md:p-4 transition-all"
-          onClick={() => setSelectedLesson(null)}
-        >
-          <div 
-            className="w-full md:max-w-md bg-white rounded-t-3xl md:rounded-3xl shadow-2xl overflow-hidden flex flex-col mb-0 md:mb-12 animate-in slide-in-from-bottom-full duration-300 relative border-t-8 border-slate-200"
-            style={{ borderTopColor: 'var(--tw-colors-emerald-500)' }} 
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className={`p-6 ${selectedLesson.unitColor} flex justify-between items-start text-white`}>
-              <div>
-                <p className="font-bold text-white/80 uppercase tracking-widest text-sm mb-1">
-                  Alphabet
-                </p>
-                <h3 className="text-2xl font-extrabold">
-                  {language === 'en' ? selectedLesson.lesson.titleEn : selectedLesson.lesson.title}
-                </h3>
-              </div>
-              <button 
-                onClick={() => setSelectedLesson(null)} 
-                className="bg-white/20 hover:bg-white/30 text-white rounded-full p-2 transition-colors -mr-2 -mt-2"
+      {mounted && createPortal(
+        <AnimatePresence>
+          {selectedLesson && (
+            <div className="fixed inset-0 z-[100] flex items-end md:items-center justify-center p-0 md:p-4">
+              <motion.div 
+                initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}
+                className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"
+                onClick={() => setSelectedLesson(null)}
+              />
+              <motion.div 
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: 20, opacity: 0 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+                className="w-full md:max-w-md bg-white rounded-t-3xl md:rounded-3xl shadow-2xl overflow-hidden flex flex-col mb-0 md:mb-12 relative border-t-8 border-slate-200 z-10"
+                style={{ borderTopColor: 'var(--tw-colors-emerald-500)' }} 
+                onClick={(e) => e.stopPropagation()}
               >
-                <X size={20} />
-              </button>
-            </div>
-
-            <div className="p-6">
-              <p className="text-slate-600 font-medium mb-8 text-lg">
-                {language === 'en' ? 'Learn these letters:' : 'Apprenez ces lettres :'} <strong className="text-3xl font-thai ml-2">{selectedLesson.lesson.items.map(i => formatCombiningChar(i.letter)).join(' ')}</strong>
-              </p>
-
-              <div className="mb-8">
-                <h4 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">
-                  {language === 'en' ? 'Choose a level' : 'Choisir un niveau'}
-                </h4>
-                <div className="flex flex-wrap gap-2 sm:gap-3">
-                  {[0, 1, 2, 3].map((levelIndex) => {
-                    const currentProgress = lessonLevels[selectedLesson.lesson.id] || 0;
-                    const isCompletedLevel = levelIndex < currentProgress;
-                    const isAccessible = levelIndex <= currentProgress;
-                    const isSelected = modalLevel === levelIndex;
-                    return (
-                      <button
-                        key={levelIndex}
-                        onClick={() => {
-                          if (isAccessible) {
-                            setModalLevel(levelIndex);
-                          }
-                        }}
-                        disabled={!isAccessible}
-                        className={`flex-1 min-w-[3.5rem] sm:min-w-[4rem] flex flex-col items-center justify-center py-3 rounded-2xl border-b-4 transition-all
-                          ${isSelected 
-                            ? `${selectedLesson.unitColor} ${selectedLesson.unitBorder} text-white scale-105 shadow-md` 
-                            : isCompletedLevel 
-                              ? 'bg-slate-100 border-slate-200 text-slate-800 hover:bg-slate-200' 
-                              : isAccessible
-                                ? 'bg-white border-2 border-slate-200 text-slate-600 hover:border-slate-300'
-                                : 'bg-slate-50 border-2 border-slate-100 text-slate-300 opacity-50 cursor-not-allowed'
-                          }`}
-                      >
-                        <span className="font-extrabold text-lg mb-1">{levelIndex + 1}</span>
-                        {isCompletedLevel && !isSelected ? (
-                          <CheckCircle size={16} className={isSelected ? "text-white" : "text-emerald-500"} />
-                        ) : (
-                          <Crown size={16} className={isSelected ? "text-white opacity-80" : "opacity-40"} />
-                        )}
-                      </button>
-                    );
-                  })}
+                <div className={`p-6 ${selectedLesson.unitColor} flex justify-between items-start text-white`}>
+                  <div>
+                    <p className="font-bold text-white/80 uppercase tracking-widest text-sm mb-1">
+                      Alphabet
+                    </p>
+                    <h3 className="text-2xl font-extrabold">
+                      {language === 'en' ? selectedLesson.lesson.titleEn : selectedLesson.lesson.title}
+                    </h3>
+                  </div>
+                  <button 
+                    onClick={() => setSelectedLesson(null)} 
+                    className="bg-white/20 hover:bg-white/30 text-white rounded-full p-2 transition-colors -mr-2 -mt-2"
+                  >
+                    <X size={20} />
+                  </button>
                 </div>
-              </div>
 
-              <div className="flex flex-col gap-3">
-                <Link
-                  href={`/alphabet/lesson/${selectedLesson.lesson.id}?level=${modalLevel + 1}`}
-                  className={`w-full py-4 rounded-xl border-b-4 font-bold text-lg text-white shadow-lg flex items-center justify-center hover:opacity-90 active:translate-y-1 transition-all ${selectedLesson.unitColor} ${selectedLesson.unitBorder}`}
-                >
-                  <Play size={20} className="mr-2 fill-current" />
-                  {language === 'en' ? `Start level ${modalLevel + 1}` : `Démarrer le niveau ${modalLevel + 1}`}
-                </Link>
-              </div>
+                <div className="p-6">
+                  <p className="text-slate-600 font-medium mb-8 text-lg">
+                    {language === 'en' ? 'Learn these letters:' : 'Apprenez ces lettres :'} <strong className="text-3xl font-thai ml-2">{selectedLesson.lesson.items.map(i => formatCombiningChar(i.letter)).join(' ')}</strong>
+                  </p>
+
+                  <div className="mb-8">
+                    <h4 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">
+                      {language === 'en' ? 'Choose a level' : 'Choisir un niveau'}
+                    </h4>
+                    <div className="flex flex-wrap gap-2 sm:gap-3">
+                      {[0, 1, 2, 3].map((levelIndex) => {
+                        const currentProgress = lessonLevels[selectedLesson.lesson.id] || 0;
+                        const isCompletedLevel = levelIndex < currentProgress;
+                        const isAccessible = levelIndex <= currentProgress;
+                        const isSelected = modalLevel === levelIndex;
+                        return (
+                          <button
+                            key={levelIndex}
+                            onClick={() => {
+                              if (isAccessible) {
+                                setModalLevel(levelIndex);
+                              }
+                            }}
+                            disabled={!isAccessible}
+                            className={`flex-1 min-w-[3.5rem] sm:min-w-[4rem] flex flex-col items-center justify-center py-3 rounded-2xl border-b-4 transition-all
+                              ${isSelected 
+                                ? `${selectedLesson.unitColor} ${selectedLesson.unitBorder} text-white scale-105 shadow-md` 
+                                : isCompletedLevel 
+                                  ? 'bg-slate-100 border-slate-200 text-slate-800 hover:bg-slate-200' 
+                                  : isAccessible
+                                    ? 'bg-white border-2 border-slate-200 text-slate-600 hover:border-slate-300'
+                                    : 'bg-slate-50 border-2 border-slate-100 text-slate-300 opacity-50 cursor-not-allowed'
+                              }`}
+                          >
+                            <span className="font-extrabold text-lg mb-1">{levelIndex + 1}</span>
+                            {isCompletedLevel && !isSelected ? (
+                              <CheckCircle size={16} className={isSelected ? "text-white" : "text-emerald-500"} />
+                            ) : (
+                              <Crown size={16} className={isSelected ? "text-white opacity-80" : "opacity-40"} />
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col gap-3">
+                    <Link
+                      href={`/alphabet/lesson/${selectedLesson.lesson.id}?level=${modalLevel + 1}`}
+                      className={`w-full py-4 rounded-xl border-b-4 font-bold text-lg text-white shadow-lg flex items-center justify-center hover:opacity-90 active:translate-y-1 transition-all ${selectedLesson.unitColor} ${selectedLesson.unitBorder}`}
+                    >
+                      <Play size={20} className="mr-2 fill-current" />
+                      {language === 'en' ? `Start level ${modalLevel + 1}` : `Démarrer le niveau ${modalLevel + 1}`}
+                    </Link>
+                  </div>
+                </div>
+              </motion.div>
             </div>
-          </div>
-        </div>,
+          )}
+        </AnimatePresence>,
         document.body
       )}
 
       {/* Unlock Lesson Modal */}
-      {lessonToUnlock && mounted && createPortal(
-        <div 
-          className="fixed inset-0 z-[100] flex items-end md:items-center justify-center bg-slate-900/40 backdrop-blur-sm p-0 md:p-4 transition-all"
-          onClick={() => setLessonToUnlock(null)}
-        >
-          <div 
-            className="w-full md:max-w-md bg-white rounded-t-3xl md:rounded-3xl shadow-2xl overflow-hidden flex flex-col mb-0 md:mb-12 animate-in slide-in-from-bottom-full duration-300 relative border-t-8 border-slate-200"
-            style={{ borderTopColor: 'var(--tw-colors-slate-400)' }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className={`p-6 bg-slate-100 flex justify-between items-start text-slate-800`}>
-              <div>
-                <p className="font-bold text-slate-500 uppercase tracking-widest text-sm mb-1">
-                  {language === 'en' ? 'Lesson Locked' : 'Leçon Verrouillée'}
-                </p>
-                <h3 className="text-2xl font-extrabold flex items-center gap-2">
-                  {language === 'en' ? lessonToUnlock.lesson.titleEn : lessonToUnlock.lesson.title}
-                </h3>
-              </div>
-              <button 
-                onClick={() => setLessonToUnlock(null)} 
-                className="bg-slate-200 hover:bg-slate-300 text-slate-600 rounded-full p-2 transition-colors -mr-2 -mt-2"
+      {mounted && createPortal(
+        <AnimatePresence>
+          {lessonToUnlock && (
+            <div className="fixed inset-0 z-[100] flex items-end md:items-center justify-center p-0 md:p-4">
+              <motion.div 
+                initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}
+                className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"
+                onClick={() => setLessonToUnlock(null)}
+              />
+              <motion.div 
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: 20, opacity: 0 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+                className="w-full md:max-w-md bg-white rounded-t-3xl md:rounded-3xl shadow-2xl overflow-hidden flex flex-col mb-0 md:mb-12 relative border-t-8 border-slate-200 z-10"
+                style={{ borderTopColor: 'var(--tw-colors-slate-400)' }}
+                onClick={(e) => e.stopPropagation()}
               >
-                <X size={20} />
-              </button>
-            </div>
+                <div className={`p-6 bg-slate-100 flex justify-between items-start text-slate-800`}>
+                  <div>
+                    <p className="font-bold text-slate-500 uppercase tracking-widest text-sm mb-1">
+                      {language === 'en' ? 'Lesson Locked' : 'Leçon Verrouillée'}
+                    </p>
+                    <h3 className="text-2xl font-extrabold flex items-center gap-2">
+                      {language === 'en' ? lessonToUnlock.lesson.titleEn : lessonToUnlock.lesson.title}
+                    </h3>
+                  </div>
+                  <button 
+                    onClick={() => setLessonToUnlock(null)} 
+                    className="bg-slate-200 hover:bg-slate-300 text-slate-600 rounded-full p-2 transition-colors -mr-2 -mt-2"
+                  >
+                    <X size={20} />
+                  </button>
+                </div>
 
-            <div className="p-6 text-center">
-              <div className="mx-auto w-16 h-16 bg-slate-100 text-slate-400 flex items-center justify-center rounded-2xl mb-4 text-3xl font-thai font-bold">
-                {lessonToUnlock.lesson.items[0]?.letter}
-              </div>
-              <h4 className="text-xl font-bold text-slate-800 mb-2">
-                {language === 'en' ? 'Unlock this level?' : 'Débloquer ce niveau ?'}
-              </h4>
-              <p className="text-slate-500 font-medium mb-8">
-                {language === 'en' 
-                  ? 'You can manually unlock this level. You will be able to play level 1, and you will need to complete it to access the next levels.' 
-                  : 'Vous pouvez débloquer manuellement ce niveau. Vous aurez accès au niveau 1 et vous devrez le terminer pour accéder aux suivants.'}
-              </p>
+                <div className="p-6 text-center">
+                  <div className="mx-auto w-16 h-16 bg-slate-100 text-slate-400 flex items-center justify-center rounded-2xl mb-4 text-3xl font-thai font-bold">
+                    {lessonToUnlock.lesson.items[0]?.letter}
+                  </div>
+                  <h4 className="text-xl font-bold text-slate-800 mb-2">
+                    {language === 'en' ? 'Unlock this level?' : 'Débloquer ce niveau ?'}
+                  </h4>
+                  <p className="text-slate-500 font-medium mb-8">
+                    {language === 'en' 
+                      ? 'You can manually unlock this level. You will be able to play level 1, and you will need to complete it to access the next levels.' 
+                      : 'Vous pouvez débloquer manuellement ce niveau. Vous aurez accès au niveau 1 et vous devrez le terminer pour accéder aux suivants.'}
+                  </p>
 
-              <div className="flex flex-col gap-3">
-                <button
-                  onClick={() => {
-                    unlockLessonManual(lessonToUnlock.lesson.id);
-                    setLessonToUnlock(null);
-                    // Also immediately select it to open the play menu
-                    setSelectedLesson({
-                      lesson: lessonToUnlock.lesson, 
-                      isCompleted: false, 
-                      unitColor: lessonToUnlock.unitColor, 
-                      unitBorder: lessonToUnlock.unitBorder
-                    });
-                    setModalLevel(0);
-                  }}
-                  className={`w-full py-4 rounded-xl border-b-4 font-bold text-lg text-white shadow-lg flex items-center justify-center hover:opacity-90 active:translate-y-1 transition-all ${lessonToUnlock.unitColor} ${lessonToUnlock.unitBorder}`}
-                >
-                  <Unlock size={20} className="mr-2" />
-                  {language === 'en' ? 'Yes, unlock it' : 'Oui, débloquer'}
-                </button>
-                <button
-                  onClick={() => setLessonToUnlock(null)}
-                  className="w-full py-4 rounded-xl bg-slate-100 text-slate-500 font-bold flex items-center justify-center hover:bg-slate-200 transition-colors"
-                >
-                  {language === 'en' ? 'Cancel' : 'Annuler'}
-                </button>
-              </div>
+                  <div className="flex flex-col gap-3">
+                    <button
+                      onClick={() => {
+                        unlockLessonManual(lessonToUnlock.lesson.id);
+                        setLessonToUnlock(null);
+                        // Also immediately select it to open the play menu
+                        setSelectedLesson({
+                          lesson: lessonToUnlock.lesson, 
+                          isCompleted: false, 
+                          unitColor: lessonToUnlock.unitColor, 
+                          unitBorder: lessonToUnlock.unitBorder
+                        });
+                        setModalLevel(0);
+                      }}
+                      className={`w-full py-4 rounded-xl border-b-4 font-bold text-lg text-white shadow-lg flex items-center justify-center hover:opacity-90 active:translate-y-1 transition-all ${lessonToUnlock.unitColor} ${lessonToUnlock.unitBorder}`}
+                    >
+                      <Unlock size={20} className="mr-2" />
+                      {language === 'en' ? 'Yes, unlock it' : 'Oui, débloquer'}
+                    </button>
+                    <button
+                      onClick={() => setLessonToUnlock(null)}
+                      className="w-full py-4 rounded-xl bg-slate-100 text-slate-500 font-bold flex items-center justify-center hover:bg-slate-200 transition-colors"
+                    >
+                      {language === 'en' ? 'Cancel' : 'Annuler'}
+                    </button>
+                  </div>
+                </div>
+              </motion.div>
             </div>
-          </div>
-        </div>,
+          )}
+        </AnimatePresence>,
         document.body
       )}
 

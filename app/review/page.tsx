@@ -77,7 +77,7 @@ export default function ReviewPage() {
           {language === 'en' ? 'You must complete at least one lesson to access this!' : 'Vous devez compléter au moins une leçon pour pouvoir y accéder !'}
         </p>
         <button 
-          onClick={() => router.push('/learn')}
+          onClick={() => router.push('/practice')}
           className="px-12 py-3 rounded-xl bg-indigo-500 border-b-4 border-indigo-700 text-white font-bold text-lg shadow-lg hover:bg-indigo-400 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest w-full max-w-sm"
         >
           {language === 'en' ? 'Back' : 'Retour'}
@@ -90,7 +90,7 @@ export default function ReviewPage() {
     return (
       <div className="min-h-screen bg-[#FAFAFA] font-sans text-slate-800 flex flex-col items-center p-4">
         <header className="w-full max-w-2xl mt-4 flex items-center justify-between mb-8">
-          <button onClick={() => router.push('/learn')} className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-full transition-colors">
+          <button onClick={() => router.push('/practice')} className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-full transition-colors">
             <X size={28} />
           </button>
           <div className="text-xl font-bold text-slate-700 flex items-center gap-2">
@@ -224,11 +224,11 @@ export default function ReviewPage() {
   const showFooter = isChecking || isAnswerComplete;
 
   return (
-    <div className="h-[100dvh] flex flex-col bg-[#FAFAFA] font-sans text-slate-800 overflow-hidden">
+    <div className="h-[100dvh] flex flex-col bg-[#FAFAFA] font-sans text-slate-800 overflow-hidden relative">
       {/* Header / Progress bar */}
       <header className="h-16 flex items-center shrink-0 justify-between border-b border-slate-200 bg-white">
         <div className="flex items-center gap-6 w-full max-w-2xl mx-auto h-full px-4 flex-1">
-          <button onClick={() => router.push('/learn')} className="text-slate-400 hover:text-slate-600 transition-colors">
+          <button onClick={() => router.push('/practice')} className="text-slate-400 hover:text-slate-600 transition-colors">
             <X size={24} strokeWidth={2.5} />
           </button>
           <div className="flex-1 h-3 bg-slate-100 rounded-full overflow-hidden">
@@ -242,7 +242,7 @@ export default function ReviewPage() {
       </header>
 
       {/* Main Exercise Area */}
-      <main className="flex-1 overflow-y-auto flex flex-col items-center py-2 sm:py-6 md:py-12 px-4 w-full">
+      <main className="flex-1 overflow-y-auto hide-scrollbar flex flex-col items-center py-2 sm:py-6 md:py-12 px-4 w-full">
         <div className="w-full max-w-3xl flex flex-col justify-center flex-1">
         
           {/* The Question / Hint System */}
@@ -305,7 +305,7 @@ export default function ReviewPage() {
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: "100%", opacity: 0 }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className={`fixed bottom-0 left-0 right-0 w-full min-h-[100px] md:min-h-[128px] py-4 md:py-0 border-t-2 items-center justify-center flex transition-colors duration-300 z-50 overflow-y-auto max-h-[50vh] ${isChecking ? (isCorrect ? 'bg-indigo-50 border-indigo-200' : 'bg-rose-50 border-rose-200 shadow-[0_-10px_40px_rgba(244,63,94,0.1)]') : 'bg-white border-slate-200 shadow-[0_-10px_40px_rgba(0,0,0,0.05)]'}`}
+              className={`absolute bottom-0 left-0 right-0 w-full min-h-[100px] md:min-h-[128px] py-4 md:py-0 border-t-2 items-center justify-center flex transition-colors duration-300 z-50 ${isChecking ? (isCorrect ? 'bg-indigo-50 border-indigo-200' : 'bg-rose-50 border-rose-200 shadow-[0_-10px_40px_rgba(244,63,94,0.1)]') : 'bg-white border-slate-200 shadow-[0_-10px_40px_rgba(0,0,0,0.05)]'}`}
             >
               <div className="w-full max-w-2xl px-4 flex sm:flex-row flex-col items-center justify-between gap-4">
               

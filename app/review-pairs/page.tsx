@@ -60,7 +60,7 @@ export default function ReviewPairsPage() {
           {language === 'en' ? 'You must complete at least one lesson to access this!' : 'Vous devez compléter au moins une leçon pour pouvoir y accéder !'}
         </p>
         <button 
-          onClick={() => router.push('/learn')}
+          onClick={() => router.push('/practice')}
           className="px-12 py-3 rounded-xl bg-fuchsia-500 border-b-4 border-fuchsia-700 text-white font-bold text-lg shadow-lg hover:bg-fuchsia-400 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest w-full max-w-sm"
         >
           {language === 'en' ? 'Back' : 'Retour'}
@@ -90,11 +90,11 @@ export default function ReviewPairsPage() {
   };
 
   return (
-    <div className="h-[100dvh] flex flex-col bg-[#FAFAFA] font-sans text-slate-800 overflow-hidden">
+    <div className="h-[100dvh] flex flex-col bg-[#FAFAFA] font-sans text-slate-800 overflow-hidden relative">
       {/* Header / Progress bar */}
       <header className="h-16 flex items-center shrink-0 justify-between border-b border-slate-200 bg-white">
         <div className="flex items-center gap-6 w-full max-w-2xl mx-auto h-full px-4 flex-1">
-          <button onClick={() => router.push('/learn')} className="text-slate-400 hover:text-slate-600 transition-colors">
+          <button onClick={() => router.push('/practice')} className="text-slate-400 hover:text-slate-600 transition-colors">
             <X size={24} strokeWidth={2.5} />
           </button>
           <div className="flex-1 h-3 bg-slate-100 rounded-full overflow-hidden">
@@ -108,7 +108,7 @@ export default function ReviewPairsPage() {
       </header>
 
       {/* Main Exercise Area */}
-      <main className="flex-1 overflow-y-auto flex flex-col items-center py-2 sm:py-6 md:py-12 px-4 w-full">
+      <main className="flex-1 overflow-y-auto hide-scrollbar flex flex-col items-center py-2 sm:py-6 md:py-12 px-4 w-full">
         <div className="w-full max-w-3xl flex flex-col justify-center flex-1">
           <AnimatePresence mode="wait">
             <motion.div 

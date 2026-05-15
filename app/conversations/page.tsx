@@ -3,12 +3,12 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useProgressStore } from '../lib/store';
-import { ArrowLeft, MessageCircle, Star } from 'lucide-react';
+import { ArrowLeft, MessageCircle, Star, BookOpen } from 'lucide-react';
 import conversationsData from '../data/conversations.json';
 
 export default function ConversationsPage() {
   const [mounted, setMounted] = useState(false);
-  const { language, xp } = useProgressStore();
+  const { language, xp, setLanguage } = useProgressStore();
 
   useEffect(() => {
     setMounted(true);
@@ -19,27 +19,51 @@ export default function ConversationsPage() {
   return (
     <div className="min-h-screen bg-[#FAFAFA] font-sans text-slate-800 pb-28 md:pb-20">
       {/* Header */}
-      <header className="bg-white border-b border-slate-200 h-16 shadow-sm sticky top-0 z-50 md:hidden">
-        <div className="flex items-center gap-4 max-w-2xl mx-auto h-full px-4 w-full">
-          <Link href="/learn" className="text-slate-400 hover:text-slate-600 transition-colors">
-            <ArrowLeft size={24} />
-          </Link>
-          <h1 className="text-xl font-bold flex-1">{language === 'en' ? 'Dialogs' : 'Discussions'}</h1>
-          <div className="flex items-center gap-1 text-rose-500 font-bold">
-            <Star size={20} className="fill-rose-500" />
-            <span>{xp}</span>
+      {/* Mobile Top Header */}
+      <header className="bg-[#FAFAFA]/95 backdrop-blur-sm z-50 h-[3.75rem] md:hidden">
+        <div className="flex items-center justify-between w-full h-full px-4 md:px-8 gap-2 sm:gap-6">
+          <div className="flex items-center gap-3">
+            <Link href="/learn" className="w-9 h-9 bg-emerald-600 rounded-xl flex items-center justify-center text-white shadow-sm md:hidden">
+              <BookOpen size={20} />
+            </Link>
+            <h1 className="text-xl font-extrabold text-slate-800 tracking-tight md:hidden">
+              {language === 'en' ? 'Dialogs' : 'Discussions'}
+            </h1>
+          </div>
+          
+          <div className="flex items-center gap-2">
+            {mounted && (
+              <button 
+                 onClick={() => setLanguage(language === 'fr' ? 'en' : 'fr')}
+                 className="flex items-center justify-center px-4 py-2 rounded-full bg-slate-100 text-slate-500 font-extrabold text-sm hover:bg-slate-200 transition-colors"
+                 title={language === 'fr' ? "Switch to English" : "Passer en Français"}
+              >
+                 {language === 'fr' ? 'FR' : 'EN'}
+              </button>
+            )}
+            
+            <div className="flex items-center gap-1.5 px-3 py-1.5 bg-amber-50 text-amber-600 rounded-xl font-extrabold text-sm">
+              <Star size={18} className="fill-amber-400 stroke-amber-400" />
+              <span>{mounted ? xp : 0} XP</span>
+            </div>
           </div>
         </div>
       </header>
 
-      <main className="max-w-2xl mx-auto px-4 mt-8 flex flex-col gap-6">
-        <p className="text-slate-500 font-medium pb-4 border-b-2 border-slate-100">
-          {language === 'en' 
-            ? 'Practice real dialogues based on the units you learned.' 
-            : 'Pratiquez de vrais dialogues selon les unités apprises.'}
-        </p>
+      <main className="max-w-4xl mx-auto space-y-8 mt-8 px-4 md:px-8">
+        <header className="mb-10 text-center md:text-left border-b-2 border-slate-100 pb-8 md:border-b-0 md:pb-0">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-slate-800 tracking-tight mb-4">
+            {language === 'en' ? 'Dialogs' : 'Discussions'}
+          </h1>
+          <p className="text-lg text-slate-500 font-medium max-w-2xl mx-auto md:mx-0">
+            {language === 'en' 
+              ? 'Practice real dialogues based on the units you learned.' 
+              : 'Pratiquez de vrais dialogues selon les unités apprises.'}
+          </p>
+        </header>
 
-        {conversationsData.conversations.map(conv => {
+        <div className="flex flex-col gap-6 max-w-2xl mx-auto md:mx-0 w-full">
+          {conversationsData.conversations.map(conv => {
           return (
             <Link 
               key={conv.id} 
@@ -60,6 +84,7 @@ export default function ConversationsPage() {
             </Link>
           );
         })}
+        </div>
       </main>
     </div>
   );

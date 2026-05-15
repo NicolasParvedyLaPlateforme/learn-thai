@@ -246,7 +246,7 @@ function LessonPageContent() {
   );
 
   return (
-    <div className="h-[100dvh] flex flex-col bg-[#FAFAFA] font-sans text-slate-800 overflow-hidden">
+    <div className="h-[100dvh] flex flex-col bg-[#FAFAFA] font-sans text-slate-800 overflow-hidden relative">
       {/* Header / Progress bar */}
       <header className="h-16 flex items-center shrink-0 justify-between border-b border-slate-200 bg-white">
         <div className="flex items-center gap-6 w-full max-w-2xl mx-auto h-full px-4 flex-1">
@@ -288,7 +288,7 @@ function LessonPageContent() {
       </header>
 
       {/* Main Exercise Area */}
-      <main className="flex-1 overflow-y-auto flex flex-col items-center py-2 sm:py-6 md:py-12 px-4 w-full relative">
+      <main className="flex-1 overflow-y-auto hide-scrollbar flex flex-col items-center py-2 sm:py-6 md:py-12 px-4 w-full relative">
         <div className="w-full max-w-3xl flex flex-col justify-center flex-1">
         
           {/* Glossary Modal */}
@@ -354,7 +354,7 @@ function LessonPageContent() {
                         : currentExercise.type === 'pair-matching'
                           ? currentExercise.question
                           : currentExercise.type === 'writing' && currentExercise.blindMode
-                            ? (language === 'en' ? "Write this " + (currentExercise.id.includes('phrase') ? "sentence" : "word") + " in Thai" : "Écrivez ce " + (currentExercise.id.includes('phrase') ? "phrase" : "mot") + " en thaï")
+                            ? (language === 'en' ? "Write this " + (currentExercise.id.includes('phrase') ? "sentence" : "word") + " in Thai" : "Écrivez " + (currentExercise.id.includes('phrase') ? "cette phrase" : "ce mot") + " en thaï")
                             : (language === 'en' ? "Translate this sentence" : "Traduisez cette phrase")}
                   </h2>
                   <div className="relative inline-block pb-1 w-full text-center md:text-left">
@@ -512,7 +512,7 @@ function LessonPageContent() {
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: "100%", opacity: 0 }}
                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                className={`fixed bottom-0 left-0 right-0 w-full min-h-[100px] md:min-h-[128px] py-4 md:py-0 border-t-2 items-center justify-center flex transition-colors duration-300 z-50 overflow-y-auto max-h-[50vh] ${isChecking ? (isCorrect ? 'bg-emerald-50 border-emerald-200' : 'bg-rose-50 border-rose-200 shadow-[0_-10px_40px_rgba(244,63,94,0.1)]') : 'bg-white border-slate-200 shadow-[0_-10px_40px_rgba(0,0,0,0.05)]'}`}
+                className={`absolute bottom-0 left-0 right-0 w-full min-h-[100px] md:min-h-[128px] py-4 md:py-0 border-t-2 items-center justify-center flex transition-colors duration-300 z-50 ${isChecking ? (isCorrect ? 'bg-emerald-50 border-emerald-200' : 'bg-rose-50 border-rose-200 shadow-[0_-10px_40px_rgba(244,63,94,0.1)]') : 'bg-white border-slate-200 shadow-[0_-10px_40px_rgba(0,0,0,0.05)]'}`}
               >
                 <div className="w-full max-w-2xl px-4 flex sm:flex-row flex-col items-center justify-between gap-4">
           
