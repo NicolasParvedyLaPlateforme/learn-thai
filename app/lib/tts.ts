@@ -1,7 +1,16 @@
 let currentAudio: HTMLAudioElement | null = null;
+let lastTtsText = '';
+let lastTtsTime = 0;
 
 export const playThaiTTS = (text: string) => {
   if (typeof window === 'undefined') return;
+  const now = Date.now();
+  if (text === lastTtsText && now - lastTtsTime < 300) {
+    return; // deduplicate rapid identical calls
+  }
+  lastTtsText = text;
+  lastTtsTime = now;
+
   try {
     const url = `/api/tts?text=${encodeURIComponent(text)}`;
     
@@ -13,7 +22,12 @@ export const playThaiTTS = (text: string) => {
       currentAudio.load();
     }
     
-    currentAudio.play().catch(e => {
+    currentAudio.play().catch((e: Error) => {
+      if (e.name === 'AbortError') {
+        // AbortError means the play() was interrupted by a new play() or pause() 
+        // We shouldn't fallback to local TTS, as the new audio will play or user intentionally stopped it
+        return;
+      }
       console.warn("Google TTS API playback failed, falling back to local speech synthesis:", e);
       fallbackTTS(text);
     });
@@ -29,6 +43,15 @@ export const playThaiTTSAsync = (text: string): Promise<void> => {
       resolve();
       return;
     }
+    
+    const now = Date.now();
+    if (text === lastTtsText && now - lastTtsTime < 300) {
+      resolve(); // ignore rapid identical calls
+      return;
+    }
+    lastTtsText = text;
+    lastTtsTime = now;
+
     try {
       const url = `/api/tts?text=${encodeURIComponent(text)}`;
       
@@ -55,7 +78,11 @@ export const playThaiTTSAsync = (text: string): Promise<void> => {
       currentAudio.addEventListener('ended', handleEnded);
       currentAudio.addEventListener('error', handleFallback);
       
-      currentAudio.play().catch(e => {
+      currentAudio.play().catch((e: Error) => {
+        if (e.name === 'AbortError') {
+          resolve();
+          return;
+        }
         console.warn("Google TTS API playback failed in async, falling back:", e);
         handleFallback();
       });
