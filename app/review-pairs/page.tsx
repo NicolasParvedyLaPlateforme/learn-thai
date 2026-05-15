@@ -90,7 +90,7 @@ export default function ReviewPairsPage() {
   };
 
   return (
-    <div className="h-[100dvh] flex flex-col bg-[#FAFAFA] font-sans text-slate-800 overflow-hidden">
+    <div className="h-[100dvh] flex flex-col bg-[#FAFAFA] font-sans text-slate-800 overflow-hidden relative">
       {/* Header / Progress bar */}
       <header className="h-16 flex items-center shrink-0 justify-between border-b border-slate-200 bg-white">
         <div className="flex items-center gap-6 w-full max-w-2xl mx-auto h-full px-4 flex-1">
@@ -108,7 +108,7 @@ export default function ReviewPairsPage() {
       </header>
 
       {/* Main Exercise Area */}
-      <main className="flex-1 overflow-y-auto flex flex-col items-center py-2 sm:py-6 md:py-12 px-4 w-full">
+      <main className="flex-1 overflow-y-auto hide-scrollbar flex flex-col items-center py-2 sm:py-6 md:py-12 px-4 w-full">
         <div className="w-full max-w-3xl flex flex-col justify-center flex-1">
           <AnimatePresence mode="wait">
             <motion.div 

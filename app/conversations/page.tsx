@@ -50,14 +50,20 @@ export default function ConversationsPage() {
         </div>
       </header>
 
-      <main className="max-w-2xl mx-auto px-4 mt-8 flex flex-col gap-6">
-        <p className="text-slate-500 font-medium pb-4 border-b-2 border-slate-100">
-          {language === 'en' 
-            ? 'Practice real dialogues based on the units you learned.' 
-            : 'Pratiquez de vrais dialogues selon les unités apprises.'}
-        </p>
+      <main className="max-w-4xl mx-auto space-y-8 mt-8 px-4 md:px-8">
+        <header className="mb-10 text-center md:text-left border-b-2 border-slate-100 pb-8 md:border-b-0 md:pb-0">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-slate-800 tracking-tight mb-4">
+            {language === 'en' ? 'Dialogs' : 'Discussions'}
+          </h1>
+          <p className="text-lg text-slate-500 font-medium max-w-2xl mx-auto md:mx-0">
+            {language === 'en' 
+              ? 'Practice real dialogues based on the units you learned.' 
+              : 'Pratiquez de vrais dialogues selon les unités apprises.'}
+          </p>
+        </header>
 
-        {conversationsData.conversations.map(conv => {
+        <div className="flex flex-col gap-6 max-w-2xl mx-auto md:mx-0 w-full">
+          {conversationsData.conversations.map(conv => {
           return (
             <Link 
               key={conv.id} 
@@ -78,6 +84,7 @@ export default function ConversationsPage() {
             </Link>
           );
         })}
+        </div>
       </main>
     </div>
   );

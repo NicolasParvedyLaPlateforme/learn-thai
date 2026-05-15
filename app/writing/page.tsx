@@ -147,7 +147,7 @@ export default function WritingPage() {
     : undefined;
 
   return (
-    <div className="h-[100dvh] flex flex-col bg-[#FAFAFA] font-sans text-slate-800 overflow-hidden">
+    <div className="h-[100dvh] flex flex-col bg-[#FAFAFA] font-sans text-slate-800 overflow-hidden relative">
       {/* Header */}
       <header className="h-16 flex items-center shrink-0 justify-between border-b border-slate-200 bg-white">
         <div className="flex items-center gap-6 w-full max-w-2xl mx-auto h-full px-4 flex-1">
@@ -180,7 +180,7 @@ export default function WritingPage() {
       </header>
 
       {/* Main Area */}
-      <main className="flex-1 overflow-y-auto flex flex-col items-center py-2 sm:py-6 md:py-12 px-4 w-full">
+      <main className="flex-1 overflow-y-auto hide-scrollbar flex flex-col items-center py-2 sm:py-6 md:py-12 px-4 w-full">
         <div className="w-full max-w-3xl flex flex-col justify-center flex-1">
         
           <div className="flex items-start gap-4 md:gap-8 mb-4 md:mb-8">
@@ -190,7 +190,9 @@ export default function WritingPage() {
             
             <div className="flex-1">
               <h2 className="text-2xl md:text-3xl font-extrabold text-slate-800 mb-4 md:mb-6 text-center md:text-left">
-                {language === 'en' ? 'Write this word in Thai' : 'Écrivez ce mot en thaï'}
+                {language === 'en' 
+                  ? "Write this " + (currentExercise.id.includes('phrase') ? "sentence" : "word") + " in Thai" 
+                  : "Écrivez " + (currentExercise.id.includes('phrase') ? "cette phrase" : "ce mot") + " en thaï"}
               </h2>
               <div className="relative pb-1 w-full text-center md:text-left min-h-[40px]">
                 {!writingConfig.hideTranslation ? (
