@@ -62,14 +62,30 @@ export default function PracticePage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {/* Review Card */}
-          <Link href="/review" className="group flex flex-col bg-white border-2 border-slate-200 rounded-3xl p-6 hover:shadow-xl hover:-translate-y-1 hover:border-indigo-300 active:translate-y-0 active:shadow-md transition-all duration-300">
-            <div className="bg-indigo-100 text-indigo-600 w-16 h-16 rounded-2xl flex items-center justify-center shrink-0 mb-6 group-hover:scale-110 transition-transform">
-              <Brain size={32} />
+          <Link href="/review" className="group flex flex-col bg-white border-2 border-slate-200 rounded-3xl p-5 hover:shadow-xl hover:-translate-y-1 hover:border-indigo-300 active:translate-y-0 active:shadow-md transition-all duration-300">
+            {/* Illustration */}
+            <div className="mb-6 w-full h-40 bg-indigo-50/50 rounded-2xl border-2 border-indigo-100 relative overflow-hidden flex items-center justify-center group-hover:bg-indigo-50 transition-colors">
+              <div className="absolute inset-0 bg-[radial-gradient(#e0e7ff_1px,transparent_1px)] [background-size:16px_16px] opacity-40"></div>
+              
+              {/* Back card */}
+              <div className="absolute w-32 h-24 bg-white rounded-xl shadow-sm border border-slate-200 flex flex-col items-center justify-center rotate-[-8deg] group-hover:rotate-[-12deg] group-hover:-translate-y-1 transition-all duration-500">
+              </div>
+              {/* Front card */}
+              <div className="absolute w-32 h-24 bg-white rounded-xl shadow-md border border-indigo-200 flex flex-col items-center justify-center rotate-[4deg] group-hover:rotate-[8deg] group-hover:-translate-y-2 group-hover:shadow-lg transition-all duration-500 gap-2">
+                <span className="text-3xl font-bold text-indigo-600">แมว</span>
+                <div className="w-12 h-2 bg-indigo-100 rounded-full"></div>
+              </div>
+
+              {/* Icon badge */}
+              <div className="absolute top-3 left-3 bg-indigo-100 text-indigo-600 p-2 rounded-xl">
+                <Brain size={20} />
+              </div>
             </div>
+
             <h3 className="text-2xl font-bold text-slate-800 mb-2">
               {language === 'en' ? 'Review' : 'Rappel'}
             </h3>
-            <p className="text-slate-500 font-medium">
+            <p className="text-slate-500 font-medium leading-relaxed">
               {language === 'en' 
                 ? 'Test your memory and reinforce what you have learned with spaced repetition.' 
                 : 'Testez votre mémoire et renforcez ce que vous avez appris avec la répétition espacée.'}
@@ -77,14 +93,38 @@ export default function PracticePage() {
           </Link>
           
           {/* Pairs Card */}
-          <Link href="/review-pairs" className="group flex flex-col bg-white border-2 border-slate-200 rounded-3xl p-6 hover:shadow-xl hover:-translate-y-1 hover:border-fuchsia-300 active:translate-y-0 active:shadow-md transition-all duration-300">
-            <div className="bg-fuchsia-100 text-fuchsia-600 w-16 h-16 rounded-2xl flex items-center justify-center shrink-0 mb-6 group-hover:scale-110 transition-transform">
-              <BookOpen size={32} />
+          <Link href="/review-pairs" className="group flex flex-col bg-white border-2 border-slate-200 rounded-3xl p-5 hover:shadow-xl hover:-translate-y-1 hover:border-fuchsia-300 active:translate-y-0 active:shadow-md transition-all duration-300">
+            {/* Illustration */}
+            <div className="mb-6 w-full h-40 bg-fuchsia-50/50 rounded-2xl border-2 border-fuchsia-100 flex items-center justify-center group-hover:bg-fuchsia-50 transition-colors relative overflow-hidden">
+               <div className="absolute inset-0 bg-[radial-gradient(#fae8ff_1px,transparent_1px)] [background-size:16px_16px] opacity-40"></div>
+               
+               {/* Grid representation of pairs */}
+               <div className="grid grid-cols-2 gap-3 relative z-10 w-48">
+                 <div className="h-10 bg-white rounded-xl shadow-sm border-2 border-slate-100 flex items-center justify-center group-hover:-translate-y-0.5 transition-all duration-300">
+                    <div className="w-8 h-2 bg-slate-200 rounded-full"></div>
+                 </div>
+                 <div className="h-10 bg-fuchsia-100 rounded-xl shadow-sm border-2 border-fuchsia-300 flex items-center justify-center group-hover:-translate-y-0.5 transition-all duration-300 text-fuchsia-600 font-bold text-[13px]">
+                    {language === 'en' ? 'Cat' : 'Chat'}
+                 </div>
+                 
+                 <div className="h-10 bg-fuchsia-500 rounded-xl shadow-md border-2 border-fuchsia-600 flex items-center justify-center group-hover:translate-y-0.5 transition-all duration-300 delay-75 text-white font-bold text-lg pt-1">
+                    แมว
+                 </div>
+                 <div className="h-10 bg-white rounded-xl shadow-sm border-2 border-slate-100 flex items-center justify-center group-hover:translate-y-0.5 transition-all duration-300 delay-75">
+                    <div className="w-8 h-2 bg-slate-200 rounded-full"></div>
+                 </div>
+               </div>
+
+              {/* Icon badge */}
+              <div className="absolute top-3 left-3 bg-fuchsia-100 text-fuchsia-600 p-2 rounded-xl">
+                <BookOpen size={20} />
+              </div>
             </div>
+
             <h3 className="text-2xl font-bold text-slate-800 mb-2">
               {language === 'en' ? 'Pairs' : 'Paires'}
             </h3>
-            <p className="text-slate-500 font-medium">
+            <p className="text-slate-500 font-medium leading-relaxed">
               {language === 'en' 
                 ? 'Match words with their translations to improve your vocabulary recognition.' 
                 : 'Associez les mots avec leurs traductions pour améliorer votre reconnaissance du vocabulaire.'}
@@ -94,15 +134,39 @@ export default function PracticePage() {
           {/* Writing Card */}
           <button 
             onClick={() => setWritingConfigModalOpen(true)}
-            className="group flex flex-col bg-white border-2 border-slate-200 rounded-3xl p-6 hover:shadow-xl hover:-translate-y-1 hover:border-sky-300 active:translate-y-0 active:shadow-md transition-all duration-300 text-left"
+            className="group flex flex-col bg-white border-2 border-slate-200 rounded-3xl p-5 hover:shadow-xl hover:-translate-y-1 hover:border-sky-300 active:translate-y-0 active:shadow-md transition-all duration-300 text-left"
           >
-            <div className="bg-sky-100 text-sky-600 w-16 h-16 rounded-2xl flex items-center justify-center shrink-0 mb-6 group-hover:scale-110 transition-transform">
-              <Pencil size={32} />
+            {/* Illustration */}
+            <div className="mb-6 w-full h-40 bg-sky-50/50 rounded-2xl border-2 border-sky-100 flex flex-col items-center justify-center gap-4 group-hover:bg-sky-50 transition-colors relative overflow-hidden">
+              <div className="absolute inset-0 bg-[radial-gradient(#e0f2fe_1px,transparent_1px)] [background-size:16px_16px] opacity-40"></div>
+              
+              {/* Input field */}
+              <div className="w-3/4 h-11 bg-white rounded-xl border-2 border-slate-200 shadow-inner flex items-center px-4 gap-0.5 relative z-10">
+                <span className="text-sky-500 font-bold text-xl leading-none pt-1">ห</span>
+                <span className="text-sky-500 font-bold text-xl leading-none pt-1">ม</span>
+                <div className="w-0.5 h-5 bg-sky-400 animate-pulse ml-0.5"></div>
+              </div>
+              
+              {/* Keyboard */}
+              <div className="flex flex-col gap-2 w-3/4 relative z-10">
+                <div className="flex justify-center gap-2">
+                  <div className="w-8 h-8 bg-white rounded-lg shadow-sm border-b-2 border-slate-200 flex items-center justify-center group-hover:-translate-y-0.5 transition-all"><span className="text-sm text-slate-400 pt-0.5">ด</span></div>
+                  <div className="w-8 h-8 bg-sky-500 rounded-lg shadow-sm border-b-2 border-sky-600 flex items-center justify-center group-hover:-translate-y-0.5 transition-all delay-75"><span className="text-sm text-white pt-0.5">า</span></div>
+                  <div className="w-8 h-8 bg-white rounded-lg shadow-sm border-b-2 border-slate-200 flex items-center justify-center group-hover:-translate-y-0.5 transition-all delay-150"><span className="text-sm text-slate-400 pt-0.5">ก</span></div>
+                  <div className="w-8 h-8 bg-white rounded-lg shadow-sm border-b-2 border-slate-200 flex items-center justify-center group-hover:-translate-y-0.5 transition-all delay-200"><span className="text-sm text-slate-400 pt-0.5">ห</span></div>
+                </div>
+              </div>
+
+              {/* Icon badge */}
+              <div className="absolute top-3 left-3 bg-sky-100 text-sky-600 p-2 rounded-xl">
+                <Pencil size={20} />
+              </div>
             </div>
+
             <h3 className="text-2xl font-bold text-slate-800 mb-2">
               {language === 'en' ? 'Writing' : 'Écriture'}
             </h3>
-            <p className="text-slate-500 font-medium">
+            <p className="text-slate-500 font-medium leading-relaxed">
               {language === 'en' 
                 ? 'Practice structural sentence building and spelling with the virtual keyboard.' 
                 : 'Pratiquez l\'écriture des mots et des phrases avec le clavier virtuel.'}
