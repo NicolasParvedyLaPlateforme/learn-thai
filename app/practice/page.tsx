@@ -1,20 +1,54 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Brain, BookOpen, Pencil } from 'lucide-react';
+import { Brain, BookOpen, Pencil, Star } from 'lucide-react';
 import { useProgressStore } from '../lib/store';
 import { WritingConfigModal } from '../components/WritingConfigModal';
 
 export default function PracticePage() {
-  const { language } = useProgressStore();
+  const { language, xp, setLanguage } = useProgressStore();
   const [isWritingConfigModalOpen, setWritingConfigModalOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   return (
-    <div className="min-h-screen bg-slate-50 pb-[100px] md:pb-8 pt-8 px-4 md:px-8">
+    <div className="min-h-screen bg-[#FAFAFA] font-sans text-slate-800 pb-28 md:pb-20">
+      
+      {/* Mobile Top Header */}
+      <header className="bg-[#FAFAFA]/95 backdrop-blur-sm z-50 h-[3.75rem] md:hidden">
+        <div className="flex items-center justify-between w-full h-full px-4 md:px-8 gap-2 sm:gap-6">
+          <div className="flex items-center gap-3">
+            <Link href="/learn" className="w-9 h-9 bg-emerald-600 rounded-xl flex items-center justify-center text-white shadow-sm md:hidden">
+              <BookOpen size={20} />
+            </Link>
+            <h1 className="text-xl font-extrabold text-slate-800 tracking-tight md:hidden">
+              {language === 'en' ? 'Practice' : 'Pratique'}
+            </h1>
+          </div>
+          
+          <div className="flex items-center gap-2">
+            {mounted && (
+              <button 
+                 onClick={() => setLanguage(language === 'fr' ? 'en' : 'fr')}
+                 className="flex items-center justify-center px-4 py-2 rounded-full bg-slate-100 text-slate-500 font-extrabold text-sm hover:bg-slate-200 transition-colors"
+                 title={language === 'fr' ? "Switch to English" : "Passer en Français"}
+              >
+                 {language === 'fr' ? 'FR' : 'EN'}
+              </button>
+            )}
+            
+            <div className="flex items-center gap-1.5 px-3 py-1.5 bg-amber-50 text-amber-600 rounded-xl font-extrabold text-sm">
+              <Star size={18} className="fill-amber-400 stroke-amber-400" />
+              <span>{mounted ? xp : 0} XP</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
       <WritingConfigModal isOpen={isWritingConfigModalOpen} onClose={() => setWritingConfigModalOpen(false)} />
       
-      <div className="max-w-4xl mx-auto space-y-8">
+      <div className="max-w-4xl mx-auto space-y-8 mt-8 px-4 md:px-8">
         <header className="mb-10 text-center md:text-left">
           <h1 className="text-4xl md:text-5xl font-extrabold text-slate-800 tracking-tight mb-4">
             {language === 'en' ? 'Practice' : 'Pratique'}

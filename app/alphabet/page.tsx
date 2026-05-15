@@ -10,7 +10,7 @@ import { BookOpen, CheckCircle, Star, Play, Crown, X, Unlock, Lock } from 'lucid
 
 export default function AlphabetMenuPage() {
   const router = useRouter();
-  const { completedLessons, unlockedLessons, lessonLevels, xp, resetLessonLevel, unlockLessonManual, language, autoDetectLanguage } = useProgressStore();
+  const { completedLessons, unlockedLessons, lessonLevels, xp, resetLessonLevel, unlockLessonManual, language, setLanguage, autoDetectLanguage } = useProgressStore();
   const [mounted, setMounted] = useState(false);
   const [selectedLesson, setSelectedLesson] = useState<{lesson: AlphabetLessonDef, isCompleted: boolean, unitColor: string, unitBorder: string} | null>(null);
   const [lessonToUnlock, setLessonToUnlock] = useState<{lesson: AlphabetLessonDef, unitColor: string, unitBorder: string} | null>(null);
@@ -99,19 +99,31 @@ export default function AlphabetMenuPage() {
     <div className="min-h-screen bg-[#FAFAFA] font-sans text-slate-800 pb-28 md:pb-20">
       
       {/* Header */}
+      {/* Mobile Top Header */}
       <header className="bg-[#FAFAFA]/95 backdrop-blur-sm z-50 h-[3.75rem] md:hidden">
-        <div className="flex items-center justify-between w-full max-w-2xl mx-auto h-full px-4 gap-2 sm:gap-6">
+        <div className="flex items-center justify-between w-full h-full px-4 md:px-8 gap-2 sm:gap-6">
           <div className="flex items-center gap-3">
-            <Link href="/learn" className="w-9 h-9 bg-emerald-600 rounded-xl flex items-center justify-center text-white shadow-sm">
+            <Link href="/learn" className="w-9 h-9 bg-emerald-600 rounded-xl flex items-center justify-center text-white shadow-sm md:hidden">
               <BookOpen size={20} />
             </Link>
-            <h1 className="text-xl font-extrabold text-slate-800 tracking-tight">Alphabet</h1>
+            <h1 className="text-xl font-extrabold text-slate-800 tracking-tight md:hidden">Alphabet</h1>
           </div>
           
-          <div className="flex items-center gap-2 sm:gap-4 font-bold">
-            <Link href="/learn" className="text-slate-500 hover:text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-full w-9 h-9 flex items-center justify-center transition-colors shadow-sm">
-              <X size={20} />
-            </Link>
+          <div className="flex items-center gap-2">
+            {mounted && (
+              <button 
+                 onClick={() => setLanguage(language === 'fr' ? 'en' : 'fr')}
+                 className="flex items-center justify-center px-4 py-2 rounded-full bg-slate-100 text-slate-500 font-extrabold text-sm hover:bg-slate-200 transition-colors"
+                 title={language === 'fr' ? "Switch to English" : "Passer en Français"}
+              >
+                 {language === 'fr' ? 'FR' : 'EN'}
+              </button>
+            )}
+            
+            <div className="flex items-center gap-1.5 px-3 py-1.5 bg-amber-50 text-amber-600 rounded-xl font-extrabold text-sm">
+              <Star size={18} className="fill-amber-400 stroke-amber-400" />
+              <span>{mounted ? xp : 0} XP</span>
+            </div>
           </div>
         </div>
       </header>
