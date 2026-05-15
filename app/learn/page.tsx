@@ -190,7 +190,7 @@ export default function Home() {
   }, [mounted]);
 
   return (
-    <div className="min-h-screen bg-[#FAFAFA] font-sans text-slate-800 pb-28 md:pb-20 overflow-hidden">
+    <div className="min-h-screen bg-[#FAFAFA] font-sans text-slate-800 pb-28 md:pb-20">
       
       {/* Header */}
       <header className="sticky top-0 bg-[#FAFAFA]/95 backdrop-blur-sm z-50 h-[3.75rem] md:hidden">
@@ -202,20 +202,20 @@ export default function Home() {
             <h1 className="text-xl font-extrabold text-slate-800 tracking-tight md:hidden">ThaiLearn</h1>
           </div>
           
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             {mounted && (
               <button 
                  onClick={() => setLanguage(language === 'fr' ? 'en' : 'fr')}
-                 className="flex items-center justify-center px-4 py-2 rounded-full bg-slate-100 text-slate-500 font-extrabold text-xs hover:bg-slate-200 transition-colors shadow-sm"
+                 className="flex items-center justify-center px-4 py-2 rounded-full bg-slate-100 text-slate-500 font-extrabold text-sm hover:bg-slate-200 transition-colors"
                  title={language === 'fr' ? "Switch to English" : "Passer en Français"}
               >
                  {language === 'fr' ? 'FR' : 'EN'}
               </button>
             )}
             
-            <div className="flex items-center gap-1.5 bg-slate-100 px-4 py-2 rounded-full text-orange-600 font-extrabold text-sm shadow-sm">
-              <Star size={16} className="fill-amber-400 stroke-amber-400" />
-              <span className="mt-0">{mounted ? xp : 0} XP</span>
+            <div className="flex items-center gap-1.5 px-3 py-1.5 bg-amber-50 text-amber-600 rounded-xl font-extrabold text-sm">
+              <Star size={18} className="fill-amber-400 stroke-amber-400" />
+              <span>{mounted ? xp : 0} XP</span>
             </div>
           </div>
         </div>
@@ -224,7 +224,7 @@ export default function Home() {
       {/* Main Content (Mobile Only) */}
       <main className="max-w-2xl mx-auto px-4 mt-2 flex flex-col gap-8 md:hidden">
         {/* Mobile Unit Selector */}
-        <div className="flex overflow-x-auto hide-scrollbar gap-2 pb-4 -mx-4 px-4 sticky top-[3.75rem] z-40 bg-[#FAFAFA]/95 backdrop-blur-sm pt-2">
+        <div className="flex overflow-x-auto hide-scrollbar gap-2 pb-4 -mx-4 px-4 sticky top-[3.75rem] z-40 bg-[#FAFAFA]/95 backdrop-blur-sm pt-2 transition-all duration-300">
           {UNITS.map((u, i) => (
             <button
               key={`nav-m-${u.id}`}

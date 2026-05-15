@@ -87,7 +87,7 @@ export default function AlphabetMenuPage() {
   }, [mounted]);
 
   return (
-    <div className="min-h-screen bg-[#FAFAFA] font-sans text-slate-800 pb-28 md:pb-20 overflow-hidden">
+    <div className="min-h-screen bg-[#FAFAFA] font-sans text-slate-800 pb-28 md:pb-20">
       
       {/* Header */}
       <header className="sticky top-0 bg-[#FAFAFA]/95 backdrop-blur-sm z-50 h-[3.75rem] md:hidden">
@@ -110,7 +110,7 @@ export default function AlphabetMenuPage() {
       {/* Main Content (Mobile Only) */}
       <main className="max-w-2xl mx-auto px-4 mt-2 flex flex-col gap-8 md:hidden">
         {/* Mobile Unit Selector */}
-        <div className="flex overflow-x-auto hide-scrollbar gap-2 pb-4 -mx-4 px-4 sticky top-[3.75rem] z-40 bg-[#FAFAFA]/95 backdrop-blur-sm pt-2">
+        <div className="flex overflow-x-auto hide-scrollbar gap-2 pb-4 -mx-4 px-4 sticky top-[3.75rem] z-40 bg-[#FAFAFA]/95 backdrop-blur-sm pt-2 transition-all duration-300">
           {UNITS.map((u, i) => (
             <button
               key={`nav-m-${u.id}`}
