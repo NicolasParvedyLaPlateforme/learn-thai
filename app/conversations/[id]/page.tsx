@@ -63,10 +63,13 @@ function ConversationContent() {
 
   // Auto-scroll effect
   useEffect(() => {
-    if (endOfMessagesRef.current) {
-      endOfMessagesRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
-    }
-  }, [currentLineIndex, stepIndex, isFinished]);
+    setTimeout(() => {
+      const messages = document.querySelectorAll('.message-bubble');
+      if (messages.length > 0) {
+        messages[messages.length - 1].scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }, 100);
+  }, [currentLineIndex, stepIndex, isFinished, choices]);
 
   // Set up choices whenever we land on a "guess" step in level 1 or 2
   useEffect(() => {
@@ -312,24 +315,28 @@ function ConversationContent() {
       </header>
 
       <main className="max-w-xl mx-auto px-4 mt-8 flex flex-col gap-6">
-        <div className="text-center mb-4">
+        <div className="text-center mb-4 transition-all duration-300">
             <h1 className="text-2xl font-black text-slate-800">
                 {language === 'en' && conversation.titleEn ? conversation.titleEn : conversation.title}
             </h1>
-            {isLevel1 && (
-              <p className="text-sm font-bold text-orange-500 uppercase tracking-wide mt-2">
-                {language === 'en' ? 'Level 1: Fill in the blanks' : 'Niveau 1: Remplir la conversation'}
-              </p>
-            )}
-            {isLevel2 && (
-              <p className="text-sm font-bold text-purple-500 uppercase tracking-wide mt-2">
-                {language === 'en' ? 'Level 2: Fill in the word' : 'Niveau 2: Remplir le mot'}
-              </p>
-            )}
-            {isLevel3 && (
-              <p className="text-sm font-bold text-blue-500 uppercase tracking-wide mt-2">
-                {language === 'en' ? 'Level 3: Choose the phrase' : 'Niveau 3: Choisir la phrase'}
-              </p>
+            {!hasStarted && (
+              <>
+                {isLevel1 && (
+                  <p className="text-sm font-bold text-orange-500 uppercase tracking-wide mt-2">
+                    {language === 'en' ? 'Level 1: Fill in the blanks' : 'Niveau 1: Remplir la conversation'}
+                  </p>
+                )}
+                {isLevel2 && (
+                  <p className="text-sm font-bold text-purple-500 uppercase tracking-wide mt-2">
+                    {language === 'en' ? 'Level 2: Fill in the word' : 'Niveau 2: Remplir le mot'}
+                  </p>
+                )}
+                {isLevel3 && (
+                  <p className="text-sm font-bold text-blue-500 uppercase tracking-wide mt-2">
+                    {language === 'en' ? 'Level 3: Choose the phrase' : 'Niveau 3: Choisir la phrase'}
+                  </p>
+                )}
+              </>
             )}
         </div>
 
@@ -374,7 +381,7 @@ function ConversationContent() {
               return (
                 <div 
                   key={index} 
-                  className={`flex w-full gap-3 py-1 ${isSpeakerA ? 'justify-start' : 'justify-end'} animate-in fade-in slide-in-from-bottom-4 duration-500`}
+                  className={`message-bubble flex w-full gap-3 py-1 ${isSpeakerA ? 'justify-start' : 'justify-end'} animate-in fade-in slide-in-from-bottom-4 duration-500`}
                 >
                   {/* Speaker A avatar */}
                   {isSpeakerA && (
@@ -468,7 +475,7 @@ function ConversationContent() {
             })}
           </div>
         )}
-        <div ref={endOfMessagesRef} className="h-96 sm:h-[400px]" />
+        <div ref={endOfMessagesRef} className="h-[300px] sm:h-[400px]" />
       </main>
 
       {/* Choices overlay for level 1, 2 and 3 */}
