@@ -63,7 +63,7 @@ export default function ConversationsPage() {
         </header>
 
         <div className="flex flex-col gap-8 max-w-2xl mx-auto md:mx-0 w-full">
-          {conversationsData.conversations.map(conv => {
+          {conversationsData.conversations.map((conv, index) => {
           return (
             <div key={conv.id} className="flex flex-col gap-3">
               <Link 
@@ -75,7 +75,7 @@ export default function ConversationsPage() {
                 </div>
                 <div>
                   <div className="text-sm font-bold text-orange-500 mb-1 uppercase tracking-wide">
-                    {language === 'en' ? `Conversation ${conv.level}` : `Conversation ${conv.level}`}
+                    {language === 'en' ? `Conversation ${index + 1}` : `Conversation ${index + 1}`}
                   </div>
                   <h2 className="text-xl font-extrabold text-slate-800 group-hover:text-orange-500 transition-colors">
                     {language === 'en' && conv.titleEn ? conv.titleEn : conv.title}

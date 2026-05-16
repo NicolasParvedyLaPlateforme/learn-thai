@@ -1,6 +1,9 @@
 let currentAudio: HTMLAudioElement | null = null;
 let lastTtsText = '';
 let lastTtsTime = 0;
+let globalLastPlayTime = 0;
+
+const WAKEUP_THRESHOLD = 15000; // 15 seconds
 
 export const playThaiTTS = (text: string) => {
   if (typeof window === 'undefined') return;
@@ -12,7 +15,8 @@ export const playThaiTTS = (text: string) => {
   lastTtsTime = now;
 
   try {
-    const url = `/api/tts?text=${encodeURIComponent(text)}`;
+    const textToSpeak = text;
+    const url = `/api/tts?text=${encodeURIComponent(textToSpeak)}`;
     
     if (!currentAudio) {
       currentAudio = new Audio(url);
@@ -22,15 +26,43 @@ export const playThaiTTS = (text: string) => {
       currentAudio.load();
     }
     
-    currentAudio.play().catch((e: Error) => {
+    const playWithWakeUp = () => {
+      if (!currentAudio) return;
+      
+      const needsWakeUp = now - globalLastPlayTime > WAKEUP_THRESHOLD;
+      globalLastPlayTime = now;
+
+      if (needsWakeUp) {
+        // Play an invisible "wake up" sound using the same audio URL
+        const wakeUpAudio = new Audio(url);
+        wakeUpAudio.volume = 0.01; // Barely audible
+        wakeUpAudio.play().catch(() => {});
+        
+        // Wait 500ms for hardware/Bluetooth to wake up, then play real audio
+        setTimeout(() => {
+          wakeUpAudio.pause();
+          wakeUpAudio.removeAttribute('src');
+          wakeUpAudio.load();
+          
+          if (!currentAudio) return;
+          currentAudio.volume = 1;
+          currentAudio.play().catch(handleError);
+        }, 500);
+      } else {
+        currentAudio.volume = 1;
+        currentAudio.play().catch(handleError);
+      }
+    };
+
+    const handleError = (e: Error) => {
       if (e.name === 'AbortError') {
-        // AbortError means the play() was interrupted by a new play() or pause() 
-        // We shouldn't fallback to local TTS, as the new audio will play or user intentionally stopped it
         return;
       }
       console.warn("Google TTS API playback failed, falling back to local speech synthesis:", e);
       fallbackTTS(text);
-    });
+    };
+
+    playWithWakeUp();
   } catch (e) {
     console.warn("Audio playback failed:", e);
     fallbackTTS(text);
@@ -53,7 +85,8 @@ export const playThaiTTSAsync = (text: string): Promise<void> => {
     lastTtsTime = now;
 
     try {
-      const url = `/api/tts?text=${encodeURIComponent(text)}`;
+      const textToSpeak = text;
+      const url = `/api/tts?text=${encodeURIComponent(textToSpeak)}`;
       
       if (!currentAudio) {
         currentAudio = new Audio(url);
@@ -77,15 +110,43 @@ export const playThaiTTSAsync = (text: string): Promise<void> => {
       
       currentAudio.addEventListener('ended', handleEnded);
       currentAudio.addEventListener('error', handleFallback);
-      
-      currentAudio.play().catch((e: Error) => {
+
+      const playWithWakeUp = () => {
+        if (!currentAudio) return;
+        
+        const needsWakeUp = now - globalLastPlayTime > WAKEUP_THRESHOLD;
+        globalLastPlayTime = now;
+
+        if (needsWakeUp) {
+          const wakeUpAudio = new Audio(url);
+          wakeUpAudio.volume = 0.01;
+          wakeUpAudio.play().catch(() => {});
+          
+          setTimeout(() => {
+            wakeUpAudio.pause();
+            wakeUpAudio.removeAttribute('src');
+            wakeUpAudio.load();
+            
+            if (!currentAudio) return;
+            currentAudio.volume = 1;
+            currentAudio.play().catch(handleError);
+          }, 500);
+        } else {
+          currentAudio.volume = 1;
+          currentAudio.play().catch(handleError);
+        }
+      };
+
+      const handleError = (e: Error) => {
         if (e.name === 'AbortError') {
           resolve();
           return;
         }
         console.warn("Google TTS API playback failed in async, falling back:", e);
         handleFallback();
-      });
+      };
+      
+      playWithWakeUp();
     } catch (e) {
       console.warn("Audio playback failed async:", e);
       fallbackTTSAsync(text).then(resolve).catch(() => resolve());

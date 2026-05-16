@@ -43,6 +43,182 @@
           "en": "I'm fine."
         }
       ]
+    },
+    {
+      "id": "conv-2",
+      "unitId": "unit-1",
+      "title": "Se présenter",
+      "titleEn": "Introducing Yourself",
+      "level": 1,
+      "dialogs": [
+        {
+          "speaker": "A",
+          "th": "สวัสดีครับ คุณชื่ออะไรครับ",
+          "phonetic": "sà-wàt-dii khráp, khun chûue à-rai khráp",
+          "fr": "Bonjour. Comment vous appelez-vous ?",
+          "en": "Hello. What is your name?"
+        },
+        {
+          "speaker": "B",
+          "th": "สวัสดีค่ะ ฉันชื่อแอนค่ะ แล้วคุณล่ะคะ",
+          "phonetic": "sà-wàt-dii khâ, chǎn chûue aen khâ, láew khun lâ khá",
+          "fr": "Bonjour. Je m'appelle Ann. Et vous ?",
+          "en": "Hello. My name is Ann. And you?"
+        },
+        {
+          "speaker": "A",
+          "th": "ผมชื่อทอมครับ",
+          "phonetic": "phǒm chûue tom khráp",
+          "fr": "Je m'appelle Tom.",
+          "en": "My name is Tom."
+        },
+        {
+          "speaker": "B",
+          "th": "ยินดีที่ได้รู้จักค่ะ",
+          "phonetic": "yin-dii thîi dâai rúu-jàk khâ",
+          "fr": "Enchantée de vous rencontrer.",
+          "en": "Nice to meet you."
+        },
+        {
+          "speaker": "A",
+          "th": "ยินดีที่ได้รู้จักเช่นกันครับ",
+          "phonetic": "yin-dii thîi dâai rúu-jàk chên kan khráp",
+          "fr": "Enchanté de vous rencontrer également.",
+          "en": "Nice to meet you too."
+        }
+      ]
+    },
+    {
+      "id": "conv-3",
+      "unitId": "unit-2",
+      "title": "Préparation d'un anniversaire",
+      "titleEn": "Preparing for a birthday",
+      "level": 1,
+      "dialogs": [
+        {
+          "speaker": "A",
+          "th": "พรุ่งนี้เป็นวันเกิดของมาเรียครับ",
+          "phonetic": "phrûng-níi pen wan-kòet khǒng maa-ria khráp",
+          "fr": "Demain, c'est l'anniversaire de Maria.",
+          "en": "Tomorrow is Maria's birthday."
+        },
+        {
+          "speaker": "B",
+          "th": "ในห้องมีเก้าอี้กี่ตัวคะ",
+          "phonetic": "nai hông mii gâo-îi kìi dtua khá",
+          "fr": "Combien y a-t-il de chaises dans la salle ?",
+          "en": "How many chairs are there in the room?"
+        },
+        {
+          "speaker": "A",
+          "th": "มีเก้าอี้สามตัวครับ",
+          "phonetic": "mii gâo-îi sǎam dtua khráp",
+          "fr": "Il y a trois chaises.",
+          "en": "There are three chairs."
+        },
+        {
+          "speaker": "B",
+          "th": "ไม่พอค่ะ ห้องอื่นมีเก้าอี้ห้าตัวค่ะ",
+          "phonetic": "mâi phoo khâ, hông ùen mii gâo-îi hâa dtua khâ",
+          "fr": "Ce n'est pas suffisant. L'autre salle a cinq chaises.",
+          "en": "That's not enough. The other room has five chairs."
+        },
+        {
+          "speaker": "A",
+          "th": "ตกลงครับ ผมจะไปเอามาครับ แล้วก็จะมีเก้าอี้แปดตัวครับ",
+          "phonetic": "dtòk-long khráp, phǒm jà pai ao maa khráp. láew gô jà mii gâo-îi bpàet dtua khráp",
+          "fr": "D'accord, je vais les prendre. Et alors il y aura huit chaises.",
+          "en": "Okay, I will take them. And then there will be eight chairs."
+        }
+      ]
+    },
+    {
+      "id": "conv-4",
+      "unitId": "unit-3",
+      "title": "Au restaurant",
+      "titleEn": "At the restaurant",
+      "level": 1,
+      "dialogs": [
+        {
+          "speaker": "A",
+          "th": "ผมอยากจะสั่งอาหารครับ",
+          "phonetic": "phǒm yàak jà sàng aa-hǎan khráp",
+          "fr": "Je voudrais commander à manger.",
+          "en": "I would like to order food."
+        },
+        {
+          "speaker": "B",
+          "th": "คุณอยากทานอะไรคะ",
+          "phonetic": "khun yàak thaan à-rai khá",
+          "fr": "Que voulez-vous manger ?",
+          "en": "What would you like to eat?"
+        },
+        {
+          "speaker": "A",
+          "th": "ขอผัดไทย ไม่เผ็ดมากนะครับ",
+          "phonetic": "khǒo phàt thai, mâi phèt mâak ná khráp",
+          "fr": "Je voudrais un pad thaï. Pas trop épicé, s'il vous plaît.",
+          "en": "I would like a pad thai. Not too spicy, please."
+        },
+        {
+          "speaker": "B",
+          "th": "ตกลงค่ะ นี่ผัดไทยของคุณค่ะ",
+          "phonetic": "dtòk-long khâ. nîi phàt thai khǒng khun khâ",
+          "fr": "D'accord. Voici votre pad thaï.",
+          "en": "Okay. Here is your pad thai."
+        },
+        {
+          "speaker": "A",
+          "th": "ขอบคุณครับ อร่อยมากครับ",
+          "phonetic": "khòop-khun khráp. à-ròi mâak khráp",
+          "fr": "Merci. C'est très délicieux !",
+          "en": "Thank you. It is very delicious!"
+        }
+      ]
+    },
+    {
+      "id": "conv-5",
+      "unitId": "unit-4",
+      "title": "Apprendre à se connaître",
+      "titleEn": "Getting to know each other",
+      "level": 1,
+      "dialogs": [
+        {
+          "speaker": "A",
+          "th": "ขอโทษครับ คุณมาจากที่ไหนครับ",
+          "phonetic": "khǒo-thôot khráp, khun maa jàak thîi-nǎi khráp",
+          "fr": "Excusez-moi, d'où venez-vous ?",
+          "en": "Excuse me, where do you come from?"
+        },
+        {
+          "speaker": "B",
+          "th": "ฉันมาจากฝรั่งเศสค่ะ",
+          "phonetic": "chǎn maa jàak frang-sèet khâ",
+          "fr": "Je viens de France.",
+          "en": "I come from France."
+        },
+        {
+          "speaker": "A",
+          "th": "คุณพูดภาษาไทยเก่งมากครับ",
+          "phonetic": "khun phûut phaa-sǎa Thai gèng mâak khráp",
+          "fr": "Vous parlez très bien thaï !",
+          "en": "You speak Thai very well!"
+        },
+        {
+          "speaker": "B",
+          "th": "ขอบคุณมากค่ะ ฉันกำลังเรียนภาษาไทยค่ะ",
+          "phonetic": "khòop-khun mâak khâ. chǎn kam-lang riian phaa-sǎa Thai khâ",
+          "fr": "Merci beaucoup. J'apprends le thaï.",
+          "en": "Thank you very much. I am learning Thai."
+        },
+        {
+          "speaker": "A",
+          "th": "ถ้าคุณมีคำถาม ถามผมได้นะครับ",
+          "phonetic": "thâa khun mii kham-thǎam, thǎam phǒm dâi ná khráp",
+          "fr": "Si vous avez une question, vous pouvez me demander.",
+          "en": "If you have a question, you can ask me."
+        }
+      ]
     }
   ]
 }
