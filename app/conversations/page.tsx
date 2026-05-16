@@ -62,26 +62,82 @@ export default function ConversationsPage() {
           </p>
         </header>
 
-        <div className="flex flex-col gap-6 max-w-2xl mx-auto md:mx-0 w-full">
+        <div className="flex flex-col gap-8 max-w-2xl mx-auto md:mx-0 w-full">
           {conversationsData.conversations.map(conv => {
           return (
-            <Link 
-              key={conv.id} 
-              href={`/conversations/${conv.id}`}
-              className="bg-white p-6 rounded-3xl border-2 border-slate-200 border-b-4 hover:-translate-y-1 hover:border-orange-300 transition-all flex items-center gap-6"
-            >
-              <div className="bg-orange-100 text-orange-500 w-16 h-16 rounded-2xl flex items-center justify-center shrink-0">
-                <MessageCircle size={32} />
-              </div>
-              <div>
-                <div className="text-sm font-bold text-orange-500 mb-1 uppercase tracking-wide">
-                  {language === 'en' ? 'Conversation' : `Niveau ${conv.level}`}
+            <div key={conv.id} className="flex flex-col gap-3">
+              <Link 
+                href={`/conversations/${conv.id}`}
+                className="bg-white p-6 rounded-3xl border-2 border-slate-200 border-b-4 hover:-translate-y-1 hover:border-orange-300 transition-all flex items-center gap-6 group"
+              >
+                <div className="bg-orange-100 text-orange-500 w-16 h-16 rounded-2xl flex items-center justify-center shrink-0 transition-colors">
+                  <MessageCircle size={32} />
                 </div>
-                <h2 className="text-xl font-extrabold text-slate-800">
-                  {language === 'en' && conv.titleEn ? conv.titleEn : conv.title}
-                </h2>
+                <div>
+                  <div className="text-sm font-bold text-orange-500 mb-1 uppercase tracking-wide">
+                    {language === 'en' ? `Conversation ${conv.level}` : `Conversation ${conv.level}`}
+                  </div>
+                  <h2 className="text-xl font-extrabold text-slate-800 group-hover:text-orange-500 transition-colors">
+                    {language === 'en' && conv.titleEn ? conv.titleEn : conv.title}
+                  </h2>
+                </div>
+              </Link>
+              
+              <div className="pl-8 pr-2 flex flex-col gap-3">
+                <Link 
+                  href={`/conversations/${conv.id}?level=1`}
+                  className="bg-white p-4 rounded-2xl border-2 border-slate-200 border-b-4 hover:-translate-y-1 hover:border-emerald-300 transition-all flex items-center gap-4 group"
+                >
+                  <div className="bg-slate-100 text-slate-400 group-hover:bg-emerald-100 group-hover:text-emerald-500 w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-colors">
+                    <Star size={20} className={1 ? "fill-current" : ""} />
+                  </div>
+                  <div>
+                    <div className="text-xs font-bold text-slate-400 group-hover:text-emerald-500 mb-0.5 uppercase tracking-wide transition-colors">
+                      {language === 'en' ? 'Level 1' : 'Niveau 1'}
+                    </div>
+                    <h3 className="text-base font-bold text-slate-700">
+                      {language === 'en' ? 'Fill in the blanks' : 'Remplir la conversation'}
+                    </h3>
+                  </div>
+                </Link>
               </div>
-            </Link>
+              
+              <div className="pl-8 pr-2 flex flex-col gap-3 mt-1">
+                <Link 
+                  href={`/conversations/${conv.id}?level=2`}
+                  className="bg-white p-4 rounded-2xl border-2 border-slate-200 border-b-4 hover:-translate-y-1 hover:border-purple-300 transition-all flex items-center gap-4 group"
+                >
+                  <div className="bg-slate-100 text-slate-400 group-hover:bg-purple-100 group-hover:text-purple-500 w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-colors">
+                    <Star size={20} className={1 ? "fill-current" : ""} />
+                  </div>
+                  <div>
+                    <div className="text-xs font-bold text-slate-400 group-hover:text-purple-500 mb-0.5 uppercase tracking-wide transition-colors">
+                      {language === 'en' ? 'Level 2' : 'Niveau 2'}
+                    </div>
+                    <h3 className="text-base font-bold text-slate-700">
+                      {language === 'en' ? 'Fill in the word' : 'Remplir le mot'}
+                    </h3>
+                  </div>
+                </Link>
+                
+                <Link 
+                  href={`/conversations/${conv.id}?level=3`}
+                  className="bg-white p-4 rounded-2xl border-2 border-slate-200 border-b-4 hover:-translate-y-1 hover:border-blue-300 transition-all flex items-center gap-4 group"
+                >
+                  <div className="bg-slate-100 text-slate-400 group-hover:bg-blue-100 group-hover:text-blue-500 w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-colors">
+                    <Star size={20} className={1 ? "fill-current" : ""} />
+                  </div>
+                  <div>
+                    <div className="text-xs font-bold text-slate-400 group-hover:text-blue-500 mb-0.5 uppercase tracking-wide transition-colors">
+                      {language === 'en' ? 'Level 3' : 'Niveau 3'}
+                    </div>
+                    <h3 className="text-base font-bold text-slate-700">
+                      {language === 'en' ? 'Choose the phrase' : 'Choisir la phrase'}
+                    </h3>
+                  </div>
+                </Link>
+              </div>
+            </div>
           );
         })}
         </div>
