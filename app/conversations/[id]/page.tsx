@@ -63,12 +63,23 @@ function ConversationContent() {
 
   // Auto-scroll effect
   useEffect(() => {
+    // Determine timeout based on whether we are showing choices so rendering can catch up
     setTimeout(() => {
       const messages = document.querySelectorAll('.message-bubble');
       if (messages.length > 0) {
-        messages[messages.length - 1].scrollIntoView({ behavior: 'smooth', block: 'center' });
+        if (choices && choices.length > 0) {
+          // When choices are visible, we want to align the 2nd to last message to the top
+          // of the screen, so that both the previous message and the current typing bubble are visible 
+          // above the fixed choices menu.
+          const targetIndex = Math.max(0, messages.length - 2);
+          messages[targetIndex].scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+          // When just conversing normally, scroll to the last message, keeping it near the center/bottom
+          // to feel like a normal chat app
+          messages[messages.length - 1].scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
       }
-    }, 100);
+    }, 150);
   }, [currentLineIndex, stepIndex, isFinished, choices]);
 
   // Set up choices whenever we land on a "guess" step in level 1 or 2
@@ -319,25 +330,6 @@ function ConversationContent() {
             <h1 className="text-2xl font-black text-slate-800">
                 {language === 'en' && conversation.titleEn ? conversation.titleEn : conversation.title}
             </h1>
-            {!hasStarted && (
-              <>
-                {isLevel1 && (
-                  <p className="text-sm font-bold text-orange-500 uppercase tracking-wide mt-2">
-                    {language === 'en' ? 'Level 1: Fill in the blanks' : 'Niveau 1: Remplir la conversation'}
-                  </p>
-                )}
-                {isLevel2 && (
-                  <p className="text-sm font-bold text-purple-500 uppercase tracking-wide mt-2">
-                    {language === 'en' ? 'Level 2: Fill in the word' : 'Niveau 2: Remplir le mot'}
-                  </p>
-                )}
-                {isLevel3 && (
-                  <p className="text-sm font-bold text-blue-500 uppercase tracking-wide mt-2">
-                    {language === 'en' ? 'Level 3: Choose the phrase' : 'Niveau 3: Choisir la phrase'}
-                  </p>
-                )}
-              </>
-            )}
         </div>
 
         {!hasStarted ? (
@@ -381,7 +373,7 @@ function ConversationContent() {
               return (
                 <div 
                   key={index} 
-                  className={`message-bubble flex w-full gap-3 py-1 ${isSpeakerA ? 'justify-start' : 'justify-end'} animate-in fade-in slide-in-from-bottom-4 duration-500`}
+                  className={`message-bubble scroll-mt-20 flex w-full gap-3 py-1 ${isSpeakerA ? 'justify-start' : 'justify-end'} animate-in fade-in slide-in-from-bottom-4 duration-500`}
                 >
                   {/* Speaker A avatar */}
                   {isSpeakerA && (
@@ -475,7 +467,7 @@ function ConversationContent() {
             })}
           </div>
         )}
-        <div ref={endOfMessagesRef} className="h-[300px] sm:h-[400px]" />
+        <div ref={endOfMessagesRef} className={`transition-all ${choices.length > 0 ? (isLevel3 ? 'h-[450px] sm:h-[500px]' : 'h-[350px] sm:h-[400px]') : 'h-32 sm:h-48'}`} />
       </main>
 
       {/* Choices overlay for level 1, 2 and 3 */}
