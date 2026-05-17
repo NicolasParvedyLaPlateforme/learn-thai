@@ -24,6 +24,7 @@ export interface AlphabetLessonDef {
   titleEn: string;
   type: 'consonant' | 'vowel';
   items: AlphabetItem[];
+  imageUrl?: string;
 }
 
 export function getAlphabetLessons(): { consonants: AlphabetLessonDef[], vowels: AlphabetLessonDef[] } {
@@ -38,7 +39,8 @@ export function getAlphabetLessons(): { consonants: AlphabetLessonDef[], vowels:
         title: `${labelFr} ${Math.floor(i / 3) + 1}`,
         titleEn: `${labelEn} ${Math.floor(i / 3) + 1}`,
         type,
-        items: list.slice(i, i + 3)
+        items: list.slice(i, i + 3),
+        imageUrl: '/images/letters.svg'
       });
     }
     return lessons;

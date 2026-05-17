@@ -5,6 +5,7 @@ export interface Word {
   en?: string;
   phonetic: string;
   explanation?: string;
+  imageUrl?: string;
 }
 
 export interface Phrase {
@@ -23,6 +24,7 @@ export interface Lesson {
   titleEn?: string;
   description: string;
   descriptionEn?: string;
+  imageUrl?: string;
   words: Word[];
   phrases: Phrase[];
   isReview?: boolean;
@@ -49,5 +51,6 @@ export interface Exercise {
   hideColors?: boolean; // If true, tone colors will be hidden
   blindMode?: boolean; // If true, Thai sentence is hidden and sound hint is provided
   introItem?: Word | Phrase; // For intro exercises
+  imageUrl?: string; // Optional image url for word exercises
   pairMatchMode?: 'normal' | 'audio-only' | 'script-only';
 }

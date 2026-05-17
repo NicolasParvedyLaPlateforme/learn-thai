@@ -219,6 +219,7 @@ export function generateEndlessReviewExercises(
         options: shuffle([word, ...distractors]),
         hideHints: !defaultOptions.showUsefulVocab,
         disableTooltips: !defaultOptions.showWordHints,
+        imageUrl: word.imageUrl
       } as any); // Type assertion for now since we'll add these options to Exercise interface
     });
     // sentence builder
@@ -274,7 +275,8 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
           answer: word.th,
           options: shuffle([word, ...distractors]),
           hideHints: true,
-          disableTooltips: true
+          disableTooltips: true,
+          imageUrl: word.imageUrl
         });
     });
     
@@ -354,7 +356,8 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
       question: language === 'en' ? (word.en || word.fr) : word.fr,
       answer: word.th,
       options: shuffle([word, ...distractors]),
-      hideHints: false
+      hideHints: false,
+      imageUrl: word.imageUrl
     });
   });
 

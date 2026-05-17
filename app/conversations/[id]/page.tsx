@@ -8,7 +8,10 @@ import { ArrowLeft, Play, RotateCcw, Volume2, Star, MessageCircle, Check, X, Hom
 import { useProgressStore } from '../../lib/store';
 import { playThaiTTS, playThaiTTSAsync } from '../../lib/tts';
 import conversationsData from '../../data/conversations.json';
-import courseData from '../../data/course.json';
+import rawCourseData from '../../data/course.json';
+import { CourseData } from '../../types';
+
+const courseData = rawCourseData as CourseData;
 
 // Helper to shuffle an array
 function shuffleArray<T>(array: T[]): T[] {
