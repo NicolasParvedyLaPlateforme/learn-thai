@@ -1,6 +1,7 @@
+import React, { useMemo } from 'react';
 import { Exercise } from '../../types';
 import { playThaiTTS } from '../../lib/tts';
-import { Delete, Volume2, ArrowUp } from 'lucide-react';
+import { Delete, Volume2 } from 'lucide-react';
 import { formatCombiningChar } from '../../lib/alphabet-utils';
 import { useProgressStore } from '../../lib/store';
 
@@ -18,7 +19,7 @@ export default function VirtualKeyboard({ exercise, selected, onChange, disabled
   const handleSelect = (charTh: string) => {
     if (disabled) return;
     onChange([...selected, charTh]);
-    // Optionally play TTS, characters might not have valid TTS audio alone though
+    // Optionally play TTS
     try {
       playThaiTTS(charTh);
     } catch(e) {}
@@ -29,8 +30,6 @@ export default function VirtualKeyboard({ exercise, selected, onChange, disabled
     onChange(selected.slice(0, -1));
   };
 
-  const isDense = exercise.options.length > 7;
-  const isPhrase = exercise.id.includes('phrase');
   const expectedChar = exercise.correctComponents?.[selected.length];
 
   const isConsonant = (charStr: string) => {
@@ -39,42 +38,67 @@ export default function VirtualKeyboard({ exercise, selected, onChange, disabled
     return code >= 0x0E01 && code <= 0x0E2E;
   };
 
-  // Track used counts to disable keys if they have all been used
-  const usedIndices = new Set<number>();
-  const usedCounts: Record<string, number> = {};
-  selected.forEach(s => {
-    usedCounts[s] = (usedCounts[s] || 0) + 1;
-  });
+  // Track used counts to know what's still available in the total pool
+  const currentOptions = useMemo(() => {
+    if (!expectedChar) return [];
 
-  const availableIndices: number[] = [];
-  exercise.options.forEach((opt, idx) => {
-    if (usedCounts[opt.th] > 0) {
-      usedIndices.add(idx);
-      usedCounts[opt.th]--;
-    } else {
-      availableIndices.push(idx);
-    }
-  });
-
-  const enabledIndices = new Set<number>();
-  if (isPhrase && expectedChar) {
-    const expectedIsConsonant = isConsonant(expectedChar);
+    const available: { idx: number; th: string }[] = [];
+    const usedCountsTemp: Record<string, number> = {};
+    selected.forEach(s => { usedCountsTemp[s] = (usedCountsTemp[s] || 0) + 1; });
     
-    const expectedIdx = availableIndices.find(idx => exercise.options[idx].th === expectedChar);
-    if (expectedIdx !== undefined) enabledIndices.add(expectedIdx);
+    exercise.options.forEach((opt, idx) => {
+      if (usedCountsTemp[opt.th] > 0) {
+        usedCountsTemp[opt.th]--;
+      } else {
+        available.push({ idx, th: opt.th });
+      }
+    });
 
-    const distractorsEnabled = new Set<string>();
-    if (expectedIdx !== undefined) distractorsEnabled.add(expectedChar);
+    const expectedIsConsonant = isConsonant(expectedChar);
+    const expectedItems = available.filter(a => a.th === expectedChar);
+    const expectedItem = expectedItems[0];
+    
+    let choices = expectedItem ? [expectedItem] : [];
+    const addedTh = new Set<string>();
+    if (expectedItem) addedTh.add(expectedItem.th);
 
-    for (const idx of availableIndices) {
-      if (enabledIndices.size >= 3) break;
-      const charStr = exercise.options[idx].th;
-      if (isConsonant(charStr) === expectedIsConsonant && !distractorsEnabled.has(charStr)) {
-        enabledIndices.add(idx);
-        distractorsEnabled.add(charStr);
+    // Try to get 2 distractors (same type first)
+    const distractors = available.filter(a => a.idx !== expectedItem?.idx && !addedTh.has(a.th));
+    // Sort to prefer same type
+    distractors.sort((a, b) => {
+      const aSame = isConsonant(a.th) === expectedIsConsonant ? 1 : 0;
+      const bSame = isConsonant(b.th) === expectedIsConsonant ? 1 : 0;
+      return bSame - aSame;
+    });
+
+    for (const d of distractors) {
+      if (choices.length >= 3) break;
+      if (!addedTh.has(d.th)) {
+        choices.push(d);
+        addedTh.add(d.th);
       }
     }
-  }
+
+    // if still < 3, pick from all options (even if they've been used) to fill
+    if (choices.length < 3) {
+      const moreDistractors = exercise.options.map((opt, idx) => ({ idx, th: opt.th })).filter(a => !addedTh.has(a.th));
+      moreDistractors.sort((a, b) => {
+        const aSame = isConsonant(a.th) === expectedIsConsonant ? 1 : 0;
+        const bSame = isConsonant(b.th) === expectedIsConsonant ? 1 : 0;
+        return bSame - aSame;
+      });
+      for (const md of moreDistractors) {
+        if (choices.length >= 3) break;
+        if (!addedTh.has(md.th)) {
+           choices.push(md);
+           addedTh.add(md.th);
+        }
+      }
+    }
+
+    // Pick top length, then shuffle choices
+    return [...choices].sort(() => Math.random() - 0.5);
+  }, [selected.length, exercise.id, expectedChar, exercise.options]);
 
   const isCombining = (charStr: string) => {
     const code = charStr.charCodeAt(0);
@@ -147,34 +171,20 @@ export default function VirtualKeyboard({ exercise, selected, onChange, disabled
       </div>
 
       {/* Keyboard area */}
-      <div className="flex flex-wrap justify-center gap-2 mt-2">
-        {exercise.options.map((opt, idx) => {
-          const isUsed = usedIndices.has(idx);
-          let isTemporarilyDisabled = false;
-          
-          if (!isUsed && isPhrase && expectedChar) {
-            isTemporarilyDisabled = !enabledIndices.has(idx);
-          }
-          
+      <div className="grid grid-cols-4 gap-2 sm:gap-3 mt-2 min-h-[80px] w-full max-w-[360px] sm:max-w-[420px] mx-auto">
+        {currentOptions.map((opt) => {
           let displayStr = formatCombiningChar(opt.th);
           
-          let btnClass = '';
-          if (isUsed) {
-            btnClass = 'bg-slate-100 border-2 border-slate-100 text-transparent pointer-events-none';
-          } else if (isTemporarilyDisabled) {
-            btnClass = 'bg-slate-50 border-2 border-slate-200 text-slate-300 pointer-events-none';
-          } else {
-            btnClass = 'bg-white border-2 border-b-4 border-slate-200 text-slate-700 hover:bg-slate-50 cursor-pointer active:translate-y-0.5 active:border-b-2';
-          }
+          let btnClass = 'bg-white border-2 border-b-4 border-slate-200 text-slate-700 hover:bg-slate-50 cursor-pointer active:translate-y-0.5 active:border-b-2';
           
           return (
             <button
-              key={`key-${idx}`}
+              key={`key-${opt.idx}`}
               onClick={() => handleSelect(opt.th)}
-              disabled={disabled || isUsed || isTemporarilyDisabled}
+              disabled={disabled}
               className={`
                 rounded-xl font-medium font-thai select-none transition-all
-                ${isDense ? 'px-3 py-1.5 text-3xl sm:px-4 sm:py-2 flex items-center justify-center min-w-[3.5rem] h-14 sm:h-16 sm:text-4xl' : 'px-4 py-2 text-4xl sm:px-5 sm:py-3 sm:text-5xl flex items-center justify-center min-w-[4.5rem] h-16 sm:h-20'}
+                text-4xl sm:text-5xl flex items-center justify-center h-16 sm:h-20
                 ${btnClass}
               `}
             >
@@ -183,19 +193,23 @@ export default function VirtualKeyboard({ exercise, selected, onChange, disabled
           );
         })}
 
+        {Array.from({ length: 3 - currentOptions.length }).map((_, i) => (
+          <div key={`empty-${i}`} />
+        ))}
+
         {/* Backspace Button */}
         <button
           onClick={handleBackspace}
           disabled={disabled || selected.length === 0}
           className={`
             rounded-xl font-medium select-none transition-all
-            ${isDense ? 'px-3 py-1.5 sm:px-4 sm:py-2 flex items-center justify-center min-w-[4rem] h-14 sm:h-16' : 'px-4 py-2 sm:px-5 sm:py-3 flex items-center justify-center min-w-[5rem] h-16 sm:h-20'}
+            flex items-center justify-center h-16 sm:h-20
             ${(!disabled && selected.length > 0)
               ? 'bg-slate-200 border-2 border-b-4 border-slate-300 text-slate-700 hover:bg-slate-300 cursor-pointer active:translate-y-0.5 active:border-b-2' 
               : 'bg-slate-100 border-2 border-slate-100 text-slate-300 pointer-events-none'}
           `}
         >
-          <Delete size={isDense ? 28 : 32} />
+          <Delete size={32} />
         </button>
       </div>
     </div>

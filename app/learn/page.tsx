@@ -9,6 +9,7 @@ import { useProgressStore } from '../lib/store';
 import courseData from '../data/course.json';
 import { BookOpen, CheckCircle, Star, Play, Crown, RotateCcw, Pencil, X, Unlock, Brain, MessageCircle, Lock } from 'lucide-react';
 import { CourseData, Lesson } from '../types';
+import Image from 'next/image';
 
 import { WritingConfigModal } from '../components/WritingConfigModal';
 
@@ -301,14 +302,22 @@ export default function Home() {
                             }
                           }}
                         >
-                          <div className={`w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center border-b-[6px] relative z-10 text-4xl sm:text-5xl font-thai shadow-sm
+                          <div className={`w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center border-b-[6px] relative z-10 text-4xl sm:text-5xl font-thai shadow-sm overflow-hidden
                             ${isMaxLevel 
                               ? unit.colorClass + ' text-white ' + unit.borderClass 
                               : level >= 8 ? unit.shades.l4 : level >= 6 ? unit.shades.l3 : level >= 3 ? unit.shades.l2 : level >= 1 ? unit.shades.l1
                               : isUnlocked ? 'bg-white ' + unit.textClass + ' border-slate-200 border-2 active:border-b-2 active:translate-y-1' 
                               : 'bg-slate-100 text-slate-300 border-slate-200 border-2 shadow-none'}`}
                           >
-                            {!isUnlocked ? <Lock size={32} className="text-slate-300" /> : isMaxLevel ? <CheckCircle size={40} className="stroke-[3]" /> : level > 0 ? <CheckCircle size={40} className="stroke-current stroke-[2.5]" /> : lesson.isReview ? <Star size={40} className="fill-current stroke-current" /> : <Play size={40} className="ml-1 fill-current stroke-[2]" />}
+                            {lesson.imageUrl ? (
+                              <>
+                                <Image src={lesson.imageUrl} alt={lesson.title} fill className={`object-cover ${!isUnlocked ? 'grayscale opacity-50' : ''}`} sizes="(max-width: 640px) 5rem, 6rem" />
+                                {!isUnlocked && <div className="absolute inset-0 z-20 flex items-center justify-center bg-slate-100/50 backdrop-blur-[1px]"><Lock size={32} className="text-slate-400" /></div>}
+                                {isMaxLevel && <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/20"><CheckCircle size={40} className="stroke-[3] text-white" /></div>}
+                              </>
+                            ) : (
+                              !isUnlocked ? <Lock size={32} className="text-slate-300" /> : isMaxLevel ? <CheckCircle size={40} className="stroke-[3]" /> : level > 0 ? <CheckCircle size={40} className="stroke-current stroke-[2.5]" /> : lesson.isReview ? <Star size={40} className="fill-current stroke-current" /> : <Play size={40} className="ml-1 fill-current stroke-[2]" />
+                            )}
                           </div>
                           
                           {(level > 0 && level <= 10) && (
@@ -442,8 +451,16 @@ export default function Home() {
                                 }
                               }}
                             >
-                              <div className={`w-16 h-16 md:w-20 md:h-20 rounded-[2rem] flex items-center justify-center border-b-[6px] relative z-10 transition-transform ${isMaxLevel ? unit.colorClass + ' text-white ' + unit.borderClass : level >= 8 ? unit.shades.l4 : level >= 6 ? unit.shades.l3 : level >= 3 ? unit.shades.l2 : level >= 1 ? unit.shades.l1 : isUnlocked ? 'bg-white ' + unit.textClass + ' border-slate-200 border-2 active:border-b-2 active:translate-y-1' : 'bg-slate-100 text-slate-300 border-slate-200 border-2 shadow-none'}`}>
-                                {isMaxLevel ? <CheckCircle size={32} className="stroke-[3]" /> : isUnlocked ? <Play size={32} className="ml-1 fill-current stroke-[2]" /> : <Lock size={32} className="stroke-[2.5]" />}
+                              <div className={`w-16 h-16 md:w-20 md:h-20 rounded-[2rem] flex items-center justify-center border-b-[6px] relative z-10 transition-transform overflow-hidden ${isMaxLevel ? unit.colorClass + ' text-white ' + unit.borderClass : level >= 8 ? unit.shades.l4 : level >= 6 ? unit.shades.l3 : level >= 3 ? unit.shades.l2 : level >= 1 ? unit.shades.l1 : isUnlocked ? 'bg-white ' + unit.textClass + ' border-slate-200 border-2 active:border-b-2 active:translate-y-1' : 'bg-slate-100 text-slate-300 border-slate-200 border-2 shadow-none'}`}>
+                                {(lesson as any).imageUrl ? (
+                                  <>
+                                    <Image src={(lesson as any).imageUrl} alt={lesson.title} fill className={`object-cover ${!isUnlocked ? 'grayscale opacity-50' : ''}`} sizes="(max-width: 768px) 4rem, 5rem" />
+                                    {!isUnlocked && <div className="absolute inset-0 z-20 flex items-center justify-center bg-slate-100/50 backdrop-blur-[1px]"><Lock size={32} className="text-slate-400" /></div>}
+                                    {isMaxLevel && <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/20"><CheckCircle size={32} className="stroke-[3] text-white" /></div>}
+                                  </>
+                                ) : (
+                                  isMaxLevel ? <CheckCircle size={32} className="stroke-[3]" /> : isUnlocked ? <Play size={32} className="ml-1 fill-current stroke-[2]" /> : <Lock size={32} className="stroke-[2.5]" />
+                                )}
                               </div>
                               
                               {(level > 0 && level <= 10) && (

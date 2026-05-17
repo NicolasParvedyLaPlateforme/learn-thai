@@ -17,14 +17,14 @@ export default function WordMatch({ exercise, selected, onChange, disabled, onAu
 
   return (
     <div className="w-full flex flex-col items-center">
-      <div className="h-10 mb-2 flex items-center justify-center">
+      <div className="min-h-[2rem] sm:min-h-[2.5rem] flex items-center justify-center">
         {localErrors.length > 0 && (
-          <div className="text-rose-500 font-bold animate-pulse text-lg py-1 px-4 bg-rose-50 rounded-full border border-rose-200 shadow-sm">
+          <div className="text-rose-500 font-bold animate-pulse text-base sm:text-lg py-0.5 sm:py-1 px-3 sm:px-4 bg-rose-50 rounded-full border border-rose-200 shadow-sm">
             Incorrect
           </div>
         )}
       </div>
-      <div className={`grid gap-2 sm:gap-3 ${isDense ? 'grid-cols-2 md:grid-cols-3' : 'grid-cols-2'} w-full max-w-3xl mx-auto`}>
+      <div className={`grid gap-1.5 sm:gap-3 ${isDense ? 'grid-cols-2 md:grid-cols-3' : 'grid-cols-2'} w-full max-w-3xl mx-auto`}>
         {exercise.options.map((opt) => {
           const isSelected = selected === opt.th;
           const isError = localErrors.includes(opt.th);
@@ -49,7 +49,7 @@ export default function WordMatch({ exercise, selected, onChange, disabled, onAu
               disabled={disabled || isError}
               className={`
                 relative rounded-2xl border-2 text-center transition-all flex flex-col items-center justify-center
-                ${isDense ? 'p-2 sm:p-3 min-h-[70px] sm:min-h-[80px]' : 'p-4 sm:p-6 min-h-[100px] sm:min-h-[120px]'}
+                ${isDense ? 'p-2 sm:p-3 min-h-[60px] sm:min-h-[80px]' : 'p-3 sm:p-6 min-h-[70px] sm:min-h-[120px]'}
                 ${isSelected 
                   ? 'bg-indigo-50 border-indigo-500 text-indigo-700 border-b-2 translate-y-0.5 shadow-[inset_0_0_0_1px_rgba(99,102,241,0.2)]' 
                   : isError

@@ -1,12 +1,13 @@
 import { useState, useRef, useEffect } from 'react';
-import { Volume2 } from 'lucide-react';
+import { Volume2, ChevronDown, ChevronUp } from 'lucide-react';
 import { Word, Phrase } from '../types';
 import { playThaiTTS } from '../lib/tts';
 import { ColoredPhonetic } from './ColoredPhonetic';
 import { useProgressStore } from '../lib/store';
+import { motion, AnimatePresence } from 'framer-motion';
 
 // A simple component to render tooltips with tap support for mobile
-export function TooltipHint({ children, tooltipContent, className = '', audioText }: { children: React.ReactNode, tooltipContent: React.ReactNode, className?: string, audioText?: string }) {
+export function TooltipHint({ children, tooltipContent, className = '', audioText, tooltipPosition = 'top' }: { children: React.ReactNode, tooltipContent: React.ReactNode, className?: string, audioText?: string, tooltipPosition?: 'top' | 'bottom' }) {
   const [isOpen, setIsOpen] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout>(null);
   const spanRef = useRef<HTMLSpanElement>(null);
@@ -69,7 +70,7 @@ export function TooltipHint({ children, tooltipContent, className = '', audioTex
       {children}
       {isOpen && (
         <div 
-          className={`absolute bottom-full mb-2 bg-white text-slate-800 px-3 py-2 rounded-xl text-sm whitespace-nowrap z-[100] shadow-[0_10px_40px_-10px_rgba(0,0,0,0.15)] ring-1 ring-slate-200 animate-in fade-in zoom-in-95 duration-200
+          className={`absolute ${tooltipPosition === 'top' ? 'bottom-full mb-1' : 'top-full -mt-4'} bg-white text-slate-800 px-3 py-2 rounded-xl text-sm whitespace-nowrap z-[120] shadow-[0_10px_40px_-10px_rgba(0,0,0,0.15)] ring-1 ring-slate-200 animate-in fade-in zoom-in-95 duration-200
             ${position === 'left' ? 'left-0' : position === 'right' ? 'right-0' : 'left-1/2 -translate-x-1/2'}
           `}
         >
@@ -77,7 +78,7 @@ export function TooltipHint({ children, tooltipContent, className = '', audioTex
             {tooltipContent}
           </div>
           <div 
-            className={`absolute top-[100%] w-3 h-3 -mt-1.5 bg-white border-b border-r border-slate-200 rotate-45 rounded-sm z-0
+            className={`absolute ${tooltipPosition === 'top' ? 'top-[100%] border-b border-r' : 'bottom-[100%] border-t border-l'} w-3 h-3 ${tooltipPosition === 'top' ? '-mt-1.5' : '-mb-1.5'} bg-white border-slate-200 rotate-45 rounded-sm z-0
              ${position === 'left' ? 'left-6' : position === 'right' ? 'right-6' : 'left-1/2 -translate-x-1/2'}
             `}
           ></div>
@@ -90,6 +91,7 @@ export function TooltipHint({ children, tooltipContent, className = '', audioTex
 // A simple component to render the french question with tooltips (hints)
 export function SentenceWithHints({text, dictionary, phrases, isSentence, exerciseOptions, hideHints, disableTooltips, hideColors, alwaysShowPhonetic, answerTh, correctComponents, charHintRegex, isChecking, forceHideRomanization, currentThaiWordForAudio, rightElement}: {text: string, dictionary: Word[], phrases: Phrase[], isSentence: boolean, exerciseOptions: Word[], hideHints?: boolean, disableTooltips?: boolean, hideColors?: boolean, alwaysShowPhonetic?: boolean, answerTh?: string, correctComponents?: string[], charHintRegex?: RegExp, isChecking?: boolean, forceHideRomanization?: boolean, currentThaiWordForAudio?: string, rightElement?: React.ReactNode}) {
   const { language, showRomanization } = useProgressStore();
+  const [isVocabOpen, setIsVocabOpen] = useState(false);
   // Try to match the ENTIRE phrase/word first
   const exactPhrase = phrases.find(p => p.fr.toLowerCase() === text.toLowerCase() || (p.en?.toLowerCase() === text.toLowerCase()));
   const exactWord = dictionary.find(w => w.fr.toLowerCase() === text.toLowerCase() || (w.en?.toLowerCase() === text.toLowerCase()));
@@ -203,10 +205,11 @@ export function SentenceWithHints({text, dictionary, phrases, isSentence, exerci
   );
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col-reverse md:flex-col gap-4 md:gap-8 relative items-center w-full">
       {tooltipTranslation && !disableTooltips ? (
         <TooltipHint 
-          className="inline-block"
+          className="inline-block relative z-[100]"
+          tooltipPosition="bottom"
           tooltipContent={
             <>
               <span className="font-thai text-lg font-bold text-slate-800">{tooltipTranslation}</span>
@@ -222,30 +225,47 @@ export function SentenceWithHints({text, dictionary, phrases, isSentence, exerci
       )}
 
       {!hideHints && isSentence && (
-        <div className="mt-2 text-sm text-slate-500 bg-slate-100 p-3 rounded-xl border-2 border-slate-200">
-          <span className="font-bold text-slate-600 block mb-2 uppercase tracking-wide text-xs">
-            {language === 'en' ? '💡 Useful vocabulary:' : '💡 Vocabulaire utile :'}
-          </span>
-          <div className="flex flex-wrap gap-x-4 gap-y-2">
-            {exerciseOptions.map((w, i) => (
-              <TooltipHint 
-                key={i}
-                className="inline-flex items-center gap-1.5 bg-white px-2 py-1 rounded border border-slate-200 shadow-sm"
-                tooltipContent={
-                  (!forceHideRomanization && showRomanization || isChecking) ? (
-                    <><span className="text-slate-500 font-medium">{language === 'en' ? 'Pronunciation:' : 'Prononciation :'}</span> <span className="font-bold text-base"><ColoredPhonetic phonetic={w.phonetic} /></span></>
-                  ) : (
-                    <span className="font-thai text-lg text-slate-800">{w.th}</span>
-                  )
-                }
-                audioText={w.th}
+        <div className="w-full relative flex flex-col items-center z-[110]">
+          <button 
+            onClick={() => setIsVocabOpen(!isVocabOpen)}
+            className="flex flex-row items-center gap-2 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-full text-xs font-bold uppercase tracking-wide transition-colors border-2 border-slate-200 focus:outline-none shrink-0"
+          >
+            {language === 'en' ? '💡 Useful vocabulary' : '💡 Vocabulaire utile'}
+            {isVocabOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+          </button>
+          
+          <AnimatePresence>
+            {isVocabOpen && (
+              <motion.div 
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+                className="absolute top-10 w-[90vw] max-w-sm sm:max-w-md md:max-w-xl text-sm text-slate-500 bg-white/95 backdrop-blur-md p-4 rounded-xl border-2 border-slate-200 shadow-xl z-[110]"
               >
-                <span className="font-thai text-lg md:text-xl text-emerald-600 font-semibold">{w.th}</span> 
-                <span className="text-slate-400">=</span> 
-                <span className="italic">{language === 'en' ? (w.en || w.fr) : w.fr}</span>
-              </TooltipHint>
-            ))}
-          </div>
+                <div className="flex flex-wrap justify-center gap-x-4 gap-y-3">
+                  {exerciseOptions.map((w, i) => (
+                    <TooltipHint 
+                      key={i}
+                      className="inline-flex items-center gap-1.5 bg-slate-50 px-2 py-1 rounded border border-slate-200 shadow-sm transition-transform hover:scale-105 active:scale-95 cursor-pointer"
+                      tooltipContent={
+                        (!forceHideRomanization && showRomanization || isChecking) ? (
+                          <><span className="text-slate-500 font-medium">{language === 'en' ? 'Pronunciation:' : 'Prononciation :'}</span> <span className="font-bold text-base"><ColoredPhonetic phonetic={w.phonetic} /></span></>
+                        ) : (
+                          <span className="font-thai text-lg text-slate-800">{w.th}</span>
+                        )
+                      }
+                      audioText={w.th}
+                    >
+                      <span className="font-thai text-lg md:text-xl text-emerald-600 font-semibold">{w.th}</span> 
+                      <span className="text-slate-400">=</span> 
+                      <span className="italic">{language === 'en' ? (w.en || w.fr) : w.fr}</span>
+                    </TooltipHint>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       )}
     </div>

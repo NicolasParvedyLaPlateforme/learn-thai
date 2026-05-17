@@ -8,6 +8,7 @@ import { createPortal } from 'react-dom';
 import { useProgressStore } from '../lib/store';
 import { getAlphabetLessons, AlphabetLessonDef, formatCombiningChar } from '../lib/alphabet-utils';
 import { BookOpen, CheckCircle, Star, Play, Crown, X, Unlock, Lock } from 'lucide-react';
+import Image from 'next/image';
 
 export default function AlphabetMenuPage() {
   const router = useRouter();
@@ -208,14 +209,22 @@ export default function AlphabetMenuPage() {
                             }
                           }}
                         >
-                          <div className={`w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center border-b-[6px] relative z-10 text-4xl sm:text-5xl font-thai shadow-sm
+                          <div className={`w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center border-b-[6px] relative z-10 text-4xl sm:text-5xl font-thai shadow-sm overflow-hidden
                             ${isMaxLevel 
                               ? unit.colorClass + ' text-white ' + unit.borderClass 
                               : level >= 3 ? unit.shades.l3 : level >= 2 ? unit.shades.l2 : level >= 1 ? unit.shades.l1
                               : isUnlocked ? 'bg-white ' + unit.textClass + ' border-slate-200 border-2 active:border-b-2 active:translate-y-1' 
                               : 'bg-slate-100 text-slate-300 border-slate-200 border-2 shadow-none'}`}
                           >
-                            {!isUnlocked ? <Lock size={32} className="text-slate-300" /> : isMaxLevel ? <Crown size={40} className="stroke-[3]" fill="currentColor" /> : level > 0 ? <CheckCircle size={40} className="stroke-current stroke-[2.5]" /> : lesson.items[0] ? formatCombiningChar(lesson.items[0].letter) : ''}
+                            {lesson.imageUrl ? (
+                              <>
+                                <Image src={lesson.imageUrl} alt={lesson.title} fill className={`object-cover ${!isUnlocked ? 'grayscale opacity-50' : ''}`} sizes="(max-width: 640px) 5rem, 6rem" />
+                                {!isUnlocked && <div className="absolute inset-0 z-20 flex items-center justify-center bg-slate-100/50 backdrop-blur-[1px]"><Lock size={32} className="text-slate-400" /></div>}
+                                {isMaxLevel && <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/20"><CheckCircle size={40} className="stroke-[3] text-white" /></div>}
+                              </>
+                            ) : (
+                              !isUnlocked ? <Lock size={32} className="text-slate-300" /> : isMaxLevel ? <Crown size={40} className="stroke-[3]" fill="currentColor" /> : level > 0 ? <CheckCircle size={40} className="stroke-current stroke-[2.5]" /> : lesson.items[0] ? formatCombiningChar(lesson.items[0].letter) : ''
+                            )}
                           </div>
                           
                           {(level > 0 && level <= 4) && (
@@ -350,8 +359,16 @@ export default function AlphabetMenuPage() {
                                 }
                               }}
                             >
-                              <div className={`w-16 h-16 md:w-20 md:h-20 rounded-[2rem] flex items-center justify-center border-b-[6px] relative z-10 transition-transform text-3xl font-thai ${isMaxLevel ? unit.colorClass + ' text-white ' + unit.borderClass : level >= 3 ? unit.shades.l3 : level >= 2 ? unit.shades.l2 : level >= 1 ? unit.shades.l1 : isUnlocked ? 'bg-white ' + unit.textClass + ' border-slate-200 border-2 active:border-b-2 active:translate-y-1' : 'bg-slate-100 text-slate-300 border-slate-200 border-2 shadow-none'}`}>
-                                {isMaxLevel ? <Crown size={32} className="stroke-[3]" fill="currentColor" /> : isUnlocked ? (level > 0 ? <CheckCircle size={32} className="stroke-current stroke-[2.5]" /> : (lesson.items[0] ? formatCombiningChar(lesson.items[0].letter) : '')) : (lesson.items[0] ? formatCombiningChar(lesson.items[0].letter) : '')}
+                              <div className={`w-16 h-16 md:w-20 md:h-20 rounded-[2rem] flex items-center justify-center border-b-[6px] relative z-10 transition-transform text-3xl font-thai overflow-hidden ${isMaxLevel ? unit.colorClass + ' text-white ' + unit.borderClass : level >= 3 ? unit.shades.l3 : level >= 2 ? unit.shades.l2 : level >= 1 ? unit.shades.l1 : isUnlocked ? 'bg-white ' + unit.textClass + ' border-slate-200 border-2 active:border-b-2 active:translate-y-1' : 'bg-slate-100 text-slate-300 border-slate-200 border-2 shadow-none'}`}>
+                                {lesson.imageUrl ? (
+                                  <>
+                                    <Image src={lesson.imageUrl} alt={lesson.title} fill className={`object-cover ${!isUnlocked ? 'grayscale opacity-50' : ''}`} sizes="(max-width: 768px) 4rem, 5rem" />
+                                    {!isUnlocked && <div className="absolute inset-0 z-20 flex items-center justify-center bg-slate-100/50 backdrop-blur-[1px]"><Lock size={32} className="text-slate-400" /></div>}
+                                    {isMaxLevel && <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/20"><CheckCircle size={32} className="stroke-[3] text-white" /></div>}
+                                  </>
+                                ) : (
+                                  isMaxLevel ? <Crown size={32} className="stroke-[3]" fill="currentColor" /> : isUnlocked ? (level > 0 ? <CheckCircle size={32} className="stroke-current stroke-[2.5]" /> : (lesson.items[0] ? formatCombiningChar(lesson.items[0].letter) : '')) : (lesson.items[0] ? formatCombiningChar(lesson.items[0].letter) : '')
+                                )}
                               </div>
                               
                               {(level > 0 && level <= 4) && (
