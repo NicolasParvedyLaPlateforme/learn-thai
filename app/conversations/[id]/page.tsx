@@ -48,6 +48,8 @@ function ConversationContent() {
   const [isChoiceCorrect, setIsChoiceCorrect] = useState<boolean | null>(null);
   const [targetWord, setTargetWord] = useState<any>(null); // For level 2
 
+  const [warnings, setWarnings] = useState<number[]>([]);
+
   // We use a ref to track if we should continue playing (handles component unmount or stop)
   const isPlayingRef = useRef(false);
   const endOfMessagesRef = useRef<HTMLDivElement>(null);
@@ -61,10 +63,23 @@ function ConversationContent() {
 
   // Auto-scroll effect
   useEffect(() => {
-    if (endOfMessagesRef.current) {
-      endOfMessagesRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
-    }
-  }, [currentLineIndex, stepIndex, isFinished]);
+    // Determine timeout based on whether we are showing choices so rendering can catch up
+    setTimeout(() => {
+      const messages = document.querySelectorAll('.message-bubble');
+      if (messages.length > 0) {
+        if (choices && choices.length > 0) {
+          // When choices are visible, we want to keep the current message visible
+          // above the fixed choices menu.
+          const targetIndex = Math.max(0, messages.length - 1);
+          messages[targetIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          // When just conversing normally, scroll to the last message, keeping it near the center/bottom
+          // to feel like a normal chat app
+          messages[messages.length - 1].scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
+    }, 150);
+  }, [currentLineIndex, stepIndex, isFinished, choices]);
 
   // Set up choices whenever we land on a "guess" step in level 1 or 2
   useEffect(() => {
@@ -99,44 +114,49 @@ function ConversationContent() {
         setIsChoiceCorrect(null);
       } else if (isLevel2) {
         const allWords = courseData.lessons.flatMap(l => l.words);
-        const validWords = allWords.filter(w => correctDialog.th.includes(w.th) && w.th.length > 1);
         
-        let target = validWords[0];
+        // Extract real words using Intl.Segmenter
+        const segmenter = new Intl.Segmenter('th', { granularity: 'word' });
+        const segments = Array.from(segmenter.segment(correctDialog.th));
+        const wordsInDialog = segments.map(s => s.segment);
+        
+        const validWords = allWords.filter(w => wordsInDialog.includes(w.th) && w.th.length > 1);
+        
         if (validWords.length > 0) {
-          target = validWords[Math.floor(Math.random() * validWords.length)];
+          const target = validWords[Math.floor(Math.random() * validWords.length)];
+          setTargetWord(target);
+          
+          const distractors = allWords.filter(w => w.th !== target.th);
+          const shuffledDistractors = shuffleArray(distractors).slice(0, 2);
+          
+          const options = [
+            { id: 0, text: target.th, translation: language === 'en' ? target.en : target.fr, phonetic: target.phonetic, correct: true },
+            ...shuffledDistractors.map((d, i) => ({
+              id: i + 1,
+              text: d.th,
+              translation: language === 'en' ? d.en : d.fr,
+              phonetic: d.phonetic,
+              correct: false
+            }))
+          ];
+          
+          setChoices(shuffleArray(options));
+          setSelectedChoiceId(null);
+          setIsChoiceCorrect(null);
         } else {
-          target = allWords[0]; // fallback
+          setTargetWord(null);
+          setChoices([]);
         }
-        
-        setTargetWord(target);
-        
-        const distractors = allWords.filter(w => w.th !== target.th);
-        const shuffledDistractors = shuffleArray(distractors).slice(0, 2);
-        
-        const options = [
-          { id: 0, text: target.th, translation: language === 'en' ? target.en : target.fr, phonetic: target.phonetic, correct: true },
-          ...shuffledDistractors.map((d, i) => ({
-            id: i + 1,
-            text: d.th,
-            translation: language === 'en' ? d.en : d.fr,
-            phonetic: d.phonetic,
-            correct: false
-          }))
-        ];
-        
-        setChoices(shuffleArray(options));
-        setSelectedChoiceId(null);
-        setIsChoiceCorrect(null);
       }
     }
-  }, [stepIndex, mounted, conversation, isLevel1, isLevel2, isInteractive, isFinished, language]);
+  }, [stepIndex, mounted, conversation, isLevel1, isLevel2, isLevel3, isInteractive, isFinished, language]);
 
-  // Handle auto-playing logic for Level 1
+  // Handle auto-playing logic for Level 1 and Level 2 auto-skipping
   useEffect(() => {
     if (!mounted || !conversation || !isInteractive || isFinished || !hasStarted) return;
     
     const playCurrentStep = async () => {
-      // Level 1 auto-plays even steps. Level 2 never auto-plays.
+      // Level 1 auto-plays even steps.
       if (isLevel1 && stepIndex < conversation.dialogs.length && stepIndex % 2 === 0) {
         setIsPlaying(true);
         setCurrentLineIndex(stepIndex);
@@ -147,6 +167,25 @@ function ConversationContent() {
         // Advance to next step (which will be a guess step)
         if (mounted) {
           setStepIndex(s => s + 1);
+        }
+      } else if (isLevel2 && stepIndex < conversation.dialogs.length) {
+        const allWords = courseData.lessons.flatMap(l => l.words);
+        const segmenter = new Intl.Segmenter('th', { granularity: 'word' });
+        const wordsInDialog = Array.from(segmenter.segment(conversation.dialogs[stepIndex].th)).map(s => s.segment);
+        const validWords = allWords.filter(w => wordsInDialog.includes(w.th) && w.th.length > 1);
+        
+        if (validWords.length === 0) {
+          setWarnings(prev => [...new Set([...prev, stepIndex])]);
+          
+          setIsPlaying(true);
+          setCurrentLineIndex(stepIndex);
+          
+          await playThaiTTSAsync(conversation.dialogs[stepIndex].th);
+          
+          setIsPlaying(false);
+          if (mounted) {
+            setStepIndex(s => s + 1);
+          }
         }
       } else if (stepIndex >= conversation.dialogs.length) {
         // Conversation fully built, finish without auto-replay
@@ -286,25 +325,10 @@ function ConversationContent() {
       </header>
 
       <main className="max-w-xl mx-auto px-4 mt-8 flex flex-col gap-6">
-        <div className="text-center mb-4">
+        <div className="text-center mb-4 transition-all duration-300">
             <h1 className="text-2xl font-black text-slate-800">
                 {language === 'en' && conversation.titleEn ? conversation.titleEn : conversation.title}
             </h1>
-            {isLevel1 && (
-              <p className="text-sm font-bold text-orange-500 uppercase tracking-wide mt-2">
-                {language === 'en' ? 'Level 1: Fill in the blanks' : 'Niveau 1: Remplir la conversation'}
-              </p>
-            )}
-            {isLevel2 && (
-              <p className="text-sm font-bold text-purple-500 uppercase tracking-wide mt-2">
-                {language === 'en' ? 'Level 2: Fill in the word' : 'Niveau 2: Remplir le mot'}
-              </p>
-            )}
-            {isLevel3 && (
-              <p className="text-sm font-bold text-blue-500 uppercase tracking-wide mt-2">
-                {language === 'en' ? 'Level 3: Choose the phrase' : 'Niveau 3: Choisir la phrase'}
-              </p>
-            )}
         </div>
 
         {!hasStarted ? (
@@ -340,14 +364,15 @@ function ConversationContent() {
               const isSpeakerA = dialog.speaker === 'A';
               
               // In Level 1, 2 and 3, if this is the current guess step, we show a waiting bubble or blank
-              const isGuessingThisLine = !isFinished && index === stepIndex && (isLevel2 || isLevel3 || (isLevel1 && index % 2 !== 0));
+              const isGuessingThisLine = !isFinished && index === stepIndex && 
+                (isLevel3 || (isLevel2 && !warnings.includes(index)) || (isLevel1 && index % 2 !== 0));
               
               const isActive = (index === currentLineIndex && isPlaying);
               
               return (
                 <div 
                   key={index} 
-                  className={`flex w-full gap-3 py-1 ${isSpeakerA ? 'justify-start' : 'justify-end'} animate-in fade-in slide-in-from-bottom-4 duration-500`}
+                  className={`message-bubble scroll-mt-20 flex w-full gap-3 py-1 ${isSpeakerA ? 'justify-start' : 'justify-end'} animate-in fade-in slide-in-from-bottom-4 duration-500`}
                 >
                   {/* Speaker A avatar */}
                   {isSpeakerA && (
@@ -408,8 +433,13 @@ function ConversationContent() {
                     )}
                     
                     {/* Phonetics and translation (shown when finished) */}
-                    {(isFinished || (!isInteractive && index < currentLineIndex) || (isInteractive && index < stepIndex)) && !isGuessingThisLine && (
+                    {(isFinished || (!isInteractive && index < currentLineIndex) || (isInteractive && index < stepIndex) || warnings.includes(index)) && !isGuessingThisLine && (
                       <div className={`px-2 flex flex-col gap-1 ${isSpeakerA ? 'text-left' : 'text-right'}`}>
+                        {warnings.includes(index) && (
+                          <span className="text-xs font-bold text-red-500 bg-red-50 p-1 rounded inline-block w-fit mb-1">
+                            ⚠️ {language === 'en' ? 'No exact word found in course.json' : 'Aucun mot exact trouvé dans course.json'}
+                          </span>
+                        )}
                         {showRomanization && <span className="text-sm font-bold text-orange-500">{dialog.phonetic}</span>}
                         <span className="text-sm font-medium text-slate-500">
                           {language === 'en' ? dialog.en : dialog.fr}
@@ -436,14 +466,14 @@ function ConversationContent() {
             })}
           </div>
         )}
-        <div ref={endOfMessagesRef} className="h-64 sm:h-80" />
+        <div ref={endOfMessagesRef} className={`transition-all ${choices.length > 0 ? 'h-[280px] sm:h-[320px]' : 'h-32 sm:h-48'}`} />
       </main>
 
       {/* Choices overlay for level 1, 2 and 3 */}
       {hasStarted && isInteractive && !isFinished && (isLevel2 || isLevel3 || stepIndex % 2 !== 0) && choices.length > 0 && (
-        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 p-4 shadow-[0_-10px_20px_-10px_rgba(0,0,0,0.1)] z-40 animate-in slide-in-from-bottom-full duration-300">
-          <div className="max-w-2xl mx-auto flex flex-col gap-3">
-            <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wide px-2 mb-1">
+        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 p-2 sm:p-3 shadow-[0_-10px_20px_-10px_rgba(0,0,0,0.1)] z-40 animate-in slide-in-from-bottom-full duration-300">
+          <div className="max-w-2xl mx-auto flex flex-col gap-1.5 sm:gap-2">
+            <h3 className="text-[11px] sm:text-xs font-bold text-slate-500 uppercase tracking-wide px-2 mb-0">
                {language === 'en' ? 'Choose the correct response:' : 'Choisissez la bonne réponse :'}
             </h3>
             {choices.map((choice) => {
@@ -467,14 +497,14 @@ function ConversationContent() {
                   key={choice.id}
                   onClick={() => handleChoiceSelect(choice)}
                   disabled={isChoiceCorrect !== null}
-                  className={`w-full text-left p-4 rounded-xl border-2 border-b-4 active:border-b-2 active:translate-y-0.5 transition-all relative ${cardStyle}`}
+                  className={`w-full text-left px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl border-2 border-b-4 active:border-b-2 active:translate-y-0.5 transition-all relative ${cardStyle}`}
                 >
-                  <div className="font-thai text-xl font-medium mb-1">{choice.text}</div>
-                  {isLevel1 && showRomanization && <div className="text-sm font-medium opacity-80">{choice.phonetic}</div>}
-                  {isLevel2 && <div className="text-sm font-medium opacity-80 text-slate-500">{choice.translation} {showRomanization ? `• ${choice.phonetic}` : ''}</div>}
+                  <div className="font-thai text-lg sm:text-xl font-medium leading-tight pr-6">{choice.text}</div>
+                  {isLevel1 && showRomanization && <div className="text-xs sm:text-sm font-medium opacity-80 mt-0.5">{choice.phonetic}</div>}
+                  {isLevel2 && <div className="text-xs sm:text-sm font-medium opacity-80 text-slate-500 mt-0.5">{choice.translation} {showRomanization ? `• ${choice.phonetic}` : ''}</div>}
                   
-                  {isWrongStatus && <X size={20} className="absolute right-4 top-1/2 -translate-y-1/2 text-red-500" />}
-                  {isCorrectStatus && <Check size={20} className="absolute right-4 top-1/2 -translate-y-1/2 text-emerald-500" />}
+                  {isWrongStatus && <X size={18} className="absolute right-3 top-1/2 -translate-y-1/2 text-red-500" />}
+                  {isCorrectStatus && <Check size={18} className="absolute right-3 top-1/2 -translate-y-1/2 text-emerald-500" />}
                 </button>
               );
             })}
