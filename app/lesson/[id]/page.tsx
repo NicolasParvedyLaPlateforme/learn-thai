@@ -574,10 +574,19 @@ function LessonPageContent() {
                     <div
                       className={`${
                         currentExercise.type === "intro" ||
-                        currentExercise.type === "word-match"
+                        currentExercise.type === "word-match" ||
+                        currentExercise.type === "sentence-builder" ||
+                        currentExercise.type === "free-typing" ||
+                        currentExercise.type === "writing"
                           ? "flex"
                           : "hidden"
-                      } w-40 h-40 sm:w-48 sm:h-48 md:w-48 md:h-48 lg:w-56 lg:h-56 mx-auto bg-emerald-100 rounded-3xl items-center justify-center text-7xl md:text-5xl shadow-sm border border-emerald-200 relative flex-shrink-0 overflow-hidden`}
+                      } ${
+                        currentExercise.type === "sentence-builder" ||
+                        currentExercise.type === "free-typing" ||
+                        currentExercise.type === "writing"
+                          ? "w-24 h-24 sm:w-32 sm:h-32 md:w-32 md:h-32 lg:w-40 lg:h-40 rounded-2xl text-5xl md:text-4xl"
+                          : "w-40 h-40 sm:w-48 sm:h-48 md:w-48 md:h-48 lg:w-56 lg:h-56 rounded-3xl text-7xl md:text-5xl"
+                      } mx-auto bg-emerald-100 items-center justify-center shadow-sm border border-emerald-200 relative flex-shrink-0 overflow-hidden`}
                     >
                       {(currentExercise.type === "intro" &&
                         (currentExercise.introItem as any)?.imageUrl) ||

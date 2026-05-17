@@ -142,10 +142,10 @@ export function generateWritingExercises(
   const completedLessons = allLessons.filter(l => completedLessonIds.includes(l.id));
   if (completedLessons.length === 0) return [];
 
-  const candidateItems: { fr: string, th: string, id: string }[] = [];
+  const candidateItems: { fr: string, th: string, id: string, imageUrl?: string }[] = [];
   completedLessons.forEach(l => {
-    l.words.filter(w => w.id !== 'w_dots').forEach(w => candidateItems.push({ fr: language === 'en' ? (w.en || w.fr) : w.fr, th: w.th, id: w.id }));
-    l.phrases.forEach(p => candidateItems.push({ fr: language === 'en' ? (p.en || p.fr) : p.fr, th: p.th, id: p.id }));
+    l.words.filter(w => w.id !== 'w_dots').forEach(w => candidateItems.push({ fr: language === 'en' ? (w.en || w.fr) : w.fr, th: w.th, id: w.id, imageUrl: w.imageUrl }));
+    l.phrases.forEach(p => candidateItems.push({ fr: language === 'en' ? (p.en || p.fr) : p.fr, th: p.th, id: p.id, imageUrl: p.imageUrl }));
   });
 
   const filteredItems = selectedWordIds 
@@ -166,7 +166,8 @@ export function generateWritingExercises(
       options: shuffle(characters.map((c, i) => ({ id: `c-${i}`, th: c, fr: '', phonetic: '' }))),
       correctComponents: characters, // Representing the order of individual characters
       componentGroups: groups,
-      hideHints: false
+      hideHints: false,
+      imageUrl: item.imageUrl
     };
   });
 }
@@ -237,6 +238,7 @@ export function generateEndlessReviewExercises(
         correctComponents: phrase.components,
         hideHints: !defaultOptions.showUsefulVocab,
         disableTooltips: !defaultOptions.showWordHints,
+        imageUrl: phrase.imageUrl
       } as any);
     });
   });
@@ -303,7 +305,8 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
             options: shuffle([...phraseWords, ...distractors]),
             correctComponents: phrase.components,
             hideHints: true,
-            disableTooltips: true
+            disableTooltips: true,
+            imageUrl: item.imageUrl
         });
     });
 
@@ -321,7 +324,8 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
             componentGroups: groups,
             hideHints: true,
             disableTooltips: true,
-            blindMode: false
+            blindMode: false,
+            imageUrl: item.imageUrl
         });
     });
 
@@ -335,7 +339,8 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
             answer: item.th,
             options: [],
             hideHints: true,
-            disableTooltips: true
+            disableTooltips: true,
+            imageUrl: item.imageUrl
         });
     });
     
@@ -372,7 +377,8 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
       answer: phrase.th,
       options: shuffle([...phraseWords, ...distractors]),
       correctComponents: phrase.components,
-      hideHints: false
+      hideHints: false,
+      imageUrl: phrase.imageUrl
     });
   });
 
@@ -459,7 +465,8 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
           componentGroups: groups,
           hideHints: true,
           blindMode: true,
-          forceHideRomanization: true
+          forceHideRomanization: true,
+          imageUrl: w.imageUrl
        });
     });
     wrPool = shuffle(wrPool);
@@ -480,7 +487,8 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
           componentGroups: groups,
           hideHints: true,
           blindMode: true,
-          forceHideRomanization: true
+          forceHideRomanization: true,
+          imageUrl: p.imageUrl
        });
     });
     wrPool = shuffle(wrPool);
@@ -498,7 +506,8 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
             componentGroups: groups,
             hideHints: true,
             blindMode: true,
-            forceHideRomanization: true
+            forceHideRomanization: true,
+            imageUrl: w.imageUrl
          });
        });
        wrPool = shuffle(wrPool);
@@ -525,6 +534,7 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
         answer: w.th,
         options: [],
         hideHints: true,
+        imageUrl: w.imageUrl
       });
     });
 
@@ -538,6 +548,7 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
         answer: p.th,
         options: [],
         hideHints: true,
+        imageUrl: p.imageUrl
       });
     });
 

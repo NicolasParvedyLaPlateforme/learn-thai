@@ -16,6 +16,7 @@ export interface Phrase {
   phonetic: string;
   components: string[]; // array of word ids
   explanation?: string;
+  imageUrl?: string;
 }
 
 export interface Lesson {
