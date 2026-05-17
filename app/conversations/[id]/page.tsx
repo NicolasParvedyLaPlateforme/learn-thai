@@ -68,11 +68,10 @@ function ConversationContent() {
       const messages = document.querySelectorAll('.message-bubble');
       if (messages.length > 0) {
         if (choices && choices.length > 0) {
-          // When choices are visible, we want to align the 2nd to last message to the top
-          // of the screen, so that both the previous message and the current typing bubble are visible 
+          // When choices are visible, we want to keep the current message visible
           // above the fixed choices menu.
-          const targetIndex = Math.max(0, messages.length - 2);
-          messages[targetIndex].scrollIntoView({ behavior: 'smooth', block: 'start' });
+          const targetIndex = Math.max(0, messages.length - 1);
+          messages[targetIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
         } else {
           // When just conversing normally, scroll to the last message, keeping it near the center/bottom
           // to feel like a normal chat app
@@ -467,14 +466,14 @@ function ConversationContent() {
             })}
           </div>
         )}
-        <div ref={endOfMessagesRef} className={`transition-all ${choices.length > 0 ? (isLevel3 ? 'h-[450px] sm:h-[500px]' : 'h-[350px] sm:h-[400px]') : 'h-32 sm:h-48'}`} />
+        <div ref={endOfMessagesRef} className={`transition-all ${choices.length > 0 ? 'h-[280px] sm:h-[320px]' : 'h-32 sm:h-48'}`} />
       </main>
 
       {/* Choices overlay for level 1, 2 and 3 */}
       {hasStarted && isInteractive && !isFinished && (isLevel2 || isLevel3 || stepIndex % 2 !== 0) && choices.length > 0 && (
-        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 p-4 shadow-[0_-10px_20px_-10px_rgba(0,0,0,0.1)] z-40 animate-in slide-in-from-bottom-full duration-300">
-          <div className="max-w-2xl mx-auto flex flex-col gap-3">
-            <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wide px-2 mb-1">
+        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 p-2 sm:p-3 shadow-[0_-10px_20px_-10px_rgba(0,0,0,0.1)] z-40 animate-in slide-in-from-bottom-full duration-300">
+          <div className="max-w-2xl mx-auto flex flex-col gap-1.5 sm:gap-2">
+            <h3 className="text-[11px] sm:text-xs font-bold text-slate-500 uppercase tracking-wide px-2 mb-0">
                {language === 'en' ? 'Choose the correct response:' : 'Choisissez la bonne réponse :'}
             </h3>
             {choices.map((choice) => {
@@ -498,14 +497,14 @@ function ConversationContent() {
                   key={choice.id}
                   onClick={() => handleChoiceSelect(choice)}
                   disabled={isChoiceCorrect !== null}
-                  className={`w-full text-left p-4 rounded-xl border-2 border-b-4 active:border-b-2 active:translate-y-0.5 transition-all relative ${cardStyle}`}
+                  className={`w-full text-left px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl border-2 border-b-4 active:border-b-2 active:translate-y-0.5 transition-all relative ${cardStyle}`}
                 >
-                  <div className="font-thai text-xl font-medium mb-1">{choice.text}</div>
-                  {isLevel1 && showRomanization && <div className="text-sm font-medium opacity-80">{choice.phonetic}</div>}
-                  {isLevel2 && <div className="text-sm font-medium opacity-80 text-slate-500">{choice.translation} {showRomanization ? `• ${choice.phonetic}` : ''}</div>}
+                  <div className="font-thai text-lg sm:text-xl font-medium leading-tight pr-6">{choice.text}</div>
+                  {isLevel1 && showRomanization && <div className="text-xs sm:text-sm font-medium opacity-80 mt-0.5">{choice.phonetic}</div>}
+                  {isLevel2 && <div className="text-xs sm:text-sm font-medium opacity-80 text-slate-500 mt-0.5">{choice.translation} {showRomanization ? `• ${choice.phonetic}` : ''}</div>}
                   
-                  {isWrongStatus && <X size={20} className="absolute right-4 top-1/2 -translate-y-1/2 text-red-500" />}
-                  {isCorrectStatus && <Check size={20} className="absolute right-4 top-1/2 -translate-y-1/2 text-emerald-500" />}
+                  {isWrongStatus && <X size={18} className="absolute right-3 top-1/2 -translate-y-1/2 text-red-500" />}
+                  {isCorrectStatus && <Check size={18} className="absolute right-3 top-1/2 -translate-y-1/2 text-emerald-500" />}
                 </button>
               );
             })}
