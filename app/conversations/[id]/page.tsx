@@ -378,10 +378,10 @@ function ConversationContent() {
                   {isSpeakerA && (
                     <div className="flex-shrink-0 mt-2">
                        <Image 
-                         src="/homme.png" 
+                         src="/deedee-no-bg.png" 
                          alt="Male avatar" 
-                         width={40} 
-                         height={40} 
+                         width={70} 
+                         height={70} 
                          className="rounded-full border border-slate-200 object-cover bg-white shadow-sm"
                          referrerPolicy="no-referrer"
                        />
@@ -452,10 +452,10 @@ function ConversationContent() {
                   {!isSpeakerA && (
                     <div className="flex-shrink-0 mt-2">
                        <Image 
-                         src="/femme.png" 
+                         src="/monkey-no-bg.png" 
                          alt="Female avatar" 
-                         width={40} 
-                         height={40} 
+                         width={70} 
+                         height={70} 
                          className="rounded-full border border-orange-200 object-cover bg-white shadow-sm"
                          referrerPolicy="no-referrer"
                        />
