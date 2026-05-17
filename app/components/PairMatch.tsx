@@ -65,20 +65,23 @@ export default function PairMatch({ pairs, mode = 'normal', onComplete, forceHid
     if (leftId === rightId) {
       // Match!
       playThaiTTS(pairs.find(p => p.id === leftId)?.th || '');
-      setTimeout(() => {
-        setMatchedIds(prev => new Set(prev).add(leftId));
-        setSelectedLeft(null);
-        setSelectedRight(null);
-      }, 500); // short delay to show both selected
+      setMatchedIds(prev => new Set(prev).add(leftId));
+      setSelectedLeft(null);
+      setSelectedRight(null);
     } else {
       // Mismatch! Show error state briefly
       const errList = new Set([leftId, rightId]);
-      setErrorIds(errList);
+      setErrorIds(prev => new Set([...prev, ...errList]));
+      setSelectedLeft(null);
+      setSelectedRight(null);
       setTimeout(() => {
-        setErrorIds(new Set());
-        setSelectedLeft(null);
-        setSelectedRight(null);
-      }, 600); // delay before resetting selection
+        setErrorIds(prev => {
+          const newErr = new Set(prev);
+          newErr.delete(leftId);
+          newErr.delete(rightId);
+          return newErr;
+        });
+      }, 600); // delay before resetting selection visual
     }
   };
 
@@ -98,14 +101,14 @@ export default function PairMatch({ pairs, mode = 'normal', onComplete, forceHid
   const isAllMatched = matchedIds.size > 0 && matchedIds.size === pairs.length;
 
   return (
-    <div className="relative w-full py-2 sm:py-8">
+    <div className="relative w-full max-w-lg mx-auto py-2 sm:py-8 flex flex-col justify-center">
       <div className={`w-full flex justify-between gap-4 transition-opacity duration-500 ${isAllMatched ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
         {/* Left Column (FR/EN) */}
         <div className="flex flex-col gap-3 sm:gap-4 flex-1">
           {leftCards.map(card => {
             const isMatched = matchedIds.has(card.id);
             const isSelected = selectedLeft === card.id;
-            const isError = errorIds.has(card.id) && isSelected;
+            const isError = errorIds.has(card.id);
             
             return (
               <motion.button
@@ -118,11 +121,11 @@ export default function PairMatch({ pairs, mode = 'normal', onComplete, forceHid
                 style={{ WebkitTapHighlightColor: 'transparent', willChange: 'opacity, transform' }}
                 className={`px-2 py-4 rounded-xl text-base sm:text-lg font-medium border-b-4 transition-colors h-24 sm:h-32 flex items-center justify-center text-center leading-tight transform-gpu backface-hidden
                   ${isMatched ? 'pointer-events-none' : ''}
-                  ${isSelected 
-                    ? isError 
-                      ? 'bg-rose-100 border-rose-300 text-rose-700' 
-                      : 'bg-indigo-100 border-indigo-300 text-indigo-700'
-                    : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'
+                  ${isError 
+                    ? 'bg-rose-100 border-rose-300 text-rose-700'
+                    : isSelected 
+                      ? 'bg-indigo-100 border-indigo-300 text-indigo-700'
+                      : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'
                   }
                 `}
               >
@@ -137,7 +140,7 @@ export default function PairMatch({ pairs, mode = 'normal', onComplete, forceHid
           {rightCards.map(card => {
             const isMatched = matchedIds.has(card.id);
             const isSelected = selectedRight === card.id;
-            const isError = errorIds.has(card.id) && isSelected;
+            const isError = errorIds.has(card.id);
             
             return (
               <motion.button
@@ -150,11 +153,11 @@ export default function PairMatch({ pairs, mode = 'normal', onComplete, forceHid
                 style={{ WebkitTapHighlightColor: 'transparent', willChange: 'opacity, transform' }}
                 className={`px-2 py-4 rounded-xl text-base sm:text-lg font-medium border-b-4 transition-colors h-24 sm:h-32 flex items-center justify-center text-center leading-tight transform-gpu backface-hidden
                   ${isMatched ? 'pointer-events-none' : ''}
-                  ${isSelected 
-                    ? isError 
-                      ? 'bg-rose-100 border-rose-300 text-rose-700' 
-                      : 'bg-indigo-100 border-indigo-300 text-indigo-700'
-                    : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'
+                  ${isError 
+                    ? 'bg-rose-100 border-rose-300 text-rose-700'
+                    : isSelected 
+                      ? 'bg-indigo-100 border-indigo-300 text-indigo-700'
+                      : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'
                   }
                 `}
               >

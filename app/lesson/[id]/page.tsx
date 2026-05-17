@@ -309,7 +309,7 @@ function LessonPageContent() {
     currentExercise.type === "intro"
       ? true
       : currentExercise.type === "free-typing"
-        ? typeof selectedAnswer === "string" && selectedAnswer.trim().length > 0
+        ? typeof selectedAnswer === "string" && selectedAnswer.trim().length >= Math.max(1, currentExercise.answer.replace(/\s+/g, "").length - 1)
         : (currentExercise.type === "writing" ||
               currentExercise.type === "sentence-builder") &&
             currentExercise.correctComponents
@@ -562,7 +562,7 @@ function LessonPageContent() {
 
             {/* Scrollable Upper Area */}
             <div
-              className={`${showInstruction ? "hidden" : "flex"} flex-1 md:flex-none w-full max-w-3xl overflow-y-auto md:overflow-y-visible px-4 py-4 md:py-4 flex-col justify-center hide-scrollbar`}
+              className={`${showInstruction || currentExercise.type === "pair-matching" ? "hidden" : "flex"} flex-1 md:flex-none w-full max-w-3xl overflow-y-auto md:overflow-y-visible px-4 py-4 md:py-4 flex-col justify-center hide-scrollbar`}
             >
               {currentExercise.type !== "pair-matching" && (
                 <>
@@ -781,7 +781,7 @@ function LessonPageContent() {
 
             {/* Exercise Options (Fixed at bottom on Mobile) */}
             <div
-              className={`${showInstruction ? "hidden" : "flex"} shrink-0 md:shrink-0 bg-transparent px-4 pb-4 pt-2 md:pt-4 md:pb-8 justify-center z-10 w-full max-w-3xl`}
+              className={`${showInstruction ? "hidden" : "flex"} ${currentExercise.type === "pair-matching" ? "flex-1 items-center" : "shrink-0 md:shrink-0"} bg-transparent px-4 pb-4 pt-2 md:pt-4 md:pb-8 justify-center z-10 w-full max-w-3xl`}
             >
               <div className="w-full relative">
                 {currentExercise.type ===
@@ -848,7 +848,7 @@ function LessonPageContent() {
             </div>
             {/* The transparent spacer to allow footer absolute positioning without overlapping options */}
             <div
-              className={`${showInstruction ? "hidden" : "block"} shrink-0 w-full bg-transparent ${showFooter ? "h-[100px] md:h-0" : "h-0 hidden opacity-0 pointer-events-none"}`}
+              className="hidden"
             ></div>
           </motion.div>
         </AnimatePresence>
