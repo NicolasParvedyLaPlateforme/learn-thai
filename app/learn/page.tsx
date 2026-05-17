@@ -261,22 +261,6 @@ export default function Home() {
                         style={{ width: `${progressPercent}%` }}
                       ></div>
                     </div>
-                    
-                    {unlockedLessons && progressPercent < 100 && (
-                      <button 
-                        className="w-full bg-white text-slate-800 font-black tracking-widest uppercase py-4 rounded-2xl shadow-[0_4px_0_rgba(0,0,0,0.1)] active:translate-y-[4px] active:shadow-none transition-all"
-                        onClick={() => {
-                           let firstUncompletedIdx = unitLessons.findIndex(l => !completedLessons.includes(l.id));
-                           if (firstUncompletedIdx === -1) firstUncompletedIdx = 0;
-                           const l = unitLessons[firstUncompletedIdx];
-                           const level = lessonLevels[l.id] || 0;
-                           setSelectedLesson({lesson: l, isCompleted: completedLessons.includes(l.id), unitColor: unit.colorClass, unitBorder: unit.borderClass});
-                           setModalLevel(Math.min(level, 9));
-                        }}
-                      >
-                        {mounted && language === 'en' ? 'Continue' : 'Continuer'}
-                      </button>
-                    )}
                   </div>
                 </div>
                 <div className={`absolute -bottom-12 -left-12 opacity-10 drop-shadow-2xl text-black rotate-[-15deg] pointer-events-none`}>
@@ -357,15 +341,9 @@ export default function Home() {
                            </span>
                            
                            {isUnlocked && (
-                             <>
-                               <div className="bg-slate-100 rounded-full px-3 py-1 text-xs font-bold text-slate-500 mt-3 mb-4">
-                                 {mounted && language === 'en' ? 'Level' : 'Niveau'} {level}/10
-                               </div>
-                               
-                               <button className={`w-full py-3.5 rounded-2xl font-black tracking-widest text-sm transition-all uppercase ${isMaxLevel ? 'bg-slate-100 text-slate-500 active:bg-slate-200' : unit.colorClass + ' text-white shadow-[0_4px_0_rgba(0,0,0,0.1)] active:shadow-none active:translate-y-[4px]'}`}>
-                                 {isMaxLevel ? (mounted && language === 'en' ? 'Review' : 'Réviser') : (mounted && language === 'en' ? 'Continue' : 'Continuer')}
-                               </button>
-                             </>
+                             <div className="bg-slate-100 rounded-full px-3 py-1 text-xs font-bold text-slate-500 mt-2">
+                               {mounted && language === 'en' ? 'Level' : 'Niveau'} {level}/10
+                             </div>
                            )}
                         </div>
 
@@ -425,22 +403,6 @@ export default function Home() {
                             {language === 'en' ? 'Lesson' : 'Leçon'} {completedInUnit}/{unitLessons.length}
                           </div>
                         </div>
-                        {unlockedLessons && progressPercent < 100 && (
-                          <button 
-                            className="bg-white text-slate-800 font-bold px-8 py-4 rounded-2xl shadow-[0_4px_0_rgba(0,0,0,0.1)] hover:-translate-y-1 hover:shadow-[0_6px_0_rgba(0,0,0,0.1)] active:translate-y-1 active:shadow-none transition-all hidden lg:block border-2 border-transparent cursor-pointer"
-                            onClick={() => {
-                               // find first unlocked lesson
-                               let firstUncompletedIdx = unitLessons.findIndex(l => !completedLessons.includes(l.id));
-                               if (firstUncompletedIdx === -1) firstUncompletedIdx = 0;
-                               const l = unitLessons[firstUncompletedIdx];
-                               const level = lessonLevels[l.id] || 0;
-                               setSelectedLesson({lesson: l, isCompleted: completedLessons.includes(l.id), unitColor: unit.colorClass, unitBorder: unit.borderClass});
-                               setModalLevel(Math.min(level, 9));
-                            }}
-                          >
-                            {language === 'en' ? 'Continue' : 'Continuer'}
-                          </button>
-                        )}
                       </div>
                     </div>
                     <div className={`absolute -bottom-10 -right-10 opacity-20 drop-shadow-2xl text-black rotate-[-15deg] pointer-events-none`}>
@@ -467,7 +429,7 @@ export default function Home() {
                        const isMaxLevel = level >= 10;
 
                        return (
-                         <div key={`desktop-node-${lesson.id}`} className="relative flex items-center w-full z-10 gap-6 md:gap-8 min-h-[7rem]">
+                         <div key={`desktop-node-${lesson.id}`} className="relative flex items-center w-full z-10 gap-6 md:gap-8 min-h-[8.5rem] py-3">
                             {/* Circle Node */}
                             <div 
                               className={`relative shrink-0 py-6 ${isUnlocked ? 'cursor-pointer hover:brightness-95 hover:scale-105 active:scale-95 transition-all' : 'cursor-not-allowed'}`}
@@ -497,7 +459,7 @@ export default function Home() {
                             
                             {/* Horizontal Card */}
                             <div 
-                              className={`flex-1 rounded-[1.5rem] border-2 p-5 md:p-6 flex items-center justify-between transition-all group ${isUnlocked ? 'bg-white border-slate-200 border-b-[6px] cursor-pointer hover:border-slate-300 active:translate-y-[4px] active:border-b-2 shadow-sm' : 'bg-transparent border-transparent opacity-80 cursor-not-allowed'}`}
+                              className={`flex-1 rounded-[1.5rem] border-2 p-5 md:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all group ${isUnlocked ? 'bg-white border-slate-200 border-b-[6px] cursor-pointer hover:border-slate-300 active:translate-y-[4px] active:border-b-2 shadow-sm' : 'bg-transparent border-transparent opacity-80 cursor-not-allowed'}`}
                               onClick={() => {
                                 if (isUnlocked) {
                                   setSelectedLesson({lesson, isCompleted, unitColor: unit.colorClass, unitBorder: unit.borderClass});
@@ -507,18 +469,19 @@ export default function Home() {
                                 }
                               }}
                             >
-                               <div className="flex flex-col items-start text-left">
+                               <div className="flex flex-col items-start text-left flex-1 md:pr-4">
                                  <h4 className="font-extrabold text-xl text-slate-800">
                                    {language === 'en' ? (lesson.titleEn || lesson.title) : lesson.title}
                                  </h4>
-                                 <span className={`text-sm font-bold mt-1 ${isMaxLevel ? unit.textClass : level > 0 ? unit.textClass : isUnlocked ? 'text-slate-500' : 'text-slate-400'}`}>
-                                   {isMaxLevel ? (language === 'en' ? 'Completed' : 'Complété') : level > 0 ? `${(level * 10)}%` : isUnlocked ? (language === 'en' ? 'In progress' : 'En cours') : (language === 'en' ? 'Locked' : 'Verrouillé')}
+                                 <span className={`text-sm font-bold mt-1 tracking-wide ${isUnlocked ? 'text-slate-500' : 'text-slate-400'}`}>
+                                   {language === 'en' ? (lesson.descriptionEn || lesson.description) : lesson.description}
                                  </span>
                                </div>
-                               
-                               <button className={`shrink-0 px-6 py-3 rounded-2xl font-bold tracking-wider text-sm transition-all hidden sm:block ${isMaxLevel ? 'bg-slate-100 text-slate-500 group-hover:bg-slate-200 cursor-pointer text-slate-600' : isUnlocked ? unit.colorClass + ' text-white group-hover:brightness-110 shadow-[0_2px_0_rgba(0,0,0,0.1)] group-active:shadow-none group-active:translate-y-[2px] cursor-pointer' : 'bg-slate-100 text-slate-300'}`}>
-                                 {isMaxLevel ? (language === 'en' ? 'Review' : 'Réviser') : isUnlocked ? (language === 'en' ? 'Continue' : 'Continuer') : (language === 'en' ? 'Start' : 'Commencer')}
-                               </button>
+                               {isUnlocked && (
+                                 <div className="bg-slate-100 rounded-full px-4 py-2 text-sm font-bold shrink-0 text-slate-500 self-start md:self-auto mt-4 md:mt-0">
+                                   {language === 'en' ? 'Level' : 'Niveau'} {level}/10
+                                 </div>
+                               )}
                             </div>
                          </div>
                        )
@@ -629,7 +592,13 @@ export default function Home() {
 
                   <div className="mb-8">
                     <h4 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">
-                      {language === 'en' ? 'Choose a level' : 'Choisir un niveau'}
+                      {(() => {
+                        const currentProgress = lessonLevels[selectedLesson.lesson.id] || 0;
+                        if (currentProgress === 0) {
+                          return language === 'en' ? 'Start with level 1' : 'Commencez avec le niveau 1';
+                        }
+                        return language === 'en' ? 'Choose a level' : 'Choisir un niveau';
+                      })()}
                     </h4>
                     <div className="flex flex-wrap gap-2 sm:gap-3">
                       {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((levelIndex) => {
