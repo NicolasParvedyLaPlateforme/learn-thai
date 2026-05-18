@@ -1,24 +1,31 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { createPortal } from 'react-dom';
 import { useProgressStore } from '../lib/store';
 import { getAlphabetLessons, AlphabetLessonDef, formatCombiningChar } from '../lib/alphabet-utils';
-import { BookOpen, CheckCircle, Star, Play, Crown, X, Unlock, Lock } from 'lucide-react';
+import { playThaiTTS } from '../lib/tts';
+import { BookOpen, CheckCircle, Star, Play, Crown, X, Unlock, Lock, ChevronLeft, ChevronRight, Clock, Volume2 } from 'lucide-react';
 import Image from 'next/image';
+
+import { useGlobalSuggestedLesson } from '../lib/useGlobalSuggestedLesson';
 
 export default function AlphabetMenuPage() {
   const router = useRouter();
-  const { completedLessons, unlockedLessons, lessonLevels, xp, resetLessonLevel, unlockLessonManual, language, setLanguage, autoDetectLanguage } = useProgressStore();
+  const { completedLessons, unlockedLessons, lessonLevels, lessonStars, xp, resetLessonLevel, unlockLessonManual, language, setLanguage, autoDetectLanguage } = useProgressStore();
   const [mounted, setMounted] = useState(false);
+  const levelsScrollRef = useRef<HTMLDivElement>(null);
+  const dragRef = useRef({ isDragging: false, startX: 0, scrollLeft: 0 });
   const [selectedLesson, setSelectedLesson] = useState<{lesson: AlphabetLessonDef, isCompleted: boolean, unitColor: string, unitBorder: string} | null>(null);
   const [modalLevel, setModalLevel] = useState(0);
   const [cols, setCols] = useState(5);
   const [activeUnitIndex, setActiveUnitIndex] = useState(0);
 
+  const globalSuggested = useGlobalSuggestedLesson();
+  
   const { consonants, vowels } = getAlphabetLessons();
 
   const UNITS = [
@@ -43,6 +50,8 @@ export default function AlphabetMenuPage() {
       lessons: vowels
     }
   ];
+
+  const suggestedLessonId = globalSuggested?.type === 'alphabet' ? globalSuggested.id : null;
 
   const handleUnitSelect = (index: number) => {
     setActiveUnitIndex(index);
@@ -83,7 +92,16 @@ export default function AlphabetMenuPage() {
       if (hash) {
         setTimeout(() => {
           try {
-            const el = document.querySelector(hash);
+             // Differentiate mobile and desktop elements
+            const baseId = hash.substring(1).replace('lesson-', ''); // just the ID
+            const isDesktop = window.innerWidth >= 768; // md breakpoint
+            const targetId = isDesktop ? `#desktop-lesson-${baseId}` : `#mobile-lesson-${baseId}`;
+            
+            let el = document.querySelector(targetId);
+            if (!el) {
+               el = document.querySelector(hash); // Fallback
+            }
+
             if (el) {
               const y = el.getBoundingClientRect().top + window.scrollY - 100;
               window.scrollTo({ top: y, behavior: 'smooth' });
@@ -162,6 +180,15 @@ export default function AlphabetMenuPage() {
                   <p className="text-white/90 mb-8 font-medium text-lg leading-snug">{mounted && language === 'en' ? unit.descriptionEn : unit.description}</p>
                   
                   <div className="w-full max-w-[280px]">
+                    <div className="flex flex-col mb-3">
+                      <div className="flex justify-between text-sm font-bold text-white/90 mb-1 px-1">
+                        <span>{language === 'en' ? 'Mastery' : 'Maîtrise'}</span>
+                        <span>{completedInUnit} / {unitLessons.length} {language === 'en' ? 'letters' : 'lettres'}</span>
+                      </div>
+                      <div className="text-white/70 text-xs font-medium px-1 text-left">
+                        {language === 'en' ? '4 levels per letter = Total mastery' : '4 niveaux par lettre = Maîtrise totale'}
+                      </div>
+                    </div>
                     <div className="w-full bg-black/10 rounded-full h-4 overflow-hidden mb-6 shadow-inner">
                       <div 
                         className="bg-white h-full rounded-full transition-all duration-1000 shadow-[0_0_10px_rgba(255,255,255,0.7)]" 
@@ -194,7 +221,7 @@ export default function AlphabetMenuPage() {
                    const lineToNextColor = level > 0 ? unit.colorClass : "bg-slate-200";
 
                    return (
-                     <div id={`lesson-${lesson.id}`} key={`mobile-node-${lesson.id}`} className="relative flex flex-col items-center w-full scroll-mt-24 z-10 mb-8 sm:mb-12 group">
+                     <div id={`mobile-lesson-${lesson.id}`} key={`mobile-node-${lesson.id}`} className="relative flex flex-col items-center w-full scroll-mt-24 z-10 mb-8 sm:mb-12 group">
                         {/* Circle Node */}
                         <div 
                           className={`relative shrink-0 mb-4 z-10 cursor-pointer hover:scale-105 active:scale-95 transition-all`}
@@ -211,27 +238,47 @@ export default function AlphabetMenuPage() {
                           >
                             {lesson.imageUrl ? (
                               <>
-                                <Image src={lesson.imageUrl} alt={lesson.title} fill className={`object-cover ${level === 0 ? 'grayscale opacity-70' : ''}`} sizes="(max-width: 640px) 5rem, 6rem" />
+                                <Image src={lesson.imageUrl} alt={lesson.title} fill className={`object-cover ${level === 0 && suggestedLessonId !== lesson.id ? 'grayscale opacity-70' : ''}`} sizes="(max-width: 640px) 5rem, 6rem" />
                                 {isMaxLevel && <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/20"><CheckCircle size={40} className="stroke-[3] text-white" /></div>}
                               </>
                             ) : (
-                              isMaxLevel ? <Crown size={40} className="stroke-[3]" fill="currentColor" /> : level > 0 ? <CheckCircle size={40} className="stroke-current stroke-[2.5]" /> : lesson.items[0] ? formatCombiningChar(lesson.items[0].letter) : ''
+                              <>
+                                {lesson.items[0] ? formatCombiningChar(lesson.items[0].letter) : ''}
+                                {isMaxLevel ? (
+                                  <div className="absolute bottom-0 right-0 translate-x-1/4 translate-y-1/4 bg-white rounded-full p-0.5 shadow-sm border border-emerald-200 z-20">
+                                    <div className="bg-emerald-500 rounded-full flex items-center justify-center w-6 h-6">
+                                      <CheckCircle size={14} className="text-white fill-emerald-500" />
+                                    </div>
+                                  </div>
+                                ) : level > 0 ? (
+                                  <div className="absolute bottom-0 right-0 translate-x-1/4 translate-y-1/4 bg-white rounded-full p-0.5 shadow-sm border border-slate-200 z-20">
+                                    <div className={`${unit.colorClass} rounded-full flex items-center justify-center w-6 h-6`}>
+                                      <span className="text-white text-[10px] font-bold tracking-tight">{level}/4</span>
+                                    </div>
+                                  </div>
+                                ) : null}
+                              </>
                             )}
-                          </div>
-                          
-                          <div className={`absolute -bottom-2 -right-2 z-20 bg-white border-2 border-slate-200 rounded-full h-8 px-2 min-w-[2rem] flex items-center justify-center text-xs font-black shadow-sm ${unit.textClass}`}>
-                            {level}/4
                           </div>
                         </div>
                         
                         {/* Card */}
                         <div 
-                          className={`w-full max-w-[280px] sm:max-w-[320px] rounded-[1.5rem] p-5 flex flex-col items-center text-center transition-all z-10 bg-white border-2 border-slate-200 border-b-[6px] cursor-pointer hover:border-slate-300 active:translate-y-[4px] active:border-b-2 shadow-sm relative`}
+                          className={`w-full max-w-[280px] sm:max-w-[320px] rounded-[1.5rem] p-5 flex flex-col items-center text-center transition-all z-10 border-2 border-b-[6px] cursor-pointer active:translate-y-[4px] active:border-b-2 shadow-sm relative ${isMaxLevel ? 'bg-emerald-50 border-emerald-200 shadow-[0_0_15px_rgba(16,185,129,0.2)]' : suggestedLessonId === lesson.id ? 'bg-white border-amber-300 shadow-[0_0_15px_rgba(252,211,77,0.5)]' : 'bg-white border-slate-200 hover:border-slate-300'}`}
                           onClick={() => {
                             setSelectedLesson({lesson, isCompleted: isMaxLevel, unitColor: unit.colorClass, unitBorder: unit.borderClass});
                             setModalLevel(Math.min(level, 3));
                           }}
                         >
+                           {isMaxLevel ? (
+                             <div className="absolute -top-3.5 left-6 bg-gradient-to-r from-emerald-400 to-emerald-500 text-white text-[10px] font-black uppercase tracking-wider py-1 px-3 rounded-full flex items-center gap-1 shadow-sm">
+                               <CheckCircle size={14} className="fill-current text-white stroke-emerald-500" /> {language === 'en' ? 'MASTERED' : 'MAÎTRISÉ'}
+                             </div>
+                           ) : suggestedLessonId === lesson.id && (
+                             <div className="absolute -top-3.5 left-6 bg-amber-400 text-amber-900 text-[10px] font-black uppercase tracking-wider py-1 px-3 rounded-full flex items-center gap-1 shadow-sm">
+                               <Star size={12} fill="currentColor" /> {language === 'en' ? 'SUGGESTED' : 'SUGGÉRÉ'}
+                             </div>
+                           )}
                            <h4 className={`font-extrabold text-xl text-slate-800`}>
                              {mounted && language === 'en' ? lesson.titleEn : lesson.title}
                            </h4>
@@ -241,16 +288,25 @@ export default function AlphabetMenuPage() {
                            
                            {/* Lesson Progress Bar (Out of 4) */}
                            <div className="w-full mt-4">
-                             <div className="flex justify-between text-xs font-bold text-slate-400 mb-1 px-1">
-                               <span>{language === 'en' ? 'Mastery' : 'Maîtrise'}</span>
-                               <span className={unit.textClass}>{level}/4</span>
-                             </div>
-                             <div className="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
-                               <div 
-                                 className={`${unit.colorClass} h-full rounded-full transition-all duration-500`}
-                                 style={{ width: `${(level / 4) * 100}%` }}
-                               ></div>
-                             </div>
+                             {level === 0 ? (
+                                suggestedLessonId === lesson.id ? (
+                                  <div className="text-sm font-bold text-slate-400 mt-2 py-1">
+                                    {language === 'en' ? 'Start learning' : 'Commencer'}
+                                  </div>
+                                ) : null
+                             ) : (
+                               <>
+                                 <div className="flex justify-between text-xs font-bold text-slate-400 mb-1 px-1">
+                                   <span>{language === 'en' ? 'Mastery' : 'Maîtrise'}</span>
+                                   <span className={unit.textClass}>{level}/4</span>
+                                 </div>
+                                 <div className="flex justify-between gap-[2px] w-full">
+                                   {Array.from({length: 4}).map((_, i) => (
+                                     <div key={i} className={`h-2.5 flex-1 rounded-sm first:rounded-l-full last:rounded-r-full ${i < level ? unit.colorClass : 'bg-slate-100'}`}></div>
+                                   ))}
+                                 </div>
+                               </>
+                             )}
                            </div>
                         </div>
 
@@ -299,14 +355,20 @@ export default function AlphabetMenuPage() {
                                          {/* Progress Bar + Continue Button */}
                       <div className="flex items-center gap-6">
                         <div className="flex-1">
+                          <div className={`flex flex-col mb-3`}>
+                            <div className={`text-sm ${unit.lightTextClass} font-bold mb-1 flex justify-between`}>
+                              <span>{language === 'en' ? 'Mastery' : 'Maîtrise'}</span>
+                              <span>{completedInUnit} / {unitLessons.length} {language === 'en' ? 'letters' : 'lettres'}</span>
+                            </div>
+                            <div className={`text-xs ${unit.lightTextClass} opacity-80 font-medium`}>
+                              {language === 'en' ? '4 levels per letter = Total mastery' : '4 niveaux par lettre = Maîtrise totale'}
+                            </div>
+                          </div>
                           <div className={`w-full ${unit.bgMutedClass} rounded-full h-4 overflow-hidden shadow-inner`}>
                             <div 
                               className="bg-emerald-300 h-full rounded-full transition-all duration-1000 origin-left" 
                               style={{ width: `${progressPercent}%` }}
                             ></div>
-                          </div>
-                          <div className={`text-sm ${unit.lightTextClass} font-bold mt-2`}>
-                            {language === 'en' ? 'Lesson' : 'Leçon'} {completedInUnit}/{unitLessons.length}
                           </div>
                         </div>
                       </div>
@@ -333,7 +395,7 @@ export default function AlphabetMenuPage() {
                        const lineToNextColor = level > 0 ? unit.colorClass : "bg-slate-200";
 
                        return (
-                         <div key={`desktop-node-${lesson.id}`} className="relative flex items-center w-full z-10 gap-6 md:gap-8 min-h-[8.5rem] py-3">
+                         <div id={`desktop-lesson-${lesson.id}`} key={`desktop-node-${lesson.id}`} className="relative flex items-center w-full z-10 gap-6 md:gap-8 min-h-[8.5rem] py-3">
                             {/* Circle Node */}
                             <div 
                               className={`relative shrink-0 py-6 cursor-pointer hover:brightness-95 hover:scale-105 active:scale-95 transition-all`}
@@ -345,16 +407,27 @@ export default function AlphabetMenuPage() {
                               <div className={`w-16 h-16 md:w-20 md:h-20 rounded-[2rem] flex items-center justify-center border-b-[6px] relative z-10 transition-transform text-3xl font-thai overflow-hidden ${isMaxLevel ? unit.colorClass + ' text-white ' + unit.borderClass : level >= 3 ? unit.shades.l3 : level >= 2 ? unit.shades.l2 : level >= 1 ? unit.shades.l1 : 'bg-white ' + unit.textClass + ' border-slate-200 border-2 active:border-b-2 active:translate-y-1'}`}>
                                 {lesson.imageUrl ? (
                                   <>
-                                    <Image src={lesson.imageUrl} alt={lesson.title} fill className={`object-cover ${level === 0 ? 'grayscale opacity-70' : ''}`} sizes="(max-width: 768px) 4rem, 5rem" />
+                                    <Image src={lesson.imageUrl} alt={lesson.title} fill className={`object-cover ${level === 0 && suggestedLessonId !== lesson.id ? 'grayscale opacity-70' : ''}`} sizes="(max-width: 768px) 4rem, 5rem" />
                                     {isMaxLevel && <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/20"><CheckCircle size={32} className="stroke-[3] text-white" /></div>}
                                   </>
                                 ) : (
-                                  isMaxLevel ? <Crown size={32} className="stroke-[3]" fill="currentColor" /> : level > 0 ? <CheckCircle size={32} className="stroke-current stroke-[2.5]" /> : (lesson.items[0] ? formatCombiningChar(lesson.items[0].letter) : '')
+                                  <>
+                                    {lesson.items[0] ? formatCombiningChar(lesson.items[0].letter) : ''}
+                                    {isMaxLevel ? (
+                                      <div className="absolute bottom-0 right-0 translate-x-1/4 translate-y-1/4 bg-white rounded-full p-0.5 shadow-sm border border-emerald-200 z-20">
+                                        <div className="bg-emerald-500 rounded-full flex items-center justify-center w-5 h-5">
+                                          <CheckCircle size={12} className="text-white fill-emerald-500" />
+                                        </div>
+                                      </div>
+                                    ) : level > 0 ? (
+                                      <div className="absolute bottom-0 right-0 translate-x-1/4 translate-y-1/4 bg-white rounded-full p-0.5 shadow-sm border border-slate-200 z-20">
+                                        <div className={`${unit.colorClass} rounded-full flex items-center justify-center w-5 h-5`}>
+                                          <span className="text-white text-[9px] font-bold tracking-tight">{level}/4</span>
+                                        </div>
+                                      </div>
+                                    ) : null}
+                                  </>
                                 )}
-                              </div>
-                              
-                              <div className={`absolute bottom-4 -right-2 z-20 bg-white border-2 border-slate-200 rounded-full h-8 px-2 min-w-[2rem] flex items-center justify-center text-xs font-black shadow-sm ${unit.textClass}`}>
-                                {level}/4
                               </div>
                               
                               {showLineToNext && (
@@ -364,12 +437,21 @@ export default function AlphabetMenuPage() {
                             
                             {/* Horizontal Card */}
                             <div 
-                              className={`flex-1 rounded-[1.5rem] border-2 p-5 md:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all group bg-white border-slate-200 border-b-[6px] cursor-pointer hover:border-slate-300 active:translate-y-[4px] active:border-b-2 shadow-sm`}
+                              className={`flex-1 rounded-[1.5rem] border-2 p-5 md:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all group border-b-[6px] cursor-pointer active:translate-y-[4px] active:border-b-2 shadow-sm relative ${isMaxLevel ? 'bg-emerald-50 border-emerald-200 shadow-[0_0_15px_rgba(16,185,129,0.2)]' : suggestedLessonId === lesson.id ? 'bg-white border-amber-300 shadow-[0_0_15px_rgba(252,211,77,0.5)]' : 'bg-white border-slate-200 hover:border-slate-300'}`}
                               onClick={() => {
                                 setSelectedLesson({lesson, isCompleted: isMaxLevel, unitColor: unit.colorClass, unitBorder: unit.borderClass});
                                 setModalLevel(Math.min(level, 3));
                               }}
                             >
+                               {isMaxLevel ? (
+                                 <div className="absolute -top-3.5 left-6 bg-gradient-to-r from-emerald-400 to-emerald-500 text-white text-[10px] font-black uppercase tracking-wider py-1 px-3 rounded-full flex items-center gap-1 shadow-sm">
+                                   <CheckCircle size={14} className="fill-current text-white stroke-emerald-500" /> {language === 'en' ? 'MASTERED' : 'MAÎTRISÉ'}
+                                 </div>
+                               ) : suggestedLessonId === lesson.id && (
+                                 <div className="absolute -top-3.5 left-6 bg-amber-400 text-amber-900 text-[10px] font-black uppercase tracking-wider py-1 px-3 rounded-full flex items-center gap-1 shadow-sm">
+                                   <Star size={12} fill="currentColor" /> {language === 'en' ? 'SUGGESTED' : 'SUGGÉRÉ'}
+                                 </div>
+                               )}
                                <div className="flex flex-col items-start text-left flex-1 md:pr-4">
                                  <h4 className="font-extrabold text-xl text-slate-800">
                                    {language === 'en' ? lesson.titleEn : lesson.title}
@@ -380,17 +462,26 @@ export default function AlphabetMenuPage() {
                                </div>
                                
                                {/* Lesson Progress Bar (Out of 4) desktop */}
-                               <div className="w-full md:w-48 shrink-0 mt-4 md:mt-0 flex flex-col">
-                                 <div className="flex justify-between text-xs font-bold text-slate-400 mb-1 px-1">
-                                   <span>{language === 'en' ? 'Mastery' : 'Maîtrise'}</span>
-                                   <span className={unit.textClass}>{level}/4</span>
-                                 </div>
-                                 <div className="w-full bg-slate-100 rounded-full h-3 overflow-hidden">
-                                   <div 
-                                     className={`${unit.colorClass} h-full rounded-full transition-all duration-500`}
-                                     style={{ width: `${(level / 4) * 100}%` }}
-                                   ></div>
-                                 </div>
+                               <div className="w-full md:w-48 shrink-0 mt-4 md:mt-0 flex flex-col justify-center">
+                                 {level === 0 ? (
+                                    suggestedLessonId === lesson.id ? (
+                                      <div className="text-sm font-bold text-slate-400 text-left md:text-right">
+                                        {language === 'en' ? 'Start learning' : 'Commencer'}
+                                      </div>
+                                    ) : null
+                                 ) : (
+                                   <>
+                                     <div className="flex justify-between text-xs font-bold text-slate-400 mb-1 px-1">
+                                       <span>{language === 'en' ? 'Mastery' : 'Maîtrise'}</span>
+                                       <span className={unit.textClass}>{level}/4</span>
+                                     </div>
+                                     <div className="flex justify-between gap-[2px] w-full">
+                                       {Array.from({length: 4}).map((_, i) => (
+                                         <div key={i} className={`h-3 flex-1 rounded-sm first:rounded-l-full last:rounded-r-full ${i < level ? unit.colorClass : 'bg-slate-100'}`}></div>
+                                       ))}
+                                     </div>
+                                   </>
+                                 )}
                                </div>
                             </div>
                          </div>
@@ -415,16 +506,15 @@ export default function AlphabetMenuPage() {
           </div>
           
           {/* Right Sidebar Wrap */}
-          <div className="w-20 xl:w-80 flex-shrink-0 relative hidden md:block z-40">
+          <div className="w-80 flex-shrink-0 relative hidden xl:block z-40">
             {/* Sticky wrapper */}
             <div className="sticky top-24 w-full">
-              {/* Container that expands on hover CSS when below xl, but static on xl */}
               <div 
-                className="absolute top-0 right-0 max-h-[calc(100vh-8rem)] flex flex-col gap-4 transition-[width,background-color,padding,border-radius,box-shadow,opacity] duration-300 ease-in-out pb-4 group w-20 hover:w-80 hover:bg-white hover:shadow-2xl hover:rounded-2xl hover:p-4 hover:border hover:border-slate-100 xl:w-full xl:bg-transparent xl:shadow-none xl:rounded-none xl:p-0 xl:border-none xl:hover:bg-transparent xl:hover:shadow-none xl:hover:rounded-none xl:hover:p-0 xl:hover:border-none xl:relative"
+                className="w-full relative flex flex-col gap-4 pb-4 group"
               >
-              <div className="flex items-center gap-3 px-2 mb-2 text-slate-800 font-bold text-xl overflow-hidden shrink-0">
+              <div className="flex items-center gap-3 px-2 mb-2 text-slate-800 font-bold text-xl shrink-0">
                 <BookOpen size={24} className="shrink-0" />
-                <h2 className="transition-opacity duration-300 whitespace-nowrap opacity-0 group-hover:opacity-100 xl:opacity-100">
+                <h2 className="whitespace-nowrap">
                   {language === 'en' ? 'Units' : 'Unités'}
                 </h2>
               </div>
@@ -439,11 +529,11 @@ export default function AlphabetMenuPage() {
                       onClick={() => handleUnitSelect(i)}
                       className={`w-full text-left rounded-2xl transition-all relative overflow-hidden flex items-center h-[5.5rem] shrink-0 ${isCurrent ? `bg-emerald-50 text-emerald-800 border-2 border-emerald-200 shadow-sm` : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300 hover:bg-slate-50 border-2 border-b-4 active:border-b-2 active:translate-y-1'}`}
                     >
-                      <div className="shrink-0 flex items-center justify-center font-black text-2xl transition-all duration-300 w-full group-hover:w-16 xl:w-16">
+                      <div className="shrink-0 flex items-center justify-center font-black text-2xl w-16">
                          {i + 1}
                       </div>
 
-                      <div className="relative z-10 flex flex-col justify-center transition-all duration-300 whitespace-nowrap overflow-hidden pr-4 opacity-0 w-0 group-hover:opacity-100 group-hover:w-auto xl:opacity-100 xl:w-auto">
+                      <div className="relative z-10 flex flex-col justify-center whitespace-nowrap overflow-hidden pr-4 w-auto">
                         <h3 className="font-extrabold text-[15px] mb-0.5 truncate w-[12rem]">{language === 'en' ? u.titleEn : u.title}</h3>
                         <span className={`text-xs font-bold ${isCurrent ? 'text-emerald-500' : 'text-slate-400'}`}>{status}</span>
                       </div>
@@ -472,80 +562,183 @@ export default function AlphabetMenuPage() {
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: 20, opacity: 0 }}
                 transition={{ duration: 0.2, ease: "easeOut" }}
-                className="w-full md:max-w-md bg-white rounded-t-3xl md:rounded-3xl shadow-2xl overflow-hidden flex flex-col mb-0 md:mb-12 relative border-t-8 border-slate-200 z-10"
-                style={{ borderTopColor: 'var(--tw-colors-emerald-500)' }} 
+                className={`w-full md:max-w-md bg-white rounded-t-3xl md:rounded-3xl shadow-2xl flex flex-col mb-0 md:mb-12 relative border-t-8 z-10 max-h-[90vh] md:max-h-[85vh] overflow-hidden ${selectedLesson.unitColor.replace('500', '700').replace('bg-', 'border-')} ${selectedLesson.unitColor.replace('400', '600').replace('bg-', 'border-')} ${selectedLesson.unitColor.replace('600', '800').replace('bg-', 'border-')}`}
                 onClick={(e) => e.stopPropagation()}
               >
-                <div className={`p-6 ${selectedLesson.unitColor} flex justify-between items-start text-white`}>
-                  <div>
-                    <p className="font-bold text-white/80 uppercase tracking-widest text-sm mb-1">
-                      Alphabet
-                    </p>
-                    <h3 className="text-2xl font-extrabold">
-                      {language === 'en' ? selectedLesson.lesson.titleEn : selectedLesson.lesson.title}
-                    </h3>
-                  </div>
+                <div className={`p-6 ${selectedLesson.unitColor} flex flex-col items-start text-white relative shrink-0`}>
                   <button 
                     onClick={() => setSelectedLesson(null)} 
-                    className="bg-white/20 hover:bg-white/30 text-white rounded-full p-2 transition-colors -mr-2 -mt-2"
+                    className="absolute top-4 right-4 text-white/80 hover:text-white rounded-full p-2 transition-colors z-10"
                   >
                     <X size={20} />
                   </button>
+                  <p className="font-bold text-white/80 uppercase tracking-widest text-sm mb-1 pr-6">
+                    Alphabet
+                  </p>
+                  <h3 className="text-2xl font-extrabold mb-1 pr-6">
+                    {language === 'en' ? selectedLesson.lesson.titleEn : selectedLesson.lesson.title}
+                  </h3>
+
+                  <div className="flex items-center gap-3 w-full mt-4">
+                     <div className="bg-white/20 text-white rounded-full px-3 py-1 flex items-center gap-1.5 text-sm font-bold shrink-0">
+                        <CheckCircle size={14} className="stroke-[3]" />
+                        {lessonLevels[selectedLesson.lesson.id] || 0}/4 {language === 'en' ? 'levels' : 'niveaux'}
+                     </div>
+                     <div className="h-2 flex-1 bg-black/15 rounded-full overflow-hidden">
+                        <div className="h-full bg-white rounded-full" style={{ width: `${((lessonLevels[selectedLesson.lesson.id] || 0) / 4) * 100}%` }}></div>
+                     </div>
+                  </div>
                 </div>
 
-                <div className="p-6">
-                  <p className="text-slate-600 font-medium mb-8 text-lg">
-                    {language === 'en' ? 'Learn these letters:' : 'Apprenez ces lettres :'} <strong className="text-3xl font-thai ml-2">{selectedLesson.lesson.items.map(i => formatCombiningChar(i.letter)).join(' ')}</strong>
-                  </p>
-
-                  <div className="mb-8">
-                    <h4 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">
-                      {(() => {
-                        const currentProgress = lessonLevels[selectedLesson.lesson.id] || 0;
-                        if (currentProgress === 0) {
-                          return language === 'en' ? 'Start with level 1' : 'Commencez avec le niveau 1';
-                        }
-                        return language === 'en' ? 'Choose a level' : 'Choisir un niveau';
-                      })()}
-                    </h4>
-                    <div className="flex flex-wrap gap-2 sm:gap-3">
-                      {[0, 1, 2, 3].map((levelIndex) => {
-                        const currentProgress = lessonLevels[selectedLesson.lesson.id] || 0;
-                        const isCompletedLevel = levelIndex < currentProgress;
-                        const isAccessible = levelIndex <= currentProgress;
-                        const isSelected = modalLevel === levelIndex;
-                        return (
-                          <button
-                            key={levelIndex}
-                            onClick={() => {
-                              if (isAccessible) {
-                                setModalLevel(levelIndex);
-                              }
-                            }}
-                            disabled={!isAccessible}
-                            className={`flex-1 min-w-[3.5rem] sm:min-w-[4rem] flex flex-col items-center justify-center py-3 rounded-2xl border-b-4 transition-all
-                              ${isSelected 
-                                ? `${selectedLesson.unitColor} ${selectedLesson.unitBorder} text-white scale-105 shadow-md` 
-                                : isCompletedLevel 
-                                  ? 'bg-slate-100 border-slate-200 text-slate-800 hover:bg-slate-200' 
-                                  : isAccessible
-                                    ? 'bg-white border-2 border-slate-200 text-slate-600 hover:border-slate-300'
-                                    : 'bg-slate-50 border-2 border-slate-100 text-slate-300 opacity-50 cursor-not-allowed'
-                              }`}
-                          >
-                            <span className="font-extrabold text-lg mb-1">{levelIndex + 1}</span>
-                            {isCompletedLevel && !isSelected ? (
-                              <CheckCircle size={16} className={isSelected ? "text-white" : "text-emerald-500"} />
-                            ) : (
-                              <Crown size={16} className={isSelected ? "text-white opacity-80" : "opacity-40"} />
-                            )}
-                          </button>
-                        );
-                      })}
-                    </div>
+                <div className="p-6 pt-4 overflow-y-auto hide-scrollbar flex-1">
+                  <div className="flex items-center justify-between gap-2 py-2 mb-6">
+                     <button 
+                        className="h-10 w-10 shrink-0 bg-white border border-slate-200 rounded-full flex items-center justify-center text-slate-400 hover:text-slate-600 shadow-sm disabled:opacity-30 disabled:cursor-not-allowed" 
+                        disabled={modalLevel === 0} 
+                        onClick={() => {
+                           setModalLevel(Math.max(0, modalLevel - 1));
+                           levelsScrollRef.current?.scrollBy({ left: -84, behavior: 'smooth' });
+                        }}
+                     >
+                        <ChevronLeft size={20}/>
+                     </button>
+                     
+                     <div 
+                        ref={(el) => {
+                           levelsScrollRef.current = el;
+                           if (el && !el.dataset.scrolled) {
+                             el.scrollTo({ left: modalLevel * 84, behavior: 'instant' });
+                             el.dataset.scrolled = 'true';
+                           }
+                        }} 
+                        onMouseDown={(e) => {
+                           dragRef.current.isDragging = true;
+                           if (levelsScrollRef.current) {
+                             dragRef.current.startX = e.pageX - levelsScrollRef.current.offsetLeft;
+                             dragRef.current.scrollLeft = levelsScrollRef.current.scrollLeft;
+                           }
+                        }}
+                        onMouseLeave={() => { dragRef.current.isDragging = false; }}
+                        onMouseUp={() => { dragRef.current.isDragging = false; }}
+                        onMouseMove={(e) => {
+                           if (!dragRef.current.isDragging) return;
+                           e.preventDefault();
+                           if (levelsScrollRef.current) {
+                             const x = e.pageX - levelsScrollRef.current.offsetLeft;
+                             const walk = (x - dragRef.current.startX) * 1.5;
+                             levelsScrollRef.current.scrollLeft = dragRef.current.scrollLeft - walk;
+                           }
+                        }}
+                        className="flex gap-3 overflow-x-auto hide-scrollbar flex-1 snap-x py-2 px-1 mx-1 scroll-smooth cursor-grab active:cursor-grabbing"
+                     >
+                        {[0, 1, 2, 3].map((levelIndex) => {
+                          const currentProgress = lessonLevels[selectedLesson.lesson.id] || 0;
+                          const starsArray = lessonStars[selectedLesson.lesson.id] || Array(10).fill(0);
+                          const earnedStars = starsArray[levelIndex] || 0;
+                          
+                          const isCompletedLevel = levelIndex < currentProgress;
+                          const isAccessible = levelIndex <= currentProgress;
+                          const isSelected = modalLevel === levelIndex;
+                          
+                          if (!isAccessible) {
+                            return (
+                              <button key={levelIndex} disabled className="shrink-0 h-16 w-16 bg-slate-50 border-2 border-slate-100 rounded-2xl flex items-center justify-center text-slate-300">
+                                <Lock size={20} />
+                              </button>
+                            );
+                          }
+                          
+                          return (
+                            <button
+                              key={levelIndex}
+                              onClick={() => setModalLevel(levelIndex)}
+                              className={`shrink-0 h-16 w-[4.5rem] flex flex-col items-center justify-center rounded-2xl border-2 transition-all snap-center relative
+                                ${isSelected 
+                                  ? `bg-white ${selectedLesson.unitBorder} text-slate-800 scale-105 shadow-md` 
+                                  : `bg-white border-slate-200 text-slate-600 hover:border-slate-300`
+                                }`}
+                            >
+                              <span className={`font-extrabold text-lg ${isSelected ? selectedLesson.unitColor.replace('bg-', 'text-') : 'text-slate-700'}`}>{levelIndex + 1}</span>
+                              {levelIndex === currentProgress ? (
+                                <span className={`text-[9px] font-black uppercase mt-0.5 ${isSelected ? selectedLesson.unitColor.replace('bg-', 'text-') : 'text-amber-500'}`}>
+                                  {language === 'en' ? 'IN PROGRESS' : 'EN COURS'}
+                                </span>
+                              ) : (
+                                <div className="flex gap-0.5 mt-0.5">
+                                  {Array.from({ length: 3 }).map((_, i) => (
+                                    <Star key={i} size={10} className={i < earnedStars ? "fill-amber-400 text-amber-500" : "fill-slate-200 text-slate-300"} />
+                                  ))}
+                                </div>
+                              )}
+                            </button>
+                          );
+                        })}
+                     </div>
+                     
+                     <button 
+                        className="h-10 w-10 shrink-0 bg-white border border-slate-200 rounded-full flex items-center justify-center text-slate-400 hover:text-slate-600 shadow-sm disabled:opacity-30 disabled:cursor-not-allowed" 
+                        disabled={modalLevel === 3 || modalLevel >= (lessonLevels[selectedLesson.lesson.id] || 0)} 
+                        onClick={() => {
+                           setModalLevel(Math.min(3, modalLevel + 1));
+                           levelsScrollRef.current?.scrollBy({ left: 84, behavior: 'smooth' });
+                        }}
+                     >
+                        <ChevronRight size={20}/>
+                     </button>
                   </div>
+                  
+                  {(() => {
+                    const letterCount = selectedLesson.lesson.items.length;
+                    const stepsCount = 10 + letterCount;
+                    let secsPerStep = 5;
+                    
+                    let estimatedSecs = stepsCount * secsPerStep;
+                    let estimatedMins = Math.max(1, Math.ceil(estimatedSecs / 60));
+                    
+                    return (
+                      <div className="mb-2">
+                        <div className="flex flex-row gap-2 mb-6">
+                           <div className="flex-1 bg-blue-50/50 rounded-2xl p-3 flex items-center gap-2 border border-blue-100 min-w-0">
+                              <div className="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center text-blue-500 shrink-0">
+                                <BookOpen size={16} />
+                              </div>
+                              <div className="min-w-0">
+                                <div className="text-blue-500 text-[10px] font-bold mb-0.5 uppercase tracking-wider truncate">{language === 'en' ? 'Letters' : 'Lettres'}</div>
+                                <div className="text-blue-900 font-extrabold text-sm sm:text-base truncate">{letterCount}</div>
+                              </div>
+                           </div>
+                           <div className="flex-1 bg-purple-50/50 rounded-2xl p-3 flex items-center gap-2 border border-purple-100 min-w-0">
+                              <div className="w-8 h-8 rounded-lg bg-purple-100 flex items-center justify-center text-purple-500 shrink-0">
+                                <Clock size={16} />
+                              </div>
+                              <div className="min-w-0">
+                                <div className="text-purple-500 text-[10px] font-bold mb-0.5 uppercase tracking-wider truncate">{language === 'en' ? 'Time' : 'Durée estimée'}</div>
+                                <div className="text-purple-900 font-extrabold text-sm sm:text-base truncate">{estimatedMins} min</div>
+                              </div>
+                           </div>
+                        </div>
 
-                  <div className="flex flex-col gap-3">
+                        <div>
+                           <h4 className="border-b text-slate-500 font-bold mb-3 pb-2 flex text-sm">{language === 'en' ? 'Letters preview' : 'Aperçu des lettres'}</h4>
+                           <div className="flex flex-nowrap overflow-x-auto hide-scrollbar gap-2 pb-2">
+                               {selectedLesson.lesson.items.slice(0, 3).map(i => (
+                                  <button onClick={() => playThaiTTS(i.letter)} key={i.letter} className="shrink-0 bg-white border-2 border-slate-100 rounded-xl px-3 py-1.5 flex items-center justify-center gap-2 font-thai text-xl font-bold shadow-sm hover:bg-slate-50 hover:border-slate-300 transition-colors cursor-pointer active:scale-95">
+                                     {formatCombiningChar(i.letter)} <Volume2 size={16} className="text-slate-300"/>
+                                  </button>
+                               ))}
+                               {letterCount > 3 && (
+                                 <div className="shrink-0 border-2 border-dashed border-slate-200 text-slate-400 rounded-xl px-3 py-1.5 flex items-center justify-center font-bold text-sm">
+                                    +{letterCount - 3} {language === 'en' ? 'others' : 'autres'}
+                                 </div>
+                               )}
+                           </div>
+                        </div>
+                      </div>
+                    );
+                  })()}
+                </div>
+                
+                <div className="shrink-0 p-6 pt-2 bg-white/90 backdrop-blur border-t border-slate-50 flex flex-col gap-3">
                     <Link
                       href={`/alphabet/lesson/${selectedLesson.lesson.id}?level=${modalLevel + 1}`}
                       className={`w-full py-4 rounded-xl border-b-4 font-bold text-lg text-white shadow-lg flex items-center justify-center hover:opacity-90 active:translate-y-1 transition-all ${selectedLesson.unitColor} ${selectedLesson.unitBorder}`}
@@ -553,7 +746,6 @@ export default function AlphabetMenuPage() {
                       <Play size={20} className="mr-2 fill-current" />
                       {language === 'en' ? `Start level ${modalLevel + 1}` : `Démarrer le niveau ${modalLevel + 1}`}
                     </Link>
-                  </div>
                 </div>
               </motion.div>
             </div>

@@ -178,9 +178,9 @@ export function SentenceWithHints({text, dictionary, phrases, isSentence, exerci
     <span className="flex flex-wrap justify-center md:justify-start items-center gap-x-2 gap-y-6 leading-relaxed text-xl md:text-2xl font-medium pt-2 pb-6 relative">
       {exactMatch ? (
         shouldShowPhonetic ? (
-          <span className="inline-flex flex-col text-center sm:text-left relative group">
+          <span className="inline-flex flex-col items-center justify-center text-center relative group">
             {innerText}
-            <span className="text-sm md:text-base font-medium tracking-wide mt-1">[<ColoredPhonetic phonetic={exactMatch.phonetic} charHintRegex={charHintRegex} hideColors={hideColors} />]</span>
+            <span className="text-sm md:text-base font-medium tracking-wide mt-1 text-center w-full">[<ColoredPhonetic phonetic={exactMatch.phonetic} charHintRegex={charHintRegex} hideColors={hideColors} />]</span>
           </span>
         ) : (
           innerText
@@ -188,7 +188,7 @@ export function SentenceWithHints({text, dictionary, phrases, isSentence, exerci
       ) : (
         innerText
       )}
-      {rightElement && <span className="ml-2 inline-flex items-center self-center shrink-0">{rightElement}</span>}
+      {rightElement && <span className="absolute left-full ml-3 top-1/2 -translate-y-1/2 inline-flex items-center shrink-0">{rightElement}</span>}
       {currentThaiWordForAudio && !wordHighlighted && (
         <div className="absolute left-1/2 -translate-x-1/2 top-full -mt-2 flex flex-col items-center z-10">
            <div className="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[6px] border-b-sky-200 -mb-[1px] z-10" />

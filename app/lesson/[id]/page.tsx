@@ -38,6 +38,7 @@ function LessonPageContent() {
     showRomanization,
     setShowRomanization,
     setLastActiveUnitIndex,
+    setLastPlayedLesson,
   } = useProgressStore();
 
   const lessonId = params.id as string;
@@ -67,6 +68,9 @@ function LessonPageContent() {
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [isFinished, setIsFinished] = useState(false);
   const [showInfoModal, setShowInfoModal] = useState(false);
+  const [mistakes, setMistakes] = useState(0);
+
+  const earnedStars = mistakes < 2 ? 3 : mistakes < 4 ? 2 : 1;
 
   const [exercisesGeneratedFor, setExercisesGeneratedFor] = useState<{
     id: string;
@@ -108,6 +112,7 @@ function LessonPageContent() {
       setIsChecking(false);
       setIsCorrect(null);
       setSelectedAnswer(null);
+      setMistakes(0);
       setExercisesGeneratedFor({ id: lesson.id, level: currentLevel });
     }
   }, [
@@ -137,7 +142,7 @@ function LessonPageContent() {
         setSelectedAnswer(null);
       } else {
         setIsFinished(true);
-        completeLesson(lesson.id, 10 + exercises.length, currentLevel);
+        completeLesson(lesson.id, 10 + exercises.length, currentLevel, earnedStars);
         confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
       }
       return;
@@ -154,7 +159,7 @@ function LessonPageContent() {
         } else {
           // Finished
           setIsFinished(true);
-          completeLesson(lesson.id, 10 + exercises.length, currentLevel);
+          completeLesson(lesson.id, 10 + exercises.length, currentLevel, earnedStars);
           confetti({
             particleCount: 150,
             spread: 70,
@@ -229,6 +234,10 @@ function LessonPageContent() {
     }
 
     setIsCorrect(correct);
+    if (!correct) {
+      setLastPlayedLesson(lessonId, 'learn');
+      setMistakes(m => m + 1);
+    }
     setIsChecking(true);
     playThaiTTS(currentExercise.answer);
   };
@@ -249,8 +258,20 @@ function LessonPageContent() {
 
     return (
       <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-[#FAFAFA] font-sans">
-        <div className="text-orange-500 mb-6">
-          <Check size={120} className="mx-auto" />
+        <div className="text-orange-500 mb-2">
+          <Check size={80} className="mx-auto" />
+        </div>
+        <div className="flex gap-2 mb-6">
+           {Array.from({ length: 3 }).map((_, i) => (
+             <motion.div 
+               key={i} 
+               initial={{ scale: 0, rotate: -45 }} 
+               animate={{ scale: 1, rotate: 0 }} 
+               transition={{ delay: 0.2 + i * 0.1, type: "spring", stiffness: 200 }}
+             >
+                <Star size={48} className={i < earnedStars ? "fill-amber-400 text-amber-500" : "fill-slate-200 text-slate-300 drop-shadow-sm"} />
+             </motion.div>
+           ))}
         </div>
         <h1 className="text-3xl font-extrabold text-slate-800 mb-2 text-center">
           {language === "en"
@@ -363,22 +384,34 @@ function LessonPageContent() {
     <div className="h-[100dvh] flex flex-col bg-[#FAFAFA] font-sans text-slate-800 overflow-hidden relative">
       {/* Header / Progress bar */}
       <header className="h-16 flex items-center shrink-0 justify-between border-b border-slate-200 bg-white">
-        <div className="flex items-center gap-6 w-full max-w-2xl mx-auto h-full px-4 flex-1">
+        <div className="flex items-center gap-3 sm:gap-6 w-full max-w-3xl mx-auto h-full px-4 flex-1">
           <button
             onClick={() => router.push(`/learn#lesson-${lesson.id}`)}
             className="text-slate-400 hover:text-slate-600 transition-colors"
           >
             <X size={24} strokeWidth={2.5} />
           </button>
-          <div className="flex-1 h-3 bg-slate-100 rounded-full overflow-hidden">
+          
+          <div className="flex font-bold text-slate-400 text-sm sm:text-base items-center shrink-0">
+            {language === "en" ? "Lvl." : "Niv."} {currentLevel + 1}
+          </div>
+
+          <div className="flex-1 h-3 bg-slate-100 rounded-full overflow-hidden min-w-[2rem]">
             <div
               className="bg-emerald-500 h-full transition-all duration-500 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.3)]"
               style={{ width: `${progress}%` }}
             />
           </div>
-          <div className="font-bold text-slate-400 flex items-center gap-3">
+          
+          <div className="font-bold text-slate-400 flex items-center gap-2 sm:gap-3 text-sm sm:text-base shrink-0">
+            <div className="hidden sm:flex items-center gap-0.5 mr-1">
+               {Array.from({ length: 3 }).map((_, i) => (
+                  <Star key={i} size={16} className={i < earnedStars ? "fill-amber-400 text-amber-400" : "fill-slate-200 text-slate-200"} />
+               ))}
+            </div>
             {currentLevel + 1 < 9 ? (
-              <span>
+              <span className="flex items-center gap-1.5">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-slate-300"><path d="m9 18 6-6-6-6"/></svg>
                 {language === "en" ? "Lvl." : "Niv."} {currentLevel + 2}
               </span>
             ) : (
@@ -386,6 +419,10 @@ function LessonPageContent() {
                 <Crown size={18} className="fill-current stroke-[2.5]" />
               </span>
             )}
+            
+            <span className="bg-slate-100 text-slate-500 px-2 sm:px-3 py-0.5 sm:py-1 rounded-md font-semibold shrink-0 ml-1">
+               {currentIndex + 1} / {exercises.length}
+            </span>
 
             {!currentExercise?.forceHideRomanization && (
               <button
@@ -510,40 +547,50 @@ function LessonPageContent() {
           >
             {/* Instruction Screen */}
             {showInstruction && (
-              <div className="flex flex-col items-center justify-center flex-1 w-full p-6 text-center space-y-8 animate-in fade-in duration-500 overflow-y-auto">
-                <div className="flex-1 flex flex-col justify-center items-center w-full">
-                  <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-800 leading-tight mb-8">
+              <div className="absolute inset-0 z-[40] flex flex-col items-center justify-start flex-1 w-full bg-gradient-to-b from-amber-50 to-white text-center animate-in fade-in duration-500 overflow-y-auto">
+                <div className="w-full bg-amber-100/80 py-2 md:py-3 text-amber-800 font-semibold flex items-center justify-center gap-2 mb-4 md:mb-6 border-b border-amber-200/50 flex-shrink-0">
+                   <span className="text-xl">💡</span> {language === "en" ? "Here is how this exercise works" : "Voici comment fonctionne cet exercice"}
+                </div>
+                
+                <div className="flex-1 flex flex-col items-center w-full px-4 md:px-6 max-w-2xl mx-auto gap-4 pb-4">
+                  <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-800 leading-tight">
                     {instructionText}
                   </h2>
 
                   {/* Example box */}
                   {currentExercise.type !== "pair-matching" &&
                     currentExercise.type !== "intro" && (
-                      <div className="bg-slate-50 p-6 rounded-3xl w-full max-w-sm sm:max-w-md md:max-w-lg border-2 border-slate-100 shadow-sm opacity-90 mx-auto">
-                        <p className="text-xs font-bold text-slate-400 mb-6 uppercase tracking-widest">
-                          {language === "en" ? "Example" : "Exemple"}
-                        </p>
+                      <div className="bg-white p-5 md:p-8 rounded-3xl w-full max-w-sm sm:max-w-md md:max-w-lg border-2 border-dashed border-amber-300 shadow-sm mx-auto relative mt-2 shrink-0">
+                        <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-amber-100 text-amber-800 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest flex items-center gap-2 shadow-sm border border-amber-200/50">
+                           <span className="w-2 h-2 rounded-full bg-amber-500 animate-[pulse_2s_ease-in-out_infinite]"></span>
+                           {language === "en" ? "Example" : "Exemple"}
+                        </div>
                         <InstructionExample
                           typeKey={instructionKey}
                           language={language}
                         />
                       </div>
                     )}
-                </div>
+                    
+                   <p className="text-slate-500 font-medium text-center text-sm md:text-base max-w-sm leading-relaxed mt-4 shrink-0">
+                     {language === "en" ? "In the next steps, you will have to find the correct answer yourself!" : "Dans les prochaines étapes, vous devrez trouver la bonne réponse vous-même !"}
+                   </p>
 
-                <div className="pt-6 w-full max-w-sm shrink-0">
-                  <button
-                    onClick={() => {
-                      setAcknowledgedInstructions((prev) => {
-                        const newer = new Set(prev);
-                        if (instructionKey) newer.add(instructionKey);
-                        return newer;
-                      });
-                    }}
-                    className="w-full py-4 rounded-2xl bg-indigo-500 border-b-4 border-indigo-700 text-white font-bold text-xl shadow-lg hover:bg-indigo-400 active:translate-y-1 active:border-b-0 transition-all uppercase tracking-widest"
-                  >
-                    {language === "en" ? "Continue" : "Continuer"}
-                  </button>
+                  <div className="pt-4 w-full max-w-sm shrink-0 mt-auto">
+                    <button
+                      onClick={() => {
+                        setAcknowledgedInstructions((prev) => {
+                          const newer = new Set(prev);
+                          if (instructionKey) newer.add(instructionKey);
+                          return newer;
+                        });
+                      }}
+                      className="w-full py-4 rounded-2xl bg-zinc-900 border-b-4 border-zinc-950 text-white font-bold text-lg shadow-lg hover:bg-zinc-800 active:translate-y-1 active:border-b-0 transition-all flex items-center justify-center gap-2"
+                    >
+                      {language === "en" ? "Got it" : "J'ai compris"}
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                    </button>
+                  </div>
                 </div>
               </div>
             )}
@@ -574,7 +621,11 @@ function LessonPageContent() {
                         currentExercise.type === "writing"
                           ? "w-24 h-24 sm:w-32 sm:h-32 md:w-32 md:h-32 lg:w-40 lg:h-40 rounded-2xl text-5xl md:text-4xl"
                           : "w-40 h-40 sm:w-48 sm:h-48 md:w-48 md:h-48 lg:w-56 lg:h-56 rounded-3xl text-7xl md:text-5xl"
-                      } mx-auto bg-emerald-100 items-center justify-center shadow-sm border border-emerald-200 relative flex-shrink-0 overflow-hidden`}
+                      } mx-auto items-center justify-center relative flex-shrink-0 ${
+                        (currentExercise.type === "intro" && (currentExercise.introItem as any)?.imageUrl) || currentExercise.imageUrl
+                          ? "bg-transparent overflow-visible"
+                          : "bg-emerald-100 shadow-sm border border-emerald-200 overflow-hidden"
+                      }`}
                     >
                       {(currentExercise.type === "intro" &&
                         (currentExercise.introItem as any)?.imageUrl) ||
@@ -587,12 +638,14 @@ function LessonPageContent() {
                           }
                           alt="word"
                           fill
-                          className="object-cover"
+                          className="object-contain"
                         />
                       ) : (
                         <span className="animate-bounce">🐘</span>
                       )}
-                      <div className="absolute -right-2 -top-2 w-6 h-6 bg-emerald-500 border-2 border-white rounded-full z-10"></div>
+                      {!((currentExercise.type === "intro" && (currentExercise.introItem as any)?.imageUrl) || currentExercise.imageUrl) && (
+                        <div className="absolute -right-2 -top-2 w-6 h-6 bg-emerald-500 border-2 border-white rounded-full z-10"></div>
+                      )}
                     </div>
 
                     {/* Question Content */}
@@ -741,27 +794,25 @@ function LessonPageContent() {
                                       currentThaiWordForAudio
                                     }
                                     rightElement={
-                                      currentExercise.type === "writing" &&
-                                      currentExercise.blindMode &&
-                                      currentExercise.correctComponents &&
-                                      !isChecking && (
+                                      (currentExercise.type === "word-match" || 
+                                       (currentExercise.type === "writing" &&
+                                        currentExercise.blindMode &&
+                                        currentExercise.correctComponents &&
+                                        !isChecking)) ? (
                                         <button
                                           onClick={() =>
                                             playThaiTTS(currentExercise.answer)
                                           }
-                                          className="text-emerald-500 hover:text-emerald-600 bg-emerald-50 p-2 rounded-full transition-colors flex-shrink-0"
+                                          className="text-emerald-500 hover:text-emerald-600 bg-emerald-50 p-2 rounded-full transition-colors flex-shrink-0 ml-2"
                                           title={
                                             language === "en"
-                                              ? "Listen to full phrase"
-                                              : "Écouter la phrase entière"
+                                              ? "Listen to pronunciation"
+                                              : "Écouter la prononciation"
                                           }
                                         >
-                                          <Volume2
-                                            size={24}
-                                            strokeWidth={2.5}
-                                          />
+                                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
                                         </button>
-                                      )
+                                      ) : undefined
                                     }
                                   />
                                 </div>

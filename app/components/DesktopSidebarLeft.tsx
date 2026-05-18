@@ -5,10 +5,12 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { BookOpen, MessageCircle, Brain, Globe, Star } from 'lucide-react';
 import { useProgressStore } from '../lib/store';
+import { useGlobalSuggestedLesson } from '../lib/useGlobalSuggestedLesson';
 
 export default function DesktopSidebarLeft() {
   const pathname = usePathname();
   const { language, setLanguage, xp, completedLessons, isExerciseRunning } = useProgressStore();
+  const globalSuggested = useGlobalSuggestedLesson();
 
   // Hidden on routes where we don't want the app shell
   const isLearnActive = pathname === '/learn';
@@ -30,6 +32,10 @@ export default function DesktopSidebarLeft() {
   const userLevel = Math.floor(completedLessons.length / 5) + 1;
   const levelTitle = userLevel < 5 ? (language === 'en' ? 'Beginner' : 'Débutant') : userLevel < 10 ? 'Intermediate' : 'Advanced';
 
+  const getHrefWithHash = (basePath: string, type: 'learn' | 'alphabet') => {
+    return globalSuggested?.type === type ? `${basePath}#${globalSuggested.id}` : basePath;
+  };
+
   return (
     <>
       {/* Spacer for desktop layout so content doesn't get hidden behind absolute sidebar depending on setup we want */}
@@ -48,9 +54,9 @@ export default function DesktopSidebarLeft() {
         </div>
 
         <div className="flex flex-col gap-2 flex-1 w-full">
-          <NavItem href="/learn" icon={<BookOpen size={24} />} label={language === 'en' ? 'Home' : 'Accueil'} active={isLearnActive} />
-          <NavItem href="/alphabet" icon={<Globe size={24} />} label="Alphabet" active={isAlphabetActive} />
-          <NavItem href="/conversations" icon={<MessageCircle size={24} />} label={language === 'en' ? 'Discussions' : 'Discussions'} active={isConversationsActive} />
+          <NavItem href={getHrefWithHash('/learn', 'learn')} icon={<BookOpen size={24} />} label={language === 'en' ? 'Path' : 'Parcours'} active={isLearnActive} hasSuggestion={globalSuggested?.type === 'learn' && !isLearnActive} />
+          <NavItem href={getHrefWithHash('/alphabet', 'alphabet')} icon={<Globe size={24} />} label="Alphabet" active={isAlphabetActive} hasSuggestion={globalSuggested?.type === 'alphabet' && !isAlphabetActive} />
+          <NavItem href="/conversations" icon={<MessageCircle size={24} />} label={language === 'en' ? 'Dialogs' : 'Dialogues'} active={isConversationsActive} />
           <NavItem href="/practice" icon={<Brain size={24} />} label={language === 'en' ? 'Practice' : 'Pratique'} active={isPracticeActive} />
         </div>
 
@@ -100,15 +106,25 @@ export default function DesktopSidebarLeft() {
   );
 }
 
-function NavItem({ href, icon, label, active }: { href: string, icon: React.ReactNode, label: string, active: boolean }) {
+function NavItem({ href, icon, label, active, hasSuggestion }: { href: string, icon: React.ReactNode, label: string, active: boolean, hasSuggestion?: boolean }) {
   return (
     <Link 
       href={href} 
       className={`flex items-center rounded-xl transition-all h-12 overflow-hidden w-12 mx-auto justify-center group-hover:w-full group-hover:justify-start group-hover:px-4 group-hover:gap-4 xl:gap-4 xl:w-full xl:justify-start xl:px-4 ${active ? 'bg-emerald-100 text-emerald-800 font-bold' : 'text-slate-600 font-medium hover:bg-emerald-50 hover:text-emerald-700'}`}
     >
-      <div className={`shrink-0 flex items-center justify-center w-6 h-6 transition-transform duration-300 ${active ? 'scale-110 group-hover:scale-100 xl:scale-100' : ''}`}>{icon}</div>
-      <span className="whitespace-nowrap transition-all duration-300 overflow-hidden opacity-0 w-0 group-hover:opacity-100 group-hover:w-auto xl:opacity-100 xl:w-auto">
+      <div className={`shrink-0 flex items-center justify-center w-6 h-6 transition-transform duration-300 relative ${active ? 'scale-110 group-hover:scale-100 xl:scale-100' : ''}`}>
+        {icon}
+        {hasSuggestion && (
+          <span className="absolute -top-1 -right-1 w-3 h-3 bg-amber-400 border-2 border-white rounded-full"></span>
+        )}
+      </div>
+      <span className="whitespace-nowrap flex-1 transition-all duration-300 overflow-hidden opacity-0 w-0 group-hover:opacity-100 group-hover:w-auto xl:opacity-100 xl:w-auto flex items-center justify-between">
         {label}
+        {hasSuggestion && (
+           <span className="bg-amber-400 text-amber-900 text-[10px] font-black uppercase px-2 py-0.5 rounded-full ml-2">
+              Suggéré
+           </span>
+        )}
       </span>
     </Link>
   );

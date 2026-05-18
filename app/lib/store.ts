@@ -54,7 +54,7 @@ interface ProgressState {
   setHasHydrated: (state: boolean) => void;
   setLanguage: (lang: AppLanguage) => void;
   autoDetectLanguage: () => void;
-  completeLesson: (lessonId: string, earnedXp: number, playedLevel?: number) => void;
+  completeLesson: (lessonId: string, earnedXp: number, playedLevel?: number, earnedStars?: number) => void;
   addXp: (amount: number) => void;
   unlockLessonManual: (lessonId: string) => void;
   resetProgress: () => void;
@@ -66,6 +66,10 @@ interface ProgressState {
   setWritingConfig: (config: Partial<WritingConfig>) => void;
   lastActiveUnitIndex: number;
   setLastActiveUnitIndex: (index: number) => void;
+  lastPlayedLessonId: string | null;
+  lastPlayedLessonType: 'learn' | 'alphabet' | null;
+  setLastPlayedLesson: (id: string, type: 'learn' | 'alphabet') => void;
+  lessonStars: Record<string, number[]>; // Maps lessonId to array of stars for each level
 }
 
 export const useProgressStore = create<ProgressState>()(
@@ -78,6 +82,7 @@ export const useProgressStore = create<ProgressState>()(
       completedLessons: [],
       unlockedLessons: [],
       lessonLevels: {},
+      lessonStars: {},
       xp: 0,
       seenAlphabets: [],
       isExerciseRunning: false,
@@ -94,6 +99,9 @@ export const useProgressStore = create<ProgressState>()(
       },
       lastActiveUnitIndex: 0,
       setLastActiveUnitIndex: (index) => set({ lastActiveUnitIndex: index }),
+      lastPlayedLessonId: null,
+      lastPlayedLessonType: null,
+      setLastPlayedLesson: (id, type) => set({ lastPlayedLessonId: id, lastPlayedLessonType: type }),
       setWritingConfig: (config) => set((state) => ({ writingConfig: { ...state.writingConfig, ...config } })),
       setLanguage: (lang) => set({ language: lang, languageSetByUser: true }),
       autoDetectLanguage: () => {
@@ -107,19 +115,27 @@ export const useProgressStore = create<ProgressState>()(
           }
         }
       },
-      completeLesson: (lessonId, earnedXp, playedLevel) => set((state) => {
+      completeLesson: (lessonId, earnedXp, playedLevel, earnedStars = 3) => set((state) => {
         const currentLevel = state.lessonLevels[lessonId] || 0;
-        // If playedLevel is provided, only unlock the next level if we played the currently available max level
         let newLevel = currentLevel;
         if (playedLevel !== undefined) {
           if (playedLevel === currentLevel) {
-             newLevel = Math.min(currentLevel + 1, 10); // Max level 10
+             newLevel = Math.min(currentLevel + 1, 10);
           }
         } else {
-           // Fallback if not provided
            newLevel = Math.min(currentLevel + 1, 10);
         }
         
+        const currentStars = state.lessonStars[lessonId] ? [...state.lessonStars[lessonId]] : Array(10).fill(0);
+        if (playedLevel !== undefined && playedLevel >= 0 && playedLevel < 10) {
+           currentStars[playedLevel] = Math.max(currentStars[playedLevel], earnedStars);
+        }
+        
+        let type: 'learn' | 'alphabet' = 'learn';
+        if (lessonId.startsWith('alphabet_')) {
+          type = 'alphabet';
+        }
+
         return {
           completedLessons: state.completedLessons.includes(lessonId) 
             ? state.completedLessons 
@@ -128,7 +144,13 @@ export const useProgressStore = create<ProgressState>()(
             ...state.lessonLevels,
             [lessonId]: newLevel
           },
-          xp: state.xp + earnedXp
+          lessonStars: {
+            ...state.lessonStars,
+            [lessonId]: currentStars
+          },
+          xp: state.xp + earnedXp,
+          lastPlayedLessonId: lessonId,
+          lastPlayedLessonType: type
         };
       }),
       addXp: (amount) => set((state) => ({ xp: state.xp + amount })),
@@ -137,11 +159,15 @@ export const useProgressStore = create<ProgressState>()(
           ? (state.unlockedLessons.includes(lessonId) ? state.unlockedLessons : [...state.unlockedLessons, lessonId])
           : [lessonId]
       })),
-      resetProgress: () => set({ completedLessons: [], unlockedLessons: [], lessonLevels: {}, xp: 0 }),
+      resetProgress: () => set({ completedLessons: [], unlockedLessons: [], lessonLevels: {}, lessonStars: {}, xp: 0 }),
       resetLessonLevel: (lessonId) => set((state) => ({
         lessonLevels: {
           ...state.lessonLevels,
           [lessonId]: 0
+        },
+        lessonStars: {
+          ...state.lessonStars,
+          [lessonId]: Array(10).fill(0)
         }
       })),
       markAlphabetSeen: (letter) => set((state) => ({
