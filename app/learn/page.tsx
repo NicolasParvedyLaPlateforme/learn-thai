@@ -164,6 +164,15 @@ export default function Home() {
   };
 
   useEffect(() => {
+    if (mounted) {
+      const el = document.getElementById(`unit-tab-${activeUnitIndex}`);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+    }
+  }, [mounted, activeUnitIndex]);
+
+  useEffect(() => {
     const updateCols = () => {
       if (window.innerWidth >= 1024) setCols(5);
       else if (window.innerWidth >= 768) setCols(4);
@@ -182,7 +191,16 @@ export default function Home() {
       if (hash) {
         setTimeout(() => {
           try {
-            const el = document.querySelector(hash);
+             // Differentiate mobile and desktop elements
+            const baseId = hash.substring(1).replace('lesson-', ''); // just the ID
+            const isDesktop = window.innerWidth >= 768; // md breakpoint
+            const targetId = isDesktop ? `#desktop-lesson-${baseId}` : `#mobile-lesson-${baseId}`;
+            
+            let el = document.querySelector(targetId);
+            if (!el) {
+               el = document.querySelector(hash); // Fallback
+            }
+
             if (el) {
               const y = el.getBoundingClientRect().top + window.scrollY - 100;
               window.scrollTo({ top: y, behavior: 'smooth' });
@@ -231,19 +249,25 @@ export default function Home() {
       <main className="max-w-2xl mx-auto px-4 mt-2 flex flex-col gap-8 md:hidden">
         {/* Mobile Unit Selector */}
         <div className="flex overflow-x-auto hide-scrollbar gap-2 pb-4 -mx-4 px-4 sticky top-0 z-40 bg-[#FAFAFA]/95 backdrop-blur-sm pt-2 transition-all duration-300">
-          {UNITS.map((u, i) => (
+          {UNITS.map((u, i) => {
+            const hasSuggestion = globalSuggested?.type === 'learn' && globalSuggested.id && data.lessons.findIndex(l => l.id === globalSuggested.id) >= u.startIndex && data.lessons.findIndex(l => l.id === globalSuggested.id) < u.endIndex;
+            return (
             <button
+              id={`unit-tab-${i}`}
               key={`nav-m-${u.id}`}
               onClick={() => handleUnitSelect(i)}
-              className={`flex-shrink-0 px-6 py-2.5 rounded-full font-bold text-[15px] transition-all shadow-sm ${
+              className={`flex-shrink-0 px-6 py-2.5 rounded-full font-bold text-[15px] transition-all shadow-sm relative ${
                 i === activeUnitIndex 
                   ? `${u.colorClass} text-white` 
                   : 'bg-slate-100 text-slate-500 hover:bg-slate-200'
               }`}
             >
+              {hasSuggestion && i !== activeUnitIndex && (
+                 <span className="absolute top-0 right-1 w-3 h-3 bg-amber-400 border-2 border-white rounded-full"></span>
+              )}
               {language === 'en' ? `Unit ${i + 1}` : `Unité ${i + 1}`}
             </button>
-          ))}
+          )})}
         </div>
 
         {(() => {
@@ -301,7 +325,7 @@ export default function Home() {
                    const lineToNextColor = level > 0 ? unit.colorClass : "bg-slate-200";
 
                    return (
-                     <div id={`lesson-${lesson.id}`} key={`mobile-node-${lesson.id}`} className="relative flex flex-col items-center w-full scroll-mt-24 z-10 mb-8 sm:mb-12 group">
+                     <div id={`mobile-lesson-${lesson.id}`} key={`mobile-node-${lesson.id}`} className="relative flex flex-col items-center w-full scroll-mt-24 z-10 mb-8 sm:mb-12 group">
                         {/* Circle Node */}
                         <div 
                           className={`relative shrink-0 mb-4 z-10 cursor-pointer hover:scale-105 active:scale-95 transition-all`}
@@ -329,18 +353,18 @@ export default function Home() {
                         
                         {/* Card */}
                         <div 
-                          className={`w-full max-w-[280px] sm:max-w-[320px] rounded-[1.5rem] p-5 flex flex-col items-center text-center transition-all z-10 border-2 border-b-[6px] cursor-pointer active:translate-y-[4px] active:border-b-2 shadow-sm relative ${isMaxLevel ? 'bg-amber-50 border-amber-300 shadow-[0_0_15px_rgba(252,211,77,0.3)]' : suggestedLessonId === lesson.id ? 'bg-white border-amber-300 shadow-[0_0_15px_rgba(252,211,77,0.5)]' : 'bg-white border-slate-200 hover:border-slate-300'}`}
+                          className={`w-full max-w-[280px] sm:max-w-[320px] rounded-[1.5rem] p-5 flex flex-col items-center text-center transition-all z-10 border-2 border-b-[6px] cursor-pointer active:translate-y-[4px] active:border-b-2 shadow-sm relative ${isMaxLevel ? 'bg-emerald-50 border-emerald-200 shadow-[0_0_15px_rgba(16,185,129,0.2)]' : suggestedLessonId === lesson.id ? 'bg-white border-amber-300 shadow-[0_0_15px_rgba(252,211,77,0.5)]' : 'bg-white border-slate-200 hover:border-slate-300'}`}
                           onClick={() => {
                             setSelectedLesson({lesson, isCompleted: isMaxLevel, unitColor: unit.colorClass, unitBorder: unit.borderClass});
                             setModalLevel(Math.min(level, 9));
                           }}
                         >
                            {isMaxLevel ? (
-                             <div className="absolute -top-3.5 bg-gradient-to-r from-amber-400 to-amber-500 text-white text-[10px] font-black uppercase tracking-wider py-1 px-3 rounded-full flex items-center gap-1 shadow-sm">
-                               <CheckCircle size={14} className="fill-current text-white stroke-amber-500" /> {language === 'en' ? 'MASTERED' : 'MAÎTRISÉ'}
+                             <div className="absolute -top-3.5 left-6 bg-gradient-to-r from-emerald-400 to-emerald-500 text-white text-[10px] font-black uppercase tracking-wider py-1 px-3 rounded-full flex items-center gap-1 shadow-sm">
+                               <CheckCircle size={14} className="fill-current text-white stroke-emerald-500" /> {language === 'en' ? 'MASTERED' : 'MAÎTRISÉ'}
                              </div>
                            ) : suggestedLessonId === lesson.id && (
-                             <div className="absolute -top-3.5 bg-amber-400 text-amber-900 text-[10px] font-black uppercase tracking-wider py-1 px-3 rounded-full flex items-center gap-1 shadow-sm">
+                             <div className="absolute -top-3.5 left-6 bg-amber-400 text-amber-900 text-[10px] font-black uppercase tracking-wider py-1 px-3 rounded-full flex items-center gap-1 shadow-sm">
                                <Star size={12} fill="currentColor" /> {language === 'en' ? 'SUGGESTED' : 'SUGGÉRÉ'}
                              </div>
                            )}
@@ -460,7 +484,7 @@ export default function Home() {
                        const isMaxLevel = level >= 10;
 
                        return (
-                         <div id={`lesson-${lesson.id}`} key={`desktop-node-${lesson.id}`} className="relative flex items-center w-full z-10 gap-6 md:gap-8 min-h-[8.5rem] py-3 group">
+                         <div id={`desktop-lesson-${lesson.id}`} key={`desktop-node-${lesson.id}`} className="relative flex items-center w-full z-10 gap-6 md:gap-8 min-h-[8.5rem] py-3 group">
                             {/* Circle Node */}
                             <div 
                               className={`relative shrink-0 py-6 cursor-pointer hover:brightness-95 hover:scale-105 active:scale-95 transition-all`}
@@ -487,18 +511,18 @@ export default function Home() {
                             
                             {/* Horizontal Card */}
                             <div 
-                              className={`flex-1 rounded-[1.5rem] border-2 p-5 md:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all group border-b-[6px] cursor-pointer active:translate-y-[4px] active:border-b-2 shadow-sm relative ${isMaxLevel ? 'bg-amber-50 border-amber-300 shadow-[0_0_15px_rgba(252,211,77,0.3)]' : suggestedLessonId === lesson.id ? 'bg-white border-amber-300 shadow-[0_0_15px_rgba(252,211,77,0.5)]' : 'bg-white border-slate-200 hover:border-slate-300'}`}
+                              className={`flex-1 rounded-[1.5rem] border-2 p-5 md:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all group border-b-[6px] cursor-pointer active:translate-y-[4px] active:border-b-2 shadow-sm relative ${isMaxLevel ? 'bg-emerald-50 border-emerald-200 shadow-[0_0_15px_rgba(16,185,129,0.2)]' : suggestedLessonId === lesson.id ? 'bg-white border-amber-300 shadow-[0_0_15px_rgba(252,211,77,0.5)]' : 'bg-white border-slate-200 hover:border-slate-300'}`}
                               onClick={() => {
                                 setSelectedLesson({lesson, isCompleted: isMaxLevel, unitColor: unit.colorClass, unitBorder: unit.borderClass});
                                 setModalLevel(Math.min(level, 9));
                               }}
                             >
                                {isMaxLevel ? (
-                                 <div className="absolute -top-3.5 left-10 bg-gradient-to-r from-amber-400 to-amber-500 text-white text-[10px] font-black uppercase tracking-wider py-1 px-3 rounded-full flex items-center gap-1 shadow-sm">
-                                   <CheckCircle size={14} className="fill-current text-white stroke-amber-500" /> {language === 'en' ? 'MASTERED' : 'MAÎTRISÉ'}
+                                 <div className="absolute -top-3.5 left-6 bg-gradient-to-r from-emerald-400 to-emerald-500 text-white text-[10px] font-black uppercase tracking-wider py-1 px-3 rounded-full flex items-center gap-1 shadow-sm">
+                                   <CheckCircle size={14} className="fill-current text-white stroke-emerald-500" /> {language === 'en' ? 'MASTERED' : 'MAÎTRISÉ'}
                                  </div>
                                ) : suggestedLessonId === lesson.id && (
-                                 <div className="absolute -top-3.5 left-10 bg-amber-400 text-amber-900 text-[10px] font-black uppercase tracking-wider py-1 px-3 rounded-full flex items-center gap-1 shadow-sm">
+                                 <div className="absolute -top-3.5 left-6 bg-amber-400 text-amber-900 text-[10px] font-black uppercase tracking-wider py-1 px-3 rounded-full flex items-center gap-1 shadow-sm">
                                    <Star size={12} fill="currentColor" /> {language === 'en' ? 'SUGGESTED' : 'SUGGÉRÉ'}
                                  </div>
                                )}
@@ -556,16 +580,15 @@ export default function Home() {
           </div>
           
           {/* Right Sidebar Wrap */}
-          <div className="w-20 xl:w-80 flex-shrink-0 relative hidden lg:block z-40">
+          <div className="w-80 flex-shrink-0 relative hidden xl:block z-40">
             {/* Sticky wrapper */}
             <div className="sticky top-24 w-full">
-              {/* Container that expands on hover CSS when below xl, but static on xl */}
               <div 
-                className="absolute top-0 right-0 max-h-[calc(100vh-8rem)] flex flex-col gap-4 transition-[width,background-color,padding,border-radius,box-shadow,opacity] duration-300 ease-in-out pb-4 group w-20 hover:w-80 hover:bg-white hover:shadow-2xl hover:rounded-2xl hover:p-4 hover:border hover:border-slate-100 xl:w-full xl:bg-transparent xl:shadow-none xl:rounded-none xl:p-0 xl:border-none xl:hover:bg-transparent xl:hover:shadow-none xl:hover:rounded-none xl:hover:p-0 xl:hover:border-none xl:relative"
+                className="w-full relative flex flex-col gap-4 pb-4 group"
               >
-              <div className="flex items-center gap-3 px-2 mb-2 text-slate-800 font-bold text-xl overflow-hidden shrink-0">
+              <div className="flex items-center gap-3 px-2 mb-2 text-slate-800 font-bold text-xl shrink-0">
                 <BookOpen size={24} className="shrink-0" />
-                <h2 className="transition-opacity duration-300 whitespace-nowrap opacity-0 group-hover:opacity-100 xl:opacity-100">
+                <h2 className="whitespace-nowrap">
                   {language === 'en' ? 'Units' : 'Unités'}
                 </h2>
               </div>
@@ -573,6 +596,7 @@ export default function Home() {
                 {UNITS.map((u, i) => {
                   const isCurrent = i === activeUnitIndex;
                   const status = isCurrent ? (language === 'en' ? 'In progress' : 'En cours') : '';
+                  const hasSuggestion = globalSuggested?.type === 'learn' && globalSuggested.id && data.lessons.findIndex(l => l.id === globalSuggested.id) >= u.startIndex && data.lessons.findIndex(l => l.id === globalSuggested.id) < u.endIndex;
 
                   return (
                     <button 
@@ -580,11 +604,14 @@ export default function Home() {
                       onClick={() => handleUnitSelect(i)}
                       className={`w-full text-left rounded-2xl transition-all relative overflow-hidden flex items-center h-[5.5rem] shrink-0 ${isCurrent ? `bg-emerald-50 text-emerald-800 border-2 border-emerald-200 shadow-sm` : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300 hover:bg-slate-50 border-2 border-b-4 active:border-b-2 active:translate-y-1'}`}
                     >
-                      <div className="shrink-0 flex items-center justify-center font-black text-2xl transition-all duration-300 w-full group-hover:w-16 xl:w-16">
+                      {hasSuggestion && !isCurrent && (
+                        <span className="absolute top-2 right-2 w-3 h-3 bg-amber-400 border-2 border-white rounded-full z-10"></span>
+                      )}
+                      <div className="shrink-0 flex items-center justify-center font-black text-2xl w-16">
                          {i + 1}
                       </div>
 
-                      <div className="relative z-10 flex flex-col justify-center transition-all duration-300 whitespace-nowrap overflow-hidden pr-4 opacity-0 w-0 group-hover:opacity-100 group-hover:w-auto xl:opacity-100 xl:w-auto">
+                      <div className="relative z-10 flex flex-col justify-center whitespace-nowrap overflow-hidden pr-4 w-auto">
                         <h3 className="font-extrabold text-[15px] mb-0.5 truncate w-[12rem]">{language === 'en' ? u.titleEn : u.title}</h3>
                         <span className={`text-xs font-bold ${isCurrent ? 'text-emerald-500' : 'text-slate-400'}`}>{status}</span>
                       </div>

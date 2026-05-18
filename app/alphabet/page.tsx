@@ -89,7 +89,16 @@ export default function AlphabetMenuPage() {
       if (hash) {
         setTimeout(() => {
           try {
-            const el = document.querySelector(hash);
+             // Differentiate mobile and desktop elements
+            const baseId = hash.substring(1).replace('lesson-', ''); // just the ID
+            const isDesktop = window.innerWidth >= 768; // md breakpoint
+            const targetId = isDesktop ? `#desktop-lesson-${baseId}` : `#mobile-lesson-${baseId}`;
+            
+            let el = document.querySelector(targetId);
+            if (!el) {
+               el = document.querySelector(hash); // Fallback
+            }
+
             if (el) {
               const y = el.getBoundingClientRect().top + window.scrollY - 100;
               window.scrollTo({ top: y, behavior: 'smooth' });
@@ -209,7 +218,7 @@ export default function AlphabetMenuPage() {
                    const lineToNextColor = level > 0 ? unit.colorClass : "bg-slate-200";
 
                    return (
-                     <div id={`lesson-${lesson.id}`} key={`mobile-node-${lesson.id}`} className="relative flex flex-col items-center w-full scroll-mt-24 z-10 mb-8 sm:mb-12 group">
+                     <div id={`mobile-lesson-${lesson.id}`} key={`mobile-node-${lesson.id}`} className="relative flex flex-col items-center w-full scroll-mt-24 z-10 mb-8 sm:mb-12 group">
                         {/* Circle Node */}
                         <div 
                           className={`relative shrink-0 mb-4 z-10 cursor-pointer hover:scale-105 active:scale-95 transition-all`}
@@ -230,25 +239,40 @@ export default function AlphabetMenuPage() {
                                 {isMaxLevel && <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/20"><CheckCircle size={40} className="stroke-[3] text-white" /></div>}
                               </>
                             ) : (
-                              isMaxLevel ? <Crown size={40} className="stroke-[3]" fill="currentColor" /> : level > 0 ? <CheckCircle size={40} className="stroke-current stroke-[2.5]" /> : lesson.items[0] ? formatCombiningChar(lesson.items[0].letter) : ''
+                              <>
+                                {lesson.items[0] ? formatCombiningChar(lesson.items[0].letter) : ''}
+                                {isMaxLevel ? (
+                                  <div className="absolute bottom-0 right-0 translate-x-1/4 translate-y-1/4 bg-white rounded-full p-0.5 shadow-sm border border-emerald-200 z-20">
+                                    <div className="bg-emerald-500 rounded-full flex items-center justify-center w-6 h-6">
+                                      <CheckCircle size={14} className="text-white fill-emerald-500" />
+                                    </div>
+                                  </div>
+                                ) : level > 0 ? (
+                                  <div className="absolute bottom-0 right-0 translate-x-1/4 translate-y-1/4 bg-white rounded-full p-0.5 shadow-sm border border-slate-200 z-20">
+                                    <div className={`${unit.colorClass} rounded-full flex items-center justify-center w-6 h-6`}>
+                                      <span className="text-white text-[10px] font-bold tracking-tight">{level}/4</span>
+                                    </div>
+                                  </div>
+                                ) : null}
+                              </>
                             )}
                           </div>
                         </div>
                         
                         {/* Card */}
                         <div 
-                          className={`w-full max-w-[280px] sm:max-w-[320px] rounded-[1.5rem] p-5 flex flex-col items-center text-center transition-all z-10 border-2 border-b-[6px] cursor-pointer active:translate-y-[4px] active:border-b-2 shadow-sm relative ${isMaxLevel ? 'bg-amber-50 border-amber-300 shadow-[0_0_15px_rgba(252,211,77,0.3)]' : suggestedLessonId === lesson.id ? 'bg-white border-amber-300 shadow-[0_0_15px_rgba(252,211,77,0.5)]' : 'bg-white border-slate-200 hover:border-slate-300'}`}
+                          className={`w-full max-w-[280px] sm:max-w-[320px] rounded-[1.5rem] p-5 flex flex-col items-center text-center transition-all z-10 border-2 border-b-[6px] cursor-pointer active:translate-y-[4px] active:border-b-2 shadow-sm relative ${isMaxLevel ? 'bg-emerald-50 border-emerald-200 shadow-[0_0_15px_rgba(16,185,129,0.2)]' : suggestedLessonId === lesson.id ? 'bg-white border-amber-300 shadow-[0_0_15px_rgba(252,211,77,0.5)]' : 'bg-white border-slate-200 hover:border-slate-300'}`}
                           onClick={() => {
                             setSelectedLesson({lesson, isCompleted: isMaxLevel, unitColor: unit.colorClass, unitBorder: unit.borderClass});
                             setModalLevel(Math.min(level, 3));
                           }}
                         >
                            {isMaxLevel ? (
-                             <div className="absolute -top-3.5 bg-gradient-to-r from-amber-400 to-amber-500 text-white text-[10px] font-black uppercase tracking-wider py-1 px-3 rounded-full flex items-center gap-1 shadow-sm">
-                               <CheckCircle size={14} className="fill-current text-white stroke-amber-500" /> {language === 'en' ? 'MASTERED' : 'MAÎTRISÉ'}
+                             <div className="absolute -top-3.5 left-6 bg-gradient-to-r from-emerald-400 to-emerald-500 text-white text-[10px] font-black uppercase tracking-wider py-1 px-3 rounded-full flex items-center gap-1 shadow-sm">
+                               <CheckCircle size={14} className="fill-current text-white stroke-emerald-500" /> {language === 'en' ? 'MASTERED' : 'MAÎTRISÉ'}
                              </div>
                            ) : suggestedLessonId === lesson.id && (
-                             <div className="absolute -top-3.5 bg-amber-400 text-amber-900 text-[10px] font-black uppercase tracking-wider py-1 px-3 rounded-full flex items-center gap-1 shadow-sm">
+                             <div className="absolute -top-3.5 left-6 bg-amber-400 text-amber-900 text-[10px] font-black uppercase tracking-wider py-1 px-3 rounded-full flex items-center gap-1 shadow-sm">
                                <Star size={12} fill="currentColor" /> {language === 'en' ? 'SUGGESTED' : 'SUGGÉRÉ'}
                              </div>
                            )}
@@ -368,7 +392,7 @@ export default function AlphabetMenuPage() {
                        const lineToNextColor = level > 0 ? unit.colorClass : "bg-slate-200";
 
                        return (
-                         <div id={`lesson-${lesson.id}`} key={`desktop-node-${lesson.id}`} className="relative flex items-center w-full z-10 gap-6 md:gap-8 min-h-[8.5rem] py-3">
+                         <div id={`desktop-lesson-${lesson.id}`} key={`desktop-node-${lesson.id}`} className="relative flex items-center w-full z-10 gap-6 md:gap-8 min-h-[8.5rem] py-3">
                             {/* Circle Node */}
                             <div 
                               className={`relative shrink-0 py-6 cursor-pointer hover:brightness-95 hover:scale-105 active:scale-95 transition-all`}
@@ -384,7 +408,22 @@ export default function AlphabetMenuPage() {
                                     {isMaxLevel && <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/20"><CheckCircle size={32} className="stroke-[3] text-white" /></div>}
                                   </>
                                 ) : (
-                                  isMaxLevel ? <Crown size={32} className="stroke-[3]" fill="currentColor" /> : level > 0 ? <CheckCircle size={32} className="stroke-current stroke-[2.5]" /> : (lesson.items[0] ? formatCombiningChar(lesson.items[0].letter) : '')
+                                  <>
+                                    {lesson.items[0] ? formatCombiningChar(lesson.items[0].letter) : ''}
+                                    {isMaxLevel ? (
+                                      <div className="absolute bottom-0 right-0 translate-x-1/4 translate-y-1/4 bg-white rounded-full p-0.5 shadow-sm border border-emerald-200 z-20">
+                                        <div className="bg-emerald-500 rounded-full flex items-center justify-center w-5 h-5">
+                                          <CheckCircle size={12} className="text-white fill-emerald-500" />
+                                        </div>
+                                      </div>
+                                    ) : level > 0 ? (
+                                      <div className="absolute bottom-0 right-0 translate-x-1/4 translate-y-1/4 bg-white rounded-full p-0.5 shadow-sm border border-slate-200 z-20">
+                                        <div className={`${unit.colorClass} rounded-full flex items-center justify-center w-5 h-5`}>
+                                          <span className="text-white text-[9px] font-bold tracking-tight">{level}/4</span>
+                                        </div>
+                                      </div>
+                                    ) : null}
+                                  </>
                                 )}
                               </div>
                               
@@ -395,18 +434,18 @@ export default function AlphabetMenuPage() {
                             
                             {/* Horizontal Card */}
                             <div 
-                              className={`flex-1 rounded-[1.5rem] border-2 p-5 md:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all group border-b-[6px] cursor-pointer active:translate-y-[4px] active:border-b-2 shadow-sm relative ${isMaxLevel ? 'bg-amber-50 border-amber-300 shadow-[0_0_15px_rgba(252,211,77,0.3)]' : suggestedLessonId === lesson.id ? 'bg-white border-amber-300 shadow-[0_0_15px_rgba(252,211,77,0.5)]' : 'bg-white border-slate-200 hover:border-slate-300'}`}
+                              className={`flex-1 rounded-[1.5rem] border-2 p-5 md:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all group border-b-[6px] cursor-pointer active:translate-y-[4px] active:border-b-2 shadow-sm relative ${isMaxLevel ? 'bg-emerald-50 border-emerald-200 shadow-[0_0_15px_rgba(16,185,129,0.2)]' : suggestedLessonId === lesson.id ? 'bg-white border-amber-300 shadow-[0_0_15px_rgba(252,211,77,0.5)]' : 'bg-white border-slate-200 hover:border-slate-300'}`}
                               onClick={() => {
                                 setSelectedLesson({lesson, isCompleted: isMaxLevel, unitColor: unit.colorClass, unitBorder: unit.borderClass});
                                 setModalLevel(Math.min(level, 3));
                               }}
                             >
                                {isMaxLevel ? (
-                                 <div className="absolute -top-3.5 left-10 bg-gradient-to-r from-amber-400 to-amber-500 text-white text-[10px] font-black uppercase tracking-wider py-1 px-3 rounded-full flex items-center gap-1 shadow-sm">
-                                   <CheckCircle size={14} className="fill-current text-white stroke-amber-500" /> {language === 'en' ? 'MASTERED' : 'MAÎTRISÉ'}
+                                 <div className="absolute -top-3.5 left-6 bg-gradient-to-r from-emerald-400 to-emerald-500 text-white text-[10px] font-black uppercase tracking-wider py-1 px-3 rounded-full flex items-center gap-1 shadow-sm">
+                                   <CheckCircle size={14} className="fill-current text-white stroke-emerald-500" /> {language === 'en' ? 'MASTERED' : 'MAÎTRISÉ'}
                                  </div>
                                ) : suggestedLessonId === lesson.id && (
-                                 <div className="absolute -top-3.5 left-10 bg-amber-400 text-amber-900 text-[10px] font-black uppercase tracking-wider py-1 px-3 rounded-full flex items-center gap-1 shadow-sm">
+                                 <div className="absolute -top-3.5 left-6 bg-amber-400 text-amber-900 text-[10px] font-black uppercase tracking-wider py-1 px-3 rounded-full flex items-center gap-1 shadow-sm">
                                    <Star size={12} fill="currentColor" /> {language === 'en' ? 'SUGGESTED' : 'SUGGÉRÉ'}
                                  </div>
                                )}
@@ -464,16 +503,15 @@ export default function AlphabetMenuPage() {
           </div>
           
           {/* Right Sidebar Wrap */}
-          <div className="w-20 xl:w-80 flex-shrink-0 relative hidden md:block z-40">
+          <div className="w-80 flex-shrink-0 relative hidden xl:block z-40">
             {/* Sticky wrapper */}
             <div className="sticky top-24 w-full">
-              {/* Container that expands on hover CSS when below xl, but static on xl */}
               <div 
-                className="absolute top-0 right-0 max-h-[calc(100vh-8rem)] flex flex-col gap-4 transition-[width,background-color,padding,border-radius,box-shadow,opacity] duration-300 ease-in-out pb-4 group w-20 hover:w-80 hover:bg-white hover:shadow-2xl hover:rounded-2xl hover:p-4 hover:border hover:border-slate-100 xl:w-full xl:bg-transparent xl:shadow-none xl:rounded-none xl:p-0 xl:border-none xl:hover:bg-transparent xl:hover:shadow-none xl:hover:rounded-none xl:hover:p-0 xl:hover:border-none xl:relative"
+                className="w-full relative flex flex-col gap-4 pb-4 group"
               >
-              <div className="flex items-center gap-3 px-2 mb-2 text-slate-800 font-bold text-xl overflow-hidden shrink-0">
+              <div className="flex items-center gap-3 px-2 mb-2 text-slate-800 font-bold text-xl shrink-0">
                 <BookOpen size={24} className="shrink-0" />
-                <h2 className="transition-opacity duration-300 whitespace-nowrap opacity-0 group-hover:opacity-100 xl:opacity-100">
+                <h2 className="whitespace-nowrap">
                   {language === 'en' ? 'Units' : 'Unités'}
                 </h2>
               </div>
@@ -488,11 +526,11 @@ export default function AlphabetMenuPage() {
                       onClick={() => handleUnitSelect(i)}
                       className={`w-full text-left rounded-2xl transition-all relative overflow-hidden flex items-center h-[5.5rem] shrink-0 ${isCurrent ? `bg-emerald-50 text-emerald-800 border-2 border-emerald-200 shadow-sm` : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300 hover:bg-slate-50 border-2 border-b-4 active:border-b-2 active:translate-y-1'}`}
                     >
-                      <div className="shrink-0 flex items-center justify-center font-black text-2xl transition-all duration-300 w-full group-hover:w-16 xl:w-16">
+                      <div className="shrink-0 flex items-center justify-center font-black text-2xl w-16">
                          {i + 1}
                       </div>
 
-                      <div className="relative z-10 flex flex-col justify-center transition-all duration-300 whitespace-nowrap overflow-hidden pr-4 opacity-0 w-0 group-hover:opacity-100 group-hover:w-auto xl:opacity-100 xl:w-auto">
+                      <div className="relative z-10 flex flex-col justify-center whitespace-nowrap overflow-hidden pr-4 w-auto">
                         <h3 className="font-extrabold text-[15px] mb-0.5 truncate w-[12rem]">{language === 'en' ? u.titleEn : u.title}</h3>
                         <span className={`text-xs font-bold ${isCurrent ? 'text-emerald-500' : 'text-slate-400'}`}>{status}</span>
                       </div>

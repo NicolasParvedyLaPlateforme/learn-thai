@@ -45,13 +45,6 @@ function LessonPageContent() {
   const requestedLevelStr = searchParams.get("level");
   const isDev = searchParams.has("dev");
 
-  useEffect(() => {
-     if (_hasHydrated && lessonId) {
-       const type = lessonId.startsWith('alphabet_') ? 'alphabet' : 'learn';
-       setLastPlayedLesson(lessonId, type);
-     }
-  }, [_hasHydrated, lessonId, setLastPlayedLesson]);
-
   // Resolve lesson and exercises directly to avoid useEffect setState
   const lesson = data.lessons.find((l) => l.id === lessonId) || null;
   const savedLevel = lesson ? lessonLevels[lesson.id] || 0 : 0;
@@ -237,6 +230,9 @@ function LessonPageContent() {
     }
 
     setIsCorrect(correct);
+    if (!correct) {
+      setLastPlayedLesson(lessonId, 'learn');
+    }
     setIsChecking(true);
     playThaiTTS(currentExercise.answer);
   };

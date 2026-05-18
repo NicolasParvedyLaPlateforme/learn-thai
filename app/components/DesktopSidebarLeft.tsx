@@ -54,9 +54,9 @@ export default function DesktopSidebarLeft() {
         </div>
 
         <div className="flex flex-col gap-2 flex-1 w-full">
-          <NavItem href={getHrefWithHash('/learn', 'learn')} icon={<BookOpen size={24} />} label={language === 'en' ? 'Home' : 'Accueil'} active={isLearnActive} hasSuggestion={globalSuggested?.type === 'learn'} />
-          <NavItem href={getHrefWithHash('/alphabet', 'alphabet')} icon={<Globe size={24} />} label="Alphabet" active={isAlphabetActive} hasSuggestion={globalSuggested?.type === 'alphabet'} />
-          <NavItem href="/conversations" icon={<MessageCircle size={24} />} label={language === 'en' ? 'Discussions' : 'Discussions'} active={isConversationsActive} />
+          <NavItem href={getHrefWithHash('/learn', 'learn')} icon={<BookOpen size={24} />} label={language === 'en' ? 'Path' : 'Parcours'} active={isLearnActive} hasSuggestion={globalSuggested?.type === 'learn' && !isLearnActive} />
+          <NavItem href={getHrefWithHash('/alphabet', 'alphabet')} icon={<Globe size={24} />} label="Alphabet" active={isAlphabetActive} hasSuggestion={globalSuggested?.type === 'alphabet' && !isAlphabetActive} />
+          <NavItem href="/conversations" icon={<MessageCircle size={24} />} label={language === 'en' ? 'Dialogs' : 'Dialogues'} active={isConversationsActive} />
           <NavItem href="/practice" icon={<Brain size={24} />} label={language === 'en' ? 'Practice' : 'Pratique'} active={isPracticeActive} />
         </div>
 

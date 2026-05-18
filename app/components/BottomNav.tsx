@@ -33,7 +33,7 @@ export default function BottomNav() {
         <Link href={getHrefWithHash('/learn', 'learn')} className={`flex flex-col items-center justify-center w-full h-full transition-colors relative ${isLearnActive ? 'text-emerald-500' : 'text-slate-400 hover:text-slate-600'}`}>
           <div className="relative">
             <BookOpen size={24} className={isLearnActive ? 'fill-emerald-100 mb-1' : 'mb-1'} />
-            {globalSuggested?.type === 'learn' && (
+            {globalSuggested?.type === 'learn' && !isLearnActive && (
               <span className="absolute -top-1 -right-1.5 w-3 h-3 bg-amber-400 border-2 border-white rounded-full"></span>
             )}
           </div>
@@ -42,7 +42,7 @@ export default function BottomNav() {
         <Link href={getHrefWithHash('/alphabet', 'alphabet')} className={`flex flex-col items-center justify-center w-full h-full transition-colors relative ${isAlphabetActive ? 'text-emerald-500' : 'text-slate-400 hover:text-slate-600'}`}>
           <div className="relative">
             <div className="w-6 h-6 flex items-center justify-center font-black text-xl mb-1">A</div>
-            {globalSuggested?.type === 'alphabet' && (
+            {globalSuggested?.type === 'alphabet' && !isAlphabetActive && (
               <span className="absolute -top-0 -right-1.5 w-3 h-3 bg-amber-400 border-2 border-white rounded-full"></span>
             )}
           </div>

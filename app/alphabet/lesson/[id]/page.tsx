@@ -17,7 +17,7 @@ function AlphabetLessonContent() {
   const params = useParams();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { completeLesson, lessonLevels, language, seenAlphabets, markAlphabetSeen, completedLessons, unlockedLessons, _hasHydrated } = useProgressStore();
+  const { completeLesson, lessonLevels, language, seenAlphabets, markAlphabetSeen, completedLessons, unlockedLessons, _hasHydrated, setLastPlayedLesson } = useProgressStore();
   
   const lessonId = params.id as string;
   const requestedLevelStr = searchParams.get('level');
@@ -142,6 +142,8 @@ function AlphabetLessonContent() {
        } else {
          playThaiTTS(currentExercise.targetText);
        }
+    } else {
+       setLastPlayedLesson(lesson.id, "alphabet");
     }
   };
 
