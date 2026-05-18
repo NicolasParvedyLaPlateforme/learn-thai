@@ -98,19 +98,7 @@ function LessonPageContent() {
       exercisesGeneratedFor.level !== currentLevel
     ) {
       const isDevLocal = new URLSearchParams(window.location.search).has("dev");
-      const lessonIndex = data.lessons.findIndex((l) => l.id === lesson.id);
-      const isUnlocked =
-        isDevLocal ||
-        lessonIndex === 0 ||
-        (lessonIndex > 0 &&
-          completedLessons.includes(data.lessons[lessonIndex - 1].id)) ||
-        unlockedLessons?.includes(lessonId);
-
-      if (!isUnlocked) {
-        router.push("/learn");
-        return;
-      }
-
+      // All lessons are now unlocked horizontally, so no redirect is needed.
       preloadThaiVoices();
       setExercises(
         generateExercises(lesson, data.lessons, currentLevel, language),

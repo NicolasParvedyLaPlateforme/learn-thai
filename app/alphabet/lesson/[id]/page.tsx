@@ -81,12 +81,13 @@ function AlphabetLessonContent() {
       }
       
       const isDevLocal = new URLSearchParams(window.location.search).has('dev');
-      const isUnlocked = isDevLocal || lessonIndex === 0 || (lessonIndex > 0 && completedLessons.includes(unitLessons[lessonIndex - 1].id)) || unlockedLessons?.includes(lessonId);
+      // All lessons are now horizontally unlocked
+      // const isUnlocked = isDevLocal || lessonIndex === 0 || (lessonIndex > 0 && completedLessons.includes(unitLessons[lessonIndex - 1].id)) || unlockedLessons?.includes(lessonId);
       
-      if (!isUnlocked) {
-        router.push('/alphabet');
-        return;
-      }
+      // if (!isUnlocked) {
+      //   router.push('/alphabet');
+      //   return;
+      // }
 
       preloadThaiVoices();
       setExercises(generateAlphabetExercises(lesson, currentLevel, language));
