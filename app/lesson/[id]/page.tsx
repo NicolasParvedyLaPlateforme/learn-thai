@@ -367,22 +367,29 @@ function LessonPageContent() {
     <div className="h-[100dvh] flex flex-col bg-[#FAFAFA] font-sans text-slate-800 overflow-hidden relative">
       {/* Header / Progress bar */}
       <header className="h-16 flex items-center shrink-0 justify-between border-b border-slate-200 bg-white">
-        <div className="flex items-center gap-6 w-full max-w-2xl mx-auto h-full px-4 flex-1">
+        <div className="flex items-center gap-3 sm:gap-6 w-full max-w-3xl mx-auto h-full px-4 flex-1">
           <button
             onClick={() => router.push(`/learn#lesson-${lesson.id}`)}
             className="text-slate-400 hover:text-slate-600 transition-colors"
           >
             <X size={24} strokeWidth={2.5} />
           </button>
-          <div className="flex-1 h-3 bg-slate-100 rounded-full overflow-hidden">
+          
+          <div className="flex font-bold text-slate-400 text-sm sm:text-base items-center shrink-0">
+            {language === "en" ? "Lvl." : "Niv."} {currentLevel + 1}
+          </div>
+
+          <div className="flex-1 h-3 bg-slate-100 rounded-full overflow-hidden min-w-[2rem]">
             <div
               className="bg-emerald-500 h-full transition-all duration-500 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.3)]"
               style={{ width: `${progress}%` }}
             />
           </div>
-          <div className="font-bold text-slate-400 flex items-center gap-3">
+          
+          <div className="font-bold text-slate-400 flex items-center gap-2 sm:gap-3 text-sm sm:text-base shrink-0">
             {currentLevel + 1 < 9 ? (
-              <span>
+              <span className="flex items-center gap-1.5">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-slate-300"><path d="m9 18 6-6-6-6"/></svg>
                 {language === "en" ? "Lvl." : "Niv."} {currentLevel + 2}
               </span>
             ) : (
@@ -390,6 +397,10 @@ function LessonPageContent() {
                 <Crown size={18} className="fill-current stroke-[2.5]" />
               </span>
             )}
+            
+            <span className="bg-slate-100 text-slate-500 px-2 sm:px-3 py-0.5 sm:py-1 rounded-md font-semibold shrink-0 ml-1">
+               {currentIndex + 1} / {exercises.length}
+            </span>
 
             {!currentExercise?.forceHideRomanization && (
               <button
@@ -588,7 +599,11 @@ function LessonPageContent() {
                         currentExercise.type === "writing"
                           ? "w-24 h-24 sm:w-32 sm:h-32 md:w-32 md:h-32 lg:w-40 lg:h-40 rounded-2xl text-5xl md:text-4xl"
                           : "w-40 h-40 sm:w-48 sm:h-48 md:w-48 md:h-48 lg:w-56 lg:h-56 rounded-3xl text-7xl md:text-5xl"
-                      } mx-auto bg-emerald-100 items-center justify-center shadow-sm border border-emerald-200 relative flex-shrink-0 overflow-hidden`}
+                      } mx-auto items-center justify-center relative flex-shrink-0 ${
+                        (currentExercise.type === "intro" && (currentExercise.introItem as any)?.imageUrl) || currentExercise.imageUrl
+                          ? "bg-transparent overflow-visible"
+                          : "bg-emerald-100 shadow-sm border border-emerald-200 overflow-hidden"
+                      }`}
                     >
                       {(currentExercise.type === "intro" &&
                         (currentExercise.introItem as any)?.imageUrl) ||
@@ -601,12 +616,14 @@ function LessonPageContent() {
                           }
                           alt="word"
                           fill
-                          className="object-cover"
+                          className="object-contain"
                         />
                       ) : (
                         <span className="animate-bounce">🐘</span>
                       )}
-                      <div className="absolute -right-2 -top-2 w-6 h-6 bg-emerald-500 border-2 border-white rounded-full z-10"></div>
+                      {!((currentExercise.type === "intro" && (currentExercise.introItem as any)?.imageUrl) || currentExercise.imageUrl) && (
+                        <div className="absolute -right-2 -top-2 w-6 h-6 bg-emerald-500 border-2 border-white rounded-full z-10"></div>
+                      )}
                     </div>
 
                     {/* Question Content */}
@@ -755,27 +772,25 @@ function LessonPageContent() {
                                       currentThaiWordForAudio
                                     }
                                     rightElement={
-                                      currentExercise.type === "writing" &&
-                                      currentExercise.blindMode &&
-                                      currentExercise.correctComponents &&
-                                      !isChecking && (
+                                      (currentExercise.type === "word-match" || 
+                                       (currentExercise.type === "writing" &&
+                                        currentExercise.blindMode &&
+                                        currentExercise.correctComponents &&
+                                        !isChecking)) ? (
                                         <button
                                           onClick={() =>
                                             playThaiTTS(currentExercise.answer)
                                           }
-                                          className="text-emerald-500 hover:text-emerald-600 bg-emerald-50 p-2 rounded-full transition-colors flex-shrink-0"
+                                          className="text-emerald-500 hover:text-emerald-600 bg-emerald-50 p-2 rounded-full transition-colors flex-shrink-0 ml-2"
                                           title={
                                             language === "en"
-                                              ? "Listen to full phrase"
-                                              : "Écouter la phrase entière"
+                                              ? "Listen to pronunciation"
+                                              : "Écouter la prononciation"
                                           }
                                         >
-                                          <Volume2
-                                            size={24}
-                                            strokeWidth={2.5}
-                                          />
+                                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
                                         </button>
-                                      )
+                                      ) : undefined
                                     }
                                   />
                                 </div>
