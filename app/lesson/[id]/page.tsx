@@ -514,40 +514,50 @@ function LessonPageContent() {
           >
             {/* Instruction Screen */}
             {showInstruction && (
-              <div className="flex flex-col items-center justify-center flex-1 w-full p-6 text-center space-y-8 animate-in fade-in duration-500 overflow-y-auto">
-                <div className="flex-1 flex flex-col justify-center items-center w-full">
-                  <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-800 leading-tight mb-8">
+              <div className="absolute inset-0 z-[40] flex flex-col items-center justify-start flex-1 w-full bg-gradient-to-b from-amber-50 to-white text-center animate-in fade-in duration-500 overflow-y-auto">
+                <div className="w-full bg-amber-100/80 py-2 md:py-3 text-amber-800 font-semibold flex items-center justify-center gap-2 mb-4 md:mb-6 border-b border-amber-200/50 flex-shrink-0">
+                   <span className="text-xl">💡</span> {language === "en" ? "Here is how this exercise works" : "Voici comment fonctionne cet exercice"}
+                </div>
+                
+                <div className="flex-1 flex flex-col items-center w-full px-4 md:px-6 max-w-2xl mx-auto gap-4 pb-4">
+                  <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-800 leading-tight">
                     {instructionText}
                   </h2>
 
                   {/* Example box */}
                   {currentExercise.type !== "pair-matching" &&
                     currentExercise.type !== "intro" && (
-                      <div className="bg-slate-50 p-6 rounded-3xl w-full max-w-sm sm:max-w-md md:max-w-lg border-2 border-slate-100 shadow-sm opacity-90 mx-auto">
-                        <p className="text-xs font-bold text-slate-400 mb-6 uppercase tracking-widest">
-                          {language === "en" ? "Example" : "Exemple"}
-                        </p>
+                      <div className="bg-white p-5 md:p-8 rounded-3xl w-full max-w-sm sm:max-w-md md:max-w-lg border-2 border-dashed border-amber-300 shadow-sm mx-auto relative mt-2 shrink-0">
+                        <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-amber-100 text-amber-800 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest flex items-center gap-2 shadow-sm border border-amber-200/50">
+                           <span className="w-2 h-2 rounded-full bg-amber-500 animate-[pulse_2s_ease-in-out_infinite]"></span>
+                           {language === "en" ? "Example" : "Exemple"}
+                        </div>
                         <InstructionExample
                           typeKey={instructionKey}
                           language={language}
                         />
                       </div>
                     )}
-                </div>
+                    
+                   <p className="text-slate-500 font-medium text-center text-sm md:text-base max-w-sm leading-relaxed mt-4 shrink-0">
+                     {language === "en" ? "In the next steps, you will have to find the correct answer yourself!" : "Dans les prochaines étapes, vous devrez trouver la bonne réponse vous-même !"}
+                   </p>
 
-                <div className="pt-6 w-full max-w-sm shrink-0">
-                  <button
-                    onClick={() => {
-                      setAcknowledgedInstructions((prev) => {
-                        const newer = new Set(prev);
-                        if (instructionKey) newer.add(instructionKey);
-                        return newer;
-                      });
-                    }}
-                    className="w-full py-4 rounded-2xl bg-indigo-500 border-b-4 border-indigo-700 text-white font-bold text-xl shadow-lg hover:bg-indigo-400 active:translate-y-1 active:border-b-0 transition-all uppercase tracking-widest"
-                  >
-                    {language === "en" ? "Continue" : "Continuer"}
-                  </button>
+                  <div className="pt-4 w-full max-w-sm shrink-0 mt-auto">
+                    <button
+                      onClick={() => {
+                        setAcknowledgedInstructions((prev) => {
+                          const newer = new Set(prev);
+                          if (instructionKey) newer.add(instructionKey);
+                          return newer;
+                        });
+                      }}
+                      className="w-full py-4 rounded-2xl bg-zinc-900 border-b-4 border-zinc-950 text-white font-bold text-lg shadow-lg hover:bg-zinc-800 active:translate-y-1 active:border-b-0 transition-all flex items-center justify-center gap-2"
+                    >
+                      {language === "en" ? "Got it" : "J'ai compris"}
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                    </button>
+                  </div>
                 </div>
               </div>
             )}
