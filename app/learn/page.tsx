@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -129,6 +129,26 @@ export default function Home() {
   const [cols, setCols] = useState(5);
   const [activeUnitIndex, setActiveUnitIndex] = useState(0);
 
+  const suggestedLessonId = useMemo(() => {
+    let firstZeroLevel: string | null = null;
+    let firstInProgress: string | null = null;
+    
+    for (const unit of UNITS) {
+       for (let i = unit.startIndex; i < unit.endIndex; i++) {
+          const lesson = data.lessons[i];
+          if (!lesson) continue;
+          const level = lessonLevels[lesson.id] || 0;
+          if (level > 0 && level < 10 && !firstInProgress) {
+             firstInProgress = lesson.id;
+          }
+          if (level === 0 && !firstZeroLevel) {
+             firstZeroLevel = lesson.id;
+          }
+       }
+    }
+    return firstInProgress || firstZeroLevel || data.lessons[0]?.id;
+  }, [lessonLevels]);
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setMounted(true);
@@ -256,9 +276,14 @@ export default function Home() {
                   <p className="text-white/90 mb-8 font-medium text-lg leading-snug">{mounted && language === 'en' ? unit.descriptionEn : unit.description}</p>
                   
                   <div className="w-full max-w-[280px]">
-                    <div className="flex justify-between text-sm font-bold text-white/90 mb-2 px-1">
-                      <span>{language === 'en' ? 'Mastery' : 'Maîtrise'}</span>
-                      <span>{completedLevelsInUnit} / {maxLevelsInUnit} {language === 'en' ? 'levels' : 'niveaux'}</span>
+                    <div className="flex flex-col mb-3">
+                      <div className="flex justify-between text-sm font-bold text-white/90 mb-1 px-1">
+                        <span>{language === 'en' ? 'Mastery' : 'Maîtrise'}</span>
+                        <span>{completedLevelsInUnit} / {maxLevelsInUnit} {language === 'en' ? 'levels' : 'niveaux'}</span>
+                      </div>
+                      <div className="text-white/70 text-xs font-medium px-1">
+                        {language === 'en' ? '10 levels per lesson = Total mastery' : '10 niveaux par leçon = Maîtrise totale'}
+                      </div>
                     </div>
                     <div className="w-full bg-black/15 rounded-full h-4 overflow-hidden mb-2 shadow-inner">
                       <div 
@@ -316,19 +341,26 @@ export default function Home() {
                             )}
                           </div>
                           
-                          <div className={`absolute -bottom-2 -right-2 z-20 bg-white border-2 border-slate-200 rounded-full h-8 px-2 min-w-[2rem] flex items-center justify-center text-xs font-black shadow-sm ${unit.textClass}`}>
-                            {level}/10
-                          </div>
+                          {level > 0 && (
+                            <div className={`absolute -bottom-2 -right-2 z-20 bg-white border-2 border-slate-200 rounded-full h-8 px-2 min-w-[2rem] flex items-center justify-center text-xs font-black shadow-sm ${unit.textClass}`}>
+                              {level}/10
+                            </div>
+                          )}
                         </div>
                         
                         {/* Card */}
                         <div 
-                          className={`w-full max-w-[280px] sm:max-w-[320px] rounded-[1.5rem] p-5 flex flex-col items-center text-center transition-all z-10 bg-white border-2 border-slate-200 border-b-[6px] cursor-pointer hover:border-slate-300 active:translate-y-[4px] active:border-b-2 shadow-sm relative`}
+                          className={`w-full max-w-[280px] sm:max-w-[320px] rounded-[1.5rem] p-5 flex flex-col items-center text-center transition-all z-10 bg-white border-2 ${suggestedLessonId === lesson.id ? 'border-amber-300 shadow-[0_0_15px_rgba(252,211,77,0.5)]' : 'border-slate-200 hover:border-slate-300'} border-b-[6px] cursor-pointer active:translate-y-[4px] active:border-b-2 shadow-sm relative`}
                           onClick={() => {
                             setSelectedLesson({lesson, isCompleted: isMaxLevel, unitColor: unit.colorClass, unitBorder: unit.borderClass});
                             setModalLevel(Math.min(level, 9));
                           }}
                         >
+                           {suggestedLessonId === lesson.id && (
+                             <div className="absolute -top-3.5 bg-amber-400 text-amber-900 text-[10px] font-black uppercase tracking-wider py-1 px-3 rounded-full flex items-center gap-1 shadow-sm">
+                               <Star size={12} fill="currentColor" /> {language === 'en' ? 'SUGGESTED' : 'SUGGÉRÉ'}
+                             </div>
+                           )}
                            <h4 className={`font-extrabold text-xl text-slate-800`}>
                              {mounted && language === 'en' ? (lesson.titleEn || lesson.title) : lesson.title}
                            </h4>
@@ -338,16 +370,24 @@ export default function Home() {
                            
                            {/* Lesson Progress Bar (Out of 10) */}
                            <div className="w-full mt-4">
-                             <div className="flex justify-between text-xs font-bold text-slate-400 mb-1 px-1">
-                               <span>{language === 'en' ? 'Mastery' : 'Maîtrise'}</span>
-                               <span className={unit.textClass}>{level}/10</span>
-                             </div>
-                             <div className="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
-                               <div 
-                                 className={`${unit.colorClass} h-full rounded-full transition-all duration-500`}
-                                 style={{ width: `${(level / 10) * 100}%` }}
-                               ></div>
-                             </div>
+                             {level === 0 ? (
+                                <div className="text-sm font-bold text-slate-300 mt-2 py-1">
+                                  {language === 'en' ? 'Ready to discover' : 'À découvrir'}
+                                </div>
+                             ) : (
+                               <>
+                                 <div className="flex justify-between text-xs font-bold text-slate-400 mb-1 px-1">
+                                   <span>{language === 'en' ? 'Mastery' : 'Maîtrise'}</span>
+                                   <span className={unit.textClass}>{level}/10</span>
+                                 </div>
+                                 <div className="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+                                   <div 
+                                     className={`${unit.colorClass} h-full rounded-full transition-all duration-500`}
+                                     style={{ width: `${(level / 10) * 100}%` }}
+                                   ></div>
+                                 </div>
+                               </>
+                             )}
                            </div>
                         </div>
 
@@ -398,9 +438,14 @@ export default function Home() {
                       {/* Progress Bar + "Continuer" Button equivalent */}
                       <div className="flex items-center gap-6">
                         <div className="flex-1">
-                          <div className={`text-sm ${unit.lightTextClass} font-bold mb-2 flex justify-between`}>
-                            <span>{language === 'en' ? 'Mastery' : 'Maîtrise'}</span>
-                            <span>{completedLevelsInUnit} / {maxLevelsInUnit} {language === 'en' ? 'levels' : 'niveaux'}</span>
+                          <div className={`flex flex-col mb-3`}>
+                            <div className={`text-sm ${unit.lightTextClass} font-bold mb-1 flex justify-between`}>
+                              <span>{language === 'en' ? 'Mastery' : 'Maîtrise'}</span>
+                              <span>{completedLevelsInUnit} / {maxLevelsInUnit} {language === 'en' ? 'levels' : 'niveaux'}</span>
+                            </div>
+                            <div className={`text-xs ${unit.lightTextClass} opacity-80 font-medium`}>
+                              {language === 'en' ? '10 levels per lesson = Total mastery' : '10 niveaux par leçon = Maîtrise totale'}
+                            </div>
                           </div>
                           <div className={`w-full ${unit.bgMutedClass} rounded-full h-4 overflow-hidden shadow-inner`}>
                             <div 
@@ -451,9 +496,11 @@ export default function Home() {
                                 )}
                               </div>
                               
-                              <div className={`absolute bottom-4 -right-2 z-20 bg-white border-2 border-slate-200 rounded-full h-8 px-2 min-w-[2rem] flex items-center justify-center text-xs font-black shadow-sm ${unit.textClass}`}>
-                                {level}/10
-                              </div>
+                              {level > 0 && (
+                                <div className={`absolute bottom-4 -right-2 z-20 bg-white border-2 border-slate-200 rounded-full h-8 px-2 min-w-[2rem] flex items-center justify-center text-xs font-black shadow-sm ${unit.textClass}`}>
+                                  {level}/10
+                                </div>
+                              )}
                               
                               {showLineToNext && (
                                  <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 w-2.5 h-full ${lineToNextColor} z-0`}></div>
@@ -462,12 +509,17 @@ export default function Home() {
                             
                             {/* Horizontal Card */}
                             <div 
-                              className={`flex-1 rounded-[1.5rem] border-2 p-5 md:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all group bg-white border-slate-200 border-b-[6px] cursor-pointer hover:border-slate-300 active:translate-y-[4px] active:border-b-2 shadow-sm`}
+                              className={`flex-1 rounded-[1.5rem] border-2 p-5 md:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all group bg-white border-b-[6px] cursor-pointer active:translate-y-[4px] active:border-b-2 shadow-sm relative ${suggestedLessonId === lesson.id ? 'border-amber-300 shadow-[0_0_15px_rgba(252,211,77,0.5)]' : 'border-slate-200 hover:border-slate-300'}`}
                               onClick={() => {
                                 setSelectedLesson({lesson, isCompleted: isMaxLevel, unitColor: unit.colorClass, unitBorder: unit.borderClass});
                                 setModalLevel(Math.min(level, 9));
                               }}
                             >
+                               {suggestedLessonId === lesson.id && (
+                                 <div className="absolute -top-3.5 left-10 bg-amber-400 text-amber-900 text-[10px] font-black uppercase tracking-wider py-1 px-3 rounded-full flex items-center gap-1 shadow-sm">
+                                   <Star size={12} fill="currentColor" /> {language === 'en' ? 'SUGGESTED' : 'SUGGÉRÉ'}
+                                 </div>
+                               )}
                                <div className="flex flex-col items-start text-left flex-1 md:pr-4">
                                  <h4 className="font-extrabold text-xl text-slate-800">
                                    {language === 'en' ? (lesson.titleEn || lesson.title) : lesson.title}
@@ -478,17 +530,25 @@ export default function Home() {
                                </div>
                                
                                {/* Lesson Progress Bar (Out of 10) desktop */}
-                               <div className="w-full md:w-48 shrink-0 mt-4 md:mt-0 flex flex-col">
-                                 <div className="flex justify-between text-xs font-bold text-slate-400 mb-1 px-1">
-                                   <span>{language === 'en' ? 'Mastery' : 'Maîtrise'}</span>
-                                   <span className={unit.textClass}>{level}/10</span>
-                                 </div>
-                                 <div className="w-full bg-slate-100 rounded-full h-3 overflow-hidden">
-                                   <div 
-                                     className={`${unit.colorClass} h-full rounded-full transition-all duration-500`}
-                                     style={{ width: `${(level / 10) * 100}%` }}
-                                   ></div>
-                                 </div>
+                               <div className="w-full md:w-48 shrink-0 mt-4 md:mt-0 flex flex-col justify-center">
+                                 {level === 0 ? (
+                                    <div className="text-sm font-bold text-slate-300 text-left md:text-right">
+                                      {language === 'en' ? 'Ready to discover' : 'À découvrir'}
+                                    </div>
+                                 ) : (
+                                   <>
+                                     <div className="flex justify-between text-xs font-bold text-slate-400 mb-1 px-1">
+                                       <span>{language === 'en' ? 'Mastery' : 'Maîtrise'}</span>
+                                       <span className={unit.textClass}>{level}/10</span>
+                                     </div>
+                                     <div className="w-full bg-slate-100 rounded-full h-3 overflow-hidden">
+                                       <div 
+                                         className={`${unit.colorClass} h-full rounded-full transition-all duration-500`}
+                                         style={{ width: `${(level / 10) * 100}%` }}
+                                       ></div>
+                                     </div>
+                                   </>
+                                 )}
                                </div>
                             </div>
                          </div>
