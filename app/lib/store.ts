@@ -66,6 +66,9 @@ interface ProgressState {
   setWritingConfig: (config: Partial<WritingConfig>) => void;
   lastActiveUnitIndex: number;
   setLastActiveUnitIndex: (index: number) => void;
+  lastPlayedLessonId: string | null;
+  lastPlayedLessonType: 'learn' | 'alphabet' | null;
+  setLastPlayedLesson: (id: string, type: 'learn' | 'alphabet') => void;
 }
 
 export const useProgressStore = create<ProgressState>()(
@@ -94,6 +97,9 @@ export const useProgressStore = create<ProgressState>()(
       },
       lastActiveUnitIndex: 0,
       setLastActiveUnitIndex: (index) => set({ lastActiveUnitIndex: index }),
+      lastPlayedLessonId: null,
+      lastPlayedLessonType: null,
+      setLastPlayedLesson: (id, type) => set({ lastPlayedLessonId: id, lastPlayedLessonType: type }),
       setWritingConfig: (config) => set((state) => ({ writingConfig: { ...state.writingConfig, ...config } })),
       setLanguage: (lang) => set({ language: lang, languageSetByUser: true }),
       autoDetectLanguage: () => {
@@ -120,6 +126,11 @@ export const useProgressStore = create<ProgressState>()(
            newLevel = Math.min(currentLevel + 1, 10);
         }
         
+        let type: 'learn' | 'alphabet' = 'learn';
+        if (lessonId.startsWith('alphabet_')) {
+          type = 'alphabet';
+        }
+
         return {
           completedLessons: state.completedLessons.includes(lessonId) 
             ? state.completedLessons 
@@ -128,7 +139,9 @@ export const useProgressStore = create<ProgressState>()(
             ...state.lessonLevels,
             [lessonId]: newLevel
           },
-          xp: state.xp + earnedXp
+          xp: state.xp + earnedXp,
+          lastPlayedLessonId: lessonId,
+          lastPlayedLessonType: type
         };
       }),
       addXp: (amount) => set((state) => ({ xp: state.xp + amount })),

@@ -10,6 +10,8 @@ import { getAlphabetLessons, AlphabetLessonDef, formatCombiningChar } from '../l
 import { BookOpen, CheckCircle, Star, Play, Crown, X, Unlock, Lock } from 'lucide-react';
 import Image from 'next/image';
 
+import { useGlobalSuggestedLesson } from '../lib/useGlobalSuggestedLesson';
+
 export default function AlphabetMenuPage() {
   const router = useRouter();
   const { completedLessons, unlockedLessons, lessonLevels, xp, resetLessonLevel, unlockLessonManual, language, setLanguage, autoDetectLanguage } = useProgressStore();
@@ -19,6 +21,8 @@ export default function AlphabetMenuPage() {
   const [cols, setCols] = useState(5);
   const [activeUnitIndex, setActiveUnitIndex] = useState(0);
 
+  const globalSuggested = useGlobalSuggestedLesson();
+  
   const { consonants, vowels } = getAlphabetLessons();
 
   const UNITS = [
@@ -44,24 +48,7 @@ export default function AlphabetMenuPage() {
     }
   ];
 
-  const suggestedLessonId = useMemo(() => {
-    let firstZeroLevel: string | null = null;
-    let firstInProgress: string | null = null;
-    
-    for (const unit of UNITS) {
-       for (const lesson of unit.lessons) {
-          if (!lesson) continue;
-          const level = lessonLevels[lesson.id] || 0;
-          if (level > 0 && level < 4 && !firstInProgress) {
-             firstInProgress = lesson.id;
-          }
-          if (level === 0 && !firstZeroLevel) {
-             firstZeroLevel = lesson.id;
-          }
-       }
-    }
-    return firstInProgress || firstZeroLevel || UNITS[0].lessons[0]?.id;
-  }, [lessonLevels, UNITS]);
+  const suggestedLessonId = globalSuggested?.type === 'alphabet' ? globalSuggested.id : null;
 
   const handleUnitSelect = (index: number) => {
     setActiveUnitIndex(index);
@@ -239,30 +226,28 @@ export default function AlphabetMenuPage() {
                           >
                             {lesson.imageUrl ? (
                               <>
-                                <Image src={lesson.imageUrl} alt={lesson.title} fill className={`object-cover ${level === 0 ? 'grayscale opacity-70' : ''}`} sizes="(max-width: 640px) 5rem, 6rem" />
+                                <Image src={lesson.imageUrl} alt={lesson.title} fill className={`object-cover ${level === 0 && suggestedLessonId !== lesson.id ? 'grayscale opacity-70' : ''}`} sizes="(max-width: 640px) 5rem, 6rem" />
                                 {isMaxLevel && <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/20"><CheckCircle size={40} className="stroke-[3] text-white" /></div>}
                               </>
                             ) : (
                               isMaxLevel ? <Crown size={40} className="stroke-[3]" fill="currentColor" /> : level > 0 ? <CheckCircle size={40} className="stroke-current stroke-[2.5]" /> : lesson.items[0] ? formatCombiningChar(lesson.items[0].letter) : ''
                             )}
                           </div>
-                          
-                          {level > 0 && (
-                            <div className={`absolute -bottom-2 -right-2 z-20 bg-white border-2 border-slate-200 rounded-full h-8 px-2 min-w-[2rem] flex items-center justify-center text-xs font-black shadow-sm ${unit.textClass}`}>
-                              {level}/4
-                            </div>
-                          )}
                         </div>
                         
                         {/* Card */}
                         <div 
-                          className={`w-full max-w-[280px] sm:max-w-[320px] rounded-[1.5rem] p-5 flex flex-col items-center text-center transition-all z-10 bg-white border-2 border-b-[6px] ${suggestedLessonId === lesson.id ? 'border-amber-300 shadow-[0_0_15px_rgba(252,211,77,0.5)]' : 'border-slate-200 hover:border-slate-300'} cursor-pointer active:translate-y-[4px] active:border-b-2 shadow-sm relative`}
+                          className={`w-full max-w-[280px] sm:max-w-[320px] rounded-[1.5rem] p-5 flex flex-col items-center text-center transition-all z-10 border-2 border-b-[6px] cursor-pointer active:translate-y-[4px] active:border-b-2 shadow-sm relative ${isMaxLevel ? 'bg-amber-50 border-amber-300 shadow-[0_0_15px_rgba(252,211,77,0.3)]' : suggestedLessonId === lesson.id ? 'bg-white border-amber-300 shadow-[0_0_15px_rgba(252,211,77,0.5)]' : 'bg-white border-slate-200 hover:border-slate-300'}`}
                           onClick={() => {
                             setSelectedLesson({lesson, isCompleted: isMaxLevel, unitColor: unit.colorClass, unitBorder: unit.borderClass});
                             setModalLevel(Math.min(level, 3));
                           }}
                         >
-                           {suggestedLessonId === lesson.id && (
+                           {isMaxLevel ? (
+                             <div className="absolute -top-3.5 bg-gradient-to-r from-amber-400 to-amber-500 text-white text-[10px] font-black uppercase tracking-wider py-1 px-3 rounded-full flex items-center gap-1 shadow-sm">
+                               <CheckCircle size={14} className="fill-current text-white stroke-amber-500" /> {language === 'en' ? 'MASTERED' : 'MAÎTRISÉ'}
+                             </div>
+                           ) : suggestedLessonId === lesson.id && (
                              <div className="absolute -top-3.5 bg-amber-400 text-amber-900 text-[10px] font-black uppercase tracking-wider py-1 px-3 rounded-full flex items-center gap-1 shadow-sm">
                                <Star size={12} fill="currentColor" /> {language === 'en' ? 'SUGGESTED' : 'SUGGÉRÉ'}
                              </div>
@@ -277,20 +262,21 @@ export default function AlphabetMenuPage() {
                            {/* Lesson Progress Bar (Out of 4) */}
                            <div className="w-full mt-4">
                              {level === 0 ? (
-                                <div className="text-sm font-bold text-slate-300 mt-2 py-1">
-                                  {language === 'en' ? 'Ready to discover' : 'À découvrir'}
-                                </div>
+                                suggestedLessonId === lesson.id ? (
+                                  <div className="text-sm font-bold text-slate-400 mt-2 py-1">
+                                    {language === 'en' ? 'Start learning' : 'Commencer'}
+                                  </div>
+                                ) : null
                              ) : (
                                <>
                                  <div className="flex justify-between text-xs font-bold text-slate-400 mb-1 px-1">
                                    <span>{language === 'en' ? 'Mastery' : 'Maîtrise'}</span>
                                    <span className={unit.textClass}>{level}/4</span>
                                  </div>
-                                 <div className="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
-                                   <div 
-                                     className={`${unit.colorClass} h-full rounded-full transition-all duration-500`}
-                                     style={{ width: `${(level / 4) * 100}%` }}
-                                   ></div>
+                                 <div className="flex justify-between gap-[2px] w-full">
+                                   {Array.from({length: 4}).map((_, i) => (
+                                     <div key={i} className={`h-2.5 flex-1 rounded-sm first:rounded-l-full last:rounded-r-full ${i < level ? unit.colorClass : 'bg-slate-100'}`}></div>
+                                   ))}
                                  </div>
                                </>
                              )}
@@ -382,7 +368,7 @@ export default function AlphabetMenuPage() {
                        const lineToNextColor = level > 0 ? unit.colorClass : "bg-slate-200";
 
                        return (
-                         <div key={`desktop-node-${lesson.id}`} className="relative flex items-center w-full z-10 gap-6 md:gap-8 min-h-[8.5rem] py-3">
+                         <div id={`lesson-${lesson.id}`} key={`desktop-node-${lesson.id}`} className="relative flex items-center w-full z-10 gap-6 md:gap-8 min-h-[8.5rem] py-3">
                             {/* Circle Node */}
                             <div 
                               className={`relative shrink-0 py-6 cursor-pointer hover:brightness-95 hover:scale-105 active:scale-95 transition-all`}
@@ -394,19 +380,13 @@ export default function AlphabetMenuPage() {
                               <div className={`w-16 h-16 md:w-20 md:h-20 rounded-[2rem] flex items-center justify-center border-b-[6px] relative z-10 transition-transform text-3xl font-thai overflow-hidden ${isMaxLevel ? unit.colorClass + ' text-white ' + unit.borderClass : level >= 3 ? unit.shades.l3 : level >= 2 ? unit.shades.l2 : level >= 1 ? unit.shades.l1 : 'bg-white ' + unit.textClass + ' border-slate-200 border-2 active:border-b-2 active:translate-y-1'}`}>
                                 {lesson.imageUrl ? (
                                   <>
-                                    <Image src={lesson.imageUrl} alt={lesson.title} fill className={`object-cover ${level === 0 ? 'grayscale opacity-70' : ''}`} sizes="(max-width: 768px) 4rem, 5rem" />
+                                    <Image src={lesson.imageUrl} alt={lesson.title} fill className={`object-cover ${level === 0 && suggestedLessonId !== lesson.id ? 'grayscale opacity-70' : ''}`} sizes="(max-width: 768px) 4rem, 5rem" />
                                     {isMaxLevel && <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/20"><CheckCircle size={32} className="stroke-[3] text-white" /></div>}
                                   </>
                                 ) : (
                                   isMaxLevel ? <Crown size={32} className="stroke-[3]" fill="currentColor" /> : level > 0 ? <CheckCircle size={32} className="stroke-current stroke-[2.5]" /> : (lesson.items[0] ? formatCombiningChar(lesson.items[0].letter) : '')
                                 )}
                               </div>
-                              
-                              {level > 0 && (
-                                <div className={`absolute bottom-4 -right-2 z-20 bg-white border-2 border-slate-200 rounded-full h-8 px-2 min-w-[2rem] flex items-center justify-center text-xs font-black shadow-sm ${unit.textClass}`}>
-                                  {level}/4
-                                </div>
-                              )}
                               
                               {showLineToNext && (
                                  <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 w-2.5 h-[calc(100%+1rem)] ${lineToNextColor} z-0`}></div>
@@ -415,13 +395,17 @@ export default function AlphabetMenuPage() {
                             
                             {/* Horizontal Card */}
                             <div 
-                              className={`flex-1 rounded-[1.5rem] border-2 p-5 md:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all group bg-white border-b-[6px] cursor-pointer active:translate-y-[4px] active:border-b-2 shadow-sm relative ${suggestedLessonId === lesson.id ? 'border-amber-300 shadow-[0_0_15px_rgba(252,211,77,0.5)]' : 'border-slate-200 hover:border-slate-300'}`}
+                              className={`flex-1 rounded-[1.5rem] border-2 p-5 md:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all group border-b-[6px] cursor-pointer active:translate-y-[4px] active:border-b-2 shadow-sm relative ${isMaxLevel ? 'bg-amber-50 border-amber-300 shadow-[0_0_15px_rgba(252,211,77,0.3)]' : suggestedLessonId === lesson.id ? 'bg-white border-amber-300 shadow-[0_0_15px_rgba(252,211,77,0.5)]' : 'bg-white border-slate-200 hover:border-slate-300'}`}
                               onClick={() => {
                                 setSelectedLesson({lesson, isCompleted: isMaxLevel, unitColor: unit.colorClass, unitBorder: unit.borderClass});
                                 setModalLevel(Math.min(level, 3));
                               }}
                             >
-                               {suggestedLessonId === lesson.id && (
+                               {isMaxLevel ? (
+                                 <div className="absolute -top-3.5 left-10 bg-gradient-to-r from-amber-400 to-amber-500 text-white text-[10px] font-black uppercase tracking-wider py-1 px-3 rounded-full flex items-center gap-1 shadow-sm">
+                                   <CheckCircle size={14} className="fill-current text-white stroke-amber-500" /> {language === 'en' ? 'MASTERED' : 'MAÎTRISÉ'}
+                                 </div>
+                               ) : suggestedLessonId === lesson.id && (
                                  <div className="absolute -top-3.5 left-10 bg-amber-400 text-amber-900 text-[10px] font-black uppercase tracking-wider py-1 px-3 rounded-full flex items-center gap-1 shadow-sm">
                                    <Star size={12} fill="currentColor" /> {language === 'en' ? 'SUGGESTED' : 'SUGGÉRÉ'}
                                  </div>
@@ -438,20 +422,21 @@ export default function AlphabetMenuPage() {
                                {/* Lesson Progress Bar (Out of 4) desktop */}
                                <div className="w-full md:w-48 shrink-0 mt-4 md:mt-0 flex flex-col justify-center">
                                  {level === 0 ? (
-                                    <div className="text-sm font-bold text-slate-300 text-left md:text-right">
-                                      {language === 'en' ? 'Ready to discover' : 'À découvrir'}
-                                    </div>
+                                    suggestedLessonId === lesson.id ? (
+                                      <div className="text-sm font-bold text-slate-400 text-left md:text-right">
+                                        {language === 'en' ? 'Start learning' : 'Commencer'}
+                                      </div>
+                                    ) : null
                                  ) : (
                                    <>
                                      <div className="flex justify-between text-xs font-bold text-slate-400 mb-1 px-1">
                                        <span>{language === 'en' ? 'Mastery' : 'Maîtrise'}</span>
                                        <span className={unit.textClass}>{level}/4</span>
                                      </div>
-                                     <div className="w-full bg-slate-100 rounded-full h-3 overflow-hidden">
-                                       <div 
-                                         className={`${unit.colorClass} h-full rounded-full transition-all duration-500`}
-                                         style={{ width: `${(level / 4) * 100}%` }}
-                                       ></div>
+                                     <div className="flex justify-between gap-[2px] w-full">
+                                       {Array.from({length: 4}).map((_, i) => (
+                                         <div key={i} className={`h-3 flex-1 rounded-sm first:rounded-l-full last:rounded-r-full ${i < level ? unit.colorClass : 'bg-slate-100'}`}></div>
+                                       ))}
                                      </div>
                                    </>
                                  )}

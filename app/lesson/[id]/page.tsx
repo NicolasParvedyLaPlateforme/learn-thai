@@ -38,11 +38,19 @@ function LessonPageContent() {
     showRomanization,
     setShowRomanization,
     setLastActiveUnitIndex,
+    setLastPlayedLesson,
   } = useProgressStore();
 
   const lessonId = params.id as string;
   const requestedLevelStr = searchParams.get("level");
   const isDev = searchParams.has("dev");
+
+  useEffect(() => {
+     if (_hasHydrated && lessonId) {
+       const type = lessonId.startsWith('alphabet_') ? 'alphabet' : 'learn';
+       setLastPlayedLesson(lessonId, type);
+     }
+  }, [_hasHydrated, lessonId, setLastPlayedLesson]);
 
   // Resolve lesson and exercises directly to avoid useEffect setState
   const lesson = data.lessons.find((l) => l.id === lessonId) || null;
