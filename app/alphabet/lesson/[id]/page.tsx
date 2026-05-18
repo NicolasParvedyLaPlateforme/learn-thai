@@ -45,6 +45,9 @@ function AlphabetLessonContent() {
   const [exercisesGeneratedFor, setExercisesGeneratedFor] = useState<{ id: string, level: number } | null>(null);
 
   const [isClient, setIsClient] = useState(false);
+  const [mistakes, setMistakes] = useState(0);
+
+  const earnedStars = mistakes < 2 ? 3 : mistakes < 4 ? 2 : 1;
 
   useEffect(() => {
     setIsClient(true);
@@ -97,6 +100,7 @@ function AlphabetLessonContent() {
       setIsCorrect(null);
       setSelectedOption(null);
       setShowHint(false);
+      setMistakes(0);
       setExercisesGeneratedFor({ id: lesson.id, level: currentLevel });
     }
   }, [lesson, router, currentLevel, language, completedLessons, _hasHydrated, lessonId, unlockedLessons, exercisesGeneratedFor]);
@@ -143,6 +147,7 @@ function AlphabetLessonContent() {
          playThaiTTS(currentExercise.targetText);
        }
     } else {
+       setMistakes(prev => prev + 1);
        setLastPlayedLesson(lesson.id, "alphabet");
     }
   };
@@ -156,7 +161,7 @@ function AlphabetLessonContent() {
       setShowHint(false);
     } else {
       setIsFinished(true);
-      completeLesson(lesson.id, 15);
+      completeLesson(lesson.id, 15, currentLevel, earnedStars);
       confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }});
     }
   };

@@ -68,6 +68,9 @@ function LessonPageContent() {
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [isFinished, setIsFinished] = useState(false);
   const [showInfoModal, setShowInfoModal] = useState(false);
+  const [mistakes, setMistakes] = useState(0);
+
+  const earnedStars = mistakes < 2 ? 3 : mistakes < 4 ? 2 : 1;
 
   const [exercisesGeneratedFor, setExercisesGeneratedFor] = useState<{
     id: string;
@@ -109,6 +112,7 @@ function LessonPageContent() {
       setIsChecking(false);
       setIsCorrect(null);
       setSelectedAnswer(null);
+      setMistakes(0);
       setExercisesGeneratedFor({ id: lesson.id, level: currentLevel });
     }
   }, [
@@ -138,7 +142,7 @@ function LessonPageContent() {
         setSelectedAnswer(null);
       } else {
         setIsFinished(true);
-        completeLesson(lesson.id, 10 + exercises.length, currentLevel);
+        completeLesson(lesson.id, 10 + exercises.length, currentLevel, earnedStars);
         confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
       }
       return;
@@ -155,7 +159,7 @@ function LessonPageContent() {
         } else {
           // Finished
           setIsFinished(true);
-          completeLesson(lesson.id, 10 + exercises.length, currentLevel);
+          completeLesson(lesson.id, 10 + exercises.length, currentLevel, earnedStars);
           confetti({
             particleCount: 150,
             spread: 70,
@@ -232,6 +236,7 @@ function LessonPageContent() {
     setIsCorrect(correct);
     if (!correct) {
       setLastPlayedLesson(lessonId, 'learn');
+      setMistakes(m => m + 1);
     }
     setIsChecking(true);
     playThaiTTS(currentExercise.answer);
@@ -253,8 +258,20 @@ function LessonPageContent() {
 
     return (
       <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-[#FAFAFA] font-sans">
-        <div className="text-orange-500 mb-6">
-          <Check size={120} className="mx-auto" />
+        <div className="text-orange-500 mb-2">
+          <Check size={80} className="mx-auto" />
+        </div>
+        <div className="flex gap-2 mb-6">
+           {Array.from({ length: 3 }).map((_, i) => (
+             <motion.div 
+               key={i} 
+               initial={{ scale: 0, rotate: -45 }} 
+               animate={{ scale: 1, rotate: 0 }} 
+               transition={{ delay: 0.2 + i * 0.1, type: "spring", stiffness: 200 }}
+             >
+                <Star size={48} className={i < earnedStars ? "fill-amber-400 text-amber-500" : "fill-slate-200 text-slate-300 drop-shadow-sm"} />
+             </motion.div>
+           ))}
         </div>
         <h1 className="text-3xl font-extrabold text-slate-800 mb-2 text-center">
           {language === "en"
@@ -387,6 +404,11 @@ function LessonPageContent() {
           </div>
           
           <div className="font-bold text-slate-400 flex items-center gap-2 sm:gap-3 text-sm sm:text-base shrink-0">
+            <div className="hidden sm:flex items-center gap-0.5 mr-1">
+               {Array.from({ length: 3 }).map((_, i) => (
+                  <Star key={i} size={16} className={i < earnedStars ? "fill-amber-400 text-amber-400" : "fill-slate-200 text-slate-200"} />
+               ))}
+            </div>
             {currentLevel + 1 < 9 ? (
               <span className="flex items-center gap-1.5">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-slate-300"><path d="m9 18 6-6-6-6"/></svg>
