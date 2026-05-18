@@ -176,7 +176,7 @@ export default function SentenceBuilder({ exercise, selected, onChange, disabled
       </div>
 
       {/* Word bank */}
-      <div className="flex flex-wrap justify-center gap-2 mt-2">
+      <div className="flex flex-wrap justify-center gap-2 -mt-2 sm:mt-2">
         {exercise.options.map((opt, idx) => {
           let isUsed = false;
           if (usedCounts[opt.th] > 0) {

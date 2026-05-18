@@ -59,7 +59,7 @@ export default function WordMatch({ exercise, selected, onChange, disabled, onAu
                 ${(disabled || isError) ? 'cursor-default' : 'cursor-pointer'}
               `}
             >
-              <span className={`font-thai font-semibold ${isDense ? 'text-lg sm:text-xl' : 'text-xl sm:text-2xl'} ${isError ? 'line-through decoration-rose-300' : ''}`}>{formatCombiningChar(opt.th)}</span>
+              <span className={`font-thai font-semibold sm:font-normal ${isDense ? 'text-xl sm:text-[35px]' : 'text-2xl sm:text-[35px]'} ${isError ? 'line-through decoration-rose-300' : ''}`}>{formatCombiningChar(opt.th)}</span>
             </button>
           );
         })}

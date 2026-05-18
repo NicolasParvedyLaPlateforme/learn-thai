@@ -97,7 +97,7 @@ export default function VirtualKeyboard({ exercise, selected, onChange, disabled
     }
 
     // Pick top length, then shuffle choices
-    return [...choices].sort(() => Math.random() - 0.5);
+    return [...choices].sort((a, b) => a.th.localeCompare(b.th));
   }, [selected.length, exercise.id, expectedChar, exercise.options]);
 
   const isCombining = (charStr: string) => {
