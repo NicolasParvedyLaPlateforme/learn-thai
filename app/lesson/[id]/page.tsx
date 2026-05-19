@@ -496,7 +496,7 @@ function LessonPageContent() {
       <main className="flex-1 flex flex-col w-full relative">
         {/* Glossary Modal */}
         {showInfoModal && (
-          <div className="absolute inset-0 z-[60] flex flex-col bg-white">
+          <div className="absolute inset-0 z-[200] flex flex-col bg-white">
             <header className="h-16 px-8 flex items-center shrink-0 border-b border-slate-200 justify-between bg-white sticky top-0">
               <h2 className="text-xl font-bold text-slate-800">
                 {language === "en" ? "Vocabulary List" : "Liste de vocabulaire"}

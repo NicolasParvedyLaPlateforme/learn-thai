@@ -279,17 +279,6 @@
           ],
           "en": "My name is (first name) and you? ",
           "imageUrl": "/images/p_p_my_name_and_you_f.svg"
-        },
-        {
-          "id": "p_what_is_it",
-          "th": "อะไร",
-          "fr": "quoi ?",
-          "phonetic": "à-rai",
-          "components": [
-            "w_arai"
-          ],
-          "en": "What ?",
-          "imageUrl": "/images/p_p_what_is_it.svg"
         }
       ],
       "titleEn": "Basics 2: Introduce yourself",
