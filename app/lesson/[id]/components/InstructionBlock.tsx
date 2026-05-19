@@ -1,6 +1,7 @@
 import { Check } from "lucide-react";
 import InstructionExample from "./InstructionExample";
 import { Exercise } from "../../../types";
+import { motion } from "motion/react";
 
 interface InstructionBlockProps {
   language: string;
@@ -31,20 +32,32 @@ export default function InstructionBlock({
 }: InstructionBlockProps) {
   return (
     <div className="absolute inset-0 bg-[#FFFBF0] z-50 flex flex-col overflow-y-auto">
-      <div className="w-full bg-amber-100/80 py-2 md:py-3 text-amber-800 font-semibold flex items-center justify-center gap-2 mb-4 md:mb-6 border-b border-amber-200/50 flex-shrink-0">
+      <motion.div 
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.1 }}
+        className="w-full bg-amber-100/80 py-2 md:py-3 text-amber-800 font-semibold flex items-center justify-center gap-2 mb-4 md:mb-6 border-b border-amber-200/50 flex-shrink-0">
         <span className="text-xl">💡</span>{" "}
         {language === "en"
           ? "Here is how this exercise works"
           : "Voici comment fonctionne cet exercice"}
-      </div>
+      </motion.div>
 
       <div className="flex-1 flex flex-col items-center w-full px-4 md:px-6 max-w-2xl mx-auto gap-4 pb-4">
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-800 leading-tight text-center">
+        <motion.h2 
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.15 }}
+          className="text-2xl sm:text-3xl font-extrabold text-slate-800 leading-tight text-center">
           {instructionText}
-        </h2>
+        </motion.h2>
 
         {currentExercise.type !== "intro" && (
-          <div className="bg-white p-5 md:p-8 rounded-3xl w-full max-w-sm sm:max-w-md md:max-w-lg border-2 border-dashed border-amber-300 shadow-sm mx-auto relative mt-2 shrink-0">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.25 }}
+            className="bg-white p-5 md:p-8 rounded-3xl w-full max-w-sm sm:max-w-md md:max-w-lg border-2 border-dashed border-amber-300 shadow-sm mx-auto relative mt-2 shrink-0">
             <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-amber-100 text-amber-800 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest flex items-center gap-2 shadow-sm border border-amber-200/50">
               <span className="w-2 h-2 rounded-full bg-amber-500 animate-[pulse_2s_ease-in-out_infinite]"></span>
               {language === "en" ? "Example" : "Exemple"}
@@ -53,16 +66,24 @@ export default function InstructionBlock({
               typeKey={instructionKey}
               language={language}
             />
-          </div>
+          </motion.div>
         )}
 
-        <p className="text-slate-500 font-medium text-center text-sm md:text-base max-w-sm leading-relaxed mt-4 shrink-0">
+        <motion.p 
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6 }}
+          className="text-slate-500 font-medium text-center text-sm md:text-base max-w-sm leading-relaxed mt-4 shrink-0">
           {language === "en"
             ? "In the next steps, you will have to find the correct answer yourself!"
             : "Dans les prochaines étapes, vous devrez trouver la bonne réponse vous-même !"}
-        </p>
+        </motion.p>
 
-        <div className="pt-4 w-full max-w-sm shrink-0 mt-auto flex flex-col gap-3">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.7 }}
+          className="pt-4 w-full max-w-sm shrink-0 mt-auto flex flex-col gap-3">
           <label className="flex items-center justify-center md:justify-start gap-3 cursor-pointer p-3 rounded-xl hover:bg-amber-100/50 transition-colors">
             <div
               className={`w-6 h-6 rounded-md border-2 flex items-center justify-center transition-colors shrink-0 ${
@@ -117,7 +138,7 @@ export default function InstructionBlock({
               <path d="m12 5 7 7-7 7"></path>
             </svg>
           </button>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

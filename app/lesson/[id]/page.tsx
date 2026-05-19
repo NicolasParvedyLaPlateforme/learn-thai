@@ -403,24 +403,35 @@ function LessonPageContent() {
           >
             {/* Instruction Screen */}
             {(showInstruction || showHelpModal) && (
-              <InstructionBlock
-                language={language}
-                instructionText={instructionText}
-                instructionKey={instructionKey}
-                currentExercise={currentExercise}
-                dontShowAgain={dontShowAgain}
-                setDontShowAgain={setDontShowAgain}
-                showHelpModal={showHelpModal}
-                setShowHelpModal={setShowHelpModal}
-                hideInstruction={hideInstruction}
-                unhideInstruction={unhideInstruction}
-                setAcknowledgedInstructions={setAcknowledgedInstructions}
-              />
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+                className="w-full flex justify-center"
+              >
+                <InstructionBlock
+                  language={language}
+                  instructionText={instructionText}
+                  instructionKey={instructionKey}
+                  currentExercise={currentExercise}
+                  dontShowAgain={dontShowAgain}
+                  setDontShowAgain={setDontShowAgain}
+                  showHelpModal={showHelpModal}
+                  setShowHelpModal={setShowHelpModal}
+                  hideInstruction={hideInstruction}
+                  unhideInstruction={unhideInstruction}
+                  setAcknowledgedInstructions={setAcknowledgedInstructions}
+                />
+              </motion.div>
             )}
 
             {/* Help Button - Above Exercise */}
             {!(showInstruction || showHelpModal) && instructionKey && (
-              <div className="w-full max-w-3xl px-4 pt-4 md:pt-6 flex justify-end shrink-0">
+              <motion.div 
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: 0.05 }}
+                className="w-full max-w-3xl px-4 pt-4 md:pt-6 flex justify-end shrink-0">
                 <button
                   onClick={() => setShowHelpModal(true)}
                   className="text-slate-500 hover:text-amber-600 transition-colors bg-white rounded-full py-1.5 px-3 shadow-sm border border-slate-200 flex items-center gap-1.5 text-sm font-bold active:scale-95"
@@ -429,7 +440,7 @@ function LessonPageContent() {
                   <HelpCircle size={18} strokeWidth={2.5} />
                   {language === "en" ? "Help" : "Aide"}
                 </button>
-              </div>
+              </motion.div>
             )}
 
             {/* Scrollable Upper Area */}
@@ -449,7 +460,10 @@ function LessonPageContent() {
             </div>
 
             {/* Exercise Options (Fixed at bottom on Mobile) */}
-            <div
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: 0.3 }}
               className={`${showInstruction || showHelpModal ? "hidden" : "flex"} ${currentExercise.type === "pair-matching" ? "flex-1 items-center" : "shrink-0 md:shrink-0"} bg-transparent px-4 pb-4 pt-2 md:pt-4 md:pb-8 justify-center z-10 w-full max-w-3xl`}
             >
               <div className="w-full relative">
@@ -528,7 +542,7 @@ function LessonPageContent() {
                   />
                 )}
               </div>
-            </div>
+            </motion.div>
             {/* The transparent spacer to allow footer absolute positioning without overlapping options */}
             <div
               className="hidden"

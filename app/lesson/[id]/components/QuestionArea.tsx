@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Exercise, Lesson, Word } from "../../../types";
 import { SentenceWithHints } from "../../../components/Hints";
 import { playThaiTTS } from "../../../lib/tts";
+import { motion } from "motion/react";
 
 interface QuestionAreaProps {
   currentExercise: Exercise;
@@ -71,7 +72,10 @@ export default function QuestionArea({
       {/* Container for Question Content */}
       <div className="flex flex-col items-center justify-center text-center gap-4 md:gap-8 my-auto md:my-0 w-full">
         {/* Image Box */}
-        <div
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: 0.1 }}
           className={`${
             currentExercise.type === "intro" ||
             currentExercise.type === "word-match" ||
@@ -105,10 +109,15 @@ export default function QuestionArea({
           {!imageUrl && (
             <div className="absolute -right-2 -top-2 w-6 h-6 bg-emerald-500 border-2 border-white rounded-full z-10"></div>
           )}
-        </div>
+        </motion.div>
 
         {/* Question Content */}
-        <div className="flex-1 mt-2 md:mt-0 flex flex-col items-center w-full">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: 0.2 }}
+          className="flex-1 mt-2 md:mt-0 flex flex-col items-center w-full"
+        >
           <div className="relative w-full text-center mt-2 md:mt-0">
             {currentExercise.type === "intro" ? (
               <div className="flex flex-col items-center gap-4">
@@ -215,7 +224,7 @@ export default function QuestionArea({
               </div>
             )}
           </div>
-        </div>
+        </motion.div>
       </div>
     </>
   );
