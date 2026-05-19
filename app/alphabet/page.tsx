@@ -12,6 +12,8 @@ import { BookOpen, CheckCircle, Star, Play, Crown, X, Unlock, Lock, ChevronLeft,
 import Image from 'next/image';
 
 import { useGlobalSuggestedLesson } from '../lib/useGlobalSuggestedLesson';
+import { DesktopSidebarRight } from '../components/DesktopSidebarRight';
+import PWAInstallButton from '../components/PWAInstallButton';
 
 export default function AlphabetMenuPage() {
   const router = useRouter();
@@ -129,6 +131,7 @@ export default function AlphabetMenuPage() {
           </div>
           
           <div className="flex items-center gap-2">
+            {mounted && <PWAInstallButton />}
             {mounted && (
               <button 
                  onClick={() => setLanguage(language === 'fr' ? 'en' : 'fr')}
@@ -506,44 +509,18 @@ export default function AlphabetMenuPage() {
           </div>
           
           {/* Right Sidebar Wrap */}
-          <div className="w-80 flex-shrink-0 relative hidden xl:block z-40">
-            {/* Sticky wrapper */}
-            <div className="sticky top-24 w-full">
-              <div 
-                className="w-full relative flex flex-col gap-4 pb-4 group"
-              >
-              <div className="flex items-center gap-3 px-2 mb-2 text-slate-800 font-bold text-xl shrink-0">
-                <BookOpen size={24} className="shrink-0" />
-                <h2 className="whitespace-nowrap">
-                  {language === 'en' ? 'Units' : 'Unités'}
-                </h2>
-              </div>
-              <div className="flex flex-col gap-3 overflow-y-auto pr-2 custom-scrollbar pb-6 w-full">
-                {UNITS.map((u, i) => {
-                  const isCurrent = i === activeUnitIndex;
-                  const status = isCurrent ? (language === 'en' ? 'In progress' : 'En cours') : '';
-
-                  return (
-                    <button 
-                      key={u.id}
-                      onClick={() => handleUnitSelect(i)}
-                      className={`w-full text-left rounded-2xl transition-all relative overflow-hidden flex items-center h-[5.5rem] shrink-0 ${isCurrent ? `bg-emerald-50 text-emerald-800 border-2 border-emerald-200 shadow-sm` : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300 hover:bg-slate-50 border-2 border-b-4 active:border-b-2 active:translate-y-1'}`}
-                    >
-                      <div className="shrink-0 flex items-center justify-center font-black text-2xl w-16">
-                         {i + 1}
-                      </div>
-
-                      <div className="relative z-10 flex flex-col justify-center whitespace-nowrap overflow-hidden pr-4 w-auto">
-                        <h3 className="font-extrabold text-[15px] mb-0.5 truncate w-[12rem]">{language === 'en' ? u.titleEn : u.title}</h3>
-                        <span className={`text-xs font-bold ${isCurrent ? 'text-emerald-500' : 'text-slate-400'}`}>{status}</span>
-                      </div>
-                    </button>
-                  )
-                })}
-              </div>
-            </div>
-          </div>
-          </div>
+          <DesktopSidebarRight 
+            units={UNITS}
+            activeUnitIndex={activeUnitIndex}
+            onUnitSelect={handleUnitSelect}
+            language={language}
+            globalSuggested={globalSuggested}
+            lessons={UNITS[activeUnitIndex].lessons}
+            lessonLevels={lessonLevels}
+            mounted={mounted}
+            maxLevelPerLesson={4}
+            suggestionType="alphabet"
+          />
         </div>
       )}
 

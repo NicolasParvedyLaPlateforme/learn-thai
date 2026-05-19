@@ -686,13 +686,79 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
     }
     finalExercises = [...wmPool, ...fillInBlankPool, ...sbPool];
   } else if (level === 3) {
-    // Level 4: Only sentence-builder
+    // Level 4: Mixture of sentence builder types
+    // 1. Fill in the blank
+    let fillInBlankPool: Exercise[] = [];
+    sbExercises.forEach((sbEx) => {
+       if (!sbEx.correctComponents || sbEx.correctComponents.length <= 1) return;
+       // Pick a random word to blank (exclude w_dots)
+       const validIndices = sbEx.correctComponents.map((c, i) => c !== 'w_dots' ? i : -1).filter(i => i !== -1);
+       if (validIndices.length === 0) return;
+       
+       const blankIndex = validIndices[Math.floor(Math.random() * validIndices.length)];
+       const blankWordId = sbEx.correctComponents[blankIndex];
+       
+       const blankWord = allLessons.flatMap(l => l.words).find(w => w.id === blankWordId) || {id: blankWordId, th: blankWordId, fr: '', en: ''};
+       
+       // Just grab 1 misspelled distractor so we have 2 options
+       const misspelledOptions = generateMisspelledWords(blankWord as any, 1);
+       
+       const prefilledComponents = sbEx.correctComponents.map((id, i) => {
+           if (i === blankIndex) return '';
+           if (id === 'w_dots') return '...';
+           const w = allLessons.flatMap(l => l.words).find(w => w.id === id);
+           return w ? w.th : id;
+       });
+       
+       fillInBlankPool.push({
+          ...sbEx,
+          id: `fill-blank-4-${sbEx.id}-${Date.now()}-${Math.random()}`,
+          isFillInBlank: true,
+          blankIndex: blankIndex,
+          prefilledComponents: prefilledComponents,
+          options: shuffle([blankWord, ...misspelledOptions]) as any,
+          maxMistakes: 1
+       });
+    });
+
+    // 2. Regular sentence builder
     let sbPool = [...sbExercises];
-    while (sbPool.length < 10 && sbExercises.length > 0) sbPool = [...sbPool, ...shuffle(sbExercises)];
-    if (sbPool.length === 0) sbPool = [...wmExercises];
-    finalExercises = sbPool.map((ex, i) => ({
+
+    // 3. New: Translate this phrase (Word Match style with full phrases)
+    let phraseMatchPool: Exercise[] = [];
+    const allPhrases = allLessons.flatMap(l => l.phrases);
+    lesson.phrases.forEach(phrase => {
+       // Find a similar phrase
+       const similar = allPhrases.filter(p => p.id !== phrase.id && p.components.some(c => phrase.components.includes(c)));
+       const distractorPhrase = similar.length > 0 ? shuffle(similar)[0] : (shuffle(allPhrases.filter(p => p.id !== phrase.id))[0] || phrase);
+       
+       phraseMatchPool.push({
+          id: `pmatch-${phrase.id}-${Date.now()}-${Math.random()}`,
+          type: 'word-match',
+          question: language === 'en' ? (phrase.en || phrase.fr) : phrase.fr,
+          answer: phrase.th,
+          options: shuffle([
+            { id: phrase.id, th: phrase.th, fr: phrase.fr, phonetic: phrase.phonetic },
+            { id: distractorPhrase.id, th: distractorPhrase.th, fr: distractorPhrase.fr, phonetic: distractorPhrase.phonetic }
+          ]) as any,
+          hideHints: false,
+          imageUrl: phrase.imageUrl,
+          maxMistakes: 1
+       });
+    });
+
+    // Combine them and ensure at least 15 exercises
+    let mixedPool = shuffle([...fillInBlankPool, ...sbPool, ...phraseMatchPool]);
+    while (mixedPool.length < 15 && mixedPool.length > 0) {
+      mixedPool = [...mixedPool, ...shuffle(mixedPool)];
+    }
+    
+    // Fallback if no phrase exercises can be generated
+    if (mixedPool.length === 0) mixedPool = [...wmExercises];
+    
+    finalExercises = mixedPool.slice(0, 15).map((ex, i) => ({
       ...ex,
-      forceHideRomanization: i >= Math.floor(sbPool.length / 2)
+      forceHideRomanization: i >= Math.floor(mixedPool.length / 2) // Hide romanization for half of them
     }));
   } else if (level >= 4 && level <= 6) {
     // Level 5 (index 4): Normal pair-matching
