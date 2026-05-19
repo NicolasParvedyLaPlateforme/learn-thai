@@ -92,7 +92,7 @@ export default function WritingPage() {
   // Loop back or refill if needed
   const progress = ((currentIndex % 10) / 10) * 100;
 
-  const handleCheck = () => {
+  const handleCheck = (overrideAnswer?: string[]) => {
     if (isChecking) {
       if (isCorrect) {
           completeLesson('writing-dummy', 1);
@@ -122,9 +122,10 @@ export default function WritingPage() {
       return;
     }
 
-    if (selectedAnswer.length === 0) return;
+    const answerToCheck = overrideAnswer || selectedAnswer;
+    if (answerToCheck.length === 0) return;
     
-    const builtValue = selectedAnswer.join('').replace(/\s+/g, '');
+    const builtValue = answerToCheck.join('').replace(/\s+/g, '');
     const targetValue = currentExercise.answer.replace(/\s+/g, '');
     const correct = builtValue === targetValue;
 
@@ -342,51 +343,50 @@ export default function WritingPage() {
               selected={selectedAnswer}
               onChange={setSelectedAnswer}
               disabled={isChecking}
+              onAutoCheck={(val) => handleCheck(val)}
             />
           </div>
         </div>
       </main>
 
       {/* Footer */}
-      <footer className={`shrink-0 min-h-[100px] md:h-32 py-4 md:py-0 border-t-2 border-slate-200 flex items-center justify-center transition-colors duration-300 ${isChecking ? (isCorrect ? 'bg-emerald-50' : 'bg-rose-50 border-rose-200') : 'bg-white'}`}>
-        <div className="w-full max-w-2xl px-4 flex sm:flex-row flex-col items-center justify-between gap-4">
-          
-          <div className="flex-1 w-full text-center sm:text-left">
-            {isChecking && isCorrect && (
-              <div className="flex items-center justify-center sm:justify-start gap-3 text-emerald-600 font-extrabold text-xl">
-                <div className="bg-white text-emerald-500 rounded-full p-1"><Check size={24} strokeWidth={3} /></div>
-                {language === 'en' ? 'Perfect!' : 'Parfait !'}
-              </div>
-            )}
-            {isChecking && !isCorrect && (
-              <div className="flex flex-col text-rose-600 font-extrabold text-xl gap-1 items-center sm:items-start">
-                <div className="flex items-center gap-3">
-                  <div className="bg-white text-rose-500 rounded-full p-1"><X size={24} strokeWidth={3} /></div>
-                  {language === 'en' ? 'Almost...' : 'Presque...'}
+      <>
+        <div className="shrink-0 min-h-[100px] md:h-32 w-full bg-transparent"></div>
+        {isChecking && (
+        <footer className={`fixed bottom-0 left-0 right-0 z-50 min-h-[100px] md:h-32 py-4 md:py-0 border-t-2 border-slate-200 flex items-center justify-center transition-colors duration-300 ${isCorrect ? 'bg-emerald-50' : 'bg-rose-50 border-rose-200'}`}>
+          <div className="w-full max-w-2xl px-4 flex sm:flex-row flex-col items-center justify-between gap-4">
+            
+            <div className="flex-1 w-full text-center sm:text-left">
+              {isCorrect ? (
+                <div className="flex items-center justify-center sm:justify-start gap-3 text-emerald-600 font-extrabold text-xl">
+                  <div className="bg-white text-emerald-500 rounded-full p-1"><Check size={24} strokeWidth={3} /></div>
+                  {language === 'en' ? 'Perfect!' : 'Parfait !'}
                 </div>
-                <div className="text-rose-800 text-sm mt-1 uppercase tracking-widest hidden sm:block">
-                  {language === 'en' ? 'The exact spelling was:' : 'La bonne écriture était :'}
+              ) : (
+                <div className="flex flex-col text-rose-600 font-extrabold text-xl gap-1 items-center sm:items-start">
+                  <div className="flex items-center gap-3">
+                    <div className="bg-white text-rose-500 rounded-full p-1"><X size={24} strokeWidth={3} /></div>
+                    {language === 'en' ? 'Almost...' : 'Presque...'}
+                  </div>
+                  <div className="text-rose-800 text-sm mt-1 uppercase tracking-widest hidden sm:block">
+                    {language === 'en' ? 'The exact spelling was:' : 'La bonne écriture était :'}
+                  </div>
+                  <div className="text-rose-900 font-medium font-thai text-2xl md:text-3xl mt-1 tracking-wider">{currentExercise.answer}</div>
                 </div>
-                <div className="text-rose-900 font-medium font-thai text-2xl md:text-3xl mt-1 tracking-wider">{currentExercise.answer}</div>
-              </div>
-            )}
-          </div>
+              )}
+            </div>
 
-          <button
-            onClick={handleCheck}
-            disabled={selectedAnswer.length === 0}
-            className={`w-full sm:w-auto px-12 py-3 rounded-xl border-b-4 font-bold text-lg shadow-lg hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest disabled:opacity-50 disabled:scale-100 disabled:shadow-none
-              ${isChecking 
-                ? (isCorrect 
-                  ? 'bg-emerald-500 border-emerald-700 text-white hover:bg-emerald-400' 
-                  : 'bg-rose-500 border-rose-700 text-white hover:bg-rose-400') 
-                : 'bg-emerald-500 border-emerald-700 text-white hover:bg-emerald-400'}
-            `}
-          >
-            {isChecking ? (language === 'en' ? 'Continue' : 'Continuer') : (language === 'en' ? 'Check' : 'Vérifier')}
-          </button>
-        </div>
-      </footer>
+            <button
+              onClick={() => handleCheck()}
+              disabled={selectedAnswer.length === 0}
+              className={`w-full sm:w-auto px-12 py-3 rounded-xl border-b-4 font-bold text-lg shadow-lg hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest disabled:opacity-50 disabled:scale-100 disabled:shadow-none ${isCorrect ? 'bg-emerald-500 border-emerald-700 text-white hover:bg-emerald-400' : 'bg-rose-500 border-rose-700 text-white hover:bg-rose-400'}`}
+            >
+              {language === 'en' ? 'Continue' : 'Continuer'}
+            </button>
+          </div>
+        </footer>
+        )}
+      </>
     </div>
   );
 }

@@ -243,7 +243,30 @@ export function generateEndlessReviewExercises(
     });
   });
 
-  return shuffle(exercises).slice(0, 20); // Return a batch of 20 random exercises
+  const finalBatch = shuffle(exercises).slice(0, 20); // Return a batch of 20 random exercises
+  
+  // Prevent consecutive word-match exercises from having the correct answer at the same index
+  let lastCorrectIndex = -1;
+  for (const ex of finalBatch) {
+    if (ex.type === 'word-match' && !ex.isFillInBlank && ex.options && ex.options.length > 1) {
+      let correctIndex = ex.options.findIndex((o: any) => o.th === ex.answer);
+      if (correctIndex !== -1) {
+        if (correctIndex === lastCorrectIndex) {
+          let newIdx;
+          do {
+            newIdx = Math.floor(Math.random() * ex.options.length);
+          } while (newIdx === correctIndex);
+          const newOptions = [...ex.options];
+          [newOptions[correctIndex], newOptions[newIdx]] = [newOptions[newIdx], newOptions[correctIndex]];
+          ex.options = newOptions;
+          correctIndex = newIdx;
+        }
+        lastCorrectIndex = correctIndex;
+      }
+    }
+  }
+  
+  return finalBatch;
 }
 
 function generateMisspelledWords(word: Word, count: number): {id: string, th: string, fr: string, phonetic: string}[] {
@@ -875,6 +898,27 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
       }
     }
     exercisesWithIntros.push(ex);
+  }
+
+  // Prevent consecutive word-match exercises from having the correct answer at the same index
+  let lastCorrectIndex = -1;
+  for (const ex of exercisesWithIntros) {
+    if (ex.type === 'word-match' && !ex.isFillInBlank && ex.options && ex.options.length > 1) {
+      let correctIndex = ex.options.findIndex((o: any) => o.th === ex.answer);
+      if (correctIndex !== -1) {
+        if (correctIndex === lastCorrectIndex) {
+          let newIdx;
+          do {
+            newIdx = Math.floor(Math.random() * ex.options.length);
+          } while (newIdx === correctIndex);
+          const newOptions = [...ex.options];
+          [newOptions[correctIndex], newOptions[newIdx]] = [newOptions[newIdx], newOptions[correctIndex]];
+          ex.options = newOptions;
+          correctIndex = newIdx;
+        }
+        lastCorrectIndex = correctIndex;
+      }
+    }
   }
 
   return exercisesWithIntros;

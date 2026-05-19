@@ -982,7 +982,13 @@ function LessonPageContent() {
       </main>
 
       {/* Footer Actions */}
-      {(currentExercise.type !== "pair-matching" || (isChecking && !isCorrect)) && (
+      {(() => {
+          if (currentExercise.type === "pair-matching") return isChecking && !isCorrect;
+          if (!isChecking && (currentExercise.type === "word-match" || currentExercise.type === "sentence-builder" || currentExercise.type === "writing")) {
+             return false;
+          }
+          return true;
+      })() && (
         <>
           <AnimatePresence>
             {showFooter && (

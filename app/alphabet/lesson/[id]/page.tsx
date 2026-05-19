@@ -110,7 +110,7 @@ function AlphabetLessonContent() {
   const currentExercise = exercises[currentIndex];
   const progress = (currentIndex / exercises.length) * 100;
 
-  const handleCheck = () => {
+  const handleCheck = (overrideOpt?: any) => {
     // If it's intro or review phase, just proceed
     if (currentExercise.type === 'intro' || currentExercise.type === 'review') {
        if (currentExercise.type === 'intro' && !seenAlphabets.includes(currentExercise.item.letter)) {
@@ -134,9 +134,10 @@ function AlphabetLessonContent() {
     }
 
     // Validate
-    if (!selectedOption) return;
+    const optionToCheck = overrideOpt || selectedOption;
+    if (!optionToCheck) return;
     
-    const correct = selectedOption.letter === currentExercise.letterToPick;
+    const correct = optionToCheck.letter === currentExercise.letterToPick;
     
     setIsCorrect(correct);
     setIsChecking(true);
@@ -283,6 +284,7 @@ function AlphabetLessonContent() {
                   if (isCorrect === null) {
                     setSelectedOption(opt);
                     playThaiTTS(opt.exampleWord);
+                    handleCheck(opt);
                   }
                 }}
                 className={`
@@ -332,6 +334,7 @@ function AlphabetLessonContent() {
                   if (isCorrect === null) {
                     setSelectedOption(opt);
                     playThaiTTS(opt.exampleWord);
+                    handleCheck(opt);
                   }
                 }}
                 className={`
@@ -454,6 +457,7 @@ function AlphabetLessonContent() {
                 if (isCorrect === null) {
                   setSelectedOption(opt);
                   playThaiTTS(opt.exampleWord);
+                  handleCheck(opt);
                 }
               }}
               className={`
@@ -522,6 +526,12 @@ function AlphabetLessonContent() {
       {/* Footer Actions */}
       <>
         <div className="shrink-0 min-h-[100px] md:min-h-[128px] w-full bg-transparent"></div>
+        {(() => {
+          if (!isChecking && currentExercise.type !== 'intro' && currentExercise.type !== 'review') {
+             return false;
+          }
+          return true;
+        })() && (
         <AnimatePresence>
           {showFooter && (
             <motion.footer 
@@ -555,7 +565,7 @@ function AlphabetLessonContent() {
               </div>
 
               <button
-                onClick={handleCheck}
+                onClick={() => handleCheck()}
                 disabled={currentExercise.type !== 'intro' && currentExercise.type !== 'review' && !isChecking && !selectedOption}
                 className={`w-full sm:w-auto px-12 py-3 rounded-xl border-b-4 font-bold text-lg shadow-lg hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest disabled:opacity-50 disabled:scale-100 disabled:shadow-none
                   ${(currentExercise.type === 'intro' || currentExercise.type === 'review') ? 'bg-emerald-500 border-emerald-700 text-white hover:bg-emerald-400' :
@@ -572,6 +582,7 @@ function AlphabetLessonContent() {
           </motion.footer>
         )}
       </AnimatePresence>
+      )}
       </>
     </div>
   );

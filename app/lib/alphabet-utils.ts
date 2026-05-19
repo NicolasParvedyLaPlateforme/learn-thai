@@ -250,5 +250,27 @@ export function generateAlphabetExercises(lessonDef: AlphabetLessonDef, level: n
     exercises.push(...pms);
   }
   
+  // Prevent consecutive matching exercises from having the correct answer at the same index
+  let lastCorrectIndex = -1;
+  for (const ex of exercises) {
+    if ((ex.type === 'word-match' || ex.type === 'phonetic-match' || ex.type === 'audio-match') && ex.options && ex.options.length > 1) {
+      // The answer is the one that matches ex.item.letter
+      let correctIndex = ex.options.findIndex(o => o.letter === ex.item.letter);
+      if (correctIndex !== -1) {
+        if (correctIndex === lastCorrectIndex) {
+          let newIdx;
+          do {
+            newIdx = Math.floor(Math.random() * ex.options.length);
+          } while (newIdx === correctIndex);
+          const newOptions = [...ex.options];
+          [newOptions[correctIndex], newOptions[newIdx]] = [newOptions[newIdx], newOptions[correctIndex]];
+          ex.options = newOptions;
+          correctIndex = newIdx;
+        }
+        lastCorrectIndex = correctIndex;
+      }
+    }
+  }
+
   return exercises;
 }

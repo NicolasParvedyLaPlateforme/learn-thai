@@ -165,7 +165,7 @@ export default function ReviewPage() {
   // Since it's endless, the progress is just cosmetic, let's keep it fixed or bouncing
   const progress = ((currentIndex % 10) / 10) * 100;
 
-  const handleCheck = () => {
+  const handleCheck = (overrideAnswer?: string | string[]) => {
     if (isChecking) {
       // Move to next exercise
       if (isCorrect) {
@@ -193,13 +193,14 @@ export default function ReviewPage() {
     }
 
     // Validate
-    if (!selectedAnswer) return;
+    const answerToCheck = overrideAnswer !== undefined && overrideAnswer !== null && (typeof overrideAnswer === 'string' || Array.isArray(overrideAnswer)) ? overrideAnswer : selectedAnswer;
+    if (!answerToCheck) return;
     
     let correct = false;
     if (currentExercise.type === 'word-match') {
-      correct = selectedAnswer === currentExercise.answer;
+      correct = answerToCheck === currentExercise.answer;
     } else if (currentExercise.type === 'sentence-builder') {
-      const builtSentence = (selectedAnswer as string[]).join('').replace(/\s+/g, '');
+      const builtSentence = (answerToCheck as string[]).join('').replace(/\s+/g, '');
       const expectedSentence = currentExercise.answer.replace(/\s+/g, '').replace(/\.\.\./g, '');
       correct = builtSentence === expectedSentence;
     }
@@ -282,6 +283,7 @@ export default function ReviewPage() {
                 selected={selectedAnswer as string} 
                 onChange={setSelectedAnswer}
                 disabled={isChecking}
+                onAutoCheck={(val) => handleCheck(val)}
               />
             ) : (
               <SentenceBuilder 
@@ -289,6 +291,7 @@ export default function ReviewPage() {
                 selected={selectedAnswer as string[] || []}
                 onChange={setSelectedAnswer}
                 disabled={isChecking}
+                onAutoCheck={(val) => handleCheck(val)}
               />
             )}
           </div>
@@ -298,6 +301,12 @@ export default function ReviewPage() {
       {/* Footer Actions */}
       <>
         <div className="shrink-0 min-h-[100px] md:min-h-[128px] w-full bg-transparent"></div>
+        {(() => {
+          if (!isChecking && (currentExercise.type === "word-match" || currentExercise.type === "sentence-builder" || currentExercise.type === "writing")) {
+             return false;
+          }
+          return true;
+        })() && (
         <AnimatePresence>
           {showFooter && (
             <motion.footer 
@@ -331,7 +340,7 @@ export default function ReviewPage() {
               </div>
 
               <button
-                onClick={handleCheck}
+                onClick={() => handleCheck()}
                 disabled={!isChecking && (!selectedAnswer || (Array.isArray(selectedAnswer) && (currentExercise.type === 'sentence-builder' && currentExercise.correctComponents ? selectedAnswer.length !== currentExercise.correctComponents.length : selectedAnswer.length === 0)))}
                 className={`w-full sm:w-auto px-12 py-3 rounded-xl border-b-4 font-bold text-lg shadow-lg hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest disabled:opacity-50 disabled:scale-100 disabled:shadow-none
                   ${isChecking 
@@ -347,6 +356,7 @@ export default function ReviewPage() {
           </motion.footer>
         )}
       </AnimatePresence>
+      )}
       </>
     </div>
   );
