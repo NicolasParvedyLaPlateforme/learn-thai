@@ -9043,14 +9043,14 @@
         },
         {
           "id": "p_auto_lesson-50_2",
-          "th": "บิน น้อง",
-          "fr": "[Pratique] voler / petit frère / petite sœur",
-          "phonetic": "bin nɔ́ɔng",
+          "th": "น้องป่วย",
+          "fr": "[Pratique] Mon petit frère / ma petite sœur est malade",
+          "phonetic": "nɔ́ɔng bpùay",
           "components": [
-            "w_bin",
-            "w_nong"
+            "w_nong",
+            "w_puay"
           ],
-          "en": "[Practical] fly / little brother / little sister",
+          "en": "[Practice] My little brother / little sister is sick",
           "imageUrl": "/images/p_p_auto_lesson-50_2.svg"
         },
         {

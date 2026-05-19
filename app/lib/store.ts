@@ -70,6 +70,9 @@ interface ProgressState {
   lastPlayedLessonType: 'learn' | 'alphabet' | null;
   setLastPlayedLesson: (id: string, type: 'learn' | 'alphabet') => void;
   lessonStars: Record<string, number[]>; // Maps lessonId to array of stars for each level
+  hiddenInstructions: string[];
+  hideInstruction: (key: string) => void;
+  unhideInstruction: (key: string) => void;
 }
 
 export const useProgressStore = create<ProgressState>()(
@@ -83,6 +86,7 @@ export const useProgressStore = create<ProgressState>()(
       unlockedLessons: [],
       lessonLevels: {},
       lessonStars: {},
+      hiddenInstructions: [],
       xp: 0,
       seenAlphabets: [],
       isExerciseRunning: false,
@@ -102,7 +106,16 @@ export const useProgressStore = create<ProgressState>()(
       lastPlayedLessonId: null,
       lastPlayedLessonType: null,
       setLastPlayedLesson: (id, type) => set({ lastPlayedLessonId: id, lastPlayedLessonType: type }),
+      hideInstruction: (key) => set((state) => ({ 
+        hiddenInstructions: state.hiddenInstructions.includes(key) 
+          ? state.hiddenInstructions 
+          : [...state.hiddenInstructions, key] 
+      })),
+      unhideInstruction: (key) => set((state) => ({ 
+        hiddenInstructions: state.hiddenInstructions.filter((k) => k !== key) 
+      })),
       setWritingConfig: (config) => set((state) => ({ writingConfig: { ...state.writingConfig, ...config } })),
+
       setLanguage: (lang) => set({ language: lang, languageSetByUser: true }),
       autoDetectLanguage: () => {
         const state = get();

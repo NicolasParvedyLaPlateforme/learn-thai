@@ -9,11 +9,21 @@ import { formatCombiningChar } from '../lib/alphabet-utils';
 interface PairMatchProps {
   pairs: Word[];
   mode?: 'normal' | 'audio-only' | 'script-only';
-  onComplete: () => void;
+  onComplete: (failed?: boolean) => void;
   forceHideRomanization?: boolean;
+  disabled?: boolean;
 }
 
-export default function PairMatch({ pairs, mode = 'normal', onComplete, forceHideRomanization }: PairMatchProps) {
+const pairColors = [
+  'bg-blue-100 border-blue-300 text-blue-700',
+  'bg-emerald-100 border-emerald-300 text-emerald-700',
+  'bg-amber-100 border-amber-300 text-amber-700',
+  'bg-purple-100 border-purple-300 text-purple-700',
+  'bg-pink-100 border-pink-300 text-pink-700',
+  'bg-cyan-100 border-cyan-300 text-cyan-700',
+];
+
+export default function PairMatch({ pairs, mode = 'normal', onComplete, forceHideRomanization, disabled }: PairMatchProps) {
   const { language, showRomanization } = useProgressStore();
   const [leftCards, setLeftCards] = useState<{id: string, text: string, type: 'left'}[]>([]);
   const [rightCards, setRightCards] = useState<{id: string, text: string, phonetic: string, type: 'right'}[]>([]);
@@ -21,10 +31,11 @@ export default function PairMatch({ pairs, mode = 'normal', onComplete, forceHid
   const [selectedLeft, setSelectedLeft] = useState<string | null>(null);
   const [selectedRight, setSelectedRight] = useState<string | null>(null);
   const [matchedIds, setMatchedIds] = useState<Set<string>>(new Set());
-  const [errorIds, setErrorIds] = useState<Set<string>>(new Set()); // IDs that recently failed
+  const [errorIds, setErrorIds] = useState<Set<string>>(new Set()); // IDs that recently failed (format: "type-id")
+  const [mistakes, setMistakes] = useState(0);
+  const [failed, setFailed] = useState(false);
 
   useEffect(() => {
-    // Initialize cards and shuffle them independently
     const lefts = pairs.map(p => ({
       id: p.id,
       text: language === 'en' ? (p.en || p.fr) : p.fr,
@@ -37,7 +48,6 @@ export default function PairMatch({ pairs, mode = 'normal', onComplete, forceHid
       type: 'right' as const
     }));
 
-    // shuffle
     const leftsSorted = [...lefts].sort(() => Math.random() - 0.5);
     const rightsSorted = [...rights].sort(() => Math.random() - 0.5);
     setLeftCards(leftsSorted);
@@ -45,13 +55,19 @@ export default function PairMatch({ pairs, mode = 'normal', onComplete, forceHid
   }, [pairs, language]);
 
   const handleSelectLeft = (id: string) => {
-    if (matchedIds.has(id)) return;
+    if (disabled || failed || matchedIds.has(id)) return;
+    
+    // In audio-only mode, force user to select audio first.
+    if (mode === 'audio-only' && !selectedRight) {
+      return;
+    }
+
     setSelectedLeft(id);
     checkMatch(id, selectedRight);
   };
 
   const handleSelectRight = (id: string) => {
-    if (matchedIds.has(id)) return;
+    if (disabled || failed || matchedIds.has(id)) return;
     setSelectedRight(id);
     if (mode !== 'script-only') {
       playThaiTTS(pairs.find(p => p.id === id)?.th || '');
@@ -69,36 +85,45 @@ export default function PairMatch({ pairs, mode = 'normal', onComplete, forceHid
       setSelectedLeft(null);
       setSelectedRight(null);
     } else {
-      // Mismatch! Show error state briefly
-      const errList = new Set([leftId, rightId]);
-      setErrorIds(prev => new Set([...prev, ...errList]));
-      setSelectedLeft(null);
-      setSelectedRight(null);
-      setTimeout(() => {
-        setErrorIds(prev => {
-          const newErr = new Set(prev);
-          newErr.delete(leftId);
-          newErr.delete(rightId);
-          return newErr;
-        });
-      }, 600); // delay before resetting selection visual
+      // Mismatch!
+      const newMistakes = mistakes + 1;
+      setMistakes(newMistakes);
+
+      if (newMistakes >= 2) {
+        setFailed(true);
+        setSelectedLeft(null);
+        setSelectedRight(null);
+        onComplete(true);
+      } else {
+        const errList = new Set([`left-${leftId}`, `right-${rightId}`]);
+        setErrorIds(prev => new Set([...prev, ...errList]));
+        setSelectedLeft(null);
+        setSelectedRight(null);
+        setTimeout(() => {
+          setErrorIds(prev => {
+            const newErr = new Set(prev);
+            newErr.delete(`left-${leftId}`);
+            newErr.delete(`right-${rightId}`);
+            return newErr;
+          });
+        }, 600);
+      }
     }
   };
 
   useEffect(() => {
     let timeout: NodeJS.Timeout;
-    if (matchedIds.size > 0 && matchedIds.size === pairs.length) {
+    if (!failed && matchedIds.size > 0 && matchedIds.size === pairs.length) {
       timeout = setTimeout(() => {
-        onComplete();
+        onComplete(false);
       }, 1000);
     }
     return () => {
       if (timeout) clearTimeout(timeout);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [matchedIds.size, pairs.length]); // Removed onComplete to prevent infinite renders
+  }, [matchedIds.size, pairs.length, failed]);
 
-  const isAllMatched = matchedIds.size > 0 && matchedIds.size === pairs.length;
+  const isAllMatched = !failed && matchedIds.size > 0 && matchedIds.size === pairs.length;
 
   return (
     <div className="relative w-full max-w-lg mx-auto py-2 sm:py-8 flex flex-col justify-center">
@@ -108,25 +133,31 @@ export default function PairMatch({ pairs, mode = 'normal', onComplete, forceHid
           {leftCards.map(card => {
             const isMatched = matchedIds.has(card.id);
             const isSelected = selectedLeft === card.id;
-            const isError = errorIds.has(card.id);
-            
+            const isError = errorIds.has(`left-${card.id}`);
+            const isDisabled = disabled || isMatched || (mode === 'audio-only' && !selectedRight && !selectedLeft);
+            let colorClass = 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50';
+
+            if (failed) {
+              const pairIndex = pairs.findIndex(p => p.id === card.id);
+              colorClass = pairColors[pairIndex % pairColors.length];
+            } else if (isError) {
+              colorClass = 'bg-rose-100 border-rose-300 text-rose-700';
+            } else if (isSelected) {
+              colorClass = 'bg-indigo-100 border-indigo-300 text-indigo-700';
+            }
+
             return (
               <motion.button
                 key={`L-${card.id}`}
                 initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: isMatched ? 0 : 1, scale: isMatched ? 0.9 : 1 }}
+                animate={{ opacity: isMatched ? 0.3 : (mode === 'audio-only' && !selectedRight && !selectedLeft) ? 0.6 : 1, scale: isMatched ? 0.95 : 1 }}
                 transition={{ duration: 0.25, ease: "easeOut" }}
                 onClick={() => handleSelectLeft(card.id)}
-                disabled={isMatched}
+                disabled={isDisabled || failed}
                 style={{ WebkitTapHighlightColor: 'transparent', willChange: 'opacity, transform' }}
                 className={`px-2 py-4 rounded-xl text-base sm:text-lg font-medium border-b-4 transition-colors h-24 sm:h-32 flex items-center justify-center text-center leading-tight transform-gpu backface-hidden
-                  ${isMatched ? 'pointer-events-none' : ''}
-                  ${isError 
-                    ? 'bg-rose-100 border-rose-300 text-rose-700'
-                    : isSelected 
-                      ? 'bg-indigo-100 border-indigo-300 text-indigo-700'
-                      : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'
-                  }
+                  ${(isMatched || isDisabled || failed) ? 'pointer-events-none' : ''}
+                  ${colorClass}
                 `}
               >
                 {card.text}
@@ -137,37 +168,42 @@ export default function PairMatch({ pairs, mode = 'normal', onComplete, forceHid
 
         {/* Right Column (TH) */}
         <div className="flex flex-col gap-3 sm:gap-4 flex-1">
-          {rightCards.map(card => {
+          {rightCards.map((card, index) => {
             const isMatched = matchedIds.has(card.id);
             const isSelected = selectedRight === card.id;
-            const isError = errorIds.has(card.id);
-            
+            const isError = errorIds.has(`right-${card.id}`);
+            let colorClass = 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50';
+
+            if (failed) {
+              const pairIndex = pairs.findIndex(p => p.id === card.id);
+              colorClass = pairColors[pairIndex % pairColors.length];
+            } else if (isError) {
+              colorClass = 'bg-rose-100 border-rose-300 text-rose-700';
+            } else if (isSelected) {
+              colorClass = 'bg-indigo-100 border-indigo-300 text-indigo-700';
+            }
+
             return (
               <motion.button
                 key={`R-${card.id}`}
                 initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: isMatched ? 0 : 1, scale: isMatched ? 0.9 : 1 }}
+                animate={{ opacity: isMatched ? 0.3 : 1, scale: isMatched ? 0.95 : 1 }}
                 transition={{ duration: 0.25, ease: "easeOut" }}
                 onClick={() => handleSelectRight(card.id)}
-                disabled={isMatched}
+                disabled={disabled || isMatched || failed}
                 style={{ WebkitTapHighlightColor: 'transparent', willChange: 'opacity, transform' }}
                 className={`px-2 py-4 rounded-xl text-base sm:text-lg font-medium border-b-4 transition-colors h-24 sm:h-32 flex items-center justify-center text-center leading-tight transform-gpu backface-hidden
-                  ${isMatched ? 'pointer-events-none' : ''}
-                  ${isError 
-                    ? 'bg-rose-100 border-rose-300 text-rose-700'
-                    : isSelected 
-                      ? 'bg-indigo-100 border-indigo-300 text-indigo-700'
-                      : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'
-                  }
+                  ${(isMatched || disabled || failed) ? 'pointer-events-none' : ''}
+                  ${colorClass}
                 `}
               >
                 <div className="flex flex-col items-center justify-center h-full">
                   {mode === 'audio-only' ? (
-                    <Volume2 className={`w-8 h-8 sm:w-10 sm:h-10 ${isSelected || isMatched ? 'text-indigo-600' : 'text-slate-400'}`} />
+                    <Volume2 className={`w-8 h-8 sm:w-10 sm:h-10 ${isSelected || isMatched || failed ? 'text-indigo-600' : 'text-slate-400'}`} />
                   ) : (
                     <>
                       <span className="text-xl sm:text-2xl">{formatCombiningChar(card.text)}</span>
-                      {mode !== 'script-only' && (!forceHideRomanization && showRomanization || isMatched) && (
+                      {mode !== 'script-only' && (!forceHideRomanization && showRomanization || isMatched || failed) && (
                         <span className="text-xs sm:text-sm opacity-60 font-mono mt-1 text-slate-500">[{card.phonetic}]</span>
                       )}
                     </>
