@@ -13,6 +13,7 @@ import Image from 'next/image';
 
 import { useGlobalSuggestedLesson } from '../lib/useGlobalSuggestedLesson';
 import { DesktopSidebarRight } from '../components/DesktopSidebarRight';
+import PWAInstallButton from '../components/PWAInstallButton';
 
 export default function AlphabetMenuPage() {
   const router = useRouter();
@@ -130,6 +131,7 @@ export default function AlphabetMenuPage() {
           </div>
           
           <div className="flex items-center gap-2">
+            {mounted && <PWAInstallButton />}
             {mounted && (
               <button 
                  onClick={() => setLanguage(language === 'fr' ? 'en' : 'fr')}

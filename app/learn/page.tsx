@@ -14,6 +14,7 @@ import Image from 'next/image';
 
 import { WritingConfigModal } from '../components/WritingConfigModal';
 import { DesktopSidebarRight } from '../components/DesktopSidebarRight';
+import PWAInstallButton from '../components/PWAInstallButton';
 
 const data = courseData as CourseData;
 
@@ -231,6 +232,7 @@ export default function Home() {
           </div>
           
           <div className="flex items-center gap-2">
+            {mounted && <PWAInstallButton />}
             {mounted && (
               <button 
                  onClick={() => setLanguage(language === 'fr' ? 'en' : 'fr')}

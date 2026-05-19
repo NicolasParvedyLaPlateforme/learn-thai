@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useProgressStore } from '../lib/store';
+import PWAInstallButton from '../components/PWAInstallButton';
 import { ArrowLeft, MessageCircle, Star, BookOpen, Info, ChevronRight, Play, X } from 'lucide-react';
 import conversationsData from '../data/conversations.json';
 
@@ -70,6 +71,7 @@ export default function ConversationsPage() {
             </div>
             
             <div className="flex items-center gap-2">
+              <PWAInstallButton />
               <button 
                  onClick={() => setLanguage(language === 'fr' ? 'en' : 'fr')}
                  className="flex items-center justify-center px-4 py-2 rounded-full bg-slate-100 text-slate-500 font-extrabold text-sm hover:bg-slate-200 transition-colors"

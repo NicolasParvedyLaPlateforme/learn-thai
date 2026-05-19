@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Brain, BookOpen, Pencil, Star } from 'lucide-react';
 import { useProgressStore } from '../lib/store';
 import { WritingConfigModal } from '../components/WritingConfigModal';
+import PWAInstallButton from '../components/PWAInstallButton';
 
 export default function PracticePage() {
   const { language, xp, setLanguage } = useProgressStore();
@@ -28,6 +29,7 @@ export default function PracticePage() {
           </div>
           
           <div className="flex items-center gap-2">
+            {mounted && <PWAInstallButton />}
             {mounted && (
               <button 
                  onClick={() => setLanguage(language === 'fr' ? 'en' : 'fr')}

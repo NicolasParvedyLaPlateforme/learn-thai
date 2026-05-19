@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { BookOpen, Globe, CheckCircle, Smartphone, Star, Play, Crown, Volume2, MessageCircle, Type, LayoutGrid, Check } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useProgressStore } from '../lib/store';
+import PWAInstallButton from './PWAInstallButton';
 
 const frContent = {
   title1: 'Apprenez le ',
@@ -136,6 +137,9 @@ export default function LandingPageClient() {
             <BookOpen size={28} />
           </div>
           <span className="text-2xl font-black tracking-tight text-slate-800">ThaiLearn</span>
+        </div>
+        <div className="flex items-center gap-2">
+          {mounted && <PWAInstallButton />}
         </div>
       </header>
 
