@@ -6,7 +6,7 @@ import { useProgressStore } from "../../lib/store";
 import courseData from "../../data/course.json";
 import { generateExercises } from "../../lib/exercise-generator";
 import { Exercise, Lesson, CourseData, Word, Phrase } from "../../types";
-import { X, Check, Star, Crown, Volume2 } from "lucide-react";
+import { X, Check, Star, Crown, Volume2, HelpCircle } from "lucide-react";
 import confetti from "canvas-confetti";
 import { playThaiTTS, preloadThaiVoices } from "../../lib/tts";
 import { motion, AnimatePresence } from "motion/react";
@@ -24,6 +24,44 @@ import { Suspense } from "react";
 
 const data = courseData as CourseData;
 
+const getInstructionKey = (ex: Exercise | undefined) => {
+  if (!ex) return null;
+  if (ex.type === "intro") return null;
+  if (ex.type === "word-match") return "word-match";
+  if (ex.type === "pair-matching") return "pair-matching";
+  if (ex.type === "sentence-builder") return "sentence-builder";
+  if (ex.type === "writing")
+    return ex.blindMode ? "writing-blind" : "writing";
+  if (ex.type === "free-typing") return "free-typing";
+  return null;
+};
+
+const getInstructionText = (key: string | null, lang: string) => {
+  if (key === "word-match")
+    return lang === "en"
+      ? "Select the correct translation"
+      : "Sélectionnez la bonne traduction";
+  if (key === "pair-matching")
+    return lang === "en"
+      ? "Match the pairs"
+      : "Reliez les paires correspondantes";
+  if (key === "sentence-builder")
+    return lang === "en"
+      ? "Translate this sentence"
+      : "Traduisez cette phrase";
+  if (key === "writing")
+    return lang === "en"
+      ? "Translate this sentence"
+      : "Traduisez cette phrase";
+  if (key === "writing-blind")
+    return lang === "en" ? "Write in Thai" : "Écrivez en thaï";
+  if (key === "free-typing")
+    return lang === "en"
+      ? "Type the correct translation"
+      : "Tapez la bonne traduction";
+  return null;
+};
+
 function LessonPageContent() {
   const params = useParams();
   const router = useRouter();
@@ -39,6 +77,9 @@ function LessonPageContent() {
     setShowRomanization,
     setLastActiveUnitIndex,
     setLastPlayedLesson,
+    hiddenInstructions,
+    hideInstruction,
+    unhideInstruction,
   } = useProgressStore();
 
   const lessonId = params.id as string;
@@ -68,6 +109,8 @@ function LessonPageContent() {
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [isFinished, setIsFinished] = useState(false);
   const [showInfoModal, setShowInfoModal] = useState(false);
+  const [showHelpModal, setShowHelpModal] = useState(false);
+  const [dontShowAgain, setDontShowAgain] = useState(false);
   const [mistakes, setMistakes] = useState(0);
 
   const earnedStars = mistakes < 2 ? 3 : mistakes < 4 ? 2 : 1;
@@ -82,9 +125,19 @@ function LessonPageContent() {
     Set<string>
   >(new Set());
 
+  const currentExerciseTop = exercises[currentIndex];
+  // Calculate instruction key here to use it in useEffect
+  const instructionKeyTop = getInstructionKey(currentExerciseTop);
+
   useEffect(() => {
     setIsClient(true);
   }, []);
+
+  useEffect(() => {
+    if (instructionKeyTop) {
+      setDontShowAgain(hiddenInstructions.includes(instructionKeyTop));
+    }
+  }, [instructionKeyTop, hiddenInstructions, showHelpModal]);
 
   useEffect(() => {
     // Ensure we don't start redirecting or generating if we haven't loaded local data
@@ -331,51 +384,13 @@ function LessonPageContent() {
               (selectedAnswer as any[]).length > 0);
 
   const showFooter =
-    currentExercise.type !== "pair-matching" &&
+    (currentExercise.type !== "pair-matching" || (isChecking && !isCorrect)) &&
     (isChecking || isAnswerComplete);
-
-  const getInstructionKey = (ex: Exercise) => {
-    if (!ex) return null;
-    if (ex.type === "intro") return null;
-    if (ex.type === "word-match") return "word-match";
-    if (ex.type === "pair-matching") return "pair-matching";
-    if (ex.type === "sentence-builder") return "sentence-builder";
-    if (ex.type === "writing")
-      return ex.blindMode ? "writing-blind" : "writing";
-    if (ex.type === "free-typing") return "free-typing";
-    return null;
-  };
-
-  const getInstructionText = (key: string | null, lang: string) => {
-    if (key === "word-match")
-      return lang === "en"
-        ? "Select the correct translation"
-        : "Sélectionnez la bonne traduction";
-    if (key === "pair-matching")
-      return lang === "en"
-        ? "Match the pairs"
-        : "Reliez les paires correspondantes";
-    if (key === "sentence-builder")
-      return lang === "en"
-        ? "Translate this sentence"
-        : "Traduisez cette phrase";
-    if (key === "writing")
-      return lang === "en"
-        ? "Translate this sentence"
-        : "Traduisez cette phrase";
-    if (key === "writing-blind")
-      return lang === "en" ? "Write in Thai" : "Écrivez en thaï";
-    if (key === "free-typing")
-      return lang === "en"
-        ? "Type the correct translation"
-        : "Tapez la bonne traduction";
-    return null;
-  };
 
   const instructionKey = getInstructionKey(currentExercise);
   const instructionText = getInstructionText(instructionKey, language);
   const isAcknowledged = instructionKey
-    ? acknowledgedInstructions.has(instructionKey)
+    ? acknowledgedInstructions.has(instructionKey) || hiddenInstructions.includes(instructionKey)
     : true;
 
   const showInstruction = !!(instructionText && !isAcknowledged);
@@ -546,8 +561,8 @@ function LessonPageContent() {
             className="absolute inset-0 flex flex-col items-center md:justify-center md:overflow-y-auto hide-scrollbar"
           >
             {/* Instruction Screen */}
-            {showInstruction && (
-              <div className="absolute inset-0 z-[40] flex flex-col items-center justify-start flex-1 w-full bg-gradient-to-b from-amber-50 to-white text-center animate-in fade-in duration-500 overflow-y-auto">
+            {(showInstruction || showHelpModal) && (
+              <div className="absolute inset-0 z-[200] flex flex-col items-center justify-start flex-1 w-full bg-gradient-to-b from-amber-50 to-white text-center animate-in fade-in duration-500 overflow-y-auto pb-8">
                 <div className="w-full bg-amber-100/80 py-2 md:py-3 text-amber-800 font-semibold flex items-center justify-center gap-2 mb-4 md:mb-6 border-b border-amber-200/50 flex-shrink-0">
                    <span className="text-xl">💡</span> {language === "en" ? "Here is how this exercise works" : "Voici comment fonctionne cet exercice"}
                 </div>
@@ -576,14 +591,43 @@ function LessonPageContent() {
                      {language === "en" ? "In the next steps, you will have to find the correct answer yourself!" : "Dans les prochaines étapes, vous devrez trouver la bonne réponse vous-même !"}
                    </p>
 
-                  <div className="pt-4 w-full max-w-sm shrink-0 mt-auto">
+                  <div className="pt-4 w-full max-w-sm shrink-0 mt-auto flex flex-col gap-3">
+                    <label className="flex items-center gap-3 cursor-pointer p-3 rounded-xl hover:bg-amber-100/50 transition-colors">
+                      <div className={`w-6 h-6 rounded-md border-2 flex items-center justify-center transition-colors ${dontShowAgain ? "bg-amber-500 border-amber-500 text-white" : "border-amber-300 bg-white"}`}>
+                        {dontShowAgain && <Check size={16} strokeWidth={3} />}
+                      </div>
+                      <span className="text-sm font-medium text-slate-600">
+                        {language === "en" ? "Do not show this automatically for this exercise type" : "Ne plus m'afficher cette aide automatiquement"}
+                      </span>
+                      <input 
+                        type="checkbox" 
+                        className="hidden" 
+                        checked={dontShowAgain} 
+                        onChange={(e) => setDontShowAgain(e.target.checked)} 
+                      />
+                    </label>
                     <button
                       onClick={() => {
-                        setAcknowledgedInstructions((prev) => {
-                          const newer = new Set(prev);
-                          if (instructionKey) newer.add(instructionKey);
-                          return newer;
-                        });
+                        if (dontShowAgain && instructionKey) {
+                          hideInstruction(instructionKey);
+                        } else if (!dontShowAgain && instructionKey) {
+                          unhideInstruction(instructionKey);
+                        }
+                        
+                        if (showHelpModal) {
+                          setShowHelpModal(false);
+                          setAcknowledgedInstructions((prev) => {
+                            const newer = new Set(prev);
+                            if (instructionKey) newer.add(instructionKey);
+                            return newer;
+                          });
+                        } else {
+                          setAcknowledgedInstructions((prev) => {
+                            const newer = new Set(prev);
+                            if (instructionKey) newer.add(instructionKey);
+                            return newer;
+                          });
+                        }
                       }}
                       className="w-full py-4 rounded-2xl bg-zinc-900 border-b-4 border-zinc-950 text-white font-bold text-lg shadow-lg hover:bg-zinc-800 active:translate-y-1 active:border-b-0 transition-all flex items-center justify-center gap-2"
                     >
@@ -595,9 +639,23 @@ function LessonPageContent() {
               </div>
             )}
 
+            {/* Help Button - Above Exercise */}
+            {!(showInstruction || showHelpModal) && instructionKey && (
+              <div className="w-full max-w-3xl px-4 pt-4 md:pt-6 flex justify-end shrink-0">
+                <button
+                  onClick={() => setShowHelpModal(true)}
+                  className="text-slate-500 hover:text-amber-600 transition-colors bg-white rounded-full py-1.5 px-3 shadow-sm border border-slate-200 flex items-center gap-1.5 text-sm font-bold active:scale-95"
+                  title={language === "en" ? "Help / Instructions" : "Aide / Instructions"}
+                >
+                  <HelpCircle size={18} strokeWidth={2.5} />
+                  {language === "en" ? "Help" : "Aide"}
+                </button>
+              </div>
+            )}
+
             {/* Scrollable Upper Area */}
             <div
-              className={`${showInstruction || currentExercise.type === "pair-matching" ? "hidden" : "flex"} flex-1 md:flex-none w-full max-w-3xl overflow-y-auto md:overflow-y-visible px-4 py-4 md:py-4 flex-col justify-center hide-scrollbar`}
+              className={`${showInstruction || showHelpModal || currentExercise.type === "pair-matching" ? "hidden" : "flex"} flex-1 md:flex-none w-full max-w-3xl overflow-y-auto md:overflow-y-visible px-4 py-4 md:py-4 flex-col justify-center hide-scrollbar`}
             >
               {currentExercise.type !== "pair-matching" && (
                 <>
@@ -829,7 +887,7 @@ function LessonPageContent() {
 
             {/* Exercise Options (Fixed at bottom on Mobile) */}
             <div
-              className={`${showInstruction ? "hidden" : "flex"} ${currentExercise.type === "pair-matching" ? "flex-1 items-center" : "shrink-0 md:shrink-0"} bg-transparent px-4 pb-4 pt-2 md:pt-4 md:pb-8 justify-center z-10 w-full max-w-3xl`}
+              className={`${showInstruction || showHelpModal ? "hidden" : "flex"} ${currentExercise.type === "pair-matching" ? "flex-1 items-center" : "shrink-0 md:shrink-0"} bg-transparent px-4 pb-4 pt-2 md:pt-4 md:pb-8 justify-center z-10 w-full max-w-3xl`}
             >
               <div className="w-full relative">
                 {currentExercise.type ===
@@ -849,24 +907,33 @@ function LessonPageContent() {
                     forceHideRomanization={
                       currentExercise.forceHideRomanization
                     }
-                    onComplete={() => {
-                      if (currentIndex < exercises.length - 1) {
-                        setCurrentIndex((prev) => prev + 1);
-                        setIsChecking(false);
-                        setIsCorrect(null);
-                        setSelectedAnswer(null);
+                    disabled={isChecking}
+                    onComplete={(failed?: boolean) => {
+                      if (failed) {
+                        setIsCorrect(false);
+                        setIsChecking(true);
+                        setMistakes((m) => m + 1);
+                        setLastPlayedLesson(lessonId, 'learn');
+                        playThaiTTS("ผิดครับ");
                       } else {
-                        setIsFinished(true);
-                        completeLesson(
-                          lesson.id,
-                          10 + exercises.length,
-                          currentLevel,
-                        );
-                        confetti({
-                          particleCount: 150,
-                          spread: 70,
-                          origin: { y: 0.6 },
-                        });
+                        if (currentIndex < exercises.length - 1) {
+                          setCurrentIndex((prev) => prev + 1);
+                          setIsChecking(false);
+                          setIsCorrect(null);
+                          setSelectedAnswer(null);
+                        } else {
+                          setIsFinished(true);
+                          completeLesson(
+                            lesson.id,
+                            10 + exercises.length,
+                            currentLevel,
+                          );
+                          confetti({
+                            particleCount: 150,
+                            spread: 70,
+                            origin: { y: 0.6 },
+                          });
+                        }
                       }
                     }}
                   />
@@ -903,7 +970,7 @@ function LessonPageContent() {
       </main>
 
       {/* Footer Actions */}
-      {currentExercise.type !== "pair-matching" && (
+      {(currentExercise.type !== "pair-matching" || (isChecking && !isCorrect)) && (
         <>
           <AnimatePresence>
             {showFooter && (
