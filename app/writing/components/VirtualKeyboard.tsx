@@ -11,18 +11,27 @@ interface Props {
   onChange: (val: string[]) => void;
   disabled: boolean;
   isChecking?: boolean;
+  onAutoCheck?: (val?: string[]) => void;
 }
 
-export default function VirtualKeyboard({ exercise, selected, onChange, disabled, isChecking }: Props) {
+export default function VirtualKeyboard({ exercise, selected, onChange, disabled, isChecking, onAutoCheck }: Props) {
   const { language } = useProgressStore();
   
   const handleSelect = (charTh: string) => {
     if (disabled) return;
-    onChange([...selected, charTh]);
+    const newSelected = [...selected, charTh];
+    onChange(newSelected);
     // Optionally play TTS
     try {
       playThaiTTS(charTh);
     } catch(e) {}
+    
+    // Auto-check if we reached the required length
+    if (exercise.correctComponents && newSelected.length === exercise.correctComponents.length) {
+       if (onAutoCheck) {
+           onAutoCheck(newSelected);
+       }
+    }
   };
 
   const handleBackspace = () => {

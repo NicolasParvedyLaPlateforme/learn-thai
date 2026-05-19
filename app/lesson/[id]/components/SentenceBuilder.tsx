@@ -10,17 +10,35 @@ interface Props {
   selected: string[];
   onChange: (val: string[]) => void;
   disabled: boolean;
+  onAutoCheck?: (val?: string[]) => void;
 }
 
-export default function SentenceBuilder({ exercise, selected, onChange, disabled }: Props) {
+export default function SentenceBuilder({ exercise, selected, onChange, disabled, onAutoCheck }: Props) {
   const { language } = useProgressStore();
   const [showHint, setShowHint] = useState(false);
   
   const handleSelect = (wordTh: string) => {
     if (disabled) return;
-    onChange([...selected, wordTh]);
+    const newSelected = [...selected, wordTh];
+    onChange(newSelected);
     playThaiTTS(wordTh);
     setShowHint(false); // Hide hint once they make a choice
+
+    // Auto-check logic
+    if (exercise.correctComponents) {
+        if (exercise.isFillInBlank) {
+           if (newSelected.length === 1 && onAutoCheck) {
+               onAutoCheck(newSelected);
+           }
+        } else {
+           const expectedCount = exercise.correctComponents.filter(c => c !== 'w_dots').length;
+           if (newSelected.length === expectedCount) {
+                if (onAutoCheck) {
+                    onAutoCheck(newSelected);
+                }
+           }
+        }
+    }
   };
 
   const handleRemove = (index: number) => {
@@ -73,12 +91,57 @@ export default function SentenceBuilder({ exercise, selected, onChange, disabled
       {/* Target area (Answer) */}
       <div className={`min-h-[120px] border-y-2 border-slate-200 py-4 flex flex-col gap-2 items-center justify-center relative`}>
         <div className="flex flex-wrap gap-2 items-center justify-center min-h-[64px] sm:min-h-[80px]">
-          {selected.length === 0 && (
+          {selected.length === 0 && !exercise.isFillInBlank && (
             <span className="text-slate-400 p-2 font-medium">{language === 'en' ? 'Build the sentence here...' : 'Formez la phrase ici...'}</span>
           )}
           {(() => {
             const items = [];
-            if (exercise.correctComponents) {
+            if (exercise.isFillInBlank && exercise.correctComponents && exercise.blankIndex !== undefined) {
+               for (let i = 0; i < exercise.correctComponents.length; i++) {
+                   if (exercise.correctComponents[i] === 'w_dots') continue;
+
+                   if (i === exercise.blankIndex) {
+                       if (selected.length > 0) {
+                           const word = selected[0];
+                           const expectedWordId = exercise.correctComponents[i];
+                           const expectedWord = exercise.options.find(o => o.id === expectedWordId)?.th;
+                           const isCorrect = word === expectedWord;
+                           const showColors = exercise.hideColors ? disabled : (exercise.blindMode ? disabled : true);
+
+                           let textColorClass = "text-slate-700";
+                           let borderColorClass = "border-slate-200";
+                           if (showColors) {
+                             textColorClass = isCorrect ? "text-emerald-600" : "text-rose-500";
+                             borderColorClass = isCorrect ? "border-slate-200" : "border-rose-300";
+                           }
+
+                           items.push(
+                             <button
+                               key={`sel-${i}`}
+                               onClick={() => handleRemove(0)}
+                               disabled={disabled}
+                               className={`bg-white text-center border-2 border-b-4 rounded-xl font-medium ${textColorClass} ${borderColorClass} shadow-sm transition-all hover:-translate-y-0.5 active:translate-y-0.5 active:border-b-2 font-thai px-2 sm:px-3 flex items-center justify-center min-w-[3rem] sm:min-w-[4rem] h-12 sm:h-16`}
+                             >
+                               <span className="leading-none text-2xl sm:text-3xl">{word}</span>
+                             </button>
+                           );
+                       } else {
+                           items.push(
+                              <div key={`fixed-${i}`} className="bg-transparent border-2 border-dashed border-slate-300 text-slate-400 rounded-xl font-medium px-2 sm:px-3 flex items-center justify-center min-w-[3rem] sm:min-w-[4rem] h-12 sm:h-16">
+                                <span className="leading-none text-xl sm:text-2xl opacity-50 font-sans">___</span>
+                              </div>
+                           );
+                       }
+                   } else {
+                       const text = exercise.prefilledComponents ? exercise.prefilledComponents[i] : exercise.correctComponents[i];
+                       items.push(
+                           <div key={`fixed-${i}`} className="bg-slate-100 text-slate-500 text-center border-2 border-slate-200 rounded-xl font-medium font-thai px-2 sm:px-3 flex items-center justify-center min-w-[3rem] sm:min-w-[4rem] h-12 sm:h-16 pointer-events-none">
+                             <span className="leading-none text-2xl sm:text-3xl">{text}</span>
+                           </div>
+                       );
+                   }
+               }
+            } else if (exercise.correctComponents) {
               let selIdx = 0;
               for (let i = 0; i < exercise.correctComponents.length; i++) {
                 if (exercise.correctComponents[i] === 'w_dots') {

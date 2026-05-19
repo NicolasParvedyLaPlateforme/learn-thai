@@ -31,7 +31,7 @@ export default function FreeTypingInput({ exercise, selected, onChange, disabled
       const j = Math.floor(Math.random() * (i + 1));
       [chars[i], chars[j]] = [chars[j], chars[i]];
     }
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+     
     setVKeys(chars);
   }, [exercise.answer]);
 

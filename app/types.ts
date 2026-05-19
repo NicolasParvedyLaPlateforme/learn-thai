@@ -54,4 +54,9 @@ export interface Exercise {
   introItem?: Word | Phrase; // For intro exercises
   imageUrl?: string; // Optional image url for word exercises
   pairMatchMode?: 'normal' | 'audio-only' | 'script-only';
+  maxMistakes?: number; // How many mistakes allowed before failing the exercise 
+  reverse?: boolean; // For word-match: if true, options show FR/EN instead of TH
+  isFillInBlank?: boolean;
+  blankIndex?: number;
+  prefilledComponents?: string[];
 }

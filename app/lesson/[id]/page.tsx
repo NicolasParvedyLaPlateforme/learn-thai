@@ -231,21 +231,28 @@ function LessonPageContent() {
     }
 
     // Validate
-    const answerToCheck =
-      typeof overrideAnswer === "string" ? overrideAnswer : selectedAnswer;
+    const answerToCheck = overrideAnswer !== undefined && overrideAnswer !== null && (typeof overrideAnswer === 'string' || Array.isArray(overrideAnswer)) ? overrideAnswer : selectedAnswer;
     if (!answerToCheck) return;
 
     let correct = false;
     if (currentExercise.type === "word-match") {
       correct = answerToCheck === currentExercise.answer;
     } else if (currentExercise.type === "sentence-builder") {
-      const builtSentence = (answerToCheck as string[])
-        .join("")
-        .replace(/\s+/g, "");
-      const expectedSentence = currentExercise.answer
-        .replace(/\s+/g, "")
-        .replace(/\.\.\./g, "");
-      correct = builtSentence === expectedSentence;
+      if (currentExercise.isFillInBlank && currentExercise.correctComponents && currentExercise.blankIndex !== undefined) {
+         if (Array.isArray(answerToCheck) && answerToCheck.length === 1) {
+             const expectedWordId = currentExercise.correctComponents[currentExercise.blankIndex];
+             const expectedWord = currentExercise.options.find(o => o.id === expectedWordId)?.th;
+             correct = answerToCheck[0] === expectedWord;
+         }
+      } else {
+         const builtSentence = (answerToCheck as string[])
+           .join("")
+           .replace(/\s+/g, "");
+         const expectedSentence = currentExercise.answer
+           .replace(/\s+/g, "")
+           .replace(/\.\.\./g, "");
+         correct = builtSentence === expectedSentence;
+      }
     } else if (currentExercise.type === "writing") {
       const builtValue = (answerToCheck as string[])
         .join("")
@@ -847,6 +854,7 @@ function LessonPageContent() {
                                     forceHideRomanization={
                                       currentExercise.forceHideRomanization
                                     }
+                                    isReverse={currentExercise.reverse}
                                     currentThaiWordForAudio={
                                       currentThaiWordForAudio
                                     }
@@ -896,7 +904,10 @@ function LessonPageContent() {
                     selected={selectedAnswer as string}
                     onChange={setSelectedAnswer}
                     disabled={isChecking}
-                    onAutoCheck={() => handleCheck(currentExercise.answer)}
+                    isChecking={isChecking}
+                    isCorrect={isCorrect}
+                    onAutoCheck={(val) => handleCheck(val)}
+                    language={language}
                   />
                 ) : currentExercise.type === "pair-matching" ? (
                   <PairMatch
@@ -942,6 +953,7 @@ function LessonPageContent() {
                     selected={(selectedAnswer as string[]) || []}
                     onChange={setSelectedAnswer as any}
                     disabled={isChecking}
+                    onAutoCheck={(val) => handleCheck(val)}
                   />
                 ) : currentExercise.type === "free-typing" ? (
                   <FreeTypingInput
@@ -956,6 +968,7 @@ function LessonPageContent() {
                     selected={(selectedAnswer as string[]) || []}
                     onChange={setSelectedAnswer as any}
                     disabled={isChecking}
+                    onAutoCheck={(val) => handleCheck(val)}
                   />
                 )}
               </div>
@@ -1119,8 +1132,16 @@ function LessonPageContent() {
                               ));
                             })()
                           ) : (
-                            <span className="text-rose-900">
-                              {currentExercise.answer}
+                            <span className={`text-rose-900 ${currentExercise.reverse ? 'font-sans' : ''}`}>
+                              {currentExercise.reverse ? (
+                                (() => {
+                                  const correctOpt = (currentExercise.options as Word[]).find((o) => o.th === currentExercise.answer);
+                                  if (correctOpt) {
+                                     return language === 'en' ? (correctOpt.en || correctOpt.fr) : correctOpt.fr;
+                                  }
+                                  return currentExercise.answer;
+                                })()
+                              ) : currentExercise.answer}
                             </span>
                           )}
                         </div>

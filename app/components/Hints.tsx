@@ -89,7 +89,7 @@ export function TooltipHint({ children, tooltipContent, className = '', audioTex
 }
 
 // A simple component to render the french question with tooltips (hints)
-export function SentenceWithHints({text, dictionary, phrases, isSentence, exerciseOptions, hideHints, disableTooltips, hideColors, alwaysShowPhonetic, answerTh, correctComponents, charHintRegex, isChecking, forceHideRomanization, currentThaiWordForAudio, rightElement}: {text: string, dictionary: Word[], phrases: Phrase[], isSentence: boolean, exerciseOptions: Word[], hideHints?: boolean, disableTooltips?: boolean, hideColors?: boolean, alwaysShowPhonetic?: boolean, answerTh?: string, correctComponents?: string[], charHintRegex?: RegExp, isChecking?: boolean, forceHideRomanization?: boolean, currentThaiWordForAudio?: string, rightElement?: React.ReactNode}) {
+export function SentenceWithHints({text, dictionary, phrases, isSentence, exerciseOptions, hideHints, disableTooltips, hideColors, alwaysShowPhonetic, answerTh, correctComponents, charHintRegex, isChecking, forceHideRomanization, currentThaiWordForAudio, isReverse, rightElement}: {text: string, dictionary: Word[], phrases: Phrase[], isSentence: boolean, exerciseOptions: Word[], hideHints?: boolean, disableTooltips?: boolean, hideColors?: boolean, alwaysShowPhonetic?: boolean, answerTh?: string, correctComponents?: string[], charHintRegex?: RegExp, isChecking?: boolean, forceHideRomanization?: boolean, currentThaiWordForAudio?: string, isReverse?: boolean, rightElement?: React.ReactNode}) {
   const { language, showRomanization } = useProgressStore();
   const [isVocabOpen, setIsVocabOpen] = useState(false);
   // Try to match the ENTIRE phrase/word first
@@ -169,13 +169,13 @@ export function SentenceWithHints({text, dictionary, phrases, isSentence, exerci
 
   // Create the main text content, always wrapping it in a TooltipHint if we have the translation
   const innerText = (
-    <span className={`inline-block ${getDottedClass()}`}>
+    <span className={`inline-block ${getDottedClass()} ${isReverse ? 'font-thai text-3xl md:text-5xl mb-2' : ''}`}>
       {highlightedText}
     </span>
   );
 
   const mainContent = (
-    <span className="flex flex-wrap justify-center md:justify-start items-center gap-x-2 gap-y-6 leading-relaxed text-xl md:text-2xl font-medium pt-2 pb-6 relative">
+    <span className={`flex flex-wrap justify-center md:justify-start items-center gap-x-2 gap-y-6 leading-relaxed font-medium pt-2 pb-6 relative ${isReverse ? 'text-3xl md:text-5xl text-slate-700' : 'text-xl md:text-2xl'}`}>
       {exactMatch ? (
         shouldShowPhonetic ? (
           <span className="inline-flex flex-col items-center justify-center text-center relative group">

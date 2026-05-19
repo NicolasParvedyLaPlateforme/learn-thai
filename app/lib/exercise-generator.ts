@@ -246,6 +246,42 @@ export function generateEndlessReviewExercises(
   return shuffle(exercises).slice(0, 20); // Return a batch of 20 random exercises
 }
 
+function generateMisspelledWords(word: Word, count: number): {id: string, th: string, fr: string, phonetic: string}[] {
+  const chars = Array.from(word.th);
+  // A few common Thai consonants to use for swapping
+  const consonants = ['ก','ข','ค','ง','จ','ฉ','ช','ซ','ด','ต','ถ','ท','น','บ','ป','ผ','พ','ฟ','ม','ย','ร','ล','ว','ส','ห','อ'];
+  const res = [];
+  for (let i=0; i<count; i++) {
+    let newChars = [...chars];
+    let attempts = 0;
+    while(attempts < 10) {
+      const idx = Math.floor(Math.random() * newChars.length);
+      // only replace base consonants if possible to avoid breaking vowels
+      const code = newChars[idx].charCodeAt(0);
+      if (code >= 0x0E01 && code <= 0x0E2E) {
+        newChars[idx] = consonants[Math.floor(Math.random() * consonants.length)];
+        break;
+      }
+      attempts++;
+    }
+    // ensure at least one change
+    if (newChars.join('') === word.th) {
+      let rc = consonants[Math.floor(Math.random() * consonants.length)];
+      while (rc === chars[0]) {
+         rc = consonants[Math.floor(Math.random() * consonants.length)];
+      }
+      newChars[0] = rc;
+    }
+    res.push({
+      id: `fake-${word.id}-${i}-${Date.now()}`,
+      th: newChars.join(''),
+      fr: '',
+      phonetic: ''
+    });
+  }
+  return res;
+}
+
 export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: number = 0, language: string = 'fr'): Exercise[] {
   let exercises: Exercise[] = [];
   const globalWords = allLessons.flatMap(l => l.words).filter(w => w.id !== 'w_dots');
@@ -387,31 +423,245 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
   sbExercises = shuffle(sbExercises);
 
   if (level === 0) {
-    // Level 1: Only word-match
-    let pool = [...wmExercises];
-    while (pool.length < 10 && wmExercises.length > 0) pool = [...pool, ...shuffle(wmExercises)];
-    if (pool.length === 0) pool = [...sbExercises];
-    finalExercises = pool;
+    // Level 1 logic requested by the user
+    let level0Exercises: Exercise[] = [];
+    validLessonWords.forEach(word => {
+      // 1: Intro
+      level0Exercises.push({
+          id: `intro-${word.id}-${Math.random()}`,
+          type: 'intro',
+          question: language === 'en' ? (word.en || word.fr) : word.fr,
+          answer: word.th,
+          options: [],
+          introItem: word,
+          hideHints: false
+      });
+      
+      // 2: Word match with only 2 options (1 correct, 1 wrong), 0 retry (maxMistakes = 1)
+      const step2Distractor = shuffle(validLessonWords.filter(w => w.id !== word.id)).slice(0, 1);
+      if (step2Distractor.length === 0) {
+        step2Distractor.push(...shuffle(globalWords.filter(w => w.id !== word.id)).slice(0, 1));
+      }
+      level0Exercises.push({
+          id: `wm2-${word.id}-${Date.now()}-${Math.random()}`,
+          type: 'word-match',
+          question: language === 'en' ? (word.en || word.fr) : word.fr,
+          answer: word.th,
+          options: shuffle([word, ...step2Distractor]),
+          hideHints: false,
+          imageUrl: word.imageUrl,
+          maxMistakes: 1
+      });
+      
+      // 3: Word match with 4 options (1 correct, 3 wrong from the exercise), maxMistakes = 2
+      let step3Distractors = shuffle(validLessonWords.filter(w => w.id !== word.id)).slice(0, 3);
+      if (step3Distractors.length < 3) {
+         step3Distractors.push(...shuffle(globalWords.filter(w => w.id !== word.id && !step3Distractors.find(sw => sw.id === w.id))).slice(0, 3 - step3Distractors.length));
+      }
+      level0Exercises.push({
+          id: `wm4-${word.id}-${Date.now()}-${Math.random()}`,
+          type: 'word-match',
+          question: language === 'en' ? (word.en || word.fr) : word.fr,
+          answer: word.th,
+          options: shuffle([word, ...step3Distractors]),
+          hideHints: false,
+          imageUrl: word.imageUrl,
+          maxMistakes: 2
+      });
+      
+      // 4: Word match with 4 options (1 correct, 3 misspelled distractors), maxMistakes = 2
+      const step4Distractors = generateMisspelledWords(word, 3);
+      level0Exercises.push({
+          id: `wm-misspelled-${word.id}-${Date.now()}-${Math.random()}`,
+          type: 'word-match',
+          question: language === 'en' ? (word.en || word.fr) : word.fr,
+          answer: word.th,
+          options: shuffle([word, ...step4Distractors]) as any,
+          hideHints: false,
+          imageUrl: word.imageUrl,
+          maxMistakes: 2
+      });
+    });
+    return level0Exercises;
   } else if (level === 1) {
     // Level 2: First half word-match, second half sentence-builder
-    let wmPool = [...wmExercises];
-    while (wmPool.length < 5 && wmExercises.length > 0) wmPool = [...wmPool, ...shuffle(wmExercises)];
+    let level1WmExercises: Exercise[] = [];
+    validLessonWords.forEach(word => {
+      // Create 2 exercises per word
+      for (let i = 0; i < 2; i++) {
+        const rand = Math.random();
+        
+        let type: 'distractors' | 'misspelled' | 'reverse';
+        if (rand < 0.33) type = 'distractors';
+        else if (rand < 0.66) type = 'misspelled';
+        else type = 'reverse';
+        
+        if (type === 'distractors') {
+          let stepDistractors = shuffle(validLessonWords.filter(w => w.id !== word.id)).slice(0, 3);
+          if (stepDistractors.length < 3) {
+             stepDistractors.push(...shuffle(globalWords.filter(w => w.id !== word.id && !stepDistractors.find(sw => sw.id === w.id))).slice(0, 3 - stepDistractors.length));
+          }
+          level1WmExercises.push({
+              id: `wm2-dist-${word.id}-${i}-${Date.now()}-${Math.random()}`,
+              type: 'word-match',
+              question: language === 'en' ? (word.en || word.fr) : word.fr,
+              answer: word.th,
+              options: shuffle([word, ...stepDistractors]),
+              hideHints: false,
+              imageUrl: word.imageUrl,
+              maxMistakes: 2
+          });
+        } else if (type === 'misspelled') {
+          const stepDistractors = generateMisspelledWords(word, 3);
+          level1WmExercises.push({
+              id: `wm2-misspelled-${word.id}-${i}-${Date.now()}-${Math.random()}`,
+              type: 'word-match',
+              question: language === 'en' ? (word.en || word.fr) : word.fr,
+              answer: word.th,
+              options: shuffle([word, ...stepDistractors]) as any,
+              hideHints: false,
+              imageUrl: word.imageUrl,
+              maxMistakes: 2
+          });
+        } else {
+          // reverse: native strings displayed, question is Thai
+          let stepDistractors = shuffle(validLessonWords.filter(w => w.id !== word.id)).slice(0, 3);
+          if (stepDistractors.length < 3) {
+             stepDistractors.push(...shuffle(globalWords.filter(w => w.id !== word.id && !stepDistractors.find(sw => sw.id === w.id))).slice(0, 3 - stepDistractors.length));
+          }
+          level1WmExercises.push({
+              id: `wm2-reverse-${word.id}-${i}-${Date.now()}-${Math.random()}`,
+              type: 'word-match',
+              question: word.th,
+              answer: word.th,
+              options: shuffle([word, ...stepDistractors]),
+              hideHints: false,
+              imageUrl: word.imageUrl,
+              maxMistakes: 2,
+              reverse: true
+          });
+        }
+      }
+    });
+
+    let wmPool = shuffle(level1WmExercises);
     let sbPool = [...sbExercises];
-    while (sbPool.length < 5 && sbExercises.length > 0) sbPool = [...sbPool, ...shuffle(sbExercises)];
-    if (wmPool.length === 0) wmPool = [...sbPool];
-    if (sbPool.length === 0) sbPool = [...wmPool];
+
+    // Attempt to pad sbPool to have some sentences if available
+    if (sbPool.length === 0) {
+      sbPool = globalWords.slice(0, 2).map((w, i) => ({
+        id: `fallback-sb-${Date.now()}-${i}`,
+        type: 'sentence-builder',
+        question: language === 'en' ? (w.en || w.fr) : w.fr,
+        answer: w.th,
+        options: [w],
+        correctComponents: [w.th]
+      }));
+    }
+
     finalExercises = [...wmPool, ...sbPool];
   } else if (level === 2) {
-    // Level 3: 4 word-match, rest sentence-builder
-    let wmPool = wmExercises.slice(0, 4);
-    while (wmPool.length < 4 && wmExercises.length > 0) {
-       wmPool.push(wmExercises[Math.floor(Math.random() * wmExercises.length)]);
-    }
+    // Level 3: 4 word-match (1 per word, randomized type), rest sentence-builder
+    let level2WmExercises: Exercise[] = [];
+    validLessonWords.forEach(word => {
+      const rand = Math.random();
+      let type: 'distractors' | 'misspelled' | 'reverse';
+      if (rand < 0.33) type = 'distractors';
+      else if (rand < 0.66) type = 'misspelled';
+      else type = 'reverse';
+      
+      if (type === 'distractors') {
+        let stepDistractors = shuffle(validLessonWords.filter(w => w.id !== word.id)).slice(0, 3);
+        if (stepDistractors.length < 3) {
+           stepDistractors.push(...shuffle(globalWords.filter(w => w.id !== word.id && !stepDistractors.find(sw => sw.id === w.id))).slice(0, 3 - stepDistractors.length));
+        }
+        level2WmExercises.push({
+            id: `wm3-dist-${word.id}-${Date.now()}-${Math.random()}`,
+            type: 'word-match',
+            question: language === 'en' ? (word.en || word.fr) : word.fr,
+            answer: word.th,
+            options: shuffle([word, ...stepDistractors]),
+            hideHints: false,
+            imageUrl: word.imageUrl,
+            maxMistakes: 2
+        });
+      } else if (type === 'misspelled') {
+        const stepDistractors = generateMisspelledWords(word, 3);
+        level2WmExercises.push({
+            id: `wm3-misspelled-${word.id}-${Date.now()}-${Math.random()}`,
+            type: 'word-match',
+            question: language === 'en' ? (word.en || word.fr) : word.fr,
+            answer: word.th,
+            options: shuffle([word, ...stepDistractors]) as any,
+            hideHints: false,
+            imageUrl: word.imageUrl,
+            maxMistakes: 2
+        });
+      } else {
+        let stepDistractors = shuffle(validLessonWords.filter(w => w.id !== word.id)).slice(0, 3);
+        if (stepDistractors.length < 3) {
+           stepDistractors.push(...shuffle(globalWords.filter(w => w.id !== word.id && !stepDistractors.find(sw => sw.id === w.id))).slice(0, 3 - stepDistractors.length));
+        }
+        level2WmExercises.push({
+            id: `wm3-reverse-${word.id}-${Date.now()}-${Math.random()}`,
+            type: 'word-match',
+            question: word.th,
+            answer: word.th,
+            options: shuffle([word, ...stepDistractors]),
+            hideHints: false,
+            imageUrl: word.imageUrl,
+            maxMistakes: 2,
+            reverse: true
+        });
+      }
+    });
+
+    let wmPool = shuffle(level2WmExercises);
+    
+    // Create fill-in-the-blank for each sentence builder exercise
+    let fillInBlankPool: Exercise[] = [];
+    sbExercises.forEach((sbEx) => {
+       if (!sbEx.correctComponents || sbEx.correctComponents.length <= 1) return;
+       // Pick a random word to blank (exclude w_dots)
+       const validIndices = sbEx.correctComponents.map((c, i) => c !== 'w_dots' ? i : -1).filter(i => i !== -1);
+       if (validIndices.length === 0) return;
+       
+       const blankIndex = validIndices[Math.floor(Math.random() * validIndices.length)];
+       const blankWordId = sbEx.correctComponents[blankIndex];
+       
+       const blankWord = allLessons.flatMap(l => l.words).find(w => w.id === blankWordId) || {id: blankWordId, th: blankWordId, fr: '', en: ''};
+       const misspelledOptions = generateMisspelledWords(blankWord as any, 1);
+       
+       const prefilledComponents = sbEx.correctComponents.map((id, i) => {
+           if (i === blankIndex) return '';
+           if (id === 'w_dots') return '...';
+           const w = allLessons.flatMap(l => l.words).find(w => w.id === id);
+           return w ? w.th : id;
+       });
+       
+       fillInBlankPool.push({
+          ...sbEx,
+          id: `fill-blank-${sbEx.id}-${Date.now()}-${Math.random()}`,
+          isFillInBlank: true,
+          blankIndex: blankIndex,
+          prefilledComponents: prefilledComponents,
+          options: shuffle([blankWord, ...misspelledOptions]) as any,
+          maxMistakes: 2
+       });
+    });
+
     let sbPool = [...sbExercises];
-    while (sbPool.length < 8 && sbExercises.length > 0) sbPool = [...sbPool, ...shuffle(sbExercises)];
-    if (wmPool.length === 0) wmPool = [...sbPool].slice(0, 4);
-    if (sbPool.length === 0) sbPool = [...wmPool];
-    finalExercises = [...wmPool, ...sbPool];
+    if (sbPool.length === 0) {
+      sbPool = globalWords.slice(0, 2).map((w, i) => ({
+        id: `fallback-sb-3-${Date.now()}-${i}`,
+        type: 'sentence-builder',
+        question: language === 'en' ? (w.en || w.fr) : w.fr,
+        answer: w.th,
+        options: [w],
+        correctComponents: [w.th]
+      }));
+    }
+    finalExercises = [...wmPool, ...fillInBlankPool, ...sbPool];
   } else if (level === 3) {
     // Level 4: Only sentence-builder
     let sbPool = [...sbExercises];
