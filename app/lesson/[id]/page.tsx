@@ -573,19 +573,18 @@ function LessonPageContent() {
                   </h2>
 
                   {/* Example box */}
-                  {currentExercise.type !== "pair-matching" &&
-                    currentExercise.type !== "intro" && (
-                      <div className="bg-white p-5 md:p-8 rounded-3xl w-full max-w-sm sm:max-w-md md:max-w-lg border-2 border-dashed border-amber-300 shadow-sm mx-auto relative mt-2 shrink-0">
-                        <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-amber-100 text-amber-800 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest flex items-center gap-2 shadow-sm border border-amber-200/50">
-                           <span className="w-2 h-2 rounded-full bg-amber-500 animate-[pulse_2s_ease-in-out_infinite]"></span>
-                           {language === "en" ? "Example" : "Exemple"}
-                        </div>
-                        <InstructionExample
-                          typeKey={instructionKey}
-                          language={language}
-                        />
+                  {currentExercise.type !== "intro" && (
+                    <div className="bg-white p-5 md:p-8 rounded-3xl w-full max-w-sm sm:max-w-md md:max-w-lg border-2 border-dashed border-amber-300 shadow-sm mx-auto relative mt-2 shrink-0">
+                      <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-amber-100 text-amber-800 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest flex items-center gap-2 shadow-sm border border-amber-200/50">
+                         <span className="w-2 h-2 rounded-full bg-amber-500 animate-[pulse_2s_ease-in-out_infinite]"></span>
+                         {language === "en" ? "Example" : "Exemple"}
                       </div>
-                    )}
+                      <InstructionExample
+                        typeKey={instructionKey}
+                        language={language}
+                      />
+                    </div>
+                  )}
                     
                    <p className="text-slate-500 font-medium text-center text-sm md:text-base max-w-sm leading-relaxed mt-4 shrink-0">
                      {language === "en" ? "In the next steps, you will have to find the correct answer yourself!" : "Dans les prochaines étapes, vous devrez trouver la bonne réponse vous-même !"}
