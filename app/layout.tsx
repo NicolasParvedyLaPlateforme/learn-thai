@@ -18,6 +18,10 @@ const sarabun = Sarabun({
 export const metadata: Metadata = {
   title: 'ThaiLearn',
   description: 'Apprenez le thaïlandais facilement',
+  icons: {
+    icon: '/icon.svg',
+    apple: '/icon.svg',
+  }
 };
 
 import DesktopSidebarLeft from './components/DesktopSidebarLeft';

@@ -11,9 +11,9 @@ export default function manifest(): MetadataRoute.Manifest {
     theme_color: '#10b981',
     icons: [
       {
-        src: '/deedee-no-bg.png',
-        sizes: 'any',
-        type: 'image/png',
+        src: '/icon.svg',
+        sizes: '192x192 512x512',
+        type: 'image/svg+xml',
       }
     ],
   }
