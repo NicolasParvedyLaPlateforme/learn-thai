@@ -30,7 +30,7 @@ export default function InstructionBlock({
   setAcknowledgedInstructions,
 }: InstructionBlockProps) {
   return (
-    <div className="absolute inset-0 bg-white z-50 flex flex-col overflow-y-auto">
+    <div className="absolute inset-0 bg-[#FFFBF0] z-50 flex flex-col overflow-y-auto">
       <div className="w-full bg-amber-100/80 py-2 md:py-3 text-amber-800 font-semibold flex items-center justify-center gap-2 mb-4 md:mb-6 border-b border-amber-200/50 flex-shrink-0">
         <span className="text-xl">💡</span>{" "}
         {language === "en"
@@ -39,7 +39,7 @@ export default function InstructionBlock({
       </div>
 
       <div className="flex-1 flex flex-col items-center w-full px-4 md:px-6 max-w-2xl mx-auto gap-4 pb-4">
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-800 leading-tight">
+        <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-800 leading-tight text-center">
           {instructionText}
         </h2>
 
@@ -63,9 +63,9 @@ export default function InstructionBlock({
         </p>
 
         <div className="pt-4 w-full max-w-sm shrink-0 mt-auto flex flex-col gap-3">
-          <label className="flex items-center gap-3 cursor-pointer p-3 rounded-xl hover:bg-amber-100/50 transition-colors">
+          <label className="flex items-center justify-center md:justify-start gap-3 cursor-pointer p-3 rounded-xl hover:bg-amber-100/50 transition-colors">
             <div
-              className={`w-6 h-6 rounded-md border-2 flex items-center justify-center transition-colors ${
+              className={`w-6 h-6 rounded-md border-2 flex items-center justify-center transition-colors shrink-0 ${
                 dontShowAgain
                   ? "bg-amber-500 border-amber-500 text-white"
                   : "border-amber-300 bg-white"
@@ -73,7 +73,7 @@ export default function InstructionBlock({
             >
               {dontShowAgain && <Check size={16} strokeWidth={3} />}
             </div>
-            <span className="text-sm font-medium text-slate-600">
+            <span className="text-sm font-medium text-slate-600 text-center md:text-left">
               {language === "en"
                 ? "Do not show this automatically for this exercise type"
                 : "Ne plus m'afficher cette aide automatiquement"}
