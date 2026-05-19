@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { BookOpen, Globe, CheckCircle, Smartphone, Star, Play, Crown, Volume2 } from 'lucide-react';
+import { BookOpen, Globe, CheckCircle, Smartphone, Star, Play, Crown, Volume2, MessageCircle, Type, LayoutGrid, Check } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useProgressStore } from '../lib/store';
 
@@ -40,6 +40,10 @@ const frContent = {
   one: 'un',
   consTip: "💡 Consonne 'h' (Ho Nam). Ici, elle sera muette et modifiera le ton de la consonne suivante.",
   writeHere: 'Écrivez ici...',
+  discussTitle: 'Dialogues interactifs',
+  discussDesc: 'Écoutez des conversations et entraînez-vous à répondre en choisissant la bonne option selon le contexte.',
+  alphaTitle: 'Maîtriser l\'Alphabet',
+  alphaDesc: 'Mémorisez les consonnes et voyelles avec des moyens mnémotechniques simples et ludiques.',
   metricsTitle: 'Près de 1000 mots et phrases classés',
   metricsDesc: "Une base de données riche et étudiée, pensée pour vous faire progresser des bases jusqu'aux discussions avancées.",
   featTitle: 'Pourquoi choisir ThaiLearn ?',
@@ -91,6 +95,10 @@ const enContent = {
   one: 'one',
   consTip: "💡 Consonant 'h' (Ho Nam). Here, it will be silent and change the tone of the following consonant.",
   writeHere: 'Write here...',
+  discussTitle: 'Interactive Dialogues',
+  discussDesc: 'Listen to real conversations and practice answering them by picking the right response according to context.',
+  alphaTitle: 'Master the Alphabet',
+  alphaDesc: 'Memorize consonants and vowels with simple and fun mnemonic devices.',
   metricsTitle: 'Nearly 1000 ranked words and phrases',
   metricsDesc: "A rich and carefully studied database, designed to take you from the basics to advanced discussions.",
   featTitle: 'Why choose ThaiLearn?',
@@ -258,41 +266,32 @@ export default function LandingPageClient() {
                   {content.sentenceDesc}
                 </p>
               </div>
-              <div className="flex-1 w-full max-w-lg bg-white p-8 rounded-[2.5rem] shadow-xl border-[6px] border-slate-100 transform -rotate-1 hover:rotate-0 transition-all">
-                <div className="flex items-start gap-4 mb-6">
-                   <div className="w-16 h-16 bg-indigo-100 rounded-2xl flex items-center justify-center text-3xl">
-                     🧠
-                   </div>
-                   <div>
-                     <h4 className="text-2xl font-bold text-slate-800">{content.sentenceTrTip}</h4>
-                     <p className="text-lg text-slate-600 mt-1">{content.sentenceTrB1}</p>
-                   </div>
+              <div className="flex-1 w-full max-w-lg bg-[#FAFAFA] p-8 rounded-[2.5rem] shadow-xl border-[6px] border-slate-100 transform -rotate-1 hover:rotate-0 transition-all flex flex-col items-center">
+                
+                <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-[2rem] bg-indigo-50 border-[6px] border-indigo-100 flex items-center justify-center text-4xl sm:text-5xl shadow-sm mb-4">
+                  🙏
+                </div>
+                
+                <div className="text-xl md:text-2xl font-bold text-slate-800 tracking-tight text-center relative w-fit mb-6">
+                  {content.sentenceTrB1} {/* Translate to 'merci (femme)' / 'hello (female)' */}
+                  <div className="absolute -bottom-1.5 left-0 right-0 h-[2px] bg-slate-300 border-b border-dashed border-slate-400 opacity-50"></div>
+                  <div className="absolute -bottom-1.5 left-0 right-0 h-[2px] bg-transparent border-b border-dashed border-white opacity-50 translate-y-px"></div>
                 </div>
 
-                <div className="bg-slate-50 border-2 border-slate-200 rounded-2xl p-4 mb-8">
-                  <div className="text-xs font-bold text-slate-400 mb-3 flex items-center gap-2">
-                    {content.vocabTip}
+                <div className="bg-slate-50 border border-slate-200 rounded-2xl p-3 mb-6 w-full max-w-xs cursor-pointer hover:bg-slate-100 transition-colors flex justify-between items-center px-4">
+                  <div className="text-[11px] font-bold text-slate-500 flex items-center gap-2">
+                    💡 {language === 'en' ? 'USEFUL VOCABULARY' : 'VOCABULAIRE UTILE'}
                   </div>
-                  <div className="flex flex-wrap gap-2 text-sm">
-                    <div className="bg-white px-3 py-1.5 rounded-lg border border-slate-200 shadow-sm"><span className="text-emerald-600 font-bold">ค่ะ</span> <span className="text-slate-400 opacity-60 ml-1">{content.partF}</span></div>
-                    <div className="bg-white px-3 py-1.5 rounded-lg border border-slate-200 shadow-sm"><span className="text-emerald-600 font-bold">ออก</span> <span className="text-slate-400 opacity-60 ml-1">{content.out}</span></div>
-                    <div className="bg-white px-3 py-1.5 rounded-lg border border-slate-200 shadow-sm"><span className="text-emerald-600 font-bold">ใหญ่</span> <span className="text-slate-400 opacity-60 ml-1">{content.big}</span></div>
-                    <div className="bg-white px-3 py-1.5 rounded-lg border border-slate-200 shadow-sm"><span className="text-emerald-600 font-bold">สวัสดี</span> <span className="text-slate-400 opacity-60 ml-1">{content.hello}</span></div>
-                  </div>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-400"><path d="m6 9 6 6 6-6"></path></svg>
                 </div>
 
-                <div className="border-t-2 border-b-2 border-slate-100 py-6 mb-8 min-h-[6rem] flex items-center justify-center gap-2">
-                   <span className="text-slate-400 font-medium tracking-wide">{content.formHere}</span>
-                   <div className="text-slate-300">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-                   </div>
+                <div className="border-t-2 border-b-2 border-slate-200 py-6 mb-8 min-h-[6rem] flex items-center justify-center gap-2 w-full">
+                   <span className="text-slate-400 font-medium text-sm tracking-wide">{content.formHere}</span>
                 </div>
 
-                <div className="flex gap-3 justify-center">
-                   <div className="bg-white p-4 rounded-xl border-2 border-slate-200 border-b-4 text-center font-bold text-slate-700 shadow-sm hover:-translate-y-1 transition-transform cursor-pointer text-xl min-w-[3.5rem]">ค่ะ</div>
-                   <div className="bg-white p-4 rounded-xl border-2 border-slate-200 border-b-4 text-center font-bold text-slate-700 shadow-sm hover:-translate-y-1 transition-transform cursor-pointer text-xl min-w-[3.5rem]">ออก</div>
-                   <div className="bg-white p-4 rounded-xl border-2 border-slate-200 border-b-4 text-center font-bold text-slate-700 shadow-sm hover:-translate-y-1 transition-transform cursor-pointer text-xl min-w-[3.5rem]">ใหญ่</div>
-                   <div className="bg-white p-4 rounded-xl border-2 border-slate-200 border-b-4 text-center font-bold text-slate-700 shadow-sm hover:-translate-y-1 transition-transform cursor-pointer text-xl min-w-[3.5rem]">สวัสดี</div>
+                <div className="flex gap-3 justify-center w-full">
+                   <div className="bg-white p-3 rounded-xl border-2 border-slate-200 border-b-4 text-center font-bold text-slate-700 shadow-sm hover:-translate-y-1 transition-transform cursor-pointer text-xl min-w-[5rem] font-thai">ขอบคุณ</div>
+                   <div className="bg-white p-3 rounded-xl border-2 border-slate-200 border-b-4 text-center font-bold text-slate-700 shadow-sm hover:-translate-y-1 transition-transform cursor-pointer text-xl min-w-[5rem] font-thai">ค่ะ</div>
                 </div>
               </div>
             </div>
@@ -332,7 +331,7 @@ export default function LandingPageClient() {
               </div>
             </div>
 
-            {/* Showcase 4: Writing/Alphabet */}
+            {/* Showcase 4: Writing */}
             <div className="flex flex-col md:flex-row-reverse items-center gap-12">
               <div className="flex-1">
                 <h3 className="text-2xl md:text-3xl font-bold mb-4 flex items-center gap-3">
@@ -346,7 +345,6 @@ export default function LandingPageClient() {
                 </p>
               </div>
               <div className="flex-1 w-full max-w-lg bg-white p-8 rounded-[2.5rem] shadow-xl border-[6px] border-slate-100 transform -rotate-1 hover:rotate-0 transition-all flex flex-col">
-                
                 <div className="flex items-start gap-4 mb-6">
                    <div className="w-16 h-16 bg-emerald-100 rounded-2xl flex items-center justify-center text-3xl">
                      ✍️
@@ -380,6 +378,99 @@ export default function LandingPageClient() {
                    <div className="bg-slate-100 w-12 h-14 rounded-xl border-2 border-slate-200 text-center font-bold text-slate-400 flex items-center justify-center text-2xl opacity-50">ห</div>
                    <div className="bg-white w-12 h-14 rounded-xl border-2 border-slate-200 border-b-4 text-center font-bold text-slate-700 shadow-sm flex items-center justify-center text-2xl hover:-translate-y-1 transition-transform cursor-pointer">-</div>
                    <div className="bg-slate-100 w-12 h-14 rounded-xl border-2 border-slate-200 text-center text-slate-400 flex items-center justify-center">⌫</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Showcase 5: Discussions */}
+            <div className="flex flex-col md:flex-row items-center gap-12">
+              <div className="flex-1">
+                <h3 className="text-2xl md:text-3xl font-bold mb-4 flex items-center gap-3">
+                  <div className="bg-amber-100 text-amber-500 p-2 rounded-xl">
+                    <MessageCircle size={24} />
+                  </div>
+                  {content.discussTitle}
+                </h3>
+                <p className="text-lg text-slate-600 font-medium leading-relaxed">
+                  {content.discussDesc}
+                </p>
+              </div>
+              <div className="flex-1 w-full max-w-md bg-white p-6 rounded-[2.5rem] shadow-xl border-[6px] border-slate-100 transform rotate-1 hover:rotate-0 transition-all flex flex-col">
+                <div className="flex flex-col gap-4">
+                  <div className="flex gap-3">
+                     <div className="w-10 h-10 rounded-full bg-slate-200 border-2 border-slate-300 flex-shrink-0 relative overflow-hidden">
+                        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-slate-400 rounded-t-full"></div>
+                        <div className="absolute top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-slate-400 rounded-full"></div>
+                     </div>
+                     <div className="bg-slate-100 p-4 rounded-3xl rounded-tl-sm border-2 border-slate-200">
+                        <div className="w-24 h-3 bg-slate-300 rounded mb-2"></div>
+                        <div className="w-16 h-3 bg-slate-300 rounded"></div>
+                     </div>
+                  </div>
+                  
+                  <div className="flex gap-3 flex-row-reverse">
+                     <div className="w-10 h-10 rounded-full bg-orange-100 border-2 border-orange-200 flex-shrink-0 relative overflow-hidden">
+                        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-orange-300 rounded-t-full"></div>
+                        <div className="absolute top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-orange-300 rounded-full"></div>
+                     </div>
+                     <div className="bg-orange-50 p-4 rounded-3xl rounded-tr-sm border-2 border-orange-200 shadow-[0_0_0_4px_rgba(251,146,60,0.3)]">
+                        <div className="flex gap-1">
+                           <div className="w-2 h-2 bg-orange-400 rounded-full animate-bounce"></div>
+                           <div className="w-2 h-2 bg-orange-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                           <div className="w-2 h-2 bg-orange-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                        </div>
+                     </div>
+                  </div>
+                </div>
+                
+                <div className="mt-8 border-t-2 border-slate-100 pt-4 flex flex-col gap-2">
+                   <div className="bg-emerald-50 border-2 border-b-4 border-emerald-400 rounded-xl p-3 text-emerald-900 font-bold flex justify-between items-center shadow-sm relative">
+                      <span className="font-thai">{language === 'en' ? 'Sawatdee Kha' : 'Sawatdee Kha'}</span>
+                      <Check size={18} className="text-emerald-500" />
+                   </div>
+                   <div className="bg-white border-2 border-b-4 border-slate-200 rounded-xl p-3 text-slate-800 font-bold opacity-50 relative">
+                      <span className="font-thai">{language === 'en' ? 'Khop Khun Kha' : 'Khop Khun Kha'}</span>
+                   </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Showcase 6: Alphabet */}
+            <div className="flex flex-col md:flex-row-reverse items-center gap-12">
+              <div className="flex-1">
+                <h3 className="text-2xl md:text-3xl font-bold mb-4 flex items-center gap-3">
+                  <div className="bg-rose-100 text-rose-500 p-2 rounded-xl">
+                    <Type size={24} />
+                  </div>
+                  {content.alphaTitle}
+                </h3>
+                <p className="text-lg text-slate-600 font-medium leading-relaxed">
+                  {content.alphaDesc}
+                </p>
+              </div>
+              <div className="flex-1 w-full max-w-lg flex items-center justify-center transform -rotate-2 hover:rotate-0 transition-all">
+                {/* Alphabet Card representation */}
+                <div className="w-64 h-64 rounded-3xl border-2 border-teal-200 bg-teal-100 shadow-xl overflow-hidden flex flex-col items-center justify-center p-4 relative font-sans">
+                  <div className="absolute top-3 left-0 right-0 text-center text-xs font-bold uppercase tracking-wider text-teal-600 opacity-80">
+                     Mid Class
+                  </div>
+                  
+                  <div className="flex-1 flex flex-col items-center justify-center w-full relative">
+                    <span className="text-8xl font-bold text-teal-600 opacity-20 absolute select-none pointer-events-none font-thai">
+                      ก
+                    </span>
+                    <div className="z-10 text-center flex flex-col items-center justify-center h-full pt-4">
+                        <div className="flex flex-col items-center gap-3">
+                          <div className="w-28 h-28 rounded-full bg-white bg-opacity-60 border-2 border-dashed border-teal-200 flex items-center justify-center relative shadow-inner">
+                              <span className="text-6xl absolute z-0 opacity-40 filter drop-shadow-sm mix-blend-multiply">🐔</span>
+                              <span className="text-7xl font-medium text-teal-600 z-10 drop-shadow-md font-thai">ก</span>
+                          </div>
+                          <p className="text-[15px] font-semibold mt-1 text-teal-600 px-2 leading-tight text-center max-w-[90%] font-sans">
+                            {language === 'en' ? 'Chicken' : 'Poulet'}
+                          </p>
+                        </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
