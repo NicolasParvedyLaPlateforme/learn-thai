@@ -261,7 +261,7 @@
             "w_khun",
             "w_la"
           ],
-          "en": "My name is (first name) and you? ",
+          "en": "My name is (first name) and you? (man) ",
           "imageUrl": "/images/p_p_my_name_and_you_m.svg"
         },
         {
@@ -596,7 +596,7 @@
             "w_dtua",
             "w_krap"
           ],
-          "en": "how many chairs are there? ",
+          "en": "how many chairs are there? (man)",
           "imageUrl": "/images/p_p_how_many_chairs_m.svg"
         },
         {
@@ -611,7 +611,7 @@
             "w_dtua",
             "w_kha"
           ],
-          "en": "how many chairs are there? ",
+          "en": "how many chairs are there? (woman)",
           "imageUrl": "/images/p_p_how_many_chairs_f.svg"
         },
         {
@@ -1700,7 +1700,7 @@
             "w_thao_rai",
             "w_krap"
           ],
-          "en": "how much does it cost? ",
+          "en": "how much does it cost? (man)",
           "imageUrl": "/images/p_p_how_much.svg"
         },
         {
@@ -1761,7 +1761,7 @@
             "w_thao_rai",
             "w_kha"
           ],
-          "en": "how much does it cost? ",
+          "en": "how much does it cost? (woman)",
           "imageUrl": "/images/p_p_how_much_f.svg"
         },
         {
