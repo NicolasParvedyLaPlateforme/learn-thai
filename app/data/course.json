@@ -855,7 +855,7 @@
             "w_mu",
             "w_aroi"
           ],
-          "en": "pork is delicious",
+          "en": "the pork is delicious",
           "imageUrl": "/images/p_p_new_l4_3.svg"
         },
         {
@@ -1881,9 +1881,9 @@
         {
           "id": "w_dee_jai",
           "th": "ดีใจ",
-          "fr": "heureux",
+          "fr": "content / ravi",
           "phonetic": "dii jai",
-          "en": "happy",
+          "en": "glad / pleased",
           "imageUrl": "/images/w_w_dee_jai.svg"
         },
         {
@@ -1905,7 +1905,7 @@
         {
           "id": "w_krot",
           "th": "โกรธ",
-          "fr": "en colère",
+          "fr": "en colère / fâché",
           "phonetic": "kròot",
           "en": "angry",
           "imageUrl": "/images/w_w_krot.svg"
@@ -3157,18 +3157,6 @@
       ],
       "phrases": [
         {
-          "id": "p_eat_chicken",
-          "th": "กินไก่",
-          "fr": "manger du poulet",
-          "phonetic": "kin kài",
-          "components": [
-            "w_kin",
-            "w_kai"
-          ],
-          "en": "eat chicken",
-          "imageUrl": "/images/p_p_eat_chicken.svg"
-        },
-        {
           "id": "p_want_fish",
           "th": "อยากกินปลา",
           "fr": "je veux manger du poisson",
@@ -3180,18 +3168,6 @@
           ],
           "en": "I want to eat fish",
           "imageUrl": "/images/p_p_want_fish.svg"
-        },
-        {
-          "id": "p_pork_delicious",
-          "th": "หมูอร่อย",
-          "fr": "le porc est délicieux",
-          "phonetic": "mǔu à-rɔ̀i",
-          "components": [
-            "w_mu",
-            "w_aroi"
-          ],
-          "en": "the pork is delicious",
-          "imageUrl": "/images/p_p_pork_delicious.svg"
         },
         {
           "id": "p_want_beef",
@@ -3540,18 +3516,6 @@
           ],
           "en": "The check, please",
           "imageUrl": "/images/p_p_bill_please.svg"
-        },
-        {
-          "id": "p_very_hungry",
-          "th": "หิวมาก",
-          "fr": "j'ai très faim",
-          "phonetic": "hǐw mâak",
-          "components": [
-            "w_hiw",
-            "w_mak"
-          ],
-          "en": "I'm very hungry",
-          "imageUrl": "/images/p_p_very_hungry.svg"
         },
         {
           "id": "p_bill_please_f",
@@ -4567,19 +4531,6 @@
       ],
       "phrases": [
         {
-          "id": "p_have_money",
-          "th": "มีเงินไหม",
-          "fr": "as-tu de l'argent ?",
-          "phonetic": "mii ngoen mǎi",
-          "components": [
-            "w_mee",
-            "w_ngern",
-            "w_mai"
-          ],
-          "en": "do you have money?",
-          "imageUrl": "/images/p_p_have_money.svg"
-        },
-        {
           "id": "p_sell_what",
           "th": "ขายอะไร",
           "fr": "tu vends quoi ?",
@@ -4717,9 +4668,9 @@
         {
           "id": "p_new_lesson-29-a1_4",
           "th": "หยุดที่นี่",
-          "fr": "S'arrêter ici",
+          "fr": "arrêtez-vous ici",
           "en": "Stop here",
-          "phonetic": "",
+          "phonetic": "yùt thîi nîi",
           "components": [
             "w_lesson-29-a1_2",
             "w_thi_ni"
@@ -4777,18 +4728,6 @@
             "w_lesson-29-a2_1"
           ],
           "imageUrl": "/images/p_p_new_lesson-29-a2_1.svg"
-        },
-        {
-          "id": "p_new_lesson-29-a2_2",
-          "th": "อ่านหนังสือ",
-          "fr": "Lire un livre",
-          "en": "Read a book",
-          "phonetic": "",
-          "components": [
-            "w_aan",
-            "w_nangsue"
-          ],
-          "imageUrl": "/images/p_p_new_lesson-29-a2_2.svg"
         },
         {
           "id": "p_new_lesson-29-a2_3",
@@ -5898,19 +5837,6 @@
           "imageUrl": "/images/p_p_new_lesson-34-a4_1.svg"
         },
         {
-          "id": "p_new_lesson-34-a4_2",
-          "th": "กินตอนเย็น",
-          "fr": "Manger le soir",
-          "en": "Eat at evening",
-          "phonetic": "",
-          "components": [
-            "w_kin",
-            "w_ton",
-            "w_yen"
-          ],
-          "imageUrl": "/images/p_p_new_lesson-34-a4_2.svg"
-        },
-        {
           "id": "p_new_lesson-34-a4_3",
           "th": "ตอนเช้าหนาว",
           "fr": "Il fait froid le matin",
@@ -6709,18 +6635,6 @@
       ],
       "phrases": [
         {
-          "id": "p_new_lesson-39-a3_0",
-          "th": "ซื้อตั๋ว",
-          "fr": "Acheter un billet",
-          "en": "Buy ticket",
-          "phonetic": "",
-          "components": [
-            "w_sue",
-            "w_tua"
-          ],
-          "imageUrl": "/images/p_p_new_lesson-39-a3_0.svg"
-        },
-        {
           "id": "p_new_lesson-39-a3_1",
           "th": "สถานีรถไฟ",
           "fr": "Gare féroviaire",
@@ -6805,18 +6719,6 @@
         }
       ],
       "phrases": [
-        {
-          "id": "p_new_lesson-39-a4_0",
-          "th": "ขับรถ",
-          "fr": "Conduire",
-          "en": "Drive a car",
-          "phonetic": "khàp rót",
-          "components": [
-            "w_khap",
-            "w_rot"
-          ],
-          "imageUrl": "/images/p_p_new_lesson-39-a4_0.svg"
-        },
         {
           "id": "p_new_lesson-39-a4_1",
           "th": "ขึ้นรถไฟ",
@@ -6907,30 +6809,6 @@
           "imageUrl": "/images/p_p_new_lesson-39-a5_0.svg"
         },
         {
-          "id": "p_new_lesson-39-a5_1",
-          "th": "เลี้ยวซ้าย",
-          "fr": "Tourner à gauche",
-          "en": "Turn left",
-          "phonetic": "",
-          "components": [
-            "w_liao",
-            "w_sai"
-          ],
-          "imageUrl": "/images/p_p_new_lesson-39-a5_1.svg"
-        },
-        {
-          "id": "p_new_lesson-39-a5_2",
-          "th": "เลี้ยวขวา",
-          "fr": "Tourner à droite",
-          "en": "Turn right",
-          "phonetic": "",
-          "components": [
-            "w_liao",
-            "w_khwa"
-          ],
-          "imageUrl": "/images/p_p_new_lesson-39-a5_2.svg"
-        },
-        {
           "id": "p_new_lesson-39-a5_3",
           "th": "อยู่ทางขวา",
           "fr": "C'est sur la droite",
@@ -6942,19 +6820,6 @@
             "w_khwa"
           ],
           "imageUrl": "/images/p_p_new_lesson-39-a5_3.svg"
-        },
-        {
-          "id": "p_new_lesson-39-a5_4",
-          "th": "ไปทางซ้าย",
-          "fr": "Aller à gauche",
-          "en": "Go left",
-          "phonetic": "",
-          "components": [
-            "w_pai",
-            "w_thang_way",
-            "w_sai"
-          ],
-          "imageUrl": "/images/p_p_new_lesson-39-a5_4.svg"
         }
       ],
       "imageUrl": "/images/default-lesson.svg"
@@ -8077,7 +7942,7 @@
             "w_khao_pron",
             "w_sung"
           ],
-          "en": "he is big",
+          "en": "he is tall",
           "imageUrl": "/images/p_p_he_is_tall.svg"
         },
         {
@@ -8520,18 +8385,6 @@
             "w_mak"
           ],
           "imageUrl": "/images/p_p_new_lesson-49-a3_3.svg"
-        },
-        {
-          "id": "p_new_lesson-49-a3_4",
-          "th": "รถสวย",
-          "fr": "Belle voiture",
-          "en": "Beautiful car",
-          "phonetic": "",
-          "components": [
-            "w_rot",
-            "w_suay"
-          ],
-          "imageUrl": "/images/p_p_new_lesson-49-a3_4.svg"
         }
       ],
       "imageUrl": "/images/default-lesson.svg"
@@ -8631,14 +8484,6 @@
       "titleEn": "Ext: Qualities",
       "descriptionEn": "More vocabulary for this unit.",
       "words": [
-        {
-          "id": "w_lesson-49-a5_0",
-          "th": "เตี้ย",
-          "fr": "petit (taille)",
-          "en": "short (size)",
-          "phonetic": "dtîa",
-          "imageUrl": "/images/w_w_lesson-49-a5_0.svg"
-        },
         {
           "id": "w_lesson-49-a5_1",
           "th": "ฉลาด",
@@ -8849,14 +8694,6 @@
           "phonetic": "ai",
           "en": "to cough",
           "imageUrl": "/images/w_w_ay.svg"
-        },
-        {
-          "id": "w_nueay_2",
-          "th": "เหนื่อย",
-          "fr": "fatigué",
-          "phonetic": "nùeay",
-          "en": "fatigue",
-          "imageUrl": "/images/w_w_nueay_2.svg"
         }
       ],
       "phrases": [
@@ -8945,14 +8782,6 @@
           "phonetic": "glua",
           "en": "be afraid",
           "imageUrl": "/images/w_w_klua.svg"
-        },
-        {
-          "id": "w_krot_2",
-          "th": "โกรธ",
-          "fr": "fâché",
-          "phonetic": "gròot",
-          "en": "angry",
-          "imageUrl": "/images/w_w_krot_2.svg"
         }
       ],
       "phrases": [
@@ -9026,14 +8855,6 @@
       "title": "Réactions cognitives",
       "description": "Penser, savoir",
       "words": [
-        {
-          "id": "w_khit_2",
-          "th": "คิด",
-          "fr": "penser",
-          "phonetic": "khít",
-          "en": "think",
-          "imageUrl": "/images/w_w_khit_2.svg"
-        },
         {
           "id": "w_ru",
           "th": "รู้",
@@ -9125,43 +8946,15 @@
       "descriptionEn": "More vocabulary for this unit.",
       "words": [
         {
-          "id": "w_lesson-54-a1_0",
-          "th": "ยา",
-          "fr": "médicament",
-          "en": "medicine",
-          "phonetic": "yaa",
-          "imageUrl": "/images/w_w_lesson-54-a1_0.svg"
-        },
-        {
           "id": "w_lesson-54-a1_1",
           "th": "ร้านขายยา",
           "fr": "pharmacie",
           "en": "pharmacy",
           "phonetic": "ráan-khǎai-yaa",
           "imageUrl": "/images/w_w_lesson-54-a1_1.svg"
-        },
-        {
-          "id": "w_lesson-54-a1_2",
-          "th": "หมอ",
-          "fr": "médecin",
-          "en": "doctor",
-          "phonetic": "mɔ̌ɔ",
-          "imageUrl": "/images/w_w_lesson-54-a1_2.svg"
         }
       ],
       "phrases": [
-        {
-          "id": "p_new_lesson-54-a1_0",
-          "th": "กินยา",
-          "fr": "Prendre un médicament",
-          "en": "Take medicine",
-          "phonetic": "",
-          "components": [
-            "w_kin",
-            "w_ya"
-          ],
-          "imageUrl": "/images/p_p_new_lesson-54-a1_0.svg"
-        },
         {
           "id": "p_new_lesson-54-a1_1",
           "th": "ไปหาหมอ",
@@ -9222,22 +9015,6 @@
       "titleEn": "Ext: Illness",
       "descriptionEn": "More vocabulary for this unit.",
       "words": [
-        {
-          "id": "w_lesson-54-a2_0",
-          "th": "เจ็บ",
-          "fr": "avoir mal",
-          "en": "pain",
-          "phonetic": "jèp",
-          "imageUrl": "/images/w_w_lesson-54-a2_0.svg"
-        },
-        {
-          "id": "w_lesson-54-a2_1",
-          "th": "ไข้",
-          "fr": "fièvre",
-          "en": "fever",
-          "phonetic": "khâi",
-          "imageUrl": "/images/w_w_lesson-54-a2_1.svg"
-        },
         {
           "id": "w_lesson-54-a2_2",
           "th": "ไอ",
@@ -9321,26 +9098,18 @@
         {
           "id": "w_lesson-54-a3_0",
           "th": "มีความสุข",
-          "fr": "heureux",
-          "en": "happy",
+          "fr": "heureux (avoir du bonheur)",
+          "en": "happy / joyful",
           "phonetic": "mii-khwaam-sùk",
           "imageUrl": "/images/w_w_lesson-54-a3_0.svg"
         },
         {
           "id": "w_lesson-54-a3_1",
           "th": "โมโห",
-          "fr": "en colère",
+          "fr": "furieux / énervé",
           "en": "mad",
           "phonetic": "mo-ho",
           "imageUrl": "/images/w_w_lesson-54-a3_1.svg"
-        },
-        {
-          "id": "w_lesson-54-a3_2",
-          "th": "กลัว",
-          "fr": "avoir peur",
-          "en": "scared",
-          "phonetic": "klua",
-          "imageUrl": "/images/w_w_lesson-54-a3_2.svg"
         },
         {
           "th": "อย่า",
@@ -9440,22 +9209,6 @@
       "titleEn": "Ext: Needs",
       "descriptionEn": "More vocabulary for this unit.",
       "words": [
-        {
-          "id": "w_lesson-54-a4_0",
-          "th": "เหนื่อย",
-          "fr": "fatigué",
-          "en": "tired",
-          "phonetic": "nʉ̀ai",
-          "imageUrl": "/images/w_w_lesson-54-a4_0.svg"
-        },
-        {
-          "id": "w_lesson-54-a4_1",
-          "th": "หิว",
-          "fr": "avoir faim",
-          "en": "hungry",
-          "phonetic": "hǐu",
-          "imageUrl": "/images/w_w_lesson-54-a4_1.svg"
-        },
         {
           "id": "w_lesson-54-a4_2",
           "th": "หิวน้ำ",
@@ -10292,14 +10045,6 @@
           "phonetic": "phûak khao",
           "en": "they",
           "imageUrl": "/images/w_w_phuak_khao.svg"
-        },
-        {
-          "id": "w_phasa",
-          "th": "ภาษา",
-          "fr": "langue",
-          "phonetic": "phaa-sǎa",
-          "en": "language",
-          "imageUrl": "/images/w_w_phasa.svg"
         }
       ],
       "phrases": [
@@ -10376,22 +10121,6 @@
       "description": "Hôtel, marché, taxis",
       "words": [
         {
-          "id": "w_rong_raem_2",
-          "th": "โรงแรม",
-          "fr": "hôtel",
-          "phonetic": "roong-raem",
-          "en": "hotel",
-          "imageUrl": "/images/w_w_rong_raem_2.svg"
-        },
-        {
-          "id": "w_talat_2",
-          "th": "ตลาด",
-          "fr": "marché",
-          "phonetic": "dtà-làat",
-          "en": "market",
-          "imageUrl": "/images/w_w_talat_2.svg"
-        },
-        {
           "id": "w_khao_enter",
           "th": "เข้า",
           "fr": "entrer",
@@ -10406,14 +10135,6 @@
           "phonetic": "ɔ̀ɔk",
           "en": "go out",
           "imageUrl": "/images/w_w_ook.svg"
-        },
-        {
-          "id": "w_yut",
-          "th": "หยุด",
-          "fr": "arrêter",
-          "phonetic": "yùt",
-          "en": "stop",
-          "imageUrl": "/images/w_w_yut.svg"
         }
       ],
       "phrases": [
@@ -10442,18 +10163,6 @@
           "imageUrl": "/images/p_p_go_market.svg"
         },
         {
-          "id": "p_stop_here",
-          "th": "หยุดที่นี่",
-          "fr": "arrêtez-vous ici",
-          "phonetic": "yùt thîi nîi",
-          "components": [
-            "w_lesson-29-a1_2",
-            "w_thi_ni"
-          ],
-          "en": "stop here",
-          "imageUrl": "/images/p_p_stop_here.svg"
-        },
-        {
           "id": "p_enter_hotel",
           "th": "เข้าโรงแรม",
           "fr": "entrer dans l'hôtel",
@@ -10478,7 +10187,7 @@
         {
           "id": "w_check_bin",
           "th": "เช็คบิล",
-          "fr": "l'addition",
+          "fr": "l'addition ( de l'anglais Check Bill)",
           "phonetic": "chék bin",
           "en": "the bill",
           "explanation": "Ce mot vient de l'anglais 'Check bill'. Le son 'k' final s'écrit avec 'ค' (qui fait normalement 'kh' au début) respectant la translittération anglaise.",
@@ -10491,14 +10200,6 @@
           "phonetic": "ìik",
           "en": "again / more",
           "imageUrl": "/images/w_w_eek.svg"
-        },
-        {
-          "id": "w_khrang_2",
-          "th": "ครั้ง",
-          "fr": "fois",
-          "phonetic": "khráng",
-          "en": "time (frequency)",
-          "imageUrl": "/images/w_w_khrang_2.svg"
         },
         {
           "id": "w_duay_kan",
