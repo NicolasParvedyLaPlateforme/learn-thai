@@ -3,8 +3,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useProgressStore } from '../lib/store';
-import courseData from '../data/course.json';
-import { generateEndlessPairMatching } from '../lib/exercise-generator';
 import { Exercise, CourseData, Word } from '../types';
 import { X, Check, Play } from 'lucide-react';
 import { playThaiTTS, preloadThaiVoices } from '../lib/tts';
@@ -12,8 +10,7 @@ import { motion, AnimatePresence } from 'motion/react';
 
 // Exercise Components
 import PairMatch from '../components/PairMatch';
-
-const data = courseData as CourseData;
+import { getEndlessPairMatchingServer } from '../actions/course';
 
 export default function ReviewPairsPage() {
   const router = useRouter();
@@ -38,7 +35,9 @@ export default function ReviewPairsPage() {
     const timer = setTimeout(() => {
       setMounted(true);
       if(!initialized && completedLessons.length > 0) {
-        setExercises(generateEndlessPairMatching(data.lessons, completedLessons, language));
+        getEndlessPairMatchingServer(completedLessons, language).then(generated => {
+           setExercises(generated);
+        });
         initialized = true;
       }
     }, 0);
@@ -47,6 +46,11 @@ export default function ReviewPairsPage() {
     return () => clearTimeout(timer);
   }, [completedLessons, language]);
 
+  const fetchMore = () => {
+    getEndlessPairMatchingServer(completedLessons, language).then(generated => {
+      setExercises(prev => [...prev, ...generated]);
+    });
+  };
 
   if (!mounted) return <div className="p-8 text-center text-slate-500 font-medium">{language === 'en' ? 'Loading...' : 'Chargement...'}</div>;
 
@@ -79,7 +83,7 @@ export default function ReviewPairsPage() {
       if (isCorrect) {
           completeLesson('review-dummy', 1); // grant 1 xp
           if (currentIndex >= exercises.length - 3) {
-            setExercises(prev => [...prev, ...generateEndlessPairMatching(data.lessons, completedLessons, language)]);
+            fetchMore();
           }
           setCurrentIndex(currentIndex + 1);
           setIsChecking(false);
@@ -140,7 +144,7 @@ export default function ReviewPairsPage() {
                   onComplete={() => {
                     completeLesson('review-dummy', 1); // grant 1 xp
                     if (currentIndex >= exercises.length - 3) {
-                      setExercises(prev => [...prev, ...generateEndlessPairMatching(data.lessons, completedLessons, language)]);
+                      fetchMore();
                     }
                     setCurrentIndex(prev => prev + 1);
                     setIsChecking(false);
