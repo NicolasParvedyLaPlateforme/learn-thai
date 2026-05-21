@@ -1897,7 +1897,7 @@
         {
           "id": "w_chop",
           "th": "ชอบ",
-          "fr": "aimer",
+          "fr": "adore",
           "phonetic": "chɔ̂ɔp",
           "en": "to like",
           "imageUrl": "/images/w_w_chop.svg"
@@ -2418,7 +2418,7 @@
           "th": "ขวา",
           "fr": "droite",
           "phonetic": "khwǎa",
-          "en": "RIGHT",
+          "en": "right",
           "imageUrl": "/images/w_w_khwa.svg"
         },
         {
@@ -6583,7 +6583,7 @@
           "th": "ตะวันออก",
           "fr": "est",
           "en": "east",
-          "phonetic": "tà-wan-ɔ̀ɔk",
+          "phonetic": "dtà-wan-ɔ̀ɔk",
           "imageUrl": "/images/w_w_lesson-39-a2_2.svg"
         },
         {
@@ -6596,9 +6596,9 @@
         },
         {
           "th": "ทิศตะวันออก",
-          "en": "East",
+          "en": "east direction / cardinal point east",
           "id": "w_thittawanok",
-          "fr": "est",
+          "fr": "direction de l'Est / point cardinal Est",
           "phonetic": "thít dtà-wan-ɔ̀ɔk",
           "imageUrl": "/images/w_w_thittawanok.svg"
         }
@@ -6681,15 +6681,6 @@
           "en": "ticket",
           "phonetic": "dtǔa",
           "imageUrl": "/images/w_w_lesson-39-a3_0.svg"
-        },
-        {
-          "id": "w_lesson-39-a3_1",
-          "th": "สถานี",
-          "fr": "station",
-          "en": "station",
-          "phonetic": "sà-thǎa-nii",
-          "imageUrl": "/images/w_w_lesson-39-a3_1.svg",
-          "allowIdenticalTranslation": true
         },
         {
           "id": "w_lesson-39-a3_2",
@@ -6797,15 +6788,6 @@
           "imageUrl": "/images/w_w_lesson-39-a4_0.svg"
         },
         {
-          "id": "w_lesson-39-a4_2",
-          "th": "รถเมล์",
-          "fr": "bus",
-          "en": "bus",
-          "phonetic": "rót-mee",
-          "imageUrl": "/images/w_w_lesson-39-a4_2.svg",
-          "allowIdenticalTranslation": true
-        },
-        {
           "th": "ขึ้น",
           "en": "go up / board",
           "id": "w_khuen_up",
@@ -6900,22 +6882,6 @@
           "en": "straight",
           "phonetic": "dtrong",
           "imageUrl": "/images/w_w_lesson-39-a5_0.svg"
-        },
-        {
-          "id": "w_lesson-39-a5_1",
-          "th": "ซ้าย",
-          "fr": "gauche",
-          "en": "left",
-          "phonetic": "sáai",
-          "imageUrl": "/images/w_w_lesson-39-a5_1.svg"
-        },
-        {
-          "id": "w_lesson-39-a5_2",
-          "th": "ขวา",
-          "fr": "droite",
-          "en": "right",
-          "phonetic": "khwǎa",
-          "imageUrl": "/images/w_w_lesson-39-a5_2.svg"
         },
         {
           "th": "ทาง",
@@ -7289,14 +7255,6 @@
           "imageUrl": "/images/w_w_thuk_correct.svg"
         },
         {
-          "id": "w_phaeng_2",
-          "th": "แพง",
-          "fr": "cher",
-          "phonetic": "phaeng",
-          "en": "Dear",
-          "imageUrl": "/images/w_w_phaeng_2.svg"
-        },
-        {
           "id": "w_sai_put",
           "th": "ใส่",
           "fr": "mettre / porter",
@@ -7378,14 +7336,6 @@
       "titleEn": "Ext: Accessories",
       "descriptionEn": "More vocabulary for this unit.",
       "words": [
-        {
-          "id": "w_lesson-44-a1_0",
-          "th": "รองเท้า",
-          "fr": "chaussures",
-          "en": "shoes",
-          "phonetic": "rɔɔng-tháo",
-          "imageUrl": "/images/w_w_lesson-44-a1_0.svg"
-        },
         {
           "id": "w_lesson-44-a1_1",
           "th": "หมวก",
@@ -7574,31 +7524,6 @@
       "titleEn": "Ext: Size",
       "descriptionEn": "More vocabulary for this unit.",
       "words": [
-        {
-          "id": "w_lesson-44-a3_0",
-          "th": "ใหญ่",
-          "fr": "grand",
-          "en": "big",
-          "phonetic": "yài",
-          "imageUrl": "/images/w_w_lesson-44-a3_0.svg"
-        },
-        {
-          "id": "w_lesson-44-a3_1",
-          "th": "เล็ก",
-          "fr": "petit",
-          "en": "small",
-          "phonetic": "lék",
-          "imageUrl": "/images/w_w_lesson-44-a3_1.svg"
-        },
-        {
-          "id": "w_lesson-44-a3_2",
-          "th": "ยาว",
-          "fr": "long",
-          "en": "long",
-          "phonetic": "yaao",
-          "imageUrl": "/images/w_w_lesson-44-a3_2.svg",
-          "allowIdenticalTranslation": true
-        },
         {
           "th": "ยาว",
           "en": "long",
@@ -7921,14 +7846,6 @@
           "phonetic": "dèk",
           "en": "child (general)",
           "imageUrl": "/images/w_w_dek_2.svg"
-        },
-        {
-          "id": "w_phuean_2",
-          "th": "เพื่อน",
-          "fr": "ami",
-          "phonetic": "phûean",
-          "en": "friend",
-          "imageUrl": "/images/w_w_phuean_2.svg"
         }
       ],
       "phrases": [
@@ -8627,28 +8544,12 @@
       "descriptionEn": "More vocabulary for this unit.",
       "words": [
         {
-          "id": "w_lesson-49-a4_0",
-          "th": "อ้วน",
-          "fr": "gros(se)",
-          "en": "fat",
-          "phonetic": "ûan",
-          "imageUrl": "/images/w_w_lesson-49-a4_0.svg"
-        },
-        {
           "id": "w_lesson-49-a4_1",
           "th": "ผอม",
           "fr": "mince",
           "en": "thin",
           "phonetic": "phɔ̌ɔm",
           "imageUrl": "/images/w_w_lesson-49-a4_1.svg"
-        },
-        {
-          "id": "w_lesson-49-a4_2",
-          "th": "สูง",
-          "fr": "grand (taille)",
-          "en": "tall",
-          "phonetic": "sǔung",
-          "imageUrl": "/images/w_w_lesson-49-a4_2.svg"
         },
         {
           "th": "แมว",
@@ -8734,7 +8635,7 @@
           "id": "w_lesson-49-a5_0",
           "th": "เตี้ย",
           "fr": "petit (taille)",
-          "en": "short",
+          "en": "short (size)",
           "phonetic": "dtîa",
           "imageUrl": "/images/w_w_lesson-49-a5_0.svg"
         },
