@@ -4,6 +4,7 @@ import LessonClientPage from './components/LessonClientPage';
 export const dynamic = 'force-dynamic';
 
 export default async function LessonPage({ params }: any) {
-  const lesson = await getLessonData(params.id);
+  const resolvedParams = await params;
+  const lesson = await getLessonData(resolvedParams.id);
   return <LessonClientPage lesson={lesson} />;
 }

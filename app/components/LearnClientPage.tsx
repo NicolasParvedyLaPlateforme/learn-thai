@@ -744,7 +744,7 @@ export default function LearnClientPage({ lightweightLessons }: { lightweightLes
                   </div>
                   
                   {(() => {
-                    const wordCount = selectedLesson.lesson.words.length;
+                    const wordCount = selectedLesson.lesson.words?.length || 0;
                     const stepsCount = 10 + wordCount + (selectedLesson.lesson.phrases?.length || 0);
                     let secsPerStep = 5;
                     if (modalLevel <= 1) secsPerStep = 5;
@@ -784,16 +784,11 @@ export default function LearnClientPage({ lightweightLessons }: { lightweightLes
                         <div>
                            <h4 className="border-b text-slate-500 font-bold mb-3 pb-2 flex text-sm">{language === 'en' ? 'Vocabulary preview' : 'Aperçu du vocabulaire'}</h4>
                            <div className="flex flex-nowrap overflow-x-auto hide-scrollbar gap-2 pb-2">
-                               {selectedLesson.lesson.words?.slice(0, 3).map((w: any) => (
+                               {selectedLesson.lesson.words?.map((w: any) => (
                                   <button onClick={() => playThaiTTS(w.th)} key={w.id} className="shrink-0 bg-white border-2 border-slate-100 rounded-xl px-3 py-1.5 flex items-center justify-center gap-2 font-thai text-xl font-bold shadow-sm hover:bg-slate-50 hover:border-slate-300 transition-colors cursor-pointer active:scale-95">
                                      {w.th} <Volume2 size={16} className="text-slate-300"/>
                                   </button>
                                ))}
-                               {wordCount > 3 && (
-                                 <div className="shrink-0 border-2 border-dashed border-slate-200 text-slate-400 rounded-xl px-3 py-1.5 flex items-center justify-center font-bold text-sm">
-                                    +{wordCount - 3} {language === 'en' ? 'others' : 'autres'}
-                                 </div>
-                               )}
                            </div>
                         </div>
                       </div>

@@ -37,7 +37,7 @@ export async function getLightweightLessons() {
     unit: (l as any).unit,
     isReview: l.isReview,
     imageUrl: (l as any).imageUrl,
-    words: l.words?.slice(0, 3) || []
+    words: l.words || []
   }));
 }
 
