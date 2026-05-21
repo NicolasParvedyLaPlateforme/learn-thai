@@ -3219,18 +3219,6 @@
           ],
           "en": "I want to eat shrimp",
           "imageUrl": "/images/p_p_want_shrimp.svg"
-        },
-        {
-          "id": "p_eat_rice",
-          "th": "กินข้าว",
-          "fr": "manger du riz / manger",
-          "phonetic": "kin kâao",
-          "components": [
-            "w_kin",
-            "w_khao"
-          ],
-          "en": "eat rice / eat",
-          "imageUrl": "/images/p_p_eat_rice.svg"
         }
       ],
       "titleEn": "On the Menu: Meats",
@@ -3407,18 +3395,6 @@
           ],
           "en": "very sweet",
           "imageUrl": "/images/p_p_very_sweet.svg"
-        },
-        {
-          "id": "p_not_spicy",
-          "th": "ไม่เผ็ด",
-          "fr": "pas épicé",
-          "phonetic": "mâi phèt",
-          "components": [
-            "w_mai_neg",
-            "w_phet"
-          ],
-          "en": "not spicy",
-          "imageUrl": "/images/p_p_not_spicy.svg"
         },
         {
           "id": "p_salty",
@@ -10149,18 +10125,6 @@
           ],
           "en": "go to the hotel",
           "imageUrl": "/images/p_p_go_hotel.svg"
-        },
-        {
-          "id": "p_go_market",
-          "th": "ไปตลาด",
-          "fr": "aller au marché",
-          "phonetic": "bpai dtà-làat",
-          "components": [
-            "w_pai",
-            "w_talat"
-          ],
-          "en": "go to the market",
-          "imageUrl": "/images/p_p_go_market.svg"
         },
         {
           "id": "p_enter_hotel",
