@@ -4598,7 +4598,7 @@
           "th": "เดินไป",
           "fr": "Marcher vers",
           "en": "Walk to",
-          "phonetic": "",
+          "phonetic": "dǝǝn-pai",
           "components": [
             "w_doen",
             "w_pai"
@@ -4610,7 +4610,7 @@
           "th": "วิ่งเร็ว",
           "fr": "Courir vite",
           "en": "Run fast",
-          "phonetic": "",
+          "phonetic": "wîng-rew",
           "components": [
             "w_lesson-29-a1_0",
             "w_rew"
@@ -4622,7 +4622,7 @@
           "th": "ช่วยหยุด",
           "fr": "Veuillez vous arrêter",
           "en": "Please stop",
-          "phonetic": "",
+          "phonetic": "chûay-yùt",
           "components": [
             "w_chuai",
             "w_lesson-29-a1_2"
@@ -4634,7 +4634,7 @@
           "th": "กำลังเดิน",
           "fr": "En train de marcher",
           "en": "Walking",
-          "phonetic": "",
+          "phonetic": "gam-lang-dǝǝn",
           "components": [
             "w_gamlang",
             "w_doen"
@@ -4686,7 +4686,7 @@
           "th": "ขอถาม",
           "fr": "Je voudrais demander",
           "en": "I'd like to ask",
-          "phonetic": "",
+          "phonetic": "khɔ̌ɔ thǎam",
           "components": [
             "w_kho_req",
             "w_lesson-29-a2_0"
@@ -4698,7 +4698,7 @@
           "th": "กรุณาตอบ",
           "fr": "Veuillez répondre",
           "en": "Please answer",
-          "phonetic": "",
+          "phonetic": "gà-rú-naa dtɔ̀ɔp",
           "components": [
             "w_ka_ru_na",
             "w_lesson-29-a2_1"
@@ -4710,7 +4710,7 @@
           "th": "ไม่ตอบ",
           "fr": "Ne pas répondre",
           "en": "Not answer",
-          "phonetic": "",
+          "phonetic": "mâi dtɔ̀ɔp",
           "components": [
             "w_mai_neg",
             "w_lesson-29-a2_1"
@@ -4722,7 +4722,7 @@
           "th": "ชอบอ่าน",
           "fr": "Aimer lire",
           "en": "Like reading",
-          "phonetic": "",
+          "phonetic": "chɔ̂ɔp àan",
           "components": [
             "w_chop",
             "w_aan"
@@ -4786,7 +4786,7 @@
           "th": "กำลังทำอาหาร",
           "fr": "En train de cuisiner",
           "en": "Cooking",
-          "phonetic": "",
+          "phonetic": "gam-lang tham aa-hǎan",
           "components": [
             "w_gamlang",
             "w_lesson-29-a3_2"
@@ -4798,7 +4798,7 @@
           "th": "ซักเสื้อผ้า",
           "fr": "Laver les vêtements",
           "en": "Wash clothes",
-          "phonetic": "",
+          "phonetic": "sák sʉ̂a-phâa",
           "components": [
             "w_lesson-29-a3_1",
             "w_suea",
@@ -4811,7 +4811,7 @@
           "th": "ทำความสะอาดบ้าน",
           "fr": "Nettoyer la maison",
           "en": "Clean house",
-          "phonetic": "",
+          "phonetic": "tham khwaam-sà-àat bâan",
           "components": [
             "w_lesson-29-a3_0",
             "w_baan"
@@ -4823,7 +4823,7 @@
           "th": "ชอบทำอาหาร",
           "fr": "Aimer cuisiner",
           "en": "Like cooking",
-          "phonetic": "",
+          "phonetic": "chɔ̂ɔp tham aa-hǎan",
           "components": [
             "w_chop",
             "w_lesson-29-a3_2"
@@ -4835,7 +4835,7 @@
           "th": "ไม่ซัก",
           "fr": "Ne pas laver",
           "en": "Not washing",
-          "phonetic": "",
+          "phonetic": "mâi sák",
           "components": [
             "w_mai_neg",
             "w_lesson-29-a3_1"
@@ -4891,7 +4891,7 @@
           "th": "เปิดประตู",
           "fr": "Ouvrir la porte",
           "en": "Open door",
-          "phonetic": "",
+          "phonetic": "bə̀ət dta-ruu",
           "components": [
             "w_lesson-29-a4_0",
             "w_pratu"
@@ -4903,7 +4903,7 @@
           "th": "ปิดหน้าต่าง",
           "fr": "Fermer la fenêtre",
           "en": "Close window",
-          "phonetic": "",
+          "phonetic": "bìt nâa-dtàang",
           "components": [
             "w_lesson-29-a4_1",
             "w_natang"
@@ -4915,7 +4915,7 @@
           "th": "ใช้เงิน",
           "fr": "Utiliser de l'เงิน",
           "en": "Use money",
-          "phonetic": "",
+          "phonetic": "chái ngoen",
           "components": [
             "w_lesson-29-a4_2",
             "w_ngern"
@@ -4927,7 +4927,7 @@
           "th": "ช่วยปิด",
           "fr": "Veuillez fermer",
           "en": "Please close",
-          "phonetic": "",
+          "phonetic": "chûay bìt",
           "components": [
             "w_chuai",
             "w_lesson-29-a4_1"
@@ -4939,7 +4939,7 @@
           "th": "ไม่เปิด",
           "fr": "Ne pas ouvrir",
           "en": "Not open",
-          "phonetic": "",
+          "phonetic": "mâi bə̀ət",
           "components": [
             "w_mai_neg",
             "w_lesson-29-a4_0"
@@ -5011,7 +5011,7 @@
           "th": "เริ่มทำ",
           "fr": "Commencer à faire",
           "en": "Begin doing",
-          "phonetic": "",
+          "phonetic": "rə̂əm tham",
           "components": [
             "w_lesson-29-a5_0",
             "w_tham"
@@ -5023,7 +5023,7 @@
           "th": "เสร็จแล้ว",
           "fr": "Déjà fini",
           "en": "Already finished",
-          "phonetic": "",
+          "phonetic": "sèt-lɛ́ɛw",
           "components": [
             "w_lesson-29-a5_1",
             "w_laew"
@@ -5035,7 +5035,7 @@
           "th": "เปลี่ยนชุด",
           "fr": "Changer de vêtements",
           "en": "Change clothes",
-          "phonetic": "",
+          "phonetic": "b̀liian chút",
           "components": [
             "w_lesson-29-a5_2",
             "w_lesson-44-a2_1"
@@ -5047,7 +5047,7 @@
           "th": "ยังไม่เสร็จ",
           "fr": "Pas encore fini",
           "en": "Not finished yet",
-          "phonetic": "",
+          "phonetic": "yang mâi sèt",
           "components": [
             "w_yang",
             "w_mai_neg",
@@ -5060,7 +5060,7 @@
           "th": "เพิ่งเริ่ม",
           "fr": "Viens de commencer",
           "en": "Just began",
-          "phonetic": "",
+          "phonetic": "pə̂ng rə̂əm",
           "components": [
             "w_phoeng",
             "w_lesson-29-a5_0"
@@ -5515,7 +5515,7 @@
           "th": "ลมแรง",
           "fr": "Vent fort",
           "en": "Strong wind",
-          "phonetic": "",
+          "phonetic": "lom rɛng",
           "components": [
             "w_lom",
             "w_raeng"
@@ -5527,7 +5527,7 @@
           "th": "มีพายุ",
           "fr": "Il y a une tempête",
           "en": "There is a storm",
-          "phonetic": "",
+          "phonetic": "mii paa-yú",
           "components": [
             "w_mee",
             "w_lesson-34-a1_2"
@@ -5539,7 +5539,7 @@
           "th": "หิมะตก",
           "fr": "Il neige",
           "en": "It's snowing",
-          "phonetic": "",
+          "phonetic": "hì-má dtòk",
           "components": [
             "w_lesson-34-a1_1",
             "w_tok"
@@ -5551,7 +5551,7 @@
           "th": "ไม่ชอบลม",
           "fr": "Ne pas aimer le vent",
           "en": "Don't like wind",
-          "phonetic": "",
+          "phonetic": "mâi chɔ̂ɔp lom",
           "components": [
             "w_mai_neg",
             "w_chop",
@@ -5564,7 +5564,7 @@
           "th": "พายุใหญ่",
           "fr": "Grosse tempête",
           "en": "Big storm",
-          "phonetic": "",
+          "phonetic": "paa-yú yài",
           "components": [
             "w_lesson-34-a1_2",
             "w_yai"
@@ -5620,7 +5620,7 @@
           "th": "ชอบฤดูร้อน",
           "fr": "Aimer l'été",
           "en": "Like summer",
-          "phonetic": "",
+          "phonetic": "chɔ̂ɔp rʉ́-duu-rɔ́ɔn",
           "components": [
             "w_chop",
             "w_lesson-34-a2_0"
@@ -5632,7 +5632,7 @@
           "th": "ฤดูหนาวเย็น",
           "fr": "L'hiver est froid",
           "en": "Winter is cold",
-          "phonetic": "",
+          "phonetic": "rʉ́-duu-nǎao yen",
           "components": [
             "w_lesson-34-a2_1",
             "w_yen"
@@ -5644,7 +5644,7 @@
           "th": "เกลียดฤดูฝน",
           "fr": "Détester la saison des pluies",
           "en": "Hate rainy season",
-          "phonetic": "",
+          "phonetic": "glìiat rʉ́-duu-fǒn",
           "components": [
             "w_kliat",
             "w_lesson-34-a2_2"
@@ -5656,7 +5656,7 @@
           "th": "ไปในฤดูร้อน",
           "fr": "Y aller en été",
           "en": "Go in summer",
-          "phonetic": "",
+          "phonetic": "pai nai rʉ́-duu-rɔ́ɔn",
           "components": [
             "w_pai",
             "w_nai",
@@ -5669,7 +5669,7 @@
           "th": "ร้อนมาก",
           "fr": "Très chaud",
           "en": "Very hot",
-          "phonetic": "",
+          "phonetic": "rɔ́ɔn mâak",
           "components": [
             "w_ron",
             "w_mak"
@@ -5709,7 +5709,7 @@
           "th": "วันนี้ร้อน",
           "fr": "Aujourd'hui il fait chaud",
           "en": "Today is hot",
-          "phonetic": "",
+          "phonetic": "wan-níi rɔ́ɔn",
           "components": [
             "w_wan_nii",
             "w_ron"
@@ -5721,7 +5721,7 @@
           "th": "เจอกันพรุ่งนี้",
           "fr": "À demain",
           "en": "See you tomorrow",
-          "phonetic": "",
+          "phonetic": "jee-gan prûng-níi",
           "components": [
             "w_joegan",
             "w_phrungnii"
@@ -5733,7 +5733,7 @@
           "th": "เมื่อวานไป",
           "fr": "J'y suis allé hier",
           "en": "Went yesterday",
-          "phonetic": "",
+          "phonetic": "mʉ̂a-waan pai",
           "components": [
             "w_lesson-34-a3_2",
             "w_pai"
@@ -5745,7 +5745,7 @@
           "th": "วันนี้กินอะไร",
           "fr": "Que mange-t-on aujourd'hui ?",
           "en": "What to eat today?",
-          "phonetic": "",
+          "phonetic": "wan-níi gin a-rai",
           "components": [
             "w_wan_nii",
             "w_kin",
@@ -5758,7 +5758,7 @@
           "th": "ไม่ทำพรุ่งนี้",
           "fr": "Pas fait demain",
           "en": "Not doing tomorrow",
-          "phonetic": "",
+          "phonetic": "mâi tham prûng-níi",
           "components": [
             "w_mai_neg",
             "w_tham",
@@ -5791,7 +5791,7 @@
           "th": "ไปตอนเช้า",
           "fr": "Aller le matin",
           "en": "Go in morning",
-          "phonetic": "",
+          "phonetic": "pai dtaawn-cháao",
           "components": [
             "w_pai",
             "w_ton",
@@ -5804,7 +5804,7 @@
           "th": "นอนตอนบ่าย",
           "fr": "Dormir l'après-midi",
           "en": "Sleep afternoon",
-          "phonetic": "",
+          "phonetic": "nɔɔn dtaawn-bàai",
           "components": [
             "w_non",
             "w_ton",
@@ -5817,7 +5817,7 @@
           "th": "ตอนเช้าหนาว",
           "fr": "Il fait froid le matin",
           "en": "Cold morning",
-          "phonetic": "",
+          "phonetic": "dtaawn-cháao nǎao",
           "components": [
             "w_ton",
             "w_chao",
@@ -5830,7 +5830,7 @@
           "th": "เจอกันตอนเย็น",
           "fr": "Se voir ce soir",
           "en": "See you this evening",
-          "phonetic": "",
+          "phonetic": "jee-gan dtaawn-yen",
           "components": [
             "w_joegan",
             "w_ton",
@@ -5888,7 +5888,7 @@
           "th": "ห้านาที",
           "fr": "Cinq minutes",
           "en": "Five minutes",
-          "phonetic": "",
+          "phonetic": "hâa naa-thii",
           "components": [
             "w_5",
             "w_lesson-34-a5_0"
@@ -5900,7 +5900,7 @@
           "th": "หนึ่งชั่วโมง",
           "fr": "Une heure",
           "en": "One hour",
-          "phonetic": "",
+          "phonetic": "nùeng chûa-moong",
           "components": [
             "w_1",
             "w_lesson-34-a5_1"
@@ -5912,7 +5912,7 @@
           "th": "รอสักพัก",
           "fr": "Attendre un instant",
           "en": "Wait a moment",
-          "phonetic": "",
+          "phonetic": "rɔɔ sàk-phák",
           "components": [
             "w_ro",
             "w_sakphak"
@@ -5924,7 +5924,7 @@
           "th": "สามนาที",
           "fr": "Trois minutes",
           "en": "Three minutes",
-          "phonetic": "",
+          "phonetic": "sǎam naa-thii",
           "components": [
             "w_3",
             "w_lesson-34-a5_0"
@@ -5936,7 +5936,7 @@
           "th": "สองชั่วโมง",
           "fr": "Deux heures",
           "en": "Two hours",
-          "phonetic": "",
+          "phonetic": "sǎawng chûua-moohng",
           "components": [
             "w_2",
             "w_lesson-34-a5_1"
@@ -6398,7 +6398,7 @@
           "th": "ไปธนาคาร",
           "fr": "Aller à la banque",
           "en": "Go to bank",
-          "phonetic": "",
+          "phonetic": "bpai thá-naa-khaan",
           "components": [
             "w_pai",
             "w_lesson-39-a1_0"
@@ -6410,7 +6410,7 @@
           "th": "หมอที่โรงพยาบาล",
           "fr": "Docteur à l'hôpital",
           "en": "Doctor at hospital",
-          "phonetic": "",
+          "phonetic": "mɔ̌ɔ thîi roong-phá-yaa-baan",
           "components": [
             "w_mo",
             "w_thii",
@@ -6423,7 +6423,7 @@
           "th": "หาตำรวจ",
           "fr": "Chercher la police",
           "en": "Find police",
-          "phonetic": "",
+          "phonetic": "hǎa dtam-rùat",
           "components": [
             "w_ha",
             "w_tamruat"
@@ -6435,7 +6435,7 @@
           "th": "โรงพยาบาลใหญ่",
           "fr": "Le grand hôpital",
           "en": "Big hospital",
-          "phonetic": "",
+          "phonetic": "roong-phá-yaa-baan yài",
           "components": [
             "w_rong_phayaban",
             "w_yai"
@@ -6447,7 +6447,7 @@
           "th": "อยู่ธนาคาร",
           "fr": "Être à la banque",
           "en": "At the bank",
-          "phonetic": "",
+          "phonetic": "yùu thá-naa-khaan",
           "components": [
             "w_yuu",
             "w_lesson-39-a1_0"
@@ -6511,7 +6511,7 @@
           "th": "ภาคเหนือ",
           "fr": "Région du nord",
           "en": "North region",
-          "phonetic": "",
+          "phonetic": "phâak-nǔuea",
           "components": [
             "w_phak",
             "w_lesson-39-a2_0"
@@ -6523,7 +6523,7 @@
           "th": "ไปภาคใต้",
           "fr": "Aller au sud",
           "en": "Go south",
-          "phonetic": "",
+          "phonetic": "pai phâak-tâi",
           "components": [
             "w_pai",
             "w_phak",
@@ -6536,7 +6536,7 @@
           "th": "ทิศตะวันออก",
           "fr": "L'est",
           "en": "The east",
-          "phonetic": "",
+          "phonetic": "thít tà-wan-òok",
           "components": [
             "w_thittawanok"
           ],
@@ -6547,7 +6547,7 @@
           "th": "คนใต้",
           "fr": "Les gens du sud",
           "en": "Southern people",
-          "phonetic": "",
+          "phonetic": "khon tâi",
           "components": [
             "w_khon",
             "w_lesson-39-a2_1"
@@ -6559,7 +6559,7 @@
           "th": "ลมเหนือ",
           "fr": "Vent du nord",
           "en": "North wind",
-          "phonetic": "",
+          "phonetic": "lom nǔuea",
           "components": [
             "w_lom",
             "w_lesson-39-a2_0"
@@ -6615,7 +6615,7 @@
           "th": "สถานีรถไฟ",
           "fr": "Gare féroviaire",
           "en": "Train station",
-          "phonetic": "",
+          "phonetic": "sà-thǎa-nii rót-fai",
           "components": [
             "w_sathannee",
             "w_rot_fai"
@@ -6627,7 +6627,7 @@
           "th": "ดูแผนที่",
           "fr": "Regarder la carte",
           "en": "Look at map",
-          "phonetic": "",
+          "phonetic": "duu phǎen-thîi",
           "components": [
             "w_du",
             "w_lesson-39-a3_2"
@@ -6639,7 +6639,7 @@
           "th": "ตั๋วสองใบ",
           "fr": "Deux billets",
           "en": "Two tickets",
-          "phonetic": "",
+          "phonetic": "tǔa sǒong bai",
           "components": [
             "w_tua",
             "w_2",
@@ -6652,7 +6652,7 @@
           "th": "สถานีไหน",
           "fr": "Quelle station ?",
           "en": "Which station?",
-          "phonetic": "",
+          "phonetic": "sà-thǎa-nii nǎi",
           "components": [
             "w_sathannee",
             "w_nai_which"
@@ -6700,7 +6700,7 @@
           "th": "ขึ้นรถไฟ",
           "fr": "Prendre le train",
           "en": "Take train",
-          "phonetic": "",
+          "phonetic": "khûen rót-fai",
           "components": [
             "w_khuen_up",
             "w_rot_fai"
@@ -6712,7 +6712,7 @@
           "th": "รอรถเมล์",
           "fr": "Attendre le bus",
           "en": "Wait for bus",
-          "phonetic": "",
+          "phonetic": "roo rót-mee",
           "components": [
             "w_ro",
             "w_rot_me"
@@ -6724,7 +6724,7 @@
           "th": "รถสวย",
           "fr": "Belle voiture",
           "en": "Beautiful car",
-          "phonetic": "",
+          "phonetic": "rót sǔay",
           "components": [
             "w_rot",
             "w_suay"
@@ -6736,7 +6736,7 @@
           "th": "รถไฟช้า",
           "fr": "Le train est lent",
           "en": "Train is slow",
-          "phonetic": "",
+          "phonetic": "rót-fai cháa",
           "components": [
             "w_rot_fai",
             "w_cha_slow"
@@ -6776,7 +6776,7 @@
           "th": "เดินตรงไป",
           "fr": "Marcher tout droit",
           "en": "Walk straight",
-          "phonetic": "",
+          "phonetic": "doeen trong pai",
           "components": [
             "w_doen",
             "w_trong",
@@ -6789,7 +6789,7 @@
           "th": "อยู่ทางขวา",
           "fr": "C'est sur la droite",
           "en": "It's on the right",
-          "phonetic": "",
+          "phonetic": "yùu thaang khwǎa",
           "components": [
             "w_yuu",
             "w_thang_way",
@@ -7200,7 +7200,7 @@
           "th": "ใส่รองเท้า",
           "fr": "Mettre ses chaussures",
           "en": "Wear shoes",
-          "phonetic": "",
+          "phonetic": "sài roong-tháaw",
           "components": [
             "w_sai_put",
             "w_rong_thao"
@@ -7212,7 +7212,7 @@
           "th": "หมวกสวย",
           "fr": "Beau chapeau",
           "en": "Beautiful hat",
-          "phonetic": "",
+          "phonetic": "mùuak sǔay",
           "components": [
             "w_lesson-44-a1_1",
             "w_suay"
@@ -7224,7 +7224,7 @@
           "th": "กระเป๋าใหญ่",
           "fr": "Grand sac",
           "en": "Big bag",
-          "phonetic": "",
+          "phonetic": "krà-pǎo yài",
           "components": [
             "w_lesson-44-a1_2",
             "w_yai"
@@ -7236,7 +7236,7 @@
           "th": "ซื้อรองเท้า",
           "fr": "Acheter des chaussures",
           "en": "Buy shoes",
-          "phonetic": "",
+          "phonetic": "súue roong-tháaw",
           "components": [
             "w_sue",
             "w_rong_thao"
@@ -7248,7 +7248,7 @@
           "th": "ชอบกระเป๋า",
           "fr": "Aimer le sac",
           "en": "Like the bag",
-          "phonetic": "",
+          "phonetic": "chôop krà-pǎo",
           "components": [
             "w_chop",
             "w_lesson-44-a1_2"
@@ -7296,7 +7296,7 @@
           "th": "กระโปรงสั้น",
           "fr": "Jupe courte",
           "en": "Short skirt",
-          "phonetic": "",
+          "phonetic": "krà-proong sân",
           "components": [
             "w_lesson-44-a2_0",
             "w_lesson-44-a4_0"
@@ -7308,7 +7308,7 @@
           "th": "ถุงเท้าสีดำ",
           "fr": "Chaussettes noires",
           "en": "Black socks",
-          "phonetic": "",
+          "phonetic": "thǔng-tháaw sǐi-dam",
           "components": [
             "w_lesson-44-a2_2",
             "w_see_color",
@@ -7321,7 +7321,7 @@
           "th": "ชุดสวยมาก",
           "fr": "Très belle robe",
           "en": "Very beautiful dress",
-          "phonetic": "",
+          "phonetic": "chút sǔay mâak",
           "components": [
             "w_lesson-44-a2_1",
             "w_suay",
@@ -7334,7 +7334,7 @@
           "th": "ใส่ชุดใหม่",
           "fr": "Mettre de nouveaux vêtements",
           "en": "Wear new dress",
-          "phonetic": "",
+          "phonetic": "sài chút mài",
           "components": [
             "w_sai_put",
             "w_lesson-44-a2_1",
@@ -7347,7 +7347,7 @@
           "th": "ไม่ใส่กระโปรง",
           "fr": "Ne pas porter de jupe",
           "en": "Not wear skirt",
-          "phonetic": "",
+          "phonetic": "mâi sài krà-proong",
           "components": [
             "w_mai_neg",
             "w_sai_put",
@@ -7389,7 +7389,7 @@
           "th": "เสื้อใหญ่",
           "fr": "Grande chemise",
           "en": "Big shirt",
-          "phonetic": "",
+          "phonetic": "sûuea yài",
           "components": [
             "w_suea",
             "w_yai"
@@ -7401,7 +7401,7 @@
           "th": "จานเล็ก",
           "fr": "Petite assiette",
           "en": "Small plate",
-          "phonetic": "",
+          "phonetic": "caan lék",
           "components": [
             "w_lesson-24-a3_2",
             "w_lek"
@@ -7413,7 +7413,7 @@
           "th": "ผมยาว",
           "fr": "Cheveux longs",
           "en": "Long hair",
-          "phonetic": "",
+          "phonetic": "phǒm yaaw",
           "components": [
             "w_phom",
             "w_yao"
@@ -7425,7 +7425,7 @@
           "th": "ไม้ตียาว",
           "fr": "Bâton long",
           "en": "Long stick",
-          "phonetic": "",
+          "phonetic": "mái-tii yaaw",
           "components": [
             "w_mai_tee",
             "w_yao"
@@ -7437,7 +7437,7 @@
           "th": "อยากได้ใหญ่",
           "fr": "En vouloir un grand",
           "en": "Want a big one",
-          "phonetic": "",
+          "phonetic": "yàak dâi yài",
           "components": [
             "w_yak",
             "w_dai",
@@ -7478,7 +7478,7 @@
           "th": "ผมสั้น",
           "fr": "Cheveux courts",
           "en": "Short hair",
-          "phonetic": "",
+          "phonetic": "phǒm sân",
           "components": [
             "w_phom",
             "w_lesson-44-a4_0"
@@ -7490,7 +7490,7 @@
           "th": "กระเป๋าหนัก",
           "fr": "Sac lourd",
           "en": "Heavy bag",
-          "phonetic": "",
+          "phonetic": "krà-pǎo nàk",
           "components": [
             "w_lesson-44-a1_2",
             "w_lesson-44-a4_1"
@@ -7502,7 +7502,7 @@
           "th": "รองเท้าเบา",
           "fr": "Chaussures légères",
           "en": "Light shoes",
-          "phonetic": "",
+          "phonetic": "roong-tháaw bao",
           "components": [
             "w_rong_thao",
             "w_lesson-44-a4_2"
@@ -7514,7 +7514,7 @@
           "th": "หนักมาก",
           "fr": "Très lourd",
           "en": "Very heavy",
-          "phonetic": "",
+          "phonetic": "nàk mâak",
           "components": [
             "w_lesson-44-a4_1",
             "w_mak"
@@ -7526,7 +7526,7 @@
           "th": "ของเบา",
           "fr": "Objet léger",
           "en": "Light object",
-          "phonetic": "",
+          "phonetic": "khǒong bao",
           "components": [
             "w_khong_of",
             "w_lesson-44-a4_2"
@@ -7598,7 +7598,7 @@
           "th": "ซื้อทอง",
           "fr": "Acheter de l'or",
           "en": "Buy gold",
-          "phonetic": "",
+          "phonetic": "súue thoong",
           "components": [
             "w_sue",
             "w_lesson-44-a5_0"
@@ -7610,7 +7610,7 @@
           "th": "แหวนเงิน",
           "fr": "Bague en argent",
           "en": "Silver ring",
-          "phonetic": "",
+          "phonetic": "wǎaen ngoeen",
           "components": [
             "w_waen",
             "w_ngern"
@@ -7622,7 +7622,7 @@
           "th": "ชอบเพชร",
           "fr": "Aimer les diamants",
           "en": "Like diamonds",
-          "phonetic": "",
+          "phonetic": "chôop phét",
           "components": [
             "w_chop",
             "w_lesson-44-a5_2"
@@ -7634,7 +7634,7 @@
           "th": "สร้อยทอง",
           "fr": "Collier en or",
           "en": "Gold necklace",
-          "phonetic": "",
+          "phonetic": "sôoy thoong",
           "components": [
             "w_soi",
             "w_lesson-44-a5_0"
@@ -7646,7 +7646,7 @@
           "th": "เพชรแพง",
           "fr": "Diamant cher",
           "en": "Expensive diamond",
-          "phonetic": "",
+          "phonetic": "phét phaaeng",
           "components": [
             "w_lesson-44-a5_2",
             "w_phaeng"
@@ -8108,7 +8108,7 @@
           "th": "ปู่ใจดี",
           "fr": "Grand-père est gentil",
           "en": "Grandfather is nice",
-          "phonetic": "",
+          "phonetic": "pùu cai-dii",
           "components": [
             "w_lesson-49-a1_0",
             "w_jai_dee"
@@ -8120,7 +8120,7 @@
           "th": "รักย่า",
           "fr": "Aimer grand-mère",
           "en": "Love grandmother",
-          "phonetic": "",
+          "phonetic": "rák yâa",
           "components": [
             "w_rak",
             "w_lesson-49-a1_1"
@@ -8132,7 +8132,7 @@
           "th": "ลุงมาหา",
           "fr": "Oncle vient visiter",
           "en": "Uncle comes visiting",
-          "phonetic": "",
+          "phonetic": "lung maa hǎa",
           "components": [
             "w_lesson-49-a1_2",
             "w_ma",
@@ -8145,7 +8145,7 @@
           "th": "บ้านปู่",
           "fr": "La maison de grand-père",
           "en": "Grandfather's house",
-          "phonetic": "",
+          "phonetic": "bâan pùu",
           "components": [
             "w_baan",
             "w_lesson-49-a1_0"
@@ -8157,7 +8157,7 @@
           "th": "ย่าทำอาหาร",
           "fr": "Grand-mère cuisine",
           "en": "Grandmother cooks",
-          "phonetic": "",
+          "phonetic": "yâa tham aa-hǎan",
           "components": [
             "w_lesson-49-a1_1",
             "w_lesson-29-a3_2"
@@ -8206,7 +8206,7 @@
           "th": "ป้ารักหลาน",
           "fr": "La tante aime son neveu",
           "en": "Aunt loves nephew",
-          "phonetic": "",
+          "phonetic": "pâa rák lǎan",
           "components": [
             "w_lesson-49-a2_0",
             "w_rak",
@@ -8219,7 +8219,7 @@
           "th": "ลูกพี่ลูกน้องมา",
           "fr": "Le cousin vient",
           "en": "Cousin comes",
-          "phonetic": "",
+          "phonetic": "lûuk-phîi-lûuk-nóong maa",
           "components": [
             "w_lesson-49-a2_1",
             "w_ma"
@@ -8231,7 +8231,7 @@
           "th": "มีหลาน",
           "fr": "Avoir un neveu",
           "en": "Have a nephew",
-          "phonetic": "",
+          "phonetic": "mii lǎan",
           "components": [
             "w_mee",
             "w_lesson-49-a2_2"
@@ -8243,7 +8243,7 @@
           "th": "ป้าใจดี",
           "fr": "Tante gentille",
           "en": "Nice aunt",
-          "phonetic": "",
+          "phonetic": "pâa cai-dii",
           "components": [
             "w_lesson-49-a2_0",
             "w_jai_dee"
@@ -8255,7 +8255,7 @@
           "th": "ให้หลาน",
           "fr": "Donner au neveu",
           "en": "Give to nephew",
-          "phonetic": "",
+          "phonetic": "hâi lǎan",
           "components": [
             "w_hai",
             "w_lesson-49-a2_2"
@@ -8319,7 +8319,7 @@
           "th": "ผู้หญิงสวย",
           "fr": "Belle femme",
           "en": "Beautiful woman",
-          "phonetic": "",
+          "phonetic": "phûu-yǐng sǔay",
           "components": [
             "w_phuying",
             "w_suay"
@@ -8331,7 +8331,7 @@
           "th": "ผู้ชายหล่อ",
           "fr": "Beau garçon",
           "en": "Handsome man",
-          "phonetic": "",
+          "phonetic": "phûu-chaai lòo",
           "components": [
             "w_phuchai",
             "w_lesson-49-a3_1"
@@ -8343,7 +8343,7 @@
           "th": "เด็กน่ารัก",
           "fr": "Mignon enfant",
           "en": "Cute child",
-          "phonetic": "",
+          "phonetic": "dèk nâa-rák",
           "components": [
             "w_dek",
             "w_lesson-49-a3_2"
@@ -8355,7 +8355,7 @@
           "th": "น่ารักมาก",
           "fr": "Très mignon!",
           "en": "Very cute!",
-          "phonetic": "",
+          "phonetic": "nâa-rák mâak",
           "components": [
             "w_lesson-49-a3_2",
             "w_mak"
@@ -8395,7 +8395,7 @@
           "th": "คนสูง",
           "fr": "Une grande personne",
           "en": "Tall person",
-          "phonetic": "",
+          "phonetic": "khon sǔung",
           "components": [
             "w_khon",
             "w_sung"
@@ -8407,7 +8407,7 @@
           "th": "แมวอ้วน",
           "fr": "Un gros chat",
           "en": "Fat cat",
-          "phonetic": "",
+          "phonetic": "maaeo ûuan",
           "components": [
             "w_maew",
             "w_uan"
@@ -8419,7 +8419,7 @@
           "th": "เขาผอม",
           "fr": "Il est mince",
           "en": "He is thin",
-          "phonetic": "",
+          "phonetic": "khǎo phǒom",
           "components": [
             "w_khao_pron",
             "w_lesson-49-a4_1"
@@ -8431,7 +8431,7 @@
           "th": "อยากสูง",
           "fr": "Vouloir être grand",
           "en": "Want to be tall",
-          "phonetic": "",
+          "phonetic": "yàak sǔung",
           "components": [
             "w_yak",
             "w_sung"
@@ -8443,7 +8443,7 @@
           "th": "อ้วนมาก",
           "fr": "Très gros",
           "en": "Very fat",
-          "phonetic": "",
+          "phonetic": "ûuan mâak",
           "components": [
             "w_uan",
             "w_mak"
@@ -8491,7 +8491,7 @@
           "th": "คนเตี้ย",
           "fr": "Une personne petite",
           "en": "Short person",
-          "phonetic": "",
+          "phonetic": "khon tîia",
           "components": [
             "w_khon",
             "w_tia"
@@ -8503,7 +8503,7 @@
           "th": "หมาฉลาด",
           "fr": "Un chien intelligent",
           "en": "Clever dog",
-          "phonetic": "",
+          "phonetic": "mǎa chà-làat",
           "components": [
             "w_ma_dog",
             "w_lesson-49-a5_1"
@@ -8515,7 +8515,7 @@
           "th": "ไม่โง่",
           "fr": "Pas stupide",
           "en": "Not stupid",
-          "phonetic": "",
+          "phonetic": "mâi ngôo",
           "components": [
             "w_mai_neg",
             "w_lesson-49-a5_2"
@@ -8527,7 +8527,7 @@
           "th": "เขาฉลาดมาก",
           "fr": "Il est très intelligent",
           "en": "He is very clever",
-          "phonetic": "",
+          "phonetic": "khǎo chà-làat mâak",
           "components": [
             "w_khao_pron",
             "w_lesson-49-a5_1",
@@ -8540,7 +8540,7 @@
           "th": "คนนั้นเก่ง",
           "fr": "Cette personne est excellente",
           "en": "That person is great",
-          "phonetic": "",
+          "phonetic": "khon nán kèng",
           "components": [
             "w_khon",
             "w_nan",
@@ -8936,7 +8936,7 @@
           "th": "ไปหาหมอ",
           "fr": "Aller chez le médecin",
           "en": "Go to doctor",
-          "phonetic": "",
+          "phonetic": "pai hǎa mǒo",
           "components": [
             "w_pai",
             "w_ha",
@@ -8949,7 +8949,7 @@
           "th": "ร้านขายยาอยู่ไหน",
           "fr": "Où est la pharmacie?",
           "en": "Where is pharmacy?",
-          "phonetic": "",
+          "phonetic": "ráan-khǎai-yaa yùu nǎi",
           "components": [
             "w_lesson-54-a1_1",
             "w_yuu",
@@ -8962,7 +8962,7 @@
           "th": "หมอใจดี",
           "fr": "Un docteur gentil",
           "en": "Nice doctor",
-          "phonetic": "",
+          "phonetic": "mǒo cai-dii",
           "components": [
             "w_mo",
             "w_jai_dee"
@@ -8974,7 +8974,7 @@
           "th": "ซื้อยา",
           "fr": "Acheter des médicaments",
           "en": "Buy medicine",
-          "phonetic": "",
+          "phonetic": "súue yaa",
           "components": [
             "w_sue",
             "w_ya"
@@ -9006,7 +9006,7 @@
           "th": "เจ็บหัว",
           "fr": "Avoir mal à la tête",
           "en": "Headache",
-          "phonetic": "",
+          "phonetic": "cèp hǔua",
           "components": [
             "w_jep",
             "w_hua"
@@ -9018,7 +9018,7 @@
           "th": "มีไข้",
           "fr": "Avoir de la fièvre",
           "en": "Have fever",
-          "phonetic": "",
+          "phonetic": "mii khâi",
           "components": [
             "w_mee",
             "w_khai_fever"
@@ -9030,7 +9030,7 @@
           "th": "ไอมาก",
           "fr": "Tousser beaucoup",
           "en": "Cough a lot",
-          "phonetic": "",
+          "phonetic": "ai mâak",
           "components": [
             "w_ay",
             "w_mak"
@@ -9042,7 +9042,7 @@
           "th": "ไม่เจ็บ",
           "fr": "Ne pas avoir mal",
           "en": "No pain",
-          "phonetic": "",
+          "phonetic": "mâi cèp",
           "components": [
             "w_mai_neg",
             "w_jep"
@@ -9054,7 +9054,7 @@
           "th": "ปวดตา",
           "fr": "Avoir mal aux yeux",
           "en": "Eye pain",
-          "phonetic": "",
+          "phonetic": "pùuat taa",
           "components": [
             "w_puat",
             "w_ta"
@@ -9118,7 +9118,7 @@
           "th": "ฉันมีความสุข",
           "fr": "Je suis heureux",
           "en": "I'm happy",
-          "phonetic": "",
+          "phonetic": "chǎn mii khwaam-sùk",
           "components": [
             "w_chan",
             "w_lesson-54-a3_0"
@@ -9130,7 +9130,7 @@
           "th": "อย่าโมโห",
           "fr": "Ne te fâche pas",
           "en": "Don't be mad",
-          "phonetic": "",
+          "phonetic": "yàa moo-hǒo",
           "components": [
             "w_ya_dont",
             "w_lesson-54-a3_1"
@@ -9142,7 +9142,7 @@
           "th": "กลัวผี",
           "fr": "Avoir peur des fantômes",
           "en": "Scared of ghosts",
-          "phonetic": "",
+          "phonetic": "klua phǐi",
           "components": [
             "w_klua",
             "w_phi_ghost"
@@ -9154,7 +9154,7 @@
           "th": "เขาโมโหมาก",
           "fr": "Il est très en colère",
           "en": "He is very angry",
-          "phonetic": "",
+          "phonetic": "khǎo moo-hǒo mâak",
           "components": [
             "w_khao_pron",
             "w_lesson-54-a3_1",
@@ -9167,7 +9167,7 @@
           "th": "ไม่ต้องกลัว",
           "fr": "N'aie pas peur!",
           "en": "Don't be scared!",
-          "phonetic": "",
+          "phonetic": "mâi-tông klua",
           "components": [
             "w_mai_neg",
             "w_tong",
@@ -9200,7 +9200,7 @@
           "th": "หิวข้าว",
           "fr": "Avoir faim",
           "en": "Hungry",
-          "phonetic": "",
+          "phonetic": "hǐw khâaw",
           "components": [
             "w_hiw",
             "w_khao"
@@ -9212,7 +9212,7 @@
           "th": "เหนื่อยมาก",
           "fr": "Très fatigué",
           "en": "Very tired",
-          "phonetic": "",
+          "phonetic": "nùueay mâak",
           "components": [
             "w_nueay",
             "w_mak"
@@ -9224,7 +9224,7 @@
           "th": "หิวน้ำไหม",
           "fr": "As-tu soif?",
           "en": "Are you thirsty?",
-          "phonetic": "",
+          "phonetic": "hǐw-náam mǎi",
           "components": [
             "w_lesson-54-a4_2",
             "w_mai"
@@ -9236,7 +9236,7 @@
           "th": "พักก่อน",
           "fr": "Repose-toi",
           "en": "Rest first",
-          "phonetic": "",
+          "phonetic": "phák kòon",
           "components": [
             "w_phak_kon"
           ],
@@ -9247,7 +9247,7 @@
           "th": "ไม่หิว",
           "fr": "Je n'ai pas faim",
           "en": "Not hungry",
-          "phonetic": "",
+          "phonetic": "mâi hǐw",
           "components": [
             "w_mai_neg",
             "w_hiw"
@@ -9303,7 +9303,7 @@
           "th": "เขายิ้ม",
           "fr": "Il sourit",
           "en": "He smiles",
-          "phonetic": "",
+          "phonetic": "khǎo yím",
           "components": [
             "w_khao_pron",
             "w_lesson-54-a5_0"
@@ -9315,7 +9315,7 @@
           "th": "เด็กร้องไห้",
           "fr": "L'enfant pleure",
           "en": "Child cries",
-          "phonetic": "",
+          "phonetic": "dèk róong-hâi",
           "components": [
             "w_dek",
             "w_lesson-54-a5_1"
@@ -9327,7 +9327,7 @@
           "th": "หัวเราะดัง",
           "fr": "Rire fort",
           "en": "Laugh loud",
-          "phonetic": "",
+          "phonetic": "hǔua-ró dang",
           "components": [
             "w_lesson-54-a5_2",
             "w_dang"
@@ -9339,7 +9339,7 @@
           "th": "อย่าร้องไห้",
           "fr": "Ne pleure pas!",
           "en": "Don't cry!",
-          "phonetic": "",
+          "phonetic": "yàa róong-hâi",
           "components": [
             "w_ya_dont",
             "w_lesson-54-a5_1"
@@ -9351,7 +9351,7 @@
           "th": "ยิ้มสวย",
           "fr": "Beau sourire",
           "en": "Beautiful smile",
-          "phonetic": "",
+          "phonetic": "yím sǔay",
           "components": [
             "w_lesson-54-a5_0",
             "w_suay"
