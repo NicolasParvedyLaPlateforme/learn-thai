@@ -936,9 +936,9 @@
         {
           "id": "w_noi",
           "th": "หน่อย",
-          "fr": "un peu",
+          "fr": "un peu (pour une demande / s'il te plaît)",
           "phonetic": "nɔ̀i",
-          "en": "a little",
+          "en": "a bit / please",
           "imageUrl": "/images/w_w_noi.svg"
         },
         {
@@ -2278,9 +2278,9 @@
         },
         {
           "th": "วาน",
-          "en": "yesterday (prefix)",
+          "en": "yesterday (short form)",
           "id": "w_wan_yesterday",
-          "fr": "hier",
+          "fr": "hier (court / familier)",
           "phonetic": "waan",
           "imageUrl": "/images/w_w_wan_yesterday.svg"
         },
@@ -2541,9 +2541,9 @@
         {
           "id": "w_nit_noi",
           "th": "นิดหน่อย",
-          "fr": "un peu",
+          "fr": "un tout petit peu",
           "phonetic": "nít nòi",
-          "en": "A little",
+          "en": "A little bit",
           "imageUrl": "/images/w_w_nit_noi.svg"
         }
       ],
@@ -3131,22 +3131,6 @@
       "description": "Poulet, porc, poisson",
       "words": [
         {
-          "id": "w_kai_2",
-          "th": "ไก่",
-          "fr": "poulet",
-          "phonetic": "kài",
-          "en": "chicken",
-          "imageUrl": "/images/w_w_kai_2.svg"
-        },
-        {
-          "id": "w_moo",
-          "th": "หมู",
-          "fr": "porc",
-          "phonetic": "mǔu",
-          "en": "pork",
-          "imageUrl": "/images/w_w_moo.svg"
-        },
-        {
           "id": "w_pla",
           "th": "ปลา",
           "fr": "poisson",
@@ -3527,14 +3511,6 @@
           "imageUrl": "/images/w_w_gep_ngoen.svg"
         },
         {
-          "id": "w_hiw_2",
-          "th": "หิว",
-          "fr": "avoir faim",
-          "phonetic": "hǐw",
-          "en": "to be hungry",
-          "imageUrl": "/images/w_w_hiw_2.svg"
-        },
-        {
           "id": "w_im",
           "th": "อิ่ม",
           "fr": "rassasié / plein",
@@ -3878,9 +3854,9 @@
         },
         {
           "th": "ล้าง",
-          "en": "wash",
+          "en": "to wash (dishes, hands, car)",
           "id": "w_lang",
-          "fr": "laver",
+          "fr": "laver (vaisselle, mains, voiture)",
           "phonetic": "láang",
           "imageUrl": "/images/w_w_lang.svg"
         },
@@ -4234,14 +4210,6 @@
       "description": "Regarder, écouter, marcher",
       "words": [
         {
-          "id": "w_doo",
-          "th": "ดู",
-          "fr": "regarder",
-          "phonetic": "duu",
-          "en": "look",
-          "imageUrl": "/images/w_w_doo.svg"
-        },
-        {
           "id": "w_fang",
           "th": "ฟัง",
           "fr": "écouter",
@@ -4253,7 +4221,7 @@
           "id": "w_doen",
           "th": "เดิน",
           "fr": "marcher",
-          "phonetic": "doen",
+          "phonetic": "dǝǝn",
           "en": "to walk",
           "imageUrl": "/images/w_w_doen.svg"
         },
@@ -4589,28 +4557,12 @@
       "description": "Vendre, donner, argent",
       "words": [
         {
-          "id": "w_khai_sell_2",
-          "th": "ขาย",
-          "fr": "vendre",
-          "phonetic": "khǎai",
-          "en": "sell",
-          "imageUrl": "/images/w_w_khai_sell_2.svg"
-        },
-        {
           "id": "w_hai",
           "th": "ให้",
           "fr": "donner",
           "phonetic": "hâi",
           "en": "give",
           "imageUrl": "/images/w_w_hai.svg"
-        },
-        {
-          "id": "w_ngoen",
-          "th": "เงิน",
-          "fr": "argent",
-          "phonetic": "ngoen",
-          "en": "money",
-          "imageUrl": "/images/w_w_ngoen.svg"
         }
       ],
       "phrases": [
@@ -4695,14 +4647,6 @@
           "en": "run",
           "phonetic": "wîng",
           "imageUrl": "/images/w_w_lesson-29-a1_0.svg"
-        },
-        {
-          "id": "w_lesson-29-a1_1",
-          "th": "เดิน",
-          "fr": "marcher",
-          "en": "walk",
-          "phonetic": "dǝǝn",
-          "imageUrl": "/images/w_w_lesson-29-a1_1.svg"
         },
         {
           "id": "w_lesson-29-a1_2",
@@ -4807,14 +4751,6 @@
           "en": "answer",
           "phonetic": "tɔ̀ɔp",
           "imageUrl": "/images/w_w_lesson-29-a2_1.svg"
-        },
-        {
-          "id": "w_lesson-29-a2_2",
-          "th": "อ่าน",
-          "fr": "lire",
-          "en": "read",
-          "phonetic": "àan",
-          "imageUrl": "/images/w_w_lesson-29-a2_2.svg"
         }
       ],
       "phrases": [
@@ -4899,8 +4835,8 @@
         {
           "id": "w_lesson-29-a3_1",
           "th": "ซัก",
-          "fr": "laver",
-          "en": "to wash",
+          "fr": "laver (vêtements) / faire la lessive",
+          "en": "to wash (clothes) / to do laundry",
           "phonetic": "sák",
           "imageUrl": "/images/w_w_lesson-29-a3_1.svg"
         },
@@ -5450,22 +5386,6 @@
           "imageUrl": "/images/w_w_lom.svg"
         },
         {
-          "id": "w_ron_2",
-          "th": "ร้อน",
-          "fr": "chaud",
-          "phonetic": "rɔ́ɔn",
-          "en": "hot",
-          "imageUrl": "/images/w_w_ron_2.svg"
-        },
-        {
-          "id": "w_naow_2",
-          "th": "หนาว",
-          "fr": "froid",
-          "phonetic": "nǎao",
-          "en": "cold",
-          "imageUrl": "/images/w_w_naow_2.svg"
-        },
-        {
           "th": "อากาศ",
           "en": "weather",
           "id": "w_akat",
@@ -5555,19 +5475,11 @@
           "imageUrl": "/images/w_w_muearai.svg"
         },
         {
-          "id": "w_ki",
-          "th": "กี่",
-          "fr": "combien de",
-          "phonetic": "ki",
-          "en": "how many",
-          "imageUrl": "/images/w_w_ki.svg"
-        },
-        {
           "id": "w_mong",
           "th": "โมง",
-          "fr": "heure",
+          "fr": "heure (familier)",
           "phonetic": "moong",
-          "en": "hour",
+          "en": "hour (short form)",
           "imageUrl": "/images/w_w_mong.svg"
         }
       ],
@@ -5657,14 +5569,6 @@
       "titleEn": "Ext: Climates",
       "descriptionEn": "More vocabulary for this unit.",
       "words": [
-        {
-          "id": "w_lesson-34-a1_0",
-          "th": "ลม",
-          "fr": "vent",
-          "en": "wind",
-          "phonetic": "lom",
-          "imageUrl": "/images/w_w_lesson-34-a1_0.svg"
-        },
         {
           "id": "w_lesson-34-a1_1",
           "th": "หิมะ",
@@ -5793,14 +5697,6 @@
           "fr": "détester",
           "phonetic": "glìiat",
           "imageUrl": "/images/w_w_kliat.svg"
-        },
-        {
-          "th": "ฤดูฝน",
-          "en": "rainy season",
-          "id": "w_rudufon",
-          "fr": "saison des pluies",
-          "phonetic": "rú-duu fǒn",
-          "imageUrl": "/images/w_w_rudufon.svg"
         }
       ],
       "phrases": [
@@ -5836,7 +5732,7 @@
           "phonetic": "",
           "components": [
             "w_kliat",
-            "w_rudufon"
+            "w_lesson-34-a2_2"
           ],
           "imageUrl": "/images/p_p_new_lesson-34-a2_2.svg"
         },
@@ -5875,14 +5771,6 @@
       "titleEn": "Ext: Days",
       "descriptionEn": "More vocabulary for this unit.",
       "words": [
-        {
-          "id": "w_lesson-34-a3_1",
-          "th": "พรุ่งนี้",
-          "fr": "demain",
-          "en": "tomorrow",
-          "phonetic": "phrûng-níi",
-          "imageUrl": "/images/w_w_lesson-34-a3_1.svg"
-        },
         {
           "id": "w_lesson-34-a3_2",
           "th": "เมื่อวาน",
@@ -5973,30 +5861,6 @@
       "titleEn": "Ext: Periods",
       "descriptionEn": "More vocabulary for this unit.",
       "words": [
-        {
-          "id": "w_lesson-34-a4_0",
-          "th": "เช้า",
-          "fr": "matin",
-          "en": "morning",
-          "phonetic": "cháo",
-          "imageUrl": "/images/w_w_lesson-34-a4_0.svg"
-        },
-        {
-          "id": "w_lesson-34-a4_1",
-          "th": "บ่าย",
-          "fr": "après-midi",
-          "en": "afternoon",
-          "phonetic": "bàai",
-          "imageUrl": "/images/w_w_lesson-34-a4_1.svg"
-        },
-        {
-          "id": "w_lesson-34-a4_2",
-          "th": "เย็น",
-          "fr": "soir",
-          "en": "evening",
-          "phonetic": "yen",
-          "imageUrl": "/images/w_w_lesson-34-a4_2.svg"
-        },
         {
           "th": "บ่าย",
           "en": "afternoon",
@@ -6591,14 +6455,6 @@
           "en": "bank",
           "phonetic": "thá-naa-khaan",
           "imageUrl": "/images/w_w_lesson-39-a1_0.svg"
-        },
-        {
-          "id": "w_lesson-39-a1_1",
-          "th": "โรงพยาบาล",
-          "fr": "hôpital",
-          "en": "hospital",
-          "phonetic": "roong-pha-yaa-baan",
-          "imageUrl": "/images/w_w_lesson-39-a1_1.svg"
         },
         {
           "id": "w_lesson-39-a1_2",
