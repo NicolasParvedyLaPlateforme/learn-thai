@@ -344,7 +344,8 @@
           "fr": "six",
           "phonetic": "hòk",
           "en": "six",
-          "imageUrl": "/images/w_w_6.svg"
+          "imageUrl": "/images/w_w_6.svg",
+          "allowIdenticalTranslation": true
         },
         {
           "id": "w_7",
@@ -2126,7 +2127,8 @@
           "fr": "station",
           "phonetic": "sà-thǎa-nii",
           "en": "station",
-          "imageUrl": "/images/w_w_sathannee.svg"
+          "imageUrl": "/images/w_w_sathannee.svg",
+          "allowIdenticalTranslation": true
         },
         {
           "id": "w_sanambin",
@@ -2166,7 +2168,8 @@
           "fr": "train",
           "en": "train",
           "phonetic": "rót-fai",
-          "imageUrl": "/images/w_w_rot_fai.svg"
+          "imageUrl": "/images/w_w_rot_fai.svg",
+          "allowIdenticalTranslation": true
         }
       ],
       "phrases": [
@@ -3659,7 +3662,8 @@
           "fr": "orange",
           "en": "orange",
           "phonetic": "sôm",
-          "imageUrl": "/images/w_w_lesson-24-a1_2.svg"
+          "imageUrl": "/images/w_w_lesson-24-a1_2.svg",
+          "allowIdenticalTranslation": true
         }
       ],
       "phrases": [
@@ -4136,7 +4140,8 @@
           "fr": "dessert",
           "en": "dessert",
           "phonetic": "khɔ̌ɔng-wǎan",
-          "imageUrl": "/images/w_w_lesson-24-a5_0.svg"
+          "imageUrl": "/images/w_w_lesson-24-a5_0.svg",
+          "allowIdenticalTranslation": true
         },
         {
           "id": "w_lesson-24-a5_2",
@@ -6083,7 +6088,8 @@
           "fr": "minute",
           "en": "minute",
           "phonetic": "naa-thii",
-          "imageUrl": "/images/w_w_lesson-34-a5_0.svg"
+          "imageUrl": "/images/w_w_lesson-34-a5_0.svg",
+          "allowIdenticalTranslation": true
         },
         {
           "id": "w_lesson-34-a5_1",
@@ -6389,7 +6395,8 @@
           "fr": "bus",
           "phonetic": "rót-mee",
           "en": "bus",
-          "imageUrl": "/images/w_w_rot_me.svg"
+          "imageUrl": "/images/w_w_rot_me.svg",
+          "allowIdenticalTranslation": true
         },
         {
           "id": "w_ruea",
@@ -6623,7 +6630,8 @@
           "id": "w_tamruat",
           "fr": "police",
           "phonetic": "dtam-rùuat",
-          "imageUrl": "/images/w_w_tamruat.svg"
+          "imageUrl": "/images/w_w_tamruat.svg",
+          "allowIdenticalTranslation": true
         }
       ],
       "phrases": [
@@ -6824,7 +6832,8 @@
           "fr": "station",
           "en": "station",
           "phonetic": "sà-thǎa-nii",
-          "imageUrl": "/images/w_w_lesson-39-a3_1.svg"
+          "imageUrl": "/images/w_w_lesson-39-a3_1.svg",
+          "allowIdenticalTranslation": true
         },
         {
           "id": "w_lesson-39-a3_2",
@@ -6937,7 +6946,8 @@
           "fr": "bus",
           "en": "bus",
           "phonetic": "rót-mee",
-          "imageUrl": "/images/w_w_lesson-39-a4_2.svg"
+          "imageUrl": "/images/w_w_lesson-39-a4_2.svg",
+          "allowIdenticalTranslation": true
         },
         {
           "th": "ขึ้น",
@@ -7730,7 +7740,8 @@
           "fr": "long",
           "en": "long",
           "phonetic": "yaao",
-          "imageUrl": "/images/w_w_lesson-44-a3_2.svg"
+          "imageUrl": "/images/w_w_lesson-44-a3_2.svg",
+          "allowIdenticalTranslation": true
         },
         {
           "th": "ยาว",
@@ -7738,7 +7749,8 @@
           "id": "w_yao",
           "fr": "long",
           "phonetic": "yaao",
-          "imageUrl": "/images/w_w_yao.svg"
+          "imageUrl": "/images/w_w_yao.svg",
+          "allowIdenticalTranslation": true
         },
         {
           "th": "ไม้ตี",
@@ -8562,7 +8574,8 @@
           "fr": "cousin",
           "en": "cousin",
           "phonetic": "lûuk-phîi-lûuk-nɔ́ɔng",
-          "imageUrl": "/images/w_w_lesson-49-a2_1.svg"
+          "imageUrl": "/images/w_w_lesson-49-a2_1.svg",
+          "allowIdenticalTranslation": true
         },
         {
           "id": "w_lesson-49-a2_2",
