@@ -1,34 +1,36 @@
-import { useMemo } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { useProgressStore } from './store';
-import courseData from '../data/course.json';
 import { getAlphabetLessons } from './alphabet-utils';
-import { CourseData } from '../types';
-
-const data = courseData as unknown as CourseData;
+import { getLightweightLessons } from '../actions/course';
 
 export type SuggestedLesson = {
   id: string;
   type: 'learn' | 'alphabet';
 };
 
-export function useGlobalSuggestedLesson(): SuggestedLesson | null {
+export function useGlobalSuggestedLesson(providedLearnLessons?: any[]): SuggestedLesson | null {
   const { lessonLevels, lastPlayedLessonId, lastPlayedLessonType } = useProgressStore();
   
-  // Need to compute these outside useMemo, or re-compute them if we want to be pure.
-  // getAlphabetLessons returns { consonants, vowels }
+  const [learnLessons, setLearnLessons] = useState<any[]>(providedLearnLessons || []);
+
+  useEffect(() => {
+    if (!providedLearnLessons) {
+      getLightweightLessons().then(lessons => {
+        setLearnLessons(lessons);
+      });
+    }
+  }, [providedLearnLessons]);
   
   return useMemo(() => {
+    if (learnLessons.length === 0) return null;
+
     let furthestInProgress: SuggestedLesson | null = null;
     let firstZeroLevel: SuggestedLesson | null = null;
     let suggestionFromLastPlayed: SuggestedLesson | null = null;
 
-    // We build flat arrays to easily find "next" lesson
-    const learnLessons = data.lessons.filter(l => Boolean(l));
     const alphabetRaw = getAlphabetLessons();
     const alphabetLessons = [...alphabetRaw.consonants, ...alphabetRaw.vowels].filter(l => Boolean(l));
 
-    // Priority 1: If we have a lastPlayedLesson, we suggest it if it's not max level.
-    // If it is max level, we suggest the next one in the same track.
     if (lastPlayedLessonId && lastPlayedLessonType) {
        const isAlphabet = lastPlayedLessonType === 'alphabet';
        const maxLevel = isAlphabet ? 4 : 10;
@@ -45,8 +47,8 @@ export function useGlobalSuggestedLesson(): SuggestedLesson | null {
        }
     }
 
-    // Still find the fallback based on progress
     for (const lesson of learnLessons) {
+      if (!lesson) continue;
       const level = lessonLevels[lesson.id] || 0;
       if (level > 0 && level < 10 && !furthestInProgress) {
         furthestInProgress = { id: lesson.id, type: 'learn' };
@@ -69,5 +71,5 @@ export function useGlobalSuggestedLesson(): SuggestedLesson | null {
     }
 
     return suggestionFromLastPlayed || furthestInProgress || firstZeroLevel || { id: learnLessons[0]?.id || '', type: 'learn' };
-  }, [lessonLevels, lastPlayedLessonId, lastPlayedLessonType]);
+  }, [lessonLevels, lastPlayedLessonId, lastPlayedLessonType, learnLessons]);
 }

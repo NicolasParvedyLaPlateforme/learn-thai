@@ -3,8 +3,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useProgressStore } from '../lib/store';
-import courseData from '../data/course.json';
-import { generateEndlessReviewExercises } from '../lib/exercise-generator';
 import type { ReviewOptions } from '../lib/exercise-generator';
 import { Exercise, CourseData, Word } from '../types';
 import { X, Check, Settings, Play } from 'lucide-react';
@@ -15,8 +13,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import WordMatch from '../lesson/[id]/components/WordMatch';
 import SentenceBuilder from '../lesson/[id]/components/SentenceBuilder';
 import { SentenceWithHints } from '../components/Hints';
-
-const data = courseData as CourseData;
+import { getEndlessReviewServer, getDictionaryForExerciseServer, getPhrasesForExerciseServer } from '../actions/course';
 
 export default function ReviewPage() {
   const router = useRouter();
@@ -46,6 +43,9 @@ export default function ReviewPage() {
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
 
   const [mounted, setMounted] = useState(false);
+  const [allWords, setAllWords] = useState<Word[]>([]);
+  const [allPhrases, setAllPhrases] = useState<any[]>([]);
+
   useEffect(() => {
     let initialized = false;
     const timer = setTimeout(() => {
@@ -53,16 +53,31 @@ export default function ReviewPage() {
       // We don't generate exercises right away anymore, we wait for user to click Start
     }, 0);
     
+    getDictionaryForExerciseServer().then(words => {
+      setAllWords(words as Word[]);
+    });
+    getPhrasesForExerciseServer().then(phrases => {
+      setAllPhrases(phrases);
+    });
+
     preloadThaiVoices();
     return () => clearTimeout(timer);
   }, [completedLessons, language]);
 
   const handleStartReview = () => {
     if (completedLessons.length > 0) {
-      setExercises(generateEndlessReviewExercises(data.lessons, completedLessons, language, options));
-      setShowOptions(false);
-      setExerciseRunning(true);
+      getEndlessReviewServer(completedLessons, language, options).then(generated => {
+        setExercises(generated);
+        setShowOptions(false);
+        setExerciseRunning(true);
+      });
     }
+  };
+
+  const fetchMore = () => {
+    getEndlessReviewServer(completedLessons, language, options).then(generated => {
+      setExercises(prev => [...prev, ...generated]);
+    });
   };
 
   if (!mounted) return <div className="p-8 text-center text-slate-500 font-medium">{language === 'en' ? 'Loading...' : 'Chargement...'}</div>;
@@ -174,7 +189,7 @@ export default function ReviewPage() {
           
           if (currentIndex >= exercises.length - 3) {
             // Refill exercises when running low
-            setExercises(prev => [...prev, ...generateEndlessReviewExercises(data.lessons, completedLessons, language, options)]);
+            fetchMore();
           }
           
           setCurrentIndex(currentIndex + 1);
@@ -208,14 +223,6 @@ export default function ReviewPage() {
     setIsCorrect(correct);
     setIsChecking(true);
     playThaiTTS(currentExercise.answer);
-  };
-
-  const getDictionaryForExercise = () => {
-     return data.lessons.flatMap(l => l.words);
-  };
-
-  const getPhrasesForExercise = () => {
-     return data.lessons.flatMap(l => l.phrases);
   };
 
   const isAnswerComplete = currentExercise.type === 'sentence-builder' && currentExercise.correctComponents
@@ -262,8 +269,8 @@ export default function ReviewPage() {
               <div className="relative inline-block pb-1 w-full text-center md:text-left">
                 <SentenceWithHints 
                   text={currentExercise.question} 
-                  dictionary={getDictionaryForExercise()} 
-                  phrases={getPhrasesForExercise()}
+                  dictionary={allWords} 
+                  phrases={allPhrases}
                   isSentence={currentExercise.type === 'sentence-builder'}
                   exerciseOptions={currentExercise.options as Word[]}
                   hideHints={currentExercise.hideHints}

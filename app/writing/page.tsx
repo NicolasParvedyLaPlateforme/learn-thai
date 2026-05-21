@@ -3,8 +3,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useProgressStore } from '../lib/store';
-import courseData from '../data/course.json';
-import { generateWritingExercises } from '../lib/exercise-generator';
 import { Exercise, CourseData, Word } from '../types';
 import { X, Check, Volume2 } from 'lucide-react';
 import { playThaiTTS } from '../lib/tts';
@@ -13,8 +11,7 @@ import { getCharacterHint } from '../lib/phonetic-mapper';
 import VirtualKeyboard from './components/VirtualKeyboard';
 import { SentenceWithHints } from '../components/Hints';
 import { formatCombiningChar } from '../lib/alphabet-utils';
-
-const data = courseData as CourseData;
+import { getWritingExercisesServer, getDictionaryForExerciseServer, getPhrasesForExerciseServer } from '../actions/course';
 
 export default function WritingPage() {
   const router = useRouter();
@@ -29,6 +26,9 @@ export default function WritingPage() {
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
 
   const [mounted, setMounted] = useState(false);
+  
+  const [allWords, setAllWords] = useState<Word[]>([]);
+  const [allPhrases, setAllPhrases] = useState<any[]>([]);
   
   useEffect(() => {
     setExerciseRunning(true);
@@ -48,11 +48,19 @@ export default function WritingPage() {
         }
         
         if (targetLessons.length > 0) {
-           setExercises(generateWritingExercises(data.lessons, targetLessons, language, writingConfig.selectedWordIds));
+           getWritingExercisesServer(targetLessons, language, writingConfig.selectedWordIds).then(generated => {
+               setExercises(generated);
+           });
         }
         initialized = true;
       }
     }, 0);
+    getDictionaryForExerciseServer().then(words => {
+      setAllWords(words as Word[]);
+    });
+    getPhrasesForExerciseServer().then(phrases => {
+      setAllPhrases(phrases);
+    });
     return () => clearTimeout(timer);
   }, [completedLessons, language, _hasHydrated, unlockedLessons, writingConfig]);
 
@@ -102,8 +110,10 @@ export default function WritingPage() {
             if (writingConfig.lessonId !== 'all') {
                targetLessons = [writingConfig.lessonId];
             }
-            setExercises(generateWritingExercises(data.lessons, targetLessons, language, writingConfig.selectedWordIds));
-            setCurrentIndex(0);
+            getWritingExercisesServer(targetLessons, language, writingConfig.selectedWordIds).then(generated => {
+               setExercises(generated);
+               setCurrentIndex(0);
+            });
           } else {
             setCurrentIndex(currentIndex + 1);
           }
@@ -132,14 +142,6 @@ export default function WritingPage() {
     setIsCorrect(correct);
     setIsChecking(true);
     playThaiTTS(currentExercise.answer);
-  };
-
-  const getDictionaryForExercise = () => {
-     return data.lessons.flatMap(l => l.words);
-  };
-
-  const getPhrasesForExercise = () => {
-     return data.lessons.flatMap(l => l.phrases);
   };
 
   const nextCharIdx = selectedAnswer.length;
@@ -199,8 +201,8 @@ export default function WritingPage() {
                 {!writingConfig.hideTranslation ? (
                   <SentenceWithHints 
                     text={currentExercise.question} 
-                    dictionary={getDictionaryForExercise()} 
-                    phrases={getPhrasesForExercise()}
+                    dictionary={allWords} 
+                    phrases={allPhrases}
                     isSentence={false}
                     exerciseOptions={[]} // No vocab needed for hints here as it's writing
                     hideHints={false}
@@ -226,7 +228,7 @@ export default function WritingPage() {
                     <div className="relative inline-block group">
                       <div className={`text-xl md:text-2xl text-indigo-500 font-medium tracking-wider ${!writingConfig.disableDictionaryClick ? 'cursor-help border-b-2 border-dashed border-indigo-200 pb-1' : ''}`}>
                          {(() => {
-                            const matchItem = [...getDictionaryForExercise(), ...getPhrasesForExercise()].find(item => item.th === currentExercise.answer);
+                            const matchItem = [...allWords, ...allPhrases].find(item => item.th === currentExercise.answer);
                             return matchItem?.phonetic || currentExercise.question;
                          })()}
                       </div>

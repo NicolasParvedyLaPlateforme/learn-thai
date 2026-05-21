@@ -1,6 +1,5 @@
 import { THAI_ALPHABET, AlphabetItem } from './alphabet-data';
-import courseData from '../data/course.json';
-import { CourseData } from '../types';
+import { Word, Phrase } from '../types';
 
 export function formatCombiningChar(charStr: string): string {
   if (!charStr) return charStr;
@@ -66,11 +65,7 @@ export interface AlphabetExercise {
   explanation?: string;
 }
 
-export function generateAlphabetExercises(lessonDef: AlphabetLessonDef, level: number, language: string): AlphabetExercise[] {
-  const course = courseData as CourseData;
-  const allPhrases = course.lessons.flatMap(l => l.phrases);
-  const allWords = course.lessons.flatMap(l => l.words);
-  
+export function generateAlphabetExercises(lessonDef: AlphabetLessonDef, level: number, language: string, allWords: Word[], allPhrases: Phrase[]): AlphabetExercise[] {
   const exercises: AlphabetExercise[] = [];
   
   if (level === 0) {

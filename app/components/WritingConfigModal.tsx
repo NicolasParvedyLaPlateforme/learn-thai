@@ -4,11 +4,9 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { createPortal } from 'react-dom';
 import { useProgressStore } from '../lib/store';
-import courseData from '../data/course.json';
 import { CourseData, Word, Phrase } from '../types';
 import { X, Check } from 'lucide-react';
-
-const data = courseData as CourseData;
+import { getVocabularyServer, getLightweightLessons } from '../actions/course';
 
 export function WritingConfigModal({ isOpen, onClose }: { isOpen: boolean, onClose: () => void }) {
   const router = useRouter();
@@ -22,6 +20,10 @@ export function WritingConfigModal({ isOpen, onClose }: { isOpen: boolean, onClo
   const [disableDictionaryClick, setDisableDictionaryClick] = useState(writingConfig.disableDictionaryClick);
   const [hideCharacterHints, setHideCharacterHints] = useState(writingConfig.hideCharacterHints);
 
+  const [currentVocabulary, setCurrentVocabulary] = useState<(Word | Phrase)[]>([]);
+  const [lessonsList, setLessonsList] = useState<any[]>([]);
+  const [isLoadingVocab, setIsLoadingVocab] = useState(false);
+
   // Synchronize on open
   useEffect(() => {
     if (isOpen) {
@@ -31,31 +33,27 @@ export function WritingConfigModal({ isOpen, onClose }: { isOpen: boolean, onClo
       setHideTranslation(writingConfig.hideTranslation);
       setDisableDictionaryClick(writingConfig.disableDictionaryClick);
       setHideCharacterHints(writingConfig.hideCharacterHints);
+      
+      // Fetch available lessons metadata once
+      getLightweightLessons().then(setLessonsList);
     }
   }, [isOpen, writingConfig]);
+
+  // Fetch vocabulary when selection changes
+  useEffect(() => {
+    if (isOpen) {
+      setIsLoadingVocab(true);
+      getVocabularyServer(selectedLessonId, completedLessons).then((vocab) => {
+        setCurrentVocabulary(vocab);
+        setIsLoadingVocab(false);
+      });
+    }
+  }, [isOpen, selectedLessonId, completedLessons]);
 
   const [mounted, setMounted] = useState(false);
   useEffect(() => { setMounted(true); }, []);
 
   if (!isOpen || !mounted) return null;
-
-  const currentVocabulary = (() => {
-    let words: Word[] = [];
-    let phrases: Phrase[] = [];
-    
-    if (selectedLessonId === 'all') {
-      const lessons = data.lessons.filter(l => completedLessons.includes(l.id));
-      words = lessons.flatMap(l => l.words || []);
-      phrases = lessons.flatMap(l => l.phrases || []);
-    } else {
-      const lesson = data.lessons.find(l => l.id === selectedLessonId);
-      if (lesson) {
-        words = lesson.words || [];
-        phrases = lesson.phrases || [];
-      }
-    }
-    return [...words, ...phrases];
-  })();
 
   const toggleWordSelection = (id: string) => {
     if (selectedWordIds === null) {
@@ -122,7 +120,7 @@ export function WritingConfigModal({ isOpen, onClose }: { isOpen: boolean, onClo
               className="w-full bg-slate-50 border-2 border-slate-200 rounded-xl px-4 py-3 text-slate-700 font-medium focus:outline-none focus:border-indigo-500 focus:bg-white transition-all"
             >
               <option value="all">{language === 'en' ? 'All seen lessons' : 'Toutes les leçons vues'}</option>
-              {data.lessons.filter(l => completedLessons.includes(l.id)).map(lesson => (
+              {lessonsList.filter(l => completedLessons.includes(l.id)).map(lesson => (
                 <option key={lesson.id} value={lesson.id}>
                   {language === 'en' && lesson.titleEn ? lesson.titleEn : lesson.title}
                 </option>
