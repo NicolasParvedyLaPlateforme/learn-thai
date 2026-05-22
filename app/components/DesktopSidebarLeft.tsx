@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { BookOpen, MessageCircle, Brain, Globe, Star } from 'lucide-react';
+import { BookOpen, MessageCircle, Brain, Globe, Star, Heart } from 'lucide-react';
 import { useProgressStore } from '../lib/store';
 import { useGlobalSuggestedLesson } from '../lib/useGlobalSuggestedLesson';
 
@@ -44,13 +44,20 @@ export default function DesktopSidebarLeft() {
       <nav 
         className="hidden md:flex fixed top-0 left-0 h-screen bg-[#F0FDF4] border-r border-emerald-100 flex-col py-6 transition-all duration-300 ease-in-out z-50 shadow-sm w-20 px-2 hover:w-64 hover:px-4 xl:w-64 xl:px-4 group"
       >
-        <div className="flex items-center gap-3 mb-10 overflow-hidden shrink-0 px-2 justify-center group-hover:justify-start xl:justify-start relative">
+        <div className="flex items-center gap-2 mb-10 overflow-hidden shrink-0 px-2 justify-center group-hover:justify-start xl:justify-start relative">
           <div className="bg-emerald-500 text-white p-2 rounded-xl shrink-0 absolute left-1/2 -translate-x-1/2 transition-all duration-300 xl:translate-x-0 xl:relative xl:left-auto group-hover:translate-x-0 group-hover:relative group-hover:left-auto">
             <BookOpen size={24} />
           </div>
-          <h1 className="text-2xl font-bold text-slate-800 tracking-tight whitespace-nowrap transition-opacity duration-300 opacity-0 group-hover:opacity-100 xl:opacity-100 xl:ml-2 group-hover:ml-2">
+          <h1 className="text-2xl font-bold text-slate-800 tracking-tight whitespace-nowrap transition-opacity duration-300 opacity-0 group-hover:opacity-100 xl:opacity-100 xl:ml-1 group-hover:ml-1">
             ThaiLearn
           </h1>
+          <button 
+            onClick={() => useProgressStore.getState().setShowCommunityModal(true)}
+            className="text-rose-500 bg-rose-50 p-1.5 rounded-full hover:bg-rose-100 transition-all opacity-0 w-0 md:group-hover:opacity-100 md:group-hover:w-auto xl:opacity-100 xl:w-auto ml-1 shrink-0"
+            title="Soutien & Communauté"
+          >
+            <Heart size={16} fill="currentColor" />
+          </button>
         </div>
 
         <div className="flex flex-col gap-2 flex-1 w-full">
