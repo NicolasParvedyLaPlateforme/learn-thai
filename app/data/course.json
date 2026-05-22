@@ -2118,7 +2118,7 @@
           "th": "ไฟ",
           "fr": "feu / électricité",
           "phonetic": "fai",
-          "en": "light",
+          "en": "fire / electricity",
           "imageUrl": "/images/w_w_fai.svg"
         },
         {
@@ -3465,92 +3465,109 @@
         {
           "id": "w_gep_ngoen",
           "th": "เก็บเงิน",
-          "fr": "l'addition",
           "phonetic": "gèp ngoen",
-          "en": "the bill please",
-          "imageUrl": "/images/w_w_gep_ngoen.svg"
+          "fr": "l'addition",
+          "en": "the bill",
+          "allowIdenticalTranslation": false
         },
         {
           "id": "w_im",
           "th": "อิ่ม",
-          "fr": "rassasié / plein",
           "phonetic": "ìm",
+          "fr": "rassasié / plein",
           "en": "satisfied / full",
-          "imageUrl": "/images/w_w_im.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "th": "ด้วย",
-          "en": "also/please",
           "id": "w_duay",
-          "fr": "aussi / s'il vous plaît",
+          "th": "ด้วย",
           "phonetic": "dûay",
-          "imageUrl": "/images/w_w_duay.svg"
+          "fr": "aussi / s'il vous plaît",
+          "en": "also / please",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_sang",
+          "th": "สั่ง",
+          "phonetic": "sàng",
+          "fr": "commander",
+          "en": "to order",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_menu",
+          "th": "เมนู",
+          "phonetic": "me-nu",
+          "fr": "menu",
+          "en": "menu",
+          "allowIdenticalTranslation": true
         }
       ],
       "phrases": [
         {
           "id": "p_bill_please",
           "th": "เก็บเงินด้วยครับ",
-          "fr": "l'addition s'il vous plaît",
           "phonetic": "gèp ngoen dûay khráp",
+          "fr": "L'addition s'il vous plaît (homme)",
+          "en": "The bill, please (man)",
           "components": [
             "w_gep_ngoen",
             "w_duay",
             "w_krap"
           ],
-          "en": "The check, please",
-          "imageUrl": "/images/p_p_bill_please.svg"
-        },
-        {
-          "id": "p_bill_please_f",
-          "th": "เก็บเงินด้วยค่ะ",
-          "fr": "l'addition s'il vous plaît (femme)",
-          "phonetic": "gèp ngoen dûay khâ",
-          "components": [
-            "w_gep_ngoen",
-            "w_duay",
-            "w_kha"
-          ],
-          "en": "the bill please (woman)",
-          "imageUrl": "/images/p_p_bill_please_f.svg"
-        },
-        {
-          "id": "p_full",
-          "th": "อิ่มแล้ว",
-          "fr": "je suis rassasié",
-          "phonetic": "ìm láew",
-          "components": [
-            "w_im",
-            "w_laew"
-          ],
-          "en": "I am full",
-          "imageUrl": "/images/p_p_full.svg"
-        },
-        {
-          "id": "p_full_m",
-          "th": "อิ่มแล้วครับ",
-          "fr": "je suis rassasié (homme)",
-          "phonetic": "ìm láew khráp",
-          "components": [
-            "w_im",
-            "w_laew",
-            "w_krap"
-          ],
-          "en": "I'm full (man)",
-          "imageUrl": "/images/p_p_full_m.svg"
+          "allowIdenticalTranslation": false
         },
         {
           "id": "p_full_f",
           "th": "อิ่มแล้วค่ะ",
-          "fr": "je suis rassasiée (femme)",
           "phonetic": "ìm láew khâ",
+          "fr": "Je suis rassasiée (femme)",
+          "en": "I am full (woman)",
           "components": [
             "w_im",
             "w_laew",
             "w_kha"
           ],
-          "en": "I am full (woman)",
-          "imageUrl": "/images/p_p_full_f.svg"
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_menu_please",
+          "th": "ขอเมนูด้วย",
+          "phonetic": "khǒr me-nu dûay",
+          "fr": "Le menu s'il vous plaît",
+          "en": "The menu please",
+          "components": [
+            "w_kho_req",
+            "w_menu",
+            "w_duay"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_want_order_what",
+          "th": "อยากสั่งอะไร",
+          "phonetic": "yàak sàng a-rai",
+          "fr": "Que veux-tu commander ?",
+          "en": "What do you want to order?",
+          "components": [
+            "w_yak",
+            "w_sang",
+            "w_arai"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_order_pork",
+          "th": "สั่งหมูครับ",
+          "phonetic": "sàng mǔu khráp",
+          "fr": "Je commande du porc (homme)",
+          "en": "I order pork (man)",
+          "components": [
+            "w_sang",
+            "w_mu",
+            "w_krap"
+          ],
+          "allowIdenticalTranslation": false
         }
       ],
       "titleEn": "The Service",
@@ -7477,7 +7494,7 @@
           "id": "w_lesson-44-a4_2",
           "th": "เบา",
           "fr": "léger",
-          "en": "light",
+          "en": "light (weight)",
           "phonetic": "bao",
           "imageUrl": "/images/w_w_lesson-44-a4_2.svg"
         }
@@ -10145,7 +10162,7 @@
           "th": "เช็คบิล",
           "fr": "l'addition ( de l'anglais Check Bill)",
           "phonetic": "chék bin",
-          "en": "the bill",
+          "en": "the bill (from english)",
           "explanation": "Ce mot vient de l'anglais 'Check bill'. Le son 'k' final s'écrit avec 'ค' (qui fait normalement 'kh' au début) respectant la translittération anglaise.",
           "imageUrl": "/images/w_w_check_bin.svg"
         },
@@ -10170,13 +10187,13 @@
         {
           "id": "p_bill_please_eng",
           "th": "เช็คบิลครับ",
-          "fr": "l'addition s'il vous plaît (homme)",
+          "fr": "l'addition s'il vous plaît (homme) / version anglaise",
           "phonetic": "chék bin khráp",
           "components": [
             "w_check_bin",
             "w_krap"
           ],
-          "en": "the bill please (man)",
+          "en": "the bill please (man) / english version",
           "imageUrl": "/images/p_p_bill_please_eng.svg"
         },
         {
