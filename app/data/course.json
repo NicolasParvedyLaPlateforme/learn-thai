@@ -7913,7 +7913,7 @@
           "id": "p_he_is_tall",
           "th": "เขาสูง",
           "fr": "il est grand",
-          "phonetic": "khâao sǔung",
+          "phonetic": "kháo sǔung",
           "components": [
             "w_khao_pron",
             "w_sung"
@@ -7924,37 +7924,38 @@
         {
           "id": "p_she_short",
           "th": "เขาเตี้ย",
-          "fr": "elle est petite (taille)",
-          "phonetic": "khâao dtîia",
+          "fr": "il est petit (taille)",
+          "phonetic": "kháo dtîia",
           "components": [
             "w_khao_pron",
             "w_tia"
           ],
-          "en": "she is small (size)",
+          "en": "he is short (size)",
           "imageUrl": "/images/p_p_she_short.svg"
         },
         {
           "id": "p_fat_cat",
           "th": "เขาอ้วน",
           "fr": "il est gros",
-          "phonetic": "khâao ûuan",
+          "phonetic": "kháo ûuan",
           "components": [
             "w_khao_pron",
             "w_uan"
           ],
-          "en": "he is big",
+          "en": "he is fat",
           "imageUrl": "/images/p_p_fat_cat.svg"
         },
         {
           "id": "p_tall_friend",
-          "th": "เพื่อนสูง",
-          "fr": "ami grand",
-          "phonetic": "phûean sǔung",
+          "th": "เพื่อนตัวสูง",
+          "fr": "ami de grande taille",
+          "phonetic": "phûean dtua sǔung",
           "components": [
             "w_phuean",
+            "w_dtua",
             "w_sung"
           ],
-          "en": "big friend",
+          "en": "tall friend",
           "imageUrl": "/images/p_p_tall_friend.svg"
         },
         {
@@ -7966,8 +7967,21 @@
             "w_mai_neg",
             "w_uan"
           ],
-          "en": "not big",
+          "en": "not fat",
           "imageUrl": "/images/p_p_not_fat.svg"
+        },
+        {
+          "id": "p_2c7f76",
+          "th": "เพื่อนตัวสูงมาก",
+          "fr": "Mon ami est très grand",
+          "en": "My friend is very tall",
+          "phonetic": "phûean dtua sǔung mâak",
+          "components": [
+            "w_phuean",
+            "w_dtua",
+            "w_sung",
+            "w_mak"
+          ]
         }
       ],
       "titleEn": "Physical appearance",
@@ -8659,7 +8673,7 @@
           "id": "w_khai_fever",
           "th": "ไข้",
           "fr": "fièvre",
-          "phonetic": "khǎai",
+          "phonetic": "khâi",
           "en": "fever",
           "imageUrl": "/images/w_w_khai_fever.svg"
         },
@@ -8948,7 +8962,7 @@
           "id": "p_new_lesson-54-a1_2",
           "th": "ร้านขายยาอยู่ไหน",
           "fr": "Où est la pharmacie?",
-          "en": "Where is pharmacy?",
+          "en": "Where is the pharmacy?",
           "phonetic": "ráan-khǎai-yaa yùu nǎi",
           "components": [
             "w_lesson-54-a1_1",
@@ -9965,14 +9979,6 @@
           "phonetic": "aa-yú",
           "en": "age",
           "imageUrl": "/images/w_w_aayu.svg"
-        },
-        {
-          "id": "w_pii",
-          "th": "ปี",
-          "fr": "an / année",
-          "phonetic": "bpii",
-          "en": "year",
-          "imageUrl": "/images/w_w_pii.svg"
         },
         {
           "id": "w_farangset",
