@@ -310,7 +310,7 @@
           "id": "w_2",
           "th": "สอง",
           "fr": "deux",
-          "phonetic": "sɔ̌ng",
+          "phonetic": "sɔ̌ong",
           "en": "two",
           "imageUrl": "/images/w_w_2.svg"
         },
@@ -421,7 +421,7 @@
           "id": "p_new_l3_2",
           "th": "สองเดือน",
           "fr": "deux mois",
-          "phonetic": "sɔ̌ng duean",
+          "phonetic": "sɔ̌ong duean",
           "components": [
             "w_2",
             "w_duean"
@@ -1346,7 +1346,7 @@
           "id": "p_new_l6_3",
           "th": "ครูใจดี",
           "fr": "le prof est bon (bien)",
-          "phonetic": "khruu dii",
+          "phonetic": "khruu jai dii",
           "components": [
             "w_khru",
             "w_jai_dee"
@@ -9408,51 +9408,26 @@
           "imageUrl": "/images/p_p_come_often.svg"
         },
         {
-          "id": "p_auto_lesson-55_0",
-          "th": "ลม หนัง",
-          "fr": "[Pratique] vent / film",
-          "phonetic": "lom nâng",
-          "components": [
-            "w_lom",
-            "w_nang"
-          ],
-          "en": "[Practical] wind / film",
-          "imageUrl": "/images/p_p_auto_lesson-55_0.svg"
-        },
-        {
           "id": "p_auto_lesson-55_1",
-          "th": "ฟัง หก",
-          "fr": "[Pratique] écouter / six",
-          "phonetic": "fang hòk",
+          "th": "ฟังเพลง",
+          "fr": "écouter de la musique",
+          "phonetic": "fang phlaeng",
           "components": [
-            "w_fang",
-            "w_6"
+            "w_fang"
           ],
-          "en": "[Practice] listen / six",
+          "en": "listen to music",
           "imageUrl": "/images/p_p_auto_lesson-55_1.svg"
         },
         {
-          "id": "p_auto_lesson-55_2",
-          "th": "ตรง โมง",
-          "fr": "[Pratique] droit / direct / heure",
-          "phonetic": "dtrong moong",
+          "id": "p_auto_lesson-55_3",
+          "th": "ตรงเวลา",
+          "fr": "à l'heure",
+          "phonetic": "dtrong wee-laa",
           "components": [
             "w_trong",
-            "w_mong"
+            "w_wela"
           ],
-          "en": "[Practice] straight / direct / time",
-          "imageUrl": "/images/p_p_auto_lesson-55_2.svg"
-        },
-        {
-          "id": "p_auto_lesson-55_3",
-          "th": "หวาน เด็ก",
-          "fr": "[Pratique] sucré / enfant (général)",
-          "phonetic": "wǎan dèk",
-          "components": [
-            "w_waan",
-            "w_dek"
-          ],
-          "en": "[Practical] sweet / child (general)",
+          "en": "on time",
           "imageUrl": "/images/p_p_auto_lesson-55_3.svg"
         }
       ],
@@ -9565,10 +9540,11 @@
       "phrases": [
         {
           "id": "p_who_is_this",
-          "th": "ใคร",
+          "th": "นี่ใคร",
           "fr": "qui est-ce ?",
-          "phonetic": "khrai",
+          "phonetic": "ni khrai",
           "components": [
+            "w_nii_here",
             "w_khrai"
           ],
           "en": "who is it ?",
