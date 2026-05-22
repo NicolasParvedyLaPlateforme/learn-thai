@@ -1372,7 +1372,7 @@
           "id": "p_new_l6_5",
           "th": "แม่ของเด็ก",
           "fr": "la mère de l'enfant",
-          "phonetic": "mâe dèk",
+          "phonetic": "mâe khɔ̌ɔng dèk",
           "components": [
             "w_mae",
             "w_khong_of",
@@ -1678,7 +1678,7 @@
           "id": "w_ngern",
           "th": "เงิน",
           "fr": "argent",
-          "phonetic": "ngen",
+          "phonetic": "ngoen",
           "en": "money",
           "imageUrl": "/images/w_w_ngern.svg"
         },
@@ -1818,7 +1818,7 @@
           "id": "p_new_l8_3",
           "th": "มีเงินไหม",
           "fr": "as-tu de l'argent ?",
-          "phonetic": "mii ngen mǎi",
+          "phonetic": "mii ngoen mǎi",
           "components": [
             "w_mee",
             "w_ngern",
@@ -2118,7 +2118,7 @@
           "th": "ไฟ",
           "fr": "feu / électricité",
           "phonetic": "fai",
-          "en": "fire/electricity",
+          "en": "light",
           "imageUrl": "/images/w_w_fai.svg"
         },
         {
@@ -2725,11 +2725,12 @@
         },
         {
           "id": "p_where_hospital",
-          "th": "โรงพยาบาลที่ไหน",
+          "th": "โรงพยาบาลอยู่ที่ไหน",
           "fr": "où est l'hôpital ?",
           "phonetic": "roong phá-yaa-baan thîi nǎi",
           "components": [
             "w_rong_phayaban",
+            "w_yuu",
             "w_thinai"
           ],
           "en": "where is the hospital?",
@@ -3178,7 +3179,7 @@
             "w_ao",
             "w_nuea"
           ],
-          "en": "I have beef",
+          "en": "I'll have the beef",
           "imageUrl": "/images/p_p_want_beef.svg"
         },
         {
@@ -3363,7 +3364,7 @@
           "th": "หวาน",
           "fr": "sucré",
           "phonetic": "wǎan",
-          "en": "sugar",
+          "en": "sweet",
           "imageUrl": "/images/w_w_waan.svg"
         },
         {
@@ -3381,6 +3382,13 @@
           "phonetic": "bprîiao",
           "en": "sour/acid",
           "imageUrl": "/images/w_w_priao.svg"
+        },
+        {
+          "id": "w_waan_sucre",
+          "th": "น้ำตาล",
+          "fr": "sucre",
+          "en": "sugar",
+          "phonetic": "nám-dtan"
         }
       ],
       "phrases": [
@@ -5403,7 +5411,7 @@
           "id": "p_what_time",
           "th": "กี่โมง",
           "fr": "quelle heure ?",
-          "phonetic": "ki moong",
+          "phonetic": "kìi moong",
           "components": [
             "w_gee",
             "w_mong"
@@ -5427,7 +5435,7 @@
           "id": "p_what_time_go",
           "th": "ไปกี่โมง",
           "fr": "tu y vas à quelle heure ?",
-          "phonetic": "bpai ki moong",
+          "phonetic": "bpai kii moong",
           "components": [
             "w_pai",
             "w_gee",
@@ -5984,7 +5992,7 @@
           "id": "p_where_hotel",
           "th": "โรงแรมอยู่ที่ไหน",
           "fr": "où est l'hôtel ?",
-          "phonetic": "roong-raem yu thîi nǎi",
+          "phonetic": "roong-raem yùu thîi nǎi",
           "components": [
             "w_rong_raem",
             "w_yuu",
@@ -5997,7 +6005,7 @@
           "id": "p_go_school",
           "th": "ไปโรงเรียน",
           "fr": "aller à l'école",
-          "phonetic": "bpai roong-riian",
+          "phonetic": "bpai roong-rian",
           "components": [
             "w_pai",
             "w_rong_rian"
@@ -6009,7 +6017,7 @@
           "id": "p_school_big",
           "th": "โรงเรียนใหญ่",
           "fr": "grande école",
-          "phonetic": "roong-riian yài",
+          "phonetic": "roong-rian yài",
           "components": [
             "w_rong_rian",
             "w_yai"
@@ -6123,11 +6131,12 @@
         },
         {
           "id": "p_where_street",
-          "th": "ถนนที่ไหน",
+          "th": "ถนนอยู่ที่ไหน",
           "fr": "où est la rue ?",
           "phonetic": "thà-nǒn thîi nǎi",
           "components": [
             "w_thanon",
+            "w_yuu",
             "w_thinai"
           ],
           "en": "where is the street?",
@@ -6208,11 +6217,12 @@
         },
         {
           "id": "p_where_bus",
-          "th": "รถเมล์ที่ไหน",
+          "th": "รถเมล์อยู่ที่ไหน",
           "fr": "où est le bus ?",
           "phonetic": "rót-mee thîi nǎi",
           "components": [
             "w_rot_me",
+            "w_yuu",
             "w_thinai"
           ],
           "en": "where is the bus?",
