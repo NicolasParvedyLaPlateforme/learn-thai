@@ -2,7 +2,7 @@
   "lessons": [
     {
       "id": "lesson-1",
-      "title": "Bases 1 : Salutations",
+      "title": "Salutations et Politesse",
       "description": "Apprenez à dire bonjour et merci",
       "words": [
         {
@@ -143,7 +143,7 @@
     },
     {
       "id": "lesson-2",
-      "title": "Bases 2 : Se présenter",
+      "title": "Se présenter : Noms et Pronoms",
       "description": "Apprenez les pronoms de base et à vous présenter",
       "words": [
         {
@@ -185,29 +185,6 @@
           "phonetic": "à-rai",
           "en": "what / which",
           "imageUrl": "/images/w_w_arai.svg"
-        },
-        {
-          "id": "w_la",
-          "th": "ล่ะ",
-          "fr": "et (pour renvoyer la question)",
-          "phonetic": "lâ",
-          "en": "and (to return the question)",
-          "imageUrl": "/images/w_w_la.svg"
-        },
-        {
-          "id": "w_laew",
-          "th": "แล้ว",
-          "fr": "alors / et (transition)",
-          "phonetic": "láew",
-          "en": "then / and (transition)",
-          "imageUrl": "/images/w_w_laew.svg"
-        },
-        {
-          "id": "w_dots",
-          "th": "...",
-          "fr": "(prénom)",
-          "phonetic": "",
-          "en": "(first name)"
         }
       ],
       "phrases": [
@@ -247,12 +224,65 @@
           ],
           "en": "my name is (woman)",
           "imageUrl": "/images/p_p_name_f.svg"
+        }
+      ],
+      "titleEn": "Basics 2: Introduce yourself",
+      "descriptionEn": "Learn basic pronouns and introducing yourself",
+      "imageUrl": "/images/introduce.svg"
+    },
+    {
+      "id": "l_nouveau_001",
+      "title": "Se présenter : Et vous ?",
+      "description": "",
+      "words": [
+        {
+          "id": "w_la",
+          "th": "ล่ะ",
+          "phonetic": "lâ",
+          "fr": "et (pour renvoyer la question)",
+          "en": "and (to return the question)",
+          "allowIdenticalTranslation": false
         },
+        {
+          "id": "w_laew",
+          "th": "แล้ว",
+          "phonetic": "láew",
+          "fr": "alors / et (transition)",
+          "en": "then / and (transition)",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_dots",
+          "th": "...",
+          "phonetic": "",
+          "fr": "(prénom)",
+          "en": "(first name)",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_go",
+          "th": "ก็",
+          "phonetic": "gô",
+          "fr": "aussi",
+          "en": "also / too",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_muean_gan",
+          "th": "เหมือนกัน",
+          "phonetic": "mǔuean gan",
+          "fr": "pareil / moi aussi",
+          "en": "same / me too",
+          "allowIdenticalTranslation": false
+        }
+      ],
+      "phrases": [
         {
           "id": "p_my_name_and_you_m",
           "th": "ผมชื่อ...แล้วคุณล่ะ",
-          "fr": "je m'appelle (prenom) et toi ? (homme)",
           "phonetic": "phǒm chûue... láew khun lâ",
+          "fr": "je m'appelle (prénom) et toi ? (homme)",
+          "en": "My name is (first name) and you? (man)",
           "components": [
             "w_phom",
             "w_chue",
@@ -261,14 +291,14 @@
             "w_khun",
             "w_la"
           ],
-          "en": "My name is (first name) and you? (man) ",
-          "imageUrl": "/images/p_p_my_name_and_you_m.svg"
+          "allowIdenticalTranslation": false
         },
         {
           "id": "p_my_name_and_you_f",
           "th": "ฉันชื่อ...แล้วคุณล่ะ",
-          "fr": "je m'appelle (prenom) et toi ? (femme)",
           "phonetic": "chǎn chûue... láew khun lâ",
+          "fr": "je m'appelle (prénom) et toi ? (femme)",
+          "en": "My name is (first name) and you? (woman)",
           "components": [
             "w_chan",
             "w_chue",
@@ -277,356 +307,518 @@
             "w_khun",
             "w_la"
           ],
-          "en": "My name is (first name) and you? (woman)",
-          "imageUrl": "/images/p_p_my_name_and_you_f.svg"
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_and_you",
+          "th": "แล้วคุณล่ะ",
+          "phonetic": "láew khun lâ",
+          "fr": "Et vous ?",
+          "en": "And you?",
+          "components": [
+            "w_laew",
+            "w_khun",
+            "w_la"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_also_well_m",
+          "th": "ผมก็สบายดีเหมือนกันครับ",
+          "phonetic": "phǒm gô sà-baai dee mǔuean gan khráp",
+          "fr": "Je vais bien aussi. (homme)",
+          "en": "I am fine too. (man)",
+          "components": [
+            "w_phom",
+            "w_go",
+            "w_sabai",
+            "w_dee",
+            "w_muean_gan",
+            "w_krap"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_also_well_f",
+          "th": "ฉันก็สบายดีเหมือนกันค่ะ",
+          "phonetic": "chǎn gô sà-baai dee mǔuean gan khâ",
+          "fr": "Je vais bien aussi. (femme)",
+          "en": "I am fine too. (woman)",
+          "components": [
+            "w_chan",
+            "w_go",
+            "w_sabai",
+            "w_dee",
+            "w_muean_gan",
+            "w_kha"
+          ],
+          "allowIdenticalTranslation": false
         }
       ],
-      "titleEn": "Basics 2: Introduce yourself",
-      "descriptionEn": "Learn basic pronouns and introducing yourself",
-      "imageUrl": "/images/introduce.svg"
+      "titleEn": "Introducing yourself: What about you?"
     },
     {
       "id": "lesson-3",
-      "title": "Nombres 1 à 10",
+      "title": "Les Nombres : 0 à 5",
       "description": "Apprenez à compter de 1 à 10",
       "words": [
         {
           "id": "w_0",
           "th": "ศูนย์",
-          "fr": "zéro",
           "phonetic": "sǔun",
+          "fr": "zéro",
           "en": "zero",
-          "imageUrl": "/images/w_w_0.svg"
+          "allowIdenticalTranslation": false
         },
         {
           "id": "w_1",
           "th": "หนึ่ง",
-          "fr": "un",
           "phonetic": "nùeng",
-          "en": "One",
-          "imageUrl": "/images/w_w_1.svg"
+          "fr": "un",
+          "en": "one",
+          "allowIdenticalTranslation": false
         },
         {
           "id": "w_2",
           "th": "สอง",
-          "fr": "deux",
           "phonetic": "sɔ̌ong",
+          "fr": "deux",
           "en": "two",
-          "imageUrl": "/images/w_w_2.svg"
+          "allowIdenticalTranslation": false
         },
         {
           "id": "w_3",
           "th": "สาม",
-          "fr": "trois",
           "phonetic": "sǎam",
+          "fr": "trois",
           "en": "three",
-          "imageUrl": "/images/w_w_3.svg"
+          "allowIdenticalTranslation": false
         },
         {
           "id": "w_4",
           "th": "สี่",
-          "fr": "quatre",
           "phonetic": "sìi",
+          "fr": "quatre",
           "en": "four",
-          "imageUrl": "/images/w_w_4.svg"
+          "allowIdenticalTranslation": false
         },
         {
           "id": "w_5",
           "th": "ห้า",
-          "fr": "cinq",
           "phonetic": "hâa",
+          "fr": "cinq",
           "en": "five",
-          "imageUrl": "/images/w_w_5.svg"
-        },
-        {
-          "id": "w_6",
-          "th": "หก",
-          "fr": "six",
-          "phonetic": "hòk",
-          "en": "six",
-          "imageUrl": "/images/w_w_6.svg",
-          "allowIdenticalTranslation": true
-        },
-        {
-          "id": "w_7",
-          "th": "เจ็ด",
-          "fr": "sept",
-          "phonetic": "jèt",
-          "en": "seven",
-          "imageUrl": "/images/w_w_7.svg"
-        },
-        {
-          "id": "w_8",
-          "th": "แปด",
-          "fr": "huit",
-          "phonetic": "bpàet",
-          "en": "eight",
-          "imageUrl": "/images/w_w_8.svg"
-        },
-        {
-          "id": "w_9",
-          "th": "เก้า",
-          "fr": "neuf",
-          "phonetic": "kâao",
-          "en": "nine",
-          "imageUrl": "/images/w_w_9.svg"
-        },
-        {
-          "id": "w_10",
-          "th": "สิบ",
-          "fr": "dix",
-          "phonetic": "sìp",
-          "en": "ten",
-          "imageUrl": "/images/w_w_10.svg"
+          "allowIdenticalTranslation": false
         },
         {
           "id": "w_pi",
           "th": "ปี",
-          "fr": "année / ans",
           "phonetic": "pii",
+          "fr": "année / ans",
           "en": "year / years",
-          "imageUrl": "/images/w_w_pi.svg"
-        },
-        {
-          "id": "w_duean",
-          "th": "เดือน",
-          "fr": "mois",
-          "phonetic": "duean",
-          "en": "month",
-          "imageUrl": "/images/w_w_duean.svg"
-        },
-        {
-          "id": "w_khrang",
-          "th": "ครั้ง",
-          "fr": "fois",
-          "phonetic": "khráng",
-          "en": "time",
-          "imageUrl": "/images/w_w_khrang.svg"
+          "allowIdenticalTranslation": false
         }
       ],
       "phrases": [
         {
           "id": "p_new_l3_1",
           "th": "หนึ่งปี",
-          "fr": "un an",
           "phonetic": "nùeng pii",
+          "fr": "un an",
+          "en": "one year",
           "components": [
             "w_1",
             "w_pi"
           ],
-          "en": "one year",
-          "imageUrl": "/images/p_p_new_l3_1.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_new_l3_2",
-          "th": "สองเดือน",
-          "fr": "deux mois",
-          "phonetic": "sɔ̌ong duean",
+          "id": "p_new_l3_2_pii",
+          "th": "สองปี",
+          "phonetic": "sɔ̌ong pii",
+          "fr": "deux ans",
+          "en": "two years",
           "components": [
             "w_2",
-            "w_duean"
+            "w_pi"
           ],
-          "en": "two months",
-          "imageUrl": "/images/p_p_new_l3_2.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_new_l3_3",
-          "th": "สามครั้ง",
-          "fr": "trois fois",
-          "phonetic": "sǎam khráng",
+          "id": "p_new_l3_3_pii",
+          "th": "สามปี",
+          "phonetic": "sǎam pii",
+          "fr": "trois ans",
+          "en": "three years",
           "components": [
             "w_3",
-            "w_khrang"
+            "w_pi"
           ],
-          "en": "three times",
-          "imageUrl": "/images/p_p_new_l3_3.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_new_l3_4",
+          "id": "p_new_l3_4_pii",
           "th": "สี่ปี",
-          "fr": "quatre ans",
           "phonetic": "sìi pii",
+          "fr": "quatre ans",
+          "en": "four years",
           "components": [
             "w_4",
             "w_pi"
           ],
-          "en": "four years",
-          "imageUrl": "/images/p_p_new_l3_4.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_new_l3_5",
-          "th": "ห้าเดือน",
-          "fr": "cinq mois",
-          "phonetic": "hâa duean",
+          "id": "p_new_l3_5_pii",
+          "th": "ห้าปี",
+          "phonetic": "hâa pii",
+          "fr": "cinq ans",
+          "en": "five years",
           "components": [
             "w_5",
-            "w_duean"
+            "w_pi"
           ],
-          "en": "five months",
-          "imageUrl": "/images/p_p_new_l3_5.svg"
+          "allowIdenticalTranslation": false
         }
       ],
-      "titleEn": "Numbers 1 to 10",
+      "titleEn": "Numbers 0 to 5",
       "descriptionEn": "Learn to count from 1 to 10",
       "imageUrl": "/images/numbers.svg"
     },
     {
+      "id": "l_nouveau_002",
+      "title": "Les Nombres : 6 à 10",
+      "description": "",
+      "words": [
+        {
+          "id": "w_6",
+          "th": "หก",
+          "phonetic": "hòk",
+          "fr": "six",
+          "en": "six",
+          "allowIdenticalTranslation": true
+        },
+        {
+          "id": "w_7",
+          "th": "เจ็ด",
+          "phonetic": "jèt",
+          "fr": "sept",
+          "en": "seven",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_8",
+          "th": "แปด",
+          "phonetic": "bpàet",
+          "fr": "huit",
+          "en": "eight",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_9",
+          "th": "เก้า",
+          "phonetic": "kâao",
+          "fr": "neuf",
+          "en": "nine",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_10",
+          "th": "สิบ",
+          "phonetic": "sìp",
+          "fr": "dix",
+          "en": "ten",
+          "allowIdenticalTranslation": false
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_6_years",
+          "th": "หกปี",
+          "phonetic": "hòk bpii",
+          "fr": "six ans",
+          "en": "six years",
+          "components": [
+            "w_6",
+            "w_pi"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_7_years",
+          "th": "เจ็ดปี",
+          "phonetic": "jèt bpii",
+          "fr": "sept ans",
+          "en": "seven years",
+          "components": [
+            "w_7",
+            "w_pi"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_8_years",
+          "th": "แปดปี",
+          "phonetic": "bpàet bpii",
+          "fr": "huit ans",
+          "en": "eight years",
+          "components": [
+            "w_8",
+            "w_pi"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_9_years",
+          "th": "เก้าปี",
+          "phonetic": "kâao bpii",
+          "fr": "neuf ans",
+          "en": "nine years",
+          "components": [
+            "w_9",
+            "w_pi"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_10_years",
+          "th": "สิบปี",
+          "phonetic": "sìp bpii",
+          "fr": "dix ans",
+          "en": "ten years",
+          "components": [
+            "w_10",
+            "w_pi"
+          ],
+          "allowIdenticalTranslation": false
+        }
+      ],
+      "titleEn": "Numbers 6 to 10"
+    },
+    {
+      "id": "l_nouveau_003",
+      "title": "Durées et Fréquences",
+      "description": "",
+      "words": [
+        {
+          "id": "w_duean",
+          "th": "เดือน",
+          "phonetic": "duean",
+          "fr": "mois",
+          "en": "month",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_khrang",
+          "th": "ครั้ง",
+          "phonetic": "khráng",
+          "fr": "fois",
+          "en": "time",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_wan",
+          "th": "วัน",
+          "phonetic": "wan",
+          "fr": "jour",
+          "en": "day",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_sapdaa",
+          "th": "สัปดาห์",
+          "phonetic": "sàp-daa",
+          "fr": "semaine",
+          "en": "week",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_thuk",
+          "th": "ทุก",
+          "phonetic": "thúk",
+          "fr": "chaque",
+          "en": "every",
+          "allowIdenticalTranslation": false
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_new_l3_2",
+          "th": "สองเดือน",
+          "phonetic": "sɔ̌ong duean",
+          "fr": "deux mois",
+          "en": "two months",
+          "components": [
+            "w_2",
+            "w_duean"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_new_l3_3",
+          "th": "สามครั้ง",
+          "phonetic": "sǎam khráng",
+          "fr": "trois fois",
+          "en": "three times",
+          "components": [
+            "w_3",
+            "w_khrang"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_new_l3_5",
+          "th": "ห้าเดือน",
+          "phonetic": "hâa duean",
+          "fr": "cinq mois",
+          "en": "five months",
+          "components": [
+            "w_5",
+            "w_duean"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_sii_sapdaa",
+          "th": "สี่สัปดาห์",
+          "phonetic": "sìi sàp-daa",
+          "fr": "quatre semaines",
+          "en": "four weeks",
+          "components": [
+            "w_4",
+            "w_sapdaa"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_thuk_wan",
+          "th": "ทุกวัน",
+          "phonetic": "thúk wan",
+          "fr": "chaque jour",
+          "en": "every day",
+          "components": [
+            "w_thuk",
+            "w_wan"
+          ],
+          "allowIdenticalTranslation": false
+        }
+      ],
+      "titleEn": "Duration and Frequency"
+    },
+    {
       "id": "lesson-3-quantities",
-      "title": "Quantités et Objets",
+      "title": "Quantités : Personnes",
       "description": "Utiliser les chiffres avec des objets",
       "words": [
         {
           "id": "w_mee",
           "th": "มี",
-          "fr": "il y a / avoir",
           "phonetic": "mii",
+          "fr": "il y a / avoir",
           "en": "there is / have",
-          "imageUrl": "/images/w_w_mee.svg"
-        },
-        {
-          "id": "w_gao_ee",
-          "th": "เก้าอี้",
-          "fr": "chaise",
-          "phonetic": "kâo-îi",
-          "en": "chair",
-          "imageUrl": "/images/w_w_gao_ee.svg"
+          "allowIdenticalTranslation": false
         },
         {
           "id": "w_gee",
           "th": "กี่",
-          "fr": "combien de",
           "phonetic": "kìi",
+          "fr": "combien de",
           "en": "how many",
-          "imageUrl": "/images/w_w_gee.svg"
-        },
-        {
-          "id": "w_dtua",
-          "th": "ตัว",
-          "fr": "classificateur (objets)",
-          "phonetic": "dtua",
-          "en": "classifier (objects)",
-          "imageUrl": "/images/w_w_dtua.svg"
+          "allowIdenticalTranslation": false
         },
         {
           "id": "w_khon",
           "th": "คน",
-          "fr": "personne (et classificateur)",
           "phonetic": "khon",
+          "fr": "personne (et classificateur)",
           "en": "person (and classifier)",
-          "imageUrl": "/images/w_w_khon.svg"
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_phuean",
+          "th": "เพื่อน",
+          "phonetic": "phûean",
+          "fr": "ami",
+          "en": "friend",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_dek",
+          "th": "เด็ก",
+          "phonetic": "dèk",
+          "fr": "enfant",
+          "en": "child",
+          "allowIdenticalTranslation": false
         }
       ],
       "phrases": [
         {
-          "id": "p_how_many_chairs",
-          "th": "มีเก้าอี้กี่ตัว",
-          "fr": "combien y a-t-il de chaises ?",
-          "phonetic": "mii kâo-îi kìi dtua",
-          "components": [
-            "w_mee",
-            "w_gao_ee",
-            "w_gee",
-            "w_dtua"
-          ],
-          "en": "how many chairs are there?",
-          "imageUrl": "/images/p_p_how_many_chairs.svg"
-        },
-        {
-          "id": "p_three_chairs",
-          "th": "มีเก้าอี้สามตัว",
-          "fr": "il y a trois chaises",
-          "phonetic": "mii kâo-îi sǎam dtua",
-          "components": [
-            "w_mee",
-            "w_gao_ee",
-            "w_3",
-            "w_dtua"
-          ],
-          "en": "there are three chairs",
-          "imageUrl": "/images/p_p_three_chairs.svg"
-        },
-        {
           "id": "p_how_many_people",
           "th": "มีกี่คน",
-          "fr": "combien y a-t-il de personnes ?",
           "phonetic": "mii kìi khon",
+          "fr": "combien y a-t-il de personnes ?",
+          "en": "how many people are there?",
           "components": [
             "w_mee",
             "w_gee",
             "w_khon"
           ],
-          "en": "how many people are there?",
-          "imageUrl": "/images/p_p_how_many_people.svg"
+          "allowIdenticalTranslation": false
         },
         {
           "id": "p_five_people",
           "th": "มีห้าคน",
-          "fr": "il y a cinq personnes",
           "phonetic": "mii hâa khon",
+          "fr": "il y a cinq personnes",
+          "en": "there are five people",
           "components": [
             "w_mee",
             "w_5",
             "w_khon"
           ],
-          "en": "there are five people",
-          "imageUrl": "/images/p_p_five_people.svg"
-        },
-        {
-          "id": "p_one_chair",
-          "th": "มีเก้าอี้หนึ่งตัว",
-          "fr": "il y a une chaise",
-          "phonetic": "mii kâo-îi nùeng dtua",
-          "components": [
-            "w_mee",
-            "w_gao_ee",
-            "w_1",
-            "w_dtua"
-          ],
-          "en": "there is a chair",
-          "imageUrl": "/images/p_p_one_chair.svg"
-        },
-        {
-          "id": "p_how_many_chairs_m",
-          "th": "มีเก้าอี้กี่ตัวครับ",
-          "fr": "combien y a-t-il de chaises ? (homme)",
-          "phonetic": "mii kâo-îi kìi dtua khráp",
-          "components": [
-            "w_mee",
-            "w_gao_ee",
-            "w_gee",
-            "w_dtua",
-            "w_krap"
-          ],
-          "en": "how many chairs are there? (man)",
-          "imageUrl": "/images/p_p_how_many_chairs_m.svg"
-        },
-        {
-          "id": "p_how_many_chairs_f",
-          "th": "มีเก้าอี้กี่ตัวค่ะ",
-          "fr": "combien y a-t-il de chaises ? (femme)",
-          "phonetic": "mii kâo-îi kìi dtua khâ",
-          "components": [
-            "w_mee",
-            "w_gao_ee",
-            "w_gee",
-            "w_dtua",
-            "w_kha"
-          ],
-          "en": "how many chairs are there? (woman)",
-          "imageUrl": "/images/p_p_how_many_chairs_f.svg"
+          "allowIdenticalTranslation": false
         },
         {
           "id": "p_four_people",
           "th": "มีสี่คน",
-          "fr": "il y a quatre personnes",
           "phonetic": "mii sìi khon",
+          "fr": "il y a quatre personnes",
+          "en": "there are four people",
           "components": [
             "w_mee",
             "w_4",
             "w_khon"
           ],
-          "en": "there are four people",
-          "imageUrl": "/images/p_p_four_people.svg"
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_how_many_friends",
+          "th": "คุณมีเพื่อนกี่คน",
+          "phonetic": "khun mii phûean kìi khon",
+          "fr": "combien d'amis as-tu ?",
+          "en": "how many friends do you have?",
+          "components": [
+            "w_khun",
+            "w_mee",
+            "w_phuean",
+            "w_gee",
+            "w_khon"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_three_children",
+          "th": "มีเด็กสามคน",
+          "phonetic": "mii dèk sǎam khon",
+          "fr": "il y a trois enfants",
+          "en": "there are three children",
+          "components": [
+            "w_mee",
+            "w_dek",
+            "w_3",
+            "w_khon"
+          ],
+          "allowIdenticalTranslation": false
         }
       ],
       "titleEn": "Quantities and Objects",
@@ -634,8 +826,128 @@
       "imageUrl": "/images/numbers.svg"
     },
     {
+      "id": "l_nouveau_004",
+      "title": "Quantités : Objets",
+      "description": "",
+      "words": [
+        {
+          "id": "w_gao_ee",
+          "th": "เก้าอี้",
+          "phonetic": "kâo-îi",
+          "fr": "chaise",
+          "en": "chair",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_dtua",
+          "th": "ตัว",
+          "phonetic": "dtua",
+          "fr": "classificateur (objets/animaux)",
+          "en": "classifier (objects/animals)",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_dto",
+          "th": "โต๊ะ",
+          "phonetic": "dtó",
+          "fr": "table",
+          "en": "table",
+          "allowIdenticalTranslation": true
+        },
+        {
+          "id": "w_krapao",
+          "th": "กระเป๋า",
+          "phonetic": "krà-pǎo",
+          "fr": "sac",
+          "en": "bag",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_bai_class",
+          "th": "ใบ",
+          "phonetic": "bai",
+          "fr": "classificateur (sacs/contenants)",
+          "en": "classifier (bags/containers)",
+          "allowIdenticalTranslation": false
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_how_many_chairs",
+          "th": "มีเก้าอี้กี่ตัว",
+          "phonetic": "mii kâo-îi kìi dtua",
+          "fr": "combien y a-t-il de chaises ?",
+          "en": "how many chairs are there?",
+          "components": [
+            "w_mee",
+            "w_gao_ee",
+            "w_gee",
+            "w_dtua"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_three_chairs",
+          "th": "มีเก้าอี้สามตัว",
+          "phonetic": "mii kâo-îi sǎam dtua",
+          "fr": "il y a trois chaises",
+          "en": "there are three chairs",
+          "components": [
+            "w_mee",
+            "w_gao_ee",
+            "w_3",
+            "w_dtua"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_two_tables",
+          "th": "มีโต๊ะสองตัว",
+          "phonetic": "mii dtó sǒng dtua",
+          "fr": "il y a deux tables",
+          "en": "there are two tables",
+          "components": [
+            "w_mee",
+            "w_dto",
+            "w_2",
+            "w_dtua"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_how_many_bags",
+          "th": "มีกระเป๋ากี่ใบ",
+          "phonetic": "mii krà-pǎo kìi bai",
+          "fr": "combien y a-t-il de sacs ?",
+          "en": "how many bags are there?",
+          "components": [
+            "w_mee",
+            "w_krapao",
+            "w_gee",
+            "w_bai_class"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_four_bags",
+          "th": "มีกระเป๋าสี่ใบ",
+          "phonetic": "mii krà-pǎo sìi bai",
+          "fr": "il y a quatre sacs",
+          "en": "there are four bags",
+          "components": [
+            "w_mee",
+            "w_krapao",
+            "w_4",
+            "w_bai_class"
+          ],
+          "allowIdenticalTranslation": false
+        }
+      ],
+      "titleEn": "Quantities: Items"
+    },
+    {
       "id": "lesson-4",
-      "title": "Nourriture : Au restaurant",
+      "title": "Nourriture : Manger et Boire",
       "description": "Manger au restaurant",
       "words": [
         {
@@ -663,38 +975,6 @@
           "imageUrl": "/images/w_w_nam.svg"
         },
         {
-          "id": "w_aroi",
-          "th": "อร่อย",
-          "fr": "délicieux",
-          "phonetic": "à-rɔ̀i",
-          "en": "delicious",
-          "imageUrl": "/images/w_w_aroi.svg"
-        },
-        {
-          "id": "w_mak",
-          "th": "มาก",
-          "fr": "très / beaucoup",
-          "phonetic": "mâak",
-          "en": "very/a lot",
-          "imageUrl": "/images/w_w_mak.svg"
-        },
-        {
-          "id": "w_kho_req",
-          "th": "ขอ",
-          "fr": "je voudrais/demander",
-          "en": "request/would like",
-          "phonetic": "khǒo",
-          "imageUrl": "/images/w_w_kho_req.svg"
-        },
-        {
-          "id": "w_phet",
-          "th": "เผ็ด",
-          "fr": "épicé",
-          "phonetic": "phèt",
-          "en": "spicy",
-          "imageUrl": "/images/w_w_phet.svg"
-        },
-        {
           "id": "w_mai_neg",
           "th": "ไม่",
           "fr": "ne pas",
@@ -709,30 +989,6 @@
           "phonetic": "ao",
           "en": "want / take",
           "imageUrl": "/images/w_w_ao.svg"
-        },
-        {
-          "id": "w_kai",
-          "th": "ไก่",
-          "fr": "poulet",
-          "phonetic": "kài",
-          "en": "chicken",
-          "imageUrl": "/images/w_w_kai.svg"
-        },
-        {
-          "id": "w_mu",
-          "th": "หมู",
-          "fr": "porc",
-          "phonetic": "mǔu",
-          "en": "pork",
-          "imageUrl": "/images/w_w_mu.svg"
-        },
-        {
-          "th": "ไข่",
-          "en": "egg",
-          "id": "w_khai_egg",
-          "fr": "œuf",
-          "phonetic": "khài",
-          "imageUrl": "/images/w_w_khai_egg.svg"
         }
       ],
       "phrases": [
@@ -747,30 +1003,6 @@
           ],
           "en": "eat (a meal)",
           "imageUrl": "/images/p_p_eat_rice.svg"
-        },
-        {
-          "id": "p_very_delicious",
-          "th": "อร่อยมาก",
-          "fr": "très délicieux",
-          "phonetic": "à-rɔ̀i mâak",
-          "components": [
-            "w_aroi",
-            "w_mak"
-          ],
-          "en": "very delicious",
-          "imageUrl": "/images/p_p_very_delicious.svg"
-        },
-        {
-          "id": "p_not_spicy",
-          "th": "ไม่เผ็ด",
-          "fr": "pas épicé",
-          "phonetic": "mâi phèt",
-          "components": [
-            "w_mai_neg",
-            "w_phet"
-          ],
-          "en": "not spicy",
-          "imageUrl": "/images/p_p_not_spicy.svg"
         },
         {
           "id": "p_want_water",
@@ -795,6 +1027,144 @@
           ],
           "en": "I don't want it",
           "imageUrl": "/images/p_p_not_want.svg"
+        }
+      ],
+      "titleEn": "Food: At the restaurant",
+      "descriptionEn": "Eating out",
+      "imageUrl": "/images/food.svg"
+    },
+    {
+      "id": "l_nouveau_005",
+      "title": "Nourriture : Viandes et Œufs",
+      "description": "",
+      "words": [
+        {
+          "id": "w_kai",
+          "th": "ไก่",
+          "fr": "poulet",
+          "phonetic": "kài",
+          "en": "chicken",
+          "imageUrl": "/images/w_w_kai.svg"
+        },
+        {
+          "id": "w_mu",
+          "th": "หมู",
+          "fr": "porc",
+          "phonetic": "mǔu",
+          "en": "pork",
+          "imageUrl": "/images/w_w_mu.svg"
+        },
+        {
+          "th": "ไข่",
+          "en": "egg",
+          "id": "w_khai_egg",
+          "fr": "œuf",
+          "phonetic": "khài",
+          "imageUrl": "/images/w_w_khai_egg.svg"
+        },
+        {
+          "id": "w_kho_req",
+          "th": "ขอ",
+          "fr": "je voudrais/demander",
+          "en": "request/would like",
+          "phonetic": "khǒo",
+          "imageUrl": "/images/w_w_kho_req.svg"
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_new_l4_1",
+          "th": "กินไก่",
+          "fr": "manger du poulet",
+          "phonetic": "kin kài",
+          "components": [
+            "w_kin",
+            "w_kai"
+          ],
+          "en": "eat chicken",
+          "imageUrl": "/images/p_p_new_l4_1.svg"
+        },
+        {
+          "id": "p_new_l4_2",
+          "th": "เอาไข่",
+          "fr": "je veux un oeuf",
+          "phonetic": "ao khài",
+          "components": [
+            "w_ao",
+            "w_khai_egg"
+          ],
+          "en": "I want an egg",
+          "imageUrl": "/images/p_p_new_l4_2.svg"
+        },
+        {
+          "id": "p_new_l4_5",
+          "th": "ไม่กินหมู",
+          "fr": "je ne mange pas de porc",
+          "phonetic": "mâi kin mǔu",
+          "components": [
+            "w_mai_neg",
+            "w_kin",
+            "w_mu"
+          ],
+          "en": "I don't eat pork",
+          "imageUrl": "/images/p_p_new_l4_5.svg"
+        }
+      ]
+    },
+    {
+      "id": "l_nouveau_006",
+      "title": "Nourriture : Saveurs",
+      "description": "",
+      "words": [
+        {
+          "id": "w_aroi",
+          "th": "อร่อย",
+          "fr": "délicieux",
+          "phonetic": "à-rɔ̀i",
+          "en": "delicious",
+          "imageUrl": "/images/w_w_aroi.svg"
+        },
+        {
+          "id": "w_mak",
+          "th": "มาก",
+          "fr": "très / beaucoup",
+          "phonetic": "mâak",
+          "en": "very/a lot",
+          "imageUrl": "/images/w_w_mak.svg"
+        },
+        {
+          "id": "w_phet",
+          "th": "เผ็ด",
+          "fr": "épicé",
+          "phonetic": "phèt",
+          "en": "spicy",
+          "imageUrl": "/images/w_w_phet.svg"
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_very_delicious",
+          "th": "อร่อยมาก",
+          "fr": "très délicieux",
+          "phonetic": "à-rɔ̀i mâak",
+          "components": [
+            "w_aroi",
+            "w_mak"
+          ],
+          "en": "very delicious",
+          "imageUrl": "/images/p_p_very_delicious.svg"
+        },
+        {
+          "id": "p_not_spicy",
+          "th": "ไม่เผ็ด",
+          "fr": "pas épicé",
+          "phonetic": "mâi phèt",
+          "components": [
+            "w_mai_neg",
+            "w_phet"
+          ],
+          "en": "not spicy",
+          "imageUrl": "/images/p_p_not_spicy.svg"
         },
         {
           "id": "p_spicy_m",
@@ -823,30 +1193,6 @@
           "imageUrl": "/images/p_p_delicious_f.svg"
         },
         {
-          "id": "p_new_l4_1",
-          "th": "กินไก่",
-          "fr": "manger du poulet",
-          "phonetic": "kin kài",
-          "components": [
-            "w_kin",
-            "w_kai"
-          ],
-          "en": "eat chicken",
-          "imageUrl": "/images/p_p_new_l4_1.svg"
-        },
-        {
-          "id": "p_new_l4_2",
-          "th": "เอาไข่",
-          "fr": "je veux un oeuf",
-          "phonetic": "ao khài",
-          "components": [
-            "w_ao",
-            "w_khai_egg"
-          ],
-          "en": "I want an egg",
-          "imageUrl": "/images/p_p_new_l4_2.svg"
-        },
-        {
           "id": "p_new_l4_3",
           "th": "หมูอร่อย",
           "fr": "le porc est délicieux",
@@ -869,28 +1215,12 @@
           ],
           "en": "spicy chicken",
           "imageUrl": "/images/p_p_new_l4_4.svg"
-        },
-        {
-          "id": "p_new_l4_5",
-          "th": "ไม่กินหมู",
-          "fr": "je ne mange pas de porc",
-          "phonetic": "mâi kin mǔu",
-          "components": [
-            "w_mai_neg",
-            "w_kin",
-            "w_mu"
-          ],
-          "en": "I don't eat pork",
-          "imageUrl": "/images/p_p_new_l4_5.svg"
         }
-      ],
-      "titleEn": "Food: At the restaurant",
-      "descriptionEn": "Eating out",
-      "imageUrl": "/images/food.svg"
+      ]
     },
     {
       "id": "lesson-5",
-      "title": "Bases 3 : Politesse et questions",
+      "title": "Politesse et Excuses",
       "description": "Formules de politesse et interrogations de base",
       "words": [
         {
@@ -902,28 +1232,12 @@
           "imageUrl": "/images/w_w_kho_thot.svg"
         },
         {
-          "id": "w_thi_ni",
-          "th": "ที่นี่",
-          "fr": "ici",
-          "en": "here",
-          "phonetic": "thîi-nîi",
-          "imageUrl": "/images/w_w_thi_ni.svg"
-        },
-        {
           "id": "w_ka_ru_na",
           "th": "กรุณา",
           "fr": "s'il vous plaît",
           "phonetic": "kà-rú-naa",
           "en": "Please",
           "imageUrl": "/images/w_w_ka_ru_na.svg"
-        },
-        {
-          "id": "w_khao_jai",
-          "th": "เข้าใจ",
-          "fr": "comprendre",
-          "phonetic": "khâo jai",
-          "en": "to understand",
-          "imageUrl": "/images/w_w_khao_jai.svg"
         },
         {
           "id": "w_chuai",
@@ -940,65 +1254,9 @@
           "phonetic": "nɔ̀i",
           "en": "a bit / please",
           "imageUrl": "/images/w_w_noi.svg"
-        },
-        {
-          "id": "w_phut",
-          "th": "พูด",
-          "fr": "parler",
-          "phonetic": "phûut",
-          "en": "speak",
-          "imageUrl": "/images/w_w_phut.svg"
-        },
-        {
-          "id": "w_khoi",
-          "th": "ค่อย",
-          "fr": "très / vraiment",
-          "phonetic": "khôi",
-          "en": "really / quite",
-          "imageUrl": "/images/w_w_khoi.svg"
-        },
-        {
-          "id": "w_nai",
-          "th": "ใน",
-          "fr": "dans",
-          "en": "in",
-          "phonetic": "nai",
-          "imageUrl": "/images/w_w_nai.svg"
-        },
-        {
-          "th": "ที่ไหน",
-          "en": "where",
-          "id": "w_thinai",
-          "fr": "où",
-          "phonetic": "thîi-nǎi",
-          "imageUrl": "/images/w_w_thinai.svg"
         }
       ],
       "phrases": [
-        {
-          "id": "p_understand_q",
-          "th": "เข้าใจไหม",
-          "fr": "comprenez-vous ?",
-          "phonetic": "khâo jai mǎi",
-          "components": [
-            "w_khao_jai",
-            "w_mai"
-          ],
-          "en": "do you understand ?",
-          "imageUrl": "/images/p_p_understand_q.svg"
-        },
-        {
-          "id": "p_not_understand",
-          "th": "ไม่เข้าใจ",
-          "fr": "je ne comprends pas",
-          "phonetic": "mâi khâo jai",
-          "components": [
-            "w_mai_neg",
-            "w_khao_jai"
-          ],
-          "en": "I don't understand",
-          "imageUrl": "/images/p_p_not_understand.svg"
-        },
         {
           "id": "p_sorry_m",
           "th": "ขอโทษครับ",
@@ -1048,17 +1306,6 @@
           "imageUrl": "/images/p_p_please_f.svg"
         },
         {
-          "id": "p_where_is_it",
-          "th": "ที่ไหน",
-          "fr": "c'est où ?",
-          "phonetic": "thîi nǎi",
-          "components": [
-            "w_thinai"
-          ],
-          "en": "where is it?",
-          "imageUrl": "/images/p_p_where_is_it.svg"
-        },
-        {
           "id": "p_new_l5_1",
           "th": "ช่วยหน่อย",
           "fr": "aidez-moi un peu",
@@ -1069,6 +1316,66 @@
           ],
           "en": "help me a little",
           "imageUrl": "/images/p_p_new_l5_1.svg"
+        }
+      ],
+      "titleEn": "Basics 3: Politeness and questions",
+      "descriptionEn": "Polite expressions and basic questions",
+      "imageUrl": "/images/default-lesson.svg"
+    },
+    {
+      "id": "l_nouveau_007",
+      "title": "Compréhension et Communication",
+      "description": "",
+      "words": [
+        {
+          "id": "w_khao_jai",
+          "th": "เข้าใจ",
+          "fr": "comprendre",
+          "phonetic": "khâo jai",
+          "en": "to understand",
+          "imageUrl": "/images/w_w_khao_jai.svg"
+        },
+        {
+          "id": "w_phut",
+          "th": "พูด",
+          "fr": "parler",
+          "phonetic": "phûut",
+          "en": "speak",
+          "imageUrl": "/images/w_w_phut.svg"
+        },
+        {
+          "id": "w_khoi",
+          "th": "ค่อย",
+          "fr": "très / vraiment",
+          "phonetic": "khôi",
+          "en": "really / quite",
+          "imageUrl": "/images/w_w_khoi.svg"
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_understand_q",
+          "th": "เข้าใจไหม",
+          "fr": "comprenez-vous ?",
+          "phonetic": "khâo jai mǎi",
+          "components": [
+            "w_khao_jai",
+            "w_mai"
+          ],
+          "en": "do you understand ?",
+          "imageUrl": "/images/p_p_understand_q.svg"
+        },
+        {
+          "id": "p_not_understand",
+          "th": "ไม่เข้าใจ",
+          "fr": "je ne comprends pas",
+          "phonetic": "mâi khâo jai",
+          "components": [
+            "w_mai_neg",
+            "w_khao_jai"
+          ],
+          "en": "I don't understand",
+          "imageUrl": "/images/p_p_not_understand.svg"
         },
         {
           "id": "p_new_l5_2",
@@ -1107,6 +1414,50 @@
           ],
           "en": "please speak a little",
           "imageUrl": "/images/p_p_new_l5_4.svg"
+        }
+      ]
+    },
+    {
+      "id": "l_nouveau_008",
+      "title": "Localisation",
+      "description": "",
+      "words": [
+        {
+          "id": "w_thi_ni",
+          "th": "ที่นี่",
+          "fr": "ici",
+          "en": "here",
+          "phonetic": "thîi-nîi",
+          "imageUrl": "/images/w_w_thi_ni.svg"
+        },
+        {
+          "id": "w_nai",
+          "th": "ใน",
+          "fr": "dans",
+          "en": "in",
+          "phonetic": "nai",
+          "imageUrl": "/images/w_w_nai.svg"
+        },
+        {
+          "th": "ที่ไหน",
+          "en": "where",
+          "id": "w_thinai",
+          "fr": "où",
+          "phonetic": "thîi-nǎi",
+          "imageUrl": "/images/w_w_thinai.svg"
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_where_is_it",
+          "th": "ที่ไหน",
+          "fr": "c'est où ?",
+          "phonetic": "thîi nǎi",
+          "components": [
+            "w_thinai"
+          ],
+          "en": "where is it?",
+          "imageUrl": "/images/p_p_where_is_it.svg"
         },
         {
           "id": "p_new_l5_5",
@@ -1120,32 +1471,13 @@
           "en": "speak where?",
           "imageUrl": "/images/p_p_new_l5_5.svg"
         }
-      ],
-      "titleEn": "Basics 3: Politeness and questions",
-      "descriptionEn": "Polite expressions and basic questions",
-      "imageUrl": "/images/default-lesson.svg"
+      ]
     },
     {
       "id": "lesson-6",
-      "title": "Sujets et Famille",
+      "title": "Famille Proche",
       "description": "Parler des autres",
       "words": [
-        {
-          "id": "w_khao_pron",
-          "th": "เขา",
-          "fr": "il / elle",
-          "phonetic": "khǎo",
-          "en": "he/she",
-          "imageUrl": "/images/w_w_khao_pron.svg"
-        },
-        {
-          "id": "w_rao",
-          "th": "เรา",
-          "fr": "nous",
-          "phonetic": "rao",
-          "en": "We",
-          "imageUrl": "/images/w_w_rao.svg"
-        },
         {
           "id": "w_mae",
           "th": "แม่",
@@ -1179,76 +1511,15 @@
           "imageUrl": "/images/w_w_nong.svg"
         },
         {
-          "id": "w_phuean",
-          "th": "เพื่อน",
-          "fr": "ami",
-          "phonetic": "phûean",
-          "en": "friend",
-          "imageUrl": "/images/w_w_phuean.svg"
-        },
-        {
-          "id": "w_khru",
-          "th": "ครู",
-          "fr": "professeur",
-          "phonetic": "khruu",
-          "en": "teacher",
-          "imageUrl": "/images/w_w_khru.svg"
-        },
-        {
-          "id": "w_dek",
-          "th": "เด็ก",
-          "fr": "enfant",
-          "phonetic": "dèk",
-          "en": "child",
-          "imageUrl": "/images/w_w_dek.svg"
-        },
-        {
-          "id": "w_pai",
-          "th": "ไป",
-          "fr": "aller",
-          "phonetic": "bpai",
-          "en": "go",
-          "imageUrl": "/images/w_w_pai.svg"
-        },
-        {
           "th": "ของ",
           "en": "of/belonging to",
           "id": "w_khong_of",
           "fr": "de (appartenance)",
           "phonetic": "khǒng",
           "imageUrl": "/images/w_w_khong_of.svg"
-        },
-        {
-          "id": "w_jai_dee",
-          "th": "ใจดี",
-          "fr": "gentil",
-          "phonetic": "jai dii",
-          "en": "kind",
-          "imageUrl": "/images/w_w_jai_dee.svg"
-        },
-        {
-          "th": "ใจ",
-          "en": "heart",
-          "id": "w_jai",
-          "fr": "cœur",
-          "phonetic": "jai",
-          "imageUrl": "/images/w_w_jai.svg"
         }
       ],
       "phrases": [
-        {
-          "id": "p_he_name",
-          "th": "เขาชื่ออะไร",
-          "fr": "comment s'appelle-t-il ?",
-          "phonetic": "khǎo chûue à-rai",
-          "components": [
-            "w_khao_pron",
-            "w_chue",
-            "w_arai"
-          ],
-          "en": "what is his name?",
-          "imageUrl": "/images/p_p_he_name.svg"
-        },
         {
           "id": "p_dad_fine",
           "th": "พ่อสบายดีไหม",
@@ -1289,19 +1560,55 @@
           ],
           "en": "what's mom's name?",
           "imageUrl": "/images/p_p_mom_name.svg"
+        }
+      ],
+      "titleEn": "Subjects and Family",
+      "descriptionEn": "Talk about others",
+      "imageUrl": "/images/family.svg"
+    },
+    {
+      "id": "l_nouveau_009",
+      "title": "Pronoms et Déplacements",
+      "description": "",
+      "words": [
+        {
+          "id": "w_khao_pron",
+          "th": "เขา",
+          "fr": "il / elle",
+          "phonetic": "khǎo",
+          "en": "he/she",
+          "imageUrl": "/images/w_w_khao_pron.svg"
         },
         {
-          "id": "p_where_is_dad",
-          "th": "พ่อไปที่ไหน",
-          "fr": "où va papa ?",
-          "phonetic": "phɔ̂ɔ bpai thîi nǎi",
+          "id": "w_rao",
+          "th": "เรา",
+          "fr": "nous",
+          "phonetic": "rao",
+          "en": "We",
+          "imageUrl": "/images/w_w_rao.svg"
+        },
+        {
+          "id": "w_pai",
+          "th": "ไป",
+          "fr": "aller",
+          "phonetic": "bpai",
+          "en": "go",
+          "imageUrl": "/images/w_w_pai.svg"
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_he_name",
+          "th": "เขาชื่ออะไร",
+          "fr": "comment s'appelle-t-il ?",
+          "phonetic": "khǎo chûue à-rai",
           "components": [
-            "w_pho",
-            "w_pai",
-            "w_thinai"
+            "w_khao_pron",
+            "w_chue",
+            "w_arai"
           ],
-          "en": "where is dad going?",
-          "imageUrl": "/images/p_p_where_is_dad.svg"
+          "en": "what is his name?",
+          "imageUrl": "/images/p_p_he_name.svg"
         },
         {
           "id": "p_we_are_good",
@@ -1316,6 +1623,52 @@
           "en": "we are fine",
           "imageUrl": "/images/p_p_we_are_good.svg"
         },
+        {
+          "id": "p_where_is_dad",
+          "th": "พ่อไปที่ไหน",
+          "fr": "où va papa ?",
+          "phonetic": "phɔ̂ɔ bpai thîi nǎi",
+          "components": [
+            "w_pho",
+            "w_pai",
+            "w_thinai"
+          ],
+          "en": "where is dad going?",
+          "imageUrl": "/images/p_p_where_is_dad.svg"
+        }
+      ]
+    },
+    {
+      "id": "l_nouveau_010",
+      "title": "Entourage et Caractère",
+      "description": "",
+      "words": [
+        {
+          "id": "w_khru",
+          "th": "ครู",
+          "fr": "professeur",
+          "phonetic": "khruu",
+          "en": "teacher",
+          "imageUrl": "/images/w_w_khru.svg"
+        },
+        {
+          "id": "w_jai_dee",
+          "th": "ใจดี",
+          "fr": "gentil",
+          "phonetic": "jai dii",
+          "en": "kind",
+          "imageUrl": "/images/w_w_jai_dee.svg"
+        },
+        {
+          "th": "ใจ",
+          "en": "heart",
+          "id": "w_jai",
+          "fr": "cœur",
+          "phonetic": "jai",
+          "imageUrl": "/images/w_w_jai.svg"
+        }
+      ],
+      "phrases": [
         {
           "id": "p_new_l6_1",
           "th": "เพื่อนชื่ออะไร",
@@ -1381,24 +1734,13 @@
           "en": "the child's mother",
           "imageUrl": "/images/p_p_new_l6_5.svg"
         }
-      ],
-      "titleEn": "Subjects and Family",
-      "descriptionEn": "Talk about others",
-      "imageUrl": "/images/family.svg"
+      ]
     },
     {
       "id": "lesson-7",
-      "title": "Verbes utiles",
+      "title": "Verbes d'action de base",
       "description": "Actions de tous les jours",
       "words": [
-        {
-          "id": "w_ma",
-          "th": "มา",
-          "fr": "venir",
-          "phonetic": "maa",
-          "en": "come",
-          "imageUrl": "/images/w_w_ma.svg"
-        },
         {
           "id": "w_tham",
           "th": "ทำ",
@@ -1406,14 +1748,6 @@
           "phonetic": "tham",
           "en": "TO DO",
           "imageUrl": "/images/w_w_tham.svg"
-        },
-        {
-          "id": "w_thammai",
-          "th": "ทำไม",
-          "fr": "pourquoi ?",
-          "phonetic": "tham-mai",
-          "en": "Why ?",
-          "imageUrl": "/images/w_w_thammai.svg"
         },
         {
           "id": "w_yak",
@@ -1432,30 +1766,6 @@
           "imageUrl": "/images/w_w_du.svg"
         },
         {
-          "id": "w_ro",
-          "th": "รอ",
-          "fr": "attendre",
-          "phonetic": "rɔɔ",
-          "en": "wait",
-          "imageUrl": "/images/w_w_ro.svg"
-        },
-        {
-          "id": "w_ha",
-          "th": "หา",
-          "fr": "chercher",
-          "en": "look for",
-          "phonetic": "hǎa",
-          "imageUrl": "/images/w_w_ha.svg"
-        },
-        {
-          "id": "w_gamlang",
-          "th": "กำลัง",
-          "fr": "en train de",
-          "en": "in the process of",
-          "phonetic": "kam-lang",
-          "imageUrl": "/images/w_w_gamlang.svg"
-        },
-        {
           "id": "w_khit",
           "th": "คิด",
           "fr": "penser",
@@ -1465,18 +1775,6 @@
         }
       ],
       "phrases": [
-        {
-          "id": "p_where_go",
-          "th": "ไปที่ไหน",
-          "fr": "où vas-tu ?",
-          "phonetic": "bpai thîi nǎi",
-          "components": [
-            "w_pai",
-            "w_thinai"
-          ],
-          "en": "where are you going?",
-          "imageUrl": "/images/p_p_where_go.svg"
-        },
         {
           "id": "p_want_eat",
           "th": "อยากกินข้าว",
@@ -1491,19 +1789,6 @@
           "imageUrl": "/images/p_p_want_eat.svg"
         },
         {
-          "id": "p_have_water",
-          "th": "มีน้ำไหม",
-          "fr": "avez-vous de l'eau ?",
-          "phonetic": "mii náam mǎi",
-          "components": [
-            "w_mee",
-            "w_nam",
-            "w_mai"
-          ],
-          "en": "do you have water?",
-          "imageUrl": "/images/p_p_have_water.svg"
-        },
-        {
           "id": "p_what_are_you_doing",
           "th": "ทำอะไร",
           "fr": "que fais-tu ?",
@@ -1514,18 +1799,6 @@
           ],
           "en": "what are you doing ?",
           "imageUrl": "/images/p_p_what_are_you_doing.svg"
-        },
-        {
-          "id": "p_come_here_m",
-          "th": "มาครับ",
-          "fr": "je viens (homme)",
-          "phonetic": "maa khráp",
-          "components": [
-            "w_ma",
-            "w_krap"
-          ],
-          "en": "I come (man)",
-          "imageUrl": "/images/p_p_come_here_m.svg"
         },
         {
           "id": "p_want_to_go_f",
@@ -1553,18 +1826,6 @@
           "imageUrl": "/images/p_p_new_l7_1.svg"
         },
         {
-          "id": "p_new_l7_2",
-          "th": "อยากรอ",
-          "fr": "vouloir attendre",
-          "phonetic": "yàak rɔɔ",
-          "components": [
-            "w_yak",
-            "w_ro"
-          ],
-          "en": "want to wait",
-          "imageUrl": "/images/p_p_new_l7_2.svg"
-        },
-        {
           "id": "p_new_l7_3",
           "th": "คิดอะไร",
           "fr": "à quoi penses-tu ?",
@@ -1575,6 +1836,107 @@
           ],
           "en": "what are you thinking about?",
           "imageUrl": "/images/p_p_new_l7_3.svg"
+        }
+      ],
+      "titleEn": "Useful verbs",
+      "descriptionEn": "Everyday actions",
+      "imageUrl": "/images/default-lesson.svg"
+    },
+    {
+      "id": "l_nouveau_011",
+      "title": "Mouvement et Attente",
+      "description": "",
+      "words": [
+        {
+          "id": "w_ma",
+          "th": "มา",
+          "fr": "venir",
+          "phonetic": "maa",
+          "en": "come",
+          "imageUrl": "/images/w_w_ma.svg"
+        },
+        {
+          "id": "w_ro",
+          "th": "รอ",
+          "fr": "attendre",
+          "phonetic": "rɔɔ",
+          "en": "wait",
+          "imageUrl": "/images/w_w_ro.svg"
+        },
+        {
+          "id": "w_thammai",
+          "th": "ทำไม",
+          "fr": "pourquoi ?",
+          "phonetic": "tham-mai",
+          "en": "Why ?",
+          "imageUrl": "/images/w_w_thammai.svg"
+        },
+        {
+          "id": "w_ha",
+          "th": "หา",
+          "fr": "chercher",
+          "en": "look for",
+          "phonetic": "hǎa",
+          "imageUrl": "/images/w_w_ha.svg"
+        },
+        {
+          "id": "w_gamlang",
+          "th": "กำลัง",
+          "fr": "en train de",
+          "en": "in the process of",
+          "phonetic": "kam-lang",
+          "imageUrl": "/images/w_w_gamlang.svg"
+        }
+      ],
+      "phrases": [
+        {
+          "id": "p_where_go",
+          "th": "ไปที่ไหน",
+          "fr": "où vas-tu ?",
+          "phonetic": "bpai thîi nǎi",
+          "components": [
+            "w_pai",
+            "w_thinai"
+          ],
+          "en": "where are you going?",
+          "imageUrl": "/images/p_p_where_go.svg"
+        },
+        {
+          "id": "p_have_water",
+          "th": "มีน้ำไหม",
+          "fr": "avez-vous de l'eau ?",
+          "phonetic": "mii náam mǎi",
+          "components": [
+            "w_mee",
+            "w_nam",
+            "w_mai"
+          ],
+          "en": "do you have water?",
+          "imageUrl": "/images/p_p_have_water.svg"
+        },
+        {
+          "id": "p_come_here_m",
+          "th": "มาครับ",
+          "fr": "je viens (homme)",
+          "phonetic": "maa khráp",
+          "components": [
+            "w_ma",
+            "w_krap"
+          ],
+          "en": "I come (man)",
+          "imageUrl": "/images/p_p_come_here_m.svg"
+        },
+        {
+          "id": "p_new_l7_2",
+          "th": "อยากรอ",
+          "fr": "vouloir attendre",
+          "phonetic": "yàak rɔɔ",
+          "components": [
+            "w_yak",
+            "w_ro"
+          ],
+          "en": "want to wait",
+          "imageUrl": "/images/p_p_new_l7_2.svg"
         },
         {
           "id": "p_new_l7_4",
@@ -1600,10 +1962,7 @@
           "en": "Why wait?",
           "imageUrl": "/images/p_p_new_l7_5.svg"
         }
-      ],
-      "titleEn": "Useful verbs",
-      "descriptionEn": "Everyday actions",
-      "imageUrl": "/images/default-lesson.svg"
+      ]
     },
     {
       "id": "lesson-8",
@@ -1683,7 +2042,7 @@
           "imageUrl": "/images/w_w_ngern.svg"
         },
         {
-          "id": "w_thuk",
+          "id": "w_thuuk",
           "th": "ถูก",
           "fr": "pas cher",
           "phonetic": "thùuk",
@@ -1808,7 +2167,7 @@
           "fr": "très bon marché",
           "phonetic": "thùuk mâak",
           "components": [
-            "w_thuk",
+            "w_thuuk",
             "w_mak"
           ],
           "en": "very cheap",
@@ -1834,7 +2193,7 @@
           "phonetic": "khǎai thùuk",
           "components": [
             "w_khai_sell",
-            "w_thuk"
+            "w_thuuk"
           ],
           "en": "sell cheap",
           "imageUrl": "/images/p_p_new_l8_4.svg"
@@ -2244,14 +2603,6 @@
       "title": "Le temps & les jours",
       "description": "Aujourd'hui, demain, hier...",
       "words": [
-        {
-          "id": "w_wan",
-          "th": "วัน",
-          "fr": "jour",
-          "phonetic": "wan",
-          "en": "day",
-          "imageUrl": "/images/w_w_wan.svg"
-        },
         {
           "id": "w_phrung",
           "th": "พรุ่ง",
@@ -6620,14 +6971,6 @@
           "imageUrl": "/images/w_w_lesson-39-a3_2.svg"
         },
         {
-          "th": "ใบ",
-          "en": "classifier (ticket/leaf)",
-          "id": "w_bai_class",
-          "fr": "classificateur",
-          "phonetic": "bai",
-          "imageUrl": "/images/w_w_bai_class.svg"
-        },
-        {
           "th": "ไหน",
           "en": "which/where",
           "id": "w_nai_which",
@@ -7151,7 +7494,7 @@
           "phonetic": "sûea thùuk",
           "components": [
             "w_suea",
-            "w_thuk"
+            "w_thuuk"
           ],
           "en": "cheap shirt",
           "imageUrl": "/images/p_p_cheap_shirt.svg"
@@ -7187,7 +7530,7 @@
           "phonetic": "khâao thùuk",
           "components": [
             "w_khao",
-            "w_thuk"
+            "w_thuuk"
           ],
           "en": "cheap rice (food)",
           "imageUrl": "/images/p_p_cheap_food.svg"
@@ -9691,7 +10034,7 @@
           "phonetic": "wǎan thùuk",
           "components": [
             "w_waan",
-            "w_thuk"
+            "w_thuuk"
           ],
           "en": "[Convenient] sweet / cheap / okay",
           "imageUrl": "/images/p_p_auto_lesson-58_1.svg"
