@@ -73,6 +73,10 @@ interface ProgressState {
   hiddenInstructions: string[];
   hideInstruction: (key: string) => void;
   unhideInstruction: (key: string) => void;
+  hasSeenCommunityModal: boolean;
+  setHasSeenCommunityModal: (seen: boolean) => void;
+  showCommunityModal: boolean;
+  setShowCommunityModal: (show: boolean) => void;
 }
 
 export const useProgressStore = create<ProgressState>()(
@@ -87,6 +91,10 @@ export const useProgressStore = create<ProgressState>()(
       lessonLevels: {},
       lessonStars: {},
       hiddenInstructions: [],
+      hasSeenCommunityModal: false,
+      showCommunityModal: false,
+      setHasSeenCommunityModal: (seen) => set({ hasSeenCommunityModal: seen }),
+      setShowCommunityModal: (show) => set({ showCommunityModal: show }),
       xp: 0,
       seenAlphabets: [],
       isExerciseRunning: false,
@@ -193,7 +201,7 @@ export const useProgressStore = create<ProgressState>()(
       name: 'thai-learning-progress',
       storage: createJSONStorage(() => safeStorage),
       partialize: (state) => Object.fromEntries(
-        Object.entries(state).filter(([key]) => !['_hasHydrated', 'isExerciseRunning'].includes(key))
+        Object.entries(state).filter(([key]) => !['_hasHydrated', 'isExerciseRunning', 'showCommunityModal'].includes(key))
       ),
       onRehydrateStorage: () => (state) => {
         state?.setHasHydrated(true);
