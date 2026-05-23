@@ -110,21 +110,21 @@ export default function PWAInstallButton() {
                 
                 {iosBrowserType === 'safari' ? (
                   <div className="text-center text-slate-600 space-y-4 font-medium">
-                    <p>Pour installer l'application sur votre appareil :</p>
+                    <p>Pour installer l&apos;application sur votre appareil :</p>
                     <ol className="text-left space-y-3 bg-slate-50 p-4 rounded-2xl border border-slate-100 text-sm">
                       <li className="flex items-center gap-3">
                         <span className="bg-white p-1.5 rounded-lg border border-slate-200 shadow-sm text-slate-700 shrink-0"><Share size={16} /></span>
-                        <div><strong>1.</strong> Appuyez sur l'icône <strong>Partager</strong> en bas de l'écran.</div>
+                        <div><strong>1.</strong> Appuyez sur l&apos;icône <strong>Partager</strong> en bas de l&apos;écran.</div>
                       </li>
                       <li className="flex items-center gap-3">
                         <span className="bg-white p-1.5 rounded-lg border border-slate-200 shadow-sm text-slate-700 shrink-0"><PlusSquare size={16} /></span>
-                        <div><strong>2.</strong> Sélectionnez <strong>Sur l'écran d'accueil</strong>.</div>
+                        <div><strong>2.</strong> Sélectionnez <strong>Sur l&apos;écran d&apos;accueil</strong>.</div>
                       </li>
                     </ol>
                   </div>
                 ) : (
                   <div className="text-center text-slate-600 space-y-4 font-medium">
-                    <p>L'installation sur iOS nécessite d'utiliser <strong>Safari</strong>.</p>
+                    <p>L&apos;installation sur iOS nécessite d&apos;utiliser <strong>Safari</strong>.</p>
                     <div className="bg-amber-50 border border-amber-200 text-amber-800 p-4 rounded-2xl text-sm text-left">
                       <p className="mb-2 break-all"><strong>1.</strong> Ouvrez <span className="font-bold underline">{currentUrl}</span> dans le navigateur Safari (🧭).</p>
                       <p><strong>2.</strong> Appuyez sur le bouton Installer.</p>
