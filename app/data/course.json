@@ -6761,91 +6761,106 @@
       "descriptionEn": "More vocabulary for this unit.",
       "words": [
         {
-          "id": "w_lesson-34-a1_1",
+          "id": "w_snow",
           "th": "หิมะ",
+          "phonetic": "hì-má",
           "fr": "neige",
           "en": "snow",
-          "phonetic": "hì-má",
-          "imageUrl": "/images/w_w_lesson-34-a1_1.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "w_lesson-34-a1_2",
+          "id": "w_storm",
           "th": "พายุ",
+          "phonetic": "phaa-yú",
           "fr": "tempête",
           "en": "storm",
-          "phonetic": "phaa-yú",
-          "imageUrl": "/images/w_w_lesson-34-a1_2.svg"
+          "allowIdenticalTranslation": false
         },
         {
+          "id": "w_strong",
           "th": "แรง",
-          "en": "strong",
-          "id": "w_raeng",
-          "fr": "fort",
           "phonetic": "raeng",
-          "imageUrl": "/images/w_w_raeng.svg"
+          "fr": "fort",
+          "en": "strong",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_dangerous",
+          "th": "อันตราย",
+          "phonetic": "an-dtà-raai",
+          "fr": "dangereux",
+          "en": "dangerous",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_lightning",
+          "th": "ฟ้าผ่า",
+          "phonetic": "fáa-phàa",
+          "fr": "foudre",
+          "en": "lightning",
+          "allowIdenticalTranslation": false
         }
       ],
       "phrases": [
         {
-          "id": "p_new_lesson-34-a1_0",
+          "id": "p_strong_wind",
           "th": "ลมแรง",
+          "phonetic": "lom raeng",
           "fr": "Vent fort",
           "en": "Strong wind",
-          "phonetic": "lom rɛng",
           "components": [
             "w_lom",
-            "w_raeng"
+            "w_strong"
           ],
-          "imageUrl": "/images/p_p_new_lesson-34-a1_0.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_new_lesson-34-a1_1",
+          "id": "p_have_storm",
           "th": "มีพายุ",
+          "phonetic": "mii phaa-yú",
           "fr": "Il y a une tempête",
           "en": "There is a storm",
-          "phonetic": "mii paa-yú",
           "components": [
             "w_mee",
-            "w_lesson-34-a1_2"
+            "w_storm"
           ],
-          "imageUrl": "/images/p_p_new_lesson-34-a1_1.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_new_lesson-34-a1_2",
+          "id": "p_snowing",
           "th": "หิมะตก",
-          "fr": "Il neige",
-          "en": "It's snowing",
           "phonetic": "hì-má dtòk",
+          "fr": "Il neige",
+          "en": "It is snowing",
           "components": [
-            "w_lesson-34-a1_1",
+            "w_snow",
             "w_tok"
           ],
-          "imageUrl": "/images/p_p_new_lesson-34-a1_2.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_new_lesson-34-a1_3",
-          "th": "ไม่ชอบลม",
-          "fr": "Ne pas aimer le vent",
-          "en": "Don't like wind",
-          "phonetic": "mâi chɔ̂ɔp lom",
+          "id": "p_dangerous_storm",
+          "th": "พายุอันตราย",
+          "phonetic": "phaa-yú an-dtà-raai",
+          "fr": "Tempête dangereuse",
+          "en": "Dangerous storm",
           "components": [
-            "w_mai_neg",
-            "w_chop",
-            "w_lom"
+            "w_storm",
+            "w_dangerous"
           ],
-          "imageUrl": "/images/p_p_new_lesson-34-a1_3.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_new_lesson-34-a1_4",
-          "th": "พายุใหญ่",
-          "fr": "Grosse tempête",
-          "en": "Big storm",
-          "phonetic": "paa-yú yài",
+          "id": "p_strong_lightning",
+          "th": "ฟ้าผ่าแรง",
+          "phonetic": "fáa-phàa raeng",
+          "fr": "Foudre forte",
+          "en": "Strong lightning",
           "components": [
-            "w_lesson-34-a1_2",
-            "w_yai"
+            "w_lightning",
+            "w_strong"
           ],
-          "imageUrl": "/images/p_p_new_lesson-34-a1_4.svg"
+          "allowIdenticalTranslation": false
         }
       ],
       "imageUrl": "/images/default-lesson.svg"
@@ -6858,99 +6873,112 @@
       "descriptionEn": "More vocabulary for this unit.",
       "words": [
         {
-          "id": "w_lesson-34-a2_0",
+          "id": "w_season_hot",
           "th": "ฤดูร้อน",
+          "phonetic": "rʉ́-duu-rɔ́ɔn",
           "fr": "été",
           "en": "summer",
-          "phonetic": "rʉ́-duu-rɔ́ɔn",
-          "imageUrl": "/images/w_w_lesson-34-a2_0.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "w_lesson-34-a2_1",
+          "id": "w_season_cold",
           "th": "ฤดูหนาว",
+          "phonetic": "rʉ́-duu-nǎao",
           "fr": "hiver",
           "en": "winter",
-          "phonetic": "rʉ́-duu-nǎao",
-          "imageUrl": "/images/w_w_lesson-34-a2_1.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "w_lesson-34-a2_2",
+          "id": "w_season_rain",
           "th": "ฤดูฝน",
+          "phonetic": "rʉ́-duu-fǒn",
           "fr": "saison des pluies",
           "en": "rainy season",
-          "phonetic": "rʉ́-duu-fǒn",
-          "imageUrl": "/images/w_w_lesson-34-a2_2.svg"
+          "allowIdenticalTranslation": false
         },
         {
+          "id": "w_hate",
           "th": "เกลียด",
-          "en": "hate",
-          "id": "w_kliat",
-          "fr": "détester",
           "phonetic": "glìiat",
-          "imageUrl": "/images/w_w_kliat.svg"
+          "fr": "détester",
+          "en": "hate",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_season",
+          "th": "ฤดู",
+          "phonetic": "rʉ́-duu",
+          "fr": "saison",
+          "en": "season",
+          "allowIdenticalTranslation": false
         }
       ],
       "phrases": [
         {
-          "id": "p_new_lesson-34-a2_0",
-          "th": "ชอบฤดูร้อน",
-          "fr": "Aimer l'été",
-          "en": "Like summer",
-          "phonetic": "chɔ̂ɔp rʉ́-duu-rɔ́ɔn",
+          "id": "p_like_summer",
+          "th": "ฉันชอบฤดูร้อน",
+          "phonetic": "chǎn chɔ̂ɔp rʉ́-duu-rɔ́ɔn",
+          "fr": "J'aime l'été",
+          "en": "I like summer",
           "components": [
+            "w_chan",
             "w_chop",
-            "w_lesson-34-a2_0"
+            "w_season_hot"
           ],
-          "imageUrl": "/images/p_p_new_lesson-34-a2_0.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_new_lesson-34-a2_1",
-          "th": "ฤดูหนาวเย็น",
-          "fr": "L'hiver est froid",
-          "en": "Winter is cold",
-          "phonetic": "rʉ́-duu-nǎao yen",
+          "id": "p_winter_cold",
+          "th": "ฤดูหนาวอากาศเย็น",
+          "phonetic": "rʉ́-duu-nǎao aa-gàat yen",
+          "fr": "En hiver, il fait froid",
+          "en": "In winter, the weather is cold",
           "components": [
-            "w_lesson-34-a2_1",
+            "w_season_cold",
+            "w_akat",
             "w_yen_cold"
           ],
-          "imageUrl": "/images/p_p_new_lesson-34-a2_1.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_new_lesson-34-a2_2",
-          "th": "เกลียดฤดูฝน",
-          "fr": "Détester la saison des pluies",
-          "en": "Hate rainy season",
-          "phonetic": "glìiat rʉ́-duu-fǒn",
+          "id": "p_hate_rainy",
+          "th": "เขาเกลียดฤดูฝน",
+          "phonetic": "kǎo glìiat rʉ́-duu-fǒn",
+          "fr": "Il déteste la saison des pluies",
+          "en": "He hates the rainy season",
           "components": [
-            "w_kliat",
-            "w_lesson-34-a2_2"
+            "w_khao_pron",
+            "w_hate",
+            "w_season_rain"
           ],
-          "imageUrl": "/images/p_p_new_lesson-34-a2_2.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_new_lesson-34-a2_3",
-          "th": "ไปในฤดูร้อน",
-          "fr": "Y aller en été",
-          "en": "Go in summer",
-          "phonetic": "pai nai rʉ́-duu-rɔ́ɔn",
+          "id": "p_go_summer",
+          "th": "อยากไปในฤดูร้อน",
+          "phonetic": "yàak pai nai rʉ́-duu-rɔ́ɔn",
+          "fr": "Je veux y aller en été",
+          "en": "I want to go in summer",
           "components": [
+            "w_yak",
             "w_pai",
             "w_nai",
-            "w_lesson-34-a2_0"
+            "w_season_hot"
           ],
-          "imageUrl": "/images/p_p_new_lesson-34-a2_3.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_new_lesson-34-a2_4",
-          "th": "ร้อนมาก",
-          "fr": "Très chaud",
-          "en": "Very hot",
-          "phonetic": "rɔ́ɔn mâak",
+          "id": "p_how_many_seasons",
+          "th": "มีกี่ฤดู",
+          "phonetic": "mii gìi rʉ́-duu",
+          "fr": "Combien de saisons y a-t-il ?",
+          "en": "How many seasons are there?",
           "components": [
-            "w_ron",
-            "w_mak"
+            "w_mee",
+            "w_gee",
+            "w_season"
           ],
-          "imageUrl": "/images/p_p_new_lesson-34-a2_4.svg"
+          "allowIdenticalTranslation": false
         }
       ],
       "imageUrl": "/images/default-lesson.svg"
@@ -6963,84 +6991,117 @@
       "descriptionEn": "More vocabulary for this unit.",
       "words": [
         {
-          "id": "w_lesson-34-a3_2",
+          "id": "w_mueawaan",
           "th": "เมื่อวาน",
+          "phonetic": "mʉ̂a-waan",
           "fr": "hier",
           "en": "yesterday",
-          "phonetic": "mʉ̂a-waan",
-          "imageUrl": "/images/w_w_lesson-34-a3_2.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "th": "เจอกัน",
-          "en": "see each other",
           "id": "w_joegan",
+          "th": "เจอกัน",
+          "phonetic": "jəə-gan",
           "fr": "se voir",
-          "phonetic": "joe-gan",
-          "imageUrl": "/images/w_w_joegan.svg"
+          "en": "see each other",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_khoey",
+          "th": "เคย",
+          "phonetic": "khəəy",
+          "fr": "avoir déjà (fait)",
+          "en": "used to / have ever",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_jan",
+          "th": "จันทร์",
+          "phonetic": "jan",
+          "fr": "lundi",
+          "en": "Monday",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_goon",
+          "th": "ก่อน",
+          "phonetic": "gɔ̀ɔn",
+          "fr": "avant / d'abord",
+          "en": "before / first",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_mai_khoei",
+          "th": "ไม่เคย",
+          "fr": "jamais",
+          "phonetic": "mâi-khoei",
+          "en": "Never",
+          "imageUrl": "/images/w_w_mai_khoei.svg"
         }
       ],
       "phrases": [
         {
-          "id": "p_new_lesson-34-a3_0",
-          "th": "วันนี้ร้อน",
-          "fr": "Aujourd'hui il fait chaud",
-          "en": "Today is hot",
-          "phonetic": "wan-níi rɔ́ɔn",
-          "components": [
-            "w_wan_nii",
-            "w_ron"
-          ],
-          "imageUrl": "/images/p_p_new_lesson-34-a3_0.svg"
-        },
-        {
-          "id": "p_new_lesson-34-a3_1",
+          "id": "p_see_you_tomorrow",
           "th": "เจอกันพรุ่งนี้",
+          "phonetic": "jəə-gan prûng-níi",
           "fr": "À demain",
           "en": "See you tomorrow",
-          "phonetic": "jee-gan prûng-níi",
           "components": [
             "w_joegan",
             "w_phrungnii"
           ],
-          "imageUrl": "/images/p_p_new_lesson-34-a3_1.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_new_lesson-34-a3_2",
-          "th": "เมื่อวานไป",
-          "fr": "J'y suis allé hier",
-          "en": "Went yesterday",
-          "phonetic": "mʉ̂a-waan pai",
+          "id": "p_went_yesterday",
+          "th": "เมื่อวานไปทำงาน",
+          "phonetic": "mʉ̂a-waan pai tham-ngaan",
+          "fr": "Je suis allé travailler hier",
+          "en": "Went to work yesterday",
           "components": [
-            "w_lesson-34-a3_2",
+            "w_mueawaan",
+            "w_pai",
+            "w_tham_ngan"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_never_been",
+          "th": "ไม่เคยไป",
+          "phonetic": "mâi khəəy pai",
+          "fr": "Je n'y suis jamais allé",
+          "en": "I have never been",
+          "components": [
+            "w_mai_khoei",
             "w_pai"
           ],
-          "imageUrl": "/images/p_p_new_lesson-34-a3_2.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_new_lesson-34-a3_3",
-          "th": "วันนี้กินอะไร",
-          "fr": "Que mange-t-on aujourd'hui ?",
-          "en": "What to eat today?",
-          "phonetic": "wan-níi gin a-rai",
+          "id": "p_see_you_monday",
+          "th": "เจอกันวันจันทร์",
+          "phonetic": "jəə-gan wan jan",
+          "fr": "À lundi",
+          "en": "See you on Monday",
           "components": [
-            "w_wan_nii",
-            "w_kin",
-            "w_arai"
+            "w_joegan",
+            "w_wan",
+            "w_jan"
           ],
-          "imageUrl": "/images/p_p_new_lesson-34-a3_3.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_new_lesson-34-a3_4",
-          "th": "ไม่ทำพรุ่งนี้",
-          "fr": "Pas fait demain",
-          "en": "Not doing tomorrow",
-          "phonetic": "mâi tham prûng-níi",
+          "id": "p_i_go_first",
+          "th": "ฉันไปก่อน",
+          "phonetic": "chǎn pai gɔ̀ɔn",
+          "fr": "J'y vais d'abord",
+          "en": "I will go first",
           "components": [
-            "w_mai_neg",
-            "w_tham",
-            "w_phrungnii"
+            "w_chan",
+            "w_pai",
+            "w_goon"
           ],
-          "imageUrl": "/images/p_p_new_lesson-34-a3_4.svg"
+          "allowIdenticalTranslation": false
         }
       ],
       "imageUrl": "/images/default-lesson.svg"
@@ -7053,86 +7114,123 @@
       "descriptionEn": "More vocabulary for this unit.",
       "words": [
         {
-          "th": "บ่าย",
-          "en": "afternoon",
           "id": "w_bai",
-          "fr": "après-midi",
+          "th": "บ่าย",
           "phonetic": "bàai",
-          "imageUrl": "/images/w_w_bai.svg"
+          "fr": "après-midi",
+          "en": "afternoon",
+          "allowIdenticalTranslation": false
         },
         {
-          "th": "สักพัก",
-          "en": "a while",
           "id": "w_sakphak",
-          "fr": "un moment",
+          "th": "สักพัก",
           "phonetic": "sàk-phák",
-          "imageUrl": "/images/w_w_sakphak.svg"
+          "fr": "un moment",
+          "en": "a while",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_naan",
+          "th": "นาน",
+          "phonetic": "naan",
+          "fr": "longtemps",
+          "en": "long time",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_diao",
+          "th": "เดี๋ยว",
+          "phonetic": "dǐao",
+          "fr": "dans un instant",
+          "en": "shortly",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_saai",
+          "th": "สาย",
+          "phonetic": "sǎai",
+          "fr": "en retard",
+          "en": "late",
+          "allowIdenticalTranslation": false
         }
       ],
       "phrases": [
         {
-          "id": "p_new_lesson-34-a4_0",
-          "th": "ไปตอนเช้า",
-          "fr": "Aller le matin",
-          "en": "Go in morning",
-          "phonetic": "pai dtaawn-cháao",
-          "components": [
-            "w_pai",
-            "w_ton",
-            "w_chao"
-          ],
-          "imageUrl": "/images/p_p_new_lesson-34-a4_0.svg"
-        },
-        {
-          "id": "p_new_lesson-34-a4_1",
+          "id": "p_non_ton_bai",
           "th": "นอนตอนบ่าย",
-          "fr": "Dormir l'après-midi",
-          "en": "Sleep afternoon",
           "phonetic": "nɔɔn dtaawn-bàai",
+          "fr": "Dormir l'après-midi",
+          "en": "Sleep in the afternoon",
           "components": [
             "w_non",
             "w_ton",
             "w_bai"
           ],
-          "imageUrl": "/images/p_p_new_lesson-34-a4_1.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_new_lesson-34-a4_3",
-          "th": "ตอนเช้าหนาว",
-          "fr": "Il fait froid le matin",
-          "en": "Cold morning",
-          "phonetic": "dtaawn-cháao nǎao",
-          "components": [
-            "w_ton",
-            "w_chao",
-            "w_naow"
-          ],
-          "imageUrl": "/images/p_p_new_lesson-34-a4_3.svg"
-        },
-        {
-          "id": "p_new_lesson-34-a4_4",
-          "th": "เจอกันตอนเย็น",
-          "fr": "Se voir ce soir",
-          "en": "See you this evening",
-          "phonetic": "jee-gan dtaawn-yen",
-          "components": [
-            "w_joegan",
-            "w_ton",
-            "w_yen_cold"
-          ],
-          "imageUrl": "/images/p_p_new_lesson-34-a4_4.svg"
-        },
-        {
-          "id": "p_new_lesson-34-a5_2",
+          "id": "p_ro_sakphak",
           "th": "รอสักพัก",
+          "phonetic": "rɔɔ sàk-phák",
           "fr": "Attendre un instant",
           "en": "Wait a moment",
-          "phonetic": "rɔɔ sàk-phák",
           "components": [
             "w_ro",
             "w_sakphak"
           ],
-          "imageUrl": "/images/p_p_new_lesson-34-a5_2.svg"
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_ro_naan_mai",
+          "th": "รอนานไหม",
+          "phonetic": "rɔɔ naan mǎi",
+          "fr": "As-tu attendu longtemps ?",
+          "en": "Did you wait long?",
+          "components": [
+            "w_ro",
+            "w_naan",
+            "w_mai"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_diao_ma",
+          "th": "เดี๋ยวมา",
+          "phonetic": "dǐao maa",
+          "fr": "Je reviens tout de suite",
+          "en": "Be right back",
+          "components": [
+            "w_diao",
+            "w_maa"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_khao_ma_saai",
+          "th": "เขามาสาย",
+          "phonetic": "kǎo maa sǎai",
+          "fr": "Il est en retard",
+          "en": "He arrives late",
+          "components": [
+            "w_khao_pron",
+            "w_maa",
+            "w_saai"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_diao_joegan_ton_bai",
+          "th": "เดี๋ยวเจอกันตอนบ่าย",
+          "phonetic": "dǐao jee-gan dtaawn-bàai",
+          "fr": "On se voit cet après-midi",
+          "en": "See you this afternoon",
+          "components": [
+            "w_diao",
+            "w_joegan",
+            "w_ton",
+            "w_bai"
+          ],
+          "allowIdenticalTranslation": false
         }
       ],
       "imageUrl": "/images/default-lesson.svg"
@@ -7147,56 +7245,119 @@
         {
           "id": "w_lesson-34-a5_1",
           "th": "ชั่วโมง",
+          "phonetic": "chûa-moong",
           "fr": "heure",
           "en": "hour",
-          "phonetic": "chûa-moong",
-          "imageUrl": "/images/w_w_lesson-34-a5_1.svg"
+          "allowIdenticalTranslation": false
         },
         {
           "id": "w_lesson-34-a5_2",
           "th": "วินาที",
+          "phonetic": "wí-naa-thii",
           "fr": "seconde",
           "en": "second",
-          "phonetic": "wí-naa-thii",
-          "imageUrl": "/images/w_w_lesson-34-a5_2.svg"
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_exactly",
+          "th": "เป๊ะ",
+          "phonetic": "pé",
+          "fr": "exactement",
+          "en": "exactly",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_duration",
+          "th": "ระยะเวลา",
+          "phonetic": "rá-yá weh-laa",
+          "fr": "durée",
+          "en": "duration",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_decade",
+          "th": "ทศวรรษ",
+          "phonetic": "thót-sà-wát",
+          "fr": "décennie",
+          "en": "decade",
+          "allowIdenticalTranslation": false
         }
       ],
       "phrases": [
         {
           "id": "p_new_lesson-34-a5_0",
           "th": "ห้านาที",
+          "phonetic": "hâa naa-thii",
           "fr": "Cinq minutes",
           "en": "Five minutes",
-          "phonetic": "hâa naa-thii",
           "components": [
             "w_5",
             "w_nathi"
           ],
-          "imageUrl": "/images/p_p_new_lesson-34-a5_0.svg"
+          "allowIdenticalTranslation": false
         },
         {
           "id": "p_new_lesson-34-a5_1",
           "th": "หนึ่งชั่วโมง",
+          "phonetic": "nùeng chûa-moong",
           "fr": "Une heure",
           "en": "One hour",
-          "phonetic": "nùeng chûa-moong",
           "components": [
             "w_1",
             "w_lesson-34-a5_1"
           ],
-          "imageUrl": "/images/p_p_new_lesson-34-a5_1.svg"
+          "allowIdenticalTranslation": false
         },
         {
           "id": "p_new_lesson-34-a5_3",
           "th": "สามนาที",
+          "phonetic": "sǎam naa-thii",
           "fr": "Trois minutes",
           "en": "Three minutes",
-          "phonetic": "sǎam naa-thii",
           "components": [
             "w_3",
             "w_nathi"
           ],
-          "imageUrl": "/images/p_p_new_lesson-34-a5_3.svg"
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_exactly_two_hours",
+          "th": "สองชั่วโมงเป๊ะ",
+          "phonetic": "sǒong chûa-moong pé",
+          "fr": "Deux heures exactement",
+          "en": "Exactly two hours",
+          "components": [
+            "w_2",
+            "w_lesson-34-a5_1",
+            "w_exactly"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_wait_10_seconds",
+          "th": "รอสิบวินาที",
+          "phonetic": "roo sìp wí-naa-thii",
+          "fr": "Attends dix secondes",
+          "en": "Wait ten seconds",
+          "components": [
+            "w_ro",
+            "w_10",
+            "w_lesson-34-a5_2"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_duration_one_decade",
+          "th": "ระยะเวลาหนึ่งทศวรรษ",
+          "phonetic": "rá-yá weh-laa nùeng thót-sà-wát",
+          "fr": "Une durée d'une décennie",
+          "en": "A duration of one decade",
+          "components": [
+            "w_duration",
+            "w_1",
+            "w_decade"
+          ],
+          "allowIdenticalTranslation": false
         }
       ],
       "imageUrl": "/images/default-lesson.svg"
@@ -10689,14 +10850,6 @@
       "description": "Jamais, parfois",
       "words": [
         {
-          "id": "w_mai_khoei",
-          "th": "ไม่เคย",
-          "fr": "jamais",
-          "phonetic": "mâi-khoei",
-          "en": "Never",
-          "imageUrl": "/images/w_w_mai_khoei.svg"
-        },
-        {
           "id": "w_bang_thi",
           "th": "บางที",
           "fr": "parfois",
@@ -11045,14 +11198,6 @@
       "title": "Jours de la semaine",
       "description": "Lundi à Dimanche",
       "words": [
-        {
-          "id": "w_jan",
-          "th": "จันทร์",
-          "fr": "lundi",
-          "phonetic": "jan",
-          "en": "Monday",
-          "imageUrl": "/images/w_w_jan.svg"
-        },
         {
           "id": "w_angkhan",
           "th": "อังคาร",
