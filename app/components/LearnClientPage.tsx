@@ -15,7 +15,7 @@ import { WritingConfigModal } from '../components/WritingConfigModal';
 import { DesktopSidebarRight } from '../components/DesktopSidebarRight';
 import PWAInstallButton from '../components/PWAInstallButton';
 
-const UNITS = [
+const BASE_UNITS = [
   {
     id: 'unit-1', title: "Unité 1 : Les bases", titleEn: "Unit 1: The Basics", description: "Commencez votre voyage en thaï !", descriptionEn: "Start your Thai journey!", colorClass: "bg-emerald-500", borderClass: "border-emerald-700", textClass: "text-emerald-500", hoverClass: "hover:bg-emerald-400", lightTextClass: "text-emerald-100", bgMutedClass: "bg-emerald-700/50",
     shades: {
@@ -23,8 +23,7 @@ const UNITS = [
       l2: "bg-emerald-300 border-emerald-500 text-emerald-900 hover:bg-emerald-400",
       l3: "bg-emerald-400 border-emerald-600 text-white hover:bg-emerald-500",
       l4: "bg-emerald-500 border-emerald-700 text-white hover:bg-emerald-600"
-    },
-    startIndex: 0, endIndex: 22
+    }
   },
   {
     id: 'unit-2', title: "Unité 2 : Vie quotidienne", titleEn: "Unit 2: Daily Life", description: "Se déplacer, se repérer et communiquer davantage.", descriptionEn: "Getting around, finding your way and communicating more.", colorClass: "bg-blue-500", borderClass: "border-blue-700", textClass: "text-blue-500", hoverClass: "hover:bg-blue-400", lightTextClass: "text-blue-100", bgMutedClass: "bg-blue-700/50",
@@ -33,8 +32,7 @@ const UNITS = [
       l2: "bg-blue-300 border-blue-500 text-blue-900 hover:bg-blue-400",
       l3: "bg-blue-400 border-blue-600 text-white hover:bg-blue-500",
       l4: "bg-blue-500 border-blue-700 text-white hover:bg-blue-600"
-    },
-    startIndex: 22, endIndex: 32
+    }
   },
   {
     id: 'unit-3', title: "Unité 3 : Nourriture & Boissons", titleEn: "Unit 3: Food & Drinks", description: "Saveurs, viandes et commander au restaurant.", descriptionEn: "Flavors, meats, and ordering at a restaurant.", colorClass: "bg-orange-500", borderClass: "border-orange-700", textClass: "text-orange-500", hoverClass: "hover:bg-orange-400", lightTextClass: "text-orange-100", bgMutedClass: "bg-orange-700/50",
@@ -43,8 +41,7 @@ const UNITS = [
       l2: "bg-orange-300 border-orange-500 text-orange-900 hover:bg-orange-400",
       l3: "bg-orange-400 border-orange-600 text-white hover:bg-orange-500",
       l4: "bg-orange-500 border-orange-700 text-white hover:bg-orange-600"
-    },
-    startIndex: 32, endIndex: 42
+    }
   },
   {
     id: 'unit-4', title: "Unité 4 : Verbes d'action", titleEn: "Unit 4: Action Verbs", description: "Regarder, jouer, travailler et apprendre.", descriptionEn: "Watching, playing, working, and learning.", colorClass: "bg-purple-500", borderClass: "border-purple-700", textClass: "text-purple-500", hoverClass: "hover:bg-purple-400", lightTextClass: "text-purple-100", bgMutedClass: "bg-purple-700/50",
@@ -53,8 +50,7 @@ const UNITS = [
       l2: "bg-purple-300 border-purple-500 text-purple-900 hover:bg-purple-400",
       l3: "bg-purple-400 border-purple-600 text-white hover:bg-purple-500",
       l4: "bg-purple-500 border-purple-700 text-white hover:bg-purple-600"
-    },
-    startIndex: 42, endIndex: 52
+    }
   },
   {
     id: 'unit-5', title: "Unité 5 : Le temps & Météo", titleEn: "Unit 5: Time & Weather", description: "Jours, heures, pluie et chaleur.", descriptionEn: "Days, hours, rain, and heat.", colorClass: "bg-cyan-500", borderClass: "border-cyan-700", textClass: "text-cyan-500", hoverClass: "hover:bg-cyan-400", lightTextClass: "text-cyan-100", bgMutedClass: "bg-cyan-700/50",
@@ -63,8 +59,7 @@ const UNITS = [
       l2: "bg-cyan-300 border-cyan-500 text-cyan-900 hover:bg-cyan-400",
       l3: "bg-cyan-400 border-cyan-600 text-white hover:bg-cyan-500",
       l4: "bg-cyan-500 border-cyan-700 text-white hover:bg-cyan-600"
-    },
-    startIndex: 52, endIndex: 62
+    }
   },
   {
     id: 'unit-6', title: "Unité 6 : En Ville & Trajets", titleEn: "Unit 6: In the City & Commuting", description: "Bâtiments, école et moyens de transports.", descriptionEn: "Buildings, schools, and transportation.", colorClass: "bg-pink-500", borderClass: "border-pink-700", textClass: "text-pink-500", hoverClass: "hover:bg-pink-400", lightTextClass: "text-pink-100", bgMutedClass: "bg-pink-700/50",
@@ -73,8 +68,7 @@ const UNITS = [
       l2: "bg-pink-300 border-pink-500 text-pink-900 hover:bg-pink-400",
       l3: "bg-pink-400 border-pink-600 text-white hover:bg-pink-500",
       l4: "bg-pink-500 border-pink-700 text-white hover:bg-pink-600"
-    },
-    startIndex: 62, endIndex: 72
+    }
   },
   {
     id: 'unit-7', title: "Unité 7 : Achats & Vêtements", titleEn: "Unit 7: Shopping & Clothes", description: "Couleurs, vêtements et argent.", descriptionEn: "Colors, clothes, and money.", colorClass: "bg-yellow-500", borderClass: "border-yellow-700", textClass: "text-yellow-500", hoverClass: "hover:bg-yellow-400", lightTextClass: "text-yellow-100", bgMutedClass: "bg-yellow-700/50",
@@ -83,8 +77,7 @@ const UNITS = [
       l2: "bg-yellow-300 border-yellow-500 text-yellow-900 hover:bg-yellow-400",
       l3: "bg-yellow-400 border-yellow-600 text-yellow-900 hover:bg-yellow-500",
       l4: "bg-yellow-500 border-yellow-700 text-yellow-900 hover:bg-yellow-600"
-    },
-    startIndex: 72, endIndex: 82
+    }
   },
   {
     id: 'unit-8', title: "Unité 8 : Description & Famille", titleEn: "Unit 8: Description & Family", description: "Apparence, frères, sœurs et amis.", descriptionEn: "Appearance, siblings, and friends.", colorClass: "bg-indigo-500", borderClass: "border-indigo-700", textClass: "text-indigo-500", hoverClass: "hover:bg-indigo-400", lightTextClass: "text-indigo-100", bgMutedClass: "bg-indigo-700/50",
@@ -93,8 +86,7 @@ const UNITS = [
       l2: "bg-indigo-300 border-indigo-500 text-indigo-900 hover:bg-indigo-400",
       l3: "bg-indigo-400 border-indigo-600 text-white hover:bg-indigo-500",
       l4: "bg-indigo-500 border-indigo-700 text-white hover:bg-indigo-600"
-    },
-    startIndex: 82, endIndex: 92
+    }
   },
   {
     id: 'unit-9', title: "Unité 9 : Santé & Émotions", titleEn: "Unit 9: Health & Emotions", description: "Docteur, tristesse, douleur et joie.", descriptionEn: "Doctor, sadness, pain, and joy.", colorClass: "bg-rose-500", borderClass: "border-rose-700", textClass: "text-rose-500", hoverClass: "hover:bg-rose-400", lightTextClass: "text-rose-100", bgMutedClass: "bg-rose-700/50",
@@ -103,8 +95,7 @@ const UNITS = [
       l2: "bg-rose-300 border-rose-500 text-rose-900 hover:bg-rose-400",
       l3: "bg-rose-400 border-rose-600 text-white hover:bg-rose-500",
       l4: "bg-rose-500 border-rose-700 text-white hover:bg-rose-600"
-    },
-    startIndex: 92, endIndex: 102
+    }
   },
   {
     id: 'unit-10', title: "Unité 10 : Le Grand Bilan A1", titleEn: "Unit 10: The Grand A1 Review", description: "Expressions, habitudes et tests finaux !", descriptionEn: "Expressions, habits, and final tests!", colorClass: "bg-teal-500", borderClass: "border-teal-700", textClass: "text-teal-500", hoverClass: "hover:bg-teal-400", lightTextClass: "text-teal-100", bgMutedClass: "bg-teal-700/50",
@@ -113,8 +104,7 @@ const UNITS = [
       l2: "bg-teal-300 border-teal-500 text-teal-900 hover:bg-teal-400",
       l3: "bg-teal-400 border-teal-600 text-white hover:bg-teal-500",
       l4: "bg-teal-500 border-teal-700 text-white hover:bg-teal-600"
-    },
-    startIndex: 102, endIndex: 112
+    }
   }
 ];
 
@@ -122,6 +112,39 @@ import { useGlobalSuggestedLesson } from '../lib/useGlobalSuggestedLesson';
 
 export default function LearnClientPage({ lightweightLessons }: { lightweightLessons: any[] }) {
   const data = { lessons: lightweightLessons };
+  
+  const UNITS = useMemo(() => {
+    const computedUnits = [];
+    let currentStartIndex = 0;
+    
+    for (let i = 0; i < BASE_UNITS.length; i++) {
+      const baseUnit = BASE_UNITS[i];
+      let endIndex = currentStartIndex;
+      
+      for (let j = currentStartIndex; j < data.lessons.length; j++) {
+        const title = data.lessons[j].title || "";
+        const titleEn = data.lessons[j].titleEn || "";
+        if (title.toLowerCase().includes("bilan") || titleEn.toLowerCase().includes("review")) {
+           endIndex = j + 1;
+           break;
+        }
+      }
+      
+      if (endIndex === currentStartIndex && currentStartIndex < data.lessons.length) {
+         endIndex = data.lessons.length;
+      }
+
+      computedUnits.push({
+        ...baseUnit,
+        startIndex: currentStartIndex,
+        endIndex: endIndex
+      });
+      
+      currentStartIndex = endIndex;
+    }
+    return computedUnits;
+  }, [lightweightLessons]);
+
   const router = useRouter();
   const { completedLessons, unlockedLessons, lessonLevels, lessonStars, xp, resetLessonLevel, language, setLanguage, unlockLessonManual, autoDetectLanguage, lastActiveUnitIndex, setLastActiveUnitIndex } = useProgressStore();
   const [mounted, setMounted] = useState(false);
