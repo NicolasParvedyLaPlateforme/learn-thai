@@ -28,6 +28,75 @@ import InstructionBlock from "./InstructionBlock";
 import Footer from "./Footer";
 import QuestionArea from "./QuestionArea";
 
+function LoadingScreen({ isLoadingData, onReady }: { isLoadingData: boolean; onReady: () => void }) {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (isLoadingData) {
+      timer = setInterval(() => {
+        setProgress(p => {
+          if (p >= 85) {
+            clearInterval(timer);
+            return 85;
+          }
+          return p + (Math.random() * 5 + 2); 
+        });
+      }, 50);
+    } else {
+      timer = setInterval(() => {
+        setProgress(p => {
+          if (p >= 100) {
+             clearInterval(timer);
+             setTimeout(onReady, 200); 
+             return 100;
+          }
+          return p + 15;
+        });
+      }, 30);
+    }
+    return () => clearInterval(timer);
+  }, [isLoadingData, onReady]);
+
+  return (
+    <motion.div 
+      key="loading-screen"
+      initial={{ opacity: 1 }}
+      exit={{ opacity: 0, transition: { duration: 0.5, ease: "easeInOut" } }}
+      className="absolute inset-0 flex flex-col items-center justify-center bg-[#FAFAFA] z-50 flex-1"
+    >
+       <motion.div
+         initial={{ scale: 0.8, opacity: 0 }}
+         animate={{ scale: 1, opacity: 1 }}
+         exit={{ scale: 0.9, opacity: 0, transition: { duration: 0.3 } }}
+         transition={{ duration: 0.4 }}
+         className="flex flex-col items-center"
+       >
+         <div className="animate-pulse text-sm text-slate-400 mb-2 uppercase tracking-widest font-semibold flex items-center gap-2">
+            {isLoadingData ? (
+              <>
+                <div className="w-2 h-2 rounded-full bg-indigo-500 animate-bounce" style={{ animationDelay: '0ms' }} />
+                <div className="w-2 h-2 rounded-full bg-indigo-500 animate-bounce" style={{ animationDelay: '150ms' }} />
+                <div className="w-2 h-2 rounded-full bg-indigo-500 animate-bounce" style={{ animationDelay: '300ms' }} />
+              </>
+            ) : "Prêt !"}
+         </div>
+         <div className="text-6xl font-extrabold text-slate-800 tracking-tighter w-36 justify-center flex font-mono border-b-2 border-indigo-100 pb-2">
+            {Math.min(100, Math.floor(progress))}
+            <span className="text-4xl text-slate-400 mt-1 ml-1">%</span>
+         </div>
+         <div className="w-64 h-2 bg-slate-200 rounded-full mt-8 shadow-inner overflow-hidden relative">
+           <motion.div 
+             className="absolute top-0 left-0 bottom-0 bg-indigo-500 rounded-full"
+             animate={{ width: `${Math.min(100, progress)}%` }}
+             transition={{ ease: "easeOut", duration: 0.1 }}
+           />
+         </div>
+       </motion.div>
+    </motion.div>
+  );
+}
+
 const getInstructionKey = (ex: Exercise | undefined) => {
   if (!ex) return null;
   if (ex.type === "intro") return null;
@@ -123,6 +192,7 @@ function LessonPageContent({ lesson }: { lesson: any }) {
   } | null>(null);
 
   const [isClient, setIsClient] = useState(false);
+  const [showExerciseUI, setShowExerciseUI] = useState(false);
   const [acknowledgedInstructions, setAcknowledgedInstructions] = useState<
     Set<string>
   >(new Set());
@@ -177,13 +247,18 @@ function LessonPageContent({ lesson }: { lesson: any }) {
     exercisesGeneratedFor,
   ]);
 
-  if (!isClient || !_hasHydrated || !lesson || exercises.length === 0)
-    return <div className="p-8 text-center">Chargement...</div>;
+  const isDataLoaded = isClient && _hasHydrated && !!lesson && exercises.length > 0;
 
-  const currentExercise = exercises[currentIndex];
-  const progress = (currentIndex / exercises.length) * 100;
+  if (!isDataLoaded && !showExerciseUI) {
+    // Need this block to prevent early variable access if exercises is empty
+    // but the loading screen is still active.
+  }
+
+  const currentExercise = exercises.length > 0 ? exercises[currentIndex] : null;
+  const progress = exercises.length > 0 ? (currentIndex / exercises.length) * 100 : 0;
 
   const handleCheck = (overrideAnswer?: any) => {
+    if (!currentExercise) return;
     if (currentExercise.type === "intro") {
       if (currentIndex < exercises.length - 1) {
         setCurrentIndex(currentIndex + 1);
@@ -325,8 +400,8 @@ function LessonPageContent({ lesson }: { lesson: any }) {
     );
   }
 
-  const isAnswerComplete =
-    currentExercise.type === "intro"
+  const isAnswerComplete = currentExercise
+    ? currentExercise.type === "intro"
       ? true
       : currentExercise.type === "free-typing"
         ? typeof selectedAnswer === "string" && selectedAnswer.trim().length >= Math.max(1, currentExercise.answer.replace(/\s+/g, "").length - 1)
@@ -339,13 +414,15 @@ function LessonPageContent({ lesson }: { lesson: any }) {
                 .length
           : selectedAnswer !== null &&
             (!Array.isArray(selectedAnswer) ||
-              (selectedAnswer as any[]).length > 0);
+              (selectedAnswer as any[]).length > 0)
+    : false;
 
-  const showFooter =
-    (currentExercise.type !== "pair-matching" || (isChecking && !isCorrect)) &&
-    (isChecking || isAnswerComplete);
+  const showFooter = currentExercise
+    ? (currentExercise.type !== "pair-matching" || (isChecking && !isCorrect)) &&
+      (isChecking || isAnswerComplete)
+    : false;
 
-  const instructionKey = getInstructionKey(currentExercise);
+  const instructionKey = getInstructionKey(currentExercise || undefined);
   const instructionText = getInstructionText(instructionKey, language);
   const isAcknowledged = instructionKey
     ? acknowledgedInstructions.has(instructionKey) || hiddenInstructions.includes(instructionKey)
@@ -355,22 +432,37 @@ function LessonPageContent({ lesson }: { lesson: any }) {
 
   return (
     <div className="h-[100dvh] flex flex-col bg-[#FAFAFA] font-sans text-slate-800 overflow-hidden relative">
-      <HeaderProgressBar
-        lessonId={lesson.id}
-        language={language}
-        currentLevel={currentLevel}
-        progress={progress}
-        earnedStars={earnedStars}
-        currentIndex={currentIndex}
-        exercisesLength={exercises.length}
-        currentExercise={currentExercise}
-        showRomanization={showRomanization}
-        setShowRomanization={setShowRomanization}
-        setShowInfoModal={setShowInfoModal}
-      />
+      <AnimatePresence mode="wait">
+        {!showExerciseUI ? (
+          <LoadingScreen 
+            key="loading-screen"
+            isLoadingData={!isDataLoaded} 
+            onReady={() => setShowExerciseUI(true)} 
+          />
+        ) : (
+          <motion.div
+            key="exercise-ui"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="flex-1 flex flex-col h-full w-full absolute inset-0"
+          >
+            <HeaderProgressBar
+              lessonId={lesson.id}
+              language={language}
+              currentLevel={currentLevel}
+              progress={progress}
+              earnedStars={earnedStars}
+              currentIndex={currentIndex}
+              exercisesLength={exercises.length}
+              currentExercise={currentExercise as Exercise}
+              showRomanization={showRomanization}
+              setShowRomanization={setShowRomanization}
+              setShowInfoModal={setShowInfoModal}
+            />
 
-      {/* Main Exercise Area */}
-      <main className="flex-1 flex flex-col w-full relative">
+            {/* Main Exercise Area */}
+            <main className="flex-1 flex flex-col w-full relative">
         {/* Glossary Modal */}
         {showInfoModal && (
           <GlossaryModal 
@@ -384,7 +476,7 @@ function LessonPageContent({ lesson }: { lesson: any }) {
         {/* The Question / Hint System */}
         <AnimatePresence mode="wait">
           <motion.div
-            key={currentExercise.id}
+            key={currentExercise?.id || 'loading'}
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20, transition: { duration: 0.2 } }}
@@ -403,7 +495,7 @@ function LessonPageContent({ lesson }: { lesson: any }) {
                   language={language}
                   instructionText={instructionText}
                   instructionKey={instructionKey}
-                  currentExercise={currentExercise}
+                  currentExercise={currentExercise as Exercise}
                   dontShowAgain={dontShowAgain}
                   setDontShowAgain={setDontShowAgain}
                   showHelpModal={showHelpModal}
@@ -435,11 +527,11 @@ function LessonPageContent({ lesson }: { lesson: any }) {
 
             {/* Scrollable Upper Area */}
             <div
-              className={`${showInstruction || showHelpModal || currentExercise.type === "pair-matching" ? "hidden" : "flex"} flex-1 md:flex-none w-full max-w-3xl overflow-y-auto md:overflow-y-visible px-4 py-4 md:py-4 flex-col justify-center hide-scrollbar`}
+              className={`${showInstruction || showHelpModal || currentExercise?.type === "pair-matching" ? "hidden" : "flex"} flex-1 md:flex-none w-full max-w-3xl overflow-y-auto md:overflow-y-visible px-4 py-4 md:py-4 flex-col justify-center hide-scrollbar`}
             >
-              {currentExercise.type !== "pair-matching" && (
+              {currentExercise?.type !== "pair-matching" && (
                 <QuestionArea
-                  currentExercise={currentExercise}
+                  currentExercise={currentExercise as Exercise}
                   lesson={lesson}
                   language={language}
                   showRomanization={showRomanization}
@@ -454,13 +546,13 @@ function LessonPageContent({ lesson }: { lesson: any }) {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: 0.3 }}
-              className={`${showInstruction || showHelpModal ? "hidden" : "flex"} ${currentExercise.type === "pair-matching" ? "flex-1 items-center" : "shrink-0 md:shrink-0"} bg-transparent px-4 pb-4 pt-2 md:pt-4 md:pb-8 justify-center z-10 w-full max-w-3xl`}
+              className={`${showInstruction || showHelpModal ? "hidden" : "flex"} ${currentExercise?.type === "pair-matching" ? "flex-1 items-center" : "shrink-0 md:shrink-0"} bg-transparent px-4 pb-4 pt-2 md:pt-4 md:pb-8 justify-center z-10 w-full max-w-3xl`}
             >
               <div className="w-full relative">
-                {currentExercise.type ===
-                "intro" ? null : currentExercise.type === "word-match" ? (
+                {currentExercise?.type ===
+                "intro" ? null : currentExercise?.type === "word-match" ? (
                   <WordMatch
-                    exercise={currentExercise}
+                    exercise={currentExercise as Exercise}
                     selected={selectedAnswer as string}
                     onChange={setSelectedAnswer}
                     disabled={isChecking}
@@ -469,7 +561,7 @@ function LessonPageContent({ lesson }: { lesson: any }) {
                     onAutoCheck={(val) => handleCheck(val)}
                     language={language}
                   />
-                ) : currentExercise.type === "pair-matching" ? (
+                ) : currentExercise?.type === "pair-matching" ? (
                   <PairMatch
                     key={currentExercise.id}
                     pairs={currentExercise.pairs as Word[]}
@@ -507,24 +599,24 @@ function LessonPageContent({ lesson }: { lesson: any }) {
                       }
                     }}
                   />
-                ) : currentExercise.type === "writing" ? (
+                ) : currentExercise?.type === "writing" ? (
                   <VirtualKeyboard
-                    exercise={currentExercise}
+                    exercise={currentExercise as Exercise}
                     selected={(selectedAnswer as string[]) || []}
                     onChange={setSelectedAnswer as any}
                     disabled={isChecking}
                     onAutoCheck={(val) => handleCheck(val)}
                   />
-                ) : currentExercise.type === "free-typing" ? (
+                ) : currentExercise?.type === "free-typing" ? (
                   <FreeTypingInput
-                    exercise={currentExercise}
+                    exercise={currentExercise as Exercise}
                     selected={(selectedAnswer as string) || ""}
                     onChange={setSelectedAnswer as any}
                     disabled={isChecking}
                   />
-                ) : (
+                ) : currentExercise && (
                   <SentenceBuilder
-                    exercise={currentExercise}
+                    exercise={currentExercise as Exercise}
                     selected={(selectedAnswer as string[]) || []}
                     onChange={setSelectedAnswer as any}
                     disabled={isChecking}
@@ -543,7 +635,7 @@ function LessonPageContent({ lesson }: { lesson: any }) {
 
       {/* Footer Actions */}
       <Footer
-        currentExercise={currentExercise}
+        currentExercise={currentExercise as Exercise}
         isChecking={isChecking}
         isCorrect={isCorrect}
         language={language}
@@ -551,6 +643,9 @@ function LessonPageContent({ lesson }: { lesson: any }) {
         showFooter={showFooter}
         handleCheck={handleCheck}
       />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
