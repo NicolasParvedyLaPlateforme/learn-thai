@@ -161,7 +161,8 @@
           "phonetic": "chǎn",
           "fr": "je (femme)",
           "en": "I (woman)",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_chan.svg"
         },
         {
           "id": "w_khun",
@@ -169,7 +170,8 @@
           "phonetic": "khun",
           "fr": "tu / vous",
           "en": "you",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_khun.svg"
         },
         {
           "id": "w_chue",
@@ -177,7 +179,8 @@
           "phonetic": "chûue",
           "fr": "nom / s'appeler",
           "en": "name / to be called",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_chue.svg"
         },
         {
           "id": "w_arai",
@@ -185,7 +188,8 @@
           "phonetic": "à-rai",
           "fr": "quoi / quel",
           "en": "what / which",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_arai.svg"
         }
       ],
       "phrases": [
@@ -200,7 +204,8 @@
             "w_chue",
             "w_arai"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_name_ask.svg"
         },
         {
           "id": "p_name_m",
@@ -212,7 +217,8 @@
             "w_phom",
             "w_chue"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_name_m.svg"
         },
         {
           "id": "p_name_f",
@@ -224,7 +230,8 @@
             "w_chan",
             "w_chue"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_name_f.svg"
         },
         {
           "id": "p_fine_m",
@@ -237,7 +244,8 @@
             "w_sabai",
             "w_dee"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_fine_m.svg"
         },
         {
           "id": "p_fine_f",
@@ -250,7 +258,8 @@
             "w_sabai",
             "w_dee"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_fine_f.svg"
         }
       ],
       "titleEn": "Basics 2: Introduce yourself",
@@ -268,7 +277,8 @@
           "phonetic": "lâ",
           "fr": "et (pour renvoyer la question)",
           "en": "and (to return the question)",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_la.svg"
         },
         {
           "id": "w_laew",
@@ -276,7 +286,8 @@
           "phonetic": "láew",
           "fr": "alors / et (transition)",
           "en": "then / and (transition)",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_laew.svg"
         },
         {
           "id": "w_dots",
@@ -292,7 +303,8 @@
           "phonetic": "gô",
           "fr": "aussi",
           "en": "also / too",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_go.svg"
         },
         {
           "id": "w_muean_gan",
@@ -300,7 +312,8 @@
           "phonetic": "mǔuean gan",
           "fr": "pareil / moi aussi",
           "en": "same / me too",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_muean_gan.svg"
         }
       ],
       "phrases": [
@@ -318,7 +331,8 @@
             "w_khun",
             "w_la"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_my_name_and_you_m.svg"
         },
         {
           "id": "p_my_name_and_you_f",
@@ -334,7 +348,8 @@
             "w_khun",
             "w_la"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_my_name_and_you_f.svg"
         },
         {
           "id": "p_and_you",
@@ -347,7 +362,8 @@
             "w_khun",
             "w_la"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_and_you.svg"
         },
         {
           "id": "p_also_well_m",
@@ -363,7 +379,8 @@
             "w_muean_gan",
             "w_krap"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_also_well_m.svg"
         },
         {
           "id": "p_also_well_f",
@@ -379,11 +396,13 @@
             "w_muean_gan",
             "w_kha"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_also_well_f.svg"
         }
       ],
       "titleEn": "Introducing yourself: What about you?",
-      "descriptionEn": "Learn to ask questions about the other person"
+      "descriptionEn": "Learn to ask questions about the other person",
+      "imageUrl": "/images/l_nouveau_001.svg"
     },
     {
       "id": "lesson-3",
@@ -396,7 +415,8 @@
           "phonetic": "sǔun",
           "fr": "zéro",
           "en": "zero",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_0.svg"
         },
         {
           "id": "w_1",
@@ -404,7 +424,8 @@
           "phonetic": "nùeng",
           "fr": "un",
           "en": "one",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_1.svg"
         },
         {
           "id": "w_2",
@@ -412,7 +433,8 @@
           "phonetic": "sɔ̌ong",
           "fr": "deux",
           "en": "two",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_2.svg"
         },
         {
           "id": "w_3",
@@ -420,7 +442,8 @@
           "phonetic": "sǎam",
           "fr": "trois",
           "en": "three",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_3.svg"
         },
         {
           "id": "w_4",
@@ -428,7 +451,8 @@
           "phonetic": "sìi",
           "fr": "quatre",
           "en": "four",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_4.svg"
         },
         {
           "id": "w_5",
@@ -436,7 +460,8 @@
           "phonetic": "hâa",
           "fr": "cinq",
           "en": "five",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_5.svg"
         },
         {
           "id": "w_pi",
@@ -444,7 +469,8 @@
           "phonetic": "pii",
           "fr": "année / ans",
           "en": "year / years",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_pi.svg"
         }
       ],
       "phrases": [
@@ -458,7 +484,8 @@
             "w_1",
             "w_pi"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_new_l3_1.svg"
         },
         {
           "id": "p_new_l3_2_pii",
@@ -470,7 +497,8 @@
             "w_2",
             "w_pi"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_new_l3_2_pii.svg"
         },
         {
           "id": "p_new_l3_3_pii",
@@ -482,7 +510,8 @@
             "w_3",
             "w_pi"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_new_l3_3_pii.svg"
         },
         {
           "id": "p_new_l3_4_pii",
@@ -494,7 +523,8 @@
             "w_4",
             "w_pi"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_new_l3_4_pii.svg"
         },
         {
           "id": "p_new_l3_5_pii",
@@ -506,7 +536,8 @@
             "w_5",
             "w_pi"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_new_l3_5_pii.svg"
         }
       ],
       "titleEn": "Numbers 0 to 5",
@@ -524,7 +555,8 @@
           "phonetic": "hòk",
           "fr": "six",
           "en": "six",
-          "allowIdenticalTranslation": true
+          "allowIdenticalTranslation": true,
+          "imageUrl": "/images/w_w_6.svg"
         },
         {
           "id": "w_7",
@@ -532,7 +564,8 @@
           "phonetic": "jèt",
           "fr": "sept",
           "en": "seven",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_7.svg"
         },
         {
           "id": "w_8",
@@ -540,7 +573,8 @@
           "phonetic": "bpàet",
           "fr": "huit",
           "en": "eight",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_8.svg"
         },
         {
           "id": "w_9",
@@ -548,7 +582,8 @@
           "phonetic": "kâao",
           "fr": "neuf",
           "en": "nine",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_9.svg"
         },
         {
           "id": "w_10",
@@ -556,7 +591,8 @@
           "phonetic": "sìp",
           "fr": "dix",
           "en": "ten",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_10.svg"
         }
       ],
       "phrases": [
@@ -570,7 +606,8 @@
             "w_6",
             "w_pi"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_6_years.svg"
         },
         {
           "id": "p_7_years",
@@ -582,7 +619,8 @@
             "w_7",
             "w_pi"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_7_years.svg"
         },
         {
           "id": "p_8_years",
@@ -594,7 +632,8 @@
             "w_8",
             "w_pi"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_8_years.svg"
         },
         {
           "id": "p_9_years",
@@ -606,7 +645,8 @@
             "w_9",
             "w_pi"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_9_years.svg"
         },
         {
           "id": "p_10_years",
@@ -618,11 +658,13 @@
             "w_10",
             "w_pi"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_10_years.svg"
         }
       ],
       "titleEn": "Numbers 6 to 10",
-      "descriptionEn": "Learn to count from 6 to 10"
+      "descriptionEn": "Learn to count from 6 to 10",
+      "imageUrl": "/images/l_nouveau_002.svg"
     },
     {
       "id": "l_nouveau_003",
@@ -635,7 +677,8 @@
           "phonetic": "duean",
           "fr": "mois",
           "en": "month",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_duean.svg"
         },
         {
           "id": "w_khrang",
@@ -643,7 +686,8 @@
           "phonetic": "khráng",
           "fr": "fois",
           "en": "time",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_khrang.svg"
         },
         {
           "id": "w_wan",
@@ -651,7 +695,8 @@
           "phonetic": "wan",
           "fr": "jour",
           "en": "day",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_wan.svg"
         },
         {
           "id": "w_sapdaa",
@@ -659,7 +704,8 @@
           "phonetic": "sàp-daa",
           "fr": "semaine",
           "en": "week",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_sapdaa.svg"
         },
         {
           "id": "w_thuk",
@@ -667,7 +713,8 @@
           "phonetic": "thúk",
           "fr": "chaque",
           "en": "every",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_thuk.svg"
         }
       ],
       "phrases": [
@@ -681,7 +728,8 @@
             "w_2",
             "w_duean"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_new_l3_2.svg"
         },
         {
           "id": "p_new_l3_3",
@@ -693,7 +741,8 @@
             "w_3",
             "w_khrang"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_new_l3_3.svg"
         },
         {
           "id": "p_new_l3_5",
@@ -705,7 +754,8 @@
             "w_5",
             "w_duean"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_new_l3_5.svg"
         },
         {
           "id": "p_sii_sapdaa",
@@ -717,7 +767,8 @@
             "w_4",
             "w_sapdaa"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_sii_sapdaa.svg"
         },
         {
           "id": "p_thuk_wan",
@@ -729,11 +780,13 @@
             "w_thuk",
             "w_wan"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_thuk_wan.svg"
         }
       ],
       "titleEn": "Duration and Frequency",
-      "descriptionEn": "Express the time and frequency of actions"
+      "descriptionEn": "Express the time and frequency of actions",
+      "imageUrl": "/images/l_nouveau_003.svg"
     },
     {
       "id": "lesson-3-quantities",
@@ -746,7 +799,8 @@
           "phonetic": "mii",
           "fr": "il y a / avoir",
           "en": "there is / have",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_mee.svg"
         },
         {
           "id": "w_gee",
@@ -754,7 +808,8 @@
           "phonetic": "kìi",
           "fr": "combien de",
           "en": "how many",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_gee.svg"
         },
         {
           "id": "w_khon",
@@ -762,7 +817,8 @@
           "phonetic": "khon",
           "fr": "personne (et classificateur)",
           "en": "person (and classifier)",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_khon.svg"
         },
         {
           "id": "w_phuean",
@@ -770,7 +826,8 @@
           "phonetic": "phûean",
           "fr": "ami",
           "en": "friend",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_phuean.svg"
         },
         {
           "id": "w_dek",
@@ -778,7 +835,8 @@
           "phonetic": "dèk",
           "fr": "enfant",
           "en": "child",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_dek.svg"
         }
       ],
       "phrases": [
@@ -793,7 +851,8 @@
             "w_gee",
             "w_khon"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_how_many_people.svg"
         },
         {
           "id": "p_five_people",
@@ -806,7 +865,8 @@
             "w_5",
             "w_khon"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_five_people.svg"
         },
         {
           "id": "p_four_people",
@@ -819,7 +879,8 @@
             "w_4",
             "w_khon"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_four_people.svg"
         },
         {
           "id": "p_how_many_friends",
@@ -834,7 +895,8 @@
             "w_gee",
             "w_khon"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_how_many_friends.svg"
         },
         {
           "id": "p_three_children",
@@ -848,7 +910,8 @@
             "w_3",
             "w_khon"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_three_children.svg"
         }
       ],
       "titleEn": "Quantities: People",
@@ -866,7 +929,8 @@
           "phonetic": "kâo-îi",
           "fr": "chaise",
           "en": "chair",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_gao_ee.svg"
         },
         {
           "id": "w_dtua",
@@ -874,7 +938,8 @@
           "phonetic": "dtua",
           "fr": "classificateur (objets/animaux)",
           "en": "classifier (objects/animals)",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_dtua.svg"
         },
         {
           "id": "w_dto",
@@ -882,7 +947,8 @@
           "phonetic": "dtó",
           "fr": "table",
           "en": "table",
-          "allowIdenticalTranslation": true
+          "allowIdenticalTranslation": true,
+          "imageUrl": "/images/w_w_dto.svg"
         },
         {
           "id": "w_krapao",
@@ -890,7 +956,8 @@
           "phonetic": "krà-pǎo",
           "fr": "sac",
           "en": "bag",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_krapao.svg"
         },
         {
           "id": "w_bai_class",
@@ -898,7 +965,8 @@
           "phonetic": "bai",
           "fr": "classificateur (sacs/contenants)",
           "en": "classifier (bags/containers)",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_bai_class.svg"
         }
       ],
       "phrases": [
@@ -914,7 +982,8 @@
             "w_gee",
             "w_dtua"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_how_many_chairs.svg"
         },
         {
           "id": "p_three_chairs",
@@ -928,7 +997,8 @@
             "w_3",
             "w_dtua"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_three_chairs.svg"
         },
         {
           "id": "p_two_tables",
@@ -942,7 +1012,8 @@
             "w_2",
             "w_dtua"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_two_tables.svg"
         },
         {
           "id": "p_how_many_bags",
@@ -956,7 +1027,8 @@
             "w_gee",
             "w_bai_class"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_how_many_bags.svg"
         },
         {
           "id": "p_four_bags",
@@ -970,11 +1042,13 @@
             "w_4",
             "w_bai_class"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_four_bags.svg"
         }
       ],
       "titleEn": "Quantities: Items",
-      "descriptionEn": "Use classifiers to count objects"
+      "descriptionEn": "Use classifiers to count objects",
+      "imageUrl": "/images/l_nouveau_004.svg"
     },
     {
       "id": "lesson-4",
@@ -987,7 +1061,8 @@
           "phonetic": "kin",
           "fr": "manger / boire (familier)",
           "en": "eat / drink (casual)",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_kin.svg"
         },
         {
           "id": "w_khao",
@@ -995,7 +1070,8 @@
           "phonetic": "khâao",
           "fr": "riz",
           "en": "rice",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_khao.svg"
         },
         {
           "id": "w_nam",
@@ -1003,7 +1079,8 @@
           "phonetic": "náam",
           "fr": "eau",
           "en": "water",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_nam.svg"
         },
         {
           "id": "w_mai_neg",
@@ -1011,7 +1088,8 @@
           "phonetic": "mâi",
           "fr": "ne pas",
           "en": "not",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_mai_neg.svg"
         },
         {
           "id": "w_ao",
@@ -1019,7 +1097,8 @@
           "phonetic": "ao",
           "fr": "vouloir / prendre",
           "en": "want / take",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_ao.svg"
         },
         {
           "id": "w_duem",
@@ -1041,7 +1120,8 @@
             "w_kin",
             "w_khao"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_eat_rice.svg"
         },
         {
           "id": "p_want_water",
@@ -1053,7 +1133,8 @@
             "w_ao",
             "w_nam"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_want_water.svg"
         },
         {
           "id": "p_not_want",
@@ -1065,7 +1146,8 @@
             "w_mai_neg",
             "w_ao"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_not_want.svg"
         },
         {
           "id": "p_drink_water_deum",
@@ -1077,7 +1159,8 @@
             "w_duem",
             "w_nam"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_drink_water_deum.svg"
         },
         {
           "id": "p_not_eat",
@@ -1089,7 +1172,8 @@
             "w_mai_neg",
             "w_kin"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_not_eat.svg"
         }
       ],
       "titleEn": "Food: At the restaurant",
@@ -1107,7 +1191,8 @@
           "phonetic": "kài",
           "fr": "poulet",
           "en": "chicken",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_kai.svg"
         },
         {
           "id": "w_mu",
@@ -1115,7 +1200,8 @@
           "phonetic": "mǔu",
           "fr": "porc",
           "en": "pork",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_mu.svg"
         },
         {
           "id": "w_khai_egg",
@@ -1123,7 +1209,8 @@
           "phonetic": "khài",
           "fr": "œuf",
           "en": "egg",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_khai_egg.svg"
         },
         {
           "id": "w_kho_req",
@@ -1131,7 +1218,8 @@
           "phonetic": "khǒo",
           "fr": "je voudrais",
           "en": "I would like",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_kho_req.svg"
         },
         {
           "id": "w_nuea",
@@ -1139,7 +1227,8 @@
           "phonetic": "núea",
           "fr": "viande (bœuf)",
           "en": "meat (beef)",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_nuea.svg"
         }
       ],
       "phrases": [
@@ -1153,7 +1242,8 @@
             "w_kin",
             "w_kai"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_new_l4_1.svg"
         },
         {
           "id": "p_new_l4_2",
@@ -1165,7 +1255,8 @@
             "w_ao",
             "w_khai_egg"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_new_l4_2.svg"
         },
         {
           "id": "p_new_l4_5",
@@ -1178,7 +1269,8 @@
             "w_kin",
             "w_mu"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_new_l4_5.svg"
         },
         {
           "id": "p_new_l4_6",
@@ -1190,7 +1282,8 @@
             "w_kho_req",
             "w_kai"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_new_l4_6.svg"
         },
         {
           "id": "p_new_l4_7",
@@ -1203,11 +1296,13 @@
             "w_nuea",
             "w_mai"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_new_l4_7.svg"
         }
       ],
       "titleEn": "Food 2: Meat and Eggs",
-      "descriptionEn": "Learn the vocabulary for meats and eggs"
+      "descriptionEn": "Learn the vocabulary for meats and eggs",
+      "imageUrl": "/images/l_nouveau_005.svg"
     },
     {
       "id": "l_nouveau_006",
@@ -1220,7 +1315,8 @@
           "phonetic": "à-rɔ̀i",
           "fr": "délicieux",
           "en": "delicious",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_aroi.svg"
         },
         {
           "id": "w_mak",
@@ -1228,7 +1324,8 @@
           "phonetic": "mâak",
           "fr": "très / beaucoup",
           "en": "very / a lot",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_mak.svg"
         },
         {
           "id": "w_phet",
@@ -1236,7 +1333,8 @@
           "phonetic": "phèt",
           "fr": "épicé",
           "en": "spicy",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_phet.svg"
         },
         {
           "id": "w_waan",
@@ -1244,7 +1342,8 @@
           "phonetic": "wǎan",
           "fr": "sucré",
           "en": "sweet",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_waan.svg"
         },
         {
           "id": "w_khem",
@@ -1252,7 +1351,8 @@
           "phonetic": "khem",
           "fr": "salé",
           "en": "salty",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_khem.svg"
         }
       ],
       "phrases": [
@@ -1266,7 +1366,8 @@
             "w_aroi",
             "w_mak"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_very_delicious.svg"
         },
         {
           "id": "p_not_spicy",
@@ -1278,7 +1379,8 @@
             "w_mai_neg",
             "w_phet"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_not_spicy.svg"
         },
         {
           "id": "p_spicy_m",
@@ -1291,7 +1393,8 @@
             "w_mak",
             "w_krap"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_spicy_m.svg"
         },
         {
           "id": "p_delicious_f",
@@ -1304,7 +1407,8 @@
             "w_mak",
             "w_kha"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_delicious_f.svg"
         },
         {
           "id": "p_pork_delicious",
@@ -1316,7 +1420,8 @@
             "w_mu",
             "w_aroi"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_pork_delicious.svg"
         },
         {
           "id": "p_spicy_chicken",
@@ -1328,7 +1433,8 @@
             "w_kai",
             "w_phet"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_spicy_chicken.svg"
         },
         {
           "id": "p_not_sweet",
@@ -1340,7 +1446,8 @@
             "w_mai_neg",
             "w_waan"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_not_sweet.svg"
         },
         {
           "id": "p_salty_meat",
@@ -1352,11 +1459,13 @@
             "w_nuea",
             "w_khem"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_salty_meat.svg"
         }
       ],
       "titleEn": "Food 3: Flavors and Appreciation",
-      "descriptionEn": "Express your tastes and appreciate food"
+      "descriptionEn": "Express your tastes and appreciate food",
+      "imageUrl": "/images/l_nouveau_006.svg"
     },
     {
       "id": "lesson-5",
@@ -1369,7 +1478,8 @@
           "phonetic": "khɔ̌ɔ thôot",
           "fr": "pardon / désolé",
           "en": "sorry / excuse me",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_kho_thot.svg"
         },
         {
           "id": "w_ka_ru_na",
@@ -1377,7 +1487,8 @@
           "phonetic": "kà-rú-naa",
           "fr": "s'il vous plaît (formel)",
           "en": "please (formal)",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_ka_ru_na.svg"
         },
         {
           "id": "w_chuai",
@@ -1385,7 +1496,8 @@
           "phonetic": "chûay",
           "fr": "aider",
           "en": "to help",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_chuai.svg"
         },
         {
           "id": "w_noi",
@@ -1393,7 +1505,8 @@
           "phonetic": "nɔ̀i",
           "fr": "un peu (pour adoucir une demande)",
           "en": "a bit (to soften a request)",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_noi.svg"
         },
         {
           "id": "w_daai",
@@ -1401,7 +1514,8 @@
           "phonetic": "dâai",
           "fr": "pouvoir / possible",
           "en": "can / able to",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_daai.svg"
         }
       ],
       "phrases": [
@@ -1415,7 +1529,8 @@
             "w_kho_thot",
             "w_krap"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_sorry_m.svg"
         },
         {
           "id": "p_sorry_f",
@@ -1427,7 +1542,8 @@
             "w_kho_thot",
             "w_kha"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_sorry_f.svg"
         },
         {
           "id": "p_help_a_bit",
@@ -1439,7 +1555,8 @@
             "w_chuai",
             "w_noi"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_help_a_bit.svg"
         },
         {
           "id": "p_please_help",
@@ -1452,7 +1569,8 @@
             "w_chuai",
             "w_noi"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_please_help.svg"
         },
         {
           "id": "p_cannot_help",
@@ -1465,7 +1583,8 @@
             "w_mai_neg",
             "w_daai"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_cannot_help.svg"
         }
       ],
       "titleEn": "Basics 3: Politeness and questions",
@@ -1483,7 +1602,8 @@
           "phonetic": "khâo jai",
           "fr": "comprendre",
           "en": "to understand",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_khao_jai.svg"
         },
         {
           "id": "w_phut",
@@ -1491,7 +1611,8 @@
           "phonetic": "phûut",
           "fr": "parler",
           "en": "to speak",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_phut.svg"
         },
         {
           "id": "w_khoi",
@@ -1499,7 +1620,8 @@
           "phonetic": "khòi",
           "fr": "assez / vraiment (souvent utilisé avec la négation pour 'pas très')",
           "en": "quite / really (often used with negation for 'not quite')",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_khoi.svg"
         },
         {
           "id": "w_cha_lent",
@@ -1507,7 +1629,8 @@
           "phonetic": "cháa",
           "fr": "lent / lentement",
           "en": "slow / slowly",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_cha_lent.svg"
         },
         {
           "id": "w_eek",
@@ -1515,7 +1638,8 @@
           "phonetic": "ìik",
           "fr": "encore / de nouveau",
           "en": "again / more",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_eek.svg"
         }
       ],
       "phrases": [
@@ -1529,7 +1653,8 @@
             "w_khao_jai",
             "w_mai"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_understand_q.svg"
         },
         {
           "id": "p_not_understand_well",
@@ -1542,7 +1667,8 @@
             "w_khoi",
             "w_khao_jai"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_not_understand_well.svg"
         },
         {
           "id": "p_speak_what",
@@ -1554,7 +1680,8 @@
             "w_phut",
             "w_arai"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_speak_what.svg"
         },
         {
           "id": "p_speak_slowly",
@@ -1568,7 +1695,8 @@
             "w_cha_lent",
             "w_noi"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_speak_slowly.svg"
         },
         {
           "id": "p_speak_again",
@@ -1583,11 +1711,13 @@
             "w_daai",
             "w_mai"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_speak_again.svg"
         }
       ],
       "titleEn": "Interactions 2: Comprehension",
-      "descriptionEn": "Check understanding and ask for clarification"
+      "descriptionEn": "Check understanding and ask for clarification",
+      "imageUrl": "/images/l_nouveau_007.svg"
     },
     {
       "id": "l_nouveau_008",
@@ -1600,7 +1730,8 @@
           "phonetic": "thîi-nîi",
           "fr": "ici",
           "en": "here",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_thi_ni.svg"
         },
         {
           "id": "w_nai",
@@ -1608,7 +1739,8 @@
           "phonetic": "nai",
           "fr": "dans",
           "en": "in",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_nai.svg"
         },
         {
           "id": "w_thi_nai",
@@ -1616,7 +1748,8 @@
           "phonetic": "thîi-nǎi",
           "fr": "où",
           "en": "where",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_thi_nai.svg"
         },
         {
           "id": "w_thi_nan",
@@ -1624,7 +1757,8 @@
           "phonetic": "thîi-nân",
           "fr": "là-bas",
           "en": "there",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_thi_nan.svg"
         },
         {
           "id": "w_bon",
@@ -1632,7 +1766,8 @@
           "phonetic": "bon",
           "fr": "sur",
           "en": "on",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_bon.svg"
         }
       ],
       "phrases": [
@@ -1645,7 +1780,8 @@
           "components": [
             "w_thi_nai"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_where_is_it.svg"
         },
         {
           "id": "p_speak_where",
@@ -1657,7 +1793,8 @@
             "w_phut",
             "w_thi_nai"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_speak_where.svg"
         },
         {
           "id": "p_in_bag",
@@ -1669,7 +1806,8 @@
             "w_nai",
             "w_krapao"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_in_bag.svg"
         },
         {
           "id": "p_on_table",
@@ -1681,7 +1819,8 @@
             "w_bon",
             "w_dto"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_on_table.svg"
         },
         {
           "id": "p_eat_here",
@@ -1693,11 +1832,13 @@
             "w_kin",
             "w_thi_ni"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_eat_here.svg"
         }
       ],
       "titleEn": "Space 1: Basic Location",
-      "descriptionEn": "Locate objects in space"
+      "descriptionEn": "Locate objects in space",
+      "imageUrl": "/images/l_nouveau_008.svg"
     },
     {
       "id": "lesson-6",
@@ -1710,7 +1851,8 @@
           "phonetic": "mâe",
           "fr": "mère",
           "en": "mother",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_mae.svg"
         },
         {
           "id": "w_pho",
@@ -1718,7 +1860,8 @@
           "phonetic": "phɔ̂ɔ",
           "fr": "père",
           "en": "father",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_pho.svg"
         },
         {
           "id": "w_phi",
@@ -1726,7 +1869,8 @@
           "phonetic": "phîi",
           "fr": "grand frère / grande sœur",
           "en": "big brother/big sister",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_phi.svg"
         },
         {
           "id": "w_nong",
@@ -1734,7 +1878,8 @@
           "phonetic": "nɔ́ɔng",
           "fr": "petit frère / petite sœur",
           "en": "little brother/little sister",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_nong.svg"
         },
         {
           "id": "w_khong_of",
@@ -1742,7 +1887,8 @@
           "phonetic": "khǒng",
           "fr": "de (appartenance)",
           "en": "of/belonging to",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_khong_of.svg"
         }
       ],
       "phrases": [
@@ -1758,7 +1904,8 @@
             "w_dee",
             "w_mai"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_dad_fine.svg"
         },
         {
           "id": "p_two_older_siblings",
@@ -1772,7 +1919,8 @@
             "w_2",
             "w_khon"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_two_older_siblings.svg"
         },
         {
           "id": "p_mom_name",
@@ -1785,7 +1933,8 @@
             "w_chue",
             "w_arai"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_mom_name.svg"
         },
         {
           "id": "p_my_younger_sibling",
@@ -1798,7 +1947,8 @@
             "w_khong_of",
             "w_phom"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_my_younger_sibling.svg"
         },
         {
           "id": "p_dad_has_three_younger_siblings",
@@ -1813,7 +1963,8 @@
             "w_3",
             "w_khon"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_dad_has_three_younger_siblings.svg"
         }
       ],
       "titleEn": "Subjects and Family",
@@ -1831,7 +1982,8 @@
           "phonetic": "khǎo",
           "fr": "il / elle",
           "en": "he / she",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_khao_pron.svg"
         },
         {
           "id": "w_rao",
@@ -1839,7 +1991,8 @@
           "phonetic": "rao",
           "fr": "nous",
           "en": "we",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_rao.svg"
         },
         {
           "id": "w_pai",
@@ -1847,7 +2000,8 @@
           "phonetic": "bpai",
           "fr": "aller",
           "en": "go",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_pai.svg"
         },
         {
           "id": "w_maa",
@@ -1855,7 +2009,8 @@
           "phonetic": "maa",
           "fr": "venir",
           "en": "come",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_maa.svg"
         },
         {
           "id": "w_man",
@@ -1863,7 +2018,8 @@
           "phonetic": "man",
           "fr": "il / elle (animal, objet)",
           "en": "it",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_man.svg"
         }
       ],
       "phrases": [
@@ -1878,7 +2034,8 @@
             "w_chue",
             "w_arai"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_he_name.svg"
         },
         {
           "id": "p_we_are_good",
@@ -1891,7 +2048,8 @@
             "w_sabai",
             "w_dee"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_we_are_good.svg"
         },
         {
           "id": "p_where_is_dad",
@@ -1904,7 +2062,8 @@
             "w_pai",
             "w_thi_nai"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_where_is_dad.svg"
         },
         {
           "id": "p_he_comes_here",
@@ -1917,7 +2076,8 @@
             "w_maa",
             "w_thi_ni"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_he_comes_here.svg"
         },
         {
           "id": "p_it_eats_chicken",
@@ -1930,11 +2090,13 @@
             "w_kin",
             "w_kai"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_it_eats_chicken.svg"
         }
       ],
       "titleEn": "Space 2: Getting Around and Pronouns",
-      "descriptionEn": "Talk about getting around and use pronouns"
+      "descriptionEn": "Talk about getting around and use pronouns",
+      "imageUrl": "/images/l_nouveau_009.svg"
     },
     {
       "id": "l_nouveau_010",
@@ -2075,7 +2237,8 @@
         }
       ],
       "titleEn": "Surroundings and Basic Actions",
-      "descriptionEn": "Describe your environment and common actions"
+      "descriptionEn": "Describe your environment and common actions",
+      "imageUrl": "/images/l_nouveau_010.svg"
     },
     {
       "id": "lesson-7",
@@ -2341,7 +2504,8 @@
         }
       ],
       "titleEn": "Getting Around and First Purchases",
-      "descriptionEn": "Getting around town to make purchases"
+      "descriptionEn": "Getting around town to make purchases",
+      "imageUrl": "/images/l_nouveau_011.svg"
     },
     {
       "id": "lesson-8",
@@ -2964,7 +3128,8 @@
           "phonetic": "fai",
           "fr": "feu / électricité",
           "en": "fire / electricity",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_fai.svg"
         },
         {
           "id": "w_khi",
@@ -2972,7 +3137,8 @@
           "phonetic": "khìi",
           "fr": "conduire (moto/vélo)",
           "en": "ride / drive (motorcycle/bicycle)",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_khi.svg"
         },
         {
           "id": "w_ha",
@@ -2980,7 +3146,8 @@
           "phonetic": "hǎa",
           "fr": "chercher",
           "en": "look for",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_ha.svg"
         },
         {
           "id": "w_phak_kon",
@@ -2988,7 +3155,8 @@
           "phonetic": "phák gɔ̀ɔn",
           "fr": "se reposer d'abord",
           "en": "rest first",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_phak_kon.svg"
         },
         {
           "id": "w_yim",
@@ -2996,7 +3164,8 @@
           "phonetic": "yím",
           "fr": "sourire",
           "en": "smile",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_yim.svg"
         }
       ],
       "phrases": [
@@ -3010,7 +3179,8 @@
             "w_khi",
             "w_rot"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_khi_rot.svg"
         },
         {
           "id": "p_ha_arai",
@@ -3022,7 +3192,8 @@
             "w_ha",
             "w_arai"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_ha_arai.svg"
         },
         {
           "id": "p_phak_kon_mai",
@@ -3034,7 +3205,8 @@
             "w_phak_kon",
             "w_mai"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_phak_kon_mai.svg"
         },
         {
           "id": "p_khao_yim",
@@ -3046,7 +3218,8 @@
             "w_khao_pron",
             "w_yim"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_khao_yim.svg"
         },
         {
           "id": "p_dek_ha_mae",
@@ -3059,11 +3232,13 @@
             "w_ha",
             "w_mae"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_dek_ha_mae.svg"
         }
       ],
       "titleEn": "Feelings and Ongoing Actions",
-      "descriptionEn": "Express emotions and what you are currently doing"
+      "descriptionEn": "Express emotions and what you are currently doing",
+      "imageUrl": "/images/l_nouveau_012.svg"
     },
     {
       "id": "lesson-13",
@@ -3076,7 +3251,8 @@
           "phonetic": "sáai",
           "fr": "gauche",
           "en": "left",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_sai.svg"
         },
         {
           "id": "w_khwa",
@@ -3084,7 +3260,8 @@
           "phonetic": "khwǎa",
           "fr": "droite",
           "en": "right",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_khwa.svg"
         },
         {
           "id": "w_trong",
@@ -3092,7 +3269,8 @@
           "phonetic": "dtrong",
           "fr": "tout droit / direct",
           "en": "straight / direct",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_trong.svg"
         },
         {
           "id": "w_liao",
@@ -3100,7 +3278,8 @@
           "phonetic": "líiao",
           "fr": "tourner",
           "en": "turn",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_liao.svg"
         },
         {
           "id": "w_glap",
@@ -3108,7 +3287,8 @@
           "phonetic": "glàp",
           "fr": "retourner / faire demi-tour",
           "en": "to return / to turn back",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_glap.svg"
         }
       ],
       "phrases": [
@@ -3122,7 +3302,8 @@
             "w_liao",
             "w_sai"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_turn_left.svg"
         },
         {
           "id": "p_turn_right",
@@ -3134,7 +3315,8 @@
             "w_liao",
             "w_khwa"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_turn_right.svg"
         },
         {
           "id": "p_go_straight",
@@ -3146,7 +3328,8 @@
             "w_trong",
             "w_pai"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_go_straight.svg"
         },
         {
           "id": "p_go_left",
@@ -3158,7 +3341,8 @@
             "w_pai",
             "w_sai"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_go_left.svg"
         },
         {
           "id": "p_go_right",
@@ -3170,7 +3354,8 @@
             "w_pai",
             "w_khwa"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_go_right.svg"
         },
         {
           "id": "p_go_straight_kha",
@@ -3183,7 +3368,8 @@
             "w_pai",
             "w_kha"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_go_straight_kha.svg"
         },
         {
           "id": "p_u_turn",
@@ -3195,7 +3381,8 @@
             "w_glap",
             "w_rot"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_u_turn.svg"
         },
         {
           "id": "p_turn_left_here",
@@ -3208,7 +3395,8 @@
             "w_sai",
             "w_thi_ni"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_turn_left_here.svg"
         }
       ],
       "titleEn": "Directions",
@@ -3226,7 +3414,8 @@
           "phonetic": "châi",
           "fr": "oui / exact",
           "en": "yes / correct",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_chai.svg"
         },
         {
           "id": "w_mai_chai",
@@ -3234,7 +3423,8 @@
           "phonetic": "mâi châi",
           "fr": "non / ce n'est pas",
           "en": "no / it's not",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_mai_chai.svg"
         },
         {
           "id": "w_nit_noi",
@@ -3242,7 +3432,8 @@
           "phonetic": "nít nòi",
           "fr": "un tout petit peu",
           "en": "a little bit",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_nit_noi.svg"
         },
         {
           "id": "w_nae_jai",
@@ -3250,7 +3441,8 @@
           "phonetic": "nâae jai",
           "fr": "sûr / certain",
           "en": "sure / certain",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_nae_jai.svg"
         },
         {
           "id": "w_aat_ja",
@@ -3258,7 +3450,8 @@
           "phonetic": "àat jà",
           "fr": "peut-être",
           "en": "maybe / perhaps",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_aat_ja.svg"
         }
       ],
       "phrases": [
@@ -3272,7 +3465,8 @@
             "w_chai",
             "w_krap"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_yes.svg"
         },
         {
           "id": "p_yes_f",
@@ -3284,7 +3478,8 @@
             "w_chai",
             "w_kha"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_yes_f.svg"
         },
         {
           "id": "p_no_m",
@@ -3296,7 +3491,8 @@
             "w_mai_chai",
             "w_krap"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_no_m.svg"
         },
         {
           "id": "p_no_f",
@@ -3308,7 +3504,8 @@
             "w_mai_chai",
             "w_kha"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_no_f.svg"
         },
         {
           "id": "p_speak_thai_little",
@@ -3321,7 +3518,8 @@
             "w_dai",
             "w_nit_noi"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_speak_thai_little.svg"
         },
         {
           "id": "p_not_sure_m",
@@ -3334,7 +3532,8 @@
             "w_nae_jai",
             "w_krap"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_not_sure_m.svg"
         },
         {
           "id": "p_not_sure_f",
@@ -3347,7 +3546,8 @@
             "w_nae_jai",
             "w_kha"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_not_sure_f.svg"
         },
         {
           "id": "p_maybe_yes",
@@ -3359,7 +3559,8 @@
             "w_aat_ja",
             "w_chai"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_maybe_yes.svg"
         }
       ],
       "titleEn": "Conversation Basics",
@@ -3505,7 +3706,8 @@
           "phonetic": "yài",
           "fr": "grand",
           "en": "big",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_yai.svg"
         },
         {
           "id": "w_lek",
@@ -3513,7 +3715,8 @@
           "phonetic": "lék",
           "fr": "petit",
           "en": "small",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_lek.svg"
         },
         {
           "id": "w_ron",
@@ -3521,7 +3724,8 @@
           "phonetic": "rɔ́ɔn",
           "fr": "chaud",
           "en": "hot",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_ron.svg"
         },
         {
           "id": "w_naow",
@@ -3529,7 +3733,8 @@
           "phonetic": "nǎao",
           "fr": "froid (météo/ressenti)",
           "en": "cold (weather/feeling)",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_naow.svg"
         },
         {
           "id": "w_yen_cold",
@@ -3537,7 +3742,8 @@
           "phonetic": "yen",
           "fr": "froid (objet/liquide)",
           "en": "cold (object/liquid)",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_yen_cold.svg"
         }
       ],
       "phrases": [
@@ -3551,7 +3757,8 @@
             "w_ron",
             "w_mak"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_very_hot.svg"
         },
         {
           "id": "p_not_big",
@@ -3563,7 +3770,8 @@
             "w_mai_neg",
             "w_yai"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_not_big.svg"
         },
         {
           "id": "p_cold_water",
@@ -3575,7 +3783,8 @@
             "w_nam",
             "w_yen_cold"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_cold_water.svg"
         },
         {
           "id": "p_small_car",
@@ -3587,7 +3796,8 @@
             "w_rot",
             "w_lek"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_small_car.svg"
         },
         {
           "id": "p_cold_m",
@@ -3599,7 +3809,8 @@
             "w_naow",
             "w_krap"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_cold_m.svg"
         }
       ],
       "titleEn": "Common Adjectives",
@@ -3745,7 +3956,8 @@
           "phonetic": "bâan",
           "fr": "maison",
           "en": "house",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_baan.svg"
         },
         {
           "id": "w_hong",
@@ -3753,7 +3965,8 @@
           "phonetic": "hɔ̂ng",
           "fr": "pièce / salle",
           "en": "room",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_hong.svg"
         },
         {
           "id": "w_non",
@@ -3761,7 +3974,8 @@
           "phonetic": "nɔɔn",
           "fr": "dormir",
           "en": "sleep",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_non.svg"
         },
         {
           "id": "w_hong_nam",
@@ -3769,7 +3983,8 @@
           "phonetic": "hɔ̂ng náam",
           "fr": "toilettes / salle de bain",
           "en": "toilet / bathroom",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_hong_nam.svg"
         },
         {
           "id": "w_tiang",
@@ -3777,7 +3992,8 @@
           "phonetic": "dtiiang",
           "fr": "lit",
           "en": "bed",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_tiang.svg"
         }
       ],
       "phrases": [
@@ -3791,7 +4007,8 @@
             "w_glap",
             "w_baan"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_return_home.svg"
         },
         {
           "id": "p_where_bathroom",
@@ -3804,7 +4021,8 @@
             "w_yuu",
             "w_thi_nai"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_where_bathroom.svg"
         },
         {
           "id": "p_sleep_room",
@@ -3816,7 +4034,8 @@
             "w_hong",
             "w_non"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_sleep_room.svg"
         },
         {
           "id": "p_want_sleep",
@@ -3828,7 +4047,8 @@
             "w_yak",
             "w_non"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_want_sleep.svg"
         },
         {
           "id": "p_sleep_on_bed",
@@ -3841,7 +4061,8 @@
             "w_bon",
             "w_tiang"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_sleep_on_bed.svg"
         }
       ],
       "titleEn": "Home & Daily",
@@ -3870,7 +4091,8 @@
           "phonetic": "bplaa",
           "fr": "poisson",
           "en": "fish",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_pla.svg"
         },
         {
           "id": "w_gung",
@@ -3878,7 +4100,8 @@
           "phonetic": "gûng",
           "fr": "crevette",
           "en": "shrimp",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_gung.svg"
         },
         {
           "id": "w_bpuu",
@@ -3886,7 +4109,8 @@
           "phonetic": "bpuu",
           "fr": "crabe",
           "en": "crab",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_bpuu.svg"
         },
         {
           "id": "w_bplaa_muek",
@@ -3894,7 +4118,8 @@
           "phonetic": "bplaa-mèuk",
           "fr": "calamar",
           "en": "squid",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_bplaa_muek.svg"
         },
         {
           "id": "w_bpet",
@@ -3902,7 +4127,8 @@
           "phonetic": "bpèt",
           "fr": "canard",
           "en": "duck",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_bpet.svg"
         }
       ],
       "phrases": [
@@ -3917,7 +4143,8 @@
             "w_kin",
             "w_pla"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_want_fish.svg"
         },
         {
           "id": "p_want_shrimp",
@@ -3930,7 +4157,8 @@
             "w_kin",
             "w_gung"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_want_shrimp.svg"
         },
         {
           "id": "p_want_beef",
@@ -3942,7 +4170,8 @@
             "w_ao",
             "w_nuea"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_want_beef.svg"
         },
         {
           "id": "p_not_eat_meat",
@@ -3955,7 +4184,8 @@
             "w_kin",
             "w_nuea"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_not_eat_meat.svg"
         },
         {
           "id": "p_like_duck",
@@ -3968,7 +4198,8 @@
             "w_kin",
             "w_bpet"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_like_duck.svg"
         },
         {
           "id": "p_spicy_squid",
@@ -3981,7 +4212,8 @@
             "w_phet",
             "w_mak"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_spicy_squid.svg"
         },
         {
           "id": "p_request_crab",
@@ -3994,7 +4226,8 @@
             "w_bpuu",
             "w_noi"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_request_crab.svg"
         }
       ],
       "titleEn": "On the Menu: Meats",
@@ -4012,7 +4245,8 @@
           "phonetic": "kaa-fae",
           "fr": "café",
           "en": "coffee",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_kafae.svg"
         },
         {
           "id": "w_cha",
@@ -4020,7 +4254,8 @@
           "phonetic": "chaa",
           "fr": "thé",
           "en": "tea",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_cha.svg"
         },
         {
           "id": "w_bia",
@@ -4028,7 +4263,8 @@
           "phonetic": "bia",
           "fr": "bière",
           "en": "beer",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_bia.svg"
         },
         {
           "id": "w_kap",
@@ -4036,7 +4272,8 @@
           "phonetic": "kàp",
           "fr": "avec / et",
           "en": "with / and",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_kap.svg"
         },
         {
           "id": "w_nom",
@@ -4044,7 +4281,8 @@
           "phonetic": "nom",
           "fr": "lait",
           "en": "milk",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_nom.svg"
         }
       ],
       "phrases": [
@@ -4059,7 +4297,8 @@
             "w_kafae",
             "w_krap"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_want_coffee_m.svg"
         },
         {
           "id": "p_want_tea_f",
@@ -4072,7 +4311,8 @@
             "w_cha",
             "w_kha"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_want_tea_f.svg"
         },
         {
           "id": "p_drink_beer",
@@ -4084,7 +4324,8 @@
             "w_duem",
             "w_bia"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_drink_beer.svg"
         },
         {
           "id": "p_no_beer",
@@ -4097,7 +4338,8 @@
             "w_duem",
             "w_bia"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_no_beer.svg"
         },
         {
           "id": "p_coffee_water",
@@ -4110,7 +4352,8 @@
             "w_kap",
             "w_nam"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_coffee_water.svg"
         },
         {
           "id": "p_tea_with_milk",
@@ -4123,7 +4366,8 @@
             "w_kap",
             "w_nom"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_tea_with_milk.svg"
         },
         {
           "id": "p_hot_coffee",
@@ -4135,7 +4379,8 @@
             "w_kafae",
             "w_ron"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_hot_coffee.svg"
         }
       ],
       "titleEn": "Drinks and Thirst",
@@ -4160,7 +4405,8 @@
           "th": "น้ำตาล",
           "fr": "sucre",
           "en": "sugar",
-          "phonetic": "nám-dtan"
+          "phonetic": "nám-dtan",
+          "imageUrl": "/images/w_w_waan_sucre.svg"
         },
         {
           "id": "w_lesson-24-a3_4",
@@ -4256,7 +4502,8 @@
           "phonetic": "gèp ngoen",
           "fr": "l'addition",
           "en": "the bill",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_gep_ngoen.svg"
         },
         {
           "id": "w_im",
@@ -4264,7 +4511,8 @@
           "phonetic": "ìm",
           "fr": "rassasié / plein",
           "en": "satisfied / full",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_im.svg"
         },
         {
           "id": "w_duay",
@@ -4272,7 +4520,8 @@
           "phonetic": "dûay",
           "fr": "aussi / s'il vous plaît",
           "en": "also / please",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_duay.svg"
         },
         {
           "id": "w_sang",
@@ -4280,7 +4529,8 @@
           "phonetic": "sàng",
           "fr": "commander",
           "en": "to order",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_sang.svg"
         },
         {
           "id": "w_menu",
@@ -4288,7 +4538,8 @@
           "phonetic": "me-nu",
           "fr": "menu",
           "en": "menu",
-          "allowIdenticalTranslation": true
+          "allowIdenticalTranslation": true,
+          "imageUrl": "/images/w_w_menu.svg"
         }
       ],
       "phrases": [
@@ -4303,7 +4554,8 @@
             "w_duay",
             "w_krap"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_bill_please.svg"
         },
         {
           "id": "p_full_f",
@@ -4316,7 +4568,8 @@
             "w_laew",
             "w_kha"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_full_f.svg"
         },
         {
           "id": "p_menu_please",
@@ -4329,7 +4582,8 @@
             "w_menu",
             "w_duay"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_menu_please.svg"
         },
         {
           "id": "p_want_order_what",
@@ -4342,7 +4596,8 @@
             "w_sang",
             "w_arai"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_want_order_what.svg"
         },
         {
           "id": "p_order_pork",
@@ -4355,7 +4610,8 @@
             "w_mu",
             "w_krap"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_order_pork.svg"
         }
       ],
       "titleEn": "The Service",
@@ -4375,7 +4631,8 @@
           "phonetic": "aép-pən",
           "fr": "pomme",
           "en": "apple",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_lesson-24-a1_0.svg"
         },
         {
           "id": "w_lesson-24-a1_1",
@@ -4383,7 +4640,8 @@
           "phonetic": "klûay",
           "fr": "banane",
           "en": "banana",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_lesson-24-a1_1.svg"
         },
         {
           "id": "w_lesson-24-a1_2",
@@ -4391,7 +4649,8 @@
           "phonetic": "sôm",
           "fr": "orange",
           "en": "orange",
-          "allowIdenticalTranslation": true
+          "allowIdenticalTranslation": true,
+          "imageUrl": "/images/w_w_lesson-24-a1_2.svg"
         },
         {
           "id": "w_lesson-24-a1_3",
@@ -4399,7 +4658,8 @@
           "phonetic": "má-mûang",
           "fr": "mangue",
           "en": "mango",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_lesson-24-a1_3.svg"
         },
         {
           "id": "w_lesson-24-a1_4",
@@ -4407,7 +4667,8 @@
           "phonetic": "taeng-moo",
           "fr": "pastèque",
           "en": "watermelon",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_lesson-24-a1_4.svg"
         }
       ],
       "phrases": [
@@ -4421,7 +4682,8 @@
             "w_kin",
             "w_lesson-24-a1_0"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_lesson-24-a1_0.svg"
         },
         {
           "id": "p_lesson-24-a1_1",
@@ -4433,7 +4695,8 @@
             "w_ao",
             "w_lesson-24-a1_2"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_lesson-24-a1_1.svg"
         },
         {
           "id": "p_lesson-24-a1_2",
@@ -4445,7 +4708,8 @@
             "w_lesson-24-a1_1",
             "w_aroi"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_lesson-24-a1_2.svg"
         },
         {
           "id": "p_lesson-24-a1_3",
@@ -4458,7 +4722,8 @@
             "w_waan",
             "w_mak"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_lesson-24-a1_3.svg"
         },
         {
           "id": "p_lesson-24-a1_4",
@@ -4471,7 +4736,8 @@
             "w_sue",
             "w_lesson-24-a1_3"
           ],
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/p_p_lesson-24-a1_4.svg"
         }
       ],
       "imageUrl": "/images/default-lesson.svg"
@@ -8768,7 +9034,8 @@
             "w_dtua",
             "w_sung",
             "w_mak"
-          ]
+          ],
+          "imageUrl": "/images/p_p_2c7f76.svg"
         }
       ],
       "titleEn": "Physical appearance",
