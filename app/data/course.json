@@ -152,7 +152,8 @@
           "phonetic": "phǒm",
           "fr": "je (homme)",
           "en": "I (man)",
-          "allowIdenticalTranslation": false
+          "allowIdenticalTranslation": false,
+          "imageUrl": "/images/w_w_phom.svg"
         },
         {
           "id": "w_chan",
