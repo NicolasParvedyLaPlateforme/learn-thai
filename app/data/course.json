@@ -3195,8 +3195,8 @@
           "id": "p_khi_rot",
           "th": "ขี่รถ",
           "phonetic": "khìi rót",
-          "fr": "conduire une moto",
-          "en": "ride a motorcycle",
+          "fr": "Monter/conduire un véhicule",
+          "en": "ride a vehicle",
           "components": [
             "w_khi",
             "w_rot"
@@ -7375,87 +7375,137 @@
     },
     {
       "id": "lesson-35",
-      "title": "Lieux 1",
+      "title": "Lieux urbains 1 : École, Hôtel et Marché",
       "description": "Hôtel, école",
       "words": [
         {
           "id": "w_rong_raem",
           "th": "โรงแรม",
-          "fr": "hôtel",
           "phonetic": "roong-raem",
+          "fr": "hôtel",
           "en": "hotel",
-          "imageUrl": "/images/w_w_rong_raem.svg"
+          "allowIdenticalTranslation": false
         },
         {
           "id": "w_rong_rian",
           "th": "โรงเรียน",
-          "fr": "école",
           "phonetic": "roong-riian",
+          "fr": "école",
           "en": "school",
-          "imageUrl": "/images/w_w_rong_rian.svg"
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_talat",
+          "th": "ตลาด",
+          "phonetic": "dtà-làat",
+          "fr": "marché",
+          "en": "market",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_thanaakhaan",
+          "th": "ธนาคาร",
+          "phonetic": "thá-naa-khaan",
+          "fr": "banque",
+          "en": "bank",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_raan",
+          "th": "ร้าน",
+          "phonetic": "ráan",
+          "fr": "magasin / boutique",
+          "en": "shop / store",
+          "allowIdenticalTranslation": false
         }
       ],
       "phrases": [
         {
           "id": "p_where_hotel",
           "th": "โรงแรมอยู่ที่ไหน",
-          "fr": "où est l'hôtel ?",
           "phonetic": "roong-raem yùu thîi nǎi",
+          "fr": "Où est l'hôtel ?",
+          "en": "Where is the hotel?",
           "components": [
             "w_rong_raem",
             "w_yuu",
             "w_thi_nai"
           ],
-          "en": "where is the hotel?",
-          "imageUrl": "/images/p_p_where_hotel.svg"
+          "allowIdenticalTranslation": false
         },
         {
           "id": "p_go_school",
           "th": "ไปโรงเรียน",
-          "fr": "aller à l'école",
           "phonetic": "bpai roong-rian",
+          "fr": "Aller à l'école",
+          "en": "Go to school",
           "components": [
             "w_pai",
             "w_rong_rian"
           ],
-          "en": "go to school",
-          "imageUrl": "/images/p_p_go_school.svg"
+          "allowIdenticalTranslation": false
         },
         {
           "id": "p_school_big",
           "th": "โรงเรียนใหญ่",
-          "fr": "grande école",
           "phonetic": "roong-rian yài",
+          "fr": "Grande école",
+          "en": "Big school",
           "components": [
             "w_rong_rian",
             "w_yai"
           ],
-          "en": "big school",
-          "imageUrl": "/images/p_p_school_big.svg"
+          "allowIdenticalTranslation": false
         },
         {
           "id": "p_hotel_good",
           "th": "โรงแรมดี",
-          "fr": "bon hôtel",
           "phonetic": "roong-raem dii",
+          "fr": "Bon hôtel",
+          "en": "Good hotel",
           "components": [
             "w_rong_raem",
             "w_dee"
           ],
-          "en": "good hotel",
-          "imageUrl": "/images/p_p_hotel_good.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_which_hotel",
-          "th": "โรงแรมอะไร",
-          "fr": "quel hôtel ?",
-          "phonetic": "roong-raem à-rai",
+          "id": "p_go_market",
+          "th": "ไปตลาด",
+          "phonetic": "bpai dtà-làat",
+          "fr": "Aller au marché",
+          "en": "Go to the market",
           "components": [
-            "w_rong_raem",
-            "w_arai"
+            "w_pai",
+            "w_talat"
           ],
-          "en": "which hotel?",
-          "imageUrl": "/images/p_p_which_hotel.svg"
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_where_bank",
+          "th": "ธนาคารอยู่ที่ไหน",
+          "phonetic": "thá-naa-khaan yùu thîi nǎi",
+          "fr": "Où est la banque ?",
+          "en": "Where is the bank?",
+          "components": [
+            "w_thanaakhaan",
+            "w_yuu",
+            "w_thi_nai"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_shop_expensive",
+          "th": "ร้านนี้แพง",
+          "phonetic": "ráan níi phaeng",
+          "fr": "Ce magasin est cher",
+          "en": "This shop is expensive",
+          "components": [
+            "w_raan",
+            "w_nii_this",
+            "w_phaeng"
+          ],
+          "allowIdenticalTranslation": false
         }
       ],
       "titleEn": "Places 1",
@@ -7464,103 +7514,112 @@
     },
     {
       "id": "lesson-36",
-      "title": "Lieux 2",
+      "title": "Lieux urbains 2 : Rues et Parcs",
       "description": "Marché, rue",
       "words": [
         {
-          "id": "w_talat",
-          "th": "ตลาด",
-          "fr": "marché",
-          "phonetic": "dtà-làat",
-          "en": "market",
-          "imageUrl": "/images/w_w_talat.svg"
-        },
-        {
           "id": "w_thanon",
           "th": "ถนน",
-          "fr": "rue",
           "phonetic": "thà-nǒn",
-          "en": "Street",
-          "imageUrl": "/images/w_w_thanon.svg"
+          "fr": "rue",
+          "en": "street",
+          "allowIdenticalTranslation": false
         },
         {
           "id": "w_suan",
           "th": "สวน",
-          "fr": "parc",
           "phonetic": "sǔuan",
+          "fr": "parc",
           "en": "park",
-          "imageUrl": "/images/w_w_suan.svg"
+          "allowIdenticalTranslation": false
         },
         {
           "id": "w_suay",
           "th": "สวย",
-          "fr": "beau / joli",
           "phonetic": "sǔuay",
-          "en": "beautiful / pretty",
-          "imageUrl": "/images/w_w_suay.svg"
+          "fr": "beau",
+          "en": "beautiful",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_ton_mai",
+          "th": "ต้นไม้",
+          "phonetic": "dtôn-mái",
+          "fr": "arbre",
+          "en": "tree",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_saphan",
+          "th": "สะพาน",
+          "phonetic": "sà-phaan",
+          "fr": "pont",
+          "en": "bridge",
+          "allowIdenticalTranslation": false
         }
       ],
       "phrases": [
         {
-          "id": "p_go_market",
-          "th": "ไปตลาด",
-          "fr": "aller au marché",
-          "phonetic": "bpai dtà-làat",
-          "components": [
-            "w_pai",
-            "w_talat"
-          ],
-          "en": "go to the market",
-          "imageUrl": "/images/p_p_go_market.svg"
-        },
-        {
-          "id": "p_big_market",
-          "th": "ตลาดใหญ่",
-          "fr": "grand marché",
-          "phonetic": "dtà-làat yài",
-          "components": [
-            "w_talat",
-            "w_yai"
-          ],
-          "en": "big market",
-          "imageUrl": "/images/p_p_big_market.svg"
-        },
-        {
           "id": "p_park_beautiful",
           "th": "สวนสวย",
-          "fr": "beau parc",
           "phonetic": "sǔuan sǔuay",
+          "fr": "beau parc",
+          "en": "beautiful park",
           "components": [
             "w_suan",
             "w_suay"
           ],
-          "en": "beautiful park",
-          "imageUrl": "/images/p_p_park_beautiful.svg"
+          "allowIdenticalTranslation": false
         },
         {
           "id": "p_where_street",
           "th": "ถนนอยู่ที่ไหน",
+          "phonetic": "thà-nǒn yùu thîi-nǎi",
           "fr": "où est la rue ?",
-          "phonetic": "thà-nǒn thîi nǎi",
+          "en": "where is the street?",
           "components": [
             "w_thanon",
             "w_yuu",
             "w_thi_nai"
           ],
-          "en": "where is the street?",
-          "imageUrl": "/images/p_p_where_street.svg"
+          "allowIdenticalTranslation": false
         },
         {
           "id": "p_go_park",
           "th": "ไปสวน",
-          "fr": "aller au parc",
           "phonetic": "bpai sǔuan",
+          "fr": "aller au parc",
+          "en": "go to the park",
           "components": [
             "w_pai",
             "w_suan"
           ],
-          "en": "go to the park",
-          "imageUrl": "/images/p_p_go_park.svg"
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_big_tree",
+          "th": "ต้นไม้ใหญ่",
+          "phonetic": "dtôn-mái yài",
+          "fr": "grand arbre",
+          "en": "big tree",
+          "components": [
+            "w_ton_mai",
+            "w_yai"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_walk_on_bridge",
+          "th": "เดินบนสะพาน",
+          "phonetic": "doen bon sà-phaan",
+          "fr": "marcher sur le pont",
+          "en": "walk on the bridge",
+          "components": [
+            "w_doen",
+            "w_bon",
+            "w_saphan"
+          ],
+          "allowIdenticalTranslation": false
         }
       ],
       "titleEn": "Locations 2",
@@ -7569,96 +7628,111 @@
     },
     {
       "id": "lesson-37",
-      "title": "Transports en commun",
+      "title": "Transports 1 : Bus et Bateaux",
       "description": "Bus, bateau",
       "words": [
         {
           "id": "w_rot_me",
           "th": "รถเมล์",
-          "fr": "bus",
           "phonetic": "rót-mee",
+          "fr": "bus",
           "en": "bus",
-          "imageUrl": "/images/w_w_rot_me.svg",
           "allowIdenticalTranslation": true
         },
         {
           "id": "w_ruea",
           "th": "เรือ",
-          "fr": "bateau",
           "phonetic": "ruea",
+          "fr": "bateau",
           "en": "boat",
-          "imageUrl": "/images/w_w_ruea.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "w_nang_v",
+          "id": "w_nang_transport",
           "th": "นั่ง",
-          "fr": "s'asseoir / prendre (bus)",
           "phonetic": "nâng",
-          "en": "sit / take (bus)",
-          "imageUrl": "/images/w_w_nang_v.svg"
+          "fr": "s'asseoir / prendre (un transport)",
+          "en": "sit / take (transport)",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_tua",
+          "th": "ตั๋ว",
+          "phonetic": "dtǔua",
+          "fr": "billet / ticket",
+          "en": "ticket",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_tha_ruea",
+          "th": "ท่าเรือ",
+          "phonetic": "thâa-ruea",
+          "fr": "embarcadère / quai",
+          "en": "pier / port",
+          "allowIdenticalTranslation": false
         }
       ],
       "phrases": [
         {
           "id": "p_take_bus",
           "th": "นั่งรถเมล์",
-          "fr": "prendre le bus",
           "phonetic": "nâng rót-mee",
+          "fr": "prendre le bus",
+          "en": "take the bus",
           "components": [
-            "w_nang_v",
+            "w_nang_transport",
             "w_rot_me"
           ],
-          "en": "take the bus",
-          "imageUrl": "/images/p_p_take_bus.svg"
+          "allowIdenticalTranslation": false
         },
         {
           "id": "p_take_boat",
           "th": "นั่งเรือ",
-          "fr": "prendre un bateau",
           "phonetic": "nâng ruea",
+          "fr": "prendre un bateau",
+          "en": "take a boat",
           "components": [
-            "w_nang_v",
+            "w_nang_transport",
             "w_ruea"
           ],
-          "en": "take a boat",
-          "imageUrl": "/images/p_p_take_boat.svg"
+          "allowIdenticalTranslation": false
         },
         {
           "id": "p_where_bus",
           "th": "รถเมล์อยู่ที่ไหน",
+          "phonetic": "rót-mee yûu thîi nǎi",
           "fr": "où est le bus ?",
-          "phonetic": "rót-mee thîi nǎi",
+          "en": "where is the bus?",
           "components": [
             "w_rot_me",
             "w_yuu",
             "w_thi_nai"
           ],
-          "en": "where is the bus?",
-          "imageUrl": "/images/p_p_where_bus.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_sit_here",
-          "th": "นั่งที่นี่",
-          "fr": "s'asseoir ici",
-          "phonetic": "nâng thîi nîi",
+          "id": "p_buy_ticket",
+          "th": "ซื้อตั๋ว",
+          "phonetic": "súue dtǔua",
+          "fr": "acheter un billet",
+          "en": "buy a ticket",
           "components": [
-            "w_nang_v",
-            "w_thi_ni"
+            "w_sue",
+            "w_tua"
           ],
-          "en": "sit here",
-          "imageUrl": "/images/p_p_sit_here.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_boat_big",
-          "th": "เรือใหญ่",
-          "fr": "grand bateau",
-          "phonetic": "ruea yài",
+          "id": "p_go_pier",
+          "th": "ไปท่าเรือ",
+          "phonetic": "pai thâa-ruea",
+          "fr": "aller à l'embarcadère",
+          "en": "go to the pier",
           "components": [
-            "w_ruea",
-            "w_yai"
+            "w_pai",
+            "w_tha_ruea"
           ],
-          "en": "big boat",
-          "imageUrl": "/images/p_p_boat_big.svg"
+          "allowIdenticalTranslation": false
         }
       ],
       "titleEn": "Public transport",
@@ -7667,94 +7741,137 @@
     },
     {
       "id": "lesson-38",
-      "title": "Aviation",
+      "title": "Transports 2 : L'Aviation",
       "description": "Avion, voler",
       "words": [
         {
           "id": "w_kruang_bin",
           "th": "เครื่องบิน",
-          "fr": "avion",
           "phonetic": "khrûeang-bin",
+          "fr": "avion",
           "en": "plane",
-          "imageUrl": "/images/w_w_kruang_bin.svg"
+          "allowIdenticalTranslation": false
         },
         {
           "id": "w_bin",
           "th": "บิน",
-          "fr": "voler",
           "phonetic": "bin",
+          "fr": "voler",
           "en": "fly",
-          "imageUrl": "/images/w_w_bin.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "w_tua",
-          "th": "ตั๋ว",
-          "fr": "billet / ticket",
-          "phonetic": "dtǔua",
-          "en": "ticket / ticket",
-          "imageUrl": "/images/w_w_tua.svg"
+          "id": "w_phu_doi_san",
+          "th": "ผู้โดยสาร",
+          "phonetic": "phûu-dooi-sǎan",
+          "fr": "passager",
+          "en": "passenger",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_thiao_bin",
+          "th": "เที่ยวบิน",
+          "phonetic": "thîiao-bin",
+          "fr": "vol (trajet)",
+          "en": "flight",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_phat_sa_pot",
+          "th": "พาสปอร์ต",
+          "phonetic": "phâat-sà-bpòot",
+          "fr": "passeport",
+          "en": "passport",
+          "allowIdenticalTranslation": false
         }
       ],
       "phrases": [
         {
           "id": "p_plane_ticket",
           "th": "ตั๋วเครื่องบิน",
-          "fr": "billet d'avion",
           "phonetic": "dtǔua khrûeang-bin",
+          "fr": "billet d'avion",
+          "en": "plane ticket",
           "components": [
             "w_tua",
             "w_kruang_bin"
           ],
-          "en": "plane ticket",
-          "imageUrl": "/images/p_p_plane_ticket.svg"
+          "allowIdenticalTranslation": false
         },
         {
           "id": "p_fly_airplane",
           "th": "บินไป",
-          "fr": "s'envoler",
           "phonetic": "bin bpai",
+          "fr": "s'envoler",
+          "en": "fly away",
           "components": [
             "w_bin",
             "w_pai"
           ],
-          "en": "fly away",
-          "imageUrl": "/images/p_p_fly_airplane.svg"
-        },
-        {
-          "id": "p_buy_ticket",
-          "th": "ซื้อตั๋ว",
-          "fr": "acheter un billet",
-          "phonetic": "súue dtǔua",
-          "components": [
-            "w_sue",
-            "w_tua"
-          ],
-          "en": "buy a ticket",
-          "imageUrl": "/images/p_p_buy_ticket.svg"
+          "allowIdenticalTranslation": false
         },
         {
           "id": "p_ticket_expensive",
           "th": "ตั๋วแพง",
-          "fr": "le billet est cher",
           "phonetic": "dtǔua phaeng",
+          "fr": "le billet est cher",
+          "en": "the ticket is expensive",
           "components": [
             "w_tua",
             "w_phaeng"
           ],
-          "en": "the ticket is expensive",
-          "imageUrl": "/images/p_p_ticket_expensive.svg"
+          "allowIdenticalTranslation": false
         },
         {
           "id": "p_airplane_big",
           "th": "เครื่องบินใหญ่",
-          "fr": "grand avion",
           "phonetic": "khrûeang-bin yài",
+          "fr": "grand avion",
+          "en": "large plane",
           "components": [
             "w_kruang_bin",
             "w_yai"
           ],
-          "en": "large plane",
-          "imageUrl": "/images/p_p_airplane_big.svg"
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_passenger_wait_plane",
+          "th": "ผู้โดยสารรอเครื่องบิน",
+          "phonetic": "phûu-dooi-sǎan roo khrûeang-bin",
+          "fr": "le passager attend l'avion",
+          "en": "the passenger waits for the plane",
+          "components": [
+            "w_phu_doi_san",
+            "w_ro",
+            "w_kruang_bin"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_flight_expensive",
+          "th": "เที่ยวบินนี้แพง",
+          "phonetic": "thîiao-bin níi phaeng",
+          "fr": "ce vol est cher",
+          "en": "this flight is expensive",
+          "components": [
+            "w_thiao_bin",
+            "w_nii_this",
+            "w_phaeng"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_passport_where",
+          "th": "พาสปอร์ตอยู่ที่ไหน",
+          "phonetic": "phâat-sà-bpòot yùu thîi-nǎi",
+          "fr": "où est le passeport ?",
+          "en": "where is the passport?",
+          "components": [
+            "w_phat_sa_pot",
+            "w_yuu",
+            "w_thi_nai"
+          ],
+          "allowIdenticalTranslation": false
         }
       ],
       "titleEn": "Aviation",
@@ -7763,19 +7880,11 @@
     },
     {
       "id": "lesson-39-a1",
-      "title": "Ext: Bâtiments",
+      "title": "Bâtiments Publics",
       "description": "Plus de vocabulaire pour cette unité.",
-      "titleEn": "Ext: Buildings",
+      "titleEn": "Buildings",
       "descriptionEn": "More vocabulary for this unit.",
       "words": [
-        {
-          "id": "w_lesson-39-a1_0",
-          "th": "ธนาคาร",
-          "fr": "banque",
-          "en": "bank",
-          "phonetic": "thá-naa-khaan",
-          "imageUrl": "/images/w_w_lesson-39-a1_0.svg"
-        },
         {
           "id": "w_lesson-39-a1_2",
           "th": "สถานีตำรวจ",
@@ -7819,7 +7928,7 @@
           "phonetic": "bpai thá-naa-khaan",
           "components": [
             "w_pai",
-            "w_lesson-39-a1_0"
+            "w_thanaakhaan"
           ],
           "imageUrl": "/images/p_p_new_lesson-39-a1_0.svg"
         },
@@ -7868,7 +7977,7 @@
           "phonetic": "yùu thá-naa-khaan",
           "components": [
             "w_yuu",
-            "w_lesson-39-a1_0"
+            "w_thanaakhaan"
           ],
           "imageUrl": "/images/p_p_new_lesson-39-a1_4.svg"
         }
@@ -7877,9 +7986,9 @@
     },
     {
       "id": "lesson-39-a2",
-      "title": "Ext: Directions",
+      "title": "Points Cardinaux",
       "description": "Plus de vocabulaire pour cette unité.",
-      "titleEn": "Ext: Directions",
+      "titleEn": "Directions",
       "descriptionEn": "More vocabulary for this unit.",
       "words": [
         {
@@ -7989,223 +8098,381 @@
     },
     {
       "id": "lesson-39-a3",
-      "title": "Ext: Voyage",
+      "title": "La Gare et les Billets",
       "description": "Plus de vocabulaire pour cette unité.",
-      "titleEn": "Ext: Travel",
+      "titleEn": "Travel",
       "descriptionEn": "More vocabulary for this unit.",
       "words": [
         {
-          "id": "w_lesson-39-a3_0",
-          "th": "ตั๋ว",
-          "fr": "billet",
-          "en": "ticket",
-          "phonetic": "dtǔa",
-          "imageUrl": "/images/w_w_lesson-39-a3_0.svg"
-        },
-        {
-          "id": "w_lesson-39-a3_2",
+          "id": "w_map",
           "th": "แผนที่",
-          "fr": "carte (paiement)",
-          "en": "map",
           "phonetic": "phǎen-thîi",
-          "imageUrl": "/images/w_w_lesson-39-a3_2.svg"
+          "fr": "carte (voyage)",
+          "en": "map",
+          "allowIdenticalTranslation": false
         },
         {
+          "id": "w_which",
           "th": "ไหน",
-          "en": "which/where",
-          "id": "w_nai_which",
-          "fr": "quel / où",
           "phonetic": "nǎi",
-          "imageUrl": "/images/w_w_nai_which.svg"
+          "fr": "quel",
+          "en": "which",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_platform",
+          "th": "ชานชาลา",
+          "phonetic": "chaan-chaa-laa",
+          "fr": "quai",
+          "en": "platform",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_board",
+          "th": "ขึ้น",
+          "phonetic": "khʉ̂n",
+          "fr": "monter",
+          "en": "to board",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_get_off",
+          "th": "ลง",
+          "phonetic": "long",
+          "fr": "descendre",
+          "en": "to get off",
+          "allowIdenticalTranslation": false
         }
       ],
       "phrases": [
         {
-          "id": "p_new_lesson-39-a3_1",
-          "th": "สถานีรถไฟ",
-          "fr": "Gare féroviaire",
-          "en": "Train station",
-          "phonetic": "sà-thǎa-nii rót-fai",
-          "components": [
-            "w_sathannee",
-            "w_rot_fai"
-          ],
-          "imageUrl": "/images/p_p_new_lesson-39-a3_1.svg"
-        },
-        {
-          "id": "p_new_lesson-39-a3_2",
+          "id": "p_look_map",
           "th": "ดูแผนที่",
+          "phonetic": "duu phǎen-thîi",
           "fr": "Regarder la carte",
           "en": "Look at map",
-          "phonetic": "duu phǎen-thîi",
           "components": [
             "w_du",
-            "w_lesson-39-a3_2"
+            "w_map"
           ],
-          "imageUrl": "/images/p_p_new_lesson-39-a3_2.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_new_lesson-39-a3_3",
+          "id": "p_two_tickets",
           "th": "ตั๋วสองใบ",
+          "phonetic": "tǔa sǒong bai",
           "fr": "Deux billets",
           "en": "Two tickets",
-          "phonetic": "tǔa sǒong bai",
           "components": [
             "w_tua",
             "w_2",
             "w_bai_class"
           ],
-          "imageUrl": "/images/p_p_new_lesson-39-a3_3.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_new_lesson-39-a3_4",
-          "th": "สถานีไหน",
-          "fr": "Quelle station ?",
-          "en": "Which station?",
-          "phonetic": "sà-thǎa-nii nǎi",
+          "id": "p_board_train",
+          "th": "ขึ้นรถไฟ",
+          "phonetic": "khʉ̂n rót-fai",
+          "fr": "Monter dans le train",
+          "en": "Board the train",
           "components": [
-            "w_sathannee",
-            "w_nai_which"
+            "w_board",
+            "w_rot_fai"
           ],
-          "imageUrl": "/images/p_p_new_lesson-39-a3_4.svg"
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_which_platform",
+          "th": "ชานชาลาไหน",
+          "phonetic": "chaan-chaa-laa nǎi",
+          "fr": "Quel quai ?",
+          "en": "Which platform?",
+          "components": [
+            "w_platform",
+            "w_which"
+          ],
+          "allowIdenticalTranslation": false
         }
       ],
       "imageUrl": "/images/numbers.svg"
     },
     {
       "id": "lesson-39-a4",
-      "title": "Ext: Véhicules",
+      "title": "Véhicules terrestres",
       "description": "Plus de vocabulaire pour cette unité.",
-      "titleEn": "Ext: Vehicles",
+      "titleEn": "Vehicles",
       "descriptionEn": "More vocabulary for this unit.",
       "words": [
         {
-          "id": "w_lesson-39-a4_0",
-          "th": "รถ",
-          "fr": "voiture",
-          "en": "car",
-          "phonetic": "rót",
-          "imageUrl": "/images/w_w_lesson-39-a4_0.svg"
+          "id": "w_jakkayaan",
+          "th": "จักรยาน",
+          "phonetic": "jàk-grà-yaan",
+          "fr": "vélo",
+          "en": "bicycle",
+          "allowIdenticalTranslation": false
         },
         {
-          "th": "ขึ้น",
-          "en": "go up / board",
-          "id": "w_khuen_up",
-          "fr": "monter",
-          "phonetic": "khûen",
-          "imageUrl": "/images/w_w_khuen_up.svg"
+          "id": "w_motoesai",
+          "th": "มอเตอร์ไซค์",
+          "phonetic": "mɔɔ-dtəə-sai",
+          "fr": "moto",
+          "en": "motorcycle",
+          "allowIdenticalTranslation": false
         },
         {
-          "th": "ช้า",
-          "en": "slow",
-          "id": "w_cha_slow",
-          "fr": "lent",
-          "phonetic": "cháa",
-          "imageUrl": "/images/w_w_cha_slow.svg"
+          "id": "w_taeksi",
+          "th": "แท็กซี่",
+          "phonetic": "tɛ́k-sîi",
+          "fr": "taxi",
+          "en": "taxi",
+          "allowIdenticalTranslation": true
+        },
+        {
+          "id": "w_rot_tu",
+          "th": "รถตู้",
+          "phonetic": "rót dtûu",
+          "fr": "fourgonnette",
+          "en": "van",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_jot",
+          "th": "จอด",
+          "phonetic": "jɔ̀ɔt",
+          "fr": "garer",
+          "en": "park (car)",
+          "allowIdenticalTranslation": false
         }
       ],
       "phrases": [
         {
+          "id": "p_khii_motoesai",
+          "th": "ขี่มอเตอร์ไซค์",
+          "phonetic": "khìi mɔɔ-dtəə-sai",
+          "fr": "Conduire une moto",
+          "en": "Ride a motorcycle",
+          "components": [
+            "w_khi",
+            "w_motoesai"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_nang_taeksi",
+          "th": "นั่งแท็กซี่",
+          "phonetic": "nâng tɛ́k-sîi",
+          "fr": "Prendre un taxi",
+          "en": "Take a taxi",
+          "components": [
+            "w_nang_transport",
+            "w_taeksi"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_jot_jakkayaan_thini",
+          "th": "จอดจักรยานที่นี่",
+          "phonetic": "jɔ̀ɔt jàk-grà-yaan thîi-nîi",
+          "fr": "Garer le vélo ici",
+          "en": "Park the bicycle here",
+          "components": [
+            "w_jot",
+            "w_jakkayaan",
+            "w_thi_ni"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_rot_tu_yu_thinai",
+          "th": "รถตู้อยู่ที่ไหน",
+          "phonetic": "rót dtûu yùu thîi-nǎi",
+          "fr": "Où est la fourgonnette ?",
+          "en": "Where is the van?",
+          "components": [
+            "w_rot_tu",
+            "w_yuu",
+            "w_thi_nai"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_ro_taeksi",
+          "th": "รอแท็กซี่",
+          "phonetic": "rɔɔ tɛ́k-sîi",
+          "fr": "Attendre un taxi",
+          "en": "Wait for a taxi",
+          "components": [
+            "w_ro",
+            "w_taeksi"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
           "id": "p_new_lesson-39-a4_1",
           "th": "ขึ้นรถไฟ",
+          "phonetic": "khûen rót-fai",
           "fr": "Prendre le train",
           "en": "Take train",
-          "phonetic": "khûen rót-fai",
           "components": [
-            "w_khuen_up",
+            "w_board",
             "w_rot_fai"
           ],
-          "imageUrl": "/images/p_p_new_lesson-39-a4_1.svg"
+          "allowIdenticalTranslation": false
         },
         {
           "id": "p_new_lesson-39-a4_2",
           "th": "รอรถเมล์",
+          "phonetic": "rɔɔ rót-mee",
           "fr": "Attendre le bus",
           "en": "Wait for bus",
-          "phonetic": "roo rót-mee",
           "components": [
             "w_ro",
             "w_rot_me"
           ],
-          "imageUrl": "/images/p_p_new_lesson-39-a4_2.svg"
+          "allowIdenticalTranslation": false
         },
         {
           "id": "p_new_lesson-39-a4_3",
           "th": "รถสวย",
+          "phonetic": "rót sǔay",
           "fr": "Belle voiture",
           "en": "Beautiful car",
-          "phonetic": "rót sǔay",
           "components": [
             "w_rot",
             "w_suay"
           ],
-          "imageUrl": "/images/p_p_new_lesson-39-a4_3.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_new_lesson-39-a4_4",
-          "th": "รถไฟช้า",
-          "fr": "Le train est lent",
-          "en": "Train is slow",
-          "phonetic": "rót-fai cháa",
+          "id": "p_new_lesson-39-a3_4",
+          "th": "สถานีไหน",
+          "phonetic": "sà-thǎa-nii nǎi",
+          "fr": "Quelle station ?",
+          "en": "Which station?",
           "components": [
-            "w_rot_fai",
-            "w_cha_slow"
+            "w_sathannee",
+            "w_which"
           ],
-          "imageUrl": "/images/p_p_new_lesson-39-a4_4.svg"
+          "allowIdenticalTranslation": false
         }
       ],
       "imageUrl": "/images/default-lesson.svg"
     },
     {
       "id": "lesson-39-a5",
-      "title": "Ext: Guides",
+      "title": "Guider sur le chemin",
       "description": "Plus de vocabulaire pour cette unité.",
-      "titleEn": "Ext: Guiding",
+      "titleEn": "Guiding",
       "descriptionEn": "More vocabulary for this unit.",
       "words": [
         {
-          "id": "w_lesson-39-a5_0",
-          "th": "ตรง",
-          "fr": "tout droit",
-          "en": "straight",
-          "phonetic": "dtrong",
-          "imageUrl": "/images/w_w_lesson-39-a5_0.svg"
+          "id": "w_thaang",
+          "th": "ทาง",
+          "phonetic": "thaang",
+          "fr": "chemin",
+          "en": "way",
+          "allowIdenticalTranslation": false
         },
         {
-          "th": "ทาง",
-          "en": "way",
-          "id": "w_thang_way",
-          "fr": "chemin",
-          "phonetic": "thaang",
-          "imageUrl": "/images/w_w_thang_way.svg"
+          "id": "w_khaam",
+          "th": "ข้าม",
+          "phonetic": "khaam",
+          "fr": "traverser",
+          "en": "to cross",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_soi",
+          "th": "ซอย",
+          "phonetic": "soi",
+          "fr": "ruelle",
+          "en": "alley",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_phaan",
+          "th": "ผ่าน",
+          "phonetic": "phaan",
+          "fr": "passer",
+          "en": "to pass",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_yaek",
+          "th": "แยก",
+          "phonetic": "yaek",
+          "fr": "intersection",
+          "en": "intersection",
+          "allowIdenticalTranslation": true
         }
       ],
       "phrases": [
         {
-          "id": "p_new_lesson-39-a5_0",
-          "th": "เดินตรงไป",
-          "fr": "Marcher tout droit",
-          "en": "Walk straight",
-          "phonetic": "doeen trong pai",
+          "id": "p_khaam_thanon",
+          "th": "ข้ามถนน",
+          "phonetic": "khaam tha-non",
+          "fr": "Traverser la rue",
+          "en": "Cross the road",
           "components": [
-            "w_doen",
-            "w_trong",
-            "w_pai"
+            "w_khaam",
+            "w_thanon"
           ],
-          "imageUrl": "/images/p_p_new_lesson-39-a5_0.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_new_lesson-39-a5_3",
+          "id": "p_liao_saai_nai_soi",
+          "th": "เลี้ยวซ้ายในซอย",
+          "phonetic": "líiao sáai nai soi",
+          "fr": "Tourner à gauche dans la ruelle",
+          "en": "Turn left in the alley",
+          "components": [
+            "w_liao",
+            "w_sai",
+            "w_nai",
+            "w_soi"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_doen_phaan_rong_pha_ya_baan",
+          "th": "เดินผ่านโรงพยาบาล",
+          "phonetic": "doen phaan roong-phá-yaa-baan",
+          "fr": "Marcher devant l'hôpital",
+          "en": "Walk past the hospital",
+          "components": [
+            "w_doen",
+            "w_phaan",
+            "w_rong_phayaban"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_yuu_thaang_khwaa",
           "th": "อยู่ทางขวา",
+          "phonetic": "yùu thaang khwǎa",
           "fr": "C'est sur la droite",
           "en": "It's on the right",
-          "phonetic": "yùu thaang khwǎa",
           "components": [
             "w_yuu",
-            "w_thang_way",
+            "w_thaang",
             "w_khwa"
           ],
-          "imageUrl": "/images/p_p_new_lesson-39-a5_3.svg"
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_liao_khwaa_thii_yaek",
+          "th": "เลี้ยวขวาที่แยก",
+          "phonetic": "líiao khwǎa thîi yaek",
+          "fr": "Tourner à droite à l'intersection",
+          "en": "Turn right at the intersection",
+          "components": [
+            "w_liao",
+            "w_khwa",
+            "w_thii",
+            "w_yaek"
+          ],
+          "allowIdenticalTranslation": false
         }
       ],
       "imageUrl": "/images/default-lesson.svg"
@@ -8988,7 +9255,7 @@
         {
           "th": "สร้อย",
           "en": "necklace",
-          "id": "w_soi",
+          "id": "w_soi_collier",
           "fr": "collier",
           "phonetic": "sɔ̂y",
           "imageUrl": "/images/w_w_soi.svg"
@@ -9038,7 +9305,7 @@
           "en": "Gold necklace",
           "phonetic": "sôoy thoong",
           "components": [
-            "w_soi",
+            "w_soi_collier",
             "w_lesson-44-a5_0"
           ],
           "imageUrl": "/images/p_p_new_lesson-44-a5_3.svg"
@@ -10822,7 +11089,8 @@
           "fr": "écouter de la musique",
           "phonetic": "fang phlaeng",
           "components": [
-            "w_fang"
+            "w_fang",
+            "w_get_off"
           ],
           "en": "listen to music",
           "imageUrl": "/images/p_p_auto_lesson-55_1.svg"
