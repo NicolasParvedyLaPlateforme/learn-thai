@@ -104,7 +104,7 @@ export default function QuestionArea({
               className="object-contain"
             />
           ) : (
-            <span className="animate-bounce">🐘</span>
+            <span>🐘</span>
           )}
           {!imageUrl && (
             <div className="absolute -right-2 -top-2 w-6 h-6 bg-emerald-500 border-2 border-white rounded-full z-10"></div>
