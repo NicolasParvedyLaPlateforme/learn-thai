@@ -6,13 +6,9 @@ import { useProgressStore } from '../lib/store';
 import PWAInstallButton from '../components/PWAInstallButton';
 import { ArrowLeft, MessageCircle, Star, BookOpen, Info, ChevronRight, Play, X } from 'lucide-react';
 import conversationsData from '../data/conversations.json';
+import CONVERSATION_UNITS from '../data/conversation_units.json';
 
-const UNITS: Record<string, { en: string, fr: string, emoji: string }> = {
-  'unit-1': { en: 'Basics & Greetings', fr: 'Bases & Salutations', emoji: '👋' },
-  'unit-2': { en: 'Numbers & Quantities', fr: 'Nombres et Quantités', emoji: '🔢' },
-  'unit-3': { en: 'Food & Restaurant', fr: 'Nourriture & Restaurant', emoji: '🍜' },
-  'unit-4': { en: 'Getting to know people', fr: 'Faire connaissance', emoji: '🤝' },
-};
+const UNITS: Record<string, { en: string, fr: string, emoji: string }> = CONVERSATION_UNITS;
 
 export default function ConversationsPage() {
   const [mounted, setMounted] = useState(false);
