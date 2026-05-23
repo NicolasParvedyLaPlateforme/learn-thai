@@ -8490,87 +8490,112 @@
     },
     {
       "id": "lesson-40",
-      "title": "Vêtements",
+      "title": "Vêtements 1 : Pantalons et Chaussures",
       "description": "Chemise, pantalon",
       "words": [
         {
           "id": "w_kangkeng",
           "th": "กางเกง",
-          "fr": "pantalon",
           "phonetic": "gaang-geeng",
+          "fr": "pantalon",
           "en": "pants",
-          "imageUrl": "/images/w_w_kangkeng.svg"
+          "allowIdenticalTranslation": false
         },
         {
           "id": "w_rong_thao",
           "th": "รองเท้า",
-          "fr": "chaussures",
           "phonetic": "rɔɔng-tháao",
+          "fr": "chaussures",
           "en": "shoes",
-          "imageUrl": "/images/w_w_rong_thao.svg"
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_thung_thao",
+          "th": "ถุงเท้า",
+          "phonetic": "thǔng-tháao",
+          "fr": "chaussettes",
+          "en": "socks",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_kra_prong",
+          "th": "กระโปรง",
+          "phonetic": "grà-proong",
+          "fr": "jupe",
+          "en": "skirt",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_muak",
+          "th": "หมวก",
+          "phonetic": "mùuak",
+          "fr": "chapeau",
+          "en": "hat",
+          "allowIdenticalTranslation": false
         }
       ],
       "phrases": [
         {
-          "id": "p_buy_shirt",
-          "th": "ซื้อเสื้อ",
-          "fr": "acheter une chemise",
-          "phonetic": "súue sûea",
+          "id": "p_black_pants",
+          "th": "กางเกงสีดำ",
+          "phonetic": "gaang-geeng sǐi dam",
+          "fr": "pantalon noir",
+          "en": "black pants",
+          "components": [
+            "w_kangkeng",
+            "w_see_color",
+            "w_dam"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_buy_shoes",
+          "th": "ซื้อรองเท้า",
+          "phonetic": "súue rɔɔng-tháao",
+          "fr": "acheter des chaussures",
+          "en": "buy shoes",
           "components": [
             "w_sue",
-            "w_suea"
+            "w_rong_thao"
           ],
-          "en": "buy a shirt",
-          "imageUrl": "/images/p_p_buy_shirt.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_sell_pants",
-          "th": "ขายกางเกง",
-          "fr": "vendre un pantalon",
-          "phonetic": "khǎai gaang-geeng",
+          "id": "p_wash_socks",
+          "th": "ซักถุงเท้า",
+          "phonetic": "sák thǔng-tháao",
+          "fr": "laver les chaussettes",
+          "en": "wash socks",
           "components": [
-            "w_khai_sell",
-            "w_kangkeng"
+            "w_lesson-29-a3_1",
+            "w_thung_thao"
           ],
-          "en": "sell pants",
-          "imageUrl": "/images/p_p_sell_pants.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_want_shoes",
-          "th": "อยากได้รองเท้า",
-          "fr": "je veux des chaussures",
-          "phonetic": "yàak dâai rɔɔng-tháao",
+          "id": "p_beautiful_skirt",
+          "th": "กระโปรงสวย",
+          "phonetic": "grà-proong sǔuay",
+          "fr": "belle jupe",
+          "en": "beautiful skirt",
+          "components": [
+            "w_kra_prong",
+            "w_suay"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_want_hat",
+          "th": "อยากได้หมวก",
+          "phonetic": "yàak dâai mùuak",
+          "fr": "je veux un chapeau",
+          "en": "I want a hat",
           "components": [
             "w_yak",
             "w_dai",
-            "w_rong_thao"
+            "w_muak"
           ],
-          "en": "I want shoes",
-          "imageUrl": "/images/p_p_want_shoes.svg"
-        },
-        {
-          "id": "p_shoes_beautiful",
-          "th": "รองเท้าสวย",
-          "fr": "belles chaussures",
-          "phonetic": "rɔɔng-tháao sǔuay",
-          "components": [
-            "w_rong_thao",
-            "w_suay"
-          ],
-          "en": "beautiful shoes",
-          "imageUrl": "/images/p_p_shoes_beautiful.svg"
-        },
-        {
-          "id": "p_shirt_big",
-          "th": "เสื้อใหญ่",
-          "fr": "chemise large",
-          "phonetic": "sûea yài",
-          "components": [
-            "w_suea",
-            "w_yai"
-          ],
-          "en": "wide shirt",
-          "imageUrl": "/images/p_p_shirt_big.svg"
+          "allowIdenticalTranslation": false
         }
       ],
       "titleEn": "Clothes",
@@ -8579,91 +8604,128 @@
     },
     {
       "id": "lesson-41",
-      "title": "Couleurs secondaires",
+      "title": "Vêtements 2 : Couleurs secondaires",
       "description": "Vert, jaune, rose",
       "words": [
         {
           "id": "w_lueang",
           "th": "เหลือง",
-          "fr": "jaune",
           "phonetic": "lǔeang",
-          "en": "YELLOW",
-          "imageUrl": "/images/w_w_lueang.svg"
+          "fr": "jaune",
+          "en": "yellow",
+          "allowIdenticalTranslation": false
         },
         {
           "id": "w_chomphu",
           "th": "ชมพู",
-          "fr": "rose",
           "phonetic": "chom-phuu",
+          "fr": "rose",
           "en": "pink",
-          "imageUrl": "/images/w_w_chomphu.svg"
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_muang",
+          "th": "ม่วง",
+          "phonetic": "mûang",
+          "fr": "violet",
+          "en": "purple",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_faa",
+          "th": "ฟ้า",
+          "phonetic": "fáa",
+          "fr": "bleu clair",
+          "en": "light blue",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_thao",
+          "th": "เทา",
+          "phonetic": "thao",
+          "fr": "gris",
+          "en": "grey",
+          "allowIdenticalTranslation": false
         }
       ],
       "phrases": [
         {
           "id": "p_green_shirt",
           "th": "เสื้อสีเขียว",
-          "fr": "chemise verte",
           "phonetic": "sûea sìi khǐiao",
-          "components": [
-            "w_suea",
-            "w_see_color",
-            "w_khiao"
-          ],
+          "fr": "chemise verte",
           "en": "green shirt",
-          "imageUrl": "/images/p_p_green_shirt.svg"
-        },
-        {
-          "id": "p_yellow_shirt",
-          "th": "เสื้อสีเหลือง",
-          "fr": "chemise jaune",
-          "phonetic": "sûea sìi lǔeang",
           "components": [
             "w_suea",
             "w_see_color",
-            "w_lueang"
-          ],
-          "en": "yellow shirt",
-          "imageUrl": "/images/p_p_yellow_shirt.svg"
-        },
-        {
-          "id": "p_pink_shoes",
-          "th": "รองเท้าสีชมพู",
-          "fr": "chaussures roses",
-          "phonetic": "rɔɔng-tháao sìi chom-phuu",
-          "components": [
-            "w_rong_thao",
-            "w_see_color",
-            "w_chomphu"
-          ],
-          "en": "pink shoes",
-          "imageUrl": "/images/p_p_pink_shoes.svg"
-        },
-        {
-          "id": "p_like_green",
-          "th": "ชอบสีเขียว",
-          "fr": "j'aime le vert",
-          "phonetic": "chɔ̂ɔp sìi khǐiao",
-          "components": [
-            "w_chop",
-            "w_see_color",
             "w_khiao"
           ],
-          "en": "I like green",
-          "imageUrl": "/images/p_p_like_green.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_pant_yellow",
+          "id": "p_yellow_pants",
           "th": "กางเกงสีเหลือง",
-          "fr": "pantalon jaune",
           "phonetic": "gaang-geeng sìi lǔeang",
+          "fr": "pantalon jaune",
+          "en": "yellow pants",
           "components": [
             "w_kangkeng",
             "w_see_color",
             "w_lueang"
           ],
-          "en": "yellow pants",
-          "imageUrl": "/images/p_p_pant_yellow.svg"
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_pink_shoes",
+          "th": "รองเท้าสีชมพู",
+          "phonetic": "rɔɔng-tháao sìi chom-phuu",
+          "fr": "chaussures roses",
+          "en": "pink shoes",
+          "components": [
+            "w_rong_thao",
+            "w_see_color",
+            "w_chomphu"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_purple_hat",
+          "th": "หมวกสีม่วง",
+          "phonetic": "mùuak sìi mûang",
+          "fr": "chapeau violet",
+          "en": "purple hat",
+          "components": [
+            "w_muak",
+            "w_see_color",
+            "w_muang"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_grey_skirt",
+          "th": "กระโปรงสีเทา",
+          "phonetic": "grà-proong sìi thao",
+          "fr": "jupe grise",
+          "en": "grey skirt",
+          "components": [
+            "w_kra_prong",
+            "w_see_color",
+            "w_thao"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_light_blue_socks",
+          "th": "ถุงเท้าสีฟ้า",
+          "phonetic": "thǔng-tháao sìi fáa",
+          "fr": "chaussettes bleu clair",
+          "en": "light blue socks",
+          "components": [
+            "w_thung_thao",
+            "w_see_color",
+            "w_faa"
+          ],
+          "allowIdenticalTranslation": false
         }
       ],
       "titleEn": "Secondary colors",
@@ -8672,87 +8734,124 @@
     },
     {
       "id": "lesson-42",
-      "title": "Description Objets",
+      "title": "Description 1 : L'état des objets",
       "description": "Nouveau, vieux",
       "words": [
         {
           "id": "w_mai_new",
           "th": "ใหม่",
-          "fr": "nouveau",
           "phonetic": "mǎi",
+          "fr": "nouveau",
           "en": "new",
-          "imageUrl": "/images/w_w_mai_new.svg"
+          "allowIdenticalTranslation": false
         },
         {
           "id": "w_kao",
           "th": "เก่า",
+          "phonetic": "kào",
           "fr": "vieux",
-          "phonetic": "kâao",
           "en": "old",
-          "imageUrl": "/images/w_w_kao.svg"
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_sa_aat",
+          "th": "สะอาด",
+          "phonetic": "sà-àat",
+          "fr": "propre",
+          "en": "clean",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_sok_ka_prok",
+          "th": "สกปรก",
+          "phonetic": "sòk-kà-pròk",
+          "fr": "sale",
+          "en": "dirty",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_tem",
+          "th": "เต็ม",
+          "phonetic": "tem",
+          "fr": "plein",
+          "en": "full",
+          "allowIdenticalTranslation": false
         }
       ],
       "phrases": [
         {
-          "id": "p_very_beautiful",
-          "th": "สวยมาก",
-          "fr": "très beau",
-          "phonetic": "sǔuay mâak",
-          "components": [
-            "w_suay",
-            "w_mak"
-          ],
-          "en": "very beautiful",
-          "imageUrl": "/images/p_p_very_beautiful.svg"
-        },
-        {
           "id": "p_new_shirt",
           "th": "เสื้อใหม่",
-          "fr": "nouvelle chemise",
           "phonetic": "sûea mǎi",
+          "fr": "nouvelle chemise",
+          "en": "new shirt",
           "components": [
             "w_suea",
             "w_mai_new"
           ],
-          "en": "new shirt",
-          "imageUrl": "/images/p_p_new_shirt.svg"
+          "allowIdenticalTranslation": false
         },
         {
           "id": "p_old_car",
           "th": "รถเก่า",
+          "phonetic": "rót kào",
           "fr": "vieille voiture",
-          "phonetic": "rót kâao",
+          "en": "old car",
           "components": [
             "w_rot",
             "w_kao"
           ],
-          "en": "old car",
-          "imageUrl": "/images/p_p_old_car.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_house_beautiful",
-          "th": "บ้านสวย",
-          "fr": "belle maison",
-          "phonetic": "bâan sǔuay",
+          "id": "p_clean_room",
+          "th": "ห้องสะอาด",
+          "phonetic": "hɔ̂ng sà-àat",
+          "fr": "chambre propre",
+          "en": "clean room",
           "components": [
-            "w_baan",
-            "w_suay"
+            "w_hong",
+            "w_sa_aat"
           ],
-          "en": "beautiful house",
-          "imageUrl": "/images/p_p_house_beautiful.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_new_not_old",
-          "th": "ใหม่ไม่เก่า",
-          "fr": "nouveau, pas vieux",
-          "phonetic": "mǎi mâi kâao",
+          "id": "p_dirty_plate",
+          "th": "จานสกปรก",
+          "phonetic": "jaan sòk-kà-pròk",
+          "fr": "assiette sale",
+          "en": "dirty plate",
           "components": [
-            "w_mai_new",
-            "w_mai_neg",
+            "w_lesson-24-a3_2",
+            "w_sok_ka_prok"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_full_cup",
+          "th": "ถ้วยเต็ม",
+          "phonetic": "tûuay tem",
+          "fr": "tasse pleine",
+          "en": "full cup",
+          "components": [
+            "w_lesson-24-a3_4",
+            "w_tem"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_old_white_bag",
+          "th": "กระเป๋าสีขาวเก่า",
+          "phonetic": "krà-pǎo sǐi kǎao kào",
+          "fr": "vieux sac blanc",
+          "en": "old white bag",
+          "components": [
+            "w_krapao",
+            "w_see_color",
+            "w_khao_color",
             "w_kao"
           ],
-          "en": "new, not old",
-          "imageUrl": "/images/p_p_new_not_old.svg"
+          "allowIdenticalTranslation": false
         }
       ],
       "titleEn": "Description Objects",
@@ -8761,86 +8860,118 @@
     },
     {
       "id": "lesson-43",
-      "title": "Prix et Argent",
+      "title": "Achats 1 : Prix et Essais",
       "description": "Bon marché, cher",
       "words": [
         {
-          "id": "w_thuk_correct",
-          "th": "ถูก",
-          "fr": "bon marché / correct",
-          "phonetic": "thùuk",
-          "en": "cheap/ok",
-          "imageUrl": "/images/w_w_thuk_correct.svg"
+          "id": "w_saii",
+          "th": "ใส่",
+          "phonetic": "sài",
+          "fr": "mettre / porter",
+          "en": "to put on / to wear",
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "w_sai_put",
-          "th": "ใส่",
-          "fr": "mettre / porter",
-          "phonetic": "sáai",
-          "en": "put / wear",
-          "imageUrl": "/images/w_w_sai_put.svg"
+          "id": "w_long",
+          "th": "ลอง",
+          "phonetic": "lɔɔng",
+          "fr": "essayer",
+          "en": "to try",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_por_dee",
+          "th": "พอดี",
+          "phonetic": "phɔɔ-dii",
+          "fr": "aller parfaitement / juste bien",
+          "en": "fit perfectly / just right",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_khap_clothe",
+          "th": "คับ",
+          "phonetic": "kháp",
+          "fr": "serré",
+          "en": "tight",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_luam",
+          "th": "หลวม",
+          "phonetic": "lǔam",
+          "fr": "ample / lâche",
+          "en": "loose",
+          "allowIdenticalTranslation": false
         }
       ],
       "phrases": [
         {
-          "id": "p_not_expensive",
-          "th": "ไม่แพง",
-          "fr": "ce n'est pas cher",
-          "phonetic": "mâi phaeng",
+          "id": "p_can_try_on",
+          "th": "ขอลองใส่ได้ไหม",
+          "phonetic": "khɔ̌ɔ lɔɔng sài dâai mǎi",
+          "fr": "Puis-je l'essayer ?",
+          "en": "Can I try it on?",
           "components": [
-            "w_mai_neg",
-            "w_phaeng"
+            "w_kho_req",
+            "w_long",
+            "w_saii",
+            "w_daai",
+            "w_mai"
           ],
-          "en": "it's not expensive",
-          "imageUrl": "/images/p_p_not_expensive.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_cheap_shirt",
-          "th": "เสื้อถูก",
-          "fr": "chemise pas chère",
-          "phonetic": "sûea thùuk",
+          "id": "p_loose_pants",
+          "th": "กางเกงหลวมนิดหน่อย",
+          "phonetic": "kaang-keeng lǔam nít-nɔ̀ɔi",
+          "fr": "Le pantalon est un peu ample.",
+          "en": "The pants are a little loose.",
           "components": [
-            "w_suea",
-            "w_thuuk"
+            "w_kangkeng",
+            "w_luam",
+            "w_nit_noi"
           ],
-          "en": "cheap shirt",
-          "imageUrl": "/images/p_p_cheap_shirt.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_expensive_shoes",
-          "th": "รองเท้าแพง",
-          "fr": "chaussures chères",
-          "phonetic": "rɔɔng-tháao phaeng",
+          "id": "p_very_tight_shoes",
+          "th": "รองเท้าคับมาก",
+          "phonetic": "rɔɔng-tháao kháp mâak",
+          "fr": "Les chaussures sont très serrées.",
+          "en": "The shoes are very tight.",
           "components": [
             "w_rong_thao",
-            "w_phaeng"
+            "w_khap_clothe",
+            "w_mak"
           ],
-          "en": "expensive shoes",
-          "imageUrl": "/images/p_p_expensive_shoes.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_put_shirt",
-          "th": "ใส่เสื้อ",
-          "fr": "mettre une chemise",
-          "phonetic": "sáai sûea",
+          "id": "p_shirt_fits",
+          "th": "เสื้อพอดี",
+          "phonetic": "sûea phɔɔ-dii",
+          "fr": "La chemise va parfaitement.",
+          "en": "The shirt fits perfectly.",
           "components": [
-            "w_sai_put",
-            "w_suea"
+            "w_suea",
+            "w_por_dee"
           ],
-          "en": "put on a shirt",
-          "imageUrl": "/images/p_p_put_shirt.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_cheap_food",
-          "th": "ข้าวถูก",
-          "fr": "riz (nourriture) bon marché",
-          "phonetic": "khâao thùuk",
+          "id": "p_try_black_hat",
+          "th": "อยากลองหมวกสีดำ",
+          "phonetic": "yàak lɔɔng mùak sǐi dam",
+          "fr": "Je veux essayer le chapeau noir.",
+          "en": "I want to try the black hat.",
           "components": [
-            "w_khao",
-            "w_thuuk"
+            "w_yak",
+            "w_long",
+            "w_muak",
+            "w_see_color",
+            "w_dam"
           ],
-          "en": "cheap rice (food)",
-          "imageUrl": "/images/p_p_cheap_food.svg"
+          "allowIdenticalTranslation": false
         }
       ],
       "titleEn": "Prices and Money",
@@ -8849,365 +8980,467 @@
     },
     {
       "id": "lesson-44-a1",
-      "title": "Ext: Accessoires",
+      "title": "Accessoires 1 : Chapeaux et Sacs",
       "description": "Plus de vocabulaire pour cette unité.",
-      "titleEn": "Ext: Accessories",
+      "titleEn": "Accessories",
       "descriptionEn": "More vocabulary for this unit.",
       "words": [
         {
-          "id": "w_lesson-44-a1_1",
-          "th": "หมวก",
-          "fr": "chapeau",
-          "en": "hat",
-          "phonetic": "mùak",
-          "imageUrl": "/images/w_w_lesson-44-a1_1.svg"
+          "id": "w_backpack",
+          "th": "เป้",
+          "phonetic": "pêe",
+          "fr": "sac à dos",
+          "en": "backpack",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_wallet",
+          "th": "กระเป๋าสตางค์",
+          "phonetic": "krà-pǎo sà-taang",
+          "fr": "portefeuille",
+          "en": "wallet",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_bag_sack",
+          "th": "ถุง",
+          "phonetic": "thǔng",
+          "fr": "sac (en tissu ou plastique)",
+          "en": "bag (cloth or plastic)",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_to_hold",
+          "th": "ถือ",
+          "phonetic": "thǔue",
+          "fr": "porter (à la main), tenir",
+          "en": "to hold, to carry",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_cap",
+          "th": "หมวกแก๊ป",
+          "phonetic": "mùak-káp",
+          "fr": "casquette",
+          "en": "cap",
+          "allowIdenticalTranslation": false
         }
       ],
       "phrases": [
         {
-          "id": "p_new_lesson-44-a1_0",
-          "th": "ใส่รองเท้า",
-          "fr": "Mettre ses chaussures",
-          "en": "Wear shoes",
-          "phonetic": "sài roong-tháaw",
-          "components": [
-            "w_sai_put",
-            "w_rong_thao"
-          ],
-          "imageUrl": "/images/p_p_new_lesson-44-a1_0.svg"
-        },
-        {
-          "id": "p_new_lesson-44-a1_1",
-          "th": "หมวกสวย",
-          "fr": "Beau chapeau",
-          "en": "Beautiful hat",
-          "phonetic": "mùuak sǔay",
-          "components": [
-            "w_lesson-44-a1_1",
-            "w_suay"
-          ],
-          "imageUrl": "/images/p_p_new_lesson-44-a1_1.svg"
-        },
-        {
-          "id": "p_new_lesson-44-a1_2",
-          "th": "กระเป๋าใหญ่",
-          "fr": "Grand sac",
-          "en": "Big bag",
-          "phonetic": "krà-pǎo yài",
-          "components": [
-            "w_krapao",
-            "w_yai"
-          ],
-          "imageUrl": "/images/p_p_new_lesson-44-a1_2.svg"
-        },
-        {
-          "id": "p_new_lesson-44-a1_3",
-          "th": "ซื้อรองเท้า",
-          "fr": "Acheter des chaussures",
-          "en": "Buy shoes",
-          "phonetic": "súue roong-tháaw",
+          "id": "p_buy_new_backpack",
+          "th": "ซื้อเป้ใหม่",
+          "phonetic": "súue pêe mài",
+          "fr": "Acheter un nouveau sac à dos",
+          "en": "Buy a new backpack",
           "components": [
             "w_sue",
-            "w_rong_thao"
+            "w_backpack",
+            "w_mai_new"
           ],
-          "imageUrl": "/images/p_p_new_lesson-44-a1_3.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_new_lesson-44-a1_4",
-          "th": "ชอบกระเป๋า",
-          "fr": "Aimer le sac",
-          "en": "Like the bag",
-          "phonetic": "chôop krà-pǎo",
+          "id": "p_no_wallet",
+          "th": "ไม่มีกระเป๋าสตางค์",
+          "phonetic": "mâi mii krà-pǎo sà-taang",
+          "fr": "Ne pas avoir de portefeuille",
+          "en": "Don't have a wallet",
           "components": [
-            "w_chop",
-            "w_krapao"
+            "w_mai_neg",
+            "w_mee",
+            "w_wallet"
           ],
-          "imageUrl": "/images/p_p_new_lesson-44-a1_4.svg"
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_he_holds_bag",
+          "th": "เขาถือถุง",
+          "phonetic": "khǎo thǔue thǔng",
+          "fr": "Il tient un sac",
+          "en": "He is holding a bag",
+          "components": [
+            "w_khao_pron",
+            "w_to_hold",
+            "w_bag_sack"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_red_cap",
+          "th": "หมวกแก๊ปสีแดง",
+          "phonetic": "mùak-káp sǐi daang",
+          "fr": "Casquette rouge",
+          "en": "Red cap",
+          "components": [
+            "w_cap",
+            "w_see_color",
+            "w_daeng"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_wallet_expensive",
+          "th": "กระเป๋าสตางค์นี้แพงมาก",
+          "phonetic": "krà-pǎo sà-taang níi phaang mâak",
+          "fr": "Ce portefeuille est très cher",
+          "en": "This wallet is very expensive",
+          "components": [
+            "w_wallet",
+            "w_nii_this",
+            "w_phaeng",
+            "w_mak"
+          ],
+          "allowIdenticalTranslation": false
         }
       ],
       "imageUrl": "/images/default-lesson.svg"
     },
     {
       "id": "lesson-44-a2",
-      "title": "Ext: Placard",
+      "title": "Vêtements 3 : Jupes et Chaussettes",
       "description": "Plus de vocabulaire pour cette unité.",
       "titleEn": "Ext: Wardrobe",
       "descriptionEn": "More vocabulary for this unit.",
       "words": [
         {
-          "id": "w_lesson-44-a2_0",
-          "th": "กระโปรง",
-          "fr": "jupe",
-          "en": "skirt",
-          "phonetic": "krà-proong",
-          "imageUrl": "/images/w_w_lesson-44-a2_0.svg"
-        },
-        {
-          "id": "w_lesson-44-a2_2",
-          "th": "ถุงเท้า",
-          "fr": "chaussettes",
-          "en": "socks",
-          "phonetic": "thǔng-tháo",
-          "imageUrl": "/images/w_w_lesson-44-a2_2.svg"
-        },
-        {
-          "id": "w_lesson-44-a4_0",
+          "id": "w_san",
           "th": "สั้น",
+          "phonetic": "sân",
           "fr": "court",
           "en": "short",
-          "phonetic": "sân",
-          "imageUrl": "/images/w_w_lesson-44-a4_0.svg"
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_yao",
+          "th": "ยาว",
+          "phonetic": "yaao",
+          "fr": "long",
+          "en": "long",
+          "allowIdenticalTranslation": true
+        },
+        {
+          "id": "w_thot",
+          "th": "ถอด",
+          "phonetic": "thòot",
+          "fr": "enlever",
+          "en": "take off",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_khemkhat",
+          "th": "เข็มขัด",
+          "phonetic": "khěm-khàt",
+          "fr": "ceinture",
+          "en": "belt",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_lai",
+          "th": "ลาย",
+          "phonetic": "laai",
+          "fr": "motif",
+          "en": "pattern",
+          "allowIdenticalTranslation": false
         }
       ],
       "phrases": [
         {
-          "id": "p_new_lesson-44-a2_0",
-          "th": "กระโปรงสั้น",
-          "fr": "Jupe courte",
-          "en": "Short skirt",
-          "phonetic": "krà-proong sân",
+          "id": "p_skirt_long",
+          "th": "กระโปรงยาว",
+          "phonetic": "krà-proong yaao",
+          "fr": "Jupe longue",
+          "en": "Long skirt",
           "components": [
-            "w_lesson-44-a2_0",
-            "w_lesson-44-a4_0"
+            "w_kra_prong",
+            "w_yao"
           ],
-          "imageUrl": "/images/p_p_new_lesson-44-a2_0.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_new_lesson-44-a2_1",
-          "th": "ถุงเท้าสีดำ",
-          "fr": "Chaussettes noires",
-          "en": "Black socks",
-          "phonetic": "thǔng-tháaw sǐi-dam",
+          "id": "p_socks_short",
+          "th": "ถุงเท้าสั้น",
+          "phonetic": "thǔng-tháao sân",
+          "fr": "Chaussettes courtes",
+          "en": "Short socks",
           "components": [
-            "w_lesson-44-a2_2",
+            "w_thung_thao",
+            "w_san"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_take_off_socks",
+          "th": "ถอดถุงเท้า",
+          "phonetic": "thòot thǔng-tháao",
+          "fr": "Enlever les chaussettes",
+          "en": "Take off socks",
+          "components": [
+            "w_thot",
+            "w_thung_thao"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_wear_black_belt",
+          "th": "ใส่เข็มขัดสีดำ",
+          "phonetic": "sài khěm-khàt sǐi-dam",
+          "fr": "Porter une ceinture noire",
+          "en": "Wear a black belt",
+          "components": [
+            "w_saii",
+            "w_khemkhat",
             "w_see_color",
             "w_dam"
           ],
-          "imageUrl": "/images/p_p_new_lesson-44-a2_1.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_new_lesson-44-a2_2",
-          "th": "ชุดสวยมาก",
-          "fr": "Très belle robe",
-          "en": "Very beautiful dress",
-          "phonetic": "chút sǔay mâak",
+          "id": "p_skirt_pattern",
+          "th": "กระโปรงลายสวย",
+          "phonetic": "krà-proong laai sǔay",
+          "fr": "Jupe à beau motif",
+          "en": "Skirt with beautiful pattern",
           "components": [
-            "w_lesson-44-a2_1",
-            "w_suay",
-            "w_mak"
+            "w_kra_prong",
+            "w_lai",
+            "w_suay"
           ],
-          "imageUrl": "/images/p_p_new_lesson-44-a2_2.svg"
-        },
-        {
-          "id": "p_new_lesson-44-a2_3",
-          "th": "ใส่ชุดใหม่",
-          "fr": "Mettre de nouveaux vêtements",
-          "en": "Wear new dress",
-          "phonetic": "sài chút mài",
-          "components": [
-            "w_sai_put",
-            "w_lesson-44-a2_1",
-            "w_mai_new"
-          ],
-          "imageUrl": "/images/p_p_new_lesson-44-a2_3.svg"
-        },
-        {
-          "id": "p_new_lesson-44-a2_4",
-          "th": "ไม่ใส่กระโปรง",
-          "fr": "Ne pas porter de jupe",
-          "en": "Not wear skirt",
-          "phonetic": "mâi sài krà-proong",
-          "components": [
-            "w_mai_neg",
-            "w_sai_put",
-            "w_lesson-44-a2_0"
-          ],
-          "imageUrl": "/images/p_p_new_lesson-44-a2_4.svg"
+          "allowIdenticalTranslation": false
         }
       ],
       "imageUrl": "/images/default-lesson.svg"
     },
     {
       "id": "lesson-44-a3",
-      "title": "Ext: Taille",
+      "title": "Description 2 : Les Longueurs",
       "description": "Plus de vocabulaire pour cette unité.",
       "titleEn": "Ext: Size",
       "descriptionEn": "More vocabulary for this unit.",
       "words": [
         {
-          "th": "ยาว",
-          "en": "long",
-          "id": "w_yao",
-          "fr": "long",
-          "phonetic": "yaao",
-          "imageUrl": "/images/w_w_yao.svg",
-          "allowIdenticalTranslation": true
+          "id": "w_mai_tee",
+          "th": "ไม้ตี",
+          "phonetic": "máai dtii",
+          "fr": "batte / raquette",
+          "en": "bat / racket",
+          "allowIdenticalTranslation": false
         },
         {
-          "th": "ไม้ตี",
-          "en": "bat/racket",
-          "id": "w_mai_tee",
-          "fr": "batte / raquette",
-          "phonetic": "máai dtii",
-          "imageUrl": "/images/w_w_mai_tee.svg"
+          "id": "w_soong",
+          "th": "สูง",
+          "phonetic": "sǔung",
+          "fr": "grand (taille) / haut",
+          "en": "tall / high",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_tia",
+          "th": "เตี้ย",
+          "phonetic": "dtîia",
+          "fr": "petit (taille)",
+          "en": "short (height)",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_na",
+          "th": "หนา",
+          "phonetic": "nǎa",
+          "fr": "épais",
+          "en": "thick",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_bang",
+          "th": "บาง",
+          "phonetic": "baang",
+          "fr": "fin / mince",
+          "en": "thin",
+          "allowIdenticalTranslation": false
         }
       ],
       "phrases": [
         {
-          "id": "p_new_lesson-44-a3_0",
-          "th": "เสื้อใหญ่",
-          "fr": "Grande chemise",
-          "en": "Big shirt",
-          "phonetic": "sûuea yài",
-          "components": [
-            "w_suea",
-            "w_yai"
-          ],
-          "imageUrl": "/images/p_p_new_lesson-44-a3_0.svg"
-        },
-        {
-          "id": "p_new_lesson-44-a3_1",
-          "th": "จานเล็ก",
-          "fr": "Petite assiette",
-          "en": "Small plate",
-          "phonetic": "caan lék",
-          "components": [
-            "w_lesson-24-a3_2",
-            "w_lek"
-          ],
-          "imageUrl": "/images/p_p_new_lesson-44-a3_1.svg"
-        },
-        {
-          "id": "p_new_lesson-44-a3_2",
-          "th": "ผมยาว",
-          "fr": "Cheveux longs",
-          "en": "Long hair",
-          "phonetic": "phǒm yaaw",
-          "components": [
-            "w_phom",
-            "w_yao"
-          ],
-          "imageUrl": "/images/p_p_new_lesson-44-a3_2.svg"
-        },
-        {
-          "id": "p_new_lesson-44-a3_3",
+          "id": "p_mai_tee_yao",
           "th": "ไม้ตียาว",
-          "fr": "Bâton long",
-          "en": "Long stick",
-          "phonetic": "mái-tii yaaw",
+          "phonetic": "máai dtii yaaw",
+          "fr": "Batte longue",
+          "en": "Long bat",
           "components": [
             "w_mai_tee",
             "w_yao"
           ],
-          "imageUrl": "/images/p_p_new_lesson-44-a3_3.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_new_lesson-44-a3_4",
-          "th": "อยากได้ใหญ่",
-          "fr": "En vouloir un grand",
-          "en": "Want a big one",
-          "phonetic": "yàak dâi yài",
+          "id": "p_khon_soong",
+          "th": "คนสูง",
+          "phonetic": "khon sǔung",
+          "fr": "Personne grande",
+          "en": "Tall person",
           "components": [
-            "w_yak",
-            "w_dai",
-            "w_yai"
+            "w_khon",
+            "w_soong"
           ],
-          "imageUrl": "/images/p_p_new_lesson-44-a3_4.svg"
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_dek_tia",
+          "th": "เด็กเตี้ย",
+          "phonetic": "dèk dtîia",
+          "fr": "Enfant de petite taille",
+          "en": "Short child",
+          "components": [
+            "w_dek",
+            "w_tia"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_suea_na",
+          "th": "เสื้อหนา",
+          "phonetic": "sûuea nǎa",
+          "fr": "Chemise épaisse",
+          "en": "Thick shirt",
+          "components": [
+            "w_suea",
+            "w_na"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_nang_sue_bang",
+          "th": "หนังสือบาง",
+          "phonetic": "nǎng-sǔue baang",
+          "fr": "Livre fin",
+          "en": "Thin book",
+          "components": [
+            "w_nangsue",
+            "w_bang"
+          ],
+          "allowIdenticalTranslation": false
         }
       ],
       "imageUrl": "/images/default-lesson.svg"
     },
     {
       "id": "lesson-44-a4",
-      "title": "Ext: Mesure",
+      "title": "Description 3 : Poids et Mesures",
       "description": "Plus de vocabulaire pour cette unité.",
-      "titleEn": "Ext: Measure",
+      "titleEn": "Measure",
       "descriptionEn": "More vocabulary for this unit.",
       "words": [
         {
-          "id": "w_lesson-44-a4_1",
+          "id": "w_nak",
           "th": "หนัก",
+          "phonetic": "nàk",
           "fr": "lourd",
           "en": "heavy",
-          "phonetic": "nàk",
-          "imageUrl": "/images/w_w_lesson-44-a4_1.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "w_lesson-44-a4_2",
+          "id": "w_bao",
           "th": "เบา",
-          "fr": "léger",
-          "en": "light (weight)",
           "phonetic": "bao",
-          "imageUrl": "/images/w_w_lesson-44-a4_2.svg"
+          "fr": "léger",
+          "en": "light",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_nam_nak",
+          "th": "น้ำหนัก",
+          "phonetic": "nám-nàk",
+          "fr": "poids",
+          "en": "weight",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_kilo",
+          "th": "กิโล",
+          "phonetic": "kì-loo",
+          "fr": "kilo",
+          "en": "kilo",
+          "allowIdenticalTranslation": true
+        },
+        {
+          "id": "w_chang",
+          "th": "ชั่ง",
+          "phonetic": "châng",
+          "fr": "peser",
+          "en": "weigh",
+          "allowIdenticalTranslation": false
         }
       ],
       "phrases": [
         {
-          "id": "p_new_lesson-44-a4_0",
-          "th": "ผมสั้น",
-          "fr": "Cheveux courts",
-          "en": "Short hair",
-          "phonetic": "phǒm sân",
-          "components": [
-            "w_phom",
-            "w_lesson-44-a4_0"
-          ],
-          "imageUrl": "/images/p_p_new_lesson-44-a4_0.svg"
-        },
-        {
-          "id": "p_new_lesson-44-a4_1",
-          "th": "กระเป๋าหนัก",
-          "fr": "Sac lourd",
-          "en": "Heavy bag",
-          "phonetic": "krà-pǎo nàk",
+          "id": "p_heavy_bag_very",
+          "th": "กระเป๋าหนักมาก",
+          "phonetic": "krà-pǎo nàk mâak",
+          "fr": "Le sac est très lourd",
+          "en": "The bag is very heavy",
           "components": [
             "w_krapao",
-            "w_lesson-44-a4_1"
-          ],
-          "imageUrl": "/images/p_p_new_lesson-44-a4_1.svg"
-        },
-        {
-          "id": "p_new_lesson-44-a4_2",
-          "th": "รองเท้าเบา",
-          "fr": "Chaussures légères",
-          "en": "Light shoes",
-          "phonetic": "roong-tháaw bao",
-          "components": [
-            "w_rong_thao",
-            "w_lesson-44-a4_2"
-          ],
-          "imageUrl": "/images/p_p_new_lesson-44-a4_2.svg"
-        },
-        {
-          "id": "p_new_lesson-44-a4_3",
-          "th": "หนักมาก",
-          "fr": "Très lourd",
-          "en": "Very heavy",
-          "phonetic": "nàk mâak",
-          "components": [
-            "w_lesson-44-a4_1",
+            "w_nak",
             "w_mak"
           ],
-          "imageUrl": "/images/p_p_new_lesson-44-a4_3.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_new_lesson-44-a4_4",
+          "id": "p_light_things",
           "th": "ของเบา",
+          "phonetic": "khǒong bao",
           "fr": "Objet léger",
           "en": "Light object",
-          "phonetic": "khǒong bao",
           "components": [
             "w_khong_of",
-            "w_lesson-44-a4_2"
+            "w_bao"
           ],
-          "imageUrl": "/images/p_p_new_lesson-44-a4_4.svg"
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_weight_how_much",
+          "th": "น้ำหนักเท่าไหร่",
+          "phonetic": "nám-nàk thâo-rài",
+          "fr": "Quel est le poids ?",
+          "en": "What is the weight?",
+          "components": [
+            "w_nam_nak",
+            "w_thao_rai"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_buy_pork_two_kilos",
+          "th": "ซื้อหมูสองกิโล",
+          "phonetic": "súue mǔu sǒong kì-loo",
+          "fr": "Acheter deux kilos de porc",
+          "en": "Buy two kilos of pork",
+          "components": [
+            "w_sue",
+            "w_mu",
+            "w_2",
+            "w_kilo"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_weigh_bag",
+          "th": "ชั่งกระเป๋า",
+          "phonetic": "châng krà-pǎo",
+          "fr": "Peser le sac",
+          "en": "Weigh the bag",
+          "components": [
+            "w_chang",
+            "w_krapao"
+          ],
+          "allowIdenticalTranslation": false
         }
       ],
       "imageUrl": "/images/default-lesson.svg"
     },
     {
       "id": "lesson-44-a5",
-      "title": "Ext: Matériaux",
+      "title": "Accessoires 2 : Matériaux et Bijoux",
       "description": "Plus de vocabulaire pour cette unité.",
       "titleEn": "Ext: Materials",
       "descriptionEn": "More vocabulary for this unit.",
@@ -9559,14 +9792,6 @@
           "phonetic": "sǔung",
           "en": "large (size)",
           "imageUrl": "/images/w_w_sung.svg"
-        },
-        {
-          "id": "w_tia",
-          "th": "เตี้ย",
-          "fr": "petit (taille)",
-          "phonetic": "dtîia",
-          "en": "small (size)",
-          "imageUrl": "/images/w_w_tia.svg"
         },
         {
           "id": "w_uan",
