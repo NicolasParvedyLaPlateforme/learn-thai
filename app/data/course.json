@@ -1051,6 +1051,17 @@
       "imageUrl": "/images/l_nouveau_004.svg"
     },
     {
+      "id": "bilan-unit-1",
+      "title": "Bilan Unité 1",
+      "description": "Évaluez vos bases : salutations, présentation, nombres jusqu'à 10 et expression des quantités.",
+      "words": [],
+      "phrases": [],
+      "titleEn": "Unit 1 Assessment",
+      "descriptionEn": "Test your basics: greetings, introductions, numbers up to 10, and expressing quantities.",
+      "imageUrl": "/images/default-lesson.svg",
+      "isReview": true
+    },
+    {
       "id": "lesson-4",
       "title": "Alimentation 1 : Boire et Manger",
       "description": "Manger au restaurant",
@@ -1972,6 +1983,17 @@
       "imageUrl": "/images/family.svg"
     },
     {
+      "id": "bilan-unit-2",
+      "title": "Bilan Unité 2",
+      "description": "Revoyez vos premiers échanges : vocabulaire de l'alimentation, formules de politesse et famille proche.",
+      "words": [],
+      "phrases": [],
+      "titleEn": "Unit 2 Assessment",
+      "descriptionEn": "Review your first interactions: food vocabulary, polite expressions, and close family.",
+      "imageUrl": "/images/default-lesson.svg",
+      "isReview": true
+    },
+    {
       "id": "l_nouveau_009",
       "title": "Espace 2 : Déplacements et Pronoms",
       "description": "Parler de ses déplacements et utiliser les pronoms",
@@ -2798,17 +2820,6 @@
       "imageUrl": "/images/time.svg"
     },
     {
-      "id": "lesson-10",
-      "title": "Bilan Unité 1",
-      "description": "Révision globale (30 questions)",
-      "isReview": true,
-      "words": [],
-      "phrases": [],
-      "titleEn": "Unit 1 assessment",
-      "descriptionEn": "Global review (30 questions)",
-      "imageUrl": "/images/default-lesson.svg"
-    },
-    {
       "id": "lesson-11",
       "title": "Transports et Lieux",
       "description": "Se déplacer en ville",
@@ -2963,6 +2974,17 @@
       "titleEn": "Transportation",
       "descriptionEn": "Getting around town",
       "imageUrl": "/images/travel.svg"
+    },
+    {
+      "id": "bilan-unit-3",
+      "title": "Bilan Unité 3",
+      "description": "Faites le point sur vos déplacements, vos premiers achats au marché et l'expression de vos sentiments.",
+      "words": [],
+      "phrases": [],
+      "titleEn": "Unit 3 Assessment",
+      "descriptionEn": "Assess your skills in getting around, making your first market purchases, and expressing feelings.",
+      "imageUrl": "/images/default-lesson.svg",
+      "isReview": true
     },
     {
       "id": "lesson-12",
@@ -4070,15 +4092,15 @@
       "imageUrl": "/images/house.svg"
     },
     {
-      "id": "lesson-19",
-      "title": "Bilan Unité 2",
-      "description": "Révision de l'unité 2 (30 questions)",
-      "isReview": true,
+      "id": "bilan-unit-4",
+      "title": "Bilan Unité 4",
+      "description": "Validez vos acquis sur l'orientation, le temps, les couleurs et le vocabulaire de base de la santé.",
       "words": [],
       "phrases": [],
-      "titleEn": "Unit 2 assessment",
-      "descriptionEn": "Unit 2 review (30 questions)",
-      "imageUrl": "/images/default-lesson.svg"
+      "titleEn": "Unit 4 Assessment",
+      "descriptionEn": "Validate your knowledge on directions, time, colors, and basic health vocabulary.",
+      "imageUrl": "/images/default-lesson.svg",
+      "isReview": true
     },
     {
       "id": "lesson-20",
@@ -5201,15 +5223,15 @@
       "imageUrl": "/images/default-lesson.svg"
     },
     {
-      "id": "lesson-24",
-      "title": "Bilan Unité 3",
-      "description": "Test sur la nourriture",
-      "isReview": true,
+      "id": "bilan-unit-5",
+      "title": "Bilan Unité 5",
+      "description": "Passez à table ! Testez votre vocabulaire sur la nourriture, les boissons, les saveurs et le service au restaurant.",
       "words": [],
       "phrases": [],
-      "titleEn": "Unit 3 Assessment",
-      "descriptionEn": "Food test",
-      "imageUrl": "/images/food.svg"
+      "titleEn": "Unit 5 Assessment",
+      "descriptionEn": "Time to eat! Test your vocabulary on food, drinks, flavors, and restaurant service.",
+      "imageUrl": "/images/default-lesson.svg",
+      "isReview": true
     },
     {
       "id": "lesson-25",
@@ -6138,15 +6160,15 @@
       "imageUrl": "/images/default-lesson.svg"
     },
     {
-      "id": "lesson-29",
-      "title": "Bilan Unité 4",
-      "description": "Test sur les verbes d'action",
-      "isReview": true,
+      "id": "bilan-unit-6",
+      "title": "Bilan Unité 6",
+      "description": "Prouvez votre maîtrise des verbes d'action, du vocabulaire du commerce et des mouvements de tous les jours.",
       "words": [],
       "phrases": [],
-      "titleEn": "Unit 4 Assessment",
-      "descriptionEn": "Action verbs test",
-      "imageUrl": "/images/default-lesson.svg"
+      "titleEn": "Unit 6 Assessment",
+      "descriptionEn": "Prove your mastery of action verbs, commerce vocabulary, and everyday movements.",
+      "imageUrl": "/images/default-lesson.svg",
+      "isReview": true
     },
     {
       "id": "lesson-30",
@@ -7014,15 +7036,15 @@
       "imageUrl": "/images/default-lesson.svg"
     },
     {
-      "id": "lesson-34",
-      "title": "Bilan Unité 5",
-      "description": "Test Temps et Météo",
-      "isReview": true,
+      "id": "bilan-unit-7",
+      "title": "Bilan Unité 7",
+      "description": "Quel temps fait-il ? Évaluez vos connaissances sur la météo, le climat, les températures et les durées.",
       "words": [],
       "phrases": [],
-      "titleEn": "Unit 5 Assessment",
-      "descriptionEn": "Time and Weather Test",
-      "imageUrl": "/images/time.svg"
+      "titleEn": "Unit 7 Assessment",
+      "descriptionEn": "What's the weather like? Assess your knowledge of weather, climate, temperatures, and durations.",
+      "imageUrl": "/images/default-lesson.svg",
+      "isReview": true
     },
     {
       "id": "lesson-35",
@@ -7862,15 +7884,15 @@
       "imageUrl": "/images/default-lesson.svg"
     },
     {
-      "id": "lesson-39",
-      "title": "Bilan Unité 6",
-      "description": "Test Lieux et Trajets",
-      "isReview": true,
+      "id": "bilan-unit-8",
+      "title": "Bilan Unité 8",
+      "description": "En route ! Révisez les lieux de la ville, les transports en commun, l'aviation et le vocabulaire du voyage.",
       "words": [],
       "phrases": [],
-      "titleEn": "Unit 6 Assessment",
-      "descriptionEn": "Places and Routes Test",
-      "imageUrl": "/images/default-lesson.svg"
+      "titleEn": "Unit 8 Assessment",
+      "descriptionEn": "On the road! Review city places, public transportation, aviation, and travel vocabulary.",
+      "imageUrl": "/images/default-lesson.svg",
+      "isReview": true
     },
     {
       "id": "lesson-40",
@@ -8710,15 +8732,15 @@
       "imageUrl": "/images/default-lesson.svg"
     },
     {
-      "id": "lesson-44",
-      "title": "Bilan Unité 7",
-      "description": "Test Achats et Apparences",
-      "isReview": true,
+      "id": "bilan-unit-9",
+      "title": "Bilan Unité 9",
+      "description": "C'est l'heure des achats : validez votre vocabulaire sur les vêtements, les prix, les matériaux et la description d'objets.",
       "words": [],
       "phrases": [],
-      "titleEn": "Unit 7 Assessment",
-      "descriptionEn": "Purchases and Appearances Test",
-      "imageUrl": "/images/default-lesson.svg"
+      "titleEn": "Unit 9 Assessment",
+      "descriptionEn": "Shopping time: validate your vocabulary on clothes, prices, materials, and object descriptions.",
+      "imageUrl": "/images/default-lesson.svg",
+      "isReview": true
     },
     {
       "id": "lesson-45",
@@ -9620,15 +9642,15 @@
       "imageUrl": "/images/default-lesson.svg"
     },
     {
-      "id": "lesson-49",
-      "title": "Bilan Unité 8",
-      "description": "Test Famille et Corps",
-      "isReview": true,
+      "id": "bilan-unit-10",
+      "title": "Bilan Unité 10",
+      "description": "Décrivez votre entourage : révisez les parties du corps, l'apparence physique, le caractère et les liens de parenté.",
       "words": [],
       "phrases": [],
-      "titleEn": "Unit 8 Assessment",
-      "descriptionEn": "Family and Body Test",
-      "imageUrl": "/images/family.svg"
+      "titleEn": "Unit 10 Assessment",
+      "descriptionEn": "Describe your surroundings: review body parts, physical appearance, character traits, and family ties.",
+      "imageUrl": "/images/default-lesson.svg",
+      "isReview": true
     },
     {
       "id": "lesson-50",
@@ -10422,15 +10444,15 @@
       "imageUrl": "/images/numbers.svg"
     },
     {
-      "id": "lesson-54",
-      "title": "Bilan Unité 9",
-      "description": "Test Sentiments et Santé",
-      "isReview": true,
+      "id": "bilan-unit-11",
+      "title": "Bilan Unité 11",
+      "description": "Prenez le pouls de votre thaï : vocabulaire de l'hôpital, symptômes, ressentis émotionnels et besoins.",
       "words": [],
       "phrases": [],
-      "titleEn": "Unit 9 Assessment",
-      "descriptionEn": "Feelings and Health Test",
-      "imageUrl": "/images/time.svg"
+      "titleEn": "Unit 11 Assessment",
+      "descriptionEn": "Take the pulse of your Thai: hospital vocabulary, symptoms, emotional feelings, and needs.",
+      "imageUrl": "/images/default-lesson.svg",
+      "isReview": true
     },
     {
       "id": "lesson-55",
@@ -11228,15 +11250,15 @@
       "imageUrl": "/images/food.svg"
     },
     {
-      "id": "lesson-64",
+      "id": "lesson-64-bilan-final",
       "title": "Le Grand Bilan A1",
-      "description": "Test final du Niveau A1 (Toutes Unités)",
-      "isReview": true,
+      "description": "L'épreuve finale ! Validez votre niveau A1 avec cette grande révision globale incluant les grands nombres, les fréquences et la grammaire.",
       "words": [],
       "phrases": [],
-      "titleEn": "The A1 Grand Assessment",
-      "descriptionEn": "Final test of Level A1 (All Units)",
-      "imageUrl": "/images/default-lesson.svg"
+      "titleEn": "A1 Final Assessment",
+      "descriptionEn": "The final test! Validate your A1 level with this comprehensive global review including large numbers, frequencies, and grammar.",
+      "imageUrl": "/images/default-lesson.svg",
+      "isReview": true
     }
   ]
 }
