@@ -8,8 +8,11 @@ import { ArrowLeft, Play, RotateCcw, Volume2, Star, MessageCircle, Check, X, Hom
 import { useProgressStore } from '../../../lib/store';
 import { playThaiTTS, playThaiTTSAsync } from '../../../lib/tts';
 import conversationsData from '../../../data/conversations.json';
+import speakersConfig from '../../../data/speakers.json';
 import { getVocabularyServer } from '../../../actions/course';
 import { Word } from '../../../types';
+import { LoadingScreen } from '../../../components/LoadingScreen';
+import { AnimatePresence, motion } from "motion/react";
 
 // Helper to shuffle an array
 function shuffleArray<T>(array: T[]): T[] {
@@ -51,6 +54,8 @@ function ConversationContent() {
   const [targetWord, setTargetWord] = useState<any>(null); // For level 2
 
   const [warnings, setWarnings] = useState<number[]>([]);
+
+  const [showExerciseUI, setShowExerciseUI] = useState(false);
 
   // We use a ref to track if we should continue playing (handles component unmount or stop)
   const isPlayingRef = useRef(false);
@@ -309,8 +314,25 @@ function ConversationContent() {
     }
   };
 
+  const isDataLoaded = mounted && !!conversation && (isLevel2 ? allWords.length > 0 : true);
+
   return (
     <div className="min-h-screen bg-[#FAFAFA] font-sans text-slate-800 pb-40">
+      <AnimatePresence mode="wait">
+        {!showExerciseUI ? (
+          <LoadingScreen 
+            key="loading-screen"
+            isLoadingData={!isDataLoaded} 
+            onReady={() => setShowExerciseUI(true)} 
+          />
+        ) : (
+          <motion.div
+            key="exercise-ui"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="flex-1 flex flex-col h-full w-full absolute inset-0"
+          >
       <header className="bg-white border-b border-slate-200 px-4 h-16 flex items-center justify-between shadow-sm sticky top-0 z-50">
         <div className="flex items-center gap-4 max-w-2xl mx-auto w-full border-slate-200 relative">
           <Link href="/conversations" className="text-slate-400 hover:text-slate-600 transition-colors z-10">
@@ -337,10 +359,16 @@ function ConversationContent() {
         </div>
 
         {!hasStarted ? (
-          <div className="flex flex-col items-center justify-center mt-12 gap-6 bg-white p-8 rounded-3xl border-2 border-slate-200 shadow-sm">
-            <div className="bg-orange-100 text-orange-500 p-6 rounded-full">
-              <MessageCircle size={48} />
-            </div>
+          <div className="flex flex-col items-center justify-center mt-8 gap-6 bg-white p-6 sm:p-8 rounded-3xl border-2 border-slate-200 shadow-sm">
+            {conversation.imageUrl ? (
+              <div className="relative w-full aspect-video md:aspect-[21/9] rounded-2xl overflow-hidden shadow-sm border border-slate-100">
+                <Image src={conversation.imageUrl} alt={conversation.title} fill className="object-cover" sizes="(max-width: 768px) 100vw, 36rem" priority />
+              </div>
+            ) : (
+              <div className="bg-orange-100 text-orange-500 p-6 rounded-full">
+                <MessageCircle size={48} />
+              </div>
+            )}
             <p className="text-center text-slate-600 font-medium">
               {isLevel1 
                 ? (language === 'en' ? 'Complete the conversation by choosing the right responses.' : 'Complétez la conversation en choisissant les bonnes réponses.')
@@ -366,7 +394,14 @@ function ConversationContent() {
               const isVisible = isInteractive && !isFinished ? index <= stepIndex : index <= currentLineIndex || isFinished;
               if (!isVisible) return null;
               
-              const isSpeakerA = dialog.speaker === 'A';
+              const speakerInfo = (speakersConfig as any)[dialog.speaker] || {
+                name: dialog.speaker,
+                avatar: '/deedee-no-bg.png',
+                bubbleColor: 'bg-white border-slate-200 text-slate-800',
+                position: dialog.speaker === 'Tom' ? 'right' : 'left'
+              };
+              
+              const isRight = speakerInfo.position === 'right';
               
               // In Level 1, 2 and 3, if this is the current guess step, we show a waiting bubble or blank
               const isGuessingThisLine = !isFinished && index === stepIndex && 
@@ -377,32 +412,33 @@ function ConversationContent() {
               return (
                 <div 
                   key={index} 
-                  className={`message-bubble scroll-mt-20 flex w-full gap-3 py-1 ${isSpeakerA ? 'justify-start' : 'justify-end'} animate-in fade-in slide-in-from-bottom-4 duration-500`}
+                  className={`message-bubble scroll-mt-20 flex w-full gap-3 py-1 ${isRight ? 'justify-end flex-row-reverse' : 'justify-start'} animate-in fade-in slide-in-from-bottom-4 duration-500`}
                 >
-                  {/* Speaker A avatar */}
-                  {isSpeakerA && (
-                    <div className="flex-shrink-0 mt-2">
-                       <Image 
-                         src="/deedee-no-bg.png" 
-                         alt="Male avatar" 
-                         width={70} 
-                         height={70} 
-                         className="rounded-full border border-slate-200 object-cover bg-white shadow-sm"
-                         referrerPolicy="no-referrer"
-                       />
-                    </div>
-                  )}
+                  {/* Avatar */}
+                  <div className="flex-shrink-0 mt-6 flex flex-col items-center">
+                     <Image 
+                       src={speakerInfo.avatar} 
+                       alt={speakerInfo.name} 
+                       width={60} 
+                       height={60} 
+                       className={`rounded-full border object-cover bg-white shadow-sm ${
+                         isRight ? 'border-blue-200' : 'border-slate-200'
+                       }`}
+                       referrerPolicy="no-referrer"
+                     />
+                  </div>
 
                   {/* Speaker bubble */}
-                  <div className={`relative max-w-[75%] flex flex-col gap-2`}>
+                  <div className={`relative max-w-[75%] flex flex-col gap-1 ${isRight ? 'items-end' : 'items-start'}`}>
+                    <span className="text-xs font-bold text-slate-400 px-2 uppercase tracking-wide">
+                      {speakerInfo.name}
+                    </span>
                     <div 
                       className={`
                         p-4 rounded-3xl shadow-sm border-2
                         ${isGuessingThisLine
-                          ? 'bg-slate-100 border-slate-200 text-slate-400'
-                          : isSpeakerA 
-                            ? 'bg-white border-slate-200 text-slate-800 rounded-tl-sm' 
-                            : 'bg-orange-50 border-orange-200 text-orange-900 rounded-tr-sm'
+                          ? 'bg-slate-100 border-slate-200 text-slate-400 rounded-2xl'
+                          : `${speakerInfo.bubbleColor} ${isRight ? 'rounded-tr-sm' : 'rounded-tl-sm'}`
                         }
                         ${isActive ? 'ring-4 ring-orange-400 ring-opacity-50 !border-orange-400' : ''}
                         transition-all duration-300
@@ -430,16 +466,16 @@ function ConversationContent() {
                     {/* Replay button next to the bubble during review mode */}
                     {isFinished && (
                       <button 
-                        onClick={() => playThaiTTS(dialog.th)}
-                        className={`absolute ${isSpeakerA ? '-right-12' : '-left-12'} top-4 p-2 text-slate-400 hover:text-orange-500 hover:bg-orange-50 rounded-full transition-colors`}
+                         onClick={() => playThaiTTS(dialog.th)}
+                         className={`absolute ${isRight ? '-left-12' : '-right-12'} top-6 p-2 text-slate-400 hover:text-orange-500 hover:bg-orange-50 rounded-full transition-colors`}
                       >
-                        <Volume2 size={24} />
+                         <Volume2 size={24} />
                       </button>
                     )}
                     
                     {/* Phonetics and translation (shown when finished) */}
                     {(isFinished || (!isInteractive && index < currentLineIndex) || (isInteractive && index < stepIndex) || warnings.includes(index)) && !isGuessingThisLine && (
-                      <div className={`px-2 flex flex-col gap-1 ${isSpeakerA ? 'text-left' : 'text-right'}`}>
+                      <div className={`px-2 flex flex-col gap-1 ${isRight ? 'text-right' : 'text-left'}`}>
                         {warnings.includes(index) && (
                           <span className="text-xs font-bold text-red-500 bg-red-50 p-1 rounded inline-block w-fit mb-1">
                             ⚠️ {language === 'en' ? 'No exact word found in course.json' : 'Aucun mot exact trouvé dans course.json'}
@@ -452,20 +488,6 @@ function ConversationContent() {
                       </div>
                     )}
                   </div>
-
-                  {/* Speaker B avatar */}
-                  {!isSpeakerA && (
-                    <div className="flex-shrink-0 mt-2">
-                       <Image 
-                         src="/monkey-no-bg.png" 
-                         alt="Female avatar" 
-                         width={70} 
-                         height={70} 
-                         className="rounded-full border border-orange-200 object-cover bg-white shadow-sm"
-                         referrerPolicy="no-referrer"
-                       />
-                    </div>
-                  )}
                 </div>
               );
             })}
@@ -584,6 +606,9 @@ function ConversationContent() {
           </div>
         </div>
       )}
+            </motion.div>
+          )}
+        </AnimatePresence>
     </div>
   );
 }

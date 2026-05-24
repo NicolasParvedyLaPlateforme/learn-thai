@@ -13,6 +13,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { ColoredPhonetic } from '../../../../components/ColoredPhonetic';
 import { AlphabetCard } from '../../../../components/AlphabetCard';
 import { Suspense } from 'react';
+import { LoadingScreen } from "../../../../components/LoadingScreen";
 
 function AlphabetLessonContent() {
   const params = useParams();
@@ -45,6 +46,7 @@ function AlphabetLessonContent() {
 
   const [exercisesGeneratedFor, setExercisesGeneratedFor] = useState<{ id: string, level: number } | null>(null);
 
+  const [showExerciseUI, setShowExerciseUI] = useState(false);
   const [isClient, setIsClient] = useState(false);
   const [mistakes, setMistakes] = useState(0);
 
@@ -108,12 +110,17 @@ function AlphabetLessonContent() {
     }
   }, [lesson, router, currentLevel, language, completedLessons, _hasHydrated, lessonId, unlockedLessons, exercisesGeneratedFor]);
 
-  if (!isClient || !_hasHydrated || !lesson || exercises.length === 0) return <div className="p-8 text-center">Loading...</div>;
+  const isDataLoaded = isClient && _hasHydrated && !!lesson && exercises.length > 0;
 
-  const currentExercise = exercises[currentIndex];
-  const progress = (currentIndex / exercises.length) * 100;
+  if (!isDataLoaded && !showExerciseUI) {
+    // Need this block to prevent early access
+  }
+
+  const currentExercise = exercises.length > 0 ? exercises[currentIndex] : null;
+  const progress = exercises.length > 0 ? (currentIndex / exercises.length) * 100 : 0;
 
   const handleCheck = (overrideOpt?: any) => {
+    if (!currentExercise) return;
     // If it's intro or review phase, just proceed
     if (currentExercise.type === 'intro' || currentExercise.type === 'review') {
        if (currentExercise.type === 'intro' && !seenAlphabets.includes(currentExercise.item.letter)) {
@@ -152,7 +159,7 @@ function AlphabetLessonContent() {
        }
     } else {
        setMistakes(prev => prev + 1);
-       setLastPlayedLesson(lesson.id, "alphabet");
+       if (lesson) setLastPlayedLesson(lesson.id, "alphabet");
     }
   };
 
@@ -165,7 +172,7 @@ function AlphabetLessonContent() {
       setShowHint(false);
     } else {
       setIsFinished(true);
-      completeLesson(lesson.id, 15, currentLevel, earnedStars);
+      if (lesson) completeLesson(lesson.id, 15, currentLevel, earnedStars);
       confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }});
     }
   };
@@ -228,9 +235,10 @@ function AlphabetLessonContent() {
     );
   }
 
-  const showFooter = isChecking || currentExercise.type === 'intro' || currentExercise.type === 'review' || selectedOption !== null;
+  const showFooter = isChecking || (currentExercise && (currentExercise.type === 'intro' || currentExercise.type === 'review')) || selectedOption !== null;
 
   const renderExerciseContent = () => {
+    if (!currentExercise) return null;
     if (currentExercise.type === 'intro') {
       return (
         <div className="flex-1 flex flex-col items-center">
@@ -488,10 +496,25 @@ function AlphabetLessonContent() {
 
   return (
     <div className="h-[100dvh] flex flex-col bg-[#FAFAFA] font-sans text-slate-800 overflow-hidden relative">
+      <AnimatePresence mode="wait">
+        {!showExerciseUI ? (
+          <LoadingScreen 
+            key="loading-screen"
+            isLoadingData={!isDataLoaded} 
+            onReady={() => setShowExerciseUI(true)} 
+          />
+        ) : (
+          <motion.div
+            key="exercise-ui"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="flex-1 flex flex-col h-full w-full absolute inset-0"
+          >
       {/* Header */}
       <header className="h-16 px-4 md:px-8 flex items-center shrink-0 justify-between border-b border-slate-200 bg-white">
         <div className="flex items-center gap-4 md:gap-6 w-full max-w-4xl mx-auto flex-1">
-          <button onClick={() => router.push(`/alphabet#lesson-${lesson.id}`)} className="text-slate-400 hover:text-slate-600 transition-colors">
+          <button onClick={() => router.push(`/alphabet#lesson-${lesson?.id}`)} className="text-slate-400 hover:text-slate-600 transition-colors">
             <X size={24} strokeWidth={2.5} />
           </button>
           <div className="flex-1 h-3 bg-slate-100 rounded-full overflow-hidden">
@@ -501,7 +524,7 @@ function AlphabetLessonContent() {
             />
           </div>
           <div className="font-bold text-slate-400 flex items-center gap-3">
-             {lesson.type === 'consonant' 
+             {lesson?.type === 'consonant' 
                 ? (language === 'en' ? 'Consonants' : 'Consonnes')
                 : (language === 'en' ? 'Vowels' : 'Voyelles')}
           </div>
@@ -511,6 +534,7 @@ function AlphabetLessonContent() {
       {/* Main Exercise Area */}
       <main className="flex-1 overflow-y-auto hide-scrollbar flex flex-col py-6 md:py-12 px-4 w-full relative">
         <div className="w-full max-w-3xl mx-auto flex flex-col justify-center flex-1">
+          {currentExercise && (
           <AnimatePresence mode="wait">
             <motion.div 
               key={currentExercise.id}
@@ -523,6 +547,7 @@ function AlphabetLessonContent() {
                {renderExerciseContent()}
             </motion.div>
           </AnimatePresence>
+          )}
         </div>
       </main>
 
@@ -530,11 +555,12 @@ function AlphabetLessonContent() {
       <>
         <div className="shrink-0 min-h-[100px] md:min-h-[128px] w-full bg-transparent"></div>
         {(() => {
+          if (!currentExercise) return false;
           if (!isChecking && currentExercise.type !== 'intro' && currentExercise.type !== 'review') {
              return false;
           }
           return true;
-        })() && (
+        })() && currentExercise && (
         <AnimatePresence>
           {showFooter && (
             <motion.footer 
@@ -587,6 +613,9 @@ function AlphabetLessonContent() {
       </AnimatePresence>
       )}
       </>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

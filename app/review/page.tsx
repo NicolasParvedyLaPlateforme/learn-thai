@@ -8,6 +8,7 @@ import { Exercise, CourseData, Word } from '../types';
 import { X, Check, Settings, Play } from 'lucide-react';
 import { playThaiTTS, preloadThaiVoices } from '../lib/tts';
 import { motion, AnimatePresence } from 'motion/react';
+import { LoadingScreen } from '../components/LoadingScreen';
 
 // Exercise Components
 import WordMatch from '../lesson/[id]/components/WordMatch';
@@ -41,6 +42,7 @@ export default function ReviewPage() {
   const [selectedAnswer, setSelectedAnswer] = useState<string | string[] | null>(null);
   const [isChecking, setIsChecking] = useState(false);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
+  const [showExerciseUI, setShowExerciseUI] = useState(false);
 
   const [mounted, setMounted] = useState(false);
   const [allWords, setAllWords] = useState<Word[]>([]);
@@ -174,13 +176,18 @@ export default function ReviewPage() {
     );
   }
 
-  if (exercises.length === 0) return <div className="p-8 text-center text-slate-500 font-medium">{language === 'en' ? 'Loading...' : 'Chargement...'}</div>;
+  const isDataLoaded = exercises.length > 0;
 
-  const currentExercise = exercises[currentIndex];
+  if (!isDataLoaded && !showExerciseUI) {
+    // Early return prevention
+  }
+
+  const currentExercise = exercises[currentIndex] || null;
   // Since it's endless, the progress is just cosmetic, let's keep it fixed or bouncing
   const progress = ((currentIndex % 10) / 10) * 100;
 
   const handleCheck = (overrideAnswer?: string | string[]) => {
+    if (!currentExercise) return;
     if (isChecking) {
       // Move to next exercise
       if (isCorrect) {
@@ -225,7 +232,7 @@ export default function ReviewPage() {
     playThaiTTS(currentExercise.answer);
   };
 
-  const isAnswerComplete = currentExercise.type === 'sentence-builder' && currentExercise.correctComponents
+  const isAnswerComplete = currentExercise && currentExercise.type === 'sentence-builder' && currentExercise.correctComponents
       ? Array.isArray(selectedAnswer) && selectedAnswer.length === currentExercise.correctComponents.filter(c => c !== 'w_dots').length
       : selectedAnswer !== null && (!Array.isArray(selectedAnswer) || (selectedAnswer as any[]).length > 0);
 
@@ -233,6 +240,21 @@ export default function ReviewPage() {
 
   return (
     <div className="h-[100dvh] flex flex-col bg-[#FAFAFA] font-sans text-slate-800 overflow-hidden relative">
+      <AnimatePresence mode="wait">
+        {!showExerciseUI ? (
+          <LoadingScreen 
+            key="loading-screen"
+            isLoadingData={!isDataLoaded} 
+            onReady={() => setShowExerciseUI(true)} 
+          />
+        ) : (
+          <motion.div
+            key="exercise-ui"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="flex-1 flex flex-col h-full w-full absolute inset-0"
+          >
       {/* Header / Progress bar */}
       <header className="h-16 flex items-center shrink-0 justify-between border-b border-slate-200 bg-white">
         <div className="flex items-center gap-6 w-full max-w-2xl mx-auto h-full px-4 flex-1">
@@ -251,6 +273,7 @@ export default function ReviewPage() {
 
       {/* Main Exercise Area */}
       <main className="flex-1 overflow-y-auto hide-scrollbar flex flex-col items-center py-2 sm:py-6 md:py-12 px-4 w-full">
+        {currentExercise && (
         <div className="w-full max-w-3xl flex flex-col justify-center flex-1">
         
           {/* The Question / Hint System */}
@@ -303,12 +326,14 @@ export default function ReviewPage() {
             )}
           </div>
         </div>
+        )}
       </main>
 
       {/* Footer Actions */}
       <>
         <div className="shrink-0 min-h-[100px] md:min-h-[128px] w-full bg-transparent"></div>
         {(() => {
+          if (!currentExercise) return false;
           if (!isChecking && (currentExercise.type === "word-match" || currentExercise.type === "sentence-builder" || currentExercise.type === "writing")) {
              return false;
           }
@@ -332,7 +357,7 @@ export default function ReviewPage() {
                     {language === 'en' ? 'Excellent!' : 'Excellent !'}
                   </div>
                 )}
-                {isChecking && !isCorrect && (
+                {isChecking && !isCorrect && currentExercise && (
                   <div className="flex flex-col text-rose-600 font-extrabold text-xl gap-1 items-center sm:items-start">
                     <div className="flex items-center gap-3">
                       <div className="bg-white text-rose-500 rounded-full p-1"><X size={24} strokeWidth={3} /></div>
@@ -348,7 +373,7 @@ export default function ReviewPage() {
 
               <button
                 onClick={() => handleCheck()}
-                disabled={!isChecking && (!selectedAnswer || (Array.isArray(selectedAnswer) && (currentExercise.type === 'sentence-builder' && currentExercise.correctComponents ? selectedAnswer.length !== currentExercise.correctComponents.length : selectedAnswer.length === 0)))}
+                disabled={!isChecking && (!selectedAnswer || (Array.isArray(selectedAnswer) && (currentExercise?.type === 'sentence-builder' && currentExercise?.correctComponents ? selectedAnswer.length !== currentExercise.correctComponents.length : selectedAnswer.length === 0)))}
                 className={`w-full sm:w-auto px-12 py-3 rounded-xl border-b-4 font-bold text-lg shadow-lg hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest disabled:opacity-50 disabled:scale-100 disabled:shadow-none
                   ${isChecking 
                     ? (isCorrect 
@@ -365,6 +390,9 @@ export default function ReviewPage() {
       </AnimatePresence>
       )}
       </>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

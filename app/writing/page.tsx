@@ -12,6 +12,8 @@ import VirtualKeyboard from './components/VirtualKeyboard';
 import { SentenceWithHints } from '../components/Hints';
 import { formatCombiningChar } from '../lib/alphabet-utils';
 import { getWritingExercisesServer, getDictionaryForExerciseServer, getPhrasesForExerciseServer } from '../actions/course';
+import { LoadingScreen } from '../components/LoadingScreen';
+import { AnimatePresence, motion } from "motion/react";
 
 export default function WritingPage() {
   const router = useRouter();
@@ -24,6 +26,7 @@ export default function WritingPage() {
   const [selectedAnswer, setSelectedAnswer] = useState<string[]>([]);
   const [isChecking, setIsChecking] = useState(false);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
+  const [showExerciseUI, setShowExerciseUI] = useState(false);
 
   const [mounted, setMounted] = useState(false);
   
@@ -94,13 +97,18 @@ export default function WritingPage() {
     );
   }
 
-  if (exercises.length === 0) return <div className="p-8 text-center text-slate-500 font-medium">{language === 'en' ? 'Generating exercises...' : 'Génération des exercices...'}</div>;
+  const isDataLoaded = mounted && exercises.length > 0;
 
-  const currentExercise = exercises[currentIndex];
+  if (!isDataLoaded && !showExerciseUI) {
+     // prevent early render
+  }
+
+  const currentExercise = exercises[currentIndex] || null;
   // Loop back or refill if needed
   const progress = ((currentIndex % 10) / 10) * 100;
 
   const handleCheck = (overrideAnswer?: string[]) => {
+    if (!currentExercise) return;
     if (isChecking) {
       if (isCorrect) {
           completeLesson('writing-dummy', 1);
@@ -151,6 +159,21 @@ export default function WritingPage() {
 
   return (
     <div className="h-[100dvh] flex flex-col bg-[#FAFAFA] font-sans text-slate-800 overflow-hidden relative">
+      <AnimatePresence mode="wait">
+        {!showExerciseUI ? (
+          <LoadingScreen 
+            key="loading-screen"
+            isLoadingData={!isDataLoaded} 
+            onReady={() => setShowExerciseUI(true)} 
+          />
+        ) : (
+          <motion.div
+            key="exercise-ui"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="flex-1 flex flex-col h-full w-full absolute inset-0"
+          >
       {/* Header */}
       <header className="h-16 flex items-center shrink-0 justify-between border-b border-slate-200 bg-white">
         <div className="flex items-center gap-6 w-full max-w-2xl mx-auto h-full px-4 flex-1">
@@ -184,6 +207,7 @@ export default function WritingPage() {
 
       {/* Main Area */}
       <main className="flex-1 overflow-y-auto hide-scrollbar flex flex-col items-center py-2 sm:py-6 md:py-12 px-4 w-full">
+        {currentExercise && (
         <div className="w-full max-w-3xl flex flex-col justify-center flex-1">
         
           <div className="flex items-start gap-4 md:gap-8 mb-4 md:mb-8">
@@ -349,6 +373,7 @@ export default function WritingPage() {
             />
           </div>
         </div>
+        )}
       </main>
 
       {/* Footer */}
@@ -389,6 +414,9 @@ export default function WritingPage() {
         </footer>
         )}
       </>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
