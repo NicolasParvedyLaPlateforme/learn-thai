@@ -8992,8 +8992,8 @@
           "id": "w_kao",
           "th": "เก่า",
           "phonetic": "kào",
-          "fr": "vieux",
-          "en": "old",
+          "fr": "vieux (objet)",
+          "en": "old (object)",
           "allowIdenticalTranslation": false,
           "imageUrl": "/images/w_w_kao.svg"
         },
@@ -9874,113 +9874,118 @@
     },
     {
       "id": "lesson-45",
-      "title": "Famille proche",
+      "title": "Famille 1 : Enfants et Amis",
       "description": "Enfants, frères",
       "words": [
         {
           "id": "w_luk",
           "th": "ลูก",
-          "fr": "enfant (son enfant)",
           "phonetic": "lûuk",
-          "en": "child (his child)",
-          "imageUrl": "/images/w_w_luk.svg"
+          "fr": "enfant (le sien)",
+          "en": "child (one's own)",
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "w_dek_2",
-          "th": "เด็ก",
-          "fr": "enfant (général)",
-          "phonetic": "dèk",
-          "en": "child (general)",
-          "imageUrl": "/images/w_w_dek_2.svg"
+          "id": "w_khrop_khrua",
+          "th": "ครอบครัว",
+          "phonetic": "khrôop khrua",
+          "fr": "famille",
+          "en": "family",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_sanit",
+          "th": "สนิท",
+          "phonetic": "sà-nìt",
+          "fr": "proche (relation)",
+          "en": "close (relationship)",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_faen",
+          "th": "แฟน",
+          "phonetic": "faen",
+          "fr": "petit(e) ami(e)",
+          "en": "boyfriend / girlfriend",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_lan",
+          "th": "หลาน",
+          "phonetic": "lǎan",
+          "fr": "petit-enfant / neveu / nièce",
+          "en": "grandchild / nephew / niece",
+          "allowIdenticalTranslation": false
         }
       ],
       "phrases": [
         {
-          "id": "p_my_friend",
-          "th": "เพื่อนผม",
-          "fr": "mon ami",
-          "phonetic": "phûean phǒm",
-          "components": [
-            "w_phuean",
-            "w_phom"
-          ],
-          "en": "my friend",
-          "imageUrl": "/images/p_p_my_friend.svg"
-        },
-        {
-          "id": "p_four_friends",
-          "th": "เพื่อนสี่คน",
-          "fr": "quatre amis",
-          "phonetic": "phûean sìi khon",
-          "components": [
-            "w_phuean",
-            "w_4",
-            "w_khon"
-          ],
-          "en": "four friends",
-          "imageUrl": "/images/p_p_four_friends.svg"
-        },
-        {
-          "id": "p_one_child",
-          "th": "ลูกหนึ่งคน",
-          "fr": "un enfant",
-          "phonetic": "lûuk nùeng khon",
+          "id": "p_my_child_kind",
+          "th": "ลูกของผมใจดี",
+          "phonetic": "lûuk khǒong phǒm jai dii",
+          "fr": "mon enfant est gentil",
+          "en": "my child is kind",
           "components": [
             "w_luk",
-            "w_1",
-            "w_khon"
+            "w_khong_of",
+            "w_phom",
+            "w_jai_dee"
           ],
-          "en": "a child",
-          "imageUrl": "/images/p_p_one_child.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_friend_eat",
-          "th": "เพื่อนกินข้าว",
-          "fr": "l'ami mange",
-          "phonetic": "phûean kin khâao",
+          "id": "p_my_close_friend",
+          "th": "เพื่อนสนิทของฉัน",
+          "phonetic": "phûean sà-nìt khǒong chǎn",
+          "fr": "mon ami proche",
+          "en": "my close friend",
           "components": [
             "w_phuean",
-            "w_kin",
-            "w_khao"
+            "w_sanit",
+            "w_khong_of",
+            "w_chan"
           ],
-          "en": "the friend eats",
-          "imageUrl": "/images/p_p_friend_eat.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_child_play",
-          "th": "เด็กเล่น",
-          "fr": "l'enfant joue",
-          "phonetic": "dèk lên",
+          "id": "p_i_have_family",
+          "th": "ผมมีครอบครัว",
+          "phonetic": "phǒm mii khrôop khrua",
+          "fr": "j'ai une famille",
+          "en": "I have a family",
           "components": [
-            "w_dek",
-            "w_len"
+            "w_phom",
+            "w_mee",
+            "w_khrop_khrua"
           ],
-          "en": "the child is playing",
-          "imageUrl": "/images/p_p_child_play.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_my_child",
-          "th": "ลูกผม",
-          "fr": "mon enfant",
-          "phonetic": "lûuk phǒm",
+          "id": "p_my_partner",
+          "th": "แฟนของผม",
+          "phonetic": "faen khǒong phǒm",
+          "fr": "mon petit ami / ma petite amie",
+          "en": "my boyfriend / my girlfriend",
           "components": [
-            "w_luk",
+            "w_faen",
+            "w_khong_of",
             "w_phom"
           ],
-          "en": "my child",
-          "imageUrl": "/images/p_p_my_child.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_where_friend",
-          "th": "เพื่อนที่ไหน",
-          "fr": "où est l'ami ?",
-          "phonetic": "phûean thîi nǎi",
+          "id": "p_grandchild_plays_with_friend",
+          "th": "หลานเล่นกับเพื่อน",
+          "phonetic": "lǎan lên kàp phûean",
+          "fr": "le petit-enfant joue avec l'ami",
+          "en": "the grandchild plays with the friend",
           "components": [
-            "w_phuean",
-            "w_thi_nai"
+            "w_lan",
+            "w_len",
+            "w_kap",
+            "w_phuean"
           ],
-          "en": "where is the friend?",
-          "imageUrl": "/images/p_p_where_friend.svg"
+          "allowIdenticalTranslation": false
         }
       ],
       "titleEn": "Close family",
@@ -9989,7 +9994,7 @@
     },
     {
       "id": "lesson-46",
-      "title": "Le corps",
+      "title": "Le Corps Humain",
       "description": "Oeil, bouche, main",
       "words": [
         {
@@ -10085,101 +10090,111 @@
     },
     {
       "id": "lesson-47",
-      "title": "Apparence physique",
+      "title": "Apparence 1 : Tailles et Formes",
       "description": "Grand, petit, gros",
       "words": [
         {
-          "id": "w_sung",
-          "th": "สูง",
-          "fr": "grand (taille)",
-          "phonetic": "sǔung",
-          "en": "large (size)",
-          "imageUrl": "/images/w_w_sung.svg"
-        },
-        {
           "id": "w_uan",
           "th": "อ้วน",
-          "fr": "gros",
           "phonetic": "ûuan",
+          "fr": "gros",
           "en": "fat",
-          "imageUrl": "/images/w_w_uan.svg"
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_phom_mince",
+          "th": "ผอม",
+          "phonetic": "phǒm",
+          "fr": "mince",
+          "en": "thin",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_klom",
+          "th": "กลม",
+          "phonetic": "glom",
+          "fr": "rond",
+          "en": "round",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_baen",
+          "th": "แบน",
+          "phonetic": "baen",
+          "fr": "plat",
+          "en": "flat",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_rup_rang",
+          "th": "รูปร่าง",
+          "phonetic": "rûup-râang",
+          "fr": "silhouette",
+          "en": "figure",
+          "allowIdenticalTranslation": false
         }
       ],
       "phrases": [
         {
-          "id": "p_he_is_tall",
-          "th": "เขาสูง",
-          "fr": "il est grand",
-          "phonetic": "kháo sǔung",
-          "components": [
-            "w_khao_pron",
-            "w_sung"
-          ],
-          "en": "he is tall",
-          "imageUrl": "/images/p_p_he_is_tall.svg"
-        },
-        {
-          "id": "p_she_short",
-          "th": "เขาเตี้ย",
-          "fr": "il est petit (taille)",
-          "phonetic": "kháo dtîia",
-          "components": [
-            "w_khao_pron",
-            "w_tia"
-          ],
-          "en": "he is short (size)",
-          "imageUrl": "/images/p_p_she_short.svg"
-        },
-        {
-          "id": "p_fat_cat",
+          "id": "p_he_is_fat",
           "th": "เขาอ้วน",
-          "fr": "il est gros",
           "phonetic": "kháo ûuan",
+          "fr": "il est gros",
+          "en": "he is fat",
           "components": [
             "w_khao_pron",
             "w_uan"
           ],
-          "en": "he is fat",
-          "imageUrl": "/images/p_p_fat_cat.svg"
-        },
-        {
-          "id": "p_tall_friend",
-          "th": "เพื่อนตัวสูง",
-          "fr": "ami de grande taille",
-          "phonetic": "phûean dtua sǔung",
-          "components": [
-            "w_phuean",
-            "w_dtua",
-            "w_sung"
-          ],
-          "en": "tall friend",
-          "imageUrl": "/images/p_p_tall_friend.svg"
+          "allowIdenticalTranslation": false
         },
         {
           "id": "p_not_fat",
           "th": "ไม่อ้วน",
-          "fr": "pas gros",
           "phonetic": "mâi ûuan",
+          "fr": "pas gros",
+          "en": "not fat",
           "components": [
             "w_mai_neg",
             "w_uan"
           ],
-          "en": "not fat",
-          "imageUrl": "/images/p_p_not_fat.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_2c7f76",
-          "th": "เพื่อนตัวสูงมาก",
-          "fr": "Mon ami est très grand",
-          "en": "My friend is very tall",
-          "phonetic": "phûean dtua sǔung mâak",
+          "id": "p_very_thin",
+          "th": "เขาผอมมาก",
+          "phonetic": "kháo phǒm mâak",
+          "fr": "il est très mince",
+          "en": "he is very thin",
           "components": [
-            "w_phuean",
-            "w_dtua",
-            "w_sung",
+            "w_khao_pron",
+            "w_phom_mince",
             "w_mak"
           ],
-          "imageUrl": "/images/p_p_2c7f76.svg"
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_round_table",
+          "th": "โต๊ะกลม",
+          "phonetic": "dtó glom",
+          "fr": "table ronde",
+          "en": "round table",
+          "components": [
+            "w_dto",
+            "w_klom"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_good_figure",
+          "th": "รูปร่างดี",
+          "phonetic": "rûup-râang dii",
+          "fr": "belle silhouette",
+          "en": "good figure",
+          "components": [
+            "w_rup_rang",
+            "w_dee"
+          ],
+          "allowIdenticalTranslation": false
         }
       ],
       "titleEn": "Physical appearance",
@@ -10188,7 +10203,7 @@
     },
     {
       "id": "lesson-48",
-      "title": "Caractère",
+      "title": "Caractère et Études",
       "description": "Gentil, amusant",
       "words": [
         {
@@ -10276,7 +10291,7 @@
     },
     {
       "id": "lesson-49-a1",
-      "title": "Ext: Aînés",
+      "title": "Famille 2 : Les Aînés",
       "description": "Plus de vocabulaire pour cette unité.",
       "titleEn": "Ext: Elders",
       "descriptionEn": "More vocabulary for this unit.",
@@ -10381,105 +10396,127 @@
     },
     {
       "id": "lesson-49-a2",
-      "title": "Ext: Parenté",
+      "title": "Famille 3 : La Parenté",
       "description": "Plus de vocabulaire pour cette unité.",
       "titleEn": "Ext: Relatives",
       "descriptionEn": "More vocabulary for this unit.",
       "words": [
         {
-          "id": "w_lesson-49-a2_0",
+          "id": "w_paa",
           "th": "ป้า",
-          "fr": "tante",
-          "en": "aunt",
           "phonetic": "pâa",
-          "imageUrl": "/images/w_w_lesson-49-a2_0.svg"
+          "fr": "tante (sœur aînée des parents)",
+          "en": "aunt (parents' older sister)",
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "w_lesson-49-a2_1",
+          "id": "w_luk_phi_luk_nong",
           "th": "ลูกพี่ลูกน้อง",
-          "fr": "cousin",
-          "en": "cousin",
           "phonetic": "lûuk-phîi-lûuk-nɔ́ɔng",
-          "imageUrl": "/images/w_w_lesson-49-a2_1.svg",
-          "allowIdenticalTranslation": true
+          "fr": "cousin, cousine",
+          "en": "cousin",
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "w_lesson-49-a2_2",
-          "th": "หลาน",
-          "fr": "neveu/petit-fils",
-          "en": "nephew",
-          "phonetic": "lǎan",
-          "imageUrl": "/images/w_w_lesson-49-a2_2.svg"
+          "id": "w_aa",
+          "th": "อา",
+          "phonetic": "aa",
+          "fr": "oncle/tante (cadet du père)",
+          "en": "uncle/aunt (father's younger sibling)",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_naa",
+          "th": "น้า",
+          "phonetic": "náa",
+          "fr": "oncle/tante (cadet de la mère)",
+          "en": "uncle/aunt (mother's younger sibling)",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_yaai",
+          "th": "ยาย",
+          "phonetic": "yaai",
+          "fr": "grand-mère (maternelle)",
+          "en": "grandmother (maternal)",
+          "allowIdenticalTranslation": false
         }
       ],
       "phrases": [
         {
-          "id": "p_new_lesson-49-a2_0",
-          "th": "ป้ารักหลาน",
-          "fr": "La tante aime son neveu",
-          "en": "Aunt loves nephew",
-          "phonetic": "pâa rák lǎan",
+          "id": "p_yaai_jai_dee",
+          "th": "ยายใจดีมาก",
+          "phonetic": "yaai cai-dii mâak",
+          "fr": "Grand-mère est très gentille.",
+          "en": "Grandmother is very kind.",
           "components": [
-            "w_lesson-49-a2_0",
-            "w_rak",
-            "w_lesson-49-a2_2"
+            "w_yaai",
+            "w_jai_dee",
+            "w_mak"
           ],
-          "imageUrl": "/images/p_p_new_lesson-49-a2_0.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_new_lesson-49-a2_1",
-          "th": "ลูกพี่ลูกน้องมา",
-          "fr": "Le cousin vient",
-          "en": "Cousin comes",
-          "phonetic": "lûuk-phîi-lûuk-nóong maa",
+          "id": "p_paa_pai_baan",
+          "th": "ป้าไปบ้านยาย",
+          "phonetic": "pâa pai bâan yaai",
+          "fr": "Tante va à la maison de grand-mère.",
+          "en": "Aunt goes to grandmother's house.",
           "components": [
-            "w_lesson-49-a2_1",
-            "w_maa"
+            "w_paa",
+            "w_pai",
+            "w_baan",
+            "w_yaai"
           ],
-          "imageUrl": "/images/p_p_new_lesson-49-a2_1.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_new_lesson-49-a2_2",
-          "th": "มีหลาน",
-          "fr": "Avoir un neveu",
-          "en": "Have a nephew",
-          "phonetic": "mii lǎan",
+          "id": "p_luk_phi_luk_nong_khong_phom",
+          "th": "ลูกพี่ลูกน้องของผม",
+          "phonetic": "lûuk-phîi-lûuk-nɔ́ɔng khɔ̌ɔng phǒm",
+          "fr": "Mon cousin.",
+          "en": "My cousin.",
           "components": [
-            "w_mee",
-            "w_lesson-49-a2_2"
+            "w_luk_phi_luk_nong",
+            "w_khong_of",
+            "w_phom"
           ],
-          "imageUrl": "/images/p_p_new_lesson-49-a2_2.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_new_lesson-49-a2_3",
-          "th": "ป้าใจดี",
-          "fr": "Tante gentille",
-          "en": "Nice aunt",
-          "phonetic": "pâa cai-dii",
+          "id": "p_aa_chop_kin_khao",
+          "th": "อาชอบกินข้าว",
+          "phonetic": "aa chɔ̂ɔp kin khâao",
+          "fr": "L'oncle aime manger du riz.",
+          "en": "Uncle likes to eat rice.",
           "components": [
-            "w_lesson-49-a2_0",
-            "w_jai_dee"
+            "w_aa",
+            "w_chop",
+            "w_kin",
+            "w_khao"
           ],
-          "imageUrl": "/images/p_p_new_lesson-49-a2_3.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_new_lesson-49-a2_4",
-          "th": "ให้หลาน",
-          "fr": "Donner au neveu",
-          "en": "Give to nephew",
-          "phonetic": "hâi lǎan",
+          "id": "p_naa_maa_haa_rao",
+          "th": "น้ามาหาเรา",
+          "phonetic": "náa maa hǎa rao",
+          "fr": "La tante vient nous voir.",
+          "en": "Aunt comes to see us.",
           "components": [
-            "w_hai",
-            "w_lesson-49-a2_2"
+            "w_naa",
+            "w_maa",
+            "w_ha",
+            "w_rao"
           ],
-          "imageUrl": "/images/p_p_new_lesson-49-a2_4.svg"
+          "allowIdenticalTranslation": false
         }
       ],
       "imageUrl": "/images/default-lesson.svg"
     },
     {
       "id": "lesson-49-a3",
-      "title": "Ext: Beauté",
+      "title": "Identité et Beauté",
       "description": "Plus de vocabulaire pour cette unité.",
       "titleEn": "Ext: Beauty",
       "descriptionEn": "More vocabulary for this unit.",
@@ -10571,174 +10608,227 @@
     },
     {
       "id": "lesson-49-a4",
-      "title": "Ext: Corpulence",
+      "title": "Apparence 2 : Nuances",
       "description": "Plus de vocabulaire pour cette unité.",
       "titleEn": "Ext: Body shape",
       "descriptionEn": "More vocabulary for this unit.",
       "words": [
         {
-          "id": "w_lesson-49-a4_1",
-          "th": "ผอม",
-          "fr": "mince",
-          "en": "thin",
-          "phonetic": "phɔ̌ɔm",
-          "imageUrl": "/images/w_w_lesson-49-a4_1.svg"
+          "id": "w_maew",
+          "th": "แมว",
+          "phonetic": "maew",
+          "fr": "chat",
+          "en": "cat",
+          "allowIdenticalTranslation": false
         },
         {
-          "th": "แมว",
-          "en": "cat",
-          "id": "w_maew",
-          "fr": "chat",
-          "phonetic": "maew",
-          "imageUrl": "/images/w_w_maew.svg"
+          "id": "w_kae",
+          "th": "แก่",
+          "phonetic": "kàe",
+          "fr": "vieux",
+          "en": "old",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_sao_young",
+          "th": "สาว",
+          "phonetic": "sǎao",
+          "fr": "jeune femme",
+          "en": "young woman",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_piu",
+          "th": "ผิว",
+          "phonetic": "phǐw",
+          "fr": "peau",
+          "en": "skin",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_na_face",
+          "th": "หน้า",
+          "phonetic": "nâa",
+          "fr": "visage",
+          "en": "face",
+          "allowIdenticalTranslation": false
         }
       ],
       "phrases": [
         {
-          "id": "p_new_lesson-49-a4_1",
+          "id": "p_maew_uan",
           "th": "แมวอ้วน",
+          "phonetic": "maew ûuan",
           "fr": "Un gros chat",
           "en": "Fat cat",
-          "phonetic": "maaeo ûuan",
           "components": [
             "w_maew",
             "w_uan"
           ],
-          "imageUrl": "/images/p_p_new_lesson-49-a4_1.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_new_lesson-49-a4_2",
-          "th": "เขาผอม",
-          "fr": "Il est mince",
-          "en": "He is thin",
-          "phonetic": "khǎo phǒom",
+          "id": "p_phuchai_kae",
+          "th": "ผู้ชายแก่",
+          "phonetic": "phûu-chaai kàe",
+          "fr": "Un vieil homme",
+          "en": "Old man",
+          "components": [
+            "w_phuchai",
+            "w_kae"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_piu_si_khao",
+          "th": "ผิวสีขาว",
+          "phonetic": "phǐw sǐi khǎao",
+          "fr": "Peau blanche",
+          "en": "White skin",
+          "components": [
+            "w_piu",
+            "w_see_color",
+            "w_khao_color"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_na_suai",
+          "th": "หน้าสวย",
+          "phonetic": "nâa sǔuai",
+          "fr": "Un beau visage",
+          "en": "Beautiful face",
+          "components": [
+            "w_na_face",
+            "w_suay"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_khao_yang_sao",
+          "th": "เขายังสาว",
+          "phonetic": "khǎo yang sǎao",
+          "fr": "Elle est encore jeune",
+          "en": "She is still young",
           "components": [
             "w_khao_pron",
-            "w_lesson-49-a4_1"
+            "w_yang",
+            "w_sao_young"
           ],
-          "imageUrl": "/images/p_p_new_lesson-49-a4_2.svg"
-        },
-        {
-          "id": "p_new_lesson-49-a4_3",
-          "th": "อยากสูง",
-          "fr": "Vouloir être grand",
-          "en": "Want to be tall",
-          "phonetic": "yàak sǔung",
-          "components": [
-            "w_yak",
-            "w_sung"
-          ],
-          "imageUrl": "/images/p_p_new_lesson-49-a4_3.svg"
-        },
-        {
-          "id": "p_new_lesson-49-a4_4",
-          "th": "อ้วนมาก",
-          "fr": "Très gros",
-          "en": "Very fat",
-          "phonetic": "ûuan mâak",
-          "components": [
-            "w_uan",
-            "w_mak"
-          ],
-          "imageUrl": "/images/p_p_new_lesson-49-a4_4.svg"
+          "allowIdenticalTranslation": false
         }
       ],
       "imageUrl": "/images/body.svg"
     },
     {
       "id": "lesson-49-a5",
-      "title": "Ext: Qualités",
+      "title": "Qualités et Intelligence",
       "description": "Plus de vocabulaire pour cette unité.",
-      "titleEn": "Ext: Qualities",
+      "titleEn": "Qualities",
       "descriptionEn": "More vocabulary for this unit.",
       "words": [
         {
-          "id": "w_lesson-49-a5_1",
+          "id": "w_chalaat",
           "th": "ฉลาด",
+          "phonetic": "chà-làat",
           "fr": "intelligent",
           "en": "clever",
-          "phonetic": "chà-làat",
-          "imageUrl": "/images/w_w_lesson-49-a5_1.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "w_lesson-49-a5_2",
+          "id": "w_ngoo",
           "th": "โง่",
-          "fr": "bête",
-          "en": "stupid",
           "phonetic": "ngôo",
-          "imageUrl": "/images/w_w_lesson-49-a5_2.svg"
+          "fr": "stupide",
+          "en": "stupid",
+          "allowIdenticalTranslation": false
         },
         {
+          "id": "w_maa_dog",
           "th": "หมา",
-          "en": "dog",
-          "id": "w_ma_dog",
-          "fr": "chien",
           "phonetic": "mǎa",
-          "imageUrl": "/images/w_w_ma_dog.svg"
+          "fr": "chien",
+          "en": "dog",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_khayan",
+          "th": "ขยัน",
+          "phonetic": "khà-yǎn",
+          "fr": "travailleur",
+          "en": "hardworking",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_khiikiat",
+          "th": "ขี้เกียจ",
+          "phonetic": "khîi-kìat",
+          "fr": "paresseux",
+          "en": "lazy",
+          "allowIdenticalTranslation": false
         }
       ],
       "phrases": [
         {
-          "id": "p_new_lesson-49-a5_0",
-          "th": "คนเตี้ย",
-          "fr": "Une personne petite",
-          "en": "Short person",
-          "phonetic": "khon tîia",
-          "components": [
-            "w_khon",
-            "w_tia"
-          ],
-          "imageUrl": "/images/p_p_new_lesson-49-a5_0.svg"
-        },
-        {
-          "id": "p_new_lesson-49-a5_1",
+          "id": "p_clever_dog",
           "th": "หมาฉลาด",
+          "phonetic": "mǎa chà-làat",
           "fr": "Un chien intelligent",
           "en": "Clever dog",
-          "phonetic": "mǎa chà-làat",
           "components": [
-            "w_ma_dog",
-            "w_lesson-49-a5_1"
+            "w_maa_dog",
+            "w_chalaat"
           ],
-          "imageUrl": "/images/p_p_new_lesson-49-a5_1.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_new_lesson-49-a5_2",
+          "id": "p_not_stupid",
           "th": "ไม่โง่",
+          "phonetic": "mâi ngôo",
           "fr": "Pas stupide",
           "en": "Not stupid",
-          "phonetic": "mâi ngôo",
           "components": [
             "w_mai_neg",
-            "w_lesson-49-a5_2"
+            "w_ngoo"
           ],
-          "imageUrl": "/images/p_p_new_lesson-49-a5_2.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_new_lesson-49-a5_3",
+          "id": "p_he_very_clever",
           "th": "เขาฉลาดมาก",
+          "phonetic": "khǎo chà-làat mâak",
           "fr": "Il est très intelligent",
           "en": "He is very clever",
-          "phonetic": "khǎo chà-làat mâak",
           "components": [
             "w_khao_pron",
-            "w_lesson-49-a5_1",
+            "w_chalaat",
             "w_mak"
           ],
-          "imageUrl": "/images/p_p_new_lesson-49-a5_3.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_new_lesson-49-a5_4",
-          "th": "คนนั้นเก่ง",
-          "fr": "Cette personne est excellente",
-          "en": "That person is great",
-          "phonetic": "khon nán kèng",
+          "id": "p_hardworking_student",
+          "th": "นักเรียนขยัน",
+          "phonetic": "nák-rian khà-yǎn",
+          "fr": "Un étudiant travailleur",
+          "en": "A hardworking student",
+          "components": [
+            "w_nak_rian",
+            "w_khayan"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_lazy_person",
+          "th": "คนขี้เกียจ",
+          "phonetic": "khon khîi-kìat",
+          "fr": "Une personne paresseuse",
+          "en": "A lazy person",
           "components": [
             "w_khon",
-            "w_nan",
-            "w_kreng"
+            "w_khiikiat"
           ],
-          "imageUrl": "/images/p_p_new_lesson-49-a5_4.svg"
+          "allowIdenticalTranslation": false
         }
       ],
       "imageUrl": "/images/default-lesson.svg"
