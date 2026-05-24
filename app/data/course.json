@@ -9541,8 +9541,8 @@
           "id": "w_bang",
           "th": "บาง",
           "phonetic": "baang",
-          "fr": "fin / mince",
-          "en": "thin",
+          "fr": "fin / mince (objet)",
+          "en": "thin (object)",
           "allowIdenticalTranslation": false,
           "imageUrl": "/images/w_w_bang.svg"
         }
@@ -10485,17 +10485,9 @@
       "descriptionEn": "More vocabulary for this unit.",
       "words": [
         {
-          "id": "w_lesson-49-a3_0",
-          "th": "สวย",
-          "fr": "belle",
-          "en": "beautiful",
-          "phonetic": "sǔay",
-          "imageUrl": "/images/w_w_lesson-49-a3_0.svg"
-        },
-        {
           "id": "w_lesson-49-a3_1",
           "th": "หล่อ",
-          "fr": "beau",
+          "fr": "beau (charisme)",
           "en": "handsome",
           "phonetic": "lɔ̀ɔ",
           "imageUrl": "/images/w_w_lesson-49-a3_1.svg"
@@ -10602,18 +10594,6 @@
         }
       ],
       "phrases": [
-        {
-          "id": "p_new_lesson-49-a4_0",
-          "th": "คนสูง",
-          "fr": "Une grande personne",
-          "en": "Tall person",
-          "phonetic": "khon sǔung",
-          "components": [
-            "w_khon",
-            "w_sung"
-          ],
-          "imageUrl": "/images/p_p_new_lesson-49-a4_0.svg"
-        },
         {
           "id": "p_new_lesson-49-a4_1",
           "th": "แมวอ้วน",
@@ -11165,7 +11145,7 @@
           "components": [
             "w_lesson-54-a1_1",
             "w_yuu",
-            "w_nai_which"
+            "w_which"
           ],
           "imageUrl": "/images/p_p_new_lesson-54-a1_2.svg"
         },
