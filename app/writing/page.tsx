@@ -153,7 +153,7 @@ export default function WritingPage() {
   };
 
   const nextCharIdx = selectedAnswer.length;
-  const charHint = currentExercise.correctComponents && nextCharIdx < currentExercise.correctComponents.length
+  const charHint = currentExercise?.correctComponents && nextCharIdx < currentExercise.correctComponents.length
     ? getCharacterHint(currentExercise.correctComponents, nextCharIdx)
     : undefined;
 
