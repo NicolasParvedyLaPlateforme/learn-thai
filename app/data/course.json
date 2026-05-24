@@ -789,6 +789,17 @@
       "imageUrl": "/images/l_nouveau_003.svg"
     },
     {
+      "id": "bilan-unit-1",
+      "title": "Bilan Unité 1",
+      "description": "Premier défi ! Évaluez vos bases en thaï : salutations, présentation, nombres de 0 à 10 et premières notions de temps.",
+      "words": [],
+      "phrases": [],
+      "titleEn": "Unit 1 Assessment",
+      "descriptionEn": "First challenge! Test your Thai basics: greetings, introductions, numbers from 0 to 10, and early time concepts.",
+      "imageUrl": "/images/default-lesson.svg",
+      "isReview": true
+    },
+    {
       "id": "lesson-3-quantities",
       "title": "Quantités : Personnes",
       "description": "Utiliser les chiffres pour compter des personnes",
@@ -1049,17 +1060,6 @@
       "titleEn": "Quantities: Items",
       "descriptionEn": "Use classifiers to count objects",
       "imageUrl": "/images/l_nouveau_004.svg"
-    },
-    {
-      "id": "bilan-unit-1",
-      "title": "Bilan Unité 1",
-      "description": "Évaluez vos bases : salutations, présentation, nombres jusqu'à 10 et expression des quantités.",
-      "words": [],
-      "phrases": [],
-      "titleEn": "Unit 1 Assessment",
-      "descriptionEn": "Test your basics: greetings, introductions, numbers up to 10, and expressing quantities.",
-      "imageUrl": "/images/default-lesson.svg",
-      "isReview": true
     },
     {
       "id": "lesson-4",
@@ -1603,6 +1603,17 @@
       "imageUrl": "/images/default-lesson.svg"
     },
     {
+      "id": "bilan-unit-2",
+      "title": "Bilan Unité 2",
+      "description": "À table ! Révisez l'expression des quantités, votre vocabulaire de l'alimentation et les formules de politesse indispensables.",
+      "words": [],
+      "phrases": [],
+      "titleEn": "Unit 2 Assessment",
+      "descriptionEn": "Time to eat! Review how to express quantities, essential food vocabulary, and crucial polite phrases.",
+      "imageUrl": "/images/default-lesson.svg",
+      "isReview": true
+    },
+    {
       "id": "l_nouveau_007",
       "title": "Interactions 2 : Compréhension",
       "description": "Vérifier la compréhension et demander de clarifier",
@@ -1981,17 +1992,6 @@
       "titleEn": "Subjects and Family",
       "descriptionEn": "Talk about others",
       "imageUrl": "/images/family.svg"
-    },
-    {
-      "id": "bilan-unit-2",
-      "title": "Bilan Unité 2",
-      "description": "Revoyez vos premiers échanges : vocabulaire de l'alimentation, formules de politesse et famille proche.",
-      "words": [],
-      "phrases": [],
-      "titleEn": "Unit 2 Assessment",
-      "descriptionEn": "Review your first interactions: food vocabulary, polite expressions, and close family.",
-      "imageUrl": "/images/default-lesson.svg",
-      "isReview": true
     },
     {
       "id": "l_nouveau_009",
@@ -2390,6 +2390,17 @@
       "titleEn": "Useful verbs",
       "descriptionEn": "Everyday actions",
       "imageUrl": "/images/default-lesson.svg"
+    },
+    {
+      "id": "bilan-unit-3",
+      "title": "Bilan Unité 3",
+      "description": "Faites le point sur votre environnement : situez-vous dans l'espace, parlez de votre famille proche et révisez les actions de base.",
+      "words": [],
+      "phrases": [],
+      "titleEn": "Unit 3 Assessment",
+      "descriptionEn": "Map out your surroundings: practice basic locations, talk about your close family, and review everyday actions.",
+      "imageUrl": "/images/default-lesson.svg",
+      "isReview": true
     },
     {
       "id": "l_nouveau_011",
@@ -2976,17 +2987,6 @@
       "imageUrl": "/images/travel.svg"
     },
     {
-      "id": "bilan-unit-3",
-      "title": "Bilan Unité 3",
-      "description": "Faites le point sur vos déplacements, vos premiers achats au marché et l'expression de vos sentiments.",
-      "words": [],
-      "phrases": [],
-      "titleEn": "Unit 3 Assessment",
-      "descriptionEn": "Assess your skills in getting around, making your first market purchases, and expressing feelings.",
-      "imageUrl": "/images/default-lesson.svg",
-      "isReview": true
-    },
-    {
       "id": "lesson-12",
       "title": "Le temps et les jours",
       "description": "Aujourd'hui, demain, hier...",
@@ -3261,6 +3261,17 @@
       "titleEn": "Feelings and Ongoing Actions",
       "descriptionEn": "Express emotions and what you are currently doing",
       "imageUrl": "/images/l_nouveau_012.svg"
+    },
+    {
+      "id": "bilan-unit-4",
+      "title": "Bilan Unité 4",
+      "description": "En route pour le marché ! Validez vos acquis sur les déplacements, la négociation, l'expression de vos ressentis et la notion du temps.",
+      "words": [],
+      "phrases": [],
+      "titleEn": "Unit 4 Assessment",
+      "descriptionEn": "Head to the market! Validate your skills in getting around, bargaining, expressing feelings, and telling time.",
+      "imageUrl": "/images/default-lesson.svg",
+      "isReview": true
     },
     {
       "id": "lesson-13",
@@ -4092,13 +4103,13 @@
       "imageUrl": "/images/house.svg"
     },
     {
-      "id": "bilan-unit-4",
-      "title": "Bilan Unité 4",
-      "description": "Validez vos acquis sur l'orientation, le temps, les couleurs et le vocabulaire de base de la santé.",
+      "id": "bilan-unit-5",
+      "title": "Bilan Unité 5",
+      "description": "Ne perdez pas le nord ! Testez vos connaissances sur les directions, les couleurs, le corps à l'hôpital et la description de votre environnement.",
       "words": [],
       "phrases": [],
-      "titleEn": "Unit 4 Assessment",
-      "descriptionEn": "Validate your knowledge on directions, time, colors, and basic health vocabulary.",
+      "titleEn": "Unit 5 Assessment",
+      "descriptionEn": "Don't get lost! Test your knowledge of directions, colors, health vocabulary, and describing your environment.",
       "imageUrl": "/images/default-lesson.svg",
       "isReview": true
     },
@@ -5004,6 +5015,17 @@
       "imageUrl": "/images/default-lesson.svg"
     },
     {
+      "id": "bilan-unit-6",
+      "title": "Bilan Unité 6",
+      "description": "Devenez un fin gourmet ! Révisez les menus, les fruits, les légumes et le vocabulaire essentiel pour commander au restaurant.",
+      "words": [],
+      "phrases": [],
+      "titleEn": "Unit 6 Assessment",
+      "descriptionEn": "Become a food connoisseur! Review menus, fruits, vegetables, and the essential vocabulary for ordering at a restaurant.",
+      "imageUrl": "/images/default-lesson.svg",
+      "isReview": true
+    },
+    {
       "id": "lesson-24-a4",
       "title": "En Cuisine : Les Cuissons",
       "description": "Plus de vocabulaire pour cette unité.",
@@ -5258,17 +5280,6 @@
         }
       ],
       "imageUrl": "/images/default-lesson.svg"
-    },
-    {
-      "id": "bilan-unit-5",
-      "title": "Bilan Unité 5",
-      "description": "Passez à table ! Testez votre vocabulaire sur la nourriture, les boissons, les saveurs et le service au restaurant.",
-      "words": [],
-      "phrases": [],
-      "titleEn": "Unit 5 Assessment",
-      "descriptionEn": "Time to eat! Test your vocabulary on food, drinks, flavors, and restaurant service.",
-      "imageUrl": "/images/default-lesson.svg",
-      "isReview": true
     },
     {
       "id": "lesson-25",
@@ -5756,6 +5767,17 @@
       "titleEn": "Trade",
       "descriptionEn": "Sell, give, money",
       "imageUrl": "/images/default-lesson.svg"
+    },
+    {
+      "id": "bilan-unit-7",
+      "title": "Bilan Unité 7",
+      "description": "Passez à l'action ! Évaluez votre maîtrise des verbes de mouvement, du vocabulaire de la cuisine, de l'apprentissage et des transactions.",
+      "words": [],
+      "phrases": [],
+      "titleEn": "Unit 7 Assessment",
+      "descriptionEn": "Take action! Assess your mastery of movement verbs, cooking vocabulary, learning terms, and commerce.",
+      "imageUrl": "/images/default-lesson.svg",
+      "isReview": true
     },
     {
       "id": "lesson-29-a1",
@@ -6392,17 +6414,6 @@
       "imageUrl": "/images/default-lesson.svg"
     },
     {
-      "id": "bilan-unit-6",
-      "title": "Bilan Unité 6",
-      "description": "Prouvez votre maîtrise des verbes d'action, du vocabulaire du commerce et des mouvements de tous les jours.",
-      "words": [],
-      "phrases": [],
-      "titleEn": "Unit 6 Assessment",
-      "descriptionEn": "Prove your mastery of action verbs, commerce vocabulary, and everyday movements.",
-      "imageUrl": "/images/default-lesson.svg",
-      "isReview": true
-    },
-    {
       "id": "lesson-30",
       "title": "Temps 1 : Moments du jour",
       "description": "Matin, Soir, Nuit",
@@ -6632,6 +6643,17 @@
       "titleEn": "Basic weather",
       "descriptionEn": "Rain, Sun",
       "imageUrl": "/images/weather.svg"
+    },
+    {
+      "id": "bilan-unit-8",
+      "title": "Bilan Unité 8",
+      "description": "Autour de la maison : consolidez vos bases sur les tâches quotidiennes, la communication de base, les moments de la journée et la météo.",
+      "words": [],
+      "phrases": [],
+      "titleEn": "Unit 8 Assessment",
+      "descriptionEn": "Around the house: solidify your basics on daily chores, fundamental communication, times of day, and the weather.",
+      "imageUrl": "/images/default-lesson.svg",
+      "isReview": true
     },
     {
       "id": "lesson-32",
@@ -7507,13 +7529,13 @@
       "imageUrl": "/images/default-lesson.svg"
     },
     {
-      "id": "bilan-unit-7",
-      "title": "Bilan Unité 7",
-      "description": "Quel temps fait-il ? Évaluez vos connaissances sur la météo, le climat, les températures et les durées.",
+      "id": "bilan-unit-9",
+      "title": "Bilan Unité 9",
+      "description": "Quel temps fait-il ? Validez vos connaissances sur la météo complexe, l'heure exacte, les saisons et l'expression des durées.",
       "words": [],
       "phrases": [],
-      "titleEn": "Unit 7 Assessment",
-      "descriptionEn": "What's the weather like? Assess your knowledge of weather, climate, temperatures, and durations.",
+      "titleEn": "Unit 9 Assessment",
+      "descriptionEn": "What's the weather like? Validate your knowledge of complex weather, telling the exact time, seasons, and expressing durations.",
       "imageUrl": "/images/default-lesson.svg",
       "isReview": true
     },
@@ -8285,6 +8307,17 @@
       "imageUrl": "/images/default-lesson.svg"
     },
     {
+      "id": "bilan-unit-10",
+      "title": "Bilan Unité 10",
+      "description": "Explorez la ville ! Révisez les lieux urbains, les moyens de transport public, les bâtiments officiels et les points cardinaux.",
+      "words": [],
+      "phrases": [],
+      "titleEn": "Unit 10 Assessment",
+      "descriptionEn": "Explore the city! Review urban locations, public transportation, official buildings, and cardinal points.",
+      "imageUrl": "/images/default-lesson.svg",
+      "isReview": true
+    },
+    {
       "id": "lesson-39-a3",
       "title": "La Gare et les Billets",
       "description": "Plus de vocabulaire pour cette unité.",
@@ -8697,17 +8730,6 @@
         }
       ],
       "imageUrl": "/images/default-lesson.svg"
-    },
-    {
-      "id": "bilan-unit-8",
-      "title": "Bilan Unité 8",
-      "description": "En route ! Révisez les lieux de la ville, les transports en commun, l'aviation et le vocabulaire du voyage.",
-      "words": [],
-      "phrases": [],
-      "titleEn": "Unit 8 Assessment",
-      "descriptionEn": "On the road! Review city places, public transportation, aviation, and travel vocabulary.",
-      "imageUrl": "/images/default-lesson.svg",
-      "isReview": true
     },
     {
       "id": "lesson-40",
@@ -9240,6 +9262,17 @@
       "titleEn": "Prices and Money",
       "descriptionEn": "Cheap, expensive",
       "imageUrl": "/images/default-lesson.svg"
+    },
+    {
+      "id": "bilan-unit-11",
+      "title": "Bilan Unité 11",
+      "description": "Préparez vos valises ! Évaluez vos compétences sur le voyage en train, les vêtements, les couleurs secondaires et les essayages en boutique.",
+      "words": [],
+      "phrases": [],
+      "titleEn": "Unit 11 Assessment",
+      "descriptionEn": "Pack your bags! Assess your skills in train travel, clothing, secondary colors, and boutique shopping.",
+      "imageUrl": "/images/default-lesson.svg",
+      "isReview": true
     },
     {
       "id": "lesson-44-a1",
@@ -9862,17 +9895,6 @@
       "imageUrl": "/images/default-lesson.svg"
     },
     {
-      "id": "bilan-unit-9",
-      "title": "Bilan Unité 9",
-      "description": "C'est l'heure des achats : validez votre vocabulaire sur les vêtements, les prix, les matériaux et la description d'objets.",
-      "words": [],
-      "phrases": [],
-      "titleEn": "Unit 9 Assessment",
-      "descriptionEn": "Shopping time: validate your vocabulary on clothes, prices, materials, and object descriptions.",
-      "imageUrl": "/images/default-lesson.svg",
-      "isReview": true
-    },
-    {
       "id": "lesson-45",
       "title": "Famille 1 : Enfants et Amis",
       "description": "Enfants, frères",
@@ -10087,6 +10109,17 @@
       "titleEn": "The body",
       "descriptionEn": "Eye, mouth, hand",
       "imageUrl": "/images/body.svg"
+    },
+    {
+      "id": "bilan-unit-12",
+      "title": "Bilan Unité 12",
+      "description": "Séance shopping ! Faites le point sur les accessoires, les mesures, les matières, mais aussi les parties du corps humain et vos proches.",
+      "words": [],
+      "phrases": [],
+      "titleEn": "Unit 12 Assessment",
+      "descriptionEn": "Shopping spree! Review accessories, measurements, materials, as well as the human body and friends.",
+      "imageUrl": "/images/default-lesson.svg",
+      "isReview": true
     },
     {
       "id": "lesson-47",
@@ -10834,13 +10867,13 @@
       "imageUrl": "/images/default-lesson.svg"
     },
     {
-      "id": "bilan-unit-10",
-      "title": "Bilan Unité 10",
-      "description": "Décrivez votre entourage : révisez les parties du corps, l'apparence physique, le caractère et les liens de parenté.",
+      "id": "bilan-unit-13",
+      "title": "Bilan Unité 13",
+      "description": "Décrivez votre entourage : validez votre vocabulaire sur l'apparence physique, les traits de caractère, la famille élargie et l'intelligence.",
       "words": [],
       "phrases": [],
-      "titleEn": "Unit 10 Assessment",
-      "descriptionEn": "Describe your surroundings: review body parts, physical appearance, character traits, and family ties.",
+      "titleEn": "Unit 13 Assessment",
+      "descriptionEn": "Describe your circle: validate your vocabulary on physical appearance, character traits, extended family, and intelligence.",
       "imageUrl": "/images/default-lesson.svg",
       "isReview": true
     },
@@ -11674,6 +11707,17 @@
       "imageUrl": "/images/feelings.svg"
     },
     {
+      "id": "bilan-unit-14",
+      "title": "Bilan Unité 14",
+      "description": "Prenez soin de vous : révisez le vocabulaire médical, les symptômes, la douleur et l'expression de vos émotions et ressentis physiques.",
+      "words": [],
+      "phrases": [],
+      "titleEn": "Unit 14 Assessment",
+      "descriptionEn": "Take care of yourself: review medical vocabulary, symptoms, pain, and the expression of your emotions and physical states.",
+      "imageUrl": "/images/default-lesson.svg",
+      "isReview": true
+    },
+    {
       "id": "lesson-54-a4",
       "title": "États 2 : Expressions du Visage",
       "description": "Plus de vocabulaire pour cette unité.",
@@ -11947,17 +11991,6 @@
         }
       ],
       "imageUrl": "/images/numbers.svg"
-    },
-    {
-      "id": "bilan-unit-11",
-      "title": "Bilan Unité 11",
-      "description": "Prenez le pouls de votre thaï : vocabulaire de l'hôpital, symptômes, ressentis émotionnels et besoins.",
-      "words": [],
-      "phrases": [],
-      "titleEn": "Unit 11 Assessment",
-      "descriptionEn": "Take the pulse of your Thai: hospital vocabulary, symptoms, emotional feelings, and needs.",
-      "imageUrl": "/images/default-lesson.svg",
-      "isReview": true
     },
     {
       "id": "lesson-55",
@@ -12436,6 +12469,17 @@
       "titleEn": "Useful and nuances",
       "descriptionEn": "Perhaps, with",
       "imageUrl": "/images/default-lesson.svg"
+    },
+    {
+      "id": "bilan-unit-15",
+      "title": "Bilan Unité 15",
+      "description": "Exprimez-vous avec précision ! Maîtrisez les expressions du visage, les mots d'interrogation, les nuances émotionnelles et vos habitudes.",
+      "words": [],
+      "phrases": [],
+      "titleEn": "Unit 15 Assessment",
+      "descriptionEn": "Express yourself clearly! Master facial expressions, question words, emotional nuances, and your habits.",
+      "imageUrl": "/images/default-lesson.svg",
+      "isReview": true
     },
     {
       "id": "lesson-59",
@@ -13098,11 +13142,11 @@
     {
       "id": "lesson-64-bilan-final",
       "title": "Le Grand Bilan A1",
-      "description": "L'épreuve finale ! Validez votre niveau A1 avec cette grande révision globale incluant les grands nombres, les fréquences et la grammaire.",
+      "description": "L'épreuve finale ! Validez votre niveau A1 avec cette grande révision globale incluant les grands nombres, les nationalités et la vie quotidienne.",
       "words": [],
       "phrases": [],
       "titleEn": "A1 Final Assessment",
-      "descriptionEn": "The final test! Validate your A1 level with this comprehensive global review including large numbers, frequencies, and grammar.",
+      "descriptionEn": "The final test! Validate your A1 level with this comprehensive global review including large numbers, nationalities, and everyday life.",
       "imageUrl": "/images/default-lesson.svg",
       "isReview": true
     }
