@@ -10846,86 +10846,123 @@
     },
     {
       "id": "lesson-50",
-      "title": "À l'hôpital",
+      "title": "Santé 1 : Médicaments et Fièvre",
       "description": "Malade, médecine",
       "words": [
         {
           "id": "w_puay",
           "th": "ป่วย",
-          "fr": "malade",
           "phonetic": "bpùay",
+          "fr": "malade",
           "en": "sick",
-          "imageUrl": "/images/w_w_puay.svg"
+          "allowIdenticalTranslation": false
         },
         {
           "id": "w_ya",
           "th": "ยา",
-          "fr": "médicament",
           "phonetic": "yaa",
+          "fr": "médicament",
           "en": "medicine",
-          "imageUrl": "/images/w_w_ya.svg"
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_khai",
+          "th": "ไข้",
+          "phonetic": "khâi",
+          "fr": "fièvre",
+          "en": "fever",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_ran_khai_ya",
+          "th": "ร้านขายยา",
+          "phonetic": "ráan-khǎai-yaa",
+          "fr": "pharmacie",
+          "en": "pharmacy",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_khoo",
+          "th": "คอ",
+          "phonetic": "khɔɔ",
+          "fr": "cou / gorge",
+          "en": "neck / throat",
+          "allowIdenticalTranslation": false
         }
       ],
       "phrases": [
         {
           "id": "p_eat_medicine",
           "th": "กินยา",
-          "fr": "prendre des médicaments",
           "phonetic": "kin yaa",
+          "fr": "Prendre des médicaments",
+          "en": "Take medicine",
           "components": [
             "w_kin",
             "w_ya"
           ],
-          "en": "take medicine",
-          "imageUrl": "/images/p_p_eat_medicine.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_auto_lesson-50_0",
-          "th": "มือ แปด",
-          "fr": "[Pratique] main / huit",
-          "phonetic": "muue bpàet",
-          "components": [
-            "w_mue",
-            "w_8"
-          ],
-          "en": "[Practice] hand / eight",
-          "imageUrl": "/images/p_p_auto_lesson-50_0.svg"
-        },
-        {
-          "id": "p_auto_lesson-50_1",
-          "th": "วัน สบาย",
-          "fr": "[Pratique] jour / bien / à l'aise",
-          "phonetic": "wan sà-baai",
-          "components": [
-            "w_wan",
-            "w_sabai"
-          ],
-          "en": "[Practical] day / good / comfortable",
-          "imageUrl": "/images/p_p_auto_lesson-50_1.svg"
-        },
-        {
-          "id": "p_auto_lesson-50_2",
+          "id": "p_nong_puay",
           "th": "น้องป่วย",
-          "fr": "[Pratique] Mon petit frère / ma petite sœur est malade",
           "phonetic": "nɔ́ɔng bpùay",
+          "fr": "Mon petit frère / ma petite sœur est malade",
+          "en": "My little brother / little sister is sick",
           "components": [
             "w_nong",
             "w_puay"
           ],
-          "en": "[Practice] My little brother / little sister is sick",
-          "imageUrl": "/images/p_p_auto_lesson-50_2.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_auto_lesson-50_3",
-          "th": "ล่ะ ไม่",
-          "fr": "[Pratique] et (pour renvoyer la question) / ne pas",
-          "phonetic": "lâ mǎi",
+          "id": "p_have_fever",
+          "th": "มีไข้",
+          "phonetic": "mii khâi",
+          "fr": "Avoir de la fièvre",
+          "en": "Have a fever",
           "components": [
-            "w_la",
-            "w_mai_neg"
+            "w_mee",
+            "w_khai"
           ],
-          "en": "[Practice] and (to return the question) / not",
-          "imageUrl": "/images/p_p_auto_lesson-50_3.svg"
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_sore_throat",
+          "th": "เจ็บคอ",
+          "phonetic": "jèp khɔɔ",
+          "fr": "Avoir mal à la gorge",
+          "en": "Have a sore throat",
+          "components": [
+            "w_jep",
+            "w_khoo"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_pharmacy_where",
+          "th": "ร้านขายยาอยู่ที่ไหน",
+          "phonetic": "ráan-khǎai-yaa yùu thîi-nǎi",
+          "fr": "Où est la pharmacie ?",
+          "en": "Where is the pharmacy?",
+          "components": [
+            "w_ran_khai_ya",
+            "w_yuu",
+            "w_thi_nai"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_buy_medicine",
+          "th": "ซื้อยา",
+          "phonetic": "súue yaa",
+          "fr": "Acheter des médicaments",
+          "en": "Buy medicine",
+          "components": [
+            "w_sue",
+            "w_ya"
+          ],
+          "allowIdenticalTranslation": false
         }
       ],
       "titleEn": "At the hospital",
@@ -10934,86 +10971,124 @@
     },
     {
       "id": "lesson-51",
-      "title": "Symptômes",
+      "title": "Santé 2 : Toux et Visite Médicale",
       "description": "Fièvre, fatigué",
       "words": [
         {
-          "id": "w_khai_fever",
-          "th": "ไข้",
-          "fr": "fièvre",
-          "phonetic": "khâi",
-          "en": "fever",
-          "imageUrl": "/images/w_w_khai_fever.svg"
-        },
-        {
           "id": "w_ay",
           "th": "ไอ",
-          "fr": "tousser",
           "phonetic": "ai",
+          "fr": "tousser",
           "en": "to cough",
-          "imageUrl": "/images/w_w_ay.svg"
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_sneeze",
+          "th": "จาม",
+          "phonetic": "jaam",
+          "fr": "éternuer",
+          "en": "to sneeze",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_runny_nose",
+          "th": "น้ำมูก",
+          "phonetic": "náam-mûuk",
+          "fr": "mucus (nez qui coule)",
+          "en": "runny nose (mucus)",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_examine",
+          "th": "ตรวจ",
+          "phonetic": "dtrùat",
+          "fr": "examiner",
+          "en": "to examine",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_clinic",
+          "th": "คลินิก",
+          "phonetic": "khlii-nìk",
+          "fr": "clinique",
+          "en": "clinic",
+          "allowIdenticalTranslation": false
         }
       ],
       "phrases": [
         {
-          "id": "p_have_fever",
-          "th": "มีไข้",
-          "fr": "j'ai de la fièvre",
-          "phonetic": "mii khǎai",
+          "id": "p_new_lesson-54-a1_1",
+          "th": "ไปหาหมอ",
+          "phonetic": "pai hǎa mǒo",
+          "fr": "Aller chez le médecin",
+          "en": "Go to see a doctor",
+          "components": [
+            "w_pai",
+            "w_ha",
+            "w_mo"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_new_lesson-54-a1_3",
+          "th": "หมอใจดี",
+          "phonetic": "mǒo cai-dii",
+          "fr": "Un docteur gentil",
+          "en": "Nice doctor",
+          "components": [
+            "w_mo",
+            "w_jai_dee"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_new_lesson-54-a2_2",
+          "th": "ไอมาก",
+          "phonetic": "ai mâak",
+          "fr": "Tousser beaucoup",
+          "en": "Cough a lot",
+          "components": [
+            "w_ay",
+            "w_mak"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_examine_throat",
+          "th": "หมอตรวจคอ",
+          "phonetic": "mǒo dtrùat khɔɔ",
+          "fr": "Le docteur examine la gorge",
+          "en": "The doctor examines the throat",
+          "components": [
+            "w_mo",
+            "w_examine",
+            "w_khoo"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_have_runny_nose",
+          "th": "มีน้ำมูก",
+          "phonetic": "mii náam-mûuk",
+          "fr": "Avoir le nez qui coule",
+          "en": "Have a runny nose",
           "components": [
             "w_mee",
-            "w_khai_fever"
+            "w_runny_nose"
           ],
-          "en": "I have a fever",
-          "imageUrl": "/images/p_p_have_fever.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_auto_lesson-51_0",
-          "th": "นอน ตา",
-          "fr": "[Pratique] dormir / oeil",
-          "phonetic": "nɔɔn dtaa",
+          "id": "p_go_clinic",
+          "th": "ไปคลินิก",
+          "phonetic": "pai khlii-nìk",
+          "fr": "Aller à la clinique",
+          "en": "Go to the clinic",
           "components": [
-            "w_non",
-            "w_ta"
+            "w_pai",
+            "w_clinic"
           ],
-          "en": "[Practical] sleep / eye",
-          "imageUrl": "/images/p_p_auto_lesson-51_0.svg"
-        },
-        {
-          "id": "p_auto_lesson-51_1",
-          "th": "ที่ไหน หิว",
-          "fr": "[Pratique] où / avoir faim",
-          "phonetic": "thîi nǎi hǐw",
-          "components": [
-            "w_thi_nai",
-            "w_hiw"
-          ],
-          "en": "[Practical] where / be hungry",
-          "imageUrl": "/images/p_p_auto_lesson-51_1.svg"
-        },
-        {
-          "id": "p_auto_lesson-51_2",
-          "th": "ยา แพง",
-          "fr": "[Pratique] médicament / cher",
-          "phonetic": "yaa phaeng",
-          "components": [
-            "w_ya",
-            "w_phaeng"
-          ],
-          "en": "[Practical] medicine / expensive",
-          "imageUrl": "/images/p_p_auto_lesson-51_2.svg"
-        },
-        {
-          "id": "p_auto_lesson-51_3",
-          "th": "เขา กาแฟ",
-          "fr": "[Pratique] il / elle / café",
-          "phonetic": "khâao kaa-fae",
-          "components": [
-            "w_khao_pron",
-            "w_kafae"
-          ],
-          "en": "[Practice] he/she/coffee",
-          "imageUrl": "/images/p_p_auto_lesson-51_3.svg"
+          "allowIdenticalTranslation": false
         }
       ],
       "titleEn": "Symptoms",
@@ -11022,86 +11097,115 @@
     },
     {
       "id": "lesson-52",
-      "title": "Sentiments",
+      "title": "Santé 3 : Peurs et Inquiétudes",
       "description": "Triste, peur, fâché",
       "words": [
         {
-          "id": "w_sia_jai",
-          "th": "เสียใจ",
-          "fr": "triste / désolé",
-          "phonetic": "sǐia-jai",
-          "en": "sad / sorry",
-          "imageUrl": "/images/w_w_sia_jai.svg"
-        },
-        {
           "id": "w_klua",
           "th": "กลัว",
-          "fr": "avoir peur",
           "phonetic": "glua",
-          "en": "be afraid",
-          "imageUrl": "/images/w_w_klua.svg"
+          "fr": "avoir peur",
+          "en": "to be afraid",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_phi_ghost",
+          "th": "ผี",
+          "phonetic": "phǐi",
+          "fr": "fantôme",
+          "en": "ghost",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_tong",
+          "th": "ต้อง",
+          "phonetic": "dtɔ̂ng",
+          "fr": "devoir",
+          "en": "must",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_kang_won",
+          "th": "กังวล",
+          "phonetic": "gang-won",
+          "fr": "s'inquiéter",
+          "en": "to worry",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_khriat",
+          "th": "เครียด",
+          "phonetic": "khrîat",
+          "fr": "stressé",
+          "en": "stressed",
+          "allowIdenticalTranslation": false
         }
       ],
       "phrases": [
         {
-          "id": "p_not_afraid",
-          "th": "ไม่กลัว",
-          "fr": "je n'ai pas peur",
-          "phonetic": "mâi glua",
+          "id": "p_mai_klua_phi",
+          "th": "ไม่กลัวผี",
+          "phonetic": "mâi glua phǐi",
+          "fr": "Je n'ai pas peur des fantômes",
+          "en": "I am not afraid of ghosts",
           "components": [
             "w_mai_neg",
+            "w_klua",
+            "w_phi_ghost"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_mai_tong_kangwon",
+          "th": "ไม่ต้องกังวล",
+          "phonetic": "mâi dtɔ̂ng gang-won",
+          "fr": "Ne t'inquiète pas",
+          "en": "Don't worry",
+          "components": [
+            "w_mai_neg",
+            "w_tong",
+            "w_kang_won"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_khao_khriat_mak",
+          "th": "เขาเครียดมาก",
+          "phonetic": "khǎo khrîat mâak",
+          "fr": "Il est très stressé",
+          "en": "He is very stressed",
+          "components": [
+            "w_khao_pron",
+            "w_khriat",
+            "w_mak"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_thammai_tong_klua",
+          "th": "ทำไมต้องกลัว",
+          "phonetic": "tham-mai dtɔ̂ng glua",
+          "fr": "Pourquoi avoir peur ?",
+          "en": "Why be afraid?",
+          "components": [
+            "w_thammai",
+            "w_tong",
             "w_klua"
           ],
-          "en": "I'm not afraid",
-          "imageUrl": "/images/p_p_not_afraid.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_auto_lesson-52_0",
-          "th": "ล่ะ หมู",
-          "fr": "[Pratique] et (pour renvoyer la question) / porc",
-          "phonetic": "lâ mǔu",
+          "id": "p_mai_tong_khriat",
+          "th": "ไม่ต้องเครียด",
+          "phonetic": "mâi dtɔ̂ng khrîat",
+          "fr": "Ne sois pas stressé",
+          "en": "Do not be stressed",
           "components": [
-            "w_la",
-            "w_mu"
+            "w_mai_neg",
+            "w_tong",
+            "w_khriat"
           ],
-          "en": "[Practical] and (to return the question) / pig",
-          "imageUrl": "/images/p_p_auto_lesson-52_0.svg"
-        },
-        {
-          "id": "p_auto_lesson-52_1",
-          "th": "หก เบียร์",
-          "fr": "[Pratique] six / bière",
-          "phonetic": "hòk bia",
-          "components": [
-            "w_6",
-            "w_bia"
-          ],
-          "en": "[Practical] six / beer",
-          "imageUrl": "/images/p_p_auto_lesson-52_1.svg"
-        },
-        {
-          "id": "p_auto_lesson-52_2",
-          "th": "ผม น้อง",
-          "fr": "[Pratique] je (homme) / petit frère / petite sœur",
-          "phonetic": "phǒm nɔ́ɔng",
-          "components": [
-            "w_phom",
-            "w_nong"
-          ],
-          "en": "[Practice] I (man) / little brother / little sister",
-          "imageUrl": "/images/p_p_auto_lesson-52_2.svg"
-        },
-        {
-          "id": "p_auto_lesson-52_3",
-          "th": "ให้ สี",
-          "fr": "[Pratique] donner / couleur",
-          "phonetic": "hâi sìi",
-          "components": [
-            "w_hai",
-            "w_see_color"
-          ],
-          "en": "[Practice] give / color",
-          "imageUrl": "/images/p_p_auto_lesson-52_3.svg"
+          "allowIdenticalTranslation": false
         }
       ],
       "titleEn": "Feelings",
@@ -11110,86 +11214,111 @@
     },
     {
       "id": "lesson-53",
-      "title": "Réactions cognitives",
+      "title": "Santé 4 : Douleurs et Compréhension",
       "description": "Penser, savoir",
       "words": [
         {
           "id": "w_ru",
           "th": "รู้",
-          "fr": "savoir / connaitre",
           "phonetic": "rúu",
-          "en": "know / know",
-          "imageUrl": "/images/w_w_ru.svg"
+          "fr": "savoir / connaître",
+          "en": "know",
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "w_jing",
-          "th": "จริง",
-          "fr": "vrai / vraiment",
-          "phonetic": "jing",
-          "en": "true / really",
-          "imageUrl": "/images/w_w_jing.svg"
+          "id": "w_aakan",
+          "th": "อาการ",
+          "phonetic": "aa-gaan",
+          "fr": "symptôme",
+          "en": "symptom",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_lang_back",
+          "th": "หลัง",
+          "phonetic": "lǎng",
+          "fr": "dos",
+          "en": "back",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_fan",
+          "th": "ฟัน",
+          "phonetic": "fan",
+          "fr": "dent",
+          "en": "tooth",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_ruesuek",
+          "th": "รู้สึก",
+          "phonetic": "rúu-sʉ̀k",
+          "fr": "se sentir",
+          "en": "feel",
+          "allowIdenticalTranslation": false
         }
       ],
       "phrases": [
         {
           "id": "p_i_dont_know",
           "th": "ไม่รู้",
-          "fr": "je ne sais pas",
           "phonetic": "mâi rúu",
+          "fr": "Je ne sais pas",
+          "en": "I don't know",
           "components": [
             "w_mai_neg",
             "w_ru"
           ],
-          "en": "I don't know",
-          "imageUrl": "/images/p_p_i_dont_know.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_auto_lesson-53_0",
-          "th": "แล้ว แปด",
-          "fr": "[Pratique] alors / et (transition) / huit",
-          "phonetic": "láew bpàet",
+          "id": "p_back_pain",
+          "th": "ปวดหลัง",
+          "phonetic": "pùuat lǎng",
+          "fr": "Avoir mal au dos",
+          "en": "Backache",
           "components": [
-            "w_laew",
-            "w_8"
+            "w_puat",
+            "w_lang_back"
           ],
-          "en": "[Practice] then / and (transition) / eight",
-          "imageUrl": "/images/p_p_auto_lesson-53_0.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_auto_lesson-53_1",
-          "th": "หัว เขา",
-          "fr": "[Pratique] tête / il / elle",
-          "phonetic": "hǔua khâao",
+          "id": "p_toothache",
+          "th": "ปวดฟัน",
+          "phonetic": "pùuat fan",
+          "fr": "Avoir mal aux dents",
+          "en": "Toothache",
           "components": [
-            "w_hua",
-            "w_khao_pron"
+            "w_puat",
+            "w_fan"
           ],
-          "en": "[Practice] head/he/she",
-          "imageUrl": "/images/p_p_auto_lesson-53_1.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_auto_lesson-53_2",
-          "th": "เหนื่อย หนัง",
-          "fr": "[Pratique] fatigué / film",
-          "phonetic": "nùeay nâng",
+          "id": "p_what_symptoms",
+          "th": "มีอาการอะไร",
+          "phonetic": "mii aa-gaan a-rai",
+          "fr": "Quels sont les symptômes ?",
+          "en": "What are the symptoms?",
           "components": [
-            "w_nueay",
-            "w_nang"
+            "w_mee",
+            "w_aakan",
+            "w_arai"
           ],
-          "en": "[Practical] tired / film",
-          "imageUrl": "/images/p_p_auto_lesson-53_2.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_auto_lesson-53_3",
-          "th": "ทำ เรียน",
-          "fr": "[Pratique] faire / apprendre",
-          "phonetic": "tham riian",
+          "id": "p_feel_sick",
+          "th": "รู้สึกป่วย",
+          "phonetic": "rúu-sʉ̀k pùuai",
+          "fr": "Se sentir malade",
+          "en": "Feel sick",
           "components": [
-            "w_tham",
-            "w_rian"
+            "w_ruesuek",
+            "w_puay"
           ],
-          "en": "[Practice] do / learn",
-          "imageUrl": "/images/p_p_auto_lesson-53_3.svg"
+          "allowIdenticalTranslation": false
         }
       ],
       "titleEn": "Cognitive reactions",
@@ -11198,439 +11327,623 @@
     },
     {
       "id": "lesson-54-a1",
-      "title": "Ext: Santé",
+      "title": "Émotions 1 : Tristesse et Certitude",
       "description": "Plus de vocabulaire pour cette unité.",
       "titleEn": "Ext: Health",
       "descriptionEn": "More vocabulary for this unit.",
       "words": [
         {
-          "id": "w_lesson-54-a1_1",
-          "th": "ร้านขายยา",
-          "fr": "pharmacie",
-          "en": "pharmacy",
-          "phonetic": "ráan-khǎai-yaa",
-          "imageUrl": "/images/w_w_lesson-54-a1_1.svg"
+          "id": "w_sia_jai",
+          "th": "เสียใจ",
+          "phonetic": "sǐia-jai",
+          "fr": "triste / désolé",
+          "en": "sad / sorry",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_jing",
+          "th": "จริง",
+          "phonetic": "jing",
+          "fr": "vrai / vraiment",
+          "en": "true / really",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_rong_hai",
+          "th": "ร้องไห้",
+          "phonetic": "rɔ́ɔng-hâi",
+          "fr": "pleurer",
+          "en": "to cry",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_nae_non",
+          "th": "แน่นอน",
+          "phonetic": "nɛ̂ɛ-nɔɔn",
+          "fr": "certainement / absolument",
+          "en": "certainly / absolutely",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_phit_wang",
+          "th": "ผิดหวัง",
+          "phonetic": "phìt-wǎng",
+          "fr": "déçu",
+          "en": "disappointed",
+          "allowIdenticalTranslation": false
         }
       ],
       "phrases": [
         {
-          "id": "p_new_lesson-54-a1_1",
-          "th": "ไปหาหมอ",
-          "fr": "Aller chez le médecin",
-          "en": "Go to doctor",
-          "phonetic": "pai hǎa mǒo",
+          "id": "p_khao_sia_jai_mak",
+          "th": "เขาเสียใจมาก",
+          "phonetic": "khǎo sǐia-jai mâak",
+          "fr": "Il est très triste.",
+          "en": "He is very sad.",
           "components": [
+            "w_khao_pron",
+            "w_sia_jai",
+            "w_mak"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_jing_mai",
+          "th": "จริงไหม",
+          "phonetic": "jing mǎi",
+          "fr": "Est-ce vraiment vrai ?",
+          "en": "Is it really true?",
+          "components": [
+            "w_jing",
+            "w_mai"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_tham_mai_khun_rong_hai",
+          "th": "ทำไมคุณร้องไห้",
+          "phonetic": "tham-mai khun rɔ́ɔng-hâi",
+          "fr": "Pourquoi pleures-tu ?",
+          "en": "Why are you crying?",
+          "components": [
+            "w_thammai",
+            "w_khun",
+            "w_rong_hai"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_chan_mai_pai_nae_non",
+          "th": "ฉันไม่ไปแน่นอน",
+          "phonetic": "chǎn mâi pai nɛ̂ɛ-nɔɔn",
+          "fr": "Je n'y vais absolument pas.",
+          "en": "I am certainly not going.",
+          "components": [
+            "w_chan",
+            "w_mai_neg",
             "w_pai",
-            "w_ha",
-            "w_mo"
+            "w_nae_non"
           ],
-          "imageUrl": "/images/p_p_new_lesson-54-a1_1.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_new_lesson-54-a1_2",
-          "th": "ร้านขายยาอยู่ไหน",
-          "fr": "Où est la pharmacie?",
-          "en": "Where is the pharmacy?",
-          "phonetic": "ráan-khǎai-yaa yùu nǎi",
+          "id": "p_phom_phit_wang_mak",
+          "th": "ผมผิดหวังมาก",
+          "phonetic": "phǒm phìt-wǎng mâak",
+          "fr": "Je suis très déçu.",
+          "en": "I am very disappointed.",
           "components": [
-            "w_lesson-54-a1_1",
-            "w_yuu",
-            "w_which"
+            "w_phom",
+            "w_phit_wang",
+            "w_mak"
           ],
-          "imageUrl": "/images/p_p_new_lesson-54-a1_2.svg"
-        },
-        {
-          "id": "p_new_lesson-54-a1_3",
-          "th": "หมอใจดี",
-          "fr": "Un docteur gentil",
-          "en": "Nice doctor",
-          "phonetic": "mǒo cai-dii",
-          "components": [
-            "w_mo",
-            "w_jai_dee"
-          ],
-          "imageUrl": "/images/p_p_new_lesson-54-a1_3.svg"
-        },
-        {
-          "id": "p_new_lesson-54-a1_4",
-          "th": "ซื้อยา",
-          "fr": "Acheter des médicaments",
-          "en": "Buy medicine",
-          "phonetic": "súue yaa",
-          "components": [
-            "w_sue",
-            "w_ya"
-          ],
-          "imageUrl": "/images/p_p_new_lesson-54-a1_4.svg"
+          "allowIdenticalTranslation": false
         }
       ],
       "imageUrl": "/images/default-lesson.svg"
     },
     {
       "id": "lesson-54-a2",
-      "title": "Ext: Maux",
+      "title": "Émotions 2 : Joie et Colère",
       "description": "Plus de vocabulaire pour cette unité.",
       "titleEn": "Ext: Illness",
       "descriptionEn": "More vocabulary for this unit.",
       "words": [
         {
-          "id": "w_lesson-54-a2_2",
-          "th": "ไอ",
-          "fr": "ตู้",
-          "en": "cough",
-          "phonetic": "ai",
-          "imageUrl": "/images/w_w_lesson-54-a2_2.svg"
+          "id": "w_mee_khwaam_suk",
+          "th": "มีความสุข",
+          "phonetic": "mii-khwaam-sùk",
+          "fr": "heureux (avoir du bonheur)",
+          "en": "happy / joyful",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_mo_ho",
+          "th": "โมโห",
+          "phonetic": "moo-hǒo",
+          "fr": "furieux / énervé",
+          "en": "mad / furious",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_ya_not",
+          "th": "อย่า",
+          "phonetic": "yàa",
+          "fr": "ne pas (impératif)",
+          "en": "do not (imperative)",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_aa_rom",
+          "th": "อารมณ์",
+          "phonetic": "aa-rom",
+          "fr": "humeur / émotion",
+          "en": "mood / emotion",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_ngut_ngit",
+          "th": "หงุดหงิด",
+          "phonetic": "ngùt-ngìt",
+          "fr": "frustré / irritable",
+          "en": "frustrated / irritable",
+          "allowIdenticalTranslation": false
         }
       ],
       "phrases": [
         {
-          "id": "p_new_lesson-54-a2_0",
-          "th": "เจ็บหัว",
-          "fr": "Avoir mal à la tête",
-          "en": "Headache",
-          "phonetic": "cèp hǔua",
+          "id": "p_chan_mee_khwaam_suk",
+          "th": "ฉันมีความสุข",
+          "phonetic": "chǎn mii-khwaam-sùk",
+          "fr": "Je suis heureuse",
+          "en": "I am happy",
           "components": [
-            "w_jep",
-            "w_hua"
+            "w_chan",
+            "w_mee_khwaam_suk"
           ],
-          "imageUrl": "/images/p_p_new_lesson-54-a2_0.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_new_lesson-54-a2_1",
-          "th": "มีไข้",
-          "fr": "Avoir de la fièvre",
-          "en": "Have fever",
-          "phonetic": "mii khâi",
+          "id": "p_ya_mo_ho",
+          "th": "อย่าโมโห",
+          "phonetic": "yàa moo-hǒo",
+          "fr": "Ne te fâche pas",
+          "en": "Don't be mad",
           "components": [
-            "w_mee",
-            "w_khai_fever"
+            "w_ya_not",
+            "w_mo_ho"
           ],
-          "imageUrl": "/images/p_p_new_lesson-54-a2_1.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_new_lesson-54-a2_2",
-          "th": "ไอมาก",
-          "fr": "Tousser beaucoup",
-          "en": "Cough a lot",
-          "phonetic": "ai mâak",
+          "id": "p_khao_mo_ho_mak",
+          "th": "เขาโมโหมาก",
+          "phonetic": "khǎo moo-hǒo mâak",
+          "fr": "Il est très en colère",
+          "en": "He is very angry",
           "components": [
-            "w_ay",
+            "w_khao_pron",
+            "w_mo_ho",
             "w_mak"
           ],
-          "imageUrl": "/images/p_p_new_lesson-54-a2_2.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_new_lesson-54-a2_3",
-          "th": "ไม่เจ็บ",
-          "fr": "Ne pas avoir mal",
-          "en": "No pain",
-          "phonetic": "mâi cèp",
+          "id": "p_khao_aa_rom_dii",
+          "th": "เขาอารมณ์ดี",
+          "phonetic": "khǎo aa-rom dii",
+          "fr": "Il est de bonne humeur",
+          "en": "He is in a good mood",
           "components": [
-            "w_mai_neg",
-            "w_jep"
+            "w_khao_pron",
+            "w_aa_rom",
+            "w_dee"
           ],
-          "imageUrl": "/images/p_p_new_lesson-54-a2_3.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_new_lesson-54-a2_4",
-          "th": "ปวดตา",
-          "fr": "Avoir mal aux yeux",
-          "en": "Eye pain",
-          "phonetic": "pùuat taa",
+          "id": "p_tham_mai_khun_ngut_ngit",
+          "th": "ทำไมคุณหงุดหงิด",
+          "phonetic": "tham-mai khun ngùt-ngìt",
+          "fr": "Pourquoi es-tu frustré ?",
+          "en": "Why are you frustrated?",
           "components": [
-            "w_puat",
-            "w_ta"
+            "w_thammai",
+            "w_khun",
+            "w_ngut_ngit"
           ],
-          "imageUrl": "/images/p_p_new_lesson-54-a2_4.svg"
+          "allowIdenticalTranslation": false
         }
       ],
       "imageUrl": "/images/default-lesson.svg"
     },
     {
       "id": "lesson-54-a3",
-      "title": "Ext: Émotions",
+      "title": "États 1 : Faim et Fatigue",
       "description": "Plus de vocabulaire pour cette unité.",
       "titleEn": "Ext: Emotions",
       "descriptionEn": "More vocabulary for this unit.",
       "words": [
         {
-          "id": "w_lesson-54-a3_0",
-          "th": "มีความสุข",
-          "fr": "heureux (avoir du bonheur)",
-          "en": "happy / joyful",
-          "phonetic": "mii-khwaam-sùk",
-          "imageUrl": "/images/w_w_lesson-54-a3_0.svg"
+          "id": "w_hiw_nam",
+          "th": "หิวน้ำ",
+          "phonetic": "hǐw náam",
+          "fr": "avoir soif",
+          "en": "thirsty",
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "w_lesson-54-a3_1",
-          "th": "โมโห",
-          "fr": "furieux / énervé",
-          "en": "mad",
-          "phonetic": "mo-ho",
-          "imageUrl": "/images/w_w_lesson-54-a3_1.svg"
+          "id": "w_phlia",
+          "th": "เพลีย",
+          "phonetic": "phlia",
+          "fr": "épuisé",
+          "en": "exhausted",
+          "allowIdenticalTranslation": false
         },
         {
-          "th": "อย่า",
-          "en": "don't",
-          "id": "w_ya_dont",
-          "fr": "ne pas (impératif)",
-          "phonetic": "yàa",
-          "imageUrl": "/images/w_w_ya_dont.svg"
+          "id": "w_mot",
+          "th": "หมด",
+          "phonetic": "mòt",
+          "fr": "fini, épuisé (chose)",
+          "en": "out of, empty",
+          "allowIdenticalTranslation": false
         },
         {
-          "th": "ผี",
-          "en": "ghost",
-          "id": "w_phi_ghost",
-          "fr": "fantôme",
-          "phonetic": "phǐi",
-          "imageUrl": "/images/w_w_phi_ghost.svg"
+          "id": "w_lap",
+          "th": "หลับ",
+          "phonetic": "làp",
+          "fr": "s'endormir",
+          "en": "to fall asleep",
+          "allowIdenticalTranslation": false
         },
         {
-          "th": "ต้อง",
-          "en": "must",
-          "id": "w_tong",
-          "fr": "devoir",
-          "phonetic": "dtɔ̂ng",
-          "imageUrl": "/images/w_w_tong.svg"
+          "id": "w_haeng",
+          "th": "แห้ง",
+          "phonetic": "hâeng",
+          "fr": "sec",
+          "en": "dry",
+          "allowIdenticalTranslation": false
         }
       ],
       "phrases": [
         {
-          "id": "p_new_lesson-54-a3_0",
-          "th": "ฉันมีความสุข",
-          "fr": "Je suis heureux",
-          "en": "I'm happy",
-          "phonetic": "chǎn mii khwaam-sùk",
+          "id": "p_hiw_nam_mai_khrap",
+          "th": "หิวน้ำไหมครับ",
+          "phonetic": "hǐw náam mǎi khráp",
+          "fr": "Avez-vous soif ?",
+          "en": "Are you thirsty?",
           "components": [
-            "w_chan",
-            "w_lesson-54-a3_0"
+            "w_hiw_nam",
+            "w_mai",
+            "w_krap"
           ],
-          "imageUrl": "/images/p_p_new_lesson-54-a3_0.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_new_lesson-54-a3_1",
-          "th": "อย่าโมโห",
-          "fr": "Ne te fâche pas",
-          "en": "Don't be mad",
-          "phonetic": "yàa moo-hǒo",
-          "components": [
-            "w_ya_dont",
-            "w_lesson-54-a3_1"
-          ],
-          "imageUrl": "/images/p_p_new_lesson-54-a3_1.svg"
-        },
-        {
-          "id": "p_new_lesson-54-a3_2",
-          "th": "กลัวผี",
-          "fr": "Avoir peur des fantômes",
-          "en": "Scared of ghosts",
-          "phonetic": "klua phǐi",
-          "components": [
-            "w_klua",
-            "w_phi_ghost"
-          ],
-          "imageUrl": "/images/p_p_new_lesson-54-a3_2.svg"
-        },
-        {
-          "id": "p_new_lesson-54-a3_3",
-          "th": "เขาโมโหมาก",
-          "fr": "Il est très en colère",
-          "en": "He is very angry",
-          "phonetic": "khǎo moo-hǒo mâak",
+          "id": "p_khao_phlia_mak",
+          "th": "เขาเพลียมาก",
+          "phonetic": "khǎo phlia mâak",
+          "fr": "Il est très épuisé.",
+          "en": "He is very exhausted.",
           "components": [
             "w_khao_pron",
-            "w_lesson-54-a3_1",
+            "w_phlia",
             "w_mak"
           ],
-          "imageUrl": "/images/p_p_new_lesson-54-a3_3.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_new_lesson-54-a3_4",
-          "th": "ไม่ต้องกลัว",
-          "fr": "N'aie pas peur!",
-          "en": "Don't be scared!",
-          "phonetic": "mâi-tông klua",
+          "id": "p_phom_mot_raeng",
+          "th": "ผมหมดแรง",
+          "phonetic": "phǒm mòt raeng",
+          "fr": "Je n'ai plus de force.",
+          "en": "I am out of energy.",
           "components": [
-            "w_mai_neg",
-            "w_tong",
-            "w_klua"
+            "w_phom",
+            "w_mot",
+            "w_strong"
           ],
-          "imageUrl": "/images/p_p_new_lesson-54-a3_4.svg"
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_yak_non_lap",
+          "th": "อยากนอนหลับ",
+          "phonetic": "yàak noon làp",
+          "fr": "Je veux m'endormir.",
+          "en": "I want to fall asleep.",
+          "components": [
+            "w_yak",
+            "w_non",
+            "w_lap"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_kho_haeng",
+          "th": "คอแห้ง",
+          "phonetic": "khoo hâeng",
+          "fr": "Avoir la gorge sèche.",
+          "en": "To have a dry throat.",
+          "components": [
+            "w_khoo",
+            "w_haeng"
+          ],
+          "allowIdenticalTranslation": false
         }
       ],
       "imageUrl": "/images/feelings.svg"
     },
     {
       "id": "lesson-54-a4",
-      "title": "Ext: Besoins",
+      "title": "États 2 : Expressions du Visage",
       "description": "Plus de vocabulaire pour cette unité.",
       "titleEn": "Ext: Needs",
       "descriptionEn": "More vocabulary for this unit.",
       "words": [
         {
-          "id": "w_lesson-54-a4_2",
-          "th": "หิวน้ำ",
-          "fr": "avoir soif",
-          "en": "thirsty",
-          "phonetic": "hǐu-náam",
-          "imageUrl": "/images/w_w_lesson-54-a4_2.svg"
+          "id": "w_hua_ro",
+          "th": "หัวเราะ",
+          "phonetic": "hǔa-rɔ́",
+          "fr": "rire",
+          "en": "laugh",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_dang",
+          "th": "ดัง",
+          "phonetic": "dang",
+          "fr": "fort (son)",
+          "en": "loud",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_bueng",
+          "th": "บึ้ง",
+          "phonetic": "bûeng",
+          "fr": "renfrogné",
+          "en": "sullen",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_nam_ta",
+          "th": "น้ำตา",
+          "phonetic": "nám-taa",
+          "fr": "larme",
+          "en": "tear",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_seed",
+          "th": "ซีด",
+          "phonetic": "sîit",
+          "fr": "pâle",
+          "en": "pale",
+          "allowIdenticalTranslation": false
         }
       ],
       "phrases": [
         {
-          "id": "p_new_lesson-54-a4_0",
-          "th": "หิวข้าว",
-          "fr": "Avoir faim",
-          "en": "Hungry",
-          "phonetic": "hǐw khâaw",
+          "id": "p_khao_hua_ro_dang",
+          "th": "เขาหัวเราะดัง",
+          "phonetic": "khǎo hǔa-rɔ́ dang",
+          "fr": "Il rit fort",
+          "en": "He laughs loudly",
           "components": [
-            "w_hiw",
-            "w_khao"
+            "w_khao_pron",
+            "w_hua_ro",
+            "w_dang"
           ],
-          "imageUrl": "/images/p_p_new_lesson-54-a4_0.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_new_lesson-54-a4_1",
-          "th": "เหนื่อยมาก",
-          "fr": "Très fatigué",
-          "en": "Very tired",
-          "phonetic": "nùueay mâak",
+          "id": "p_ya_tham_na_bueng",
+          "th": "อย่าทำหน้าบึ้ง",
+          "phonetic": "yàa tham nâa bûeng",
+          "fr": "Ne fais pas la moue",
+          "en": "Don't frown",
           "components": [
-            "w_nueay",
+            "w_ya_not",
+            "w_tham",
+            "w_na_face",
+            "w_bueng"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_dek_rong_hai_dang",
+          "th": "เด็กร้องไห้ดัง",
+          "phonetic": "dèk rɔ́ɔng-hâi dang",
+          "fr": "L'enfant pleure fort",
+          "en": "The child cries loudly",
+          "components": [
+            "w_dek",
+            "w_rong_hai",
+            "w_dang"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_khao_mee_nam_ta",
+          "th": "เขามีน้ำตา",
+          "phonetic": "khǎo mii nám-taa",
+          "fr": "Il a des larmes",
+          "en": "He has tears",
+          "components": [
+            "w_khao_pron",
+            "w_mee",
+            "w_nam_ta"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_na_seed_mak",
+          "th": "หน้าซีดมาก",
+          "phonetic": "nâa sîit mâak",
+          "fr": "Visage très pâle",
+          "en": "Very pale face",
+          "components": [
+            "w_na_face",
+            "w_seed",
             "w_mak"
           ],
-          "imageUrl": "/images/p_p_new_lesson-54-a4_1.svg"
-        },
-        {
-          "id": "p_new_lesson-54-a4_2",
-          "th": "หิวน้ำไหม",
-          "fr": "As-tu soif?",
-          "en": "Are you thirsty?",
-          "phonetic": "hǐw-náam mǎi",
-          "components": [
-            "w_lesson-54-a4_2",
-            "w_mai"
-          ],
-          "imageUrl": "/images/p_p_new_lesson-54-a4_2.svg"
-        },
-        {
-          "id": "p_new_lesson-54-a4_3",
-          "th": "พักก่อน",
-          "fr": "Repose-toi",
-          "en": "Rest first",
-          "phonetic": "phák kòon",
-          "components": [
-            "w_phak_kon"
-          ],
-          "imageUrl": "/images/p_p_new_lesson-54-a4_3.svg"
-        },
-        {
-          "id": "p_new_lesson-54-a4_4",
-          "th": "ไม่หิว",
-          "fr": "Je n'ai pas faim",
-          "en": "Not hungry",
-          "phonetic": "mâi hǐw",
-          "components": [
-            "w_mai_neg",
-            "w_hiw"
-          ],
-          "imageUrl": "/images/p_p_new_lesson-54-a4_4.svg"
+          "allowIdenticalTranslation": false
         }
       ],
       "imageUrl": "/images/default-lesson.svg"
     },
     {
       "id": "lesson-54-a5",
-      "title": "Ext: Visage",
+      "title": "Révisions : Santé et États",
       "description": "Plus de vocabulaire pour cette unité.",
-      "titleEn": "Ext: Face",
+      "titleEn": "Face",
       "descriptionEn": "More vocabulary for this unit.",
       "words": [
         {
-          "id": "w_lesson-54-a5_1",
-          "th": "ร้องไห้",
-          "fr": "pleurer",
-          "en": "cry",
-          "phonetic": "rɔ́ɔng-hâai",
-          "imageUrl": "/images/w_w_lesson-54-a5_1.svg"
+          "id": "w_khaeng_raeng",
+          "th": "แข็งแรง",
+          "phonetic": "khǎeng-raeng",
+          "fr": "fort / en bonne santé",
+          "en": "strong / healthy",
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "w_lesson-54-a5_2",
-          "th": "หัวเราะ",
-          "fr": "rire",
-          "en": "laugh",
-          "phonetic": "hǔa-rɔ́",
-          "imageUrl": "/images/w_w_lesson-54-a5_2.svg"
+          "id": "w_baat_jep",
+          "th": "บาดเจ็บ",
+          "phonetic": "bàat-jèp",
+          "fr": "blessé",
+          "en": "injured",
+          "allowIdenticalTranslation": false
         },
         {
-          "th": "ดัง",
-          "en": "loud",
-          "id": "w_dang",
-          "fr": "fort (bruit)",
-          "phonetic": "dang",
-          "imageUrl": "/images/w_w_dang.svg"
+          "id": "w_leuat",
+          "th": "เลือด",
+          "phonetic": "lûeat",
+          "fr": "sang",
+          "en": "blood",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_wian_hua",
+          "th": "เวียนหัว",
+          "phonetic": "wian-hǔua",
+          "fr": "étourdi / avoir le vertige",
+          "en": "dizzy",
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "w_haai_jai",
+          "th": "หายใจ",
+          "phonetic": "hǎai-jai",
+          "fr": "respirer",
+          "en": "to breathe",
+          "allowIdenticalTranslation": false
         }
       ],
       "phrases": [
         {
-          "id": "p_new_lesson-54-a5_0",
-          "th": "เขายิ้ม",
-          "fr": "Il sourit",
-          "en": "He smiles",
-          "phonetic": "khǎo yím",
+          "id": "p_auto_lesson-50_3",
+          "th": "ล่ะ ไม่",
+          "phonetic": "lâ mâi",
+          "fr": "[Pratique] et (pour renvoyer la question) / ne pas",
+          "en": "[Practice] and (to return the question) / not",
+          "components": [
+            "w_la",
+            "w_mai_neg"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_auto_lesson-53_2",
+          "th": "เหนื่อย หนัง",
+          "phonetic": "nùeay nǎng",
+          "fr": "[Pratique] fatigué / film",
+          "en": "[Practical] tired / film",
+          "components": [
+            "w_nueay",
+            "w_nang"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_auto_lesson-53_3",
+          "th": "ทำ เรียน",
+          "phonetic": "tham rian",
+          "fr": "[Pratique] faire / apprendre",
+          "en": "[Practice] do / learn",
+          "components": [
+            "w_tham",
+            "w_rian"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_health_strong",
+          "th": "ผมแข็งแรงมาก",
+          "phonetic": "phǒm khǎeng-raeng mâak",
+          "fr": "Je suis très en bonne santé.",
+          "en": "I am very healthy.",
+          "components": [
+            "w_phom",
+            "w_khaeng_raeng",
+            "w_mak"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_health_blood",
+          "th": "หมอตรวจเลือด",
+          "phonetic": "mǒr dtruat lûeat",
+          "fr": "Le médecin examine le sang.",
+          "en": "The doctor checks the blood.",
+          "components": [
+            "w_mo",
+            "w_examine",
+            "w_leuat"
+          ],
+          "allowIdenticalTranslation": false
+        },
+        {
+          "id": "p_health_injured",
+          "th": "เขาบาดเจ็บต้องไปโรงพยาบาล",
+          "phonetic": "khǎo bàat-jèp dtông bpai roong-phá-yaa-baan",
+          "fr": "Il est blessé, il doit aller à l'hôpital.",
+          "en": "He is injured, must go to the hospital.",
           "components": [
             "w_khao_pron",
-            "w_yim"
+            "w_baat_jep",
+            "w_tong",
+            "w_pai",
+            "w_rong_phayaban"
           ],
-          "imageUrl": "/images/p_p_new_lesson-54-a5_0.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_new_lesson-54-a5_1",
-          "th": "เด็กร้องไห้",
-          "fr": "L'enfant pleure",
-          "en": "Child cries",
-          "phonetic": "dèk róong-hâi",
+          "id": "p_health_dizzy",
+          "th": "ฉันรู้สึกเวียนหัวอยากพักก่อน",
+          "phonetic": "chǎn rúu-sèuk wian-hǔua yàak phák-gòrn",
+          "fr": "Je me sens étourdi, je veux me reposer d'abord.",
+          "en": "I feel dizzy, I want to rest first.",
           "components": [
-            "w_dek",
-            "w_lesson-54-a5_1"
+            "w_chan",
+            "w_ruesuek",
+            "w_wian_hua",
+            "w_yak",
+            "w_phak_kon"
           ],
-          "imageUrl": "/images/p_p_new_lesson-54-a5_1.svg"
+          "allowIdenticalTranslation": false
         },
         {
-          "id": "p_new_lesson-54-a5_2",
-          "th": "หัวเราะดัง",
-          "fr": "Rire fort",
-          "en": "Laugh loud",
-          "phonetic": "hǔua-ró dang",
+          "id": "p_health_breathe",
+          "th": "หายใจไม่ได้",
+          "phonetic": "hǎai-jai mâi dâai",
+          "fr": "Je ne peux pas respirer.",
+          "en": "I cannot breathe.",
           "components": [
-            "w_lesson-54-a5_2",
-            "w_dang"
+            "w_haai_jai",
+            "w_mai_neg",
+            "w_daai"
           ],
-          "imageUrl": "/images/p_p_new_lesson-54-a5_2.svg"
-        },
-        {
-          "id": "p_new_lesson-54-a5_3",
-          "th": "อย่าร้องไห้",
-          "fr": "Ne pleure pas!",
-          "en": "Don't cry!",
-          "phonetic": "yàa róong-hâi",
-          "components": [
-            "w_ya_dont",
-            "w_lesson-54-a5_1"
-          ],
-          "imageUrl": "/images/p_p_new_lesson-54-a5_3.svg"
-        },
-        {
-          "id": "p_new_lesson-54-a5_4",
-          "th": "ยิ้มสวย",
-          "fr": "Beau sourire",
-          "en": "Beautiful smile",
-          "phonetic": "yím sǔay",
-          "components": [
-            "w_yim",
-            "w_suay"
-          ],
-          "imageUrl": "/images/p_p_new_lesson-54-a5_4.svg"
+          "allowIdenticalTranslation": false
         }
       ],
       "imageUrl": "/images/numbers.svg"
