@@ -492,6 +492,7 @@ function LessonPageContent({ lesson }: { lesson: any }) {
                     isCorrect={isCorrect}
                     onAutoCheck={(val) => handleCheck(val)}
                     language={language}
+                    onAddMistake={() => setMistakes(m => m + 1)}
                   />
                 ) : currentExercise?.type === "pair-matching" ? (
                   <PairMatch

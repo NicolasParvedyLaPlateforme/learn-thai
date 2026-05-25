@@ -77,6 +77,8 @@ interface ProgressState {
   setHasSeenCommunityModal: (seen: boolean) => void;
   showCommunityModal: boolean;
   setShowCommunityModal: (show: boolean) => void;
+  completedConversations: Record<string, number>;
+  completeConversation: (convId: string, level: number) => void;
 }
 
 export const useProgressStore = create<ProgressState>()(
@@ -87,6 +89,7 @@ export const useProgressStore = create<ProgressState>()(
       language: 'fr',
       languageSetByUser: false,
       completedLessons: [],
+      completedConversations: {},
       unlockedLessons: [],
       lessonLevels: {},
       lessonStars: {},
@@ -123,6 +126,19 @@ export const useProgressStore = create<ProgressState>()(
         hiddenInstructions: state.hiddenInstructions.filter((k) => k !== key) 
       })),
       setWritingConfig: (config) => set((state) => ({ writingConfig: { ...state.writingConfig, ...config } })),
+
+      completeConversation: (convId, level) => set((state) => {
+        const currentLevel = state.completedConversations[convId] ?? -1;
+        if (level > currentLevel) {
+          return {
+            completedConversations: {
+              ...state.completedConversations,
+              [convId]: level
+            }
+          };
+        }
+        return state;
+      }),
 
       setLanguage: (lang) => set({ language: lang, languageSetByUser: true }),
       autoDetectLanguage: () => {

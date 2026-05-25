@@ -33,7 +33,7 @@ function ConversationContent() {
   const isLevel3 = level === '3';
   const isInteractive = isLevel1 || isLevel2 || isLevel3;
 
-  const { language, addXp, showRomanization, completedLessons } = useProgressStore();
+  const { language, addXp, showRomanization, completedLessons, completeConversation } = useProgressStore();
   const [mounted, setMounted] = useState(false);
   const [allWords, setAllWords] = useState<Word[]>([]);
   
@@ -201,6 +201,11 @@ function ConversationContent() {
         // Conversation fully built, finish without auto-replay
         setIsFinished(true);
         addXp(10);
+        let completionLvl = 0;
+        if (isLevel1) completionLvl = 1;
+        if (isLevel2) completionLvl = 2;
+        if (isLevel3) completionLvl = 3;
+        completeConversation(conversation.id, completionLvl);
       }
     };
     
@@ -244,6 +249,7 @@ function ConversationContent() {
       setIsFinished(true);
       setCurrentLineIndex(conversation.dialogs.length);
       addXp(10);
+      completeConversation(conversation.id, 0);
     }
   };
 
@@ -269,6 +275,7 @@ function ConversationContent() {
       setIsFinished(true);
       setCurrentLineIndex(conversation.dialogs.length);
       addXp(10);
+      completeConversation(conversation.id, 0);
     }
   };
 

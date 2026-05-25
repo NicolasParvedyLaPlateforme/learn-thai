@@ -274,27 +274,38 @@ function generateMisspelledWords(word: Word, count: number): {id: string, th: st
   // A few common Thai consonants to use for swapping
   const consonants = ['ก','ข','ค','ง','จ','ฉ','ช','ซ','ด','ต','ถ','ท','น','บ','ป','ผ','พ','ฟ','ม','ย','ร','ล','ว','ส','ห','อ'];
   const res = [];
+  
+  // Find a single valid index to mutate across all distractors
+  let targetIdx = 0;
+  let attempts = 0;
+  while(attempts < 10) {
+    const idx = Math.floor(Math.random() * chars.length);
+    const code = chars[idx].charCodeAt(0);
+    // only replace base consonants if possible to avoid breaking vowels
+    if (code >= 0x0E01 && code <= 0x0E2E) {
+      targetIdx = idx;
+      break;
+    }
+    attempts++;
+  }
+
+  // Create unique replacements
+  const usedConsonants = new Set([chars[targetIdx]]);
+  
   for (let i=0; i<count; i++) {
     let newChars = [...chars];
-    let attempts = 0;
-    while(attempts < 10) {
-      const idx = Math.floor(Math.random() * newChars.length);
-      // only replace base consonants if possible to avoid breaking vowels
-      const code = newChars[idx].charCodeAt(0);
-      if (code >= 0x0E01 && code <= 0x0E2E) {
-        newChars[idx] = consonants[Math.floor(Math.random() * consonants.length)];
-        break;
-      }
-      attempts++;
+    let rc = consonants[Math.floor(Math.random() * consonants.length)];
+    
+    // Ensure we pick a consonant we haven't used yet in this position
+    let pickAttempts = 0;
+    while (usedConsonants.has(rc) && pickAttempts < 20) {
+       rc = consonants[Math.floor(Math.random() * consonants.length)];
+       pickAttempts++;
     }
-    // ensure at least one change
-    if (newChars.join('') === word.th) {
-      let rc = consonants[Math.floor(Math.random() * consonants.length)];
-      while (rc === chars[0]) {
-         rc = consonants[Math.floor(Math.random() * consonants.length)];
-      }
-      newChars[0] = rc;
-    }
+    usedConsonants.add(rc);
+    
+    newChars[targetIdx] = rc;
+    
     res.push({
       id: `fake-${word.id}-${i}-${Date.now()}`,
       th: newChars.join(''),

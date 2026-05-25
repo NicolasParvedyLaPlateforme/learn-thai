@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useProgressStore } from '../lib/store';
 import PWAInstallButton from '../components/PWAInstallButton';
-import { ArrowLeft, MessageCircle, Star, BookOpen, Info, ChevronRight, Play, X, Book, Image as ImageIcon } from 'lucide-react';
+import { ArrowLeft, MessageCircle, Star, BookOpen, Info, ChevronRight, Play, X, Book, Image as ImageIcon, Lock } from 'lucide-react';
 import conversationsData from '../data/conversations.json';
 import CONVERSATION_UNITS from '../data/conversation_units.json';
 
@@ -25,7 +25,7 @@ interface Conversation {
 
 export default function ConversationsPage() {
   const [mounted, setMounted] = useState(false);
-  const { language, xp, setLanguage } = useProgressStore();
+  const { language, xp, setLanguage, completedConversations } = useProgressStore();
   const [selectedStoryId, setSelectedStoryId] = useState<string | null>(null);
   const [selectedConvId, setSelectedConvId] = useState<string | null>(null);
 
@@ -191,31 +191,45 @@ export default function ConversationsPage() {
                )}
                {currentStoryConvs.map((conv, index) => {
                   const isSelected = selectedConvId === conv.id;
+                  const isLocked = index > 0 && (completedConversations[currentStoryConvs[index - 1].id] || 0) < 2;
+
                   return (
                     <button
                       key={conv.id}
-                      onClick={() => setSelectedConvId(conv.id)}
-                      className={`w-full flex items-center gap-4 p-4 rounded-2xl transition-all border-2 ${isSelected ? 'bg-orange-50 border-orange-200' : 'bg-white border-slate-100 hover:border-slate-200 hover:bg-slate-50'}`}
+                      onClick={() => !isLocked && setSelectedConvId(conv.id)}
+                      disabled={isLocked}
+                      className={`w-full flex items-center justify-center p-4 rounded-2xl transition-all border-2 relative overflow-hidden ${isSelected ? 'bg-orange-50 border-orange-200' : isLocked ? 'bg-slate-50 border-slate-100 cursor-not-allowed' : 'bg-white border-slate-100 hover:border-slate-200 hover:bg-slate-50'}`}
                     >
-                       {/* THUMBNAIL OR ICON */}
-                       {conv.imageUrl ? (
-                          <div className={`w-14 h-14 rounded-xl overflow-hidden relative shrink-0 border-2 ${isSelected ? 'border-orange-300' : 'border-slate-200'}`}>
-                            <Image src={conv.imageUrl} alt={conv.title} fill className="object-cover" />
-                          </div>
-                       ) : (
-                          <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 transition-colors ${isSelected ? 'bg-orange-100 text-orange-500' : 'bg-slate-100 text-slate-400'}`}>
-                             <MessageCircle size={24} className={isSelected ? 'fill-orange-100' : ''} />
-                          </div>
-                       )}
-                       
-                       <div className="flex-1 min-w-0 pr-2 text-left">
-                          <h3 className={`font-bold truncate text-base ${isSelected ? 'text-orange-600' : 'text-slate-700'}`}>
-                             {index + 1}. {language === 'en' && conv.titleEn ? conv.titleEn : conv.title}
-                          </h3>
-                          <p className={`text-sm truncate mt-0.5 ${isSelected ? 'text-orange-500/80' : 'text-slate-400'}`}>
-                             {conv.dialogs[0] ? (language === 'en' ? conv.dialogs[0].en : conv.dialogs[0].fr) : ''}
-                          </p>
+                       <div className={`w-full flex items-center gap-4 ${isLocked ? 'opacity-40 blur-[1px]' : ''}`}>
+                         {/* THUMBNAIL OR ICON */}
+                         {conv.imageUrl ? (
+                            <div className={`w-14 h-14 rounded-xl overflow-hidden relative shrink-0 border-2 ${isSelected ? 'border-orange-300' : 'border-slate-200'}`}>
+                              <Image src={conv.imageUrl} alt={conv.title} fill className="object-cover" />
+                            </div>
+                         ) : (
+                            <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 transition-colors ${isSelected ? 'bg-orange-100 text-orange-500' : 'bg-slate-100 text-slate-400'}`}>
+                               <MessageCircle size={24} className={isSelected ? 'fill-orange-100' : ''} />
+                            </div>
+                         )}
+                         
+                         <div className="flex-1 min-w-0 pr-2 text-left">
+                            <h3 className={`font-bold truncate text-base ${isSelected ? 'text-orange-600' : 'text-slate-700'}`}>
+                               {index + 1}. {language === 'en' && conv.titleEn ? conv.titleEn : conv.title}
+                            </h3>
+                            <p className={`text-sm truncate mt-0.5 ${isSelected ? 'text-orange-500/80' : 'text-slate-400'}`}>
+                               {conv.dialogs[0] ? (language === 'en' ? conv.dialogs[0].en : conv.dialogs[0].fr) : ''}
+                            </p>
+                         </div>
                        </div>
+                       
+                       {isLocked && (
+                         <div className="absolute inset-0 flex items-center justify-center z-10 p-4">
+                            <div className="bg-slate-800/90 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-sm flex items-center gap-2 max-w-full text-center">
+                               <Lock size={16} className="shrink-0" />
+                               <span className="truncate">{language === 'en' ? 'Complete Level 2 of previous conversation' : 'Terminer le Niveau 2 de la précédente conversation'}</span>
+                            </div>
+                         </div>
+                       )}
                     </button>
                   );
                })}
@@ -292,59 +306,100 @@ export default function ConversationsPage() {
 
                         <div className="h-px w-full bg-slate-100 my-1"></div>
 
-                        <Link 
-                           href={`/conversations/${selectedConv.id}?level=1`}
-                           className="group relative flex items-center gap-4 p-4 rounded-2xl border-2 border-emerald-100 bg-emerald-50 hover:bg-emerald-100 hover:border-emerald-200 active:scale-[0.98] transition-all"
-                        >
-                           <div className="w-12 h-12 rounded-xl bg-white text-emerald-500 shadow-sm flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-                              <Star size={24} className="fill-current" />
-                           </div>
-                           <div className="flex-1">
-                              <div className="text-[11px] font-bold text-emerald-600/80 uppercase tracking-wider mb-0.5">
-                                 {language === 'en' ? 'Level 1' : 'Niveau 1'}
-                              </div>
-                              <div className="font-extrabold text-emerald-900 text-base">
-                                 {language === 'en' ? 'Fill in the blanks' : 'Remplir la conversation'}
-                              </div>
-                           </div>
-                           <ChevronRight size={20} className="text-emerald-400 group-hover:text-emerald-600 group-hover:translate-x-1 transition-all" />
-                        </Link>
+                        {(() => {
+                           const highestCompleted = completedConversations[selectedConv.id] ?? -1;
+                           const isLevel1Locked = highestCompleted < 0;
+                           const isLevel2Locked = highestCompleted < 1;
+                           const isLevel3Locked = highestCompleted < 2;
 
-                        <Link 
-                           href={`/conversations/${selectedConv.id}?level=2`}
-                           className="group relative flex items-center gap-4 p-4 rounded-2xl border-2 border-purple-100 bg-purple-50 hover:bg-purple-100 hover:border-purple-200 active:scale-[0.98] transition-all"
-                        >
-                           <div className="w-12 h-12 rounded-xl bg-white text-purple-500 shadow-sm flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-                              <Star size={24} className="fill-current" />
-                           </div>
-                           <div className="flex-1">
-                              <div className="text-[11px] font-bold text-purple-600/80 uppercase tracking-wider mb-0.5">
-                                 {language === 'en' ? 'Level 2' : 'Niveau 2'}
-                              </div>
-                              <div className="font-extrabold text-purple-900 text-base">
-                                 {language === 'en' ? 'Fill in the word' : 'Remplir le mot'}
-                              </div>
-                           </div>
-                           <ChevronRight size={20} className="text-purple-400 group-hover:text-purple-600 group-hover:translate-x-1 transition-all" />
-                        </Link>
+                           return (
+                              <>
+                                 <Link 
+                                    href={isLevel1Locked ? '#' : `/conversations/${selectedConv.id}?level=1`}
+                                    className={`group relative flex items-center gap-4 p-4 rounded-2xl border-2 overflow-hidden transition-all ${isLevel1Locked ? 'border-slate-100 bg-slate-50 cursor-not-allowed opacity-80' : 'border-emerald-100 bg-emerald-50 hover:bg-emerald-100 hover:border-emerald-200 active:scale-[0.98]'}`}
+                                 >
+                                    <div className={`w-full flex items-center gap-4 ${isLevel1Locked ? 'opacity-40 blur-[1px]' : ''}`}>
+                                       <div className="w-12 h-12 rounded-xl bg-white text-emerald-500 shadow-sm flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                                          <Star size={24} className="fill-current" />
+                                       </div>
+                                       <div className="flex-1">
+                                          <div className="text-[11px] font-bold text-emerald-600/80 uppercase tracking-wider mb-0.5">
+                                             {language === 'en' ? 'Level 1' : 'Niveau 1'}
+                                          </div>
+                                          <div className="font-extrabold text-emerald-900 text-base">
+                                             {language === 'en' ? 'Fill in the blanks' : 'Remplir la conversation'}
+                                          </div>
+                                       </div>
+                                       <ChevronRight size={20} className="text-emerald-400 group-hover:text-emerald-600 group-hover:translate-x-1 transition-all" />
+                                    </div>
+                                    {isLevel1Locked && (
+                                       <div className="absolute inset-0 flex items-center justify-center z-10 p-4 font-sans font-bold">
+                                          <div className="bg-slate-800/90 text-white text-[11px] font-bold px-3 py-1.5 rounded-xl shadow-sm flex items-center gap-1.5 max-w-full text-center">
+                                             <Lock size={12} className="shrink-0" />
+                                             <span className="truncate">{language === 'en' ? 'Listen to the conversation to unlock' : 'Écouter la conversation pour débloquer'}</span>
+                                          </div>
+                                       </div>
+                                    )}
+                                 </Link>
 
-                        <Link 
-                           href={`/conversations/${selectedConv.id}?level=3`}
-                           className="group relative flex items-center gap-4 p-4 rounded-2xl border-2 border-blue-100 bg-blue-50 hover:bg-blue-100 hover:border-blue-200 active:scale-[0.98] transition-all"
-                        >
-                           <div className="w-12 h-12 rounded-xl bg-white text-blue-500 shadow-sm flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-                              <Star size={24} className="fill-current" />
-                           </div>
-                           <div className="flex-1">
-                              <div className="text-[11px] font-bold text-blue-600/80 uppercase tracking-wider mb-0.5">
-                                 {language === 'en' ? 'Level 3' : 'Niveau 3'}
-                              </div>
-                              <div className="font-extrabold text-blue-900 text-base">
-                                 {language === 'en' ? 'Choose the phrase' : 'Choisir la phrase'}
-                              </div>
-                           </div>
-                           <ChevronRight size={20} className="text-blue-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all" />
-                        </Link>
+                                 <Link 
+                                    href={isLevel2Locked ? '#' : `/conversations/${selectedConv.id}?level=2`}
+                                    className={`group relative flex items-center gap-4 p-4 rounded-2xl border-2 overflow-hidden transition-all ${isLevel2Locked ? 'border-slate-100 bg-slate-50 cursor-not-allowed opacity-80' : 'border-purple-100 bg-purple-50 hover:bg-purple-100 hover:border-purple-200 active:scale-[0.98]'}`}
+                                 >
+                                    <div className={`w-full flex items-center gap-4 ${isLevel2Locked ? 'opacity-40 blur-[1px]' : ''}`}>
+                                       <div className="w-12 h-12 rounded-xl bg-white text-purple-500 shadow-sm flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                                          <Star size={24} className="fill-current" />
+                                       </div>
+                                       <div className="flex-1">
+                                          <div className="text-[11px] font-bold text-purple-600/80 uppercase tracking-wider mb-0.5">
+                                             {language === 'en' ? 'Level 2' : 'Niveau 2'}
+                                          </div>
+                                          <div className="font-extrabold text-purple-900 text-base">
+                                             {language === 'en' ? 'Fill in the word' : 'Remplir le mot'}
+                                          </div>
+                                       </div>
+                                       <ChevronRight size={20} className="text-purple-400 group-hover:text-purple-600 group-hover:translate-x-1 transition-all" />
+                                    </div>
+                                    {isLevel2Locked && (
+                                       <div className="absolute inset-0 flex items-center justify-center z-10 p-4 font-sans font-bold">
+                                          <div className="bg-slate-800/90 text-white text-[11px] font-bold px-3 py-1.5 rounded-xl shadow-sm flex items-center gap-1.5 max-w-full text-center">
+                                             <Lock size={12} className="shrink-0" />
+                                             <span className="truncate">{language === 'en' ? 'Complete Level 1 to unlock' : 'Terminer le Niveau 1 pour débloquer'}</span>
+                                          </div>
+                                       </div>
+                                    )}
+                                 </Link>
+
+                                 <Link 
+                                    href={isLevel3Locked ? '#' : `/conversations/${selectedConv.id}?level=3`}
+                                    className={`group relative flex items-center gap-4 p-4 rounded-2xl border-2 overflow-hidden transition-all ${isLevel3Locked ? 'border-slate-100 bg-slate-50 cursor-not-allowed opacity-80' : 'border-blue-100 bg-blue-50 hover:bg-blue-100 hover:border-blue-200 active:scale-[0.98]'}`}
+                                 >
+                                    <div className={`w-full flex items-center gap-4 ${isLevel3Locked ? 'opacity-40 blur-[1px]' : ''}`}>
+                                       <div className="w-12 h-12 rounded-xl bg-white text-blue-500 shadow-sm flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                                          <Star size={24} className="fill-current" />
+                                       </div>
+                                       <div className="flex-1">
+                                          <div className="text-[11px] font-bold text-blue-600/80 uppercase tracking-wider mb-0.5">
+                                             {language === 'en' ? 'Level 3' : 'Niveau 3'}
+                                          </div>
+                                          <div className="font-extrabold text-blue-900 text-base">
+                                             {language === 'en' ? 'Choose the phrase' : 'Choisir la phrase'}
+                                          </div>
+                                       </div>
+                                       <ChevronRight size={20} className="text-blue-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all" />
+                                    </div>
+                                    {isLevel3Locked && (
+                                       <div className="absolute inset-0 flex items-center justify-center z-10 p-4 font-sans font-bold">
+                                          <div className="bg-slate-800/90 text-white text-[11px] font-bold px-3 py-1.5 rounded-xl shadow-sm flex items-center gap-1.5 max-w-full text-center">
+                                             <Lock size={12} className="shrink-0" />
+                                             <span className="truncate">{language === 'en' ? 'Complete Level 2 to unlock' : 'Terminer le Niveau 2 pour débloquer'}</span>
+                                          </div>
+                                       </div>
+                                    )}
+                                 </Link>
+                              </>
+                           );
+                        })()}
                      </div>
                   </div>
                </div>

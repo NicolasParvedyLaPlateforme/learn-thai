@@ -55,15 +55,51 @@ export default function QuestionArea({
             segments.find((s) => s.index > currentStrLen) ||
             segments[segments.length - 1];
         }
-        if (currentWordSegment) {
-          currentThaiWordForAudio = currentWordSegment.segment;
-        }
+      if (currentWordSegment) {
+        currentThaiWordForAudio = currentWordSegment.segment;
       }
-    } catch (e) {}
+    }
+  } catch (e) {}
+}
+
+const isReverse = currentExercise.reverse;
+const is4ChoiceSimilar = (() => {
+  if (currentExercise.type !== "word-match" || isReverse) return false;
+  const options = currentExercise.options?.map((o: any) => o.th) || [];
+  if (options.length !== 4) return false;
+  if (options.some(o => !o || o.length === 0)) return false;
+
+  const minLen = Math.min(...options.map(o => o.length));
+  
+  let commonPrefixLen = 0;
+  while (commonPrefixLen < minLen) {
+    const char = options[0][commonPrefixLen];
+    if (options.every(o => o[commonPrefixLen] === char)) {
+      commonPrefixLen++;
+    } else {
+      break;
+    }
   }
 
-  const imageUrl =
-    (currentExercise.type === "intro" &&
+  let commonSuffixLen = 0;
+  while (commonSuffixLen < minLen - commonPrefixLen) {
+    const char = options[0][options[0].length - 1 - commonSuffixLen];
+    if (options.every(o => o[o.length - 1 - commonSuffixLen] === char)) {
+      commonSuffixLen++;
+    } else {
+      break;
+    }
+  }
+
+  const diffs = options.map(o => o.substring(commonPrefixLen, o.length - commonSuffixLen));
+  if (diffs.some(d => d.length === 0)) return false;
+  const maxDiffLen = Math.max(...diffs.map(d => Array.from(d).length));
+  
+  return maxDiffLen <= 3;
+})();
+
+const imageUrl =
+  (currentExercise.type === "intro" &&
       (currentExercise.introItem as any)?.imageUrl) ||
     currentExercise.imageUrl;
 
@@ -175,7 +211,8 @@ export default function QuestionArea({
                     hideHints={currentExercise.hideHints}
                     disableTooltips={
                       currentExercise.disableTooltips ||
-                      currentExercise.blindMode
+                      currentExercise.blindMode ||
+                      is4ChoiceSimilar
                     }
                     hideColors={currentExercise.hideColors}
                     alwaysShowPhonetic={true}
