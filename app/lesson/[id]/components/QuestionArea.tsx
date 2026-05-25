@@ -221,6 +221,11 @@ export default function QuestionArea({
                     }
                   />
                 </div>
+                {currentExercise.blankHint && (
+                  <p className="text-xl text-emerald-600 font-medium pb-2 text-center mt-[-10px] md:mt-[-20px]">
+                    {currentExercise.blankHint}
+                  </p>
+                )}
               </div>
             )}
           </div>

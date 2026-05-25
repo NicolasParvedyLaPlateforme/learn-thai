@@ -58,5 +58,6 @@ export interface Exercise {
   reverse?: boolean; // For word-match: if true, options show FR/EN instead of TH
   isFillInBlank?: boolean;
   blankIndex?: number;
+  blankHint?: string;
   prefilledComponents?: string[];
 }

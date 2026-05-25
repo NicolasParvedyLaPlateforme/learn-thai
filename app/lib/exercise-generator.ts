@@ -568,7 +568,49 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
     });
 
     let wmPool = shuffle(level1WmExercises);
-    let sbPool = [...sbExercises];
+
+    let fillInBlankPool: Exercise[] = [];
+    sbExercises.forEach((sbEx) => {
+       if (!sbEx.correctComponents || sbEx.correctComponents.length <= 1) {
+           fillInBlankPool.push(sbEx);
+           return;
+       }
+       const validIndices = sbEx.correctComponents.map((c, i) => c !== 'w_dots' ? i : -1).filter(i => i !== -1);
+       if (validIndices.length === 0) {
+           fillInBlankPool.push(sbEx);
+           return;
+       }
+       
+       const blankIndex = validIndices[Math.floor(Math.random() * validIndices.length)];
+       const blankWordId = sbEx.correctComponents[blankIndex];
+       
+       const blankWord = allLessons.flatMap(l => l.words).find(w => w.id === blankWordId) || {id: blankWordId, th: blankWordId, fr: '', en: ''};
+       const misspelledOptions = generateMisspelledWords(blankWord as any, 1);
+       
+       const prefilledComponents = sbEx.correctComponents.map((id, i) => {
+           if (i === blankIndex) return '';
+           if (id === 'w_dots') return '...';
+           const w = allLessons.flatMap(l => l.words).find(w => w.id === id);
+           return w ? w.th : id;
+       });
+       
+       const missingWordFr = language === 'en' ? (blankWord.en || blankWord.fr) : blankWord.fr;
+       const blankHint = language === 'en' ? `(Missing: ${missingWordFr})` : `(Mot manquant : ${missingWordFr})`;
+
+       fillInBlankPool.push({
+          ...sbEx,
+          id: `fill-blank-2-${sbEx.id}-${Date.now()}-${Math.random()}`,
+          question: sbEx.question,
+          blankHint: blankHint,
+          isFillInBlank: true,
+          blankIndex: blankIndex,
+          prefilledComponents: prefilledComponents,
+          options: shuffle([blankWord, ...misspelledOptions]) as any,
+          maxMistakes: 2
+       });
+    });
+
+    let sbPool = fillInBlankPool;
 
     // Attempt to pad sbPool to have some sentences if available
     if (sbPool.length === 0) {
@@ -662,9 +704,14 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
            return w ? w.th : id;
        });
        
+       const missingWordFr = language === 'en' ? (blankWord.en || blankWord.fr) : blankWord.fr;
+       const blankHint = language === 'en' ? `(Missing: ${missingWordFr})` : `(Mot manquant : ${missingWordFr})`;
+
        fillInBlankPool.push({
           ...sbEx,
           id: `fill-blank-${sbEx.id}-${Date.now()}-${Math.random()}`,
+          question: sbEx.question,
+          blankHint: blankHint,
           isFillInBlank: true,
           blankIndex: blankIndex,
           prefilledComponents: prefilledComponents,
@@ -710,9 +757,14 @@ export function generateExercises(lesson: Lesson, allLessons: Lesson[], level: n
            return w ? w.th : id;
        });
        
+       const missingWordFr = language === 'en' ? (blankWord.en || blankWord.fr) : blankWord.fr;
+       const blankHint = language === 'en' ? `(Missing: ${missingWordFr})` : `(Mot manquant : ${missingWordFr})`;
+
        fillInBlankPool.push({
           ...sbEx,
           id: `fill-blank-4-${sbEx.id}-${Date.now()}-${Math.random()}`,
+          question: sbEx.question,
+          blankHint: blankHint,
           isFillInBlank: true,
           blankIndex: blankIndex,
           prefilledComponents: prefilledComponents,
