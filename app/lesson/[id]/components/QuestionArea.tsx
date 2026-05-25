@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useEffect } from "react";
 import { Exercise, Lesson, Word } from "../../../types";
 import { SentenceWithHints } from "../../../components/Hints";
 import { playThaiTTS } from "../../../lib/tts";
@@ -21,6 +22,12 @@ export default function QuestionArea({
   isChecking,
   selectedAnswer,
 }: QuestionAreaProps) {
+  useEffect(() => {
+    if (currentExercise.type === "intro") {
+      playThaiTTS(currentExercise.answer);
+    }
+  }, [currentExercise]);
+
   let currentThaiWordForAudio: string | undefined;
   if (
     currentExercise.type === "writing" &&
