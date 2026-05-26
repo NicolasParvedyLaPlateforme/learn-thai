@@ -161,7 +161,7 @@ export default function AlphabetClientPage({ lightweightLessons }: { lightweight
         {(() => {
           const unit = UNITS[activeUnitIndex];
           const unitLessons = unit.lessons;
-          const completedInUnit = unitLessons.filter(l => completedLessons.includes(l.id)).length;
+          const completedInUnit = mounted ? unitLessons.filter(l => completedLessons.includes(l.id)).length : 0;
           const progressPercent = mounted && unitLessons.length > 0 ? (completedInUnit / unitLessons.length) * 100 : 0;
           
           return (
@@ -334,8 +334,8 @@ export default function AlphabetClientPage({ lightweightLessons }: { lightweight
             {(()=>{
               const unit = UNITS[activeUnitIndex];
               const unitLessons = unit.lessons;
-              const completedInUnit = unitLessons.filter(l => completedLessons.includes(l.id)).length;
-              const progressPercent = unitLessons.length > 0 ? (completedInUnit / unitLessons.length) * 100 : 0;
+              const completedInUnit = mounted ? unitLessons.filter(l => completedLessons.includes(l.id)).length : 0;
+              const progressPercent = mounted && unitLessons.length > 0 ? (completedInUnit / unitLessons.length) * 100 : 0;
               
               return (
                 <div key={`desktop-unit-${unit.id}`} className="flex flex-col gap-8 w-full animate-in fade-in slide-in-from-bottom-4 duration-500 relative">
@@ -376,8 +376,8 @@ export default function AlphabetClientPage({ lightweightLessons }: { lightweight
                      
                      {unitLessons.map((lesson, idx) => {
                        const itemIndex = idx;
-                       const isCompleted = completedLessons.includes(lesson.id);
-                       const level = lessonLevels[lesson.id] || 0;
+                       const isCompleted = mounted ? completedLessons.includes(lesson.id) : false;
+                       const level = mounted ? (lessonLevels[lesson.id] || 0) : 0;
                        
                        // All alphabet lessons are unlocked horizontally
                        const isUnlocked = true;

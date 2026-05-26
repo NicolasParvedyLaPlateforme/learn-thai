@@ -416,7 +416,7 @@ export default function LearnClientPage({ lightweightLessons }: { lightweightLes
                      
                      {unitLessons.map((lesson, idx) => {
                        const globalIndex = unit.startIndex + idx;
-                       const level = lessonLevels[lesson.id] || 0;
+                       const level = mounted ? (lessonLevels[lesson.id] || 0) : 0;
                        const isUnlocked = true;
                        
                        const showLineToNext = idx < unitLessons.length - 1;

@@ -82,7 +82,7 @@ export default function ReviewPage() {
     });
   };
 
-  if (!mounted) return <div className="p-8 text-center text-slate-500 font-medium">{language === 'en' ? 'Loading...' : 'Chargement...'}</div>;
+  if (!mounted) return null;
 
   if (completedLessons.length === 0) {
     return (

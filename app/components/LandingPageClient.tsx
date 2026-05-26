@@ -123,6 +123,12 @@ export default function LandingPageClient() {
   useEffect(() => {
     setMounted(true);
     autoDetectLanguage();
+    
+    // Redirect returning users directly to the app
+    const { completedLessons } = useProgressStore.getState();
+    if (completedLessons && completedLessons.length > 0) {
+      window.location.replace('/learn');
+    }
   }, [autoDetectLanguage]);
 
   const content = (mounted && language === 'en') ? enContent : frContent;

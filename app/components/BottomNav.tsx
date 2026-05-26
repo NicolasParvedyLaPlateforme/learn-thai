@@ -12,6 +12,12 @@ export default function BottomNav() {
   const { language } = useProgressStore();
   const globalSuggested = useGlobalSuggestedLesson();
 
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
   // Define visibility logic
   const isLearnActive = pathname === '/learn';
   const isAlphabetActive = pathname === '/alphabet';
@@ -20,7 +26,7 @@ export default function BottomNav() {
   
   const isVisible = isLearnActive || isAlphabetActive || isConversationsActive || isPracticeActive;
 
-  if (!isVisible) return null;
+  if (!isVisible || !mounted) return null;
 
   const getHrefWithHash = (basePath: string, type: 'learn' | 'alphabet') => {
     return globalSuggested?.type === type ? `${basePath}#${globalSuggested.id}` : basePath;
