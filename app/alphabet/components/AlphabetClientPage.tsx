@@ -15,9 +15,11 @@ import { useGlobalSuggestedLesson } from '../../lib/useGlobalSuggestedLesson';
 import { DesktopSidebarRight } from '../../components/DesktopSidebarRight';
 import PWAInstallButton from '../../components/PWAInstallButton';
 import ALPHABET_BASE_UNITS from '../../data/alphabet_units.json';
+import { useIsPWA } from '../../../hooks/use-pwa';
 
 export default function AlphabetClientPage({ lightweightLessons }: { lightweightLessons: any[] }) {
   const router = useRouter();
+  const isPWA = useIsPWA();
   const { completedLessons, unlockedLessons, lessonLevels, lessonStars, xp, resetLessonLevel, unlockLessonManual, language, setLanguage, autoDetectLanguage } = useProgressStore();
   const [mounted, setMounted] = useState(false);
   const levelsScrollRef = useRef<HTMLDivElement>(null);
@@ -131,10 +133,12 @@ export default function AlphabetClientPage({ lightweightLessons }: { lightweight
               </button>
             )}
             
-            <div className="flex items-center gap-1.5 px-3 py-1.5 bg-amber-50 text-amber-600 rounded-xl font-extrabold text-sm">
-              <Star size={18} className="fill-amber-400 stroke-amber-400" />
-              <span>{mounted ? xp : 0} XP</span>
-            </div>
+            {(mounted && isPWA) && (
+              <div className="flex items-center gap-1.5 px-3 py-1.5 bg-amber-50 text-amber-600 rounded-xl font-extrabold text-sm">
+                <Star size={18} className="fill-amber-400 stroke-amber-400" />
+                <span>{xp} XP</span>
+              </div>
+            )}
           </div>
         </div>
       </header>
@@ -161,7 +165,7 @@ export default function AlphabetClientPage({ lightweightLessons }: { lightweight
         {(() => {
           const unit = UNITS[activeUnitIndex];
           const unitLessons = unit.lessons;
-          const completedInUnit = unitLessons.filter(l => completedLessons.includes(l.id)).length;
+          const completedInUnit = mounted ? unitLessons.filter(l => completedLessons.includes(l.id)).length : 0;
           const progressPercent = mounted && unitLessons.length > 0 ? (completedInUnit / unitLessons.length) * 100 : 0;
           
           return (
@@ -213,7 +217,14 @@ export default function AlphabetClientPage({ lightweightLessons }: { lightweight
                    const lineToNextColor = level > 0 ? unit.colorClass : "bg-slate-200";
 
                    return (
-                     <div id={`mobile-lesson-${lesson.id}`} key={`mobile-node-${lesson.id}`} className="relative flex flex-col items-center w-full scroll-mt-24 z-10 mb-8 sm:mb-12 group">
+                     <motion.div 
+                       id={`mobile-lesson-${lesson.id}`} 
+                       key={`mobile-node-${lesson.id}`} 
+                       initial={{ opacity: 0, y: 30 }}
+                       animate={{ opacity: 1, y: 0 }}
+                       transition={{ duration: 0.4, delay: idx * 0.1, ease: "easeOut" }}
+                       className="relative flex flex-col items-center w-full scroll-mt-24 z-10 mb-8 sm:mb-12 group"
+                     >
                         {/* Circle Node */}
                         <div 
                           className={`relative shrink-0 mb-4 z-10 cursor-pointer hover:scale-105 active:scale-95 transition-all`}
@@ -305,7 +316,7 @@ export default function AlphabetClientPage({ lightweightLessons }: { lightweight
                         {showLineToNext && (
                            <div className={`absolute top-[4.5rem] left-1/2 -translate-x-1/2 w-3 h-[calc(100%+2rem)] sm:h-[calc(100%+3rem)] ${lineToNextColor} z-0`}></div>
                         )}
-                     </div>
+                     </motion.div>
                    )
                  })}
                  
@@ -334,8 +345,8 @@ export default function AlphabetClientPage({ lightweightLessons }: { lightweight
             {(()=>{
               const unit = UNITS[activeUnitIndex];
               const unitLessons = unit.lessons;
-              const completedInUnit = unitLessons.filter(l => completedLessons.includes(l.id)).length;
-              const progressPercent = unitLessons.length > 0 ? (completedInUnit / unitLessons.length) * 100 : 0;
+              const completedInUnit = mounted ? unitLessons.filter(l => completedLessons.includes(l.id)).length : 0;
+              const progressPercent = mounted && unitLessons.length > 0 ? (completedInUnit / unitLessons.length) * 100 : 0;
               
               return (
                 <div key={`desktop-unit-${unit.id}`} className="flex flex-col gap-8 w-full animate-in fade-in slide-in-from-bottom-4 duration-500 relative">
@@ -376,8 +387,8 @@ export default function AlphabetClientPage({ lightweightLessons }: { lightweight
                      
                      {unitLessons.map((lesson, idx) => {
                        const itemIndex = idx;
-                       const isCompleted = completedLessons.includes(lesson.id);
-                       const level = lessonLevels[lesson.id] || 0;
+                       const isCompleted = mounted ? completedLessons.includes(lesson.id) : false;
+                       const level = mounted ? (lessonLevels[lesson.id] || 0) : 0;
                        
                        // All alphabet lessons are unlocked horizontally
                        const isUnlocked = true;
@@ -387,7 +398,14 @@ export default function AlphabetClientPage({ lightweightLessons }: { lightweight
                        const lineToNextColor = level > 0 ? unit.colorClass : "bg-slate-200";
 
                        return (
-                         <div id={`desktop-lesson-${lesson.id}`} key={`desktop-node-${lesson.id}`} className="relative flex items-center w-full z-10 gap-6 md:gap-8 min-h-[8.5rem] py-3">
+                         <motion.div 
+                           id={`desktop-lesson-${lesson.id}`} 
+                           key={`desktop-node-${lesson.id}`} 
+                           initial={{ opacity: 0, x: -20 }}
+                           animate={{ opacity: 1, x: 0 }}
+                           transition={{ duration: 0.4, delay: idx * 0.1, ease: "easeOut" }}
+                           className="relative flex items-center w-full z-10 gap-6 md:gap-8 min-h-[8.5rem] py-3 group"
+                         >
                             {/* Circle Node */}
                             <div 
                               className={`relative shrink-0 py-6 cursor-pointer hover:brightness-95 hover:scale-105 active:scale-95 transition-all`}
@@ -476,7 +494,7 @@ export default function AlphabetClientPage({ lightweightLessons }: { lightweight
                                  )}
                                </div>
                             </div>
-                         </div>
+                         </motion.div>
                        )
                      })}
                      

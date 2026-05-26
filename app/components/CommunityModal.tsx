@@ -3,9 +3,10 @@
 import React, { useEffect, useState } from 'react';
 import { useProgressStore } from '../lib/store';
 import { X, Heart, ExternalLink } from 'lucide-react';
-import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export function CommunityModal() {
+  const pathname = usePathname();
   const { 
     hasSeenCommunityModal, 
     setHasSeenCommunityModal, 
@@ -19,11 +20,12 @@ export function CommunityModal() {
 
   useEffect(() => {
     setMounted(true);
-    if (!hasSeenCommunityModal && mounted) {
+    // Only auto-show if we haven't seen it AND we are on the /learn page
+    if (!hasSeenCommunityModal && mounted && pathname === '/learn') {
       setShowCommunityModal(true);
-      setHasSeenCommunityModal(true); // Don't show automatically next time unless they clear storage, or we can use the checkbox.
+      setHasSeenCommunityModal(true); // Don't show automatically next time unless they clear storage.
     }
-  }, [hasSeenCommunityModal, setHasSeenCommunityModal, setShowCommunityModal, mounted]);
+  }, [hasSeenCommunityModal, setHasSeenCommunityModal, setShowCommunityModal, mounted, pathname]);
 
   // Adjust logic: If they never checked "Don't show again", we might want to keep showing it? 
   // Let's say we show it once automatically. If they check "Don't show again", we set a persisted flag.
