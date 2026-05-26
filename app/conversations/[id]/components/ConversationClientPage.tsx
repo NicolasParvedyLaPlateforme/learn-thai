@@ -4,7 +4,7 @@ import React, { useEffect, useState, useRef, Suspense } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useParams, useSearchParams } from 'next/navigation';
-import { ArrowLeft, Play, RotateCcw, Volume2, Star, MessageCircle, Check, X, Home } from 'lucide-react';
+import { ArrowLeft, Play, RotateCcw, Volume2, Star, MessageCircle, Check, X, Home, Image as ImageIcon, Type, Sparkles } from 'lucide-react';
 import { useProgressStore } from '../../../lib/store';
 import { playThaiTTS, playThaiTTSAsync } from '../../../lib/tts';
 import conversationsData from '../../../data/conversations.json';
@@ -45,13 +45,56 @@ function ConversationContent() {
   const [isFinished, setIsFinished] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
   
+  // Scoring and Hints
+  const [stars, setStars] = useState(5);
+  const [hintsUsed, setHintsUsed] = useState<{ [key: number]: boolean }>({});
+  const [hintWord, setHintWord] = useState<Word | null>(null);
+  
+  const [isImageModalOpen, setIsImageModalOpen] = useState(false);
+  const [lostStarAnimation, setLostStarAnimation] = useState(false);
+  const [showHeader, setShowHeader] = useState(true);
+  const lastScrollY = useRef(0);
+  const prevStarsRef = useRef(stars);
+
   // Level 1 and 2 specific states
   // We advance the conversation step by step.
   const [stepIndex, setStepIndex] = useState(0); 
   const [choices, setChoices] = useState<any[]>([]);
   const [selectedChoiceId, setSelectedChoiceId] = useState<number | null>(null);
   const [isChoiceCorrect, setIsChoiceCorrect] = useState<boolean | null>(null);
-  const [targetWord, setTargetWord] = useState<any>(null); // For level 2
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY > lastScrollY.current + 10) {
+        setShowHeader(false);
+      } else if (currentScrollY < lastScrollY.current - 10) {
+        setShowHeader(true);
+      }
+      lastScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    // Only hide the header automatically when these specific properties change (state transition)
+    // we want to still allow the user to show it by scrolling up.
+    if (hasStarted && !isFinished) {
+      setShowHeader(false);
+    }
+  }, [stepIndex, currentLineIndex]);
+
+  useEffect(() => {
+    if (stars < prevStarsRef.current) {
+      setLostStarAnimation(true);
+      setShowHeader(true);
+      setTimeout(() => setLostStarAnimation(false), 1200);
+    }
+    prevStarsRef.current = stars;
+  }, [stars]);
+  const [targetWord, setTargetWord] = useState<Word | null>(null); // For level 2
 
   const [warnings, setWarnings] = useState<number[]>([]);
 
@@ -78,10 +121,14 @@ function ConversationContent() {
       const messages = document.querySelectorAll('.message-bubble');
       if (messages.length > 0) {
         if (choices && choices.length > 0) {
-          // When choices are visible, we want to keep the current message visible
-          // above the fixed choices menu.
-          const targetIndex = Math.max(0, messages.length - 1);
-          messages[targetIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
+          // When choices are visible, we want to ensure the target message (previous speaker) is at the top/center
+          const targetIndex = Math.max(0, messages.length - 2);
+          const yOffset = -70; // Account for the sticky header
+          const element = messages[targetIndex];
+          if (element) {
+            const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
+            window.scrollTo({top: y, behavior: 'smooth'});
+          }
         } else {
           // When just conversing normally, scroll to the last message, keeping it near the center/bottom
           // to feel like a normal chat app
@@ -100,8 +147,17 @@ function ConversationContent() {
     
     if (stepIndex < conversation.dialogs.length && isGuessStep) {
       const correctDialog = conversation.dialogs[stepIndex];
+      setHintsUsed({});
       
       if (isLevel1 || isLevel3) {
+        // Find a hint word from the correct sentence
+        const segmenter = new Intl.Segmenter('th', { granularity: 'word' });
+        const allSegmentsRaw = Array.from(segmenter.segment(correctDialog.th));
+        const wordsInDialog = allSegmentsRaw.map(s => s.segment);
+        const validWords = allWords.filter(w => wordsInDialog.includes(w.th) && w.th.length > 1);
+        const hw = validWords.length > 0 ? validWords[Math.floor(Math.random() * validWords.length)] : null;
+        setHintWord(hw);
+
         // Get all possible dialogs as distractor pool
         // Exclude the correct one
         const allDialogs = conversationsData.conversations.flatMap(c => c.dialogs);
@@ -109,14 +165,35 @@ function ConversationContent() {
         
         const shuffledDistractors = shuffleArray(distractors).slice(0, 2); // get 2 random wrong options
         
+        const computeSegmentsAndVisible = (text: string, isCorrect: boolean) => {
+          const segs = Array.from(segmenter.segment(text)).map(s => s.segment);
+          let visIdx = -1;
+          if (isCorrect && hw) {
+            visIdx = segs.findIndex(s => s === hw.th);
+          } else {
+             // pick a random word segment (length > 1) to remain visible for hint 4
+             const wordIndices = segs.map((s, i) => s.length > 1 ? i : -1).filter(i => i !== -1);
+             if (wordIndices.length > 0) visIdx = wordIndices[Math.floor(Math.random() * wordIndices.length)];
+             else visIdx = Math.floor(Math.random() * segs.length);
+          }
+          return { segments: segs, visibleSegmentIndex: visIdx };
+        };
+
+        const correctData = computeSegmentsAndVisible(correctDialog.th, true);
+
         const options = [
-          { id: 0, text: correctDialog.th, phonetic: correctDialog.phonetic, correct: true },
-          ...shuffledDistractors.map((d, i) => ({
-            id: i + 1,
-            text: d.th,
-            phonetic: d.phonetic,
-            correct: false
-          }))
+          { id: 0, text: correctDialog.th, phonetic: correctDialog.phonetic, correct: true, segments: correctData.segments, visibleSegmentIndex: correctData.visibleSegmentIndex },
+          ...shuffledDistractors.map((d, i) => {
+            const dData = computeSegmentsAndVisible(d.th, false);
+            return {
+              id: i + 1,
+              text: d.th,
+              phonetic: d.phonetic,
+              correct: false,
+              segments: dData.segments,
+              visibleSegmentIndex: dData.visibleSegmentIndex
+             };
+          })
         ];
         
         setChoices(shuffleArray(options));
@@ -200,12 +277,19 @@ function ConversationContent() {
       } else if (stepIndex >= conversation.dialogs.length) {
         // Conversation fully built, finish without auto-replay
         setIsFinished(true);
-        addXp(10);
-        let completionLvl = 0;
-        if (isLevel1) completionLvl = 1;
-        if (isLevel2) completionLvl = 2;
-        if (isLevel3) completionLvl = 3;
-        completeConversation(conversation.id, completionLvl);
+        
+        const isSuccess = !isInteractive || ((isLevel1 || isLevel2 || isLevel3) && stars >= 3);
+        const isTrueSuccessLv3 = isLevel3 && stars >= 4;
+        const passedInteractive = (isLevel1 && stars >= 3) || (isLevel2 && stars >= 3) || isTrueSuccessLv3;
+
+        if (!isInteractive || passedInteractive) {
+          addXp(10);
+          let completionLvl = 0;
+          if (isLevel1) completionLvl = 1;
+          if (isLevel2) completionLvl = 2;
+          if (isLevel3) completionLvl = 3;
+          completeConversation(conversation.id, completionLvl);
+        }
       }
     };
     
@@ -294,6 +378,20 @@ function ConversationContent() {
     }
   }
 
+  const restartInteraction = () => {
+    setStars(5);
+    setIsFinished(false);
+    setCurrentLineIndex(0);
+    setStepIndex(0);
+    setChoices([]);
+    setHintsUsed({});
+    setHintWord(null);
+    setSelectedChoiceId(null);
+    setIsChoiceCorrect(null);
+    setIsPlaying(false);
+    isPlayingRef.current = false;
+  }
+
   const handleChoiceSelect = async (choice: any) => {
     if (isChoiceCorrect !== null) return; // Prevent multiple clicks
     
@@ -313,6 +411,7 @@ function ConversationContent() {
       setIsPlaying(false);
       setStepIndex(s => s + 1);
     } else {
+      setStars(s => Math.max(0, s - 1));
       // Play error sound or just reset after a short delay
       setTimeout(() => {
         setIsChoiceCorrect(null);
@@ -321,10 +420,23 @@ function ConversationContent() {
     }
   };
 
+  const attemptApplyHintCost = (hintNum: number) => {
+    if (!hintsUsed[hintNum]) {
+       const previouslyUsedHintCount = Object.keys(hintsUsed).length;
+       setHintsUsed(prev => ({ ...prev, [hintNum]: true }));
+       // Deduct a star for every 2 hints used (so when the count reaches 2, 4, etc.)
+       const newCount = previouslyUsedHintCount + 1;
+       if (newCount % 2 === 0) {
+         setStars(s => Math.max(0, s - 1));
+       }
+    }
+  };
+
   const isDataLoaded = mounted && !!conversation && (isLevel2 ? allWords.length > 0 : true);
 
   return (
-    <div className="min-h-screen bg-[#FAFAFA] font-sans text-slate-800 pb-40">
+    // We need pb-[350px] or more so that we can always scroll the last message to the top of the screen when the choices menu is open.
+    <div className="min-h-[100dvh] bg-[#FAFAFA] font-sans text-slate-800 pb-[350px]">
       <AnimatePresence mode="wait">
         {!showExerciseUI ? (
           <LoadingScreen 
@@ -340,7 +452,12 @@ function ConversationContent() {
             transition={{ duration: 0.5, ease: "easeOut" }}
             className="flex-1 flex flex-col h-full w-full absolute inset-0"
           >
-      <header className="bg-white border-b border-slate-200 px-4 h-16 flex items-center justify-between shadow-sm sticky top-0 z-50">
+      <motion.header 
+        initial={{ y: 0 }}
+        animate={{ y: showHeader ? 0 : '-100%' }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
+        className="bg-white border-b border-slate-200 px-4 h-16 flex items-center justify-between shadow-sm fixed top-0 left-0 right-0 z-50"
+      >
         <div className="flex items-center gap-4 max-w-2xl mx-auto w-full border-slate-200 relative">
           <Link href="/conversations" className="text-slate-400 hover:text-slate-600 transition-colors z-10">
             <ArrowLeft size={24} />
@@ -355,10 +472,52 @@ function ConversationContent() {
               ></div>
             </div>
           </div>
+          {(isLevel1 || isLevel2 || isLevel3) && (
+            <div className="flex items-center gap-1.5 z-10 relative">
+               {Array.from({ length: 5 }).map((_, i) => (
+                 <div key={i} className="relative w-6 h-6 flex items-center justify-center">
+                    <Star size={24} className="fill-slate-200 text-slate-200 absolute inset-0" />
+                    <AnimatePresence>
+                      {i < stars ? (
+                         <motion.div
+                           key={`star-${i}`}
+                           initial={{ scale: 1, opacity: 1 }}
+                           exit={{ 
+                             scale: [1, 1.4, 0], 
+                             rotate: [0, -15, 45], 
+                             opacity: [1, 1, 0], 
+                             y: [0, -10, 20],
+                             filter: ["brightness(1)", "brightness(1.5)", "blur(2px)"]
+                           }}
+                           transition={{ duration: 0.6, ease: "easeIn" }}
+                           className="absolute inset-0"
+                         >
+                           <Star size={24} className="fill-yellow-400 text-yellow-400 drop-shadow-sm" />
+                         </motion.div>
+                      ) : null}
+                    </AnimatePresence>
+                    <AnimatePresence>
+                      {(lostStarAnimation && i === stars) ? (
+                        <motion.div 
+                          key={`minus-${i}`}
+                          className="absolute pointer-events-none z-50 text-red-500 font-black text-sm"
+                          initial={{ opacity: 0, y: 0, scale: 0.5 }}
+                          animate={{ opacity: 1, y: -25, scale: 1.2 }}
+                          exit={{ opacity: 0, y: -40, scale: 1 }}
+                          transition={{ duration: 1 }}
+                        >
+                          -1
+                        </motion.div>
+                      ) : null}
+                    </AnimatePresence>
+                 </div>
+               ))}
+            </div>
+          )}
         </div>
-      </header>
+      </motion.header>
 
-      <main className="max-w-xl mx-auto px-4 mt-8 flex flex-col gap-6">
+      <main className="max-w-xl mx-auto px-4 mt-24 flex flex-col gap-6">
         <div className="text-center mb-4 transition-all duration-300">
             <h1 className="text-2xl font-black text-slate-800">
                 {language === 'en' && conversation.titleEn ? conversation.titleEn : conversation.title}
@@ -507,9 +666,67 @@ function ConversationContent() {
       {hasStarted && isInteractive && !isFinished && (isLevel2 || isLevel3 || stepIndex % 2 !== 0) && choices.length > 0 && (
         <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 p-2 sm:p-3 shadow-[0_-10px_20px_-10px_rgba(0,0,0,0.1)] z-40 animate-in slide-in-from-bottom-full duration-300">
           <div className="max-w-2xl mx-auto flex flex-col gap-1.5 sm:gap-2">
-            <h3 className="text-[11px] sm:text-xs font-bold text-slate-500 uppercase tracking-wide px-2 mb-0">
-               {language === 'en' ? 'Choose the correct response:' : 'Choisissez la bonne réponse :'}
-            </h3>
+            {(isLevel1 || isLevel3) && hintWord && (
+              <div className="w-full mb-2 bg-indigo-50/50 rounded-2xl p-2 sm:p-3 border border-indigo-100 flex flex-col items-center gap-2">
+                 <div className="text-[11px] sm:text-xs font-bold text-indigo-800 flex items-center gap-1.5 text-center">
+                    <Sparkles size={14} />
+                    {language === 'en' ? 'Need a hint?' : 'Besoin d\'un indice ?'}
+                 </div>
+                 <div className="flex w-full overflow-x-auto pb-1 items-center justify-center gap-1.5 sm:gap-2 mt-0.5">
+                     <button
+                       onClick={() => {
+                          attemptApplyHintCost(1);
+                          playThaiTTS(hintWord.th);
+                       }}
+                       className={`px-2.5 sm:px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold border-2 transition-all flex items-center justify-center gap-1.5 min-h-[36px] ${hintsUsed[1] ? 'bg-white border-indigo-200 text-indigo-600' : 'bg-indigo-100 border-indigo-200 text-indigo-500 hover:bg-indigo-200 hover:border-indigo-300'}`}
+                     >
+                        <Volume2 size={16} /> 
+                        <span className="hidden sm:inline">
+                           {hintsUsed[1] ? (language === 'en' ? 'Replay' : 'Rejouer') : (language === 'en' ? 'Hint 1' : 'Indice 1')}
+                        </span>
+                     </button>
+
+                     <button
+                       onClick={() => {
+                          attemptApplyHintCost(2);
+                          setIsImageModalOpen(true);
+                        }}
+                       className={`px-2.5 sm:px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold border-2 transition-all flex items-center justify-center gap-1.5 min-h-[36px] min-w-[70px] ${hintsUsed[2] ? 'bg-white border-indigo-200 text-indigo-600' : 'bg-indigo-100 border-indigo-200 text-indigo-500 hover:bg-indigo-200 hover:border-indigo-300'}`}
+                     >
+                        <ImageIcon size={16} />
+                        <span className="hidden sm:inline">{hintsUsed[2] ? (language === 'en' ? 'Image' : 'Image') : (language === 'en' ? 'Hint 2' : 'Indice 2')}</span>
+                     </button>
+
+                     <button
+                       onClick={() => {
+                          attemptApplyHintCost(3);
+                       }}
+                       className={`px-2.5 sm:px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold border-2 transition-all flex items-center justify-center gap-1.5 min-h-[36px] ${hintsUsed[3] ? 'bg-white border-indigo-200 text-indigo-600' : 'bg-indigo-100 border-indigo-200 text-indigo-500 hover:bg-indigo-200 hover:border-indigo-300'}`}
+                     >
+                        {!hintsUsed[3] && <Type size={16} />} 
+                        {hintsUsed[3] ? <span>{language === 'en' ? hintWord.en : hintWord.fr}</span> : <span className="hidden sm:inline">{language === 'en' ? 'Hint 3' : 'Indice 3'}</span>}
+                     </button>
+                     
+                     <button
+                       onClick={() => {
+                          attemptApplyHintCost(4);
+                       }}
+                       className={`px-2.5 sm:px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold border-2 transition-all flex items-center justify-center gap-1.5 min-h-[36px] ${hintsUsed[4] ? 'bg-fuchsia-100 border-fuchsia-300 text-fuchsia-700' : 'bg-white border-slate-200 text-slate-500 hover:bg-slate-50'}`}
+                       title={language === 'en' ? 'Highlight differences' : 'Surligner les différences'}
+                     >
+                        <Sparkles size={16} />
+                        <span className="hidden sm:inline">
+                           {hintsUsed[4] ? (language === 'en' ? 'Focus ON' : 'Focus ON') : (language === 'en' ? 'Hint 4' : 'Indice 4')}
+                        </span>
+                     </button>
+                 </div>
+              </div>
+            )}
+            <div className="flex items-end justify-between px-2 mb-0">
+               <h3 className="text-[11px] sm:text-xs font-bold text-slate-500 uppercase tracking-wide">
+                  {language === 'en' ? 'Choose the correct response:' : 'Choisissez la bonne réponse :'}
+               </h3>
+            </div>
             {choices.map((choice) => {
               const isSelected = selectedChoiceId === choice.id;
               const isCorrect = choice.correct;
@@ -525,6 +742,9 @@ function ConversationContent() {
               } else if (isCorrectStatus) {
                 cardStyle = "bg-emerald-50 border-emerald-400 text-emerald-900";
               }
+
+              // Hint 4 rendering
+              const applyHint4 = hintsUsed[4] && choice.segments;
               
               return (
                 <button
@@ -533,9 +753,18 @@ function ConversationContent() {
                   disabled={isChoiceCorrect !== null}
                   className={`w-full text-left px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl border-2 border-b-4 active:border-b-2 active:translate-y-0.5 transition-all relative ${cardStyle}`}
                 >
-                  <div className="font-thai text-lg sm:text-xl font-medium leading-tight pr-6">{choice.text}</div>
+                  <div className="font-thai text-lg sm:text-xl font-medium leading-tight pr-6">
+                     {applyHint4 ? (
+                        choice.segments.map((segment: string, i: number) => (
+                           <span key={i} className={`${i !== choice.visibleSegmentIndex ? 'opacity-30' : 'opacity-100'}`}>{segment}</span>
+                        ))
+                     ) : (
+                        <span>{choice.text}</span>
+                     )}
+                  </div>
                   {isLevel1 && showRomanization && <div className="text-xs sm:text-sm font-medium opacity-80 mt-0.5">{choice.phonetic}</div>}
                   {isLevel2 && <div className="text-xs sm:text-sm font-medium opacity-80 text-slate-500 mt-0.5">{choice.translation} {showRomanization ? `• ${choice.phonetic}` : ''}</div>}
+                  {isLevel3 && showRomanization && <div className="text-xs sm:text-sm font-medium opacity-80 mt-0.5">{choice.phonetic}</div>}
                   
                   {isWrongStatus && <X size={18} className="absolute right-3 top-1/2 -translate-y-1/2 text-red-500" />}
                   {isCorrectStatus && <Check size={18} className="absolute right-3 top-1/2 -translate-y-1/2 text-emerald-500" />}
@@ -559,45 +788,13 @@ function ConversationContent() {
             {!isInteractive && (
               <button 
                 onClick={startNormalConversation}
-                className="flex-1 bg-white border-2 border-slate-200 hover:bg-slate-50 text-slate-700 font-bold py-4 px-6 rounded-2xl border-b-4 active:border-b-2 active:translate-y-0.5 transition-all flex items-center justify-center gap-2"
+                className="flex-[1] bg-white border-2 border-slate-200 hover:bg-slate-50 text-slate-700 font-bold py-4 px-6 rounded-2xl border-b-4 active:border-b-2 active:translate-y-0.5 transition-all flex items-center justify-center gap-2"
               >
                 <RotateCcw size={24} />
                 <span className="hidden sm:inline">{language === 'en' ? 'Listen Again' : 'Réécouter'}</span>
               </button>
             )}
-            {isLevel1 ? (
-              <Link 
-                href={`/conversations/${conversation.id}?level=2`}
-                className="flex-[2] bg-purple-500 hover:bg-purple-600 text-white font-bold py-4 px-6 rounded-2xl border-b-4 border-purple-700 active:border-b-2 active:translate-y-0.5 transition-all flex items-center justify-center text-center group"
-              >
-                <span className="flex items-center gap-2">
-                  {language === 'en' ? 'Start Level 2' : 'Passer au Niveau 2'}
-                  <div className="bg-white/20 group-hover:bg-white/30 rounded-full p-1 transition-colors">
-                     <Star size={16} className="fill-white" />
-                  </div>
-                </span>
-              </Link>
-            ) : isLevel2 ? (
-              <Link 
-                href={`/conversations/${conversation.id}?level=3`}
-                className="flex-[2] bg-purple-500 hover:bg-purple-600 text-white font-bold py-4 px-6 rounded-2xl border-b-4 border-purple-700 active:border-b-2 active:translate-y-0.5 transition-all flex items-center justify-center text-center group"
-              >
-                <span className="flex items-center gap-2">
-                  {language === 'en' ? 'Start Level 3' : 'Passer au Niveau 3'}
-                  <div className="bg-white/20 group-hover:bg-white/30 rounded-full p-1 transition-colors">
-                     <Star size={16} className="fill-white" />
-                  </div>
-                </span>
-              </Link>
-            ) : isLevel3 ? (
-              <Link 
-                href="/conversations"
-                className="flex-[2] bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 px-6 rounded-2xl border-b-4 border-blue-700 active:border-b-2 active:translate-y-0.5 transition-all flex items-center justify-center text-center gap-2"
-              >
-                <Star size={24} className="fill-white" />
-                {language === 'en' ? 'Complete Level 3' : 'Terminer Niveau 3'}
-              </Link>
-            ) : (
+            {!isInteractive && (
               <Link 
                 href={`/conversations/${conversation.id}?level=1`}
                 className="flex-[2] bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-6 rounded-2xl border-b-4 border-orange-700 active:border-b-2 active:translate-y-0.5 transition-all flex items-center justify-center text-center group"
@@ -610,12 +807,117 @@ function ConversationContent() {
                 </span>
               </Link>
             )}
+            
+            {isInteractive && (() => {
+              const passedLv12 = (isLevel1 || isLevel2) && stars >= 3;
+              const passedLv3 = isLevel3 && stars >= 4;
+              
+              if (isLevel1) {
+                if (passedLv12) {
+                  return (
+                    <Link 
+                      href={`/conversations/${conversation.id}?level=2`}
+                      className="flex-[2] bg-purple-500 hover:bg-purple-600 text-white font-bold py-4 px-6 rounded-2xl border-b-4 border-purple-700 active:border-b-2 active:translate-y-0.5 transition-all flex items-center justify-center text-center group"
+                    >
+                      <span className="flex items-center gap-2">
+                        {language === 'en' ? 'Start Level 2' : 'Passer au Niveau 2'}
+                        <div className="bg-white/20 group-hover:bg-white/30 rounded-full p-1 transition-colors">
+                           <Star size={16} className="fill-white" />
+                        </div>
+                      </span>
+                    </Link>
+                  );
+                } else {
+                  return (
+                    <button 
+                      onClick={restartInteraction}
+                      className="flex-[2] bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold py-4 px-6 rounded-2xl border-b-4 border-slate-400 active:border-b-2 active:translate-y-0.5 transition-all flex items-center justify-center text-center gap-2"
+                    >
+                      <RotateCcw size={20} />
+                      {language === 'en' ? 'Retry' : 'Réessayer'} (Score: {stars} / ★★★)
+                    </button>
+                  );
+                }
+              } else if (isLevel2) {
+                if (passedLv12) {
+                  return (
+                    <Link 
+                      href={`/conversations/${conversation.id}?level=3`}
+                      className="flex-[2] bg-purple-500 hover:bg-purple-600 text-white font-bold py-4 px-6 rounded-2xl border-b-4 border-purple-700 active:border-b-2 active:translate-y-0.5 transition-all flex items-center justify-center text-center group"
+                    >
+                      <span className="flex items-center gap-2">
+                        {language === 'en' ? 'Start Level 3' : 'Passer au Niveau 3'}
+                        <div className="bg-white/20 group-hover:bg-white/30 rounded-full p-1 transition-colors">
+                           <Star size={16} className="fill-white" />
+                        </div>
+                      </span>
+                    </Link>
+                  );
+                } else {
+                  return (
+                    <button 
+                      onClick={restartInteraction}
+                      className="flex-[2] bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold py-4 px-6 rounded-2xl border-b-4 border-slate-400 active:border-b-2 active:translate-y-0.5 transition-all flex items-center justify-center text-center gap-2"
+                    >
+                      <RotateCcw size={20} />
+                      {language === 'en' ? 'Retry' : 'Réessayer'} (Score: {stars} / ★★★)
+                    </button>
+                  );
+                }
+              } else if (isLevel3) {
+                if (passedLv3) {
+                  return (
+                    <Link 
+                      href="/conversations"
+                      className="flex-[2] bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 px-6 rounded-2xl border-b-4 border-blue-700 active:border-b-2 active:translate-y-0.5 transition-all flex items-center justify-center text-center gap-2"
+                    >
+                      <Check size={24} className="text-white" />
+                      {language === 'en' ? 'Complete Level 3' : 'Terminer Niveau 3'}
+                    </Link>
+                  );
+                } else {
+                  return (
+                    <button 
+                      onClick={restartInteraction}
+                      className="flex-[2] bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold py-4 px-6 rounded-2xl border-b-4 border-slate-400 active:border-b-2 active:translate-y-0.5 transition-all flex items-center justify-center text-center gap-2"
+                    >
+                      <RotateCcw size={20} />
+                      {language === 'en' ? 'Retry' : 'Réessayer'} (Score: {stars} / ★★★★)
+                    </button>
+                  );
+                }
+              }
+            })()}
           </div>
         </div>
       )}
             </motion.div>
           )}
         </AnimatePresence>
+
+      {/* Image Modal for Hint 2 */}
+      {isImageModalOpen && hintWord && (
+        <div 
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm animate-in fade-in duration-200"
+          onClick={() => setIsImageModalOpen(false)}
+        >
+          <div 
+            className="bg-white p-6 rounded-3xl shadow-2xl max-w-sm w-full animate-in zoom-in-95 duration-200 relative flex flex-col items-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button 
+              onClick={() => setIsImageModalOpen(false)}
+              className="absolute top-4 right-4 p-2 bg-slate-100 hover:bg-slate-200 rounded-full text-slate-500 transition-colors"
+            >
+              <X size={20} />
+            </button>
+            <div className="w-48 h-48 relative mb-4 mt-2">
+               <Image src={hintWord.imageUrl || `/images/w_w_${hintWord.id}.svg`} alt="Hint Image" fill className="object-contain" />
+            </div>
+            <p className="text-sm font-bold text-slate-400 mt-2">{language === 'en' ? 'Tap anywhere to close' : 'Appuyez n\'importe où pour fermer'}</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
