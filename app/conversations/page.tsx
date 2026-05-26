@@ -138,9 +138,10 @@ export default function ConversationsPage() {
                   return (
                     <motion.button
                       key={unitId}
-                      initial={{ opacity: 0, y: 40 }}
+                      initial={window.innerWidth < 768 ? false : { opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.6, delay: idx * 0.1, ease: "easeOut" }}
+                      transition={{ duration: 0.4, delay: window.innerWidth < 768 ? 0 : idx * 0.1, ease: "easeOut" }}
+                      style={{ WebkitTransform: 'translateZ(0)', willChange: 'transform, opacity' }}
                       onClick={() => {
                         setSelectedStoryId(unitId);
                         if (window.innerWidth >= 768 && groupedConvs[unitId]?.length > 0) {
@@ -204,9 +205,10 @@ export default function ConversationsPage() {
                   return (
                     <motion.button
                       key={conv.id}
-                      initial={{ opacity: 0, x: 30 }}
+                      initial={window.innerWidth < 768 ? false : { opacity: 0, x: 20 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.08, ease: "easeOut" }}
+                      transition={{ duration: 0.4, delay: window.innerWidth < 768 ? 0 : index * 0.1, ease: "easeOut" }}
+                      style={{ WebkitTransform: 'translateZ(0)', willChange: 'transform, opacity' }}
                       onClick={() => !isLocked && setSelectedConvId(conv.id)}
                       disabled={isLocked}
                       className={`w-full flex items-center justify-center p-4 rounded-2xl transition-all border-2 relative overflow-hidden ${isSelected ? 'bg-orange-50 border-orange-200' : isLocked ? 'bg-slate-50 border-slate-100 cursor-not-allowed' : 'bg-white border-slate-100 hover:border-slate-200 hover:bg-slate-50'}`}
