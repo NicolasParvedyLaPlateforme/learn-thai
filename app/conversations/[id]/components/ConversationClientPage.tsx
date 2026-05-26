@@ -130,9 +130,13 @@ function ConversationContent() {
             window.scrollTo({top: y, behavior: 'smooth'});
           }
         } else {
-          // When just conversing normally, scroll to the last message, keeping it near the center/bottom
-          // to feel like a normal chat app
-          messages[messages.length - 1].scrollIntoView({ behavior: 'smooth', block: 'center' });
+          // Normal chatting
+          const lastElement = messages[messages.length - 1];
+          const rect = lastElement.getBoundingClientRect();
+          // Only scroll if the element is near or below the bottom of the viewport
+          if (rect.bottom > window.innerHeight - 150) {
+              lastElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
         }
       }
     }, 150);
@@ -578,7 +582,7 @@ function ConversationContent() {
               return (
                 <div 
                   key={index} 
-                  className={`message-bubble scroll-mt-20 flex w-full gap-3 py-1 ${isRight ? 'justify-end flex-row-reverse' : 'justify-start'} animate-in fade-in slide-in-from-bottom-4 duration-500`}
+                  className={`message-bubble scroll-mt-20 flex w-full gap-3 py-1 ${isRight ? 'justify-end flex-row-reverse' : 'justify-start'} animate-in fade-in slide-in-from-bottom-2 duration-300`}
                 >
                   {/* Avatar */}
                   <div className="flex-shrink-0 mt-6 flex flex-col items-center">
