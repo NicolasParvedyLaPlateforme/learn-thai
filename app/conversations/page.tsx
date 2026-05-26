@@ -3,11 +3,13 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { motion, AnimatePresence } from 'motion/react';
 import { useProgressStore } from '../lib/store';
 import PWAInstallButton from '../components/PWAInstallButton';
 import { ArrowLeft, MessageCircle, Star, BookOpen, Info, ChevronRight, Play, X, Book, Image as ImageIcon, Lock } from 'lucide-react';
 import conversationsData from '../data/conversations.json';
 import CONVERSATION_UNITS from '../data/conversation_units.json';
+import { useIsPWA } from '../../hooks/use-pwa';
 
 const UNITS: Record<string, { en: string, fr: string, emoji: string, imageUrl?: string, description?: { en: string, fr: string } }> = CONVERSATION_UNITS;
 
@@ -25,6 +27,7 @@ interface Conversation {
 
 export default function ConversationsPage() {
   const [mounted, setMounted] = useState(false);
+  const isPWA = useIsPWA();
   const { language, xp, setLanguage, completedConversations } = useProgressStore();
   const [selectedStoryId, setSelectedStoryId] = useState<string | null>(null);
   const [selectedConvId, setSelectedConvId] = useState<string | null>(null);
@@ -113,10 +116,12 @@ export default function ConversationsPage() {
             
             <div className="flex items-center gap-2">
               {mobileView === 'stories_list' && <PWAInstallButton />}
-              <div className="flex items-center gap-1.5 px-3 py-1.5 bg-amber-50 text-amber-600 rounded-xl font-extrabold text-sm">
-                <Star size={18} className="fill-amber-400 stroke-amber-400" />
-                <span>{mounted ? xp : 0} XP</span>
-              </div>
+              {(mounted && isPWA) && (
+                <div className="flex items-center gap-1.5 px-3 py-1.5 bg-amber-50 text-amber-600 rounded-xl font-extrabold text-sm">
+                  <Star size={18} className="fill-amber-400 stroke-amber-400" />
+                  <span>{xp} XP</span>
+                </div>
+              )}
             </div>
           </div>
         </header>
@@ -127,12 +132,15 @@ export default function ConversationsPage() {
           {/* View: Stories List */}
           {!selectedStoryId && (
              <div className="grid grid-cols-1 gap-4">
-               {Object.entries(UNITS).map(([unitId, unit]) => {
+               {Object.entries(UNITS).map(([unitId, unit], idx) => {
                   const hasConversations = groupedConvs[unitId] && groupedConvs[unitId].length > 0;
                   if (!hasConversations) return null;
                   return (
-                    <button
+                    <motion.button
                       key={unitId}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: idx * 0.1, ease: "easeOut" }}
                       onClick={() => {
                         setSelectedStoryId(unitId);
                         if (window.innerWidth >= 768 && groupedConvs[unitId]?.length > 0) {
@@ -163,7 +171,7 @@ export default function ConversationsPage() {
                             <ChevronRight size={16} className="ml-1 group-hover:translate-x-1 transition-transform" />
                          </div>
                        </div>
-                    </button>
+                    </motion.button>
                   );
                })}
              </div>
@@ -194,8 +202,11 @@ export default function ConversationsPage() {
                   const isLocked = index > 0 && (completedConversations[currentStoryConvs[index - 1].id] || 0) < 2;
 
                   return (
-                    <button
+                    <motion.button
                       key={conv.id}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.4, delay: index * 0.1, ease: "easeOut" }}
                       onClick={() => !isLocked && setSelectedConvId(conv.id)}
                       disabled={isLocked}
                       className={`w-full flex items-center justify-center p-4 rounded-2xl transition-all border-2 relative overflow-hidden ${isSelected ? 'bg-orange-50 border-orange-200' : isLocked ? 'bg-slate-50 border-slate-100 cursor-not-allowed' : 'bg-white border-slate-100 hover:border-slate-200 hover:bg-slate-50'}`}
@@ -230,7 +241,7 @@ export default function ConversationsPage() {
                             </div>
                          </div>
                        )}
-                    </button>
+                    </motion.button>
                   );
                })}
              </div>

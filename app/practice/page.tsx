@@ -2,15 +2,18 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { motion, AnimatePresence } from 'motion/react';
 import { Brain, BookOpen, Pencil, Star } from 'lucide-react';
 import { useProgressStore } from '../lib/store';
 import { WritingConfigModal } from '../components/WritingConfigModal';
 import PWAInstallButton from '../components/PWAInstallButton';
+import { useIsPWA } from '../../hooks/use-pwa';
 
 export default function PracticePage() {
   const { language, xp, setLanguage } = useProgressStore();
   const [isWritingConfigModalOpen, setWritingConfigModalOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const isPWA = useIsPWA();
   useEffect(() => setMounted(true), []);
 
   return (
@@ -40,10 +43,12 @@ export default function PracticePage() {
               </button>
             )}
             
-            <div className="flex items-center gap-1.5 px-3 py-1.5 bg-amber-50 text-amber-600 rounded-xl font-extrabold text-sm">
-              <Star size={18} className="fill-amber-400 stroke-amber-400" />
-              <span>{mounted ? xp : 0} XP</span>
-            </div>
+            {(mounted && isPWA) && (
+              <div className="flex items-center gap-1.5 px-3 py-1.5 bg-amber-50 text-amber-600 rounded-xl font-extrabold text-sm">
+                <Star size={18} className="fill-amber-400 stroke-amber-400" />
+                <span>{xp} XP</span>
+              </div>
+            )}
           </div>
         </div>
       </header>
@@ -64,7 +69,12 @@ export default function PracticePage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {/* Review Card */}
-          <Link href="/review" className="group flex flex-col bg-white border-2 border-slate-200 rounded-3xl p-5 hover:shadow-xl hover:-translate-y-1 hover:border-indigo-300 active:translate-y-0 active:shadow-md transition-all duration-300">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.1, ease: 'easeOut' }}
+          >
+            <Link href="/review" className="group flex flex-col bg-white border-2 border-slate-200 rounded-3xl p-5 hover:shadow-xl hover:-translate-y-1 hover:border-indigo-300 active:translate-y-0 active:shadow-md transition-all duration-300">
             {/* Illustration */}
             <div className="mb-6 w-full h-40 bg-indigo-50/50 rounded-2xl border-2 border-indigo-100 relative overflow-hidden flex items-center justify-center group-hover:bg-indigo-50 transition-colors">
               <div className="absolute inset-0 bg-[radial-gradient(#e0e7ff_1px,transparent_1px)] [background-size:16px_16px] opacity-40"></div>
@@ -93,8 +103,14 @@ export default function PracticePage() {
                 : 'Testez votre mémoire et renforcez ce que vous avez appris avec la répétition espacée.'}
             </p>
           </Link>
+          </motion.div>
           
           {/* Pairs Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.2, ease: 'easeOut' }}
+          >
           <Link href="/review-pairs" className="group flex flex-col bg-white border-2 border-slate-200 rounded-3xl p-5 hover:shadow-xl hover:-translate-y-1 hover:border-fuchsia-300 active:translate-y-0 active:shadow-md transition-all duration-300">
             {/* Illustration */}
             <div className="mb-6 w-full h-40 bg-fuchsia-50/50 rounded-2xl border-2 border-fuchsia-100 flex items-center justify-center group-hover:bg-fuchsia-50 transition-colors relative overflow-hidden">
@@ -132,8 +148,14 @@ export default function PracticePage() {
                 : 'Associez les mots avec leurs traductions pour améliorer votre reconnaissance du vocabulaire.'}
             </p>
           </Link>
+          </motion.div>
 
           {/* Writing Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.3, ease: 'easeOut' }}
+          >
           <button 
             onClick={() => setWritingConfigModalOpen(true)}
             className="group flex flex-col bg-white border-2 border-slate-200 rounded-3xl p-5 hover:shadow-xl hover:-translate-y-1 hover:border-sky-300 active:translate-y-0 active:shadow-md transition-all duration-300 text-left"
@@ -174,6 +196,7 @@ export default function PracticePage() {
                 : 'Pratiquez l\'écriture des mots et des phrases avec le clavier virtuel.'}
             </p>
           </button>
+          </motion.div>
         </div>
       </div>
     </div>

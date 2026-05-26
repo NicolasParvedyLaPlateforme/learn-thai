@@ -115,6 +115,7 @@ function LessonPageContent({ lesson }: { lesson: any }) {
   const [showHelpModal, setShowHelpModal] = useState(false);
   const [dontShowAgain, setDontShowAgain] = useState(false);
   const [mistakes, setMistakes] = useState(0);
+  const [isExiting, setIsExiting] = useState(false);
 
   const earnedStars = mistakes < 2 ? 3 : mistakes < 4 ? 2 : 1;
 
@@ -192,45 +193,53 @@ function LessonPageContent({ lesson }: { lesson: any }) {
   const handleCheck = (overrideAnswer?: any) => {
     if (!currentExercise) return;
     if (currentExercise.type === "intro") {
-      if (currentIndex < exercises.length - 1) {
-        setCurrentIndex(currentIndex + 1);
-        setIsChecking(false);
-        setIsCorrect(null);
-        setSelectedAnswer(null);
-      } else {
-        setIsFinished(true);
-        completeLesson(lesson.id, 10 + exercises.length, currentLevel, earnedStars);
-        confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
-      }
-      return;
-    }
-
-    if (isChecking) {
-      // Move to next exercise
-      if (isCorrect) {
+      setIsExiting(true);
+      setTimeout(() => {
+        setIsExiting(false);
         if (currentIndex < exercises.length - 1) {
           setCurrentIndex(currentIndex + 1);
           setIsChecking(false);
           setIsCorrect(null);
           setSelectedAnswer(null);
         } else {
-          // Finished
           setIsFinished(true);
           completeLesson(lesson.id, 10 + exercises.length, currentLevel, earnedStars);
-          confetti({
-            particleCount: 150,
-            spread: 70,
-            origin: { y: 0.6 },
-          });
+          confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
         }
-      } else {
-        // If wrong, we re-add the exercise to the end!
-        setExercises([...exercises, currentExercise]);
-        setCurrentIndex(currentIndex + 1);
-        setIsChecking(false);
-        setIsCorrect(null);
-        setSelectedAnswer(null);
-      }
+      }, 150);
+      return;
+    }
+
+    if (isChecking) {
+      setIsExiting(true);
+      setTimeout(() => {
+        setIsExiting(false);
+        // Move to next exercise
+        if (isCorrect) {
+          if (currentIndex < exercises.length - 1) {
+            setCurrentIndex(currentIndex + 1);
+            setIsChecking(false);
+            setIsCorrect(null);
+            setSelectedAnswer(null);
+          } else {
+            // Finished
+            setIsFinished(true);
+            completeLesson(lesson.id, 10 + exercises.length, currentLevel, earnedStars);
+            confetti({
+              particleCount: 150,
+              spread: 70,
+              origin: { y: 0.6 },
+            });
+          }
+        } else {
+          // If wrong, we re-add the exercise to the end!
+          setExercises([...exercises, currentExercise]);
+          setCurrentIndex(currentIndex + 1);
+          setIsChecking(false);
+          setIsCorrect(null);
+          setSelectedAnswer(null);
+        }
+      }, 150);
       return;
     }
 
@@ -458,7 +467,9 @@ function LessonPageContent({ lesson }: { lesson: any }) {
             )}
 
             {/* Scrollable Upper Area */}
-            <div
+            <motion.div
+              animate={{ opacity: isExiting ? 0 : 1, y: 0, scale: 1 }}
+              transition={{ duration: isExiting ? 0.15 : 0.3, delay: isExiting ? 0 : 0.1 }}
               className={`${showInstruction || showHelpModal || currentExercise?.type === "pair-matching" ? "hidden" : "flex"} flex-1 md:flex-none w-full max-w-3xl overflow-y-auto md:overflow-y-visible px-4 py-4 md:py-4 flex-col justify-center hide-scrollbar`}
             >
               {currentExercise?.type !== "pair-matching" && (
@@ -471,13 +482,13 @@ function LessonPageContent({ lesson }: { lesson: any }) {
                   selectedAnswer={selectedAnswer}
                 />
               )}
-            </div>
+            </motion.div>
 
             {/* Exercise Options (Fixed at bottom on Mobile) */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: 0.3 }}
+              animate={isExiting ? { opacity: 0 } : { opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: isExiting ? 0.15 : 0.3, delay: isExiting ? 0 : 0.3 }}
               className={`${showInstruction || showHelpModal ? "hidden" : "flex"} ${currentExercise?.type === "pair-matching" ? "flex-1 items-center" : "shrink-0 md:shrink-0"} bg-transparent px-4 pb-4 pt-2 md:pt-4 md:pb-8 justify-center z-10 w-full max-w-3xl`}
             >
               <div className="w-full relative">
@@ -511,24 +522,28 @@ function LessonPageContent({ lesson }: { lesson: any }) {
                         setLastPlayedLesson(lessonId, 'learn');
                         playThaiTTS("ผิดครับ");
                       } else {
-                        if (currentIndex < exercises.length - 1) {
-                          setCurrentIndex((prev) => prev + 1);
-                          setIsChecking(false);
-                          setIsCorrect(null);
-                          setSelectedAnswer(null);
-                        } else {
-                          setIsFinished(true);
-                          completeLesson(
-                            lesson.id,
-                            10 + exercises.length,
-                            currentLevel,
-                          );
-                          confetti({
-                            particleCount: 150,
-                            spread: 70,
-                            origin: { y: 0.6 },
-                          });
-                        }
+                        setIsExiting(true);
+                        setTimeout(() => {
+                          setIsExiting(false);
+                          if (currentIndex < exercises.length - 1) {
+                            setCurrentIndex((prev) => prev + 1);
+                            setIsChecking(false);
+                            setIsCorrect(null);
+                            setSelectedAnswer(null);
+                          } else {
+                            setIsFinished(true);
+                            completeLesson(
+                              lesson.id,
+                              10 + exercises.length,
+                              currentLevel,
+                            );
+                            confetti({
+                              particleCount: 150,
+                              spread: 70,
+                              origin: { y: 0.6 },
+                            });
+                          }
+                        }, 150);
                       }
                     }}
                   />

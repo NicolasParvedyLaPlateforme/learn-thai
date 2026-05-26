@@ -430,7 +430,7 @@
         {
           "id": "w_2",
           "th": "สอง",
-          "phonetic": "sɔ̌ong",
+          "phonetic": "sɔ̌ɔng",
           "fr": "deux",
           "en": "two",
           "allowIdenticalTranslation": false,
@@ -721,7 +721,7 @@
         {
           "id": "p_new_l3_2",
           "th": "สองเดือน",
-          "phonetic": "sɔ̌ong duean",
+          "phonetic": "sɔ̌ɔng duean",
           "fr": "deux mois",
           "en": "two months",
           "components": [
@@ -1014,7 +1014,7 @@
         {
           "id": "p_two_tables",
           "th": "มีโต๊ะสองตัว",
-          "phonetic": "mii dtó sǒng dtua",
+          "phonetic": "mii dtó sɔ̌ɔng dtua",
           "fr": "il y a deux tables",
           "en": "there are two tables",
           "components": [
@@ -1932,7 +1932,7 @@
         {
           "id": "p_two_older_siblings",
           "th": "มีพี่สองคน",
-          "phonetic": "mii phîi sɔ̌ng khon",
+          "phonetic": "mii phîi sɔ̌ɔng khon",
           "fr": "il y a deux grands frères",
           "en": "there are two big brothers",
           "components": [
@@ -6825,7 +6825,7 @@
         {
           "id": "p_two_hours",
           "th": "สองชั่วโมง",
-          "phonetic": "sǒong chûa-moong",
+          "phonetic": "sɔ̌ɔng chûa-moong",
           "fr": "deux heures",
           "en": "two hours",
           "components": [
@@ -7486,7 +7486,7 @@
         {
           "id": "p_exactly_two_hours",
           "th": "สองชั่วโมงเป๊ะ",
-          "phonetic": "sǒong chûa-moong pé",
+          "phonetic": "sɔ̌ɔng chûa-moong pé",
           "fr": "Deux heures exactement",
           "en": "Exactly two hours",
           "components": [
@@ -8387,7 +8387,7 @@
         {
           "id": "p_two_tickets",
           "th": "ตั๋วสองใบ",
-          "phonetic": "tǔa sǒong bai",
+          "phonetic": "tǔa sɔ̌ɔng bai",
           "fr": "Deux billets",
           "en": "Two tickets",
           "components": [
@@ -9746,7 +9746,7 @@
         {
           "id": "p_buy_pork_two_kilos",
           "th": "ซื้อหมูสองกิโล",
-          "phonetic": "súue mǔu sǒong kì-loo",
+          "phonetic": "súue mǔu sɔ̌ɔng kì-loo",
           "fr": "Acheter deux kilos de porc",
           "en": "Buy two kilos of pork",
           "components": [
