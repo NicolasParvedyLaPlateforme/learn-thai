@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { motion, AnimatePresence } from 'motion/react';
 import { useProgressStore } from '../lib/store';
 import PWAInstallButton from '../components/PWAInstallButton';
-import { ArrowLeft, MessageCircle, Star, BookOpen, Info, ChevronRight, Play, X, Book, Image as ImageIcon, Lock } from 'lucide-react';
+import { ArrowLeft, MessageCircle, Star, BookOpen, Info, ChevronRight, Play, X, Book, Image as ImageIcon, Lock, Check, Clock, Users, Volume2, MapPin } from 'lucide-react';
 import conversationsData from '../data/conversations.json';
 import CONVERSATION_UNITS from '../data/conversation_units.json';
 import { useIsPWA } from '../../hooks/use-pwa';
@@ -22,6 +22,7 @@ interface Conversation {
   titleEn?: string;
   imageUrl?: string;
   dialogs: Array<{
+    speaker?: string;
     en: string;
     fr: string;
     th: string;
@@ -83,40 +84,26 @@ export default function ConversationsPage() {
                      ? 'conversation' 
                      : (selectedStoryId ? 'story' : 'stories_list');
 
+  const selectedSpeakers = selectedConv ? Array.from(new Set(selectedConv.dialogs.map(d => d.speaker || (language === 'en' ? 'Character' : 'Personnage')))) : [];
+
+  const handlePlayExcerpt = () => {
+     if (selectedConv && selectedConv.dialogs.length > 0) {
+         const firstText = selectedConv.dialogs[0].th;
+         // simple fake play sound feedback, actual TTS would be better but this is a placeholder
+         const audio = new Audio(`/api/tts?text=${encodeURIComponent(firstText)}&speaker=female`);
+         audio.play().catch(e => console.log('Audio play failed', e));
+     }
+  };
+
   return (
-    <div className="relative h-[100dvh] md:h-screen bg-[#F5F7FA] font-sans text-slate-800 flex flex-col md:flex-row overflow-hidden pb-[72px] md:pb-0">
+    <div className="relative h-[100dvh] md:h-screen lg:h-[100dvh] bg-[#F5F7FA] md:bg-white font-sans text-slate-800 flex flex-col md:flex-row overflow-hidden pb-[72px] md:pb-0">
       
       {/* LEFT PANEL : Stories or Conversations List */}
-      <div className={`w-full md:w-[380px] lg:w-[420px] bg-white border-r border-slate-200 flex flex-col h-full shrink-0 transition-transform duration-300 ${mobileView !== 'stories_list' && mobileView !== 'story' ? 'max-md:-translate-x-full max-md:hidden' : ''} ${mobileView === 'conversation' ? 'max-md:hidden' : ''}`}>
+      <div className={`w-full md:w-[60%] lg:w-[65%] flex flex-col h-full shrink-0 transition-transform duration-300 md:border-r border-slate-200 bg-white ${mobileView !== 'stories_list' && mobileView !== 'story' ? 'max-md:-translate-x-full max-md:hidden' : ''} ${mobileView === 'conversation' ? 'max-md:hidden' : ''}`}>
         
-        {/* Desktop Header */}
-        <div className="hidden md:flex h-16 items-center justify-between px-6 border-b border-slate-100 shrink-0">
-          <div className="flex items-center gap-3">
-             {selectedStoryId && (
-               <button 
-                 onClick={() => { setSelectedStoryId(null); setSelectedConvId(null); }}
-                 className="flex items-center justify-center w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 transition-colors text-slate-600 mr-2"
-               >
-                 <ArrowLeft size={18} />
-               </button>
-             )}
-             <h1 className="text-xl font-extrabold text-slate-800 tracking-tight">
-                {language === 'en' ? 'Stories' : 'Histoires'}
-             </h1>
-          </div>
-          <div className="flex items-center gap-2">
-             <button 
-                onClick={() => setLanguage(language === 'fr' ? 'en' : 'fr')}
-                className="flex items-center justify-center w-9 h-9 rounded-full bg-slate-100 text-slate-500 font-bold text-xs hover:bg-slate-200 transition-colors"
-             >
-                {language === 'fr' ? 'FR' : 'EN'}
-             </button>
-          </div>
-        </div>
-
-        {/* Mobile Header */}
+        {/* Mobile Header (hide on md) */}
         <header className="bg-[#FAFAFA]/95 backdrop-blur-sm z-50 h-[3.75rem] md:hidden shrink-0 border-b border-slate-100">
-          <div className="flex items-center justify-between w-full h-full px-4 gap-2">
+           <div className="flex items-center justify-between w-full h-full px-4 gap-2">
             <div className="flex items-center gap-3">
               {mobileView === 'story' && (
                  <button 
@@ -148,12 +135,21 @@ export default function ConversationsPage() {
           </div>
         </header>
 
+        {/* Desktop Header for Stories List (only show if no story selected) */}
+        {!selectedStoryId && (
+            <div className="hidden md:flex h-16 items-center justify-between px-6 border-b border-slate-100 shrink-0">
+               <h1 className="text-xl font-extrabold text-slate-800 tracking-tight">
+                  {language === 'en' ? 'Stories' : 'Histoires'}
+               </h1>
+            </div>
+        )}
+
         {/* Main List Area */}
-        <div className="flex-1 overflow-y-auto w-full p-4">
+        <div className="flex-1 overflow-y-auto w-full">
           
           {/* View: Stories List */}
           {!selectedStoryId && (
-             <div className="grid grid-cols-1 gap-4">
+             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 md:p-6 lg:p-8">
                {Object.entries(UNITS).map(([unitId, unit], idx) => {
                   const hasConversations = groupedConvs[unitId] && groupedConvs[unitId].length > 0;
                   if (!hasConversations) return null;
@@ -170,26 +166,27 @@ export default function ConversationsPage() {
                            setSelectedConvId(groupedConvs[unitId][0].id);
                         }
                       }}
-                      className="group flex flex-col items-start gap-4 p-4 rounded-3xl border-2 border-slate-100 bg-white hover:border-emerald-200 transition-all text-left shadow-sm hover:shadow-md h-full w-full relative overflow-hidden"
+                      className="group flex flex-col items-start p-4 rounded-3xl border-2 border-slate-100 bg-white hover:border-emerald-200 transition-all text-left shadow-sm hover:shadow-md w-full relative overflow-hidden"
                     >
                        {unit.imageUrl && (
-                          <div className="w-full h-32 md:h-40 rounded-2xl bg-slate-100 overflow-hidden relative mb-2">
+                          <div className="w-full h-40 rounded-2xl bg-slate-100 overflow-hidden relative mb-4">
                             <Image src={unit.imageUrl} alt={unit.en} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                            <div className="absolute top-3 left-3 bg-white/90 backdrop-blur rounded-xl px-2 py-1 shadow-sm text-lg">
+                               {unit.emoji}
+                            </div>
                           </div>
                        )}
-                       <div className="flex flex-col gap-1 w-full">
-                         <div className="flex items-center gap-2">
-                           <span className="text-2xl">{unit.emoji}</span>
-                           <h2 className="text-lg font-extrabold text-slate-800">
-                             {language === 'en' ? unit.en : unit.fr}
-                           </h2>
-                         </div>
+                       <div className="flex flex-col gap-1 w-full flex-1">
+                         <h2 className="text-lg font-extrabold text-slate-800 flex items-center gap-2">
+                           {!unit.imageUrl && <span className="text-2xl">{unit.emoji}</span>}
+                           {language === 'en' ? unit.en : unit.fr}
+                         </h2>
                          {unit.description && (
                             <p className="text-sm text-slate-500 mt-1 line-clamp-2">
                               {language === 'en' ? unit.description.en : unit.description.fr}
                             </p>
                          )}
-                         <div className="mt-3 flex items-center text-emerald-600 font-bold text-sm">
+                         <div className="mt-auto pt-4 flex items-center text-emerald-600 font-bold text-sm">
                             {language === 'en' ? 'Explore Story' : 'Explorer l\'histoire'}
                             <ChevronRight size={16} className="ml-1 group-hover:translate-x-1 transition-transform" />
                          </div>
@@ -201,390 +198,413 @@ export default function ConversationsPage() {
           )}
 
           {/* View: Conversations List for Selected Story */}
-          {selectedStoryId && (
-             <div className="flex flex-col gap-3">
-               {selectedStory && (
-                  <div className="mb-4">
-                     <h2 className="text-2xl font-extrabold text-slate-900 px-2 flex items-center gap-3">
-                       {selectedStory.emoji} {language === 'en' ? selectedStory.en : selectedStory.fr}
-                     </h2>
-                     {selectedStory.description && (
-                       <p className="mt-2 text-sm text-slate-500 px-2">
-                         {language === 'en' ? selectedStory.description.en : selectedStory.description.fr}
-                       </p>
-                     )}
-                     {selectedStory.imageUrl && (
-                        <div className="w-full h-48 rounded-3xl overflow-hidden mt-4 shadow-sm border border-slate-100 relative">
-                           <Image src={selectedStory.imageUrl} alt="story" fill className="object-cover" />
-                        </div>
-                     )}
-                  </div>
-               )}
-               {currentStoryConvs.map((conv, index) => {
-                  const isSelected = selectedConvId === conv.id;
-                  const isStoryLocked = index > 0 && (completedConversations[currentStoryConvs[index - 1].id] || 0) < 2;
+          {selectedStoryId && selectedStory && (
+             <div className="flex flex-col h-full bg-[#fdfdfd]">
+                {/* Desktop Breadcrumb & Story Header */}
+                <div className="p-4 md:p-8 shrink-0 md:border-b border-slate-100 bg-white shadow-[0_4px_20px_-15px_rgba(0,0,0,0.1)] relative z-10">
+                     <div className="hidden md:flex items-center gap-2 text-sm font-bold text-slate-400 mb-6">
+                          <button onClick={() => { setSelectedStoryId(null); setSelectedConvId(null); }} className="hover:text-slate-600 transition-colors">
+                              {language === 'en' ? 'Stories' : 'Histoires'}
+                          </button>
+                          <ChevronRight size={16} />
+                          <span className="text-slate-700">{language === 'en' ? selectedStory.en : selectedStory.fr}</span>
+                     </div>
 
-                  const vocabReqs = getRequiredLessonsForConv(conv.dialogs);
-                  const missingVocabReqs = vocabReqs.filter(req => (lessonLevels[req.lessonId] || 0) < 1);
-                  const isVocabLocked = missingVocabReqs.length > 0;
+                     <div className="flex flex-col md:flex-row gap-6 items-start">
+                          {selectedStory.imageUrl && (
+                              <div className="w-full md:w-56 h-40 md:h-36 rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition-shadow relative shrink-0 order-2 md:order-1">
+                                  <Image src={selectedStory.imageUrl} alt="" fill className="object-cover" />
+                                  <div className="absolute bottom-3 left-3 text-3xl drop-shadow-md">{selectedStory.emoji}</div>
+                              </div>
+                          )}
+                          <div className="flex-1 flex flex-col order-1 md:order-2 w-full">
+                              <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 mb-2 md:mb-3">
+                                   {language === 'en' ? selectedStory.en : selectedStory.fr}
+                              </h1>
+                              <p className="text-slate-500 text-sm md:text-base leading-relaxed mb-4 md:mb-6 md:line-clamp-3">
+                                   {language === 'en' && selectedStory.description ? selectedStory.description.en : selectedStory.description?.fr}
+                              </p>
+                              
+                              <div className="mt-auto w-full">
+                                  <div className="flex justify-between items-end text-xs font-bold text-slate-500 mb-2">
+                                      <span>{language === 'en' ? 'Story progression' : 'Progression de l\'histoire'}</span>
+                                      <span className="text-emerald-500 text-sm">
+                                         {/* Simple count of completed convs out of total */}
+                                         {currentStoryConvs.filter(c => (completedConversations[c.id] || 0) >= 0).length}/{currentStoryConvs.length} {language === 'en' ? 'chapters' : 'chapitres'}
+                                      </span>
+                                  </div>
+                                  <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
+                                      <div className="h-full bg-emerald-400 rounded-full transition-all duration-1000" style={{width: `${(currentStoryConvs.filter(c => (completedConversations[c.id] || 0) >= 0).length/currentStoryConvs.length)*100}%`}}></div>
+                                  </div>
+                              </div>
+                          </div>
+                     </div>
+                </div>
 
-                  return (
-                    <motion.button
-                      key={conv.id}
-                      initial={window.innerWidth < 768 ? false : { opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.4, delay: window.innerWidth < 768 ? 0 : index * 0.1, ease: "easeOut" }}
-                      style={{ WebkitTransform: 'translateZ(0)', willChange: 'transform, opacity' }}
-                      onClick={() => {
-                        if (isStoryLocked) return;
-                        if (isVocabLocked) {
-                          setSelectedPrereqConv({ conv, missingReqs: missingVocabReqs });
-                        } else {
-                          setSelectedConvId(conv.id);
-                        }
-                      }}
-                      disabled={isStoryLocked}
-                      className={`w-full flex items-center justify-center p-4 rounded-2xl transition-all border-2 relative overflow-hidden ${isSelected ? 'bg-orange-50 border-orange-200' : isStoryLocked ? 'bg-slate-50 border-slate-100 cursor-not-allowed' : isVocabLocked ? 'bg-blue-50/50 border-blue-100' : 'bg-white border-slate-100 hover:border-slate-200 hover:bg-slate-50'}`}
-                    >
-                       <div className={`w-full flex items-center gap-4 ${(isStoryLocked || isVocabLocked) ? 'opacity-40 blur-[1px]' : ''}`}>
-                         {/* THUMBNAIL OR ICON */}
-                         {conv.imageUrl ? (
-                            <div className={`w-14 h-14 rounded-xl overflow-hidden relative shrink-0 border-2 ${isSelected ? 'border-orange-300' : 'border-slate-200'}`}>
-                              <Image src={conv.imageUrl} alt={conv.title} fill className="object-cover" />
-                            </div>
-                         ) : (
-                            <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 transition-colors ${isSelected ? 'bg-orange-100 text-orange-500' : 'bg-slate-100 text-slate-400'}`}>
-                               <MessageCircle size={24} className={isSelected ? 'fill-orange-100' : ''} />
-                            </div>
-                         )}
-                         
-                         <div className="flex-1 min-w-0 pr-2 text-left">
-                            <h3 className={`font-bold truncate text-base ${isSelected ? 'text-orange-600' : 'text-slate-700'}`}>
-                               {index + 1}. {language === 'en' && conv.titleEn ? conv.titleEn : conv.title}
-                            </h3>
-                            <p className={`text-sm truncate mt-0.5 ${isSelected ? 'text-orange-500/80' : 'text-slate-400'}`}>
-                               {conv.dialogs[0] ? (language === 'en' ? conv.dialogs[0].en : conv.dialogs[0].fr) : ''}
-                            </p>
-                         </div>
-                       </div>
-                       
-                       {isStoryLocked && (
-                         <div className="absolute inset-0 flex items-center justify-center z-10 p-4">
-                            <div className="bg-slate-800/90 text-white text-[11px] sm:text-xs font-bold px-3 py-2 rounded-xl shadow-sm flex items-center gap-2 max-w-full text-center">
-                               <Lock size={16} className="shrink-0" />
-                               <span className="truncate">{language === 'en' ? 'Complete Level 2 of previous conversation' : 'Terminer le Niveau 2 de la précédente conversation'}</span>
-                            </div>
-                         </div>
-                       )}
+                {/* Chapters list (vertical timeline style) */}
+                <div className="flex-1 p-4 md:p-8 relative min-h-0">
+                     {/* Vertical connecting line */}
+                     <div className="absolute left-[39px] md:left-[67px] top-10 bottom-10 w-[2px] bg-slate-100 hidden md:block"></div>
 
-                       {!isStoryLocked && isVocabLocked && (
-                         <div className="absolute inset-0 flex items-center justify-center z-10 p-4">
-                            <div className="bg-blue-600/90 text-white text-[11px] sm:text-xs font-bold px-3 py-2 rounded-xl shadow-sm flex items-center gap-2 max-w-full text-center hover:bg-blue-600 transition-colors cursor-pointer">
-                               <BookOpen size={16} className="shrink-0" />
-                               <span className="truncate">{language === 'en' ? 'Vocabulary prerequisites required' : 'Prérequis de vocabulaire manquants'}</span>
-                            </div>
-                         </div>
-                       )}
-                    </motion.button>
-                  );
-               })}
+                     <div className="flex flex-col gap-4 md:gap-6 relative z-10 w-full max-w-4xl mx-auto pb-8">
+                         {currentStoryConvs.map((conv, index) => {
+                             const isSelected = selectedConvId === conv.id;
+                             const isStoryLocked = index > 0 && (completedConversations[currentStoryConvs[index - 1].id] || 0) < 2;
+                             const vocabReqs = getRequiredLessonsForConv(conv.dialogs);
+                             const missingVocabReqs = vocabReqs.filter(req => (lessonLevels[req.lessonId] || 0) < 1);
+                             const isVocabLocked = missingVocabReqs.length > 0;
+                             
+                             const highestCompleted = completedConversations[conv.id] ?? -1;
+                             const isCompleted = highestCompleted >= 2;
+
+                             return (
+                               <div key={conv.id} className="flex gap-4 md:gap-6 items-stretch md:items-center">
+                                   {/* Timeline circle */}
+                                   <div className="hidden md:flex flex-col items-center justify-center shrink-0 w-10">
+                                       <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-base z-10 transition-colors shadow-sm
+                                           ${isSelected ? 'bg-orange-100 text-orange-600 ring-4 ring-orange-50' : 
+                                             isCompleted ? 'bg-emerald-500 text-white' : 
+                                             isStoryLocked ? 'bg-slate-100 text-slate-400' :
+                                             'bg-white border-2 border-slate-200 text-slate-500' 
+                                           }`}>
+                                            {isCompleted ? <Check size={20} strokeWidth={3} /> :
+                                             isStoryLocked ? <Lock size={16} /> :
+                                             (index + 1)}
+                                       </div>
+                                   </div>
+
+                                   {/* The Card */}
+                                   <motion.button
+                                     initial={window.innerWidth < 768 ? false : { opacity: 0, x: 20 }}
+                                     animate={{ opacity: 1, x: 0 }}
+                                     transition={{ duration: 0.4, delay: window.innerWidth < 768 ? 0 : index * 0.1, ease: "easeOut" }}
+                                     style={{ WebkitTransform: 'translateZ(0)', willChange: 'transform, opacity' }}
+                                     onClick={() => {
+                                       if (isStoryLocked) return;
+                                       setSelectedConvId(conv.id);
+                                     }}
+                                     disabled={isStoryLocked}
+                                     className={`group flex-1 flex flex-col md:flex-row items-stretch md:items-center p-3 md:p-4 rounded-3xl border-2 transition-all text-left relative overflow-hidden
+                                       ${isSelected ? 'border-emerald-400 bg-emerald-50/10 shadow-md ring-4 ring-emerald-50' : 
+                                         isStoryLocked ? 'border-slate-100 bg-slate-50 opacity-70 cursor-not-allowed' : 
+                                         'border-transparent bg-white shadow-sm hover:shadow-md hover:border-slate-200'} ...
+                                     `}
+                                   >
+                                      {/* Inside the card */}
+                                      <div className="flex items-center gap-4 w-full">
+                                         {conv.imageUrl ? (
+                                             <div className={`w-28 h-20 md:w-40 md:h-28 rounded-2xl overflow-hidden shrink-0 relative transition-all ${(isStoryLocked || isVocabLocked) && !isSelected ? 'grayscale opacity-60' : ''}`}>
+                                                 <Image src={conv.imageUrl} alt="" fill className="object-cover" />
+                                                 {/* In progress badge overlay */}
+                                                 {isSelected && !isCompleted && !isStoryLocked && (
+                                                     <div className="absolute bottom-2 left-2 bg-orange-500 text-white text-[10px] md:text-xs font-bold px-2.5 py-1 rounded-lg flex items-center gap-1.5 shadow-md">
+                                                         <Play size={10} className="fill-current" />
+                                                         {language === 'en' ? 'In progress' : 'En cours'}
+                                                     </div>
+                                                 )}
+                                                 {/* Locked badge overlay */}
+                                                 {isStoryLocked && (
+                                                     <div className="absolute inset-0 flex items-center justify-center bg-slate-900/40 backdrop-blur-[2px]">
+                                                         <Lock size={20} className="text-white" />
+                                                     </div>
+                                                 )}
+                                             </div>
+                                         ) : (
+                                            <div className={`w-28 h-20 md:w-40 md:h-28 rounded-2xl shrink-0 flex items-center justify-center bg-slate-100 ${(isStoryLocked || isVocabLocked) && !isSelected ? 'grayscale opacity-60' : ''}`}>
+                                               <MessageCircle size={32} className="text-slate-300 relative z-0" />
+                                               {isStoryLocked && <div className="absolute"><Lock size={20} className="text-slate-500" /></div>}
+                                            </div>
+                                         )}
+
+                                         <div className="flex-1 min-w-0 pr-2 py-1 md:py-2 flex flex-col h-full justify-center">
+                                            <div className="mb-auto">
+                                                <h3 className={`font-extrabold text-base md:text-lg text-slate-800 ${(isStoryLocked) && !isSelected ? 'opacity-60' : ''} truncate`}>
+                                                     {index + 1}. {language === 'en' && conv.titleEn ? conv.titleEn : conv.title}
+                                                </h3>
+                                                <p className={`hidden md:block text-sm text-slate-500 truncate mt-1 ${(isStoryLocked) && !isSelected ? 'opacity-60' : ''}`}>
+                                                     {conv.dialogs[0] ? (language === 'en' ? conv.dialogs[0].en : conv.dialogs[0].fr) : ''}
+                                                </p>
+                                            </div>
+
+                                            <div className={`mt-3 flex items-center gap-3 md:gap-4 text-[11px] md:text-xs font-bold ${(isStoryLocked) && !isSelected ? 'opacity-60 grayscale' : ''}`}>
+                                                <div className="flex items-center gap-1.5 text-slate-400">
+                                                   <Clock size={14} /> 8 min
+                                                </div>
+                                                <div className="flex items-center gap-1.5 text-slate-400">
+                                                   <Users size={14} /> {Array.from(new Set(conv.dialogs.map(d=>d.speaker))).length}
+                                                </div>
+                                                <div className="flex items-center gap-1.5 text-orange-400">
+                                                   <Star size={14} className="fill-current" /> +75
+                                                </div>
+                                                
+                                                {/* Internal Progress */}
+                                                <div className="ml-auto flex items-center gap-1">
+                                                   {[0, 1, 2, 3].map(l => (
+                                                      <div key={l} className={`w-5 md:w-6 h-1.5 rounded-full ${highestCompleted >= (l-1) ? 'bg-emerald-400' : 'bg-slate-200'}`}></div>
+                                                   ))}
+                                                </div>
+                                            </div>
+                                         </div>
+                                         <ChevronRight size={20} className={`text-slate-300 shrink-0 mx-2 hidden md:block transition-transform ${isSelected ? 'translate-x-1 text-emerald-400' : 'group-hover:translate-x-1'}`} />
+                                      </div>
+
+                                      {/* Grey out Vocab missing */}
+                                      {!isStoryLocked && isVocabLocked && !isSelected && (
+                                         <div className="absolute inset-0 bg-white/60 backdrop-blur-[1px] z-10 flex flex-col items-center justify-center">
+                                             <div className="bg-blue-600 text-white text-[11px] md:text-xs font-bold px-4 py-2 rounded-xl shadow-sm flex items-center gap-2">
+                                                  <BookOpen size={14} />
+                                                  {language === 'en' ? 'Prérequis manquants' : 'Prérequis de vocabulaire manquants'}
+                                             </div>
+                                         </div>
+                                      )}
+                                   </motion.button>
+                               </div>
+                             );
+                         })}
+                     </div>
+                </div>
              </div>
           )}
-
-          <div className="h-6"></div>
         </div>
       </div>
 
       {/* RIGHT PANEL : Detail & Action */}
-      <div className={`flex-1 flex flex-col h-full bg-[#F5F7FA] md:bg-slate-50 md:border-l border-slate-200 z-20 ${mobileView === 'conversation' ? 'translate-x-0 absolute inset-0' : 'max-md:hidden'} md:relative`}>
+      <div className={`flex-1 flex flex-col h-full bg-[#f8fafc] md:bg-white z-20 shadow-[-10px_0_30px_-15px_rgba(0,0,0,0.05)] w-full md:w-[40%] lg:w-[35%] relative ${mobileView === 'conversation' ? 'translate-x-0 absolute inset-0' : 'max-md:hidden'} md:relative`}>
          {selectedConv ? (
-             <>
-               {/* Detail Header (Mobile has back button) */}
-               <div className="h-[3.75rem] md:h-16 flex items-center px-4 sm:px-8 bg-white border-b border-slate-200 shrink-0">
-                  <button 
-                    onClick={() => setSelectedConvId(null)}
-                    className="w-10 h-10 -ml-2 mr-2 bg-slate-100 rounded-full flex justify-center items-center text-slate-600 md:hidden"
-                  >
-                    <ArrowLeft size={20} />
-                  </button>
-                  <div className="flex items-center gap-3">
-                     <div className="w-8 h-8 rounded-full bg-orange-100 text-orange-500 flex items-center justify-center shrink-0 hidden md:flex">
-                        <MessageCircle size={16} className="fill-current" />
-                     </div>
-                     <h2 className="text-lg font-extrabold text-slate-800 truncate">
-                        {language === 'en' && selectedConv.titleEn ? selectedConv.titleEn : selectedConv.title}
-                     </h2>
-                  </div>
-               </div>
+             <div className="flex flex-col h-full overflow-y-auto">
+                {/* Detail Header (Mobile has back button) */}
+                <div className="md:hidden h-[3.75rem] flex items-center px-4 bg-white/80 backdrop-blur sticky top-0 z-50 border-b border-slate-100 shrink-0">
+                   <button 
+                     onClick={() => setSelectedConvId(null)}
+                     className="w-10 h-10 -ml-2 mr-2 bg-slate-100 rounded-full flex justify-center items-center text-slate-600"
+                   >
+                     <ArrowLeft size={20} />
+                   </button>
+                   <h2 className="text-lg font-extrabold text-slate-800 truncate">
+                      {language === 'en' && selectedConv.titleEn ? selectedConv.titleEn : selectedConv.title}
+                   </h2>
+                </div>
 
-               {/* Content Box */}
-               <div className="flex-1 overflow-y-auto p-4 sm:p-8 pb-[100px] md:pb-8 flex flex-col w-full">
-                  <div className="w-full max-w-lg mx-auto bg-white rounded-3xl md:shadow-md border border-slate-200 overflow-hidden flex flex-col shrink-0 my-auto md:my-0 pb-2">
-                     <div className="p-6 md:p-8 text-center border-b border-slate-100 bg-slate-50 relative">
-                        {selectedConv.imageUrl ? (
-                           <div className="w-24 h-24 rounded-3xl overflow-hidden mx-auto mb-5 shadow-lg border-4 border-white rotate-3 relative">
-                              <Image src={selectedConv.imageUrl} alt={selectedConv.title} fill className="object-cover" />
+                <div className="p-4 md:p-8 flex flex-col relative w-full max-w-xl mx-auto">
+                   {/* Big Image Cover */}
+                   <div className="w-full aspect-video md:h-56 rounded-3xl overflow-hidden relative shadow-md shrink-0 mb-6 group bg-slate-200">
+                       {selectedConv.imageUrl ? (
+                           <Image src={selectedConv.imageUrl} alt="" fill className="object-cover" />
+                       ) : (
+                           <div className="w-full h-full flex items-center justify-center flex-col bg-gradient-to-br from-orange-100 to-orange-50 text-orange-400">
+                              <MessageCircle size={48} className="mb-2" />
                            </div>
-                        ) : (
-                           <div className="w-20 h-20 bg-orange-100 text-orange-500 rounded-3xl flex items-center justify-center mx-auto mb-5 rotate-3 shadow-inner">
-                              <MessageCircle size={40} className="fill-orange-200/50" />
-                           </div>
-                        )}
-                        <h2 className="text-2xl font-extrabold text-slate-800 mb-2">
-                           {language === 'en' && selectedConv.titleEn ? selectedConv.titleEn : selectedConv.title}
-                        </h2>
-                        <p className="text-slate-500 text-sm font-medium px-4">
-                           {language === 'en' 
-                              ? 'Choose a difficulty level to start practicing this dialogue.' 
-                              : 'Choisissez un niveau de difficulté pour commencer à pratiquer ce dialogue.'}
-                        </p>
-                     </div>
-
-                     <div className="p-4 sm:p-6 flex flex-col gap-3">
-                        {isSelectedConvStoryLocked ? (
-                            <div className="flex flex-col items-center justify-center p-8 text-center gap-4">
-                                <div className="w-16 h-16 bg-slate-100 rounded-2xl flex items-center justify-center text-slate-400">
-                                    <Lock size={32} />
-                                </div>
-                                <h3 className="text-lg font-bold text-slate-700">
-                                    {language === 'en' ? 'Conversation Locked' : 'Conversation bloquée'}
-                                </h3>
-                                <p className="text-sm text-slate-500">
-                                    {language === 'en' ? 'Complete Level 2 of the previous conversation to unlock this one.' : 'Terminez le Niveau 2 de la conversation précédente pour débloquer celle-ci.'}
-                                </p>
-                            </div>
-                        ) : isSelectedConvVocabLocked ? (
-                            <div className="flex flex-col items-center justify-center p-6 text-center gap-4">
-                                <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-blue-500">
-                                    <BookOpen size={32} />
-                                </div>
-                                <h3 className="text-lg font-bold text-slate-700">
-                                    {language === 'en' ? 'Vocabulary Prerequisites Missing' : 'Prérequis de vocabulaire manquants'}
-                                </h3>
-                                <p className="text-sm text-slate-500 mb-2">
-                                    {language === 'en' ? 'You need to learn some vocabulary before starting this conversation.' : 'Vous devez apprendre du vocabulaire avant de commencer cette conversation.'}
-                                </p>
-                                <button
-                                    onClick={() => setSelectedPrereqConv({ conv: selectedConv, missingReqs: selectedConvMissingReqs })}
-                                    className="bg-blue-500 hover:bg-blue-600 active:scale-[0.98] transition-all text-white font-bold py-3 px-6 rounded-xl w-full"
-                                >
-                                    {language === 'en' ? 'View Prerequisites' : 'Voir les prérequis'}
-                                </button>
-                            </div>
-                        ) : (
-                           <>
-                              <Link 
-                                 href={`/conversations/${selectedConv.id}`}
-                                 className="group relative flex items-center gap-4 p-4 rounded-2xl border-2 border-slate-100 bg-white hover:bg-slate-50 hover:border-slate-200 active:scale-[0.98] transition-all"
-                              >
-                                 <div className="w-12 h-12 rounded-xl bg-slate-100 text-slate-500 shadow-sm flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-                                    <BookOpen size={24} className="fill-current" />
-                                 </div>
-                                 <div className="flex-1">
-                                    <div className="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-0.5">
-                                       {language === 'en' ? 'Base conversation' : 'Conversation de base'}
-                                    </div>
-                                    <div className="font-extrabold text-slate-700 text-base">
-                                       {language === 'en' ? 'Read & Listen' : 'Écouter et lire'}
-                                    </div>
-                                 </div>
-                                 <ChevronRight size={20} className="text-slate-400 group-hover:text-slate-600 group-hover:translate-x-1 transition-all" />
-                              </Link>
-
-                              <div className="h-px w-full bg-slate-100 my-1"></div>
-
-                              {(() => {
-                                 const highestCompleted = completedConversations[selectedConv.id] ?? -1;
-                                 const isLevel1Locked = highestCompleted < 0;
-                                 const isLevel2Locked = highestCompleted < 1;
-                                 const isLevel3Locked = highestCompleted < 2;
-
-                                 return (
-                                    <>
-                                       <Link 
-                                          href={isLevel1Locked ? '#' : `/conversations/${selectedConv.id}?level=1`}
-                                          className={`group relative flex items-center gap-4 p-4 rounded-2xl border-2 overflow-hidden transition-all ${isLevel1Locked ? 'border-slate-100 bg-slate-50 cursor-not-allowed opacity-80' : 'border-emerald-100 bg-emerald-50 hover:bg-emerald-100 hover:border-emerald-200 active:scale-[0.98]'}`}
-                                       >
-                                          <div className={`w-full flex items-center gap-4 ${isLevel1Locked ? 'opacity-40 blur-[1px]' : ''}`}>
-                                             <div className="w-12 h-12 rounded-xl bg-white text-emerald-500 shadow-sm flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-                                                <Star size={24} className="fill-current" />
-                                             </div>
-                                             <div className="flex-1">
-                                                <div className="text-[11px] font-bold text-emerald-600/80 uppercase tracking-wider mb-0.5">
-                                                   {language === 'en' ? 'Level 1' : 'Niveau 1'}
-                                                </div>
-                                                <div className="font-extrabold text-emerald-900 text-base">
-                                                   {language === 'en' ? 'Fill in the blanks' : 'Remplir la conversation'}
-                                                </div>
-                                             </div>
-                                             <ChevronRight size={20} className="text-emerald-400 group-hover:text-emerald-600 group-hover:translate-x-1 transition-all" />
-                                          </div>
-                                          {isLevel1Locked && (
-                                             <div className="absolute inset-0 flex items-center justify-center z-10 p-4 font-sans font-bold">
-                                                <div className="bg-slate-800/90 text-white text-[11px] font-bold px-3 py-1.5 rounded-xl shadow-sm flex items-center gap-1.5 max-w-full text-center">
-                                                   <Lock size={12} className="shrink-0" />
-                                                   <span className="truncate">{language === 'en' ? 'Listen to the conversation to unlock' : 'Écouter la conversation pour débloquer'}</span>
-                                                </div>
-                                             </div>
-                                          )}
-                                       </Link>
-
-                                       <Link 
-                                          href={isLevel2Locked ? '#' : `/conversations/${selectedConv.id}?level=2`}
-                                          className={`group relative flex items-center gap-4 p-4 rounded-2xl border-2 overflow-hidden transition-all ${isLevel2Locked ? 'border-slate-100 bg-slate-50 cursor-not-allowed opacity-80' : 'border-purple-100 bg-purple-50 hover:bg-purple-100 hover:border-purple-200 active:scale-[0.98]'}`}
-                                       >
-                                          <div className={`w-full flex items-center gap-4 ${isLevel2Locked ? 'opacity-40 blur-[1px]' : ''}`}>
-                                             <div className="w-12 h-12 rounded-xl bg-white text-purple-500 shadow-sm flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-                                                <Star size={24} className="fill-current" />
-                                             </div>
-                                             <div className="flex-1">
-                                                <div className="text-[11px] font-bold text-purple-600/80 uppercase tracking-wider mb-0.5">
-                                                   {language === 'en' ? 'Level 2' : 'Niveau 2'}
-                                                </div>
-                                                <div className="font-extrabold text-purple-900 text-base">
-                                                   {language === 'en' ? 'Fill in the word' : 'Remplir le mot'}
-                                                </div>
-                                             </div>
-                                             <ChevronRight size={20} className="text-purple-400 group-hover:text-purple-600 group-hover:translate-x-1 transition-all" />
-                                          </div>
-                                          {isLevel2Locked && (
-                                             <div className="absolute inset-0 flex items-center justify-center z-10 p-4 font-sans font-bold">
-                                                <div className="bg-slate-800/90 text-white text-[11px] font-bold px-3 py-1.5 rounded-xl shadow-sm flex items-center gap-1.5 max-w-full text-center">
-                                                   <Lock size={12} className="shrink-0" />
-                                                   <span className="truncate">{language === 'en' ? 'Complete Level 1 to unlock' : 'Terminer le Niveau 1 pour débloquer'}</span>
-                                                </div>
-                                             </div>
-                                          )}
-                                       </Link>
-
-                                       <Link 
-                                          href={isLevel3Locked ? '#' : `/conversations/${selectedConv.id}?level=3`}
-                                          className={`group relative flex items-center gap-4 p-4 rounded-2xl border-2 overflow-hidden transition-all ${isLevel3Locked ? 'border-slate-100 bg-slate-50 cursor-not-allowed opacity-80' : 'border-blue-100 bg-blue-50 hover:bg-blue-100 hover:border-blue-200 active:scale-[0.98]'}`}
-                                       >
-                                          <div className={`w-full flex items-center gap-4 ${isLevel3Locked ? 'opacity-40 blur-[1px]' : ''}`}>
-                                             <div className="w-12 h-12 rounded-xl bg-white text-blue-500 shadow-sm flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-                                                <Star size={24} className="fill-current" />
-                                             </div>
-                                             <div className="flex-1">
-                                                <div className="text-[11px] font-bold text-blue-600/80 uppercase tracking-wider mb-0.5">
-                                                   {language === 'en' ? 'Level 3' : 'Niveau 3'}
-                                                </div>
-                                                <div className="font-extrabold text-blue-900 text-base">
-                                                   {language === 'en' ? 'Choose the phrase' : 'Choisir la phrase'}
-                                                </div>
-                                             </div>
-                                             <ChevronRight size={20} className="text-blue-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all" />
-                                          </div>
-                                          {isLevel3Locked && (
-                                             <div className="absolute inset-0 flex items-center justify-center z-10 p-4 font-sans font-bold">
-                                                <div className="bg-slate-800/90 text-white text-[11px] font-bold px-3 py-1.5 rounded-xl shadow-sm flex items-center gap-1.5 max-w-full text-center">
-                                                   <Lock size={12} className="shrink-0" />
-                                                   <span className="truncate">{language === 'en' ? 'Complete Level 2 to unlock' : 'Terminer le Niveau 2 pour débloquer'}</span>
-                                                </div>
-                                             </div>
-                                          )}
-                                       </Link>
-                                    </>
-                                 );
-                              })()}
-                           </>
-                        )}
-                     </div>
-                  </div>
-               </div>
-             </>
-         ) : (
-             <div className="flex-1 flex items-center justify-center p-8 bg-slate-50">
-                <div className="max-w-sm text-center">
-                   <div className="w-24 h-24 mx-auto bg-slate-200 rounded-full flex items-center justify-center text-slate-400 mb-6">
-                      <Book size={48} className="opacity-50" />
+                       )}
+                       
+                       {/* Play excerpt button overlay */}
+                       <div className="absolute inset-0 flex items-center justify-center bg-slate-900/10 opacity-0 group-hover:opacity-100 transition-opacity">
+                           <button onClick={handlePlayExcerpt} className="bg-white/95 backdrop-blur text-slate-800 text-sm font-bold px-6 py-3 rounded-2xl flex items-center gap-2 shadow-xl hover:scale-105 active:scale-95 transition-all">
+                               <Volume2 size={18} className="text-emerald-500" />
+                               {language === 'en' ? 'Play an excerpt' : 'Ecouter un extrait'}
+                           </button>
+                       </div>
+                       
+                       {/* Mock location tag */}
+                       <div className="absolute bottom-3 left-3 bg-white/95 backdrop-blur text-slate-600 text-[10px] md:text-xs font-bold px-3 py-1.5 rounded-xl flex items-center gap-1.5 shadow-sm">
+                           <MapPin size={12} className="text-red-500" /> Bangkok
+                       </div>
                    </div>
-                   <h3 className="text-xl font-bold text-slate-700 mb-2">
-                       {language === 'en' ? 'Select a conversation' : 'Sélectionnez une conversation'}
-                   </h3>
-                   <p className="text-slate-500">
+
+                   {/* Title & Desc */}
+                   <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 mb-3 leading-tight">
+                       {language === 'en' && selectedConv.titleEn ? selectedConv.titleEn : selectedConv.title}
+                   </h2>
+                   <p className="text-slate-500 text-sm md:text-base mb-6 leading-relaxed">
                        {language === 'en' 
-                          ? 'Choose a story from the menu, then pick a conversation to start practicing.'
-                          : 'Choisissez une histoire dans le menu, puis choisissez une conversation pour commencer la pratique.'}
+                          ? `Learn to communicate in scenarios like "${selectedConv.dialogs[0]?.en}". Practice listening, reading, and interacting.` 
+                          : `Découvrez comment communiquer dans des situations comme "${selectedConv.dialogs[0]?.fr}". Pratiquez l'écoute, la lecture et l'interaction.` }
+                   </p>
+
+                   {/* Stats row */}
+                   <div className="flex flex-wrap items-center gap-4 md:gap-6 mb-8 border-b border-slate-100 pb-6">
+                       <div className="flex items-center gap-2 text-sm text-slate-500 font-bold bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-100">
+                           <Clock size={16} className="text-slate-400" /> 8 min
+                       </div>
+                       <div className="flex items-center gap-2 text-sm text-slate-500 font-bold bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-100">
+                           <Users size={16} className="text-slate-400" /> {selectedSpeakers.length} {language === 'en' ? 'characters' : 'personnages'}
+                       </div>
+                       <div className="flex items-center gap-2 text-sm text-orange-600 font-bold bg-orange-50 px-3 py-1.5 rounded-lg border border-orange-100">
+                           <Star size={16} className="fill-orange-400 text-orange-400" /> +75 XP
+                       </div>
+                   </div>
+
+                   {/* Personnages */}
+                   <div className="mb-8 p-5 bg-slate-50/80 rounded-3xl border border-slate-100">
+                       <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3 pl-1">
+                           {language === 'en' ? 'Characters' : 'Personnages'}
+                       </div>
+                       <div className="flex flex-wrap gap-2">
+                           {selectedSpeakers.map((sp, i) => (
+                               <div key={i} className="px-4 py-2 bg-white border border-slate-200 rounded-xl text-sm font-bold text-slate-700 shadow-sm flex items-center gap-2">
+                                   <div className="w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center text-[10px] text-slate-400">
+                                      <Users size={10} />
+                                   </div>
+                                   {sp}
+                               </div>
+                           ))}
+                       </div>
+                   </div>
+
+                   {/* Niveaux de difficulté ou Prérequis */}
+                   <div>
+                       <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-4 pl-1">
+                           {isSelectedConvStoryLocked 
+                              ? '' 
+                              : isSelectedConvVocabLocked 
+                                 ? (language === 'en' ? 'Missing Prerequisites' : 'Prérequis manquants')
+                                 : (language === 'en' ? 'Difficulty Levels' : 'Niveaux de difficulté')
+                           }
+                       </div>
+
+                       {isSelectedConvStoryLocked ? (
+                           <div className="bg-slate-50 border-2 border-slate-100 rounded-3xl p-8 text-center flex flex-col items-center shadow-sm">
+                                <div className="w-16 h-16 bg-white rounded-2xl shadow-sm border border-slate-100 mb-4 flex items-center justify-center">
+                                    <Lock size={32} className="text-slate-300" />
+                                </div>
+                                <h3 className="text-lg font-bold text-slate-700 mb-2">{language === 'en' ? 'Chapter Locked' : 'Chapitre bloqué'}</h3>
+                                <p className="text-slate-500 text-sm max-w-xs leading-relaxed">{language === 'en' ? 'Complete Level 2 of the previous conversation to continue the story.' : 'Terminer le Niveau 2 de la conversation précédente pour continuer l\'histoire.'}</p>
+                           </div>
+                       ) : isSelectedConvVocabLocked ? (
+                           <div className="flex flex-col gap-4">
+                               <div className="bg-blue-50 border-2 border-blue-100 rounded-2xl p-4 text-sm text-blue-700 font-medium mb-2">
+                                  {language === 'en' 
+                                      ? 'You must complete Level 1 of the following lessons to learn the required vocabulary.' 
+                                      : 'Vous devez réaliser le Niveau 1 des leçons suivantes pour apprendre le vocabulaire.'}
+                               </div>
+                               {selectedConvMissingReqs.map(req => (
+                                    <div key={req.lessonId} className="bg-white border-2 border-blue-100 rounded-3xl p-5 shadow-sm relative overflow-hidden group hover:border-blue-300 transition-colors">
+                                       <div className="absolute top-0 right-0 bg-blue-50 text-blue-500 text-[10px] font-extrabold tracking-wider px-3 py-1.5 rounded-bl-xl border-l-[2px] border-b-[2px] border-blue-100">
+                                          VOCAB
+                                       </div>
+                                       <h4 className="font-extrabold text-slate-800 text-base mb-3 pr-12">{language==='en'?req.lessonTitleEn:req.lessonTitle}</h4>
+                                       <div className="flex flex-wrap gap-2 mb-5">
+                                          {req.matchedWords.map((mw, i) => (
+                                              <span key={i} className="text-xs font-bold text-slate-600 bg-slate-50 border border-slate-100 px-2.5 py-1 rounded-lg">{mw.th}</span>
+                                          ))}
+                                          {req.matchedWords.length > 5 && <span className="text-xs font-bold text-slate-400 px-1 py-1">...</span>}
+                                       </div>
+                                       <Link href={`/lesson/${req.lessonId}?level=1`} className="flex w-full items-center justify-center gap-2 bg-blue-500 hover:bg-blue-600 active:scale-[0.98] text-white font-bold py-3.5 rounded-xl transition-all shadow-sm">
+                                          <Play size={16} className="fill-current" />
+                                          {language === 'en' ? 'Learn words' : 'Apprendre ces mots'}
+                                       </Link>
+                                    </div>
+                               ))}
+                           </div>
+                       ) : (
+                           <div className="flex flex-col gap-3 pb-8">
+                               {(() => {
+                                  const highestCompleted = completedConversations[selectedConv.id] ?? -1;
+                                  const isLevel1Locked = highestCompleted < 0;
+                                  const isLevel2Locked = highestCompleted < 1;
+                                  const isLevel3Locked = highestCompleted < 2;
+
+                                  return (
+                                     <>
+                                         {/* Base Conversation */}
+                                         <Link href={`/conversations/${selectedConv.id}`} className="group flex items-center p-4 rounded-3xl border-2 border-emerald-400 bg-emerald-50/30 hover:bg-emerald-50 transition-colors shadow-sm">
+                                             <div className="w-12 h-12 rounded-2xl bg-emerald-500 text-white flex items-center justify-center shrink-0 mr-4 shadow-sm">
+                                                 <Check size={24} strokeWidth={3} />
+                                             </div>
+                                             <div className="flex-1">
+                                                 <div className="font-extrabold text-slate-800 text-base group-hover:text-emerald-700 transition-colors">
+                                                     {language === 'en' ? 'Base conversation' : 'Conversation de base'}
+                                                 </div>
+                                                 <div className="text-sm font-medium text-slate-500">
+                                                     {language === 'en' ? 'Listen and read' : 'Écouter et lire'}
+                                                 </div>
+                                             </div>
+                                             <ChevronRight className="text-emerald-500 shrink-0" />
+                                         </Link>
+
+                                         {/* Level 1 */}
+                                         <Link 
+                                            href={isLevel1Locked ? '#' : `/conversations/${selectedConv.id}?level=1`}
+                                            className={`group flex items-center p-4 rounded-3xl border-2 transition-all ${isLevel1Locked ? 'border-slate-100 bg-slate-50 opacity-60 cursor-not-allowed' : 'border-orange-400 bg-white hover:bg-orange-50 shadow-sm'}`}
+                                         >
+                                            <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 mr-4 shadow-sm ${isLevel1Locked ? 'bg-slate-200 text-slate-400' : 'bg-orange-500 text-white'}`}>
+                                                {isLevel1Locked ? <Lock size={20} /> : <Star size={24} className="fill-current" />}
+                                            </div>
+                                            <div className="flex-1">
+                                                <div className="text-[10px] uppercase tracking-wider font-extrabold mb-0.5 text-slate-400">
+                                                    Niveau 1
+                                                </div>
+                                                <div className={`font-extrabold text-base transition-colors ${isLevel1Locked ? 'text-slate-600' : 'text-slate-800 group-hover:text-orange-700'}`}>
+                                                    {language === 'en' ? 'Fill in the blanks' : 'Remplir la conversation'}
+                                                </div>
+                                            </div>
+                                            {!isLevel1Locked && <ChevronRight className="text-orange-400 shrink-0" />}
+                                         </Link>
+
+                                         {/* Level 2 */}
+                                         <Link 
+                                            href={isLevel2Locked ? '#' : `/conversations/${selectedConv.id}?level=2`}
+                                            className={`group flex items-center p-4 rounded-3xl border-2 transition-all ${isLevel2Locked ? 'border-slate-100 bg-slate-50 opacity-60 cursor-not-allowed' : 'border-purple-400 bg-white hover:bg-purple-50 shadow-sm'}`}
+                                         >
+                                            <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 mr-4 shadow-sm ${isLevel2Locked ? 'bg-slate-200 text-slate-400' : 'bg-slate-100 text-purple-400'}`}>
+                                                {isLevel2Locked ? <Lock size={20} /> : <Star size={24} className="fill-current" />}
+                                            </div>
+                                            <div className="flex-1">
+                                                <div className="text-[10px] uppercase tracking-wider font-extrabold mb-0.5 text-slate-400">
+                                                    Niveau 2
+                                                </div>
+                                                <div className={`font-extrabold text-base transition-colors ${isLevel2Locked ? 'text-slate-600' : 'text-slate-800 group-hover:text-purple-700'}`}>
+                                                    {language === 'en' ? 'Fill in the word' : 'Remplir le mot'}
+                                                </div>
+                                                {isLevel2Locked && <div className="text-xs font-medium text-slate-500 mt-0.5">Terminer le Niveau 1</div>}
+                                            </div>
+                                            {!isLevel2Locked && <ChevronRight className="text-purple-300 shrink-0" />}
+                                         </Link>
+
+                                         {/* Level 3 */}
+                                         <Link 
+                                            href={isLevel3Locked ? '#' : `/conversations/${selectedConv.id}?level=3`}
+                                            className={`group flex items-center p-4 rounded-3xl border-2 transition-all ${isLevel3Locked ? 'border-slate-100 bg-slate-50 opacity-60 cursor-not-allowed' : 'border-blue-400 bg-white hover:bg-blue-50 shadow-sm'}`}
+                                         >
+                                            <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 mr-4 shadow-sm ${isLevel3Locked ? 'bg-slate-200 text-slate-400' : 'bg-slate-100 text-blue-400'}`}>
+                                                {isLevel3Locked ? <Lock size={20} /> : <Star size={24} className="fill-current" />}
+                                            </div>
+                                            <div className="flex-1">
+                                                <div className="text-[10px] uppercase tracking-wider font-extrabold mb-0.5 text-slate-400">
+                                                    Niveau 3
+                                                </div>
+                                                <div className={`font-extrabold text-base transition-colors ${isLevel3Locked ? 'text-slate-600' : 'text-slate-800 group-hover:text-blue-700'}`}>
+                                                    {language === 'en' ? 'Choose the phrase' : 'Choisir la phrase'}
+                                                </div>
+                                                {isLevel3Locked && <div className="text-xs font-medium text-slate-500 mt-0.5">Terminer le Niveau 2</div>}
+                                            </div>
+                                            {!isLevel3Locked && <ChevronRight className="text-blue-300 shrink-0" />}
+                                         </Link>
+                                     </>
+                                  );
+                               })()}
+                           </div>
+                       )}
+                   </div>
+                </div>
+             </div>
+         ) : (
+             <div className="flex-1 flex items-center justify-center p-8 bg-[#fdfdfd]">
+                <div className="max-w-sm text-center">
+                   <div className="w-24 h-24 mx-auto bg-slate-100 rounded-3xl flex items-center justify-center text-slate-400 mb-6 rotate-3">
+                      <BookOpen size={48} className="opacity-50" />
+                   </div>
+                   <h3 className="text-2xl font-extrabold text-slate-800 mb-2">
+                       {language === 'en' ? 'Start practicing' : 'Pratiquez un dialogue'}
+                   </h3>
+                   <p className="text-slate-500 leading-relaxed font-medium">
+                       {language === 'en' 
+                          ? 'Select a conversation from the story to view its details, characters, and difficulty levels.'
+                          : 'Sélectionnez une conversation de l\'histoire pour voir les chapitres et commencer à repousser vos limites.'}
                    </p>
                 </div>
              </div>
          )}
       </div>
-
-      {/* PREREQUISITES MODAL */}
-      <AnimatePresence>
-        {selectedPrereqConv && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-            <motion.div 
-               initial={{ opacity: 0 }}
-               animate={{ opacity: 1 }}
-               exit={{ opacity: 0 }}
-               className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"
-               onClick={() => setSelectedPrereqConv(null)}
-            />
-            <motion.div 
-               initial={{ scale: 0.95, opacity: 0, y: 20 }}
-               animate={{ scale: 1, opacity: 1, y: 0 }}
-               exit={{ scale: 0.95, opacity: 0, y: 20 }}
-               className="bg-white rounded-3xl w-full max-w-lg shadow-2xl relative z-10 overflow-hidden flex flex-col max-h-[90vh]"
-            >
-               <div className="p-6 border-b border-slate-100 bg-slate-50 relative flex items-center shrink-0">
-                 <div className="w-12 h-12 bg-blue-100 text-blue-500 rounded-2xl flex items-center justify-center shrink-0 mr-4">
-                    <BookOpen size={24} />
-                 </div>
-                 <div className="flex-1 pr-6 text-left">
-                    <h2 className="text-xl font-extrabold text-slate-800">
-                       {language === 'en' ? 'Vocabulary Prerequisites' : 'Prérequis de vocabulaire'}
-                    </h2>
-                    <p className="text-slate-500 text-sm mt-1">
-                       {language === 'en' 
-                          ? 'You need to complete Level 1 of the following exercises to unlock this conversation.'
-                          : 'Vous devez réaliser le Niveau 1 des exercices suivants pour débloquer cette conversation.'}
-                    </p>
-                 </div>
-                 <button 
-                   onClick={() => setSelectedPrereqConv(null)}
-                   className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center text-slate-400 hover:bg-slate-200 hover:text-slate-600 rounded-full transition-colors"
-                 >
-                   <X size={20} />
-                 </button>
-               </div>
-
-               <div className="p-6 overflow-y-auto flex-1 flex flex-col gap-4 bg-slate-50/50">
-                 {selectedPrereqConv.missingReqs.map((req, idx) => (
-                    <div key={req.lessonId} className="bg-white border-2 border-slate-100 rounded-2xl p-4 shadow-sm flex flex-col text-left">
-                       <div className="flex justify-between items-start mb-3 gap-2">
-                          <h3 className="font-extrabold text-slate-700 text-lg leading-tight">
-                             {language === 'en' ? req.lessonTitleEn : req.lessonTitle}
-                          </h3>
-                          <Link 
-                             href={`/lesson/${req.lessonId}?level=1`}
-                             className="shrink-0 bg-blue-500 hover:bg-blue-600 text-white text-sm font-bold px-4 py-2 rounded-xl transition-all shadow-sm active:scale-95 flex items-center gap-1.5"
-                          >
-                             <Play size={14} className="fill-current" />
-                             {language === 'en' ? 'Play' : 'Jouer'}
-                          </Link>
-                       </div>
-                       
-                       <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">
-                          {language === 'en' ? 'Words to learn:' : 'Mots à apprendre :'}
-                       </p>
-                       <div className="flex flex-wrap gap-2">
-                          {req.matchedWords.map((mw, mwIdx) => (
-                             <div key={mwIdx} className="bg-slate-50 border border-slate-200 px-2 py-1 rounded-lg text-sm flex items-center gap-2">
-                                <span className="font-thai font-bold text-slate-700">{mw.th}</span>
-                                <span className="text-slate-400 text-xs">({language === 'en' ? mw.en : mw.fr})</span>
-                             </div>
-                          ))}
-                       </div>
-                    </div>
-                 ))}
-               </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }
