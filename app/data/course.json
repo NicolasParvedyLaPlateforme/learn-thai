@@ -8,7 +8,7 @@
         {
           "id": "w_sawatdee",
           "th": "สวัสดี",
-          "fr": "bonjour",
+          "fr": "Bonjour",
           "phonetic": "sà-wàt-dii",
           "en": "Good morning",
           "imageUrl": "/images/hello_word.svg"
@@ -16,25 +16,25 @@
         {
           "id": "w_khopkhun",
           "th": "ขอบคุณ",
-          "fr": "merci",
+          "fr": "Merci",
           "phonetic": "khɔ̀p-khun",
-          "en": "THANKS",
+          "en": "Thanks",
           "imageUrl": "/images/thanks_word.svg"
         },
         {
           "id": "w_krap",
           "th": "ครับ",
-          "fr": "particule homme",
+          "fr": "particule polie homme",
           "phonetic": "khráp",
-          "en": "man particle",
+          "en": "polite male particle",
           "imageUrl": "/images/man_word.svg"
         },
         {
           "id": "w_kha",
           "th": "ค่ะ",
-          "fr": "particule femme",
+          "fr": "particule polie femme",
           "phonetic": "khâ",
-          "en": "woman particle",
+          "en": "polite female particle",
           "imageUrl": "/images/woman_word.svg"
         },
         {
@@ -4486,7 +4486,7 @@
         {
           "id": "p_sour",
           "th": "เปรี้ยวมาก",
-          "fr": "très acide",
+          "fr": "très aigre",
           "phonetic": "bprîiao mâak",
           "components": [
             "w_priao",
@@ -6456,7 +6456,7 @@
           "id": "p_this_morning",
           "th": "เช้านี้",
           "fr": "ce matin",
-          "phonetic": "cháao nee",
+          "phonetic": "cháao née",
           "components": [
             "w_chao",
             "w_nii_this"
@@ -6468,7 +6468,7 @@
           "id": "p_work_morning",
           "th": "ทำงานเช้านี้",
           "fr": "travailler ce matin",
-          "phonetic": "tham-ngaan cháao nee",
+          "phonetic": "tham-ngaan cháao née",
           "components": [
             "w_tham_ngan",
             "w_chao",
@@ -6480,14 +6480,14 @@
         {
           "id": "p_eat_evening",
           "th": "กินข้าวเย็น",
-          "fr": "manger le soir",
+          "fr": "manger le soir / Dîner ",
           "phonetic": "kin khâao yen",
           "components": [
             "w_kin",
             "w_khao",
             "w_yen_evening"
           ],
-          "en": "eat in the evening",
+          "en": "eat in the evening / have dinner",
           "imageUrl": "/images/p_p_eat_evening.svg"
         },
         {
@@ -6699,7 +6699,7 @@
             "w_lom",
             "w_mak"
           ],
-          "en": "lots of wind",
+          "en": "very windy ",
           "imageUrl": "/images/p_p_wind_strong.svg"
         },
         {
@@ -9051,7 +9051,7 @@
         {
           "id": "p_new_shirt",
           "th": "เสื้อใหม่",
-          "phonetic": "sûea mǎi",
+          "phonetic": "sûea mài",
           "fr": "nouvelle chemise",
           "en": "new shirt",
           "components": [
@@ -12500,7 +12500,7 @@
         {
           "id": "p_i_pity_that_cat",
           "th": "ผมสงสารแมวตัวนั้น",
-          "phonetic": "pǒm sǒng-sǎan mɛɛo dtua nán",
+          "phonetic": "phǒm sǒng-sǎan mɛɛo dtua nán",
           "fr": "J'ai pitié de ce chat.",
           "en": "I feel sorry for that cat.",
           "components": [
