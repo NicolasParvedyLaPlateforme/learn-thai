@@ -13,6 +13,10 @@ import { LoadingScreen } from '../components/LoadingScreen';
 // Exercise Components
 import WordMatch from '../lesson/[id]/components/WordMatch';
 import SentenceBuilder from '../lesson/[id]/components/SentenceBuilder';
+import FreeTypingInput from '../lesson/[id]/components/FreeTypingInput';
+import VirtualKeyboard from '../writing/components/VirtualKeyboard';
+import QuestionArea from '../lesson/[id]/components/QuestionArea';
+import Footer from '../lesson/[id]/components/Footer';
 import { SentenceWithHints } from '../components/Hints';
 import { getEndlessReviewServer, getDictionaryForExerciseServer, getPhrasesForExerciseServer } from '../actions/course';
 
@@ -219,12 +223,51 @@ export default function ReviewPage() {
     if (!answerToCheck) return;
     
     let correct = false;
-    if (currentExercise.type === 'word-match') {
+    if (currentExercise.type === 'word-match' || currentExercise.type === 'intro') {
       correct = answerToCheck === currentExercise.answer;
     } else if (currentExercise.type === 'sentence-builder') {
       const builtSentence = (answerToCheck as string[]).join('').replace(/\s+/g, '');
       const expectedSentence = currentExercise.answer.replace(/\s+/g, '').replace(/\.\.\./g, '');
       correct = builtSentence === expectedSentence;
+    } else if (currentExercise.type === "free-typing") {
+      const a = (answerToCheck as string).replace(/\s+/g, "");
+      const b = currentExercise.answer.replace(/\s+/g, "");
+      if (a === b) {
+        correct = true;
+      } else {
+        try {
+          const matrix = Array.from({ length: a.length + 1 }, () =>
+            new Array(b.length + 1).fill(0)
+          );
+          for (let i = 0; i <= a.length; i++) matrix[i][0] = i;
+          for (let j = 0; j <= b.length; j++) matrix[0][j] = j;
+          for (let i = 1; i <= a.length; i++) {
+            for (let j = 1; j <= b.length; j++) {
+              const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+              matrix[i][j] = Math.min(
+                matrix[i - 1][j] + 1,
+                matrix[i][j - 1] + 1,
+                matrix[i - 1][j - 1] + cost
+              );
+            }
+          }
+          const similarity =
+            1 - matrix[a.length][b.length] / Math.max(a.length, b.length);
+          correct = similarity >= 0.8;
+        } catch (e) {
+          correct = false;
+        }
+      }
+    } else if (currentExercise.type === "writing") {
+      if (currentExercise.blindMode && currentExercise.correctComponents) {
+        correct =
+          (answerToCheck as string[]).join("") ===
+          currentExercise.correctComponents.join("");
+      } else {
+        correct =
+          (answerToCheck as string[]).join("").replace(/\s+/g, "") ===
+          currentExercise.answer.replace(/\s+/g, "").replace(/\.\.\./g, "");
+      }
     }
 
     setIsCorrect(correct);
@@ -232,11 +275,19 @@ export default function ReviewPage() {
     playThaiTTS(currentExercise.answer);
   };
 
-  const isAnswerComplete = currentExercise && currentExercise.type === 'sentence-builder' && currentExercise.correctComponents
-      ? Array.isArray(selectedAnswer) && selectedAnswer.length === currentExercise.correctComponents.filter(c => c !== 'w_dots').length
-      : selectedAnswer !== null && (!Array.isArray(selectedAnswer) || (selectedAnswer as any[]).length > 0);
-
-  const showFooter = isChecking || isAnswerComplete;
+  const showFooter = (() => {
+    if (!currentExercise) return false;
+    if (
+      !isChecking &&
+      (currentExercise.type === "word-match" ||
+        currentExercise.type === "sentence-builder" ||
+        currentExercise.type === "writing" ||
+        currentExercise.type === "free-typing")
+    ) {
+      return false;
+    }
+    return true;
+  })();
 
   return (
     <div className="h-[100dvh] flex flex-col bg-[#FAFAFA] font-sans text-slate-800 overflow-hidden relative">
@@ -272,124 +323,88 @@ export default function ReviewPage() {
       </header>
 
       {/* Main Exercise Area */}
-      <main className="flex-1 overflow-y-auto hide-scrollbar flex flex-col items-center py-2 sm:py-6 md:py-12 px-4 w-full">
-        {currentExercise && (
-        <div className="w-full max-w-3xl flex flex-col justify-center flex-1">
-        
-          {/* The Question / Hint System */}
-          <div className="flex items-start gap-4 md:gap-8 mb-4 md:mb-8">
-            <div className="hidden md:flex w-32 h-32 bg-indigo-100 rounded-3xl items-center justify-center text-5xl shadow-sm border border-indigo-200 relative flex-shrink-0">
-               <span className="animate-pulse">🧠</span>
-               <div className="absolute -right-2 -top-2 w-6 h-6 bg-indigo-500 border-2 border-white rounded-full"></div>
-            </div>
-            
-            <div className="flex-1 mt-2 md:mt-0">
-              <h2 className="text-2xl md:text-3xl font-extrabold text-slate-800 mb-4 md:mb-6 text-center md:text-left">
-                {currentExercise.type === 'word-match' 
-                  ? (language === 'en' ? "Select the correct translation:" : "Sélectionnez la bonne traduction")
-                  : (language === 'en' ? "Translate this sentence:" : "Traduisez cette phrase")}
-              </h2>
-              <div className="relative inline-block pb-1 w-full text-center md:text-left">
-                <SentenceWithHints 
-                  text={currentExercise.question} 
-                  dictionary={allWords} 
-                  phrases={allPhrases}
-                  isSentence={currentExercise.type === 'sentence-builder'}
-                  exerciseOptions={currentExercise.options as Word[]}
-                  hideHints={currentExercise.hideHints}
-                  disableTooltips={currentExercise.disableTooltips}
-                  hideColors={currentExercise.hideColors}
-                  alwaysShowPhonetic={currentExercise.type === 'writing'}
-                />
-              </div>
-            </div>
-          </div>
+      <main className="flex-1 flex flex-col w-full relative">
+        <AnimatePresence mode="wait">
+          {currentExercise && (
+             <motion.div
+                key={currentExercise.id}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20, transition: { duration: 0.2 } }}
+                transition={{ duration: 0.3 }}
+                className="absolute inset-0 flex flex-col items-center md:justify-center md:overflow-y-auto hide-scrollbar"
+             >
+                {/* Scrollable Upper Area */}
+                <motion.div
+                   className={`flex flex-1 md:flex-none w-full max-w-3xl overflow-y-auto md:overflow-y-visible px-4 py-4 md:py-4 flex-col justify-center hide-scrollbar`}
+                >
+                  <QuestionArea
+                    currentExercise={{
+                        ...currentExercise,
+                        hideHints: !options.showWordHints,
+                        disableTooltips: !options.showWordHints,
+                      }}
+                    lesson={{ words: allWords, phrases: allPhrases } as any}
+                    language={language}
+                    showRomanization={true}
+                    isChecking={isChecking}
+                    selectedAnswer={selectedAnswer}
+                  />
+                </motion.div>
 
-          {/* Exercise Options */}
-          <div className="mt-8">
-            {currentExercise.type === 'word-match' ? (
-              <WordMatch 
-                exercise={currentExercise} 
-                selected={selectedAnswer as string} 
-                onChange={setSelectedAnswer}
-                disabled={isChecking}
-                onAutoCheck={(val) => handleCheck(val)}
-              />
-            ) : (
-              <SentenceBuilder 
-                exercise={currentExercise}
-                selected={selectedAnswer as string[] || []}
-                onChange={setSelectedAnswer}
-                disabled={isChecking}
-                onAutoCheck={(val) => handleCheck(val)}
-              />
-            )}
-          </div>
-        </div>
-        )}
+                {/* Exercise Options (Fixed at bottom on Mobile) */}
+                <motion.div
+                   className={`flex shrink-0 md:shrink-0 bg-transparent px-4 pb-4 pt-2 md:pt-4 md:pb-8 justify-center z-10 w-full max-w-3xl`}
+                >
+                  <div className="w-full relative">
+                    {currentExercise.type === 'word-match' ? (
+                      <WordMatch 
+                        exercise={currentExercise} 
+                        selected={selectedAnswer as string} 
+                        onChange={setSelectedAnswer}
+                        disabled={isChecking}
+                        onAutoCheck={(val) => handleCheck(val)}
+                      />
+                    ) : currentExercise.type === 'sentence-builder' ? (
+                      <SentenceBuilder 
+                        exercise={currentExercise}
+                        selected={selectedAnswer as string[] || []}
+                        onChange={setSelectedAnswer}
+                        disabled={isChecking}
+                        onAutoCheck={(val) => handleCheck(val)}
+                      />
+                    ) : currentExercise.type === "free-typing" ? (
+                        <FreeTypingInput
+                          exercise={currentExercise}
+                          selected={selectedAnswer as string}
+                          onChange={setSelectedAnswer}
+                          disabled={isChecking}
+                        />
+                    ) : currentExercise.type === "writing" ? (
+                        <VirtualKeyboard
+                          exercise={currentExercise}
+                          selected={selectedAnswer as string[] || []}
+                          onChange={setSelectedAnswer}
+                          disabled={isChecking}
+                          onAutoCheck={(val) => handleCheck(val)}
+                        />
+                    ) : null}
+                  </div>
+                </motion.div>
+             </motion.div>
+          )}
+        </AnimatePresence>
       </main>
 
-      {/* Footer Actions */}
-      <>
-        <div className="shrink-0 min-h-[100px] md:min-h-[128px] w-full bg-transparent"></div>
-        {(() => {
-          if (!currentExercise) return false;
-          if (!isChecking && (currentExercise.type === "word-match" || currentExercise.type === "sentence-builder" || currentExercise.type === "writing")) {
-             return false;
-          }
-          return true;
-        })() && (
-        <AnimatePresence>
-          {showFooter && (
-            <motion.footer 
-              initial={{ y: "100%", opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: "100%", opacity: 0 }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className={`absolute bottom-0 left-0 right-0 w-full min-h-[100px] md:min-h-[128px] py-4 md:py-0 border-t-2 items-center justify-center flex transition-colors duration-300 z-50 ${isChecking ? (isCorrect ? 'bg-indigo-50 border-indigo-200' : 'bg-rose-50 border-rose-200 shadow-[0_-10px_40px_rgba(244,63,94,0.1)]') : 'bg-white border-slate-200 shadow-[0_-10px_40px_rgba(0,0,0,0.05)]'}`}
-            >
-              <div className="w-full max-w-2xl px-4 flex sm:flex-row flex-col items-center justify-between gap-4">
-              
-              <div className="flex-1 w-full text-center sm:text-left">
-                {isChecking && isCorrect && (
-                  <div className="flex items-center justify-center sm:justify-start gap-3 text-indigo-600 font-extrabold text-xl">
-                    <div className="bg-white text-indigo-500 rounded-full p-1"><Check size={24} strokeWidth={3} /></div>
-                    {language === 'en' ? 'Excellent!' : 'Excellent !'}
-                  </div>
-                )}
-                {isChecking && !isCorrect && currentExercise && (
-                  <div className="flex flex-col text-rose-600 font-extrabold text-xl gap-1 items-center sm:items-start">
-                    <div className="flex items-center gap-3">
-                      <div className="bg-white text-rose-500 rounded-full p-1"><X size={24} strokeWidth={3} /></div>
-                      {language === 'en' ? 'Incorrect.' : 'Incorrect.'}
-                    </div>
-                    <div className="text-rose-800 text-sm mt-1 uppercase tracking-widest">
-                      {language === 'en' ? 'Correct answer:' : 'Réponse correcte :'}
-                    </div>
-                    <div className="text-rose-900 font-medium font-thai text-xl md:text-2xl mt-1 sm:mt-0">{currentExercise.answer}</div>
-                  </div>
-                )}
-              </div>
-
-              <button
-                onClick={() => handleCheck()}
-                disabled={!isChecking && (!selectedAnswer || (Array.isArray(selectedAnswer) && (currentExercise?.type === 'sentence-builder' && currentExercise?.correctComponents ? selectedAnswer.length !== currentExercise.correctComponents.length : selectedAnswer.length === 0)))}
-                className={`w-full sm:w-auto px-12 py-3 rounded-xl border-b-4 font-bold text-lg shadow-lg hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest disabled:opacity-50 disabled:scale-100 disabled:shadow-none
-                  ${isChecking 
-                    ? (isCorrect 
-                      ? 'bg-indigo-500 border-indigo-700 text-white hover:bg-indigo-400' 
-                      : 'bg-rose-500 border-rose-700 text-white hover:bg-rose-400') 
-                    : 'bg-indigo-500 border-indigo-700 text-white hover:bg-indigo-400'}
-                `}
-              >
-                {isChecking ? (language === 'en' ? 'Continue' : 'Continuer') : (language === 'en' ? 'Check' : 'Vérifier')}
-              </button>
-            </div>
-          </motion.footer>
-        )}
-      </AnimatePresence>
-      )}
-      </>
+      <Footer
+        currentExercise={currentExercise!}
+        isChecking={isChecking}
+        isCorrect={isCorrect}
+        language={language}
+        selectedAnswer={selectedAnswer}
+        showFooter={showFooter}
+        handleCheck={handleCheck}
+      />
           </motion.div>
         )}
       </AnimatePresence>

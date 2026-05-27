@@ -13,6 +13,8 @@ import { LoadingScreen } from '../components/LoadingScreen';
 import PairMatch from '../components/PairMatch';
 import { getEndlessPairMatchingServer } from '../actions/course';
 
+import Footer from '../lesson/[id]/components/Footer';
+
 export default function ReviewPairsPage() {
   const router = useRouter();
   const { completedLessons, xp, completeLesson, language, setExerciseRunning } = useProgressStore();
@@ -24,6 +26,7 @@ export default function ReviewPairsPage() {
   const [isChecking, setIsChecking] = useState(false);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [showExerciseUI, setShowExerciseUI] = useState(false);
+  const [isExiting, setIsExiting] = useState(false);
 
   const [mounted, setMounted] = useState(false);
   
@@ -87,13 +90,28 @@ export default function ReviewPairsPage() {
   const handleCheck = () => {
     if (isChecking) {
       if (isCorrect) {
-          completeLesson('review-dummy', 1); // grant 1 xp
-          if (currentIndex >= exercises.length - 3) {
-            fetchMore();
-          }
+          setIsExiting(true);
+          setTimeout(() => {
+            setIsExiting(false);
+            completeLesson('review-dummy', 1); // grant 1 xp
+            if (currentIndex >= exercises.length - 3) {
+              fetchMore();
+            }
+            setCurrentIndex(prev => prev + 1);
+            setIsChecking(false);
+            setIsCorrect(null);
+          }, 150);
+      } else {
+        // If wrong, wait for user to click Continue (which calls handleCheck)
+        setIsExiting(true);
+        setTimeout(() => {
+          setIsExiting(false);
+          // put exercise at the end? Or just proceed.
+          setExercises([...exercises, currentExercise]);
           setCurrentIndex(currentIndex + 1);
           setIsChecking(false);
           setIsCorrect(null);
+        }, 150);
       }
       return;
     }
@@ -133,75 +151,64 @@ export default function ReviewPairsPage() {
       </header>
 
       {/* Main Exercise Area */}
-      <main className="flex-1 overflow-y-auto hide-scrollbar flex flex-col items-center py-2 sm:py-6 md:py-12 px-4 w-full">
-        {currentExercise && (
-        <div className="w-full max-w-3xl flex flex-col justify-center flex-1">
-          <AnimatePresence mode="wait">
-            <motion.div 
+      <main className="flex-1 flex flex-col w-full relative">
+        <AnimatePresence mode="wait">
+          {currentExercise && (
+            <motion.div
               key={currentExercise.id}
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20, transition: { duration: 0.2 } }}
               transition={{ duration: 0.3 }}
-              className="w-full"
+              className="absolute inset-0 flex flex-col items-center md:justify-center md:overflow-y-auto hide-scrollbar"
             >
-              <div className="flex items-start gap-4 md:gap-8 mb-4 md:mb-8">
-                <div className="hidden md:flex w-32 h-32 bg-fuchsia-100 rounded-3xl items-center justify-center text-5xl shadow-sm border border-fuchsia-200 relative flex-shrink-0">
-                   <span className="animate-pulse">🎴</span>
-                   <div className="absolute -right-2 -top-2 w-6 h-6 bg-fuchsia-500 border-2 border-white rounded-full"></div>
+              {/* Scrollable / Main Area */}
+              <motion.div
+                animate={{ opacity: isExiting ? 0 : 1, y: 0, scale: 1 }}
+                transition={{ duration: isExiting ? 0.15 : 0.3, delay: isExiting ? 0 : 0.1 }}
+                className={`flex flex-1 md:flex-none w-full max-w-3xl overflow-y-auto md:overflow-y-visible px-4 py-4 md:py-4 flex-col justify-center hide-scrollbar`}
+              >
+                <div className="mt-2 text-center w-full max-w-3xl flex flex-col justify-center items-center flex-1">
+                   <PairMatch 
+                     key={currentExercise.id}
+                     pairs={currentExercise.pairs as Word[]}
+                     mode={currentExercise.pairMatchMode}
+                     disabled={isChecking}
+                     onComplete={(failed?: boolean) => {
+                       if (failed) {
+                         setIsCorrect(false);
+                         setIsChecking(true);
+                       } else {
+                         setIsExiting(true);
+                         setTimeout(() => {
+                           setIsExiting(false);
+                           completeLesson('review-dummy', 1); // grant 1 xp
+                           if (currentIndex >= exercises.length - 3) {
+                             fetchMore();
+                           }
+                           setCurrentIndex(prev => prev + 1);
+                           setIsChecking(false);
+                           setIsCorrect(null);
+                         }, 150);
+                       }
+                     }}
+                   />
                 </div>
-                
-                <div className="flex-1 mt-2 md:mt-0">
-                  <h2 className="text-2xl md:text-3xl font-extrabold text-slate-800 mb-4 md:mb-6 text-center md:text-left">
-                    {currentExercise.question}
-                  </h2>
-                </div>
-              </div>
-
-              <div className="mt-2">
-                <PairMatch 
-                  key={currentExercise.id}
-                  pairs={currentExercise.pairs as Word[]}
-                  mode={currentExercise.pairMatchMode}
-                  onComplete={() => {
-                    completeLesson('review-dummy', 1); // grant 1 xp
-                    if (currentIndex >= exercises.length - 3) {
-                      fetchMore();
-                    }
-                    setCurrentIndex(prev => prev + 1);
-                    setIsChecking(false);
-                    setIsCorrect(null);
-                  }}
-                />
-              </div>
+              </motion.div>
             </motion.div>
-          </AnimatePresence>
-        </div>
-        )}
+          )}
+        </AnimatePresence>
       </main>
 
-      {/* Footer Actions */}
-      <footer className={`shrink-0 min-h-[100px] md:h-32 py-4 md:py-0 border-t-2 border-slate-200 flex flex-col justify-center transition-colors duration-300 hidden`}>
-        <div className="w-full max-w-2xl px-4 mx-auto flex sm:flex-row flex-col items-center justify-between gap-4">
-          
-          <div className="flex-1 w-full text-center sm:text-left">
-            {isChecking && isCorrect && (
-              <div className="flex items-center justify-center sm:justify-start gap-3 text-emerald-600 font-extrabold text-xl">
-                <div className="bg-white text-emerald-500 rounded-full p-1"><Check size={24} strokeWidth={3} /></div>
-                {language === 'en' ? 'Excellent!' : 'Excellent !'}
-              </div>
-            )}
-          </div>
-
-          <button
-            id="next-btn"
-            onClick={handleCheck}
-            className={`w-full sm:w-auto px-12 py-3 rounded-xl border-b-4 font-bold text-lg shadow-lg hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest disabled:opacity-50 disabled:scale-100 disabled:shadow-none bg-emerald-500 border-emerald-700 text-white hover:bg-emerald-400`}
-          >
-             {language === 'en' ? 'Continue' : 'Continuer'}
-          </button>
-        </div>
-      </footer>
+      <Footer
+        currentExercise={currentExercise!}
+        isChecking={isChecking}
+        isCorrect={isCorrect}
+        language={language}
+        selectedAnswer={null}
+        showFooter={isChecking && !isCorrect}
+        handleCheck={handleCheck}
+      />
           </motion.div>
         )}
       </AnimatePresence>

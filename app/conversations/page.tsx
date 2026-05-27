@@ -11,6 +11,8 @@ import conversationsData from '../data/conversations.json';
 import CONVERSATION_UNITS from '../data/conversation_units.json';
 import { useIsPWA } from '../../hooks/use-pwa';
 
+import { getRequiredLessonsForConv, RequiredVocabLesson } from '../lib/vocabulary-utils';
+
 const UNITS: Record<string, { en: string, fr: string, emoji: string, imageUrl?: string, description?: { en: string, fr: string } }> = CONVERSATION_UNITS;
 
 interface Conversation {
@@ -22,15 +24,17 @@ interface Conversation {
   dialogs: Array<{
     en: string;
     fr: string;
+    th: string;
   }>;
 }
 
 export default function ConversationsPage() {
   const [mounted, setMounted] = useState(false);
   const isPWA = useIsPWA();
-  const { language, xp, setLanguage, completedConversations } = useProgressStore();
+  const { language, xp, setLanguage, completedConversations, lessonLevels } = useProgressStore();
   const [selectedStoryId, setSelectedStoryId] = useState<string | null>(null);
   const [selectedConvId, setSelectedConvId] = useState<string | null>(null);
+  const [selectedPrereqConv, setSelectedPrereqConv] = useState<{conv: Conversation, missingReqs: RequiredVocabLesson[]} | null>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -200,7 +204,11 @@ export default function ConversationsPage() {
                )}
                {currentStoryConvs.map((conv, index) => {
                   const isSelected = selectedConvId === conv.id;
-                  const isLocked = index > 0 && (completedConversations[currentStoryConvs[index - 1].id] || 0) < 2;
+                  const isStoryLocked = index > 0 && (completedConversations[currentStoryConvs[index - 1].id] || 0) < 2;
+
+                  const vocabReqs = getRequiredLessonsForConv(conv.dialogs);
+                  const missingVocabReqs = vocabReqs.filter(req => (lessonLevels[req.lessonId] || 0) < 1);
+                  const isVocabLocked = missingVocabReqs.length > 0;
 
                   return (
                     <motion.button
@@ -209,11 +217,18 @@ export default function ConversationsPage() {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.4, delay: window.innerWidth < 768 ? 0 : index * 0.1, ease: "easeOut" }}
                       style={{ WebkitTransform: 'translateZ(0)', willChange: 'transform, opacity' }}
-                      onClick={() => !isLocked && setSelectedConvId(conv.id)}
-                      disabled={isLocked}
-                      className={`w-full flex items-center justify-center p-4 rounded-2xl transition-all border-2 relative overflow-hidden ${isSelected ? 'bg-orange-50 border-orange-200' : isLocked ? 'bg-slate-50 border-slate-100 cursor-not-allowed' : 'bg-white border-slate-100 hover:border-slate-200 hover:bg-slate-50'}`}
+                      onClick={() => {
+                        if (isStoryLocked) return;
+                        if (isVocabLocked) {
+                          setSelectedPrereqConv({ conv, missingReqs: missingVocabReqs });
+                        } else {
+                          setSelectedConvId(conv.id);
+                        }
+                      }}
+                      disabled={isStoryLocked}
+                      className={`w-full flex items-center justify-center p-4 rounded-2xl transition-all border-2 relative overflow-hidden ${isSelected ? 'bg-orange-50 border-orange-200' : isStoryLocked ? 'bg-slate-50 border-slate-100 cursor-not-allowed' : isVocabLocked ? 'bg-blue-50/50 border-blue-100' : 'bg-white border-slate-100 hover:border-slate-200 hover:bg-slate-50'}`}
                     >
-                       <div className={`w-full flex items-center gap-4 ${isLocked ? 'opacity-40 blur-[1px]' : ''}`}>
+                       <div className={`w-full flex items-center gap-4 ${(isStoryLocked || isVocabLocked) ? 'opacity-40 blur-[1px]' : ''}`}>
                          {/* THUMBNAIL OR ICON */}
                          {conv.imageUrl ? (
                             <div className={`w-14 h-14 rounded-xl overflow-hidden relative shrink-0 border-2 ${isSelected ? 'border-orange-300' : 'border-slate-200'}`}>
@@ -235,11 +250,20 @@ export default function ConversationsPage() {
                          </div>
                        </div>
                        
-                       {isLocked && (
+                       {isStoryLocked && (
                          <div className="absolute inset-0 flex items-center justify-center z-10 p-4">
-                            <div className="bg-slate-800/90 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-sm flex items-center gap-2 max-w-full text-center">
+                            <div className="bg-slate-800/90 text-white text-[11px] sm:text-xs font-bold px-3 py-2 rounded-xl shadow-sm flex items-center gap-2 max-w-full text-center">
                                <Lock size={16} className="shrink-0" />
                                <span className="truncate">{language === 'en' ? 'Complete Level 2 of previous conversation' : 'Terminer le Niveau 2 de la précédente conversation'}</span>
+                            </div>
+                         </div>
+                       )}
+
+                       {!isStoryLocked && isVocabLocked && (
+                         <div className="absolute inset-0 flex items-center justify-center z-10 p-4">
+                            <div className="bg-blue-600/90 text-white text-[11px] sm:text-xs font-bold px-3 py-2 rounded-xl shadow-sm flex items-center gap-2 max-w-full text-center hover:bg-blue-600 transition-colors cursor-pointer">
+                               <BookOpen size={16} className="shrink-0" />
+                               <span className="truncate">{language === 'en' ? 'Vocabulary prerequisites required' : 'Prérequis de vocabulaire manquants'}</span>
                             </div>
                          </div>
                        )}
@@ -435,6 +459,80 @@ export default function ConversationsPage() {
              </div>
          )}
       </div>
+
+      {/* PREREQUISITES MODAL */}
+      <AnimatePresence>
+        {selectedPrereqConv && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+            <motion.div 
+               initial={{ opacity: 0 }}
+               animate={{ opacity: 1 }}
+               exit={{ opacity: 0 }}
+               className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"
+               onClick={() => setSelectedPrereqConv(null)}
+            />
+            <motion.div 
+               initial={{ scale: 0.95, opacity: 0, y: 20 }}
+               animate={{ scale: 1, opacity: 1, y: 0 }}
+               exit={{ scale: 0.95, opacity: 0, y: 20 }}
+               className="bg-white rounded-3xl w-full max-w-lg shadow-2xl relative z-10 overflow-hidden flex flex-col max-h-[90vh]"
+            >
+               <div className="p-6 border-b border-slate-100 bg-slate-50 relative flex items-center shrink-0">
+                 <div className="w-12 h-12 bg-blue-100 text-blue-500 rounded-2xl flex items-center justify-center shrink-0 mr-4">
+                    <BookOpen size={24} />
+                 </div>
+                 <div className="flex-1 pr-6 text-left">
+                    <h2 className="text-xl font-extrabold text-slate-800">
+                       {language === 'en' ? 'Vocabulary Prerequisites' : 'Prérequis de vocabulaire'}
+                    </h2>
+                    <p className="text-slate-500 text-sm mt-1">
+                       {language === 'en' 
+                          ? 'You need to complete Level 1 of the following exercises to unlock this conversation.'
+                          : 'Vous devez réaliser le Niveau 1 des exercices suivants pour débloquer cette conversation.'}
+                    </p>
+                 </div>
+                 <button 
+                   onClick={() => setSelectedPrereqConv(null)}
+                   className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center text-slate-400 hover:bg-slate-200 hover:text-slate-600 rounded-full transition-colors"
+                 >
+                   <X size={20} />
+                 </button>
+               </div>
+
+               <div className="p-6 overflow-y-auto flex-1 flex flex-col gap-4 bg-slate-50/50">
+                 {selectedPrereqConv.missingReqs.map((req, idx) => (
+                    <div key={req.lessonId} className="bg-white border-2 border-slate-100 rounded-2xl p-4 shadow-sm flex flex-col text-left">
+                       <div className="flex justify-between items-start mb-3 gap-2">
+                          <h3 className="font-extrabold text-slate-700 text-lg leading-tight">
+                             {language === 'en' ? req.lessonTitleEn : req.lessonTitle}
+                          </h3>
+                          <Link 
+                             href={`/lesson/${req.lessonId}?level=1`}
+                             className="shrink-0 bg-blue-500 hover:bg-blue-600 text-white text-sm font-bold px-4 py-2 rounded-xl transition-all shadow-sm active:scale-95 flex items-center gap-1.5"
+                          >
+                             <Play size={14} className="fill-current" />
+                             {language === 'en' ? 'Play' : 'Jouer'}
+                          </Link>
+                       </div>
+                       
+                       <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">
+                          {language === 'en' ? 'Words to learn:' : 'Mots à apprendre :'}
+                       </p>
+                       <div className="flex flex-wrap gap-2">
+                          {req.matchedWords.map((mw, mwIdx) => (
+                             <div key={mwIdx} className="bg-slate-50 border border-slate-200 px-2 py-1 rounded-lg text-sm flex items-center gap-2">
+                                <span className="font-thai font-bold text-slate-700">{mw.th}</span>
+                                <span className="text-slate-400 text-xs">({language === 'en' ? mw.en : mw.fr})</span>
+                             </div>
+                          ))}
+                       </div>
+                    </div>
+                 ))}
+               </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
