@@ -477,25 +477,19 @@ export default function ConversationsPage() {
                                       : 'Vous devez réaliser le Niveau 1 des leçons suivantes pour apprendre le vocabulaire.'}
                                </div>
                                {selectedConvMissingReqs.map(req => (
-                                    <div key={req.lessonId} className="bg-white border-2 border-slate-100/60 rounded-[24px] p-5 md:p-6 shadow-[0_2px_12px_-4px_rgba(0,0,0,0.04)] transition-all hover:shadow-md hover:border-slate-200 group">
-                                       <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-5">
-                                           <h4 className="font-extrabold text-[#20304a] text-lg md:text-xl leading-tight flex-1 md:pr-4">
-                                               {language === 'en' ? req.lessonTitleEn : req.lessonTitle}
-                                           </h4>
-                                           <Link 
-                                              href={`/lesson/${req.lessonId}?level=1`} 
-                                              className="flex items-center justify-center gap-2 bg-[#2d7ef8] hover:bg-[#2067d5] active:scale-[0.98] text-white font-bold py-2.5 px-6 rounded-[14px] transition-all shrink-0 w-full md:w-auto shadow-sm"
-                                           >
-                                              <Play size={16} className="fill-current" />
-                                              {language === 'en' ? 'Play' : 'Jouer'}
-                                           </Link>
+                                    <div key={req.lessonId} className="bg-white border-2 border-slate-100/60 rounded-[24px] p-5 md:p-6 shadow-[0_2px_12px_-4px_rgba(0,0,0,0.04)] transition-all hover:shadow-md hover:border-slate-200 group relative overflow-hidden">
+                                       <div className="absolute top-0 right-0 bg-blue-50 text-blue-500 text-[10px] font-extrabold tracking-wider px-3 py-1.5 rounded-bl-xl border-l-[2px] border-b-[2px] border-blue-50/60">
+                                          VOCAB
                                        </div>
+                                       <h4 className="font-extrabold text-[#20304a] text-lg md:text-xl leading-tight mb-5 pr-12">
+                                           {language === 'en' ? req.lessonTitleEn : req.lessonTitle}
+                                       </h4>
                                        
                                        <div className="text-[11px] font-extrabold text-[#869ab8] uppercase tracking-[0.12em] mb-4">
                                            {language === 'en' ? 'Words to learn' : 'Mots à apprendre'} :
                                        </div>
                                        
-                                       <div className="flex flex-wrap gap-2.5">
+                                       <div className="flex flex-wrap gap-2.5 mb-6">
                                           {req.matchedWords.slice(0, 8).map((mw, i) => (
                                               <span key={i} className="text-[13px] text-[#4b5563] bg-white border-2 border-[#e2e8f0]/60 px-3.5 py-1.5 rounded-[12px] flex items-center gap-1.5 flex-wrap font-medium">
                                                  <span className="font-bold text-[#20304a] text-sm">{mw.th}</span> 
@@ -504,6 +498,14 @@ export default function ConversationsPage() {
                                           ))}
                                           {req.matchedWords.length > 8 && <span className="text-sm font-bold text-[#869ab8] px-2 py-1.5">...</span>}
                                        </div>
+                                       
+                                       <Link 
+                                          href={`/lesson/${req.lessonId}?level=1`} 
+                                          className="flex w-full items-center justify-center gap-2 bg-[#2d7ef8] hover:bg-[#2067d5] active:scale-[0.98] text-white font-bold py-3.5 rounded-xl transition-all shadow-sm"
+                                       >
+                                          <Play size={16} className="fill-current" />
+                                          {language === 'en' ? 'Learn words' : 'Apprendre ces mots'}
+                                       </Link>
                                     </div>
                                 ))}
                            </div>
@@ -547,11 +549,13 @@ export default function ConversationsPage() {
                                                    <div className="text-[10px] uppercase tracking-wider font-extrabold text-slate-400">
                                                        Niveau 1
                                                    </div>
-                                                   {!isLevel1Locked && highestCompleted >= 1 && (
+                                                   {!isLevel1Locked && (
                                                         <div className="flex gap-0.5 pr-2">
                                                             <Star size={14} className={starsArr[1] > 0 ? "fill-orange-400 text-orange-400" : "fill-slate-200 text-slate-200"} />
                                                             <Star size={14} className={starsArr[1] > 1 ? "fill-orange-400 text-orange-400" : "fill-slate-200 text-slate-200"} />
                                                             <Star size={14} className={starsArr[1] > 2 ? "fill-orange-400 text-orange-400" : "fill-slate-200 text-slate-200"} />
+                                                            <Star size={14} className={starsArr[1] > 3 ? "fill-orange-400 text-orange-400" : "fill-slate-200 text-slate-200"} />
+                                                            <Star size={14} className={starsArr[1] > 4 ? "fill-orange-400 text-orange-400" : "fill-slate-200 text-slate-200"} />
                                                         </div>
                                                    )}
                                                 </div>
@@ -575,11 +579,13 @@ export default function ConversationsPage() {
                                                    <div className="text-[10px] uppercase tracking-wider font-extrabold text-slate-400">
                                                        Niveau 2
                                                    </div>
-                                                   {!isLevel2Locked && highestCompleted >= 2 && (
+                                                   {!isLevel2Locked && (
                                                         <div className="flex gap-0.5 pr-2">
                                                             <Star size={14} className={starsArr[2] > 0 ? "fill-purple-400 text-purple-400" : "fill-slate-200 text-slate-200"} />
                                                             <Star size={14} className={starsArr[2] > 1 ? "fill-purple-400 text-purple-400" : "fill-slate-200 text-slate-200"} />
                                                             <Star size={14} className={starsArr[2] > 2 ? "fill-purple-400 text-purple-400" : "fill-slate-200 text-slate-200"} />
+                                                            <Star size={14} className={starsArr[2] > 3 ? "fill-purple-400 text-purple-400" : "fill-slate-200 text-slate-200"} />
+                                                            <Star size={14} className={starsArr[2] > 4 ? "fill-purple-400 text-purple-400" : "fill-slate-200 text-slate-200"} />
                                                         </div>
                                                    )}
                                                 </div>
@@ -604,11 +610,13 @@ export default function ConversationsPage() {
                                                    <div className="text-[10px] uppercase tracking-wider font-extrabold text-slate-400">
                                                        Niveau 3
                                                    </div>
-                                                   {!isLevel3Locked && highestCompleted >= 3 && (
+                                                   {!isLevel3Locked && (
                                                         <div className="flex gap-0.5 pr-2">
                                                             <Star size={14} className={starsArr[3] > 0 ? "fill-blue-400 text-blue-400" : "fill-slate-200 text-slate-200"} />
                                                             <Star size={14} className={starsArr[3] > 1 ? "fill-blue-400 text-blue-400" : "fill-slate-200 text-slate-200"} />
                                                             <Star size={14} className={starsArr[3] > 2 ? "fill-blue-400 text-blue-400" : "fill-slate-200 text-slate-200"} />
+                                                            <Star size={14} className={starsArr[3] > 3 ? "fill-blue-400 text-blue-400" : "fill-slate-200 text-slate-200"} />
+                                                            <Star size={14} className={starsArr[3] > 4 ? "fill-blue-400 text-blue-400" : "fill-slate-200 text-slate-200"} />
                                                         </div>
                                                    )}
                                                 </div>
