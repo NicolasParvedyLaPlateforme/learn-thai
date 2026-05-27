@@ -292,7 +292,8 @@ function ConversationContent() {
           if (isLevel1) completionLvl = 1;
           if (isLevel2) completionLvl = 2;
           if (isLevel3) completionLvl = 3;
-          completeConversation(conversation.id, completionLvl);
+          let earnedStars = isInteractive ? stars : 3;
+          completeConversation(conversation.id, completionLvl, earnedStars);
         }
       }
     };

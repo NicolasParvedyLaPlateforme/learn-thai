@@ -77,8 +77,9 @@ interface ProgressState {
   setHasSeenCommunityModal: (seen: boolean) => void;
   showCommunityModal: boolean;
   setShowCommunityModal: (show: boolean) => void;
+  conversationStars: Record<string, number[]>;
   completedConversations: Record<string, number>;
-  completeConversation: (convId: string, level: number) => void;
+  completeConversation: (convId: string, level: number, stars?: number) => void;
 }
 
 export const useProgressStore = create<ProgressState>()(
@@ -90,6 +91,7 @@ export const useProgressStore = create<ProgressState>()(
       languageSetByUser: false,
       completedLessons: [],
       completedConversations: {},
+      conversationStars: {},
       unlockedLessons: [],
       lessonLevels: {},
       lessonStars: {},
@@ -127,17 +129,32 @@ export const useProgressStore = create<ProgressState>()(
       })),
       setWritingConfig: (config) => set((state) => ({ writingConfig: { ...state.writingConfig, ...config } })),
 
-      completeConversation: (convId, level) => set((state) => {
+      completeConversation: (convId, level, stars = 3) => set((state) => {
         const currentLevel = state.completedConversations[convId] ?? -1;
+        const currentStars = state.conversationStars[convId] ? [...state.conversationStars[convId]] : [0, 0, 0, 0];
+        
+        if (level >= 0 && level <= 3) {
+            currentStars[level] = Math.max(currentStars[level], stars);
+        }
+
         if (level > currentLevel) {
           return {
             completedConversations: {
               ...state.completedConversations,
               [convId]: level
+            },
+            conversationStars: {
+              ...state.conversationStars,
+              [convId]: currentStars
             }
           };
         }
-        return state;
+        return {
+            conversationStars: {
+              ...state.conversationStars,
+              [convId]: currentStars
+            }
+        };
       }),
 
       setLanguage: (lang) => set({ language: lang, languageSetByUser: true }),

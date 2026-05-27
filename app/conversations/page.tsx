@@ -32,7 +32,7 @@ interface Conversation {
 export default function ConversationsPage() {
   const [mounted, setMounted] = useState(false);
   const isPWA = useIsPWA();
-  const { language, xp, setLanguage, completedConversations, lessonLevels } = useProgressStore();
+  const { language, xp, setLanguage, completedConversations, conversationStars, lessonLevels } = useProgressStore();
   const [selectedStoryId, setSelectedStoryId] = useState<string | null>(null);
   const [selectedConvId, setSelectedConvId] = useState<string | null>(null);
   const [selectedPrereqConv, setSelectedPrereqConv] = useState<{conv: Conversation, missingReqs: RequiredVocabLesson[]} | null>(null);
@@ -68,7 +68,7 @@ export default function ConversationsPage() {
       const convs = groupedConvs[selectedStoryId] || [];
       const idx = convs.findIndex(c => c.id === selectedConv.id);
       if (idx > 0) {
-        isSelectedConvStoryLocked = (completedConversations[convs[idx - 1].id] || 0) < 2;
+        isSelectedConvStoryLocked = (completedConversations[convs[idx - 1].id] ?? -1) < 3;
       }
     }
     const reqs = getRequiredLessonsForConv(selectedConv.dialogs);
@@ -230,11 +230,11 @@ export default function ConversationsPage() {
                                       <span>{language === 'en' ? 'Story progression' : 'Progression de l\'histoire'}</span>
                                       <span className="text-emerald-500 text-sm">
                                          {/* Simple count of completed convs out of total */}
-                                         {currentStoryConvs.filter(c => (completedConversations[c.id] || 0) >= 0).length}/{currentStoryConvs.length} {language === 'en' ? 'chapters' : 'chapitres'}
+                                         {currentStoryConvs.filter(c => (completedConversations[c.id] ?? -1) >= 3).length}/{currentStoryConvs.length} {language === 'en' ? 'chapters' : 'chapitres'}
                                       </span>
                                   </div>
                                   <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
-                                      <div className="h-full bg-emerald-400 rounded-full transition-all duration-1000" style={{width: `${(currentStoryConvs.filter(c => (completedConversations[c.id] || 0) >= 0).length/currentStoryConvs.length)*100}%`}}></div>
+                                      <div className="h-full bg-emerald-400 rounded-full transition-all duration-1000" style={{width: `${(currentStoryConvs.filter(c => (completedConversations[c.id] ?? -1) >= 3).length/currentStoryConvs.length)*100}%`}}></div>
                                   </div>
                               </div>
                           </div>
@@ -249,13 +249,13 @@ export default function ConversationsPage() {
                      <div className="flex flex-col gap-4 md:gap-6 relative z-10 w-full max-w-4xl mx-auto pb-8">
                          {currentStoryConvs.map((conv, index) => {
                              const isSelected = selectedConvId === conv.id;
-                             const isStoryLocked = index > 0 && (completedConversations[currentStoryConvs[index - 1].id] || 0) < 2;
+                             const isStoryLocked = index > 0 && (completedConversations[currentStoryConvs[index - 1].id] ?? -1) < 3;
                              const vocabReqs = getRequiredLessonsForConv(conv.dialogs);
                              const missingVocabReqs = vocabReqs.filter(req => (lessonLevels[req.lessonId] || 0) < 1);
                              const isVocabLocked = missingVocabReqs.length > 0;
                              
                              const highestCompleted = completedConversations[conv.id] ?? -1;
-                             const isCompleted = highestCompleted >= 2;
+                             const isCompleted = highestCompleted >= 3;
 
                              return (
                                <div key={conv.id} className="flex gap-4 md:gap-6 items-stretch md:items-center">
@@ -340,7 +340,7 @@ export default function ConversationsPage() {
                                                 {/* Internal Progress */}
                                                 <div className="ml-auto flex items-center gap-1">
                                                    {[0, 1, 2, 3].map(l => (
-                                                      <div key={l} className={`w-5 md:w-6 h-1.5 rounded-full ${highestCompleted >= (l-1) ? 'bg-emerald-400' : 'bg-slate-200'}`}></div>
+                                                      <div key={l} className={`w-5 md:w-6 h-1.5 rounded-full ${highestCompleted >= l ? 'bg-emerald-400' : 'bg-slate-200'}`}></div>
                                                    ))}
                                                 </div>
                                             </div>
@@ -477,28 +477,41 @@ export default function ConversationsPage() {
                                       : 'Vous devez réaliser le Niveau 1 des leçons suivantes pour apprendre le vocabulaire.'}
                                </div>
                                {selectedConvMissingReqs.map(req => (
-                                    <div key={req.lessonId} className="bg-white border-2 border-blue-100 rounded-3xl p-5 shadow-sm relative overflow-hidden group hover:border-blue-300 transition-colors">
-                                       <div className="absolute top-0 right-0 bg-blue-50 text-blue-500 text-[10px] font-extrabold tracking-wider px-3 py-1.5 rounded-bl-xl border-l-[2px] border-b-[2px] border-blue-100">
-                                          VOCAB
+                                    <div key={req.lessonId} className="bg-white border-2 border-slate-100/60 rounded-[24px] p-5 md:p-6 shadow-[0_2px_12px_-4px_rgba(0,0,0,0.04)] transition-all hover:shadow-md hover:border-slate-200 group">
+                                       <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-5">
+                                           <h4 className="font-extrabold text-[#20304a] text-lg md:text-xl leading-tight flex-1 md:pr-4">
+                                               {language === 'en' ? req.lessonTitleEn : req.lessonTitle}
+                                           </h4>
+                                           <Link 
+                                              href={`/lesson/${req.lessonId}?level=1`} 
+                                              className="flex items-center justify-center gap-2 bg-[#2d7ef8] hover:bg-[#2067d5] active:scale-[0.98] text-white font-bold py-2.5 px-6 rounded-[14px] transition-all shrink-0 w-full md:w-auto shadow-sm"
+                                           >
+                                              <Play size={16} className="fill-current" />
+                                              {language === 'en' ? 'Play' : 'Jouer'}
+                                           </Link>
                                        </div>
-                                       <h4 className="font-extrabold text-slate-800 text-base mb-3 pr-12">{language==='en'?req.lessonTitleEn:req.lessonTitle}</h4>
-                                       <div className="flex flex-wrap gap-2 mb-5">
-                                          {req.matchedWords.map((mw, i) => (
-                                              <span key={i} className="text-xs font-bold text-slate-600 bg-slate-50 border border-slate-100 px-2.5 py-1 rounded-lg">{mw.th}</span>
+                                       
+                                       <div className="text-[11px] font-extrabold text-[#869ab8] uppercase tracking-[0.12em] mb-4">
+                                           {language === 'en' ? 'Words to learn' : 'Mots à apprendre'} :
+                                       </div>
+                                       
+                                       <div className="flex flex-wrap gap-2.5">
+                                          {req.matchedWords.slice(0, 8).map((mw, i) => (
+                                              <span key={i} className="text-[13px] text-[#4b5563] bg-white border-2 border-[#e2e8f0]/60 px-3.5 py-1.5 rounded-[12px] flex items-center gap-1.5 flex-wrap font-medium">
+                                                 <span className="font-bold text-[#20304a] text-sm">{mw.th}</span> 
+                                                 <span className="text-[#869ab8]">({language === 'en' ? mw.en : mw.fr})</span>
+                                              </span>
                                           ))}
-                                          {req.matchedWords.length > 5 && <span className="text-xs font-bold text-slate-400 px-1 py-1">...</span>}
+                                          {req.matchedWords.length > 8 && <span className="text-sm font-bold text-[#869ab8] px-2 py-1.5">...</span>}
                                        </div>
-                                       <Link href={`/lesson/${req.lessonId}?level=1`} className="flex w-full items-center justify-center gap-2 bg-blue-500 hover:bg-blue-600 active:scale-[0.98] text-white font-bold py-3.5 rounded-xl transition-all shadow-sm">
-                                          <Play size={16} className="fill-current" />
-                                          {language === 'en' ? 'Learn words' : 'Apprendre ces mots'}
-                                       </Link>
                                     </div>
-                               ))}
+                                ))}
                            </div>
                        ) : (
                            <div className="flex flex-col gap-3 pb-8">
                                {(() => {
                                   const highestCompleted = completedConversations[selectedConv.id] ?? -1;
+                                  const starsArr = conversationStars[selectedConv.id] || [0,0,0,0];
                                   const isLevel1Locked = highestCompleted < 0;
                                   const isLevel2Locked = highestCompleted < 1;
                                   const isLevel3Locked = highestCompleted < 2;
@@ -530,8 +543,17 @@ export default function ConversationsPage() {
                                                 {isLevel1Locked ? <Lock size={20} /> : <Star size={24} className="fill-current" />}
                                             </div>
                                             <div className="flex-1">
-                                                <div className="text-[10px] uppercase tracking-wider font-extrabold mb-0.5 text-slate-400">
-                                                    Niveau 1
+                                                <div className="flex items-center justify-between mb-0.5">
+                                                   <div className="text-[10px] uppercase tracking-wider font-extrabold text-slate-400">
+                                                       Niveau 1
+                                                   </div>
+                                                   {!isLevel1Locked && highestCompleted >= 1 && (
+                                                        <div className="flex gap-0.5 pr-2">
+                                                            <Star size={14} className={starsArr[1] > 0 ? "fill-orange-400 text-orange-400" : "fill-slate-200 text-slate-200"} />
+                                                            <Star size={14} className={starsArr[1] > 1 ? "fill-orange-400 text-orange-400" : "fill-slate-200 text-slate-200"} />
+                                                            <Star size={14} className={starsArr[1] > 2 ? "fill-orange-400 text-orange-400" : "fill-slate-200 text-slate-200"} />
+                                                        </div>
+                                                   )}
                                                 </div>
                                                 <div className={`font-extrabold text-base transition-colors ${isLevel1Locked ? 'text-slate-600' : 'text-slate-800 group-hover:text-orange-700'}`}>
                                                     {language === 'en' ? 'Fill in the blanks' : 'Remplir la conversation'}
@@ -549,8 +571,17 @@ export default function ConversationsPage() {
                                                 {isLevel2Locked ? <Lock size={20} /> : <Star size={24} className="fill-current" />}
                                             </div>
                                             <div className="flex-1">
-                                                <div className="text-[10px] uppercase tracking-wider font-extrabold mb-0.5 text-slate-400">
-                                                    Niveau 2
+                                                <div className="flex items-center justify-between mb-0.5">
+                                                   <div className="text-[10px] uppercase tracking-wider font-extrabold text-slate-400">
+                                                       Niveau 2
+                                                   </div>
+                                                   {!isLevel2Locked && highestCompleted >= 2 && (
+                                                        <div className="flex gap-0.5 pr-2">
+                                                            <Star size={14} className={starsArr[2] > 0 ? "fill-purple-400 text-purple-400" : "fill-slate-200 text-slate-200"} />
+                                                            <Star size={14} className={starsArr[2] > 1 ? "fill-purple-400 text-purple-400" : "fill-slate-200 text-slate-200"} />
+                                                            <Star size={14} className={starsArr[2] > 2 ? "fill-purple-400 text-purple-400" : "fill-slate-200 text-slate-200"} />
+                                                        </div>
+                                                   )}
                                                 </div>
                                                 <div className={`font-extrabold text-base transition-colors ${isLevel2Locked ? 'text-slate-600' : 'text-slate-800 group-hover:text-purple-700'}`}>
                                                     {language === 'en' ? 'Fill in the word' : 'Remplir le mot'}
@@ -569,8 +600,17 @@ export default function ConversationsPage() {
                                                 {isLevel3Locked ? <Lock size={20} /> : <Star size={24} className="fill-current" />}
                                             </div>
                                             <div className="flex-1">
-                                                <div className="text-[10px] uppercase tracking-wider font-extrabold mb-0.5 text-slate-400">
-                                                    Niveau 3
+                                                <div className="flex items-center justify-between mb-0.5">
+                                                   <div className="text-[10px] uppercase tracking-wider font-extrabold text-slate-400">
+                                                       Niveau 3
+                                                   </div>
+                                                   {!isLevel3Locked && highestCompleted >= 3 && (
+                                                        <div className="flex gap-0.5 pr-2">
+                                                            <Star size={14} className={starsArr[3] > 0 ? "fill-blue-400 text-blue-400" : "fill-slate-200 text-slate-200"} />
+                                                            <Star size={14} className={starsArr[3] > 1 ? "fill-blue-400 text-blue-400" : "fill-slate-200 text-slate-200"} />
+                                                            <Star size={14} className={starsArr[3] > 2 ? "fill-blue-400 text-blue-400" : "fill-slate-200 text-slate-200"} />
+                                                        </div>
+                                                   )}
                                                 </div>
                                                 <div className={`font-extrabold text-base transition-colors ${isLevel3Locked ? 'text-slate-600' : 'text-slate-800 group-hover:text-blue-700'}`}>
                                                     {language === 'en' ? 'Choose the phrase' : 'Choisir la phrase'}
