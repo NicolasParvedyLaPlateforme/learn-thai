@@ -243,9 +243,6 @@ export default function ConversationsPage() {
 
                 {/* Chapters list (vertical timeline style) */}
                 <div className="flex-1 p-4 md:p-8 relative min-h-0">
-                     {/* Vertical connecting line */}
-                     <div className="absolute left-[39px] md:left-[67px] top-10 bottom-10 w-[2px] bg-slate-100 hidden md:block"></div>
-
                      <div className="flex flex-col gap-4 md:gap-6 relative z-10 w-full max-w-4xl mx-auto pb-8">
                          {currentStoryConvs.map((conv, index) => {
                              const isSelected = selectedConvId === conv.id;
@@ -258,14 +255,23 @@ export default function ConversationsPage() {
                              const isCompleted = highestCompleted >= 3;
 
                              return (
-                               <div key={conv.id} className="flex gap-4 md:gap-6 items-stretch md:items-center">
+                               <div key={conv.id} className="flex gap-4 md:gap-6 items-stretch relative">
+                                   {/* Vertical timeline line segments */}
+                                   {index < currentStoryConvs.length - 1 && (
+                                        <div className="absolute left-5 top-12 bottom-[-1.5rem] md:bottom-[-2rem] w-1 hidden md:flex flex-col gap-1.5 -ml-[1.5px] py-1 z-0">
+                                            <div className={`w-full flex-1 rounded-full ${highestCompleted >= 0 ? 'bg-emerald-400' : 'bg-slate-200'}`}></div>
+                                            <div className={`w-full flex-1 rounded-full ${highestCompleted >= 1 ? 'bg-emerald-400' : 'bg-slate-200'}`}></div>
+                                            <div className={`w-full flex-1 rounded-full ${highestCompleted >= 2 ? 'bg-emerald-400' : 'bg-slate-200'}`}></div>
+                                            <div className={`w-full flex-1 rounded-full ${highestCompleted >= 3 ? 'bg-emerald-400' : 'bg-slate-200'}`}></div>
+                                        </div>
+                                   )}
                                    {/* Timeline circle */}
-                                   <div className="hidden md:flex flex-col items-center justify-center shrink-0 w-10">
-                                       <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-base z-10 transition-colors shadow-sm
-                                           ${isSelected ? 'bg-orange-100 text-orange-600 ring-4 ring-orange-50' : 
-                                             isCompleted ? 'bg-emerald-500 text-white' : 
+                                   <div className="hidden md:flex flex-col items-center shrink-0 w-10 mt-6 relative z-10">
+                                       <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-base z-10 transition-colors shadow-[0_0_15px_-3px_rgba(0,0,0,0.1)]
+                                           ${isSelected ? 'bg-emerald-100 text-emerald-600 ring-4 ring-emerald-50' : 
+                                             isCompleted ? 'bg-emerald-500 text-white ring-4 ring-emerald-50' : 
                                              isStoryLocked ? 'bg-slate-100 text-slate-400' :
-                                             'bg-white border-2 border-slate-200 text-slate-500' 
+                                             'bg-orange-100 text-orange-600 ring-4 ring-orange-50' 
                                            }`}>
                                             {isCompleted ? <Check size={20} strokeWidth={3} /> :
                                              isStoryLocked ? <Lock size={16} /> :
