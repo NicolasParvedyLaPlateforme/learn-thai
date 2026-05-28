@@ -210,18 +210,56 @@ export default function ConversationsPage() {
                           <span className="text-slate-700">{language === 'en' ? selectedStory.en : selectedStory.fr}</span>
                      </div>
 
-                     <div className="flex flex-col md:flex-row gap-6 items-start">
+                     {/* Mobile Header Hero Layout */}
+                     <div className="md:hidden flex flex-col gap-4">
+                         <div className="relative w-full aspect-[4/3] sm:aspect-[16/9] rounded-3xl overflow-hidden shadow-lg border border-slate-200">
+                              {selectedStory.imageUrl ? (
+                                  <>
+                                      <Image src={selectedStory.imageUrl} alt="" fill className="object-cover" />
+                                      <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent" />
+                                  </>
+                              ) : (
+                                  <div className="absolute inset-0 bg-emerald-100 flex items-center justify-center">
+                                      <BookOpen size={64} className="text-emerald-500 opacity-50" />
+                                  </div>
+                              )}
+                              
+                              <div className="absolute inset-x-0 bottom-0 p-5 flex flex-col gap-2">
+                                  {selectedStory.imageUrl && <div className="text-3xl drop-shadow-md mb-1">{selectedStory.emoji}</div>}
+                                  <h1 className={`text-2xl font-extrabold leading-tight ${selectedStory.imageUrl ? 'text-white' : 'text-slate-800'}`}>
+                                       {language === 'en' ? selectedStory.en : selectedStory.fr}
+                                  </h1>
+                                  <p className={`text-sm leading-relaxed line-clamp-3 ${selectedStory.imageUrl ? 'text-slate-200' : 'text-slate-600'}`}>
+                                       {language === 'en' && selectedStory.description ? selectedStory.description.en : selectedStory.description?.fr}
+                                  </p>
+                              </div>
+                         </div>
+                         <div className="w-full pl-1 pr-1">
+                              <div className="flex justify-between items-end text-xs font-bold text-slate-500 mb-2">
+                                  <span>{language === 'en' ? 'Story progression' : 'Progression de l\'histoire'}</span>
+                                  <span className="text-emerald-500 text-sm">
+                                     {currentStoryConvs.filter(c => (completedConversations[c.id] ?? -1) >= 3).length}/{currentStoryConvs.length} {language === 'en' ? 'chapters' : 'chapitres'}
+                                  </span>
+                              </div>
+                              <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
+                                  <div className="h-full bg-emerald-400 rounded-full transition-all duration-1000" style={{width: `${(currentStoryConvs.filter(c => (completedConversations[c.id] ?? -1) >= 3).length/currentStoryConvs.length)*100}%`}}></div>
+                              </div>
+                         </div>
+                     </div>
+
+                     {/* Desktop Header Layout */}
+                     <div className="hidden md:flex flex-row gap-6 items-start">
                           {selectedStory.imageUrl && (
-                              <div className="w-full md:w-56 h-40 md:h-36 rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition-shadow relative shrink-0 order-2 md:order-1">
+                              <div className="w-56 h-36 rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition-shadow relative shrink-0">
                                   <Image src={selectedStory.imageUrl} alt="" fill className="object-cover" />
                                   <div className="absolute bottom-3 left-3 text-3xl drop-shadow-md">{selectedStory.emoji}</div>
                               </div>
                           )}
-                          <div className="flex-1 flex flex-col order-1 md:order-2 w-full">
-                              <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 mb-2 md:mb-3">
+                          <div className="flex-1 flex flex-col w-full min-h-[9rem]">
+                              <h1 className="text-3xl font-extrabold text-slate-900 mb-3">
                                    {language === 'en' ? selectedStory.en : selectedStory.fr}
                               </h1>
-                              <p className="text-slate-500 text-sm md:text-base leading-relaxed mb-4 md:mb-6 md:line-clamp-3">
+                              <p className="text-slate-500 text-base leading-relaxed mb-6 line-clamp-3">
                                    {language === 'en' && selectedStory.description ? selectedStory.description.en : selectedStory.description?.fr}
                               </p>
                               
@@ -229,7 +267,6 @@ export default function ConversationsPage() {
                                   <div className="flex justify-between items-end text-xs font-bold text-slate-500 mb-2">
                                       <span>{language === 'en' ? 'Story progression' : 'Progression de l\'histoire'}</span>
                                       <span className="text-emerald-500 text-sm">
-                                         {/* Simple count of completed convs out of total */}
                                          {currentStoryConvs.filter(c => (completedConversations[c.id] ?? -1) >= 3).length}/{currentStoryConvs.length} {language === 'en' ? 'chapters' : 'chapitres'}
                                       </span>
                                   </div>

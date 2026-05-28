@@ -523,33 +523,44 @@ function ConversationContent() {
       </motion.header>
 
       <main className="max-w-xl mx-auto px-4 mt-24 flex flex-col gap-6">
-        <div className="text-center mb-4 transition-all duration-300">
-            <h1 className="text-2xl font-black text-slate-800">
-                {language === 'en' && conversation.titleEn ? conversation.titleEn : conversation.title}
-            </h1>
-        </div>
+        {hasStarted && (
+          <div className="text-center mb-0 transition-all duration-300">
+              <h1 className="text-2xl font-black text-slate-800">
+                  {language === 'en' && conversation.titleEn ? conversation.titleEn : conversation.title}
+              </h1>
+          </div>
+        )}
 
         {!hasStarted ? (
-          <div className="flex flex-col items-center justify-center mt-8 gap-6 bg-white p-6 sm:p-8 rounded-3xl border-2 border-slate-200 shadow-sm">
-            {conversation.imageUrl ? (
-              <div className="relative w-full aspect-video md:aspect-[21/9] rounded-2xl overflow-hidden shadow-sm border border-slate-100">
-                <Image src={conversation.imageUrl} alt={conversation.title} fill className="object-cover" sizes="(max-width: 768px) 100vw, 36rem" priority />
+          <div className="flex flex-col items-center justify-center gap-6 w-full">
+            <div className="relative w-full aspect-[4/5] sm:aspect-video rounded-3xl overflow-hidden shadow-lg border border-slate-200">
+              {conversation.imageUrl ? (
+                <>
+                  <Image src={conversation.imageUrl} alt={conversation.title} fill className="object-cover" sizes="(max-width: 768px) 100vw, 36rem" priority />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent" />
+                </>
+              ) : (
+                <div className="absolute inset-0 bg-orange-100 flex items-center justify-center">
+                  <MessageCircle size={64} className="text-orange-500 opacity-50" />
+                </div>
+              )}
+              
+              <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8 flex flex-col gap-3">
+                <h1 className={`text-3xl sm:text-4xl font-black leading-tight ${conversation.imageUrl ? 'text-white' : 'text-slate-800'}`}>
+                    {language === 'en' && conversation.titleEn ? conversation.titleEn : conversation.title}
+                </h1>
+                <p className={`font-medium sm:text-lg leading-relaxed ${conversation.imageUrl ? 'text-slate-200' : 'text-slate-600'}`}>
+                  {isLevel1 
+                    ? (language === 'en' ? 'Complete the conversation by choosing the right responses.' : 'Complétez la conversation en choisissant les bonnes réponses.')
+                    : isLevel2
+                      ? (language === 'en' ? 'Complete the sentences by choosing the correct missing word.' : 'Complétez les phrases en choisissant le bon mot manquant.')
+                      : isLevel3
+                        ? (language === 'en' ? 'Complete the sentences by choosing the correct phrase.' : 'Complétez les phrases en choisissant la bonne phrase.')
+                        : (language === 'en' ? 'Listen to the conversation to understand the context.' : 'Écoutez la conversation pour comprendre le contexte.')
+                  }
+                </p>
               </div>
-            ) : (
-              <div className="bg-orange-100 text-orange-500 p-6 rounded-full">
-                <MessageCircle size={48} />
-              </div>
-            )}
-            <p className="text-center text-slate-600 font-medium">
-              {isLevel1 
-                ? (language === 'en' ? 'Complete the conversation by choosing the right responses.' : 'Complétez la conversation en choisissant les bonnes réponses.')
-                : isLevel2
-                  ? (language === 'en' ? 'Complete the sentences by choosing the correct missing word.' : 'Complétez les phrases en choisissant le bon mot manquant.')
-                  : isLevel3
-                    ? (language === 'en' ? 'Complete the sentences by choosing the correct phrase.' : 'Complétez les phrases en choisissant la bonne phrase.')
-                    : (language === 'en' ? 'Listen to the conversation to understand the context.' : 'Écoutez la conversation pour comprendre le contexte.')
-              }
-            </p>
+            </div>
             <button 
               onClick={startInteraction}
               className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-8 rounded-2xl w-full border-b-4 border-orange-700 active:border-b-0 active:translate-y-1 transition-all flex items-center justify-center gap-2 text-lg"
