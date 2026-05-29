@@ -1,9 +1,10 @@
-import React, { useRef } from 'react';
-import { BookOpen, CheckCircle, Clock, Lock, Pencil, Play, RotateCcw, Star, Volume2, X, Users } from 'lucide-react';
+import React, { useRef, useState } from 'react';
+import { BookOpen, CheckCircle, Clock, Lock, Pencil, Play, RotateCcw, Star, Volume2, X, Users, Target, ChevronLeft, Flag } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { playThaiTTS } from '../lib/tts';
 import { motion, AnimatePresence } from 'motion/react';
+import { DailyQuestsWidget } from './DailyQuestsWidget';
 
 interface Unit {
   id: string;
@@ -54,6 +55,7 @@ export function DesktopSidebarRight({
   lessonStars,
   resetLessonLevel
 }: DesktopSidebarRightProps) {
+  const [showUnitsList, setShowUnitsList] = useState(false);
   const dragRef = useRef({ isDragging: false, startX: 0, scrollLeft: 0 });
   const levelsScrollRef = useRef<HTMLDivElement>(null);
 
@@ -231,6 +233,43 @@ export function DesktopSidebarRight({
       );
     }
 
+    if (!showUnitsList) {
+      return (
+        <motion.div
+           key="dashboard-view"
+           initial={{ opacity: 0, x: -20 }}
+           animate={{ opacity: 1, x: 0 }}
+           exit={{ opacity: 0, x: 20 }}
+           transition={{ duration: 0.2, ease: "easeOut" }}
+           className="w-full h-full relative px-6 overflow-y-auto hide-scrollbar pt-6 pb-16 flex flex-col gap-6"
+        >
+           <button 
+             onClick={() => setShowUnitsList(true)}
+             className="w-full flex items-center justify-between p-4 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-2xl transition-colors group"
+           >
+             <div className="flex items-center gap-3">
+               <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center shadow-sm">
+                 <BookOpen size={20} className="text-slate-400 group-hover:text-slate-600 transition-colors" />
+               </div>
+               <div className="flex flex-col text-left">
+                 <span className="font-bold text-slate-800 tracking-tight">
+                   {language === 'en' ? 'Course Units' : 'Unités du Cours'}
+                 </span>
+                 <span className="text-xs text-slate-500 font-medium">
+                   {language === 'en' ? 'Change or view units' : 'Changer ou voir les unités'}
+                 </span>
+               </div>
+             </div>
+             <ChevronLeft size={20} className="text-slate-400 group-hover:text-slate-600 rotate-180 transition-transform group-hover:translate-x-1" />
+           </button>
+
+           <div className="w-full">
+             <DailyQuestsWidget />
+           </div>
+        </motion.div>
+      );
+    }
+
     return (
       <motion.div
         key="units-view"
@@ -241,11 +280,19 @@ export function DesktopSidebarRight({
         className="w-full h-full relative px-6 overflow-y-auto hide-scrollbar pt-6 pb-16"
       >
         <div className="w-full relative flex flex-col gap-4 group">
-          <div className="flex items-center gap-3 mb-2 text-slate-800 font-bold px-1 shrink-0">
-            <BookOpen size={20} className="text-slate-400 shrink-0" />
-            <h2 className="whitespace-nowrap text-lg text-slate-600">
-              {language === 'en' ? 'Units' : 'Unités'}
-            </h2>
+          <div className="flex items-center justify-between gap-3 mb-2 px-1 shrink-0">
+            <div className="flex items-center gap-3 text-slate-800 font-bold">
+              <BookOpen size={20} className="text-slate-400 shrink-0" />
+              <h2 className="whitespace-nowrap text-lg text-slate-600">
+                {language === 'en' ? 'Units' : 'Unités'}
+              </h2>
+            </div>
+            <button 
+              onClick={() => setShowUnitsList(false)}
+              className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-slate-200 transition-colors"
+            >
+              <X size={18} />
+            </button>
           </div>
           <div className="flex flex-col gap-3 pb-6 w-full">
             {units.map((u, i) => {

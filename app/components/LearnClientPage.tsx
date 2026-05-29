@@ -7,13 +7,14 @@ import { useRouter } from 'next/navigation';
 import { createPortal } from 'react-dom';
 import { useProgressStore } from '../lib/store';
 import { playThaiTTS } from '../lib/tts';
-import { BookOpen, CheckCircle, Star, Play, Crown, RotateCcw, Pencil, X, Unlock, Brain, MessageCircle, Lock, ChevronLeft, ChevronRight, Clock, Volume2, Heart, Users } from 'lucide-react';
+import { BookOpen, CheckCircle, Star, Play, Crown, RotateCcw, Pencil, X, Unlock, Brain, MessageCircle, Lock, ChevronLeft, ChevronRight, Clock, Volume2, Heart, Users, Flame, Target } from 'lucide-react';
 import { Lesson } from '../types';
 import Image from 'next/image';
 
 import { WritingConfigModal } from '../components/WritingConfigModal';
 import { DesktopSidebarRight } from '../components/DesktopSidebarRight';
 import PWAInstallButton from '../components/PWAInstallButton';
+import { DailyQuestsWidget } from '../components/DailyQuestsWidget';
 import BASE_UNITS from '../data/units.json';
 
 import { useGlobalSuggestedLesson } from '../lib/useGlobalSuggestedLesson';
@@ -55,11 +56,12 @@ export default function LearnClientPage({ lightweightLessons }: { lightweightLes
   }, [lightweightLessons]);
 
   const router = useRouter();
-  const { completedLessons, unlockedLessons, lessonLevels, lessonStars, xp, resetLessonLevel, language, setLanguage, unlockLessonManual, autoDetectLanguage, lastActiveUnitIndex, setLastActiveUnitIndex } = useProgressStore();
+  const { completedLessons, unlockedLessons, lessonLevels, lessonStars, xp, currentStreak, dailyQuests, resetLessonLevel, language, setLanguage, unlockLessonManual, autoDetectLanguage, lastActiveUnitIndex, setLastActiveUnitIndex } = useProgressStore();
   const [mounted, setMounted] = useState(false);
   const isPWA = useIsPWA();
   const [isWritingConfigModalOpen, setWritingConfigModalOpen] = useState(false);
   const [isPracticeModalOpen, setPracticeModalOpen] = useState(false);
+  const [isQuestsModalOpen, setIsQuestsModalOpen] = useState(false);
   const levelsScrollRef = useRef<HTMLDivElement>(null);
   const [selectedLesson, setSelectedLesson] = useState<{lesson: any, isCompleted: boolean, unitColor: string, unitBorder: string} | null>(null);
   const [modalLevel, setModalLevel] = useState(0);
@@ -74,6 +76,7 @@ export default function LearnClientPage({ lightweightLessons }: { lightweightLes
     const timer = setTimeout(() => {
       setMounted(true);
       autoDetectLanguage();
+      useProgressStore.getState().checkAndGenerateQuests();
     }, 0);
     return () => clearTimeout(timer);
   }, [autoDetectLanguage]);
@@ -180,10 +183,22 @@ export default function LearnClientPage({ lightweightLessons }: { lightweightLes
               </button>
             )}
             
-            {(mounted && isPWA) && (
-              <div className="flex items-center gap-1.5 px-3 py-1.5 bg-amber-50 text-amber-600 rounded-xl font-extrabold text-sm">
-                <Star size={18} className="fill-amber-400 stroke-amber-400" />
-                <span>{xp} XP</span>
+            {mounted && (
+              <div className="flex items-center gap-1.5">
+                <div className="hidden md:flex items-center gap-1 px-2 py-1.5 bg-amber-50 text-amber-600 rounded-xl font-extrabold text-sm">
+                  <Star size={16} className="fill-amber-400 stroke-amber-400" />
+                  <span>{xp}</span>
+                </div>
+                <div className="hidden md:flex items-center gap-1 px-2 py-1.5 bg-orange-50 text-orange-500 rounded-xl font-extrabold text-sm">
+                  <Flame size={16} fill="currentColor" className={`${currentStreak > 0 ? '' : 'text-slate-400 opacity-50'}`} />
+                  <span className={`${currentStreak > 0 ? '' : 'text-slate-400 opacity-50'}`}>{currentStreak}</span>
+                </div>
+                <button 
+                  onClick={() => setIsQuestsModalOpen(true)}
+                  className="xl:hidden flex items-center justify-center p-1.5 bg-emerald-50 text-emerald-500 rounded-xl hover:bg-emerald-100 transition-colors"
+                >
+                  <Target size={18} />
+                </button>
               </div>
             )}
           </div>
@@ -267,8 +282,46 @@ export default function LearnClientPage({ lightweightLessons }: { lightweightLes
                 )}
               </div>
 
+              {/* Current Quest Banner (Mobile) */}
+              {mounted && (
+                <div 
+                  onClick={() => setIsQuestsModalOpen(true)}
+                  className="xl:hidden mt-6 w-full bg-white rounded-2xl border-2 border-slate-100 p-4 shadow-sm flex items-center justify-between cursor-pointer active:scale-95 transition-transform"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-emerald-50 flex items-center justify-center shrink-0">
+                      <Target size={20} className="text-emerald-500" />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-xs font-semibold text-slate-400">
+                        {language === 'en' ? 'Daily Quest' : 'Quête du jour'}
+                      </span>
+                      {dailyQuests.filter(q => !q.completed).length > 0 ? (
+                        <span className="text-sm font-bold text-slate-700">
+                          {language === 'en' 
+                            ? dailyQuests.filter(q => !q.completed)[0].titleEn 
+                            : dailyQuests.filter(q => !q.completed)[0].titleFr}
+                        </span>
+                      ) : (
+                        <span className="text-sm font-bold text-emerald-600">
+                          {language === 'en' ? 'All quests completed!' : 'Toutes les quêtes terminées !'}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                  {dailyQuests.filter(q => !q.completed).length > 0 && (
+                    <div className="flex items-center gap-2">
+                       <span className="text-sm font-bold text-slate-400">
+                         {dailyQuests.filter(q => !q.completed)[0].progress} / {dailyQuests.filter(q => !q.completed)[0].target}
+                       </span>
+                       <ChevronRight size={18} className="text-slate-300" />
+                    </div>
+                  )}
+                </div>
+              )}
+
               {/* Vertical Timeline of Lessons (Mobile) */}
-              <div className="flex flex-col relative w-full items-center mt-4 pb-20">
+              <div className="flex flex-col relative w-full items-center mt-8 pb-20">
                  <div className="absolute left-1/2 top-0 bottom-0 w-3 -translate-x-1/2 bg-slate-200 rounded-full z-0"></div>
                  
                  {unitLessons.map((lesson, idx) => {
@@ -788,6 +841,46 @@ export default function LearnClientPage({ lightweightLessons }: { lightweightLes
         </AnimatePresence>,
         document.body
       )}
+
+      {mounted && typeof window !== 'undefined' && createPortal(
+        <AnimatePresence>
+          {isQuestsModalOpen && (
+            <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center pointer-events-none md:hidden">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm pointer-events-auto"
+                onClick={() => setIsQuestsModalOpen(false)}
+              />
+              <motion.div
+                initial={{ y: "100%" }}
+                animate={{ y: 0 }}
+                exit={{ y: "100%" }}
+                transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                className="w-full bg-white rounded-t-3xl shadow-2xl relative pointer-events-auto flex flex-col max-h-[85vh] overflow-hidden"
+              >
+                <div className="w-full flex justify-center py-3 shrink-0 bg-white z-10 rounded-t-3xl border-b border-slate-100">
+                  <div className="w-12 h-1.5 bg-slate-200 rounded-full" />
+                </div>
+                
+                <button 
+                  onClick={() => setIsQuestsModalOpen(false)}
+                  className="absolute top-4 right-4 text-slate-400 bg-slate-100 p-2 rounded-full hover:bg-slate-200 hover:text-slate-600 transition-colors z-20"
+                >
+                  <X size={20} />
+                </button>
+
+                <div className="p-6 pb-12 overflow-y-auto">
+                   <DailyQuestsWidget />
+                </div>
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
+
       <WritingConfigModal isOpen={isWritingConfigModalOpen} onClose={() => setWritingConfigModalOpen(false)} />
     </div>
   );

@@ -12,6 +12,25 @@ export interface WritingConfig {
   hideCharacterHints: boolean;
 }
 
+export interface DailyQuest {
+  id: string;
+  type: 'lessons' | 'review' | 'perfect_lesson' | 'xp';
+  target: number;
+  progress: number;
+  rewardXp: number;
+  completed: boolean;
+  titleEn: string;
+  titleFr: string;
+}
+
+const generateNewQuests = (): DailyQuest[] => {
+  return [
+    { id: 'q1', type: 'lessons', target: 1, progress: 0, rewardXp: 20, completed: false, titleEn: 'Complete 1 Lesson', titleFr: 'Terminer 1 leçon' },
+    { id: 'q2', type: 'xp', target: 50, progress: 0, rewardXp: 15, completed: false, titleEn: 'Earn 50 XP', titleFr: 'Gagner 50 XP' },
+    { id: 'q3', type: 'perfect_lesson', target: 1, progress: 0, rewardXp: 25, completed: false, titleEn: 'Get 3 stars on a level', titleFr: 'Obtenir 3 étoiles à un niveau' },
+  ];
+};
+
 const safeStorage = {
   getItem: (name: string): string | null => {
     if (typeof window === 'undefined') return null;
@@ -80,6 +99,16 @@ interface ProgressState {
   conversationStars: Record<string, number[]>;
   completedConversations: Record<string, number>;
   completeConversation: (convId: string, level: number, stars?: number) => void;
+
+  // Streaks & Quests
+  currentStreak: number;
+  longestStreak: number;
+  lastActiveDate: string | null;
+  dailyQuests: DailyQuest[];
+  questsDate: string | null;
+  recordActivity: () => void;
+  progressQuest: (type: 'lessons' | 'review' | 'perfect_lesson' | 'xp', amount: number) => void;
+  checkAndGenerateQuests: () => void;
 }
 
 export const useProgressStore = create<ProgressState>()(
@@ -100,6 +129,72 @@ export const useProgressStore = create<ProgressState>()(
       showCommunityModal: false,
       setHasSeenCommunityModal: (seen) => set({ hasSeenCommunityModal: seen }),
       setShowCommunityModal: (show) => set({ showCommunityModal: show }),
+      currentStreak: 0,
+      longestStreak: 0,
+      lastActiveDate: null,
+      dailyQuests: [],
+      questsDate: null,
+      
+      recordActivity: () => set((state) => {
+        const today = new Date().toISOString().split('T')[0];
+        if (state.lastActiveDate === today) return {}; // Already active today
+        
+        let newStreak = state.currentStreak;
+        if (state.lastActiveDate) {
+          const lastDate = new Date(state.lastActiveDate);
+          const currentDate = new Date(today);
+          const diffTime = Math.abs(currentDate.getTime() - lastDate.getTime());
+          const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+          
+          if (diffDays === 1) {
+            newStreak += 1;
+          } else if (diffDays > 1) {
+            newStreak = 1;
+          }
+        } else {
+          newStreak = 1;
+        }
+
+        return {
+          lastActiveDate: today,
+          currentStreak: newStreak,
+          longestStreak: Math.max(state.longestStreak, newStreak)
+        };
+      }),
+
+      progressQuest: (type, amount) => set((state) => {
+        const updatedQuests = state.dailyQuests.map((quest) => {
+          if (quest.type === type && !quest.completed) {
+            const newProgress = Math.min(quest.progress + amount, quest.target);
+            const completed = newProgress >= quest.target;
+            return { ...quest, progress: newProgress, completed };
+          }
+          return quest;
+        });
+
+        // Add reward XP for newly completed quests
+        const newlyCompletedQuests = updatedQuests.filter(
+          (q, i) => q.completed && !state.dailyQuests[i].completed
+        );
+        const earnedXp = newlyCompletedQuests.reduce((acc, q) => acc + q.rewardXp, 0);
+
+        return {
+          dailyQuests: updatedQuests,
+          xp: state.xp + earnedXp,
+        };
+      }),
+
+      checkAndGenerateQuests: () => set((state) => {
+        const today = new Date().toISOString().split('T')[0];
+        if (state.questsDate !== today) {
+          return {
+            questsDate: today,
+            dailyQuests: generateNewQuests()
+          };
+        }
+        return {};
+      }),
+
       xp: 0,
       seenAlphabets: [],
       isExerciseRunning: false,
@@ -129,33 +224,40 @@ export const useProgressStore = create<ProgressState>()(
       })),
       setWritingConfig: (config) => set((state) => ({ writingConfig: { ...state.writingConfig, ...config } })),
 
-      completeConversation: (convId, level, stars = 3) => set((state) => {
-        const currentLevel = state.completedConversations[convId] ?? -1;
-        const currentStars = state.conversationStars[convId] ? [...state.conversationStars[convId]] : [0, 0, 0, 0];
-        
-        if (level >= 0 && level <= 3) {
-            currentStars[level] = Math.max(currentStars[level], stars);
-        }
+      completeConversation: (convId, level, stars = 3) => {
+        set((state) => {
+          const currentLevel = state.completedConversations[convId] ?? -1;
+          const currentStars = state.conversationStars[convId] ? [...state.conversationStars[convId]] : [0, 0, 0, 0];
+          
+          if (level >= 0 && level <= 3) {
+              currentStars[level] = Math.max(currentStars[level], stars);
+          }
 
-        if (level > currentLevel) {
+          if (level > currentLevel) {
+            return {
+              completedConversations: {
+                ...state.completedConversations,
+                [convId]: level
+              },
+              conversationStars: {
+                ...state.conversationStars,
+                [convId]: currentStars
+              }
+            };
+          }
           return {
-            completedConversations: {
-              ...state.completedConversations,
-              [convId]: level
-            },
-            conversationStars: {
-              ...state.conversationStars,
-              [convId]: currentStars
-            }
+              conversationStars: {
+                ...state.conversationStars,
+                [convId]: currentStars
+              }
           };
+        });
+        get().recordActivity();
+        get().progressQuest('lessons', 1);
+        if (stars >= 3) {
+          get().progressQuest('perfect_lesson', 1);
         }
-        return {
-            conversationStars: {
-              ...state.conversationStars,
-              [convId]: currentStars
-            }
-        };
-      }),
+      },
 
       setLanguage: (lang) => set({ language: lang, languageSetByUser: true }),
       autoDetectLanguage: () => {
@@ -169,45 +271,58 @@ export const useProgressStore = create<ProgressState>()(
           }
         }
       },
-      completeLesson: (lessonId, earnedXp, playedLevel, earnedStars = 3) => set((state) => {
-        const currentLevel = state.lessonLevels[lessonId] || 0;
-        let newLevel = currentLevel;
-        if (playedLevel !== undefined) {
-          if (playedLevel === currentLevel) {
+      completeLesson: (lessonId, earnedXp, playedLevel, earnedStars = 3) => {
+        set((state) => {
+          const currentLevel = state.lessonLevels[lessonId] || 0;
+          let newLevel = currentLevel;
+          if (playedLevel !== undefined) {
+            if (playedLevel === currentLevel) {
+               newLevel = Math.min(currentLevel + 1, 10);
+            }
+          } else {
              newLevel = Math.min(currentLevel + 1, 10);
           }
-        } else {
-           newLevel = Math.min(currentLevel + 1, 10);
-        }
-        
-        const currentStars = state.lessonStars[lessonId] ? [...state.lessonStars[lessonId]] : Array(10).fill(0);
-        if (playedLevel !== undefined && playedLevel >= 0 && playedLevel < 10) {
-           currentStars[playedLevel] = Math.max(currentStars[playedLevel], earnedStars);
-        }
-        
-        let type: 'learn' | 'alphabet' = 'learn';
-        if (lessonId.startsWith('alphabet_')) {
-          type = 'alphabet';
-        }
+          
+          const currentStars = state.lessonStars[lessonId] ? [...state.lessonStars[lessonId]] : Array(10).fill(0);
+          if (playedLevel !== undefined && playedLevel >= 0 && playedLevel < 10) {
+             currentStars[playedLevel] = Math.max(currentStars[playedLevel], earnedStars);
+          }
+          
+          let type: 'learn' | 'alphabet' = 'learn';
+          if (lessonId.startsWith('alphabet_')) {
+            type = 'alphabet';
+          }
 
-        return {
-          completedLessons: state.completedLessons.includes(lessonId) 
-            ? state.completedLessons 
-            : [...state.completedLessons, lessonId],
-          lessonLevels: {
-            ...state.lessonLevels,
-            [lessonId]: newLevel
-          },
-          lessonStars: {
-            ...state.lessonStars,
-            [lessonId]: currentStars
-          },
-          xp: state.xp + earnedXp,
-          lastPlayedLessonId: lessonId,
-          lastPlayedLessonType: type
-        };
-      }),
-      addXp: (amount) => set((state) => ({ xp: state.xp + amount })),
+          return {
+            completedLessons: state.completedLessons.includes(lessonId) 
+              ? state.completedLessons 
+              : [...state.completedLessons, lessonId],
+            lessonLevels: {
+              ...state.lessonLevels,
+              [lessonId]: newLevel
+            },
+            lessonStars: {
+              ...state.lessonStars,
+              [lessonId]: currentStars
+            },
+            xp: state.xp + earnedXp,
+            lastPlayedLessonId: lessonId,
+            lastPlayedLessonType: type
+          };
+        });
+        
+        get().recordActivity();
+        get().progressQuest('lessons', 1);
+        get().progressQuest('xp', earnedXp);
+        if (earnedStars >= 3) {
+          get().progressQuest('perfect_lesson', 1);
+        }
+      },
+      addXp: (amount) => {
+        set((state) => ({ xp: state.xp + amount }));
+        get().recordActivity();
+        get().progressQuest('xp', amount);
+      },
       unlockLessonManual: (lessonId) => set((state) => ({
         unlockedLessons: state.unlockedLessons 
           ? (state.unlockedLessons.includes(lessonId) ? state.unlockedLessons : [...state.unlockedLessons, lessonId])

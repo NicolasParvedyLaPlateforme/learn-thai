@@ -80,7 +80,7 @@ function ConversationContent() {
 
   useEffect(() => {
     // Only hide the header automatically when these specific properties change (state transition)
-    // we want to still allow the user to show it by scrolling up.
+    // we want to still allow the user to show it by scrolling up.ok
     if (hasStarted && !isFinished) {
       setShowHeader(false);
     }

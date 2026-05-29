@@ -3,13 +3,13 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { BookOpen, MessageCircle, Brain, Globe, Star, Heart } from 'lucide-react';
+import { BookOpen, MessageCircle, Brain, Globe, Star, Heart, Flame } from 'lucide-react';
 import { useProgressStore } from '../lib/store';
 import { useGlobalSuggestedLesson } from '../lib/useGlobalSuggestedLesson';
 
 export default function DesktopSidebarLeft() {
   const pathname = usePathname();
-  const { language, setLanguage, xp, completedLessons, isExerciseRunning } = useProgressStore();
+  const { language, setLanguage, xp, currentStreak, completedLessons, isExerciseRunning } = useProgressStore();
   const globalSuggested = useGlobalSuggestedLesson();
 
   // Hidden on routes where we don't want the app shell
@@ -68,30 +68,27 @@ export default function DesktopSidebarLeft() {
         </div>
 
         {/* User Summary / Level */}
-        <div className="mt-auto shrink-0 border-t border-emerald-200/60 pt-6 overflow-hidden flex flex-col items-center gap-4 px-0 group-hover:px-2 xl:px-2 transition-all">
-          <div className="flex items-center group-hover:gap-3 xl:gap-3 justify-center group-hover:justify-start xl:justify-start w-full transition-all">
-            <div className="shrink-0 bg-slate-800 text-white rounded-full flex items-center justify-center font-bold relative w-12 h-12 transition-all">
-              U
-              <div className="absolute -bottom-1 -right-1 bg-white rounded-full p-0.5">
-                <div className="bg-emerald-500 w-3 h-3 rounded-full"></div>
+        <div className="mt-auto shrink-0 border-t border-emerald-200/60 pt-6 overflow-hidden flex flex-col items-center gap-3 px-0 group-hover:px-2 xl:px-2 transition-all">
+          
+          <div className="flex gap-2 w-full justify-center group-hover:justify-start xl:justify-start transition-all">
+            <div className="bg-amber-100 text-amber-600 font-bold rounded-xl shadow-sm h-10 flex-1 flex items-center justify-center whitespace-nowrap px-0 group-hover:px-2 xl:px-2 overflow-hidden border border-amber-200 relative group/stat">
+              <span className="transition-all duration-300 opacity-0 w-0 group-hover:opacity-100 group-hover:w-auto xl:opacity-100 xl:w-auto flex items-center gap-1.5 text-sm">
+                <Star size={16} fill="currentColor" />
+                {xp}
+              </span>
+              <div className="absolute inset-0 flex items-center justify-center transition-all duration-300 group-hover:opacity-0 xl:opacity-0 pointer-events-none">
+                 <Star size={20} fill="currentColor" />
               </div>
             </div>
-            <div className="flex flex-col whitespace-nowrap transition-all duration-300 overflow-hidden opacity-0 w-0 group-hover:opacity-100 group-hover:w-auto xl:opacity-100 xl:w-auto">
-              <span className="font-bold text-slate-800">Level {userLevel}</span>
-              <span className="text-xs text-slate-500 font-medium">
-                {completedLessons.length} {language === 'en' ? 'lessons' : 'leçons terminées'}
+            
+            <div className="bg-orange-100 text-orange-500 font-bold rounded-xl shadow-sm h-10 flex-1 flex items-center justify-center whitespace-nowrap px-0 group-hover:px-2 xl:px-2 overflow-hidden border border-orange-200 relative group/stat">
+              <span className="transition-all duration-300 opacity-0 w-0 group-hover:opacity-100 group-hover:w-auto xl:opacity-100 xl:w-auto flex items-center gap-1.5 text-sm">
+                <Flame size={16} fill="currentColor" className={`${currentStreak > 0 ? 'text-orange-500' : 'text-slate-400 opacity-50'}`} />
+                <span className={`${currentStreak > 0 ? '' : 'text-slate-400 opacity-50'}`}>{currentStreak}</span>
               </span>
-            </div>
-          </div>
-          
-          <div className="bg-amber-100 text-amber-600 font-bold rounded-2xl shadow-sm w-full h-12 shrink-0 flex items-center justify-center whitespace-nowrap px-0 group-hover:px-4 xl:px-4 group overflow-hidden border border-amber-200">
-            <span className="transition-all duration-300 overflow-hidden opacity-0 w-0 group-hover:opacity-100 group-hover:w-auto xl:opacity-100 xl:w-auto flex items-center gap-2">
-              <Star size={18} fill="currentColor" />
-              {xp} XP {language === 'en' ? 'Earned' : 'Gagnés'}
-            </span>
-            <div className="flex items-center justify-center w-12 h-12 transition-all duration-300 group-hover:opacity-0 group-hover:w-0 xl:opacity-0 xl:w-0 overflow-hidden shrink-0 relative">
-               <Star size={24} fill="currentColor" />
-               <span className="absolute inset-0 flex items-center justify-center text-[10px] font-black text-white" style={{ marginTop: '2px' }}>{xp > 99 ? '99+' : xp}</span>
+              <div className="absolute inset-0 flex items-center justify-center transition-all duration-300 group-hover:opacity-0 xl:opacity-0 pointer-events-none">
+                 <Flame size={20} fill="currentColor" className={`${currentStreak > 0 ? 'text-orange-500' : 'text-slate-400 opacity-50'}`} />
+              </div>
             </div>
           </div>
 
