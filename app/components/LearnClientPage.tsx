@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 import { createPortal } from 'react-dom';
 import { useProgressStore } from '../lib/store';
 import { playThaiTTS } from '../lib/tts';
-import { BookOpen, CheckCircle, Star, Play, Crown, RotateCcw, Pencil, X, Unlock, Brain, MessageCircle, Lock, ChevronLeft, ChevronRight, Clock, Volume2, Heart } from 'lucide-react';
+import { BookOpen, CheckCircle, Star, Play, Crown, RotateCcw, Pencil, X, Unlock, Brain, MessageCircle, Lock, ChevronLeft, ChevronRight, Clock, Volume2, Heart, Users } from 'lucide-react';
 import { Lesson } from '../types';
 import Image from 'next/image';
 
@@ -150,7 +150,7 @@ export default function LearnClientPage({ lightweightLessons }: { lightweightLes
   }, [mounted]);
 
   return (
-    <div className="min-h-screen bg-[#FAFAFA] font-sans text-slate-800 pb-28 md:pb-20">
+    <div className="min-h-screen bg-[#FAFAFA] font-sans text-slate-800 pb-28 md:pb-0">
       
       {/* Header */}
       <header className="bg-[#FAFAFA]/95 backdrop-blur-sm z-50 h-[3.75rem] md:hidden">
@@ -281,7 +281,8 @@ export default function LearnClientPage({ lightweightLessons }: { lightweightLes
                         {/* Circle Node */}
                         <div 
                           className={`relative shrink-0 mb-4 z-10 cursor-pointer hover:scale-105 active:scale-95 transition-all`}
-                          onClick={() => {
+                          onClick={(e) => {
+                            e.stopPropagation();
                             setSelectedLesson({lesson, isCompleted: isMaxLevel, unitColor: unit.colorClass, unitBorder: unit.borderClass});
                             setModalLevel(Math.min(level, 9));
                           }}
@@ -306,7 +307,8 @@ export default function LearnClientPage({ lightweightLessons }: { lightweightLes
                         {/* Card */}
                         <div 
                           className={`w-full max-w-[280px] sm:max-w-[320px] rounded-[1.5rem] p-5 flex flex-col items-center text-center transition-all z-10 border-2 border-b-[6px] cursor-pointer active:translate-y-[4px] active:border-b-2 shadow-sm relative ${isMaxLevel ? 'bg-emerald-50 border-emerald-200 shadow-[0_0_15px_rgba(16,185,129,0.2)]' : suggestedLessonId === lesson.id ? 'bg-white border-amber-300 shadow-[0_0_15px_rgba(252,211,77,0.5)]' : 'bg-white border-slate-200 hover:border-slate-300'}`}
-                          onClick={() => {
+                          onClick={(e) => {
+                            e.stopPropagation();
                             setSelectedLesson({lesson, isCompleted: isMaxLevel, unitColor: unit.colorClass, unitBorder: unit.borderClass});
                             setModalLevel(Math.min(level, 9));
                           }}
@@ -376,9 +378,12 @@ export default function LearnClientPage({ lightweightLessons }: { lightweightLes
 
       {/* Main Content (Desktop Only) */}
       {mounted && (
-        <div className="hidden md:flex flex-row w-full max-w-[100rem] mx-auto px-6 lg:px-8 py-8 items-start relative min-h-screen">
+        <div 
+          className="hidden md:flex flex-row w-full items-start relative min-h-screen"
+          onClick={() => setSelectedLesson(null)}
+        >
           {/* Center Curriculum Content */}
-          <div className="flex-1 flex justify-center w-full pr-8">
+          <div className="flex-1 flex justify-center w-full pt-8 pb-32 px-6 lg:px-8 pr-8 xl:pr-12">
             <div className="flex flex-col gap-10 w-full max-w-4xl">
             {(()=>{
               const unit = UNITS[activeUnitIndex];
@@ -447,7 +452,8 @@ export default function LearnClientPage({ lightweightLessons }: { lightweightLes
                             {/* Circle Node */}
                             <div 
                               className={`relative shrink-0 py-6 cursor-pointer hover:brightness-95 hover:scale-105 active:scale-95 transition-all`}
-                              onClick={() => {
+                              onClick={(e) => {
+                                e.stopPropagation();
                                 setSelectedLesson({lesson, isCompleted: isMaxLevel, unitColor: unit.colorClass, unitBorder: unit.borderClass});
                                 setModalLevel(Math.min(level, 9));
                               }}
@@ -471,7 +477,8 @@ export default function LearnClientPage({ lightweightLessons }: { lightweightLes
                             {/* Horizontal Card */}
                             <div 
                               className={`flex-1 rounded-[1.5rem] border-2 p-5 md:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all group border-b-[6px] cursor-pointer active:translate-y-[4px] active:border-b-2 shadow-sm relative ${isMaxLevel ? 'bg-emerald-50 border-emerald-200 shadow-[0_0_15px_rgba(16,185,129,0.2)]' : suggestedLessonId === lesson.id ? 'bg-white border-amber-300 shadow-[0_0_15px_rgba(252,211,77,0.5)]' : 'bg-white border-slate-200 hover:border-slate-300'}`}
-                              onClick={() => {
+                              onClick={(e) => {
+                                e.stopPropagation();
                                 setSelectedLesson({lesson, isCompleted: isMaxLevel, unitColor: unit.colorClass, unitBorder: unit.borderClass});
                                 setModalLevel(Math.min(level, 9));
                               }}
@@ -549,6 +556,12 @@ export default function LearnClientPage({ lightweightLessons }: { lightweightLes
             mounted={mounted}
             maxLevelPerLesson={10}
             suggestionType="learn"
+            selectedLesson={selectedLesson}
+            onCloseLesson={() => setSelectedLesson(null)}
+            modalLevel={modalLevel}
+            setModalLevel={setModalLevel}
+            lessonStars={lessonStars}
+            resetLessonLevel={resetLessonLevel}
           />
         </div>
       )}
@@ -556,148 +569,99 @@ export default function LearnClientPage({ lightweightLessons }: { lightweightLes
       {/* Selected Lesson Modal */}
       {mounted && createPortal(
         <AnimatePresence>
-          {selectedLesson && (
-            <div className="fixed inset-0 z-[100] flex items-end md:items-center justify-center p-0 md:p-4">
+           {selectedLesson && (
+            <div className="fixed inset-0 z-[100] flex items-end md:items-center justify-center p-0 md:p-4 xl:hidden">
               <motion.div 
                 initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}
                 className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"
                 onClick={() => setSelectedLesson(null)}
               />
               <motion.div 
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                exit={{ y: 20, opacity: 0 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-                className={`w-full md:max-w-md bg-white rounded-t-3xl md:rounded-3xl shadow-2xl flex flex-col mb-0 md:mb-12 relative border-t-8 z-10 max-h-[90vh] md:max-h-[85vh] overflow-hidden ${selectedLesson.unitColor.replace('500', '700').replace('bg-', 'border-')} ${selectedLesson.unitColor.replace('400', '600').replace('bg-', 'border-')} ${selectedLesson.unitColor.replace('600', '800').replace('bg-', 'border-')}`}
+                initial={{ y: "100%" }}
+                animate={{ y: 0 }}
+                exit={{ y: "100%" }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+                className={`w-full md:max-w-[26rem] h-[100dvh] md:h-auto md:max-h-[90vh] bg-white rounded-none md:rounded-[20px] shadow-xl flex flex-col relative overflow-hidden z-20`}
                 onClick={(e) => e.stopPropagation()}
               >
-                <div className={`p-6 ${selectedLesson.unitColor} flex flex-col items-start text-white relative shrink-0`}>
-                  <button 
-                    onClick={() => setSelectedLesson(null)} 
-                    className="absolute top-4 right-4 text-white/80 hover:text-white rounded-full p-2 transition-colors z-10"
-                  >
-                    <X size={20} />
-                  </button>
-                  <p className="font-bold text-white/80 uppercase tracking-widest text-sm mb-1 pr-6">
-                    {selectedLesson.lesson.isReview 
-                      ? (language === 'en' ? 'Review Test' : 'Test Bilan') 
-                      : (language === 'en' ? 'Lesson' : 'Leçon')}
-                  </p>
-                  <h3 className="text-2xl font-extrabold mb-1 pr-6">
-                    {language === 'en' ? (selectedLesson.lesson.titleEn || selectedLesson.lesson.title) : selectedLesson.lesson.title}
-                  </h3>
-                  <p className="text-white/90 font-medium text-sm mb-4">
-                    {language === 'en' ? (selectedLesson.lesson.descriptionEn || selectedLesson.lesson.description) : selectedLesson.lesson.description}
-                  </p>
+                {/* Removed Close Button */}
 
-                  <div className="flex items-center gap-3 w-full">
-                     <div className="bg-white/20 text-white rounded-full px-3 py-1 flex items-center gap-1.5 text-sm font-bold shrink-0">
-                        <CheckCircle size={14} className="stroke-[3]" />
-                        {lessonLevels[selectedLesson.lesson.id] || 0}/10 {language === 'en' ? 'levels' : 'niveaux'}
-                     </div>
-                     <div className="h-2 flex-1 bg-black/15 rounded-full overflow-hidden">
-                        <div className="h-full bg-white rounded-full" style={{ width: `${((lessonLevels[selectedLesson.lesson.id] || 0) / 10) * 100}%` }}></div>
+                {/* Scrollable Content */}
+                <div className="flex flex-col flex-1 overflow-y-auto hide-scrollbar">
+                  {/* Image Header */}
+                  <div className="w-full shrink-0 z-0">
+                     <div className={`w-full h-[100px] md:h-[180px] bg-amber-50 flex items-center justify-center relative overflow-hidden`}>
+                       {selectedLesson.lesson.imageUrl ? (
+                          <Image src={selectedLesson.lesson.imageUrl} alt="" fill className="object-contain md:object-cover p-2 md:p-0" />
+                       ) : (
+                          <BookOpen size={48} className="text-slate-200" />
+                       )}
                      </div>
                   </div>
-                </div>
 
-                <div className="p-6 pt-4 overflow-y-auto hide-scrollbar flex-1">
-                  <div className="flex items-center justify-between gap-2 py-2 mb-6">
-                     <button 
-                        className="h-10 w-10 shrink-0 bg-white border border-slate-200 rounded-full flex items-center justify-center text-slate-400 hover:text-slate-600 shadow-sm disabled:opacity-30 disabled:cursor-not-allowed" 
-                        disabled={modalLevel === 0} 
-                        onClick={() => {
-                           setModalLevel(Math.max(0, modalLevel - 1));
-                           levelsScrollRef.current?.scrollBy({ left: -84, behavior: 'smooth' });
-                        }}
-                     >
-                        <ChevronLeft size={20}/>
-                     </button>
-                     
-                     <div 
-                        ref={(el) => {
-                           levelsScrollRef.current = el;
-                           if (el && !el.dataset.scrolled) {
-                             el.scrollTo({ left: modalLevel * 84, behavior: 'instant' });
-                             el.dataset.scrolled = 'true';
-                           }
-                        }} 
-                        onMouseDown={(e) => {
-                           dragRef.current.isDragging = true;
-                           if (levelsScrollRef.current) {
-                             dragRef.current.startX = e.pageX - levelsScrollRef.current.offsetLeft;
-                             dragRef.current.scrollLeft = levelsScrollRef.current.scrollLeft;
-                           }
-                        }}
-                        onMouseLeave={() => { dragRef.current.isDragging = false; }}
-                        onMouseUp={() => { dragRef.current.isDragging = false; }}
-                        onMouseMove={(e) => {
-                           if (!dragRef.current.isDragging) return;
-                           e.preventDefault();
-                           if (levelsScrollRef.current) {
-                             const x = e.pageX - levelsScrollRef.current.offsetLeft;
-                             const walk = (x - dragRef.current.startX) * 1.5;
-                             levelsScrollRef.current.scrollLeft = dragRef.current.scrollLeft - walk;
-                           }
-                        }}
-                        className="flex gap-3 overflow-x-auto hide-scrollbar flex-1 snap-x py-2 px-1 mx-1 scroll-smooth cursor-grab active:cursor-grabbing"
-                     >
-                        {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((levelIndex) => {
-                          const currentProgress = lessonLevels[selectedLesson.lesson.id] || 0;
-                          const starsArray = lessonStars[selectedLesson.lesson.id] || Array(10).fill(0);
-                          const earnedStars = starsArray[levelIndex] || 0;
-                          
-                          const isCompletedLevel = levelIndex < currentProgress;
-                          const isAccessible = levelIndex <= currentProgress;
-                          const isSelected = modalLevel === levelIndex;
-                          
-                          if (!isAccessible) {
-                            return (
-                              <button key={levelIndex} disabled className="shrink-0 h-16 w-16 bg-slate-50 border-2 border-slate-100 rounded-2xl flex items-center justify-center text-slate-300">
-                                <Lock size={20} />
-                              </button>
-                            );
-                          }
-                          
-                          return (
-                            <button
-                              key={levelIndex}
-                              onClick={() => setModalLevel(levelIndex)}
-                              className={`shrink-0 h-16 w-[4.5rem] flex flex-col items-center justify-center rounded-2xl border-2 transition-all snap-center relative
-                                ${isSelected 
-                                  ? `bg-white ${selectedLesson.unitBorder} text-slate-800 scale-105 shadow-md` 
-                                  : `bg-white border-slate-200 text-slate-600 hover:border-slate-300`
-                                }`}
-                            >
-                              <span className={`font-extrabold text-lg ${isSelected ? selectedLesson.unitColor.replace('bg-', 'text-') : 'text-slate-700'}`}>{levelIndex + 1}</span>
-                              {levelIndex === currentProgress ? (
-                                <span className={`text-[9px] font-black uppercase mt-0.5 ${isSelected ? selectedLesson.unitColor.replace('bg-', 'text-') : 'text-amber-500'}`}>
-                                  {language === 'en' ? 'IN PROGRESS' : 'EN COURS'}
-                                </span>
-                              ) : (
-                                <div className="flex gap-0.5 mt-0.5">
+                  <div className="p-6 pt-5 pb-2 text-center flex flex-col items-center">
+                    <h3 className="text-2xl font-extrabold text-slate-800 mb-2 leading-tight font-sans tracking-tight">
+                      {language === 'en' ? (selectedLesson.lesson.titleEn || selectedLesson.lesson.title) : selectedLesson.lesson.title}
+                    </h3>
+                    
+                    <p className="text-slate-500 text-sm leading-relaxed mb-6 font-medium">
+                      {language === 'en' ? (selectedLesson.lesson.descriptionEn || selectedLesson.lesson.description) : selectedLesson.lesson.description}
+                    </p>
+
+                    {/* Levels Grid */}
+                    <div className="grid grid-cols-5 gap-y-4 gap-x-2 w-full mb-6 max-w-[16rem] mx-auto">
+                      {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((levelIndex) => {
+                        const currentProgress = lessonLevels[selectedLesson.lesson.id] || 0;
+                        const starsArray = lessonStars[selectedLesson.lesson.id] || Array(10).fill(0);
+                        const earnedStars = starsArray[levelIndex] || 0;
+                        
+                        const isAccessible = levelIndex <= currentProgress;
+                        const isCompleted = levelIndex < currentProgress;
+                        const isSelected = modalLevel === levelIndex;
+                        const isCurrent = levelIndex === currentProgress;
+                        
+                        return (
+                          <button
+                            key={levelIndex}
+                            onClick={() => {
+                              if (isAccessible) {
+                                setModalLevel(levelIndex);
+                              }
+                            }}
+                            className={`flex flex-col items-center gap-2 transition-transform hover:scale-105 active:scale-95 disabled:hover:scale-100 disabled:active:scale-100 disabled:cursor-not-allowed`}
+                            disabled={!isAccessible}
+                          >
+                            <div className={`
+                              w-11 h-11 rounded-full flex items-center justify-center transition-all duration-300 mx-auto
+                              ${isSelected ? 'ring-4 ring-offset-2 ring-[#0a6c4a]/20' : ''}
+                              ${isCompleted ? 'bg-amber-400 border border-amber-500 shadow-sm text-amber-900' : 
+                                isCurrent ? 'bg-white border-[3px] border-[#0a6c4a] shadow-sm text-[#0a6c4a]' : 
+                                'bg-slate-50 border border-slate-200 text-slate-300'
+                              }
+                            `}>
+                              {isCompleted ? (
+                                <div className="flex gap-[1px]">
                                   {Array.from({ length: 3 }).map((_, i) => (
-                                    <Star key={i} size={10} className={i < earnedStars ? "fill-amber-400 text-amber-500" : "fill-slate-200 text-slate-300"} />
+                                    <Star key={i} className={`stroke-[1.5] ${i < earnedStars ? "fill-amber-900 stroke-amber-900" : "fill-amber-500/30 stroke-amber-700/40"}`} size={10} />
                                   ))}
                                 </div>
+                              ) : isCurrent ? (
+                                <span className="font-extrabold text-lg">{levelIndex + 1}</span>
+                              ) : (
+                                <Lock size={16} className="stroke-[2.5]" />
                               )}
-                            </button>
-                          );
-                        })}
-                     </div>
-                     
-                     <button 
-                        className="h-10 w-10 shrink-0 bg-white border border-slate-200 rounded-full flex items-center justify-center text-slate-400 hover:text-slate-600 shadow-sm disabled:opacity-30 disabled:cursor-not-allowed" 
-                        disabled={modalLevel === 9 || modalLevel >= (lessonLevels[selectedLesson.lesson.id] || 0)} 
-                        onClick={() => {
-                           setModalLevel(Math.min(9, modalLevel + 1));
-                           levelsScrollRef.current?.scrollBy({ left: 84, behavior: 'smooth' });
-                        }}
-                     >
-                        <ChevronRight size={20}/>
-                     </button>
+                            </div>
+                            <span className={`text-[9px] font-black tracking-widest uppercase
+                              ${isCurrent ? 'text-[#0a6c4a]' : isCompleted ? 'text-amber-500' : 'text-slate-300'}
+                            `}>
+                              {isCurrent ? (language === 'en' ? 'IN PROGRESS' : 'EN COURS') : `NIV. ${levelIndex + 1}`}
+                            </span>
+                          </button>
+                        );
+                      })}
+                    </div>
                   </div>
-                  
+
                   {(() => {
                     const wordCount = selectedLesson.lesson.words?.length || 0;
                     const stepsCount = 10 + wordCount + (selectedLesson.lesson.phrases?.length || 0);
@@ -712,61 +676,68 @@ export default function LearnClientPage({ lightweightLessons }: { lightweightLes
                     let estimatedMins = Math.ceil(estimatedSecs / 60);
                     if (modalLevel === 9) estimatedMins = Math.max(30, estimatedMins);
                     else estimatedMins = Math.max(1, estimatedMins);
-                    
+
                     return (
-                      <div className="mb-2">
-                        <div className="flex flex-row gap-2 mb-6">
-                           <div className="flex-1 bg-blue-50/50 rounded-2xl p-3 flex items-center gap-2 border border-blue-100 min-w-0">
-                              <div className="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center text-blue-500 shrink-0">
-                                <BookOpen size={16} />
-                              </div>
-                              <div className="min-w-0">
-                                <div className="text-blue-500 text-[10px] font-bold mb-0.5 uppercase tracking-wider truncate">{language === 'en' ? 'Vocab' : 'Vocabulaire'}</div>
-                                <div className="text-blue-900 font-extrabold text-sm sm:text-base truncate">{wordCount} {language === 'en' ? 'words' : 'mots'}</div>
-                              </div>
-                           </div>
-                           <div className="flex-1 bg-purple-50/50 rounded-2xl p-3 flex items-center gap-2 border border-purple-100 min-w-0">
-                              <div className="w-8 h-8 rounded-lg bg-purple-100 flex items-center justify-center text-purple-500 shrink-0">
-                                <Clock size={16} />
-                              </div>
-                              <div className="min-w-0">
-                                <div className="text-purple-500 text-[10px] font-bold mb-0.5 uppercase tracking-wider truncate">{language === 'en' ? 'Time' : 'Durée estimée'}</div>
-                                <div className="text-purple-900 font-extrabold text-sm sm:text-base truncate">{estimatedMins} min</div>
-                              </div>
-                           </div>
+                      <div className="px-7 pt-2 flex flex-col">
+                        {/* Badges Container */}
+                        <div className="flex items-center justify-center gap-3 mb-8 border-b border-slate-100 pb-8 w-full flex-wrap">
+                          <div className="flex items-center gap-2 px-3 sm:px-4 py-2 border border-slate-200 rounded-lg text-slate-600 text-sm font-semibold whitespace-nowrap shadow-sm bg-white">
+                            <Clock size={16} className="text-slate-500" />
+                            {estimatedMins} min
+                          </div>
+                          <div className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-amber-50 border border-amber-200 rounded-lg text-amber-700 text-sm font-bold shadow-sm whitespace-nowrap">
+                            <Star size={16} className="fill-amber-500 text-amber-600" />
+                            +15 XP
+                          </div>
                         </div>
 
-                        <div>
-                           <h4 className="border-b text-slate-500 font-bold mb-3 pb-2 flex text-sm">{language === 'en' ? 'Vocabulary preview' : 'Aperçu du vocabulaire'}</h4>
-                           <div className="flex flex-nowrap overflow-x-auto hide-scrollbar gap-2 pb-2">
-                               {selectedLesson.lesson.words?.map((w: any) => (
-                                  <button onClick={() => playThaiTTS(w.th)} key={w.id} className="shrink-0 bg-white border-2 border-slate-100 rounded-xl px-3 py-1.5 flex items-center justify-center gap-2 font-thai text-xl font-bold shadow-sm hover:bg-slate-50 hover:border-slate-300 transition-colors cursor-pointer active:scale-95">
-                                     {w.th} <Volume2 size={16} className="text-slate-300"/>
-                                  </button>
-                               ))}
-                           </div>
+                        {/* Vocab preview */}
+                        <div className="mb-4">
+                          <div className="flex items-center justify-between mb-4">
+                            <h4 className="text-[12px] font-black uppercase text-slate-500 tracking-wider">
+                              {language === 'en' ? `Vocabulary (LVL ${modalLevel + 1}) :` : `Vocabulaire (NIV. ${modalLevel + 1}) :`}
+                            </h4>
+                            <div className="bg-blue-50/50 text-blue-700 font-black text-[10px] uppercase px-2 py-0.5 rounded">Chips</div>
+                          </div>
+
+                          <div className="flex flex-wrap gap-2.5 pb-2">
+                              {selectedLesson.lesson.words?.map((w: any) => (
+                                <button onClick={() => playThaiTTS(w.th)} key={w.id} className="group shrink-0 bg-white border border-slate-200 rounded-[2rem] px-4 py-2 flex items-center justify-center gap-2.5 shadow-sm hover:border-[#0a6c4a] hover:bg-[#0a6c4a]/5 transition-colors cursor-pointer active:scale-95">
+                                    <span className="font-bold text-[#0a6c4a] text-[17px]">{w.th}</span> 
+                                    <span className="text-slate-500 text-[13px] font-medium">({language === 'en' ? w.en : w.fr})</span>
+                                </button>
+                              ))}
+                          </div>
                         </div>
                       </div>
-                    );
+                    )
                   })()}
                 </div>
-                
-                <div className="shrink-0 p-6 pt-2 bg-white/90 backdrop-blur border-t border-slate-50 flex flex-col gap-3">
-                    <Link
-                      href={`/lesson/${selectedLesson.lesson.id}?level=${modalLevel + 1}`}
-                      className={`w-full py-4 rounded-xl border-b-4 font-bold text-lg text-white shadow-lg flex items-center justify-center hover:opacity-90 active:translate-y-1 transition-all ${selectedLesson.unitColor} ${selectedLesson.unitBorder}`}
-                    >
-                      <Play size={20} className="mr-2 fill-current" />
-                      {language === 'en' ? `Start level ${modalLevel + 1}` : `Démarrer le niveau ${modalLevel + 1}`}
-                    </Link>
+
+                {/* Sticky Actions Footer */}
+                <div className="shrink-0 p-6 pt-4 bg-white/95 backdrop-blur z-10 flex flex-col gap-3 pb-6 border-t border-slate-100 shadow-[0_-10px_30px_rgba(0,0,0,0.02)]">
+                    <div className="flex items-center gap-3 w-full">
+                      <button
+                        onClick={() => setSelectedLesson(null)}
+                        className="md:hidden shrink-0 flex items-center justify-center w-14 h-14 rounded-xl bg-slate-100 text-slate-600 hover:bg-slate-200 active:scale-95 transition-all"
+                      >
+                        <ChevronLeft size={24} />
+                      </button>
+                      <Link
+                        href={`/lesson/${selectedLesson.lesson.id}?level=${modalLevel + 1}`}
+                        className="flex-1 py-4 xl:py-4 md:py-3 rounded-xl font-bold text-[17px] text-white shadow-md flex items-center justify-center hover:opacity-90 active:translate-y-1 transition-all bg-[#0a6c4a]"
+                      >
+                        {language === 'en' ? `Start lesson` : `Commencer la leçon`}
+                      </Link>
+                    </div>
 
                     {selectedLesson.isCompleted && (
-                      <div className="flex gap-3 mt-2">
+                      <div className="flex gap-3">
                         <Link
                           href={`/writing?lessonId=${selectedLesson.lesson.id}`}
-                          className="flex-1 py-3 rounded-xl bg-slate-100 text-slate-500 font-bold flex items-center justify-center hover:bg-slate-200 transition-colors"
+                          className="flex-1 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-500 font-bold text-sm flex items-center justify-center hover:bg-slate-100 transition-colors"
                         >
-                          <Pencil size={18} className="mr-2" />
+                          <Pencil size={16} className="mr-2" />
                           {language === 'en' ? 'Writing' : 'Écriture'}
                         </Link>
                         <button
@@ -774,14 +745,14 @@ export default function LearnClientPage({ lightweightLessons }: { lightweightLes
                             resetLessonLevel(selectedLesson.lesson.id);
                             setModalLevel(0);
                           }}
-                          className="flex-1 py-3 rounded-xl border-2 border-rose-100 text-rose-500 font-bold flex items-center justify-center hover:bg-rose-50 transition-colors"
+                          className="flex-1 py-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-600 font-bold text-sm flex items-center justify-center hover:bg-rose-100 transition-colors"
                         >
-                          <RotateCcw size={18} className="mr-2" />
+                          <RotateCcw size={16} className="mr-2" />
                           {language === 'en' ? 'Reset' : 'Réinitialiser'}
                         </button>
                       </div>
                     )}
-                  </div>
+                </div>
               </motion.div>
             </div>
           )}
