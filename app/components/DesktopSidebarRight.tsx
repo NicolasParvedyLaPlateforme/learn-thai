@@ -86,7 +86,7 @@ export function DesktopSidebarRight({
             {/* Removed Close Button */}
 
             {/* Scrollable Content */}
-            <div className="flex flex-col flex-1 overflow-y-auto hide-scrollbar">
+            <div className="flex flex-col flex-1 overflow-y-auto hide-scrollbar p-3">
               {/* Image Header */}
               <div className="w-full shrink-0 z-0">
                  <div className={`w-full h-[180px] relative border-b border-slate-100 ${!selectedLesson.lesson.imageUrl && 'bg-amber-50 flex items-center justify-center'}`}>
@@ -132,7 +132,7 @@ export function DesktopSidebarRight({
                       >
                         <div className={`
                           w-11 h-11 rounded-full flex items-center justify-center transition-all duration-300
-                          ${isSelected ? 'ring-4 ring-offset-2 ring-[#0a6c4a]/20' : ''}
+                          ${isSelected ? 'scale-110 ring-[4px] ring-offset-[3px] ring-[#0a6c4a]/40 shadow-lg relative z-10' : ''}
                           ${isCompleted ? 'bg-amber-400 border border-amber-500 shadow-sm text-amber-900' : 
                             isCurrent ? 'bg-white border-[3px] border-[#0a6c4a] shadow-sm text-[#0a6c4a]' : 
                             'bg-slate-50 border border-slate-200 text-slate-300'
@@ -141,7 +141,7 @@ export function DesktopSidebarRight({
                           {isCompleted ? (
                             <div className="flex gap-[1px]">
                               {Array.from({ length: 3 }).map((_, i) => (
-                                <Star key={i} className={`stroke-[1.5] ${i < earnedStars ? "fill-amber-900 stroke-amber-900" : "fill-amber-500/30 stroke-amber-700/40"}`} size={10} />
+                                <Star key={i} className={`stroke-[1.5] ${i < earnedStars ? "fill-amber-900 stroke-amber-900" : "fill-white stroke-white"}`} size={10} />
                               ))}
                             </div>
                           ) : isCurrent ? (

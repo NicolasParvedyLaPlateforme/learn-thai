@@ -224,35 +224,47 @@ export default function LearnClientPage({ lightweightLessons }: { lightweightLes
           
           return (
             <div key={unit.id} className="relative z-0">
-              <div className={`mb-10 p-6 sm:p-8 ${unit.colorClass} rounded-[2rem] text-white shadow-lg relative overflow-hidden border-b-[6px] ${unit.borderClass}`}>
-                <div className="relative z-10 w-full flex flex-col items-center text-center">
-                  <h2 className="text-3xl font-extrabold mb-2 text-white drop-shadow-sm">{mounted && language === 'en' ? unit.titleEn : unit.title}</h2>
-                  <p className="text-white/90 mb-8 font-medium text-lg leading-snug">{mounted && language === 'en' ? unit.descriptionEn : unit.description}</p>
+              <div className={`mb-10 p-6 sm:p-8 ${unit.colorClass} border-b-[6px] ${unit.borderClass} rounded-[2rem] text-white shadow-lg relative overflow-hidden`}>
+                {unit.imageUrl && (
+                  <>
+                    <Image src={unit.imageUrl} alt={unit.title} fill className="object-cover opacity-50 mix-blend-overlay" priority />
+                    <div className={`absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10 z-0`}></div>
+                  </>
+                )}
+                <div className="relative z-10 w-full flex flex-col items-start text-left">
+                  <div className="flex justify-between items-start w-full mb-2">
+                    <h2 className="text-3xl font-extrabold text-white drop-shadow-md uppercase tracking-tight break-words pr-2">{mounted && language === 'en' ? unit.titleEn : unit.title}</h2>
+                  </div>
+                  <p className={`${unit.imageUrl ? 'text-white' : unit.lightTextClass} mb-8 font-medium text-lg leading-snug drop-shadow`}>{mounted && language === 'en' ? unit.descriptionEn : unit.description}</p>
                   
-                  <div className="w-full max-w-[280px]">
+                  <div className="w-full">
                     <div className="flex flex-col mb-3">
-                      <div className="flex justify-between text-sm font-bold text-white/90 mb-1 px-1">
+                      <div className="flex justify-between text-sm font-bold text-white mb-2 px-1 drop-shadow-sm uppercase tracking-wide">
                         <span>{language === 'en' ? 'Mastery' : 'Maîtrise'}</span>
                         <span>{completedLevelsInUnit} / {maxLevelsInUnit} {language === 'en' ? 'levels' : 'niveaux'}</span>
                       </div>
-                      <div className="text-white/70 text-xs font-medium px-1">
+                      <div className={`w-full ${unit.imageUrl ? 'bg-black/20 backdrop-blur-sm' : 'bg-black/15'} rounded-full h-4 overflow-hidden mb-2 shadow-inner`}>
+                        <div 
+                          className={`bg-white h-full rounded-full transition-all duration-1000 ${unit.imageUrl && 'shadow-[0_0_10px_rgba(255,255,255,0.7)]'}`} 
+                          style={{ width: `${progressPercent}%` }}
+                        ></div>
+                      </div>
+                      <div className={`${unit.imageUrl ? 'text-white' : unit.lightTextClass} font-bold text-sm px-1 drop-shadow-sm`}>
                         {language === 'en' ? '10 levels per lesson = Total mastery' : '10 niveaux par leçon = Maîtrise totale'}
                       </div>
                     </div>
-                    <div className="w-full bg-black/15 rounded-full h-4 overflow-hidden mb-2 shadow-inner">
-                      <div 
-                        className="bg-white h-full rounded-full transition-all duration-1000 shadow-[0_0_10px_rgba(255,255,255,0.7)]" 
-                        style={{ width: `${progressPercent}%` }}
-                      ></div>
-                    </div>
                   </div>
                 </div>
-                <div className={`absolute -bottom-12 -left-12 opacity-10 drop-shadow-2xl text-black rotate-[-15deg] pointer-events-none`}>
-                  <BookOpen size={240} />
-                </div>
-                <div className={`absolute -top-12 -right-12 opacity-10 drop-shadow-2xl text-white rotate-[15deg] pointer-events-none`}>
-                  <Star size={160} />
-                </div>
+                {!unit.imageUrl && (
+                  <>
+                    <div className={`absolute -bottom-12 -left-12 opacity-10 drop-shadow-2xl text-black rotate-[-15deg] pointer-events-none`}>
+                      <BookOpen size={240} />
+                    </div>
+                    <div className={`absolute -top-12 -right-12 opacity-10 drop-shadow-2xl text-white rotate-[15deg] pointer-events-none`}>
+                      <Star size={160} />
+                    </div>
+                  </>
+                )}
               </div>
 
               {/* Vertical Timeline of Lessons (Mobile) */}
@@ -395,40 +407,57 @@ export default function LearnClientPage({ lightweightLessons }: { lightweightLes
               return (
                 <div key={`desktop-unit-${unit.id}`} className="flex flex-col gap-8 w-full animate-in fade-in slide-in-from-bottom-4 duration-500 relative">
                   {/* Unit Hero Card */}
-                  <div className={`p-8 md:p-10 ${unit.colorClass} rounded-3xl text-white shadow-xl relative overflow-hidden border-b-[6px] ${unit.borderClass}`}>
-                    <div className="relative z-10">
-                      <h2 className="text-4xl font-extrabold mb-3">{language === 'en' ? unit.titleEn : unit.title}</h2>
-                      <p className={`${unit.lightTextClass} mb-8 font-medium text-lg`}>{language === 'en' ? unit.descriptionEn : unit.description}</p>
+                  <div className={`p-8 md:p-10 ${unit.colorClass} border-b-[6px] ${unit.borderClass} rounded-3xl text-white shadow-xl relative overflow-hidden`}>
+                    {unit.imageUrl && (
+                      <>
+                        <Image src={unit.imageUrl} alt={unit.title} fill className="object-cover opacity-50 mix-blend-overlay" priority />
+                        <div className={`absolute inset-0 bg-gradient-to-r from-black/30 via-black/10 to-transparent z-0`}></div>
+                        <div className={`absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10 z-0`}></div>
+                      </>
+                    )}
+                    <div className="relative z-10 w-full">
+                      <div className="flex justify-between items-start mb-3">
+                        <h2 className="text-4xl lg:text-5xl font-extrabold text-white drop-shadow-md uppercase tracking-tight">{language === 'en' ? unit.titleEn : unit.title}</h2>
+                        {unit.imageUrl && (
+                          <button onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} className="flex items-center gap-2 bg-white/20 hover:bg-white/30 backdrop-blur-md px-4 py-2.5 rounded-xl text-white font-bold text-sm transition-all border border-white/30 whitespace-nowrap shadow-sm">
+                            {language === 'en' ? 'CHANGE UNIT' : "CHANGER D'UNIT"}
+                            <ChevronLeft className="w-4 h-4 rotate-[-90deg]" />
+                          </button>
+                        )}
+                      </div>
+                      <p className={`${unit.imageUrl ? 'text-white' : unit.lightTextClass} mb-10 font-medium text-xl drop-shadow`}>{language === 'en' ? unit.descriptionEn : unit.description}</p>
                       
-                      {/* Progress Bar + "Continuer" Button equivalent */}
+                      {/* Progress Bar */}
                       <div className="flex items-center gap-6">
                         <div className="flex-1">
                           <div className={`flex flex-col mb-3`}>
-                            <div className={`text-sm ${unit.lightTextClass} font-bold mb-1 flex justify-between`}>
-                              <span>{language === 'en' ? 'Mastery' : 'Maîtrise'}</span>
+                            <div className={`text-sm text-white font-bold mb-2 flex justify-between uppercase tracking-wide drop-shadow-sm`}>
+                              <span>{language === 'en' ? 'Mastery' : 'MAÎTRISE'}</span>
                               <span>{completedLevelsInUnit} / {maxLevelsInUnit} {language === 'en' ? 'levels' : 'niveaux'}</span>
                             </div>
-                            <div className={`text-xs ${unit.lightTextClass} opacity-80 font-medium`}>
+                            <div className={`w-full ${unit.imageUrl ? 'bg-black/20 backdrop-blur-sm' : unit.bgMutedClass} rounded-full h-4 overflow-hidden shadow-inner mb-2`}>
+                              <div 
+                                className={`bg-white h-full rounded-full transition-all duration-1000 origin-left ${unit.imageUrl && 'shadow-[0_0_10px_rgba(255,255,255,0.7)]'}`} 
+                                style={{ width: `${progressPercent}%` }}
+                              ></div>
+                            </div>
+                            <div className={`text-sm ${unit.imageUrl ? 'text-white' : unit.lightTextClass} font-bold drop-shadow-sm`}>
                               {language === 'en' ? '10 levels per lesson = Total mastery' : '10 niveaux par leçon = Maîtrise totale'}
                             </div>
-                          </div>
-                          <div className={`w-full ${unit.bgMutedClass} rounded-full h-4 overflow-hidden shadow-inner`}>
-                            <div 
-                              className="bg-emerald-300 h-full rounded-full transition-all duration-1000 origin-left" 
-                              style={{ width: `${progressPercent}%` }}
-                            ></div>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div className={`absolute -bottom-10 -right-10 opacity-20 drop-shadow-2xl text-black rotate-[-15deg] pointer-events-none`}>
-                      <BookOpen size={200} />
-                    </div>
+                    {!unit.imageUrl && (
+                      <div className={`absolute -bottom-10 -right-10 opacity-20 drop-shadow-2xl text-black rotate-[-15deg] pointer-events-none`}>
+                        <BookOpen size={200} />
+                      </div>
+                    )}
                   </div>
                   
                   {/* Vertical Timeline of Lessons */}
                   <div className="flex flex-col relative w-full pl-6 md:pl-10 mt-4 pb-32">
-                     <div className="absolute left-[3.25rem] md:left-[4.25rem] top-8 bottom-0 w-2.5 bg-slate-200 rounded-full z-0"></div>
+                     <div className="absolute left-[calc(3.5rem-5px)] md:left-[calc(5rem-5px)] top-[5rem] bottom-[8rem] w-[10px] bg-slate-200 rounded-full z-0"></div>
                      
                      {unitLessons.map((lesson, idx) => {
                        const globalIndex = unit.startIndex + idx;
@@ -451,14 +480,14 @@ export default function LearnClientPage({ lightweightLessons }: { lightweightLes
                          >
                             {/* Circle Node */}
                             <div 
-                              className={`relative shrink-0 py-6 cursor-pointer hover:brightness-95 hover:scale-105 active:scale-95 transition-all`}
+                              className={`relative shrink-0 py-6 cursor-pointer hover:brightness-95 hover:scale-105 active:scale-95 transition-all z-10`}
                               onClick={(e) => {
                                 e.stopPropagation();
                                 setSelectedLesson({lesson, isCompleted: isMaxLevel, unitColor: unit.colorClass, unitBorder: unit.borderClass});
                                 setModalLevel(Math.min(level, 9));
                               }}
                             >
-                              <div className={`w-16 h-16 md:w-20 md:h-20 rounded-[2rem] flex items-center justify-center border-b-[6px] relative z-10 transition-transform overflow-hidden ${isMaxLevel ? unit.colorClass + ' text-white ' + unit.borderClass : level >= 8 ? unit.shades.l4 : level >= 6 ? unit.shades.l3 : level >= 3 ? unit.shades.l2 : level >= 1 ? unit.shades.l1 : 'bg-white ' + unit.textClass + ' border-slate-200 border-2 active:border-b-2 active:translate-y-1'}`}>
+                              <div className={`w-16 h-16 md:w-20 md:h-20 rounded-[2rem] flex items-center justify-center border-b-[6px] relative z-20 transition-transform overflow-hidden bg-white ${isMaxLevel ? unit.colorClass + ' text-white ' + unit.borderClass : level >= 8 ? unit.shades.l4 : level >= 6 ? unit.shades.l3 : level >= 3 ? unit.shades.l2 : level >= 1 ? unit.shades.l1 : 'bg-white ' + unit.textClass + ' border-slate-200 border-2 active:border-b-2 active:translate-y-1'}`}>
                                 {(lesson as any).imageUrl ? (
                                   <>
                                     <Image src={(lesson as any).imageUrl} alt={lesson.title} fill className={`object-cover ${level === 0 && suggestedLessonId !== lesson.id ? 'grayscale opacity-70' : ''}`} sizes="(max-width: 768px) 4rem, 5rem" />
@@ -468,15 +497,11 @@ export default function LearnClientPage({ lightweightLessons }: { lightweightLes
                                   isMaxLevel ? <CheckCircle size={32} className="stroke-[3]" /> : <Play size={32} className="ml-1 fill-current stroke-[2]" />
                                 )}
                               </div>
-                              
-                              {showLineToNext && (
-                                 <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 w-2.5 h-full ${lineToNextColor} z-0`}></div>
-                              )}
                             </div>
                             
                             {/* Horizontal Card */}
                             <div 
-                              className={`flex-1 rounded-[1.5rem] border-2 p-5 md:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all group border-b-[6px] cursor-pointer active:translate-y-[4px] active:border-b-2 shadow-sm relative ${isMaxLevel ? 'bg-emerald-50 border-emerald-200 shadow-[0_0_15px_rgba(16,185,129,0.2)]' : suggestedLessonId === lesson.id ? 'bg-white border-amber-300 shadow-[0_0_15px_rgba(252,211,77,0.5)]' : 'bg-white border-slate-200 hover:border-slate-300'}`}
+                              className={`flex-1 rounded-[1.5rem] border-2 p-5 md:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all group border-b-[6px] cursor-pointer active:translate-y-[4px] active:border-b-2 shadow-sm relative z-10 ${isMaxLevel ? 'bg-emerald-50 border-emerald-200 shadow-[0_0_15px_rgba(16,185,129,0.2)]' : suggestedLessonId === lesson.id ? 'bg-white border-amber-300 shadow-[0_0_15px_rgba(252,211,77,0.5)]' : 'bg-white border-slate-200 hover:border-slate-300'}`}
                               onClick={(e) => {
                                 e.stopPropagation();
                                 setSelectedLesson({lesson, isCompleted: isMaxLevel, unitColor: unit.colorClass, unitBorder: unit.borderClass});
@@ -524,6 +549,10 @@ export default function LearnClientPage({ lightweightLessons }: { lightweightLes
                                  )}
                                </div>
                             </div>
+
+                            {showLineToNext && (
+                               <div className={`absolute top-1/2 left-[calc(2rem-5px)] md:left-[calc(2.5rem-5px)] w-[10px] h-[calc(100%+4rem)] ${lineToNextColor} z-0`}></div>
+                            )}
                          </motion.div>
                        )
                      })}
@@ -633,7 +662,7 @@ export default function LearnClientPage({ lightweightLessons }: { lightweightLes
                           >
                             <div className={`
                               w-11 h-11 rounded-full flex items-center justify-center transition-all duration-300 mx-auto
-                              ${isSelected ? 'ring-4 ring-offset-2 ring-[#0a6c4a]/20' : ''}
+                              ${isSelected ? 'scale-110 ring-[4px] ring-offset-[3px] ring-[#0a6c4a]/40 shadow-lg relative z-10' : ''}
                               ${isCompleted ? 'bg-amber-400 border border-amber-500 shadow-sm text-amber-900' : 
                                 isCurrent ? 'bg-white border-[3px] border-[#0a6c4a] shadow-sm text-[#0a6c4a]' : 
                                 'bg-slate-50 border border-slate-200 text-slate-300'
@@ -642,7 +671,7 @@ export default function LearnClientPage({ lightweightLessons }: { lightweightLes
                               {isCompleted ? (
                                 <div className="flex gap-[1px]">
                                   {Array.from({ length: 3 }).map((_, i) => (
-                                    <Star key={i} className={`stroke-[1.5] ${i < earnedStars ? "fill-amber-900 stroke-amber-900" : "fill-amber-500/30 stroke-amber-700/40"}`} size={10} />
+                                    <Star key={i} className={`stroke-[1.5] ${i < earnedStars ? "fill-amber-900 stroke-amber-900" : "fill-white stroke-white"}`} size={10} />
                                   ))}
                                 </div>
                               ) : isCurrent ? (
